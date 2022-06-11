@@ -5,6 +5,7 @@ $form = rex_config_form::factory("rexstan");
 
 $field = $form->addInputField('number', 'level', 5, ["class" => "form-control","min" =>0, 'max'=>9]);
 $field->setLabel('Level');
+$field->setNotice('0 is the loosest and 9 is the strictest - <a href="https://phpstan.org/user-guide/rule-levels">see PHPStan Rule Levels</a>');
 
 $field = $form->addSelectField('addons', $value = null, ['class' => 'form-control selectpicker', 'data-live-search' => 'true']); // die Klasse selectpicker aktiviert den Selectpicker von Bootstrap
 $field->setAttribute('multiple', 'multiple');
