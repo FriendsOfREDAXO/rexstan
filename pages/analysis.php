@@ -2,14 +2,21 @@
 
 /** @var rex_addon $this */
 
-$cmd = 'php '.__DIR__.'/../vendor/bin/phpstan analyse -c '.__DIR__.'/../phpstan.neon.dist --error-format=json';
+$cmd = 'php '.__DIR__.'/../vendor/bin/phpstan analyse -c '.__DIR__.'/../phpstan.neon.dist --error-format=json --no-progress 2>&1';
 
-$json = shell_exec($cmd);
-$phpstanResult = json_decode($json, true);
+$output = shell_exec($cmd);
+if ($output[0] === '{') {
+    $phpstanResult = json_decode($output, true);
+} else {
+    echo '<span class="rex-error">'.nl2br(rex_escape($output)).'</span>';
+    return;
+}
 
 if (!is_array($phpstanResult) || !is_array($phpstanResult['files'])) {
     echo 'No phpstan result';
 } else {
+    echo $phpstanResult['totals']['file_errors'] .' Fehler gefunden in '. count($phpstanResult['files']) .' Dateien';
+
     echo '<table class="table table-hover">
                <thead>
                 <tr>
