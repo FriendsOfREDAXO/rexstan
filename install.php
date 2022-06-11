@@ -18,7 +18,7 @@ if (!is_file($userConfig)) {
         $paths[] = $available_addon->getPath();
     }
 
-    RexStanUserConfig::save(5, $paths);
+    RexStanUserConfig::save(3, $paths);
 }
 
 $template = rex_file::get(__DIR__.'/phpstan.neon.tpl');
