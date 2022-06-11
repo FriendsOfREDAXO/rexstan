@@ -35,10 +35,8 @@ if (!is_array($phpstanResult) || !is_array($phpstanResult['files'])) {
 
             $url = rex_editor::factory()->getUrl($file, $message['line']);
             if ($url) {
-                $error = '<a href="'. $url .'">'. rex_escape($error) .'</a>';
+                $error = '<a href="'. $url .'">'. rex_escape($message['message']) .'</a>';
             }
-
-
 
             echo '<tr class="rexstan-error">';
             echo '<td></td>';
