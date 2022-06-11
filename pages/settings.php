@@ -9,13 +9,23 @@ $field->setNotice('0 is the loosest and 9 is the strictest - <a href="https://ph
 
 $field = $form->addSelectField('addons', RexStanUserConfig::getPaths(), ['class' => 'form-control selectpicker', 'data-live-search' => 'true']); // die Klasse selectpicker aktiviert den Selectpicker von Bootstrap
 $field->setAttribute('multiple', 'multiple');
-$field->setLabel("Addons");
+$field->setLabel("AddOns");
+$field->setNotice('AddOns die untersucht werden sollen');
 $select = $field->getSelect();
 
 $available_addons = rex_addon::getAvailableAddons();
 foreach ($available_addons as $available_addon) {
     $select->addOption($available_addon->getName(), $available_addon->getPath());
 }
+
+$field = $form->addSelectField('extensions', RexStanUserConfig::getIncludes(), ['class' => 'form-control selectpicker']);
+$field->setAttribute('multiple', 'multiple');
+$field->setLabel("PHPStan Extensions");
+$select = $field->getSelect();
+
+$select->addOption('Strict-Mode', realpath(__DIR__.'/../vendor/phpstan/phpstan-strict-rules/rules.neon'));
+$select->addOption('Deprecation Warnings', realpath(__DIR__.'/../vendor/phpstan/phpstan-deprecation-rules/rules.neon'));
+$select->addOption( 'Symfony Erweiterungen', realpath(__DIR__.'/../vendor/phpstan/phpstan-symfony/rules.neon'));
 
 $fragment = new rex_fragment();
 $fragment->setVar('class', 'edit', false);
@@ -32,5 +42,10 @@ if (rex_post($form_name . '_save')) {
         $paths[] = $addonPath;
     }
 
-    RexStanUserConfig::save((int) $post_data['level'], $paths);
+    $includes = [];
+    foreach ($post_data['extensions'] as $extensionPath) {
+        $includes[] = $extensionPath;
+    }
+
+    RexStanUserConfig::save((int) $post_data['level'], $paths, $includes);
 }
