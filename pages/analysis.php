@@ -6,9 +6,6 @@ if (is_callable(['rex_path', 'findBinaryPath'])) {
     $phpBinary = rex_path::findBinaryPath('php');
 } else {
     $phpBinary = 'php';
-    if (file_exists('/usr/local/php')) {
-        $phpBinary = '/usr/local/php';
-    }
 }
 
 $cmd = $phpBinary.' '.__DIR__.'/../vendor/bin/phpstan analyse -c '.__DIR__.'/../phpstan.neon --error-format=json --no-progress 2>&1';
