@@ -2,13 +2,13 @@
 
 /** @var rex_addon $this */
 
-$cmd = 'php '.__DIR__.'/../vendor/bin/phpstan analyse -c '.__DIR__.'/../phpstan.neon.dist --error-format=json --no-progress 2>&1';
+$cmd = 'php '.__DIR__.'/../vendor/bin/phpstan analyse -c '.__DIR__.'/../phpstan.neon --error-format=json --no-progress 2>&1';
 
 $output = shell_exec($cmd);
 if ($output[0] === '{') {
     $phpstanResult = json_decode($output, true);
 } else {
-    echo '<span class="rex-error">'.nl2br(rex_escape($output)).'</span>';
+    echo '<span class="rexstan-error">'.nl2br(rex_escape($output)).'</span>';
     return;
 }
 
@@ -43,7 +43,7 @@ if (!is_array($phpstanResult) || !is_array($phpstanResult['files'])) {
                 $error = '<a href="'. $url .'">'. rex_escape($message['message']) .'</a>';
             }
 
-            echo '<tr class="rexstan-error">';
+            echo '<tr class="rexstan-error-message">';
             echo '<td>'.$error.'</td>';
             echo '<td>'. rex_escape(basename($shortFile)).':'.$message['line'] .'</td>';
             echo '</tr>';

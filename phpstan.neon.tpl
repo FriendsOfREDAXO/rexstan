@@ -5,15 +5,18 @@ includes:
     - vendor/phpstan/phpstan-deprecation-rules/rules.neon
     - vendor/phpstan/phpstan-symfony/extension.neon
     - vendor/phpstan/phpstan-symfony/rules.neon
+    - %REXSTAN_USERCONFIG%
 
 parameters:
-    level: 5
+    ### parameters we expect from user-config.neon
+    # level: 5
+    # paths:
+    #    - ../mblock/
+
     phpVersion: 70300 # PHP 7.3
     treatPhpDocTypesAsCertain: false
     bootstrapFiles:
         - ../../../../vendor/autoload.php
-    paths:
-        - ../mblock/
     scanDirectories:
         # make sure phpstan knows all core/core-addons classes
         - ../../core/
