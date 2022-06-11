@@ -2,7 +2,7 @@
 
 /** @var rex_addon $this */
 
-$cmd = 'php '.__DIR__.'/../vendor/bin/phpstan analyse -c '.__DIR__.'/../phpstan.neon.dist --error-format=json --no-progress 2>&1';
+$cmd = 'php '.__DIR__.'/../vendor/bin/phpstan analyse -c '.__DIR__.'/../phpstan.neon --error-format=json --no-progress 2>&1';
 
 $output = shell_exec($cmd);
 if ($output[0] === '{') {
