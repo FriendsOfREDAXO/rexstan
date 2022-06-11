@@ -15,7 +15,7 @@ if ($output[0] === '{') {
 if (!is_array($phpstanResult) || !is_array($phpstanResult['files'])) {
     echo 'No phpstan result';
 } else {
-    echo $phpstanResult['totals']['file_errors'] .' Fehler gefunden in '. count($phpstanResult['files']) .' Dateien';
+    echo $phpstanResult['totals']['file_errors'] .' Probleme gefunden in '. count($phpstanResult['files']) .' Dateien';
 
     echo '<table class="table table-hover">
                <thead>
