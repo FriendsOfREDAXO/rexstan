@@ -12,7 +12,7 @@ To optimize the developer experience you should enable REDAXO editor config.
 When your webserver allows, you can see and run the analysis via the REDAXO backend web interface.
 This might not work on any server, because of security settings.
 
-Alternativly its possible to run the analysis via the REDAXO console via `php console rexstan:analyze` command, which should work in most environments.
+Alternativly its possible to run the analysis via the REDAXO console via `php redaxo/bin/console rexstan:analyze` command, which should work in most environments.
 
 ## 💌 Support rexstan
 
