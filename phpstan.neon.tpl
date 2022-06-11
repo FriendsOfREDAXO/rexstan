@@ -1,5 +1,3 @@
-# Todo: make config configurable
-
 includes:
     - vendor/phpstan/phpstan-strict-rules/rules.neon
     - vendor/phpstan/phpstan-deprecation-rules/rules.neon
