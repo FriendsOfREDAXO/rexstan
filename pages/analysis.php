@@ -13,7 +13,6 @@ if (!is_array($phpstanResult) || !is_array($phpstanResult['files'])) {
     echo '<table class="table table-hover">
                <thead>
                 <tr>
-                <th class="rex-table-icon"></th>
                 <th>Error</th>
                 <th>Datei</th>
 </tr>
@@ -26,7 +25,6 @@ if (!is_array($phpstanResult) || !is_array($phpstanResult['files'])) {
         $shortFile = str_replace($basePath, '', $file);
 
         echo '<tr class="rexstan-error-file">';
-        echo '<td></td>';
         echo '<td colspan="2"><span>'.rex_escape(dirname($shortFile)).DIRECTORY_SEPARATOR.'</span>'.rex_escape(basename($shortFile)).'</td>';
         echo '</tr>';
 
@@ -39,7 +37,6 @@ if (!is_array($phpstanResult) || !is_array($phpstanResult['files'])) {
             }
 
             echo '<tr class="rexstan-error">';
-            echo '<td></td>';
             echo '<td>'.$error.'</td>';
             echo '<td>'. rex_escape(basename($shortFile)).':'.$message['line'] .'</td>';
             echo '</tr>';
