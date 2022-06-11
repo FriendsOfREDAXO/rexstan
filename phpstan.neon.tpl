@@ -5,7 +5,7 @@ includes:
     - vendor/phpstan/phpstan-deprecation-rules/rules.neon
     - vendor/phpstan/phpstan-symfony/extension.neon
     - vendor/phpstan/phpstan-symfony/rules.neon
-    - /Users/staabm/workspace/redaxo/redaxo/data/addons/rexstan/user-config.neon
+    - %REXSTAN_USERCONFIG%
 
 parameters:
     ### parameters we expect from user-config.neon
