@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'name' => '__root__',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '9a6d8c06fc1d170ab4d2edf2057d3d90f84b7f9e',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
+    ),
+    'versions' => array(
+        '__root__' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '9a6d8c06fc1d170ab4d2edf2057d3d90f84b7f9e',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'phpstan/phpstan' => array(
+            'pretty_version' => '1.7.12',
+            'version' => '1.7.12.0',
+            'reference' => '32f10779d9cd88a9cbd972ec611a4148a3cbbc7e',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpstan/phpstan',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'phpstan/phpstan-symfony' => array(
+            'pretty_version' => '1.2.5',
+            'version' => '1.2.5.0',
+            'reference' => '85be852a17fd5a6b67d4fc6daed21e794f935b2d',
+            'type' => 'phpstan-extension',
+            'install_path' => __DIR__ . '/../phpstan/phpstan-symfony',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+    ),
+);

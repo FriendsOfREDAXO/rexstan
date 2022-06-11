@@ -1,0 +1,12 @@
+<?php
+
+namespace Symfony\Component\Form;
+
+/**
+ * @extends \ArrayAccess<string, \Symfony\Component\Form\FormInterface>
+ * @extends \Traversable<string, \Symfony\Component\Form\FormInterface>
+ */
+interface FormInterface extends \ArrayAccess, \Traversable, \Countable
+{
+
+}

@@ -1,0 +1,22 @@
+<?php
+
+namespace Symfony\Component\Form;
+
+use ArrayAccess;
+use IteratorAggregate;
+
+/**
+ * @implements IteratorAggregate<int|string, self>
+ * @implements ArrayAccess<int|string, self>
+ */
+class FormView implements ArrayAccess, IteratorAggregate
+{
+
+    /**
+     * Returns an iterator to iterate over children (implements \IteratorAggregate).
+     *
+     * @return \ArrayIterator<int|string, FormView> The iterator
+     */
+    public function getIterator();
+
+}

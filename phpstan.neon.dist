@@ -1,0 +1,29 @@
+# Todo: make config configurable
+parameters:
+    level: 5
+    phpVersion: 70300 # PHP 7.3
+    treatPhpDocTypesAsCertain: false
+    bootstrapFiles:
+        - ../../../../vendor/autoload.php
+    paths:
+        - ../mblock/
+    scanDirectories:
+        # make sure phpstan knows all classes of all core/core-addons classes
+        - ../../core/
+        - ../backup/
+        - ../be_style/
+        - ../cronjob/
+        - ../debug/
+        - ../install/
+        - ../media_manager/
+        - ../mediapool/
+        - ../metainfo/
+        - ../phpmailer/
+        - ../project/
+        - ../structure/
+        - ../users/
+    # https://phpstan.org/config-reference#universal-object-crates
+    universalObjectCratesClasses:
+        - rex_fragment
+    ignoreErrors:
+        - '#Variable \$this might not be defined.#'
