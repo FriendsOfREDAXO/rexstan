@@ -8,7 +8,10 @@ if (is_callable(['rex_path', 'findBinaryPath'])) {
     $phpBinary = 'php';
 }
 
-$cmd = $phpBinary.' '.__DIR__.'/../vendor/bin/phpstan analyse -c '.__DIR__.'/../phpstan.neon --error-format=json --no-progress 2>&1';
+$phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan');
+$configPath = realpath(__DIR__.'/../phpstan.neon');
+
+$cmd = $phpBinary .' '. $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress 2>&1';
 
 $output = shell_exec($cmd);
 if ($output[0] === '{') {
