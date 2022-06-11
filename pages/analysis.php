@@ -2,16 +2,10 @@
 
 /** @var rex_addon $this */
 
-$phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan');
-$configPath = realpath(__DIR__.'/../phpstan.neon');
+$phpstanResult = RexStan::runFromWeb();
 
-$cmd = $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress 2>&1';
-
-$output = shell_exec($cmd);
-if ($output[0] === '{') {
-    $phpstanResult = json_decode($output, true);
-} else {
-    echo '<span class="rexstan-error">'.nl2br(rex_escape($output)).'</span>';
+if (is_string($phpstanResult)) {
+    echo '<span class="rexstan-error">'.nl2br(rex_escape($phpstanResult)).'</span>';
     return;
 }
 

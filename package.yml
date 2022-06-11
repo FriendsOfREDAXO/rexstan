@@ -12,6 +12,9 @@ page:
         settings: { title: translate:settings }
         readme: { title: translate:readme, subPath: README.md }
 
+console_commands:
+    rexstan:analyze: rexstan_command
+
 requires:
     php:
         version: '>=7.2'

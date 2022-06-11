@@ -1,6 +1,6 @@
 <?php
 
-class RexStanUserConfig {
+final class RexStanUserConfig {
     /**
      * @param int   $level
      * @param array<string> $paths
