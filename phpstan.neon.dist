@@ -8,7 +8,7 @@ parameters:
     paths:
         - ../mblock/
     scanDirectories:
-        # make sure phpstan knows all classes of all core/core-addons classes
+        # make sure phpstan knows all core/core-addons classes
         - ../../core/
         - ../backup/
         - ../be_style/
@@ -19,7 +19,6 @@ parameters:
         - ../mediapool/
         - ../metainfo/
         - ../phpmailer/
-        - ../project/
         - ../structure/
         - ../users/
     # https://phpstan.org/config-reference#universal-object-crates
@@ -27,3 +26,14 @@ parameters:
         - rex_fragment
     ignoreErrors:
         - '#Variable \$this might not be defined.#'
+
+services:
+    -
+        class: redaxo\phpstan\RexClassDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicStaticMethodReturnTypeExtension
+
+    -
+        class: redaxo\phpstan\RexFunctionsDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicFunctionReturnTypeExtension

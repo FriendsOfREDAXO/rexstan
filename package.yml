@@ -1,0 +1,16 @@
+package: rexstan
+version: '1.0'
+author: Friends Of REDAXO
+supportpage: https://github.com/FriendsOfREDAXO/rexstan
+
+page:
+    title: translate:name
+    perm: admin
+    subpages:
+        analysis: { title: translate:analysis }
+        readme: { title: translate:readme, subPath: README.md }
+
+requires:
+    php:
+        version: '>=7.2'
+    redaxo: ^5.2

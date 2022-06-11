@@ -2,5 +2,10 @@
     "require": {
         "phpstan/phpstan": "^1.7",
         "phpstan/phpstan-symfony": "^1.2"
+    },
+    "autoload": {
+        "classmap": [
+            "lib/"
+        ]
     }
 }
