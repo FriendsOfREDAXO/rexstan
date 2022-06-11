@@ -35,8 +35,5 @@ if (rex_post($form_name . '_save')) {
 
     }
 
-    if (count($file) > 0) {
-
-        rex_file::put(rex_addon::get('rexstan')->getDataPath() . '/addons.yml', rex_string::yamlEncode($file, 3));
-    }
+    rex_file::put(rex_addon::get('rexstan')->getDataPath('user-config.neon'), rex_string::yamlEncode($file, 3));
 }
