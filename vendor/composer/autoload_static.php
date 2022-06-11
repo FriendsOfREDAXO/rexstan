@@ -21,13 +21,14 @@ class ComposerStaticInit829d5a56155bf5717e81de9fa869183c
         'PHPStan\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
-            1 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
-            2 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
+            1 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
+            2 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
         ),
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'RexStanUserConfig' => __DIR__ . '/../..' . '/lib/RexStanUserConfig.php',
         'redaxo\\phpstan\\RexClassDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/RexClassDynamicReturnTypeExtension.php',
         'redaxo\\phpstan\\RexFunctionsDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/RexFunctionsDynamicReturnTypeExtension.php',
     );
