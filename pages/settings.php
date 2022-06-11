@@ -25,7 +25,6 @@ $select = $field->getSelect();
 
 $select->addOption('Strict-Mode', realpath(__DIR__.'/../vendor/phpstan/phpstan-strict-rules/rules.neon'));
 $select->addOption('Deprecation Warnings', realpath(__DIR__.'/../vendor/phpstan/phpstan-deprecation-rules/rules.neon'));
-$select->addOption( 'Symfony Erweiterungen', realpath(__DIR__.'/../vendor/phpstan/phpstan-symfony/rules.neon'));
 
 $fragment = new rex_fragment();
 $fragment->setVar('class', 'edit', false);

@@ -1,5 +1,4 @@
 includes:
-    - vendor/phpstan/phpstan-symfony/extension.neon
     - %REXSTAN_USERCONFIG%
 
 parameters:
