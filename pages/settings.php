@@ -31,7 +31,7 @@ if (rex_post($form_name . '_save')) {
     foreach ($post_data['addons'] as $addon_file) {
 
         $addon = rex_addon::get($addon_file);
-        $file['parameters']['paths'][] = '../' . $addon->getName() . '/';
+        $file['parameters']['paths'][] = $addon->getPath();
 
     }
 
