@@ -10,8 +10,6 @@ parameters:
 
     phpVersion: 70300 # PHP 7.3
     treatPhpDocTypesAsCertain: false
-    bootstrapFiles:
-        - ../../../../vendor/autoload.php
     scanDirectories:
         # make sure phpstan knows all core/core-addons classes
         - ../../core/
