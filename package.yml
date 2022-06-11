@@ -8,6 +8,7 @@ page:
     perm: admin
     subpages:
         analysis: { title: translate:analysis }
+        settings: { title: translate:settings }
         readme: { title: translate:readme, subPath: README.md }
 
 requires:
