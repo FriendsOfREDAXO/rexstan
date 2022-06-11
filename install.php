@@ -3,7 +3,22 @@
 $userConfig = $this->getDataPath('user-config.neon');
 
 if (!is_file($userConfig)) {
-    rex_file::put($userConfig, '');
+    $paths = [];
+
+    $available_addons = rex_addon::getAvailableAddons();
+    foreach ($available_addons as $available_addon) {
+        if ($available_addon->isSystemPackage()) {
+            continue;
+        }
+
+        if ($available_addon->getName() == 'rexstan') {
+            continue;
+        }
+
+        $paths[] = $available_addon->getPath();
+    }
+
+    RexStanUserConfig::save(5, $paths);
 }
 
 $template = rex_file::get(__DIR__.'/phpstan.neon.tpl');

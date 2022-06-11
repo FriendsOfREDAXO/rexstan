@@ -26,14 +26,11 @@ $form_name = $form->getName();
 if (rex_post($form_name . '_save')) {
     $post_data = rex_post($form_name);
 
-    $file = [];
-    $file['parameters']['level'] = (int) $post_data['level'];
+    $paths = [];
     foreach ($post_data['addons'] as $addon_file) {
-
         $addon = rex_addon::get($addon_file);
-        $file['parameters']['paths'][] = $addon->getPath();
-
+        $paths[] = $addon->getPath();
     }
 
-    rex_file::put(rex_addon::get('rexstan')->getDataPath('user-config.neon'), rex_string::yamlEncode($file, 3));
+    RexStanUserConfig::save((int) $post_data['level'], $paths);
 }
