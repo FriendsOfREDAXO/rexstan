@@ -2,16 +2,10 @@
 
 /** @var rex_addon $this */
 
-if (is_callable(['rex_path', 'findBinaryPath'])) {
-    $phpBinary = rex_path::findBinaryPath('php');
-} else {
-    $phpBinary = 'php';
-}
-
 $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan');
 $configPath = realpath(__DIR__.'/../phpstan.neon');
 
-$cmd = $phpBinary .' '. $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress 2>&1';
+$cmd = $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress 2>&1';
 
 $output = shell_exec($cmd);
 if ($output[0] === '{') {
