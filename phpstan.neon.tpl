@@ -13,20 +13,6 @@ parameters:
     bootstrapFiles:
         - phpstan-bootstrap.php
 
-    scanDirectories:
-        # make sure phpstan knows all core/core-addons classes
-        - ../../core/
-        - ../backup/
-        - ../be_style/
-        - ../cronjob/
-        - ../debug/
-        - ../install/
-        - ../media_manager/
-        - ../mediapool/
-        - ../metainfo/
-        - ../phpmailer/
-        - ../structure/
-        - ../users/
     # https://phpstan.org/config-reference#universal-object-crates
     universalObjectCratesClasses:
         - rex_fragment
