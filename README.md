@@ -29,7 +29,7 @@ Close all Dialogs with `OK`.
 When your webserver allows, you can see and run the analysis via the REDAXO backend web interface.
 This might not work on any server, because of security settings.
 
-To optimize the developer experience you should enable REDAXO editor config.
+To optimize the developer experience you should enable REDAXO editor integration.
 
 ## REDAXO Console
 
