@@ -8,7 +8,12 @@ final class RexStan {
         $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan');
         $configPath = realpath(__DIR__.'/../phpstan.neon');
 
-        $cmd = $phpstanBinary .' analyse -c '. $configPath;
+        if (rex::getConsole()) {
+            $cmd = 'REXSTAN_PATHFIX=1 '.$phpstanBinary .' analyse -c '. $configPath;
+        } else {
+            $cmd = $phpstanBinary .' analyse -c '. $configPath;
+        }
+
         $output = shell_exec($cmd);
 
         return $output;
@@ -21,7 +26,7 @@ final class RexStan {
         $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan');
         $configPath = realpath(__DIR__.'/../phpstan.neon');
 
-        $cmd = 'REXSTAN_WEBUI=1 '. $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress 2>&1';
+        $cmd = 'REXSTAN_PATHFIX=1 '. $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress 2>&1';
 
         $output = shell_exec($cmd);
         if ($output[0] === '{') {

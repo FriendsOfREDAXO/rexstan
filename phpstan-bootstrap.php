@@ -3,8 +3,8 @@
 unset($REX);
 $REX['REDAXO'] = false;
 
-// not sure yet, why running the command from the WEB UI needs a different HTDOCS_PATH
-if (getenv('REXSTAN_WEBUI')) {
+// not sure yet, why running the command from PHPStorm needs a different HTDOCS_PATH
+if (getenv('REXSTAN_PATHFIX')) {
     $REX['HTDOCS_PATH'] = '../';
 } else {
     $REX['HTDOCS_PATH'] = './';
