@@ -7,7 +7,8 @@ parameters:
     # paths:
     #    - ../mblock/
 
-    phpVersion: 70300 # PHP 7.3
+    # disabled for now, as we are running into function not found errors?
+    # phpVersion: 70300 # PHP 7.3
     treatPhpDocTypesAsCertain: false
 
     bootstrapFiles:
