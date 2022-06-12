@@ -34,17 +34,19 @@ echo $fragment->parse('core/page/section.php');
 
 $form_name = $form->getName();
 if (rex_post($form_name . '_save')) {
-    $post_data = rex_post($form_name);
+    $postData = rex_post($form_name);
+    $addonPaths = $postData['addons'] ?? [];
+    $extensions = $postData['extensions'] ?? [];
 
     $paths = [];
-    foreach ($post_data['addons'] as $addonPath) {
+    foreach ($addonPaths as $addonPath) {
         $paths[] = $addonPath;
     }
 
     $includes = [];
-    foreach ($post_data['extensions'] as $extensionPath) {
+    foreach ($extensions as $extensionPath) {
         $includes[] = $extensionPath;
     }
 
-    RexStanUserConfig::save((int) $post_data['level'], $paths, $includes);
+    RexStanUserConfig::save((int) $postData['level'], $paths, $includes);
 }
