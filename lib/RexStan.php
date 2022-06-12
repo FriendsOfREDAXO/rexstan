@@ -21,7 +21,7 @@ final class RexStan {
         $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan');
         $configPath = realpath(__DIR__.'/../phpstan.neon');
 
-        $cmd = $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress 2>&1';
+        $cmd = 'REXSTAN_WEBUI=1 '. $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress 2>&1';
 
         $output = shell_exec($cmd);
         if ($output[0] === '{') {
