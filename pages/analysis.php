@@ -5,12 +5,13 @@
 $phpstanResult = RexStan::runFromWeb();
 
 if (is_string($phpstanResult)) {
-    echo '<span class="rexstan-error">'.nl2br(rex_escape($phpstanResult)).'</span>';
+    echo rex_view::error(nl2br($phpstanResult));
+
     return;
 }
 
 if (!is_array($phpstanResult) || !is_array($phpstanResult['files'])) {
-    echo 'No phpstan result';
+    echo '<p>No phpstan result</p>';
 } else {
     echo '<p><strong>'.$phpstanResult['totals']['file_errors'] .'</strong> Probleme gefunden in <strong>'. count($phpstanResult['files']) .'</strong> Dateien</p>';
 
