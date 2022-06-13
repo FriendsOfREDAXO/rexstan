@@ -46,7 +46,7 @@ if (!is_array($phpstanResult) || !is_array($phpstanResult['files'])) {
             case 7:
                 $emoji = '🥈';
                 break;
-            case 9:
+            case 8:
                 $emoji = '🥇';
             break;
         }
