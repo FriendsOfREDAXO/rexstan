@@ -11,9 +11,11 @@ Es gibt sogenannte Levels die man in aufsteigender Folge nacheinander durcharbei
 
 ## Wie soll ich mit dem Addon arbeiten?
 
+### Nachträgliche Verwendung in bestehenden Projekten
+
 Als Neuling hat es sich bewährt zunächst alle Probleme im Level 0 zu bewerten und bestenfalls zu beheben.
 Es ist nicht zwingend nötig alle Probleme eines Levels zu beheben um sich im Anschluß mit dem nächsten zu befassen.
-Dennoch zeigt die Erfahrung dass es empfehlenswert die Levels nacheinander zu durchlaufen.
+Dennoch zeigt die Erfahrung, dass es empfehlenswert ist die Levels nacheinander zu durchlaufen.
 
 Durch das aktivieren von PHP-Extensions (siehe Einstellungen), können weitere Probleme aufgedeckt werden.
 
@@ -22,11 +24,24 @@ Man sollte allerdings versuchen so viel Code möglich zu scannen.
 Bei aktivierter PHPStorm integration - siehe Readme - können "beliebig" große Projekte untersucht werden.
 
 
+### Verwendung in neuen Projekten
+
+In neue Projekten bietet es sich für rexstan Neulinge an, mit dem Level 5 zu starten.
+
+Wenn bereits Erfahrung mit code analyse tools gesammelt wurde, steht einem Start in noch höherem Level, ggf. sogar mit aktiviertem Strict-Mode.
+
+
 ## Wie kann rexstan mit Deprecations helfen?
 
 Sobald unter Einstellungen "Deprecation Warnings" aktiviert sind, werden deprecations mit entsprechenden Hinweisen gemeldet. Dies betrifft sowohl Funktionen/Methoden von verwendeten AddOns und Bibliotheken, als auch native Funktionen von PHP selbst.
 
 Während der Bearbeitung von Deprecations sollte darauf geachtet werden, dass ggf. Mindestversionen von Abhängigkeiten angehoben werden müssen, wenn stattdessen aktuellere Funktionen/Methoden verwendet werden.
+
+## Was ist der Strict-Mode
+
+Der Strict-Mode ist für erfahrene PHP Programmierer geeignet und verbietet die Nutzung vieler gebräuchlicher Funktionen, um u.a. das Fehlerpotentzial auf ein minimum zu reduzieren.
+
+Details dazu sind unter [phpstan-strict-rules](https://github.com/phpstan/phpstan-strict-rules) zu finden.
 
 
 ##  Wie mit dem Fehler "Instantiated class X not found." umgehen?
