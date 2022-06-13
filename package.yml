@@ -13,7 +13,7 @@ page:
         settings: { title: translate:settings }
         analysis: { title: translate:analysis }
         readme: { title: translate:readme, subPath: README.md }
-        faq: { title: translate:faq, subPath: FAQ.md }
+        faq: { title: translate:faq, subPath: FAQ.md, icon: rex-icon fa-book }
 
 console_commands:
     rexstan:analyze: rexstan_command
