@@ -10,8 +10,8 @@ page:
     popup: true
     linkAttr: { target: _rexstan }
     subpages:
-        analysis: { title: translate:analysis }
         settings: { title: translate:settings }
+        analysis: { title: translate:analysis }
         readme: { title: translate:readme, subPath: README.md }
         faq: { title: translate:faq, subPath: FAQ.md }
 

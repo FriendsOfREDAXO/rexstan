@@ -1,6 +1,6 @@
 rexstan_name = rexstan
 
-rexstan_analysis = Analyse
+rexstan_analysis = Web UI Analyse
 rexstan_settings = Einstellungen
 rexstan_readme = Readme
 rexstan_faq = FAQ
