@@ -15,7 +15,49 @@ if (is_string($phpstanResult)) {
 if (!is_array($phpstanResult) || !is_array($phpstanResult['files'])) {
     echo '<p>No phpstan result</p>';
 } else {
-    echo '<p><strong>'.$phpstanResult['totals']['file_errors'] .'</strong> Probleme gefunden in <strong>'. count($phpstanResult['files']) .'</strong> Dateien</p>';
+    $totalErrors = $phpstanResult['totals']['file_errors'];
+    
+    if ($totalErrors === 0) {
+        $level = RexStanUserConfig::getLevel();
+
+        $emoji = '';
+        switch ($level) {
+            case 1:
+                $emoji = '✌️';
+                break;
+            case 2:
+                $emoji = '💪';
+                break;
+            case 3:
+                $emoji = '🧙';
+                break;
+            case 4:
+                $emoji = '🏎️';
+                break;
+            case 5:
+                $emoji = '🚀';
+                break;
+            case 6:
+                $emoji = '🥉';
+                break;
+            case 7:
+                $emoji = '🥈';
+                break;
+            case 9:
+                $emoji = '🥇';
+            break;
+        }
+
+        echo '<span class="rexstan-achievement">'.$emoji .'</span>';
+        echo rex_view::success('Gratulation, es wurden keine Fehler gefunden.');
+
+        if ($level !== 9) {
+            echo '<p>In den <a href="'. rex_url::backendPage('rexstan/settings') .'">Einstellungen</a>, solltest du jetzt das nächste Level anvisieren.</p>';
+        }
+        return;
+    }
+
+    echo '<p><strong>'. $totalErrors .'</strong> Probleme gefunden in <strong>'. count($phpstanResult['files']) .'</strong> Dateien</p>';
 
     echo '<table class="table table-hover">
                <thead>
