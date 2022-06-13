@@ -16,12 +16,15 @@ if (!is_array($phpstanResult) || !is_array($phpstanResult['files'])) {
     echo '<p>No phpstan result</p>';
 } else {
     $totalErrors = $phpstanResult['totals']['file_errors'];
-    
+
     if ($totalErrors === 0) {
         $level = RexStanUserConfig::getLevel();
 
         $emoji = '';
         switch ($level) {
+            case 0:
+                $emoji = '❤️️';
+                break;
             case 1:
                 $emoji = '✌️';
                 break;
