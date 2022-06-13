@@ -28,10 +28,21 @@ final class RexStan {
 
         $cmd = 'REXSTAN_PATHFIX=1 '. $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress 2>&1';
 
-        $output = shell_exec($cmd);
+        $lastError = '';
+        set_error_handler(function ($type, $msg) use (&$lastError) { $lastError = $msg; });
+        try {
+            $output = @shell_exec($cmd);
+        } finally {
+            restore_error_handler();
+        }
+
         if ($output[0] === '{') {
             // return the analysis result as an array
             return json_decode($output, true);
+        }
+
+        if ($output == '') {
+            $output = $lastError;
         }
 
         // return the error string as is
