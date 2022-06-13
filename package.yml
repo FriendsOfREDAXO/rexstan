@@ -1,5 +1,5 @@
 package: rexstan
-version: '1.0.6'
+version: '1.0.7'
 author: Friends Of REDAXO
 supportpage: https://github.com/FriendsOfREDAXO/rexstan
 
@@ -7,6 +7,8 @@ page:
     title: translate:name
     perm: admin
     icon: rex-icon fa-user-secret
+    popup: true
+    linkAttr: { target: _rexstan }
     subpages:
         analysis: { title: translate:analysis }
         settings: { title: translate:settings }
