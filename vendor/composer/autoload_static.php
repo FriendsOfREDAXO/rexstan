@@ -28,9 +28,11 @@ class ComposerStaticInit829d5a56155bf5717e81de9fa869183c
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'RexStan' => __DIR__ . '/../..' . '/lib/RexStan.php',
         'RexStanUserConfig' => __DIR__ . '/../..' . '/lib/RexStanUserConfig.php',
         'redaxo\\phpstan\\RexClassDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/RexClassDynamicReturnTypeExtension.php',
         'redaxo\\phpstan\\RexFunctionsDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/RexFunctionsDynamicReturnTypeExtension.php',
+        'rexstan_command' => __DIR__ . '/../..' . '/lib/command.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
