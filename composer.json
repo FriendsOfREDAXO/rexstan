@@ -9,5 +9,8 @@
         "classmap": [
             "lib/"
         ]
+    },
+    "config": {
+        "bin-compat": "full"
     }
 }
