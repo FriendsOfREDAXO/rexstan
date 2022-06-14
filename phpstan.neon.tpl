@@ -17,8 +17,21 @@ parameters:
 
     ignoreErrors:
         # ignore errors when analyzing rex modules/templates, caused by rex-vars
-        - '#Constant REX_[A-Z_]+ not found\.#'
-        - '#^Variable \$this might not be defined\.#'
+        -
+            message: '#Constant REX_[A-Z_]+ not found\.#'
+            path: *data/addons/developer/*
+        -
+            message: '#.* will always evaluate to (true|false).#'
+            path: *data/addons/developer/*
+        -
+            message: '#.* is always (true|false).#'
+            path: *data/addons/developer/*
+        -
+            message: '#^Variable \$this might not be defined\.#'
+            path: *data/addons/developer/*
+        -
+            message: '#^Variable \$this might not be defined\.#'
+            path: */fragments/*
 
     # autoload core/core-addon symbols which are not autoloadable
     scanDirectories:
