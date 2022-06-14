@@ -15,7 +15,7 @@ final class RexStan {
         }
         
         $cmd = $phpstanBinary .' analyse -c '. $configPath;
-        $output = self::execCmd($cmd, $lastError, $pathFix);
+        $output = self::execCmd($cmd, $pathFix, $lastError);
 
         return $output;
     }
@@ -28,7 +28,7 @@ final class RexStan {
         $configPath = realpath(__DIR__.'/../phpstan.neon');
 
         $cmd = $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress 2>&1';
-        $output = self::execCmd($cmd, $lastError, true);
+		$output = self::execCmd($cmd, true, $lastError);
 
         if ($output[0] === '{') {
             // return the analysis result as an array
@@ -43,6 +43,9 @@ final class RexStan {
         return $output;
     }
     
+	/**
+	 * @param string $lastError
+	 */
     static private function execCmd(string $cmd, bool $pathFix, &$lastError) {
         $lastError = '';
         set_error_handler(function ($type, $msg) use (&$lastError) { $lastError = $msg; });
