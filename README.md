@@ -3,6 +3,9 @@ rexstan
 
 Adds code analysis to REDAXO improving developer productivity and code quality.
 
+![Screenshots](https://github.com/FriendsOfREDAXO/rexstan/blob/assets/stanscreen.png?raw=true)
+
+
 ## IDE Integration
 
 The most effective way to use rexstan is to integrate it with your IDE.
@@ -36,6 +39,10 @@ To optimize the developer experience you should enable REDAXO editor integration
 Its possible to run the analysis via the REDAXO console via `php redaxo/bin/console rexstan:analyze` command, which should work in most environments.
 
 This might be usefull, to e.g. create reports, so you can track reported problems and your progress handling them over time.
+
+## REDAXO Docker 
+
+If you use rexstan with [docker-redaxo](https://github.com/FriendsOfREDAXO/docker-redaxo) you might need to set the /temp folder writable. Open the docker console and run: `chmod 777 -R /tmp && chmod o+t -R /tmp`
 
 ## 💌 Support rexstan
 
