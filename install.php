@@ -1,6 +1,8 @@
 <?php
 
-$userConfig = $this->getDataPath('user-config.neon');
+$addon = rex_addon::get('rexstan');
+
+$userConfig = $addon->getDataPath('user-config.neon');
 
 if (!is_file($userConfig)) {
     $paths = [];
@@ -9,17 +11,17 @@ if (!is_file($userConfig)) {
     if ($projectAddon->getPath()) {
         $paths[] = $projectAddon->getPath();
     } else {
-        $available_addons = rex_addon::getAvailableAddons();
-        foreach ($available_addons as $available_addon) {
-            if ($available_addon->isSystemPackage()) {
+        $availableAddons = rex_addon::getAvailableAddons();
+        foreach ($availableAddons as $available_addon) {
+            if ($availableAddons->isSystemPackage()) {
                 continue;
             }
 
-            if ($available_addon->getName() == 'rexstan') {
+            if ($availableAddons->getName() == 'rexstan') {
                 continue;
             }
 
-            $paths[] = $available_addon->getPath();
+            $paths[] = $availableAddons->getPath();
         }
     }
 
