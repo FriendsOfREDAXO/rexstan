@@ -40,6 +40,9 @@ Its possible to run the analysis via the REDAXO console via `php redaxo/bin/cons
 
 This might be usefull, to e.g. create reports, so you can track reported problems and your progress handling them over time.
 
+## REDAXO Docker 
+If you use it with [docker-redaxo](https://github.com/FriendsOfREDAXO/docker-redaxo) you should set the /temp folder writable. Open the docker console and run: 'chmod 777 -R /tmp && chmod o+t -R /tmp'
+
 ## 💌 Support rexstan
 
 [Consider supporting the project](https://github.com/sponsors/staabm), so we can make this tool even better even faster for everyone.
