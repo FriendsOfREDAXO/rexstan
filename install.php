@@ -1,6 +1,8 @@
 <?php
 
-$userConfig = $this->getDataPath('user-config.neon');
+$addon = rex_addon::get('rexstan');
+
+$userConfig = $addon->getDataPath('user-config.neon');
 
 if (!is_file($userConfig)) {
     $paths = [];
