@@ -5,8 +5,12 @@ final class RexStan {
      * @return string
      */
     static public function runFromCli() {
-        $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan');
-        $configPath = realpath(__DIR__.'/../phpstan.neon');
+       if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+           $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan.bat');
+       } else {
+           $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan');
+       }
+       $configPath = realpath(__DIR__.'/../phpstan.neon');
 
         if (rex::getConsole()) {
             $pathFix = true;
@@ -24,7 +28,11 @@ final class RexStan {
      * @return array|string
      */
     static public function runFromWeb() {
-        $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan');
+       if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+           $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan.bat');
+       } else {
+           $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan');
+       }
         $configPath = realpath(__DIR__.'/../phpstan.neon');
 
         $cmd = $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress 2>&1';
