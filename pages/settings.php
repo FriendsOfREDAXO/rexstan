@@ -26,6 +26,7 @@ $select = $field->getSelect();
 $select->addOption('Bleeding-Edge', realpath(__DIR__.'/../vendor/phpstan/phpstan/conf/bleedingEdge.neon'));
 $select->addOption('Strict-Mode', realpath(__DIR__.'/../vendor/phpstan/phpstan-strict-rules/rules.neon'));
 $select->addOption('Deprecation Warnings', realpath(__DIR__.'/../vendor/phpstan/phpstan-deprecation-rules/rules.neon'));
+$select->addOption('PHPUnit', realpath(__DIR__.'/../vendor/phpstan/phpstan-phpunit/rules.neon'));
 
 $fragment = new rex_fragment();
 $fragment->setVar('class', 'edit', false);
