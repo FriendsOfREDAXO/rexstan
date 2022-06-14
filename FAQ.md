@@ -40,6 +40,13 @@ Dies kann sowohl via PHPDoc, als auch nativen Typehints passieren:
 - [PHPDocs Basics](https://phpstan.org/writing-php-code/phpdocs-basics)
 - [PHPDoc Arten](https://phpstan.org/writing-php-code/phpdoc-types)
 
+
+## Die Analyse liefert keine Ergebnisse.. was nun?
+
+Du sollest sicherstellen dass für die Analyse genügend Speicher zur Verfügung steht und keine timeouts eintreten.
+Um die Fehlerursache einzugrenzen sollte das php-error log konsultiert werden.
+
+
 ## Wie kann rexstan mit Deprecations helfen?
 
 Sobald unter Einstellungen "Deprecation Warnings" aktiviert sind, werden deprecations mit entsprechenden Hinweisen gemeldet. Dies betrifft sowohl Funktionen/Methoden von verwendeten AddOns und Bibliotheken, als auch native Funktionen von PHP selbst.
@@ -73,3 +80,4 @@ In der Regel deuten derartige Fehler daraufhin, dass rexstan nicht den genauen T
 oder ein inkorrekter Type zugeordnet ist.
 
 Prüfe zum Beispiel wie die Variable definiert wird und ob dabei verwendete Methoden/Funktionen korrekte Parameter und Return-Typen definieren.  
+
