@@ -10,6 +10,13 @@ parameters:
     excludePaths:
         - */vendor/*
 
+    # autoload core/core-addon symbols which are not autoloadable
+    scanDirectories:
+        - ../../core/functions/
+        - ../structure/functions/
+        - ../metainfo/functions/
+        - ../mediapool/functions/
+
     # disabled for now, as we are running into function not found errors?
     # phpVersion: 70300 # PHP 7.3
     treatPhpDocTypesAsCertain: false
