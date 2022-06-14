@@ -11,6 +11,13 @@ Es gibt sogenannte Levels die man in aufsteigender Folge nacheinander durcharbei
 
 ## Wie soll ich mit dem Addon arbeiten?
 
+### Verwendung in neuen Projekten
+
+In neue Projekten bietet es sich für rexstan Neulinge an, mit dem Level 5 zu starten.
+
+Wenn bereits Erfahrung mit code analyse tools gesammelt wurde, steht einem Start in noch höherem Level, ggf. sogar mit aktiviertem Strict-Mode.
+
+
 ### Nachträgliche Verwendung in bestehenden Projekten
 
 Als Neuling hat es sich bewährt zunächst alle Probleme im Level 0 zu bewerten und bestenfalls zu beheben.
@@ -24,12 +31,14 @@ Man sollte allerdings versuchen so viel Code möglich zu scannen.
 Bei aktivierter PHPStorm integration - siehe Readme - können "beliebig" große Projekte untersucht werden.
 
 
-### Verwendung in neuen Projekten
+### Wie kann ich Vorgehen?
 
-In neue Projekten bietet es sich für rexstan Neulinge an, mit dem Level 5 zu starten.
+Damit rexstan gute Analyse-Ergebnisse liefern kann ist eine präzise Typisierung notwendig.
+Dies erreicht man indem man alle Parameter und Return-Typen von Funktionen und Methoden definiert.
 
-Wenn bereits Erfahrung mit code analyse tools gesammelt wurde, steht einem Start in noch höherem Level, ggf. sogar mit aktiviertem Strict-Mode.
-
+Dies kann sowohl via PHPDoc, als auch nativen Typehints passieren:
+- [PHPDocs Basics](https://phpstan.org/writing-php-code/phpdocs-basics)
+- [PHPDoc Arten](https://phpstan.org/writing-php-code/phpdoc-types)
 
 ## Wie kann rexstan mit Deprecations helfen?
 
@@ -42,7 +51,7 @@ Während der Bearbeitung von Deprecations sollte darauf geachtet werden, dass gg
 Bei aktivierter [Bleeding Edge](https://phpstan.org/blog/what-is-bleeding-edge) werden experimentelle Features aktiviert, die ggf. Einschränkungen mit sich bringen.
 
 
-## Was ist der Strict-Mode
+## Was ist der Strict-Mode?
 
 Der Strict-Mode ist für erfahrene PHP Programmierer geeignet und verbietet die Nutzung vieler gebräuchlicher Funktionen, um u.a. das Fehlerpotentzial auf ein minimum zu reduzieren.
 
