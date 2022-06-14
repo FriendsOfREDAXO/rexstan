@@ -20,8 +20,6 @@ parameters:
     # https://phpstan.org/config-reference#universal-object-crates
     universalObjectCratesClasses:
         - rex_fragment
-    ignoreErrors:
-        - '#Variable \$this might not be defined.#'
 
 services:
     -
