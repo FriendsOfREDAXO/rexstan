@@ -12,16 +12,16 @@ if (!is_file($userConfig)) {
         $paths[] = $projectAddon->getPath();
     } else {
         $availableAddons = rex_addon::getAvailableAddons();
-        foreach ($availableAddons as $available_addon) {
-            if ($availableAddons->isSystemPackage()) {
+        foreach ($availableAddons as $availableAddon) {
+            if ($availableAddon->isSystemPackage()) {
                 continue;
             }
 
-            if ($availableAddons->getName() == 'rexstan') {
+            if ($availableAddon->getName() == 'rexstan') {
                 continue;
             }
 
-            $paths[] = $availableAddons->getPath();
+            $paths[] = $availableAddon->getPath();
         }
     }
 
