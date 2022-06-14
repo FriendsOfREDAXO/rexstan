@@ -1,9 +1,0 @@
-<?php
-
-namespace Symfony\Contracts\Cache;
-
-use Psr\Cache\CacheItemInterface;
-
-interface ItemInterface extends CacheItemInterface
-{
-}
