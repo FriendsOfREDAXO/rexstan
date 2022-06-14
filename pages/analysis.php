@@ -7,7 +7,7 @@ $phpstanResult = RexStan::runFromWeb();
 if (is_string($phpstanResult)) {
     echo rex_view::error(nl2br($phpstanResult));
 
-    echo '<p>Die Web UI erfordert funktionert nicht auf allen Systemen, siehe README.</p>';
+    echo '<p>Die Web UI funktionert nicht auf allen Systemen, siehe README.</p>';
 
     return;
 }
