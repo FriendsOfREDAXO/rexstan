@@ -43,7 +43,7 @@ Dies kann sowohl via PHPDoc, als auch nativen Typehints passieren:
 
 ## Die Analyse liefert keine Ergebnisse.. was nun?
 
-Du sollest sicherstellen dass für die Analyse genügend Speicher zur Verfügung steht und keine timeouts eintreten.
+Du sollest sicherstellen dass für die Analyse in der PHP-CLI genügend Speicher zur Verfügung steht und keine timeouts eintreten.
 Um die Fehlerursache einzugrenzen sollte das php-error log konsultiert werden.
 
 
