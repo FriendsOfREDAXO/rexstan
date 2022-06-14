@@ -2,7 +2,7 @@
 
 final class RexStan {
     /**
-     * @return array|string
+     * @return string
      */
     static public function runFromCli() {
         $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan');
