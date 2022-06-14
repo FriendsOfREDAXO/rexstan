@@ -23,6 +23,7 @@ $field->setAttribute('multiple', 'multiple');
 $field->setLabel("PHPStan Extensions");
 $select = $field->getSelect();
 
+$select->addOption('Bleeding-Edge', realpath(__DIR__.'/../vendor/phpstan/phpstan/conf/bleedingEdge.neon'));
 $select->addOption('Strict-Mode', realpath(__DIR__.'/../vendor/phpstan/phpstan-strict-rules/rules.neon'));
 $select->addOption('Deprecation Warnings', realpath(__DIR__.'/../vendor/phpstan/phpstan-deprecation-rules/rules.neon'));
 

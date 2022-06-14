@@ -37,6 +37,11 @@ Sobald unter Einstellungen "Deprecation Warnings" aktiviert sind, werden depreca
 
 Während der Bearbeitung von Deprecations sollte darauf geachtet werden, dass ggf. Mindestversionen von Abhängigkeiten angehoben werden müssen, wenn stattdessen aktuellere Funktionen/Methoden verwendet werden.
 
+## Was ist Bleeding Edge?
+
+Bei aktivierter [Bleeding Edge](https://phpstan.org/blog/what-is-bleeding-edge) werden experimentelle Features aktiviert, die ggf. Einschränkungen mit sich bringen.
+
+
 ## Was ist der Strict-Mode
 
 Der Strict-Mode ist für erfahrene PHP Programmierer geeignet und verbietet die Nutzung vieler gebräuchlicher Funktionen, um u.a. das Fehlerpotentzial auf ein minimum zu reduzieren.
