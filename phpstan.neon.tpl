@@ -10,6 +10,14 @@ parameters:
     excludePaths:
         - */vendor/*
 
+    # don't report not found ignores
+    reportUnmatchedIgnoredErrors: false
+
+    ignoreErrors:
+        # ignore errors when analyzing rex modules/templates, caused by rex-vars
+        - '#Constant REX_[A-Z_]+ not found\.#'
+        - '#^Variable \$this might not be defined\.#'
+
     # autoload core/core-addon symbols which are not autoloadable
     scanDirectories:
         - ../../core/functions/

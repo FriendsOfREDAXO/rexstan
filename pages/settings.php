@@ -13,9 +13,13 @@ $field->setLabel("AddOns");
 $field->setNotice('AddOns die untersucht werden sollen');
 $select = $field->getSelect();
 
-$available_addons = rex_addon::getAvailableAddons();
-foreach ($available_addons as $available_addon) {
-    $select->addOption($available_addon->getName(), $available_addon->getPath());
+foreach (rex_addon::getAvailableAddons() as $availableAddon) {
+    $select->addOption($availableAddon->getName(), $availableAddon->getPath());
+
+    if ($availableAddon->getName() === 'developer') {
+        $select->addOption('developer: modules', rex_addon::get('developer')->getDataPath('modules'));
+        $select->addOption('developer: templates', rex_addon::get('developer')->getDataPath('templates'));
+    }
 }
 
 $field = $form->addSelectField('extensions', RexStanUserConfig::getIncludes(), ['class' => 'form-control selectpicker']);
