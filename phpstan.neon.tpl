@@ -1,3 +1,5 @@
+# rexstan auto generated file - do not edit
+
 includes:
     - %REXSTAN_USERCONFIG%
 
