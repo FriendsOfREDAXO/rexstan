@@ -56,9 +56,10 @@ final class RexStan {
             }
            $output = @shell_exec($cmd);
         } finally {
-            if ($pathFix) {
-                putenv('REXSTAN_PATHFIX'); // remove the env var
-            }
+           if ($pathFix) {
+                // remove the env var
+                putenv('REXSTAN_PATHFIX');
+           }
            restore_error_handler();
         }
         
