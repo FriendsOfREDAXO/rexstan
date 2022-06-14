@@ -15,7 +15,7 @@ final class RexStan {
         }
         
         $cmd = $phpstanBinary .' analyse -c '. $configPath;
-        $output = self::execCmd($cmd, $lastError, true);
+        $output = self::execCmd($cmd, $lastError, $pathFix);
 
         $output = shell_exec($cmd);
 
