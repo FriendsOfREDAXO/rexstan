@@ -47,11 +47,11 @@ final class RexStan {
         $lastError = '';
         set_error_handler(function ($type, $msg) use (&$lastError) { $lastError = $msg; });
         try {
-            if ($pathFix) {
+           if ($pathFix) {
                 // cross os compatible way of setting a env var.
                 // the var will be inherited by the child process
                 putenv('REXSTAN_PATHFIX=1');
-            }
+           }
            $output = @shell_exec($cmd);
         } finally {
            if ($pathFix) {
