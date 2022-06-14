@@ -3,6 +3,9 @@ rexstan
 
 Adds code analysis to REDAXO improving developer productivity and code quality.
 
+![Screenshots](https://raw.githubusercontent.com/FriendsOfREDAXO/reystan/assets/stanscreen.png)
+
+
 ## IDE Integration
 
 The most effective way to use rexstan is to integrate it with your IDE.
