@@ -5,6 +5,8 @@ final class RexStanUserConfig {
      * @param int   $level
      * @param array<string> $paths
      * @param array<string> $includes
+     *
+     * @return void
      */
     static public function save(int $level, array $paths, array $includes) {
         $file = [];
@@ -12,7 +14,9 @@ final class RexStanUserConfig {
         $file['parameters']['level'] = $level;
         $file['parameters']['paths'] = $paths;
 
-        rex_file::put(self::userconfig(), rex_string::yamlEncode($file, 3));
+        $prefix = "# rexstan auto generated file - do not edit\n\n";
+
+        rex_file::put(self::userconfig(), $prefix . rex_string::yamlEncode($file, 3));
     }
 
     static public function getLevel(): int {
