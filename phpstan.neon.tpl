@@ -66,27 +66,3 @@ services:
         class: redaxo\phpstan\RexSqlDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
-
-    # redaxos setQuery etc. APIs support both, prepared and unprepared statements..
-    # therefore we need to register them twice, to also cover cases which don't pass parameters.
-    -
-        class: staabm\PHPStanDba\Rules\SyntaxErrorInPreparedStatementMethodRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            classMethods:
-                - 'rex_sql::setQuery'
-                - 'rex_sql::setDBQuery'
-                - 'rex_sql::getArray'
-                - 'rex_sql::getDBArray'
-
-    -
-        class: staabm\PHPStanDba\Rules\SyntaxErrorInQueryMethodRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            classMethods:
-                - 'rex_sql::setQuery#0'
-                - 'rex_sql::setDBQuery#0'
-                - 'rex_sql::getArray#0'
-                - 'rex_sql::getDBArray#0'
-                - 'rex_sql::prepareQuery#0'
-                - 'rex_sql::getQueryType#0'
