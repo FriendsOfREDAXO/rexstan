@@ -2,6 +2,11 @@
 
 $addon = rex_addon::get('rexstan');
 
+if (isset($REX['PATH_PROVIDER'])) {
+    $addon->setProperty('installmsg', 'Using rexstan in a setup with a custom PATH_PROVIDER is not supported.');
+    return;
+}
+
 $userConfig = $addon->getDataPath('user-config.neon');
 
 if (!is_file($userConfig)) {
