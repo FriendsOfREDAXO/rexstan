@@ -71,7 +71,7 @@ Details dazu sind unter [phpstan-strict-rules](https://github.com/phpstan/phpsta
 Somit werden u.a. Fehler in SQL Abfragen erkannt.
 
 
-##  Wie mit dem Fehler "Instantiated class X not found." umgehen?
+##  Wie mit dem Fehler `Instantiated class X not found.` umgehen?
 
 Falls die Klasse auf ein AddOn hinweist, das noch nicht aktiviert ist, sollte dieses aktiviert werden.
 
@@ -80,7 +80,7 @@ Gleiches gilt für vergleichbare Fehler wie Bspw.
 - "Call to method MM on an unknown class X."
 
 
-## Wie mit dem Fehler "Call to an undefined method CC::MM()." umgehen?
+## Wie mit dem Fehler `Call to an undefined method CC::MM().` umgehen?
 
 In der Regel deuten derartige Fehler daraufhin, dass rexstan nicht den genauen Typ/Klasse einer Variable kennt,
 oder ein inkorrekter Type zugeordnet ist.
@@ -88,7 +88,7 @@ oder ein inkorrekter Type zugeordnet ist.
 Prüfe zum Beispiel wie die Variable definiert wird und ob dabei verwendete Methoden/Funktionen korrekte Parameter und Return-Typen definieren.  
 
 
-## Wie mit dem Fehler "parameter $ep with generic class rex_extension_point but does not specify its types: T" umgehen?
+## Wie mit dem Fehler `parameter $ep with generic class rex_extension_point but does not specify its types: T` umgehen?
 
 Die Klasse `rex_extension_point` verwendet einen [Class-Level-Generic"](https://phpstan.org/blog/generics-in-php-using-phpdocs#class-level-generics),
 der den Rückgabewert der Methode `getSubject()` eingrenzt.
