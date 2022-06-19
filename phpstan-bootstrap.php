@@ -1,7 +1,7 @@
 <?php
 
+use staabm\PHPStanDba\QueryReflection\PdoMysqlQueryReflector;
 use staabm\PHPStanDba\QueryReflection\RuntimeConfiguration;
-use staabm\PHPStanDba\QueryReflection\MysqliQueryReflector;
 use staabm\PHPStanDba\QueryReflection\QueryReflection;
 
 unset($REX);
@@ -27,11 +27,10 @@ $config = rex_file::getConfig($configFile);
 
 $db = ($config['db'][1] ?? []) + ['host' => '', 'login' => '', 'password' => '', 'name' => ''];
 
-$mysqli = new mysqli(
-    $db['host'],
+$pdo = new PDO(
+    sprintf('mysql:dbname=%s;host=%s', $db['name'], $db['host']),
     $db['login'],
     $db['password'],
-    $db['name']
 );
 
 $config = new RuntimeConfiguration();
@@ -40,6 +39,6 @@ $config = new RuntimeConfiguration();
 // $config->analyzeQueryPlans(true);
 
 QueryReflection::setupReflector(
-    new MysqliQueryReflector($mysqli),
+    new PdoMysqlQueryReflector($pdo),
     $config
 );
