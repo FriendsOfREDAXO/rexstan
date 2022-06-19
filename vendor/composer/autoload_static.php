@@ -11,19 +11,35 @@ class ComposerStaticInit7d28987f5749c840ef9609f53969aebc
     );
 
     public static $prefixLengthsPsr4 = array (
+        's' => 
+        array (
+            'staabm\\PHPStanDba\\' => 18,
+        ),
         'P' => 
         array (
             'PHPStan\\' => 8,
         ),
+        'C' => 
+        array (
+            'Composer\\Semver\\' => 16,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'staabm\\PHPStanDba\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/staabm/phpstan-dba/src',
+        ),
         'PHPStan\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
-            1 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
-            2 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
-            3 => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src',
+            1 => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src',
+            2 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
+            3 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
+        ),
+        'Composer\\Semver\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/semver/src',
         ),
     );
 
@@ -33,6 +49,7 @@ class ComposerStaticInit7d28987f5749c840ef9609f53969aebc
         'RexStanUserConfig' => __DIR__ . '/../..' . '/lib/RexStanUserConfig.php',
         'redaxo\\phpstan\\RexClassDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/RexClassDynamicReturnTypeExtension.php',
         'redaxo\\phpstan\\RexFunctionsDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/RexFunctionsDynamicReturnTypeExtension.php',
+        'redaxo\\phpstan\\RexSqlDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/RexSqlDynamicReturnTypeExtension.php',
         'rexstan_command' => __DIR__ . '/../..' . '/lib/command.php',
     );
 

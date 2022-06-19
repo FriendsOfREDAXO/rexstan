@@ -11,5 +11,6 @@ return array(
     'RexStanUserConfig' => $baseDir . '/lib/RexStanUserConfig.php',
     'redaxo\\phpstan\\RexClassDynamicReturnTypeExtension' => $baseDir . '/lib/RexClassDynamicReturnTypeExtension.php',
     'redaxo\\phpstan\\RexFunctionsDynamicReturnTypeExtension' => $baseDir . '/lib/RexFunctionsDynamicReturnTypeExtension.php',
+    'redaxo\\phpstan\\RexSqlDynamicReturnTypeExtension' => $baseDir . '/lib/RexSqlDynamicReturnTypeExtension.php',
     'rexstan_command' => $baseDir . '/lib/command.php',
 );

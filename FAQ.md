@@ -65,6 +65,12 @@ Der Strict-Mode ist für erfahrene PHP Programmierer geeignet und verbietet die 
 Details dazu sind unter [phpstan-strict-rules](https://github.com/phpstan/phpstan-strict-rules) zu finden.
 
 
+## Was ist phpstan-dba?
+
+[`phpstan-dba`](https://staabm.github.io/2022/05/01/phpstan-dba.html) ist eine Erweiterung für PHPStan, die die statische Code Analyse von Datenbankabfragen ermöglicht.
+Somit werden u.a. Fehler in SQL Abfragen erkannt.
+
+
 ##  Wie mit dem Fehler "Instantiated class X not found." umgehen?
 
 Falls die Klasse auf ein AddOn hinweist, das noch nicht aktiviert ist, sollte dieses aktiviert werden.
