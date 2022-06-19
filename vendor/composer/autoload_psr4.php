@@ -6,5 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'PHPStan\\' => array($vendorDir . '/phpstan/phpstan-deprecation-rules/src', $vendorDir . '/phpstan/phpstan-strict-rules/src', $vendorDir . '/phpstan/phpstan-symfony/src', $vendorDir . '/phpstan/phpstan-phpunit/src'),
+    'staabm\\PHPStanDba\\' => array($vendorDir . '/staabm/phpstan-dba/src'),
+    'PHPStan\\' => array($vendorDir . '/phpstan/phpstan-deprecation-rules/src', $vendorDir . '/phpstan/phpstan-phpunit/src', $vendorDir . '/phpstan/phpstan-strict-rules/src', $vendorDir . '/phpstan/phpstan-symfony/src'),
+    'Composer\\Semver\\' => array($vendorDir . '/composer/semver/src'),
 );

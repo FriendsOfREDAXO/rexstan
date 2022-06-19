@@ -1,0 +1,92 @@
+services:
+    -
+        class: staabm\PHPStanDba\Extensions\DoctrineConnectionQueryDynamicReturnTypeExtension
+        tags:
+        	- phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
+        class: staabm\PHPStanDba\Extensions\DoctrineConnectionExecuteQueryDynamicReturnTypeExtension
+        tags:
+        	- phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
+        class: staabm\PHPStanDba\Extensions\DoctrineConnectionPrepareDynamicReturnTypeExtension
+        tags:
+        	- phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
+        class: staabm\PHPStanDba\Extensions\DoctrineResultDynamicReturnTypeExtension
+        tags:
+        	- phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
+        class: staabm\PHPStanDba\Extensions\DoctrineStatementExecuteDynamicReturnTypeExtension
+        tags:
+        	- phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
+        class: staabm\PHPStanDba\Extensions\DoctrineConnectionFetchDynamicReturnTypeExtension
+        tags:
+        	- phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
+        class: staabm\PHPStanDba\Extensions\PdoQueryDynamicReturnTypeExtension
+        tags:
+        	- phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
+        class: staabm\PHPStanDba\Extensions\PdoPrepareDynamicReturnTypeExtension
+        tags:
+        	- phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
+        class: staabm\PHPStanDba\Extensions\PdoStatementExecuteTypeSpecifyingExtension
+        tags:
+        	- phpstan.typeSpecifier.methodTypeSpecifyingExtension
+
+    -
+        class: staabm\PHPStanDba\Extensions\PdoStatementFetchDynamicReturnTypeExtension
+        tags:
+        	- phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
+        class: staabm\PHPStanDba\Extensions\PdoStatementSetFetchModeTypeSpecifyingExtension
+        tags:
+        	- phpstan.typeSpecifier.methodTypeSpecifyingExtension
+
+    -
+        class: staabm\PHPStanDba\Extensions\PdoStatementFetchObjectDynamicReturnTypeExtension
+        tags:
+        	- phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
+        class: staabm\PHPStanDba\Extensions\PdoStatementColumnCountDynamicReturnTypeExtension
+        tags:
+        	- phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
+        class: staabm\PHPStanDba\Extensions\DeployerRunMysqlQueryDynamicReturnTypeExtension
+        tags:
+        	- phpstan.broker.dynamicFunctionReturnTypeExtension
+
+    -
+        class: staabm\PHPStanDba\Extensions\MysqliQueryDynamicReturnTypeExtension
+        tags:
+        	- phpstan.broker.dynamicMethodReturnTypeExtension
+        	- phpstan.broker.dynamicFunctionReturnTypeExtension
+
+    -
+        class: staabm\PHPStanDba\Extensions\MysqliEscapeStringDynamicReturnTypeExtension
+        tags:
+        	- phpstan.broker.dynamicMethodReturnTypeExtension
+        	- phpstan.broker.dynamicFunctionReturnTypeExtension
+
+    -
+        class: staabm\PHPStanDba\Extensions\PdoQuoteDynamicReturnTypeExtension
+        tags:
+        	- phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
+        class: staabm\PHPStanDba\Ast\PreviousConnectingVisitor
+        tags:
+        	- phpstan.parser.richParserNodeVisitor
