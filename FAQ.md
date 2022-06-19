@@ -87,3 +87,21 @@ oder ein inkorrekter Type zugeordnet ist.
 
 Prüfe zum Beispiel wie die Variable definiert wird und ob dabei verwendete Methoden/Funktionen korrekte Parameter und Return-Typen definieren.  
 
+
+## Wie mit dem Fehler "parameter $ep with generic class rex_extension_point but does not specify its types: T" umgehen?
+
+Die Klasse `rex_extension_point` verwendet einen [Class-Level-Generic"](https://phpstan.org/blog/generics-in-php-using-phpdocs#class-level-generics),
+der den Rückgabewert der Methode `getSubject()` eingrenzt.
+
+Das bedeutet dass man einen Parameter vom typ `rex_extension_point` mittels `<T>` PHPDoc weiter eingrenzen kann, zum Beispiel:
+
+```php
+/**
+ * @param rex_extension_point<string> $ep 
+ */
+function myExtension(rex_extension_point $ep) {
+    $ep->getSubject(); // aufgrund des generic phpdocs, weiß rexstan dass "string" returned wird.
+}
+```
+
+Weiterlesen: [Generics in PHPStan](https://phpstan.org/blog/generics-in-php-using-phpdocs)
