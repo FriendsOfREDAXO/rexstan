@@ -63,16 +63,6 @@ parameters:
 			path: src/Rules/Classes/RequireParentConstructCallRule.php
 
 		-
-			message: "#^Method PHPStan\\\\Rules\\\\Classes\\\\RequireParentConstructCallRule\\:\\:getParentConstructorClass\\(\\) has parameter \\$classReflection with generic class ReflectionClass but does not specify its types\\: T$#"
-			count: 1
-			path: src/Rules/Classes/RequireParentConstructCallRule.php
-
-		-
-			message: "#^Method PHPStan\\\\Rules\\\\Classes\\\\RequireParentConstructCallRule\\:\\:getParentConstructorClass\\(\\) return type with generic class ReflectionClass does not specify its types\\: T$#"
-			count: 1
-			path: src/Rules/Classes/RequireParentConstructCallRule.php
-
-		-
 			message: "#^Class PHPStan\\\\Rules\\\\DisallowedConstructs\\\\DisallowedBacktickRule implements generic interface PHPStan\\\\Rules\\\\Rule but does not specify its types\\: TNodeType$#"
 			count: 1
 			path: src/Rules/DisallowedConstructs/DisallowedBacktickRule.php
@@ -111,16 +101,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$node \\(PhpParser\\\\Node\\\\Stmt\\\\Foreach_\\) of method PHPStan\\\\Rules\\\\ForeachLoop\\\\OverwriteVariablesWithForeachRule\\:\\:processNode\\(\\) should be contravariant with parameter \\$node \\(PhpParser\\\\Node\\) of method PHPStan\\\\Rules\\\\Rule\\<PhpParser\\\\Node\\>\\:\\:processNode\\(\\)$#"
 			count: 1
 			path: src/Rules/ForeachLoop/OverwriteVariablesWithForeachRule.php
-
-		-
-			message: "#^Class PHPStan\\\\Rules\\\\Methods\\\\WrongCaseOfInheritedMethodRule implements generic interface PHPStan\\\\Rules\\\\Rule but does not specify its types\\: TNodeType$#"
-			count: 1
-			path: src/Rules/Methods/WrongCaseOfInheritedMethodRule.php
-
-		-
-			message: "#^Parameter \\#1 \\$node \\(PhpParser\\\\Node\\\\Stmt\\\\ClassMethod\\) of method PHPStan\\\\Rules\\\\Methods\\\\WrongCaseOfInheritedMethodRule\\:\\:processNode\\(\\) should be contravariant with parameter \\$node \\(PhpParser\\\\Node\\) of method PHPStan\\\\Rules\\\\Rule\\<PhpParser\\\\Node\\>\\:\\:processNode\\(\\)$#"
-			count: 1
-			path: src/Rules/Methods/WrongCaseOfInheritedMethodRule.php
 
 		-
 			message: "#^Class PHPStan\\\\Rules\\\\Operators\\\\OperandInArithmeticIncrementOrDecrementRule implements generic interface PHPStan\\\\Rules\\\\Rule but does not specify its types\\: TNodeType$#"

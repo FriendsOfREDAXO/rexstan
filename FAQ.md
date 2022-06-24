@@ -71,6 +71,14 @@ Details dazu sind unter [phpstan-strict-rules](https://github.com/phpstan/phpsta
 Somit werden u.a. Fehler in SQL Abfragen erkannt.
 
 
+## Wie mit dem Fehler `Loose comparison via ... is not allowed.` umgehen?
+
+Diese Fehler werden nur im Strict-Mode gemeldet. Es wird empfohlen mit `===` bzw. `!==` zu arbeiten.
+Man muss dabei darauf achten dass es in Grenzfällen zu unterschiedlichen Ergebnissen führen kann.
+
+Weiterlesen: [PHP – Loose Comparison (==) VS Strict Comparision (===)](https://techgeekgalaxy.com/php-equality-comparisons/)
+
+
 ##  Wie mit dem Fehler `Instantiated class X not found.` umgehen?
 
 Falls die Klasse auf ein AddOn hinweist, das noch nicht aktiviert ist, sollte dieses aktiviert werden.
