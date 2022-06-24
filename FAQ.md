@@ -78,6 +78,7 @@ Man muss dabei darauf achten dass es in Grenzfällen zu unterschiedlichen Ergebn
 
 Weiterlesen: [PHP – Loose Comparison (==) VS Strict Comparision (===)](https://techgeekgalaxy.com/php-equality-comparisons/)
 
+
 ##  Wie mit dem Fehler `Instantiated class X not found.` umgehen?
 
 Falls die Klasse auf ein AddOn hinweist, das noch nicht aktiviert ist, sollte dieses aktiviert werden.
