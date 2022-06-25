@@ -8,6 +8,10 @@ Es ist nicht möglich diese Probleme vom AddOn selbst lösen zu lassen.
 Wo nach Problem gesucht wird, kann in den Einstellungen definiert werden.
 Es gibt sogenannte Levels die man in aufsteigender Folge nacheinander durcharbeiten sollte.
 
+rexstan basiert [auf PHPStan](https://phpstan.org/blog/find-bugs-in-your-code-without-writing-tests):
+
+> PHPStan focuses on finding errors in your code without actually running it. It catches whole classes of bugs even before you write tests for the code. It moves PHP closer to compiled languages in the sense that the correctness of each line of the code can be checked before you run the actual line.
+
 
 ## Wie soll ich mit dem Addon arbeiten?
 
