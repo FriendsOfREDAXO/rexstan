@@ -42,7 +42,7 @@ This might be usefull, to e.g. create reports, so you can track reported problem
 
 ## REDAXO Docker 
 
-If you use rexstan with [docker-redaxo](https://github.com/FriendsOfREDAXO/docker-redaxo) you might need to set the /temp folder writable. Open the docker console and run: `chmod 777 -R /tmp && chmod o+t -R /tmp`
+If you use rexstan with [docker-redaxo](https://github.com/FriendsOfREDAXO/docker-redaxo) you might need to set the /tmp folder writable. Open the docker console and run: `chmod 777 -R /tmp && chmod o+t -R /tmp`
 
 ## 💌 Support rexstan
 
