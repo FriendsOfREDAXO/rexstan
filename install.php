@@ -11,9 +11,12 @@ require_once __DIR__ .'/lib/RexStan.php';
 $cliPhpVerssion = RexStan::execCmd('php -r "echo PHP_VERSION_ID;"', false, $lastError);
 if (is_numeric($cliPhpVerssion)) {
     if ($cliPhpVerssion < 70300) {
-        $addon->setProperty('installmsg', 'Your PHP CLI version is too old. Please upgrade to PHP 7.3 or higher.');
+        $addon->setProperty('installmsg', 'PHP CLI version is too old. Please upgrade to PHP 7.3 or higher.');
         return;
     }
+} else {
+    $addon->setProperty('installmsg', 'Unable to determine PHP CLI version. Make sure PHP is installed in the CLI and availabe within your system PATH.');
+    return;
 }
 
 $userConfig = $addon->getDataPath('user-config.neon');
