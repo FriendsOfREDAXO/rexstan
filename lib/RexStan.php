@@ -17,7 +17,7 @@ final class RexStan {
         } else {
             $pathFix = false;
         }
-        
+
         $cmd = $phpstanBinary .' analyse -c '. $configPath;
         $output = self::execCmd($cmd, $pathFix, $lastError);
 
@@ -50,12 +50,12 @@ final class RexStan {
         // return the error string as is
         return $output;
     }
-    
+
     /**
      * @param string $lastError
      * @return string
      */
-    static private function execCmd(string $cmd, bool $pathFix, &$lastError) {
+    static public function execCmd(string $cmd, bool $pathFix, &$lastError) {
         $lastError = '';
         set_error_handler(function ($type, $msg) use (&$lastError) { $lastError = $msg; });
         try {
@@ -72,7 +72,7 @@ final class RexStan {
            }
            restore_error_handler();
         }
-        
+
         return $output;
     }
 }
