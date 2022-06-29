@@ -17,8 +17,8 @@ foreach (rex_addon::getAvailableAddons() as $availableAddon) {
     $select->addOption($availableAddon->getName(), $availableAddon->getPath());
 
     if ($availableAddon->getName() === 'developer') {
-        $select->addOption('developer: modules', rex_addon::get('developer')->getDataPath('modules'));
-        $select->addOption('developer: templates', rex_addon::get('developer')->getDataPath('templates'));
+        $select->addOption('developer: modules', rex_developer_manager::getBasePath() .'/modules/');
+        $select->addOption('developer: templates', rex_developer_manager::getBasePath() .'/templates/');
     }
 }
 
