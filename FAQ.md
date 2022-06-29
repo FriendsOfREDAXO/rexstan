@@ -117,3 +117,29 @@ function myExtension(rex_extension_point $ep) {
 ```
 
 Weiterlesen: [Generics in PHPStan](https://phpstan.org/blog/generics-in-php-using-phpdocs)
+
+
+## Wie mit dem Fehler `Variable $this might not be defined.` umgehen?
+
+Im Addon-Context sollte die Verwendung von $this vermieden werden.
+Empfehlung ist $this mit `rex_addon::get` zu ersetzen.
+
+Statt
+
+```php
+if (rex::isBackend() && is_object(rex::getUser()) && 'rexstan' === rex_be_controller::getCurrentPagePart(1) ) {
+    rex_view::addCssFile($this->getAssetsUrl('rexstan.css'));
+    rex_view::addJsFile($this->getAssetsUrl('confetti.min.js'));
+}
+```
+
+folgendes verwenden
+
+```php
+$addon = rex_addon::get('rexstan');
+
+if (rex::isBackend() && is_object(rex::getUser()) && 'rexstan' === rex_be_controller::getCurrentPagePart(1) ) {
+    rex_view::addCssFile($addon->getAssetsUrl('rexstan.css'));
+    rex_view::addJsFile($addon->getAssetsUrl('confetti.min.js'));
+}
+```
