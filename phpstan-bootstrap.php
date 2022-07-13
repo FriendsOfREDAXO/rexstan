@@ -7,13 +7,7 @@ use staabm\PHPStanDba\QueryReflection\QueryReflection;
 unset($REX);
 $REX['REDAXO'] = false;
 
-// not sure yet, why running the command from PHPStorm needs a different HTDOCS_PATH
-if (getenv('REXSTAN_PATHFIX')) {
-    $REX['HTDOCS_PATH'] = '../';
-} else {
-    $REX['HTDOCS_PATH'] = './';
-}
-
+$REX['HTDOCS_PATH'] = realpath(__DIR__.'/../../../../');
 $REX['BACKEND_FOLDER'] = 'redaxo';
 $REX['LOAD_PAGE'] = false;
 
