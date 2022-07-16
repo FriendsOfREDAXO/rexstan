@@ -1,16 +1,18 @@
 <?php
 
-final class RexStan {
+final class RexStan
+{
     /**
      * @return string
      */
-    static public function runFromCli() {
-       if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-           $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan.bat');
-       } else {
-           $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan');
-       }
-       $configPath = realpath(__DIR__.'/../phpstan.neon');
+    public static function runFromCli()
+    {
+        if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
+            $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan.bat');
+        } else {
+            $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan');
+        }
+        $configPath = realpath(__DIR__.'/../phpstan.neon');
 
         $cmd = $phpstanBinary .' analyse -c '. $configPath;
         $output = self::execCmd($cmd, $lastError);
@@ -21,23 +23,24 @@ final class RexStan {
     /**
      * @return array|string
      */
-    static public function runFromWeb() {
-       if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-           $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan.bat');
-       } else {
-           $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan');
-       }
+    public static function runFromWeb()
+    {
+        if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
+            $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan.bat');
+        } else {
+            $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan');
+        }
         $configPath = realpath(__DIR__.'/../phpstan.neon');
 
         $cmd = $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress 2>&1';
         $output = self::execCmd($cmd, $lastError);
 
-        if ($output[0] === '{') {
+        if ('{' === $output[0]) {
             // return the analysis result as an array
             return json_decode($output, true);
         }
 
-        if ($output == '') {
+        if ('' == $output) {
             $output = $lastError;
         }
 
@@ -49,13 +52,16 @@ final class RexStan {
      * @param string $lastError
      * @return string
      */
-    static public function execCmd(string $cmd, &$lastError) {
+    public static function execCmd(string $cmd, &$lastError)
+    {
         $lastError = '';
-        set_error_handler(function ($type, $msg) use (&$lastError) { $lastError = $msg; });
+        set_error_handler(static function ($type, $msg) use (&$lastError) {
+            $lastError = $msg;
+        });
         try {
-           $output = @shell_exec($cmd);
+            $output = @shell_exec($cmd);
         } finally {
-           restore_error_handler();
+            restore_error_handler();
         }
 
         return $output;

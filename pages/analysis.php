@@ -17,7 +17,7 @@ if (!is_array($phpstanResult) || !is_array($phpstanResult['files'])) {
 } else {
     $totalErrors = $phpstanResult['totals']['file_errors'];
 
-    if ($totalErrors === 0) {
+    if (0 === $totalErrors) {
         $level = RexStanUserConfig::getLevel();
 
         $emoji = '';
@@ -54,7 +54,7 @@ if (!is_array($phpstanResult) || !is_array($phpstanResult['files'])) {
         echo '<span class="rexstan-achievement">'.$emoji .'</span>';
         echo rex_view::success('Gratulation, es wurden keine Fehler in Level '. $level .' gefunden.');
 
-        if ($level === 9) {
+        if (9 === $level) {
             echo '<script>
                 var duration = 10 * 1000;
                 var animationEnd = Date.now() + duration;

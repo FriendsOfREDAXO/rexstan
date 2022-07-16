@@ -1,8 +1,8 @@
 <?php
 
 use staabm\PHPStanDba\QueryReflection\PdoMysqlQueryReflector;
-use staabm\PHPStanDba\QueryReflection\RuntimeConfiguration;
 use staabm\PHPStanDba\QueryReflection\QueryReflection;
+use staabm\PHPStanDba\QueryReflection\RuntimeConfiguration;
 
 unset($REX);
 $REX['REDAXO'] = false;
@@ -12,7 +12,6 @@ $REX['BACKEND_FOLDER'] = 'redaxo';
 $REX['LOAD_PAGE'] = false;
 
 require __DIR__.'/../../core/boot.php';
-
 
 // phpstan-dba bootstrapping
 

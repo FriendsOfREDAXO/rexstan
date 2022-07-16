@@ -33,7 +33,7 @@ if (!is_file($userConfig)) {
                 continue;
             }
 
-            if ($availableAddon->getName() == 'rexstan') {
+            if ('rexstan' == $availableAddon->getName()) {
                 continue;
             }
 
