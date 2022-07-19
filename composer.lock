@@ -298,22 +298,22 @@
         },
         {
             "name": "phpstan/phpstan-symfony",
-            "version": "1.2.5",
+            "version": "1.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-symfony.git",
-                "reference": "85be852a17fd5a6b67d4fc6daed21e794f935b2d"
+                "reference": "b3df0da98adc391d23204d843b6320d480084ee1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/85be852a17fd5a6b67d4fc6daed21e794f935b2d",
-                "reference": "85be852a17fd5a6b67d4fc6daed21e794f935b2d",
+                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/b3df0da98adc391d23204d843b6320d480084ee1",
+                "reference": "b3df0da98adc391d23204d843b6320d480084ee1",
                 "shasum": ""
             },
             "require": {
                 "ext-simplexml": "*",
                 "php": "^7.2 || ^8.0",
-                "phpstan/phpstan": "^1.6"
+                "phpstan/phpstan": "^1.8"
             },
             "conflict": {
                 "symfony/framework-bundle": "<3.0"
@@ -363,22 +363,22 @@
             "description": "Symfony Framework extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-symfony/issues",
-                "source": "https://github.com/phpstan/phpstan-symfony/tree/1.2.5"
+                "source": "https://github.com/phpstan/phpstan-symfony/tree/1.2.6"
             },
-            "time": "2022-06-10T08:44:35+00:00"
+            "time": "2022-07-18T15:46:26+00:00"
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.2.41",
+            "version": "0.2.42",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "5533f24536e78841f28215599ae0e6551c9c768b"
+                "reference": "950726e0986d0f67f0aa4f6abcd67ccdf9e71348"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/5533f24536e78841f28215599ae0e6551c9c768b",
-                "reference": "5533f24536e78841f28215599ae0e6551c9c768b",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/950726e0986d0f67f0aa4f6abcd67ccdf9e71348",
+                "reference": "950726e0986d0f67f0aa4f6abcd67ccdf9e71348",
                 "shasum": ""
             },
             "require": {
@@ -418,9 +418,9 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.41"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.42"
             },
-            "time": "2022-06-29T18:52:53+00:00"
+            "time": "2022-07-19T10:05:36+00:00"
         }
     ],
     "packages-dev": [],
