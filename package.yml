@@ -20,5 +20,5 @@ console_commands:
 
 requires:
     php:
-        version: '>=7.3 <=8.2'
+        version: '>=7.3 <8.2'
     redaxo: '^5.2'
