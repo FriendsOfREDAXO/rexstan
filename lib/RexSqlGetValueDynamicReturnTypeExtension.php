@@ -56,7 +56,7 @@ final class RexSqlGetValueDynamicReturnTypeExtension implements DynamicMethodRet
             return null;
         }
 
-        if ($sqlResultType->hasOffsetValueType($valueNameType)) {
+        if ($sqlResultType->hasOffsetValueType($valueNameType)->yes()) {
             return $sqlResultType->getOffsetValueType($valueNameType);
         }
 
