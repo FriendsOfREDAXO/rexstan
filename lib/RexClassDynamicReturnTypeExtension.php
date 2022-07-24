@@ -11,6 +11,7 @@ use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\DynamicStaticMethodReturnTypeExtension;
 use PHPStan\Type\Type;
 use rex;
+use rex_sql;
 use function count;
 use function in_array;
 
@@ -42,7 +43,9 @@ final class RexClassDynamicReturnTypeExtension implements DynamicStaticMethodRet
         if ('escapeidentifier' === $name) {
             $identifierName = $scope->getType($args[0]->value);
             if ($identifierName instanceof ConstantStringType) {
-                return new ConstantStringType(rex_sql::escapeIdentifier($identifierName->getValue()));
+                // 1:1 copied rex_sql::escapeIdentifier()
+                $escapedIdentifier = '`' . str_replace('`', '``', $identifierName->getValue()) . '`';
+                return new ConstantStringType($escapedIdentifier);
             }
         }
 
