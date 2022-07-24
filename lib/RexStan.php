@@ -7,12 +7,8 @@ final class RexStan
      */
     public static function runFromCli()
     {
-        if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
-            $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan.bat');
-        } else {
-            $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan');
-        }
-        $configPath = realpath(__DIR__.'/../phpstan.neon');
+        $phpstanBinary = self::phpstanBinPath();
+        $configPath = self::phpstanConfigPath();
 
         $cmd = $phpstanBinary .' analyse -c '. $configPath;
         $output = self::execCmd($cmd, $lastError);
@@ -25,12 +21,8 @@ final class RexStan
      */
     public static function runFromWeb()
     {
-        if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
-            $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan.bat');
-        } else {
-            $phpstanBinary = realpath(__DIR__.'/../vendor/bin/phpstan');
-        }
-        $configPath = realpath(__DIR__.'/../phpstan.neon');
+        $phpstanBinary = self::phpstanBinPath();
+        $configPath = self::phpstanConfigPath();
 
         $cmd = $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress 2>&1';
         $output = self::execCmd($cmd, $lastError);
@@ -46,6 +38,17 @@ final class RexStan
 
         // return the error string as is
         return $output;
+    }
+
+    /**
+     * @return void
+     */
+    public static function clearResultCache()
+    {
+        $phpstanBinary = self::phpstanBinPath();
+
+        $cmd = $phpstanBinary .' clear-result-cache';
+        $output = self::execCmd($cmd, $lastError);
     }
 
     /**
@@ -65,5 +68,19 @@ final class RexStan
         }
 
         return $output;
+    }
+
+    private static function phpstanBinPath(): string
+    {
+        if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
+            return realpath(__DIR__.'/../vendor/bin/phpstan.bat');
+        }
+
+        return realpath(__DIR__.'/../vendor/bin/phpstan');
+    }
+
+    private static function phpstanConfigPath(): string
+    {
+        return realpath(__DIR__.'/../phpstan.neon');
     }
 }
