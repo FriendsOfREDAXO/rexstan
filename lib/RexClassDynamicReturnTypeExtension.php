@@ -23,7 +23,7 @@ final class RexClassDynamicReturnTypeExtension implements DynamicStaticMethodRet
 
     public function isStaticMethodSupported(MethodReflection $methodReflection): bool
     {
-        return in_array(strtolower($methodReflection->getName()), ['gettable', 'gettableprefix'], true);
+        return in_array(strtolower($methodReflection->getName()), ['gettable', 'gettableprefix', 'escapeidentifier'], true);
     }
 
     public function getTypeFromStaticMethodCall(MethodReflection $methodReflection, StaticCall $methodCall, Scope $scope): ?Type
@@ -39,10 +39,18 @@ final class RexClassDynamicReturnTypeExtension implements DynamicStaticMethodRet
             return null;
         }
 
-        $tableName = $scope->getType($args[0]->value);
+        if ('escapeidentifier' === $name) {
+            $identifierName = $scope->getType($args[0]->value);
+            if ($identifierName instanceof ConstantStringType) {
+                return new ConstantStringType(rex_sql::escapeIdentifier($identifierName->getValue()));
+            }
+        }
 
-        if ($tableName instanceof ConstantStringType) {
-            return new ConstantStringType('rex_'. $tableName->getValue());
+        if ('gettable' === $name) {
+            $tableName = $scope->getType($args[0]->value);
+            if ($tableName instanceof ConstantStringType) {
+                return new ConstantStringType('rex_'. $tableName->getValue());
+            }
         }
 
         return null;
