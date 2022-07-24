@@ -17,12 +17,12 @@ final class RexStanUserConfig
 
         $prefix = "# rexstan auto generated file - do not edit\n\n";
 
-        rex_file::put(self::userconfig(), $prefix . rex_string::yamlEncode($file, 3));
+        rex_file::put(self::getUserConfigPath(), $prefix . rex_string::yamlEncode($file, 3));
     }
 
     public static function getLevel(): int
     {
-        $neon = rex_file::get(self::userconfig());
+        $neon = self::readUserConfig();
         $settings = rex_string::yamlDecode($neon);
         return (int) $settings['parameters']['level'];
     }
@@ -32,7 +32,7 @@ final class RexStanUserConfig
      */
     public static function getPaths(): array
     {
-        $neon = rex_file::get(self::userconfig());
+        $neon = self::readUserConfig();
         $settings = rex_string::yamlDecode($neon);
         return $settings['parameters']['paths'];
     }
@@ -42,12 +42,23 @@ final class RexStanUserConfig
      */
     public static function getIncludes(): array
     {
-        $neon = rex_file::get(self::userconfig());
+        $neon = self::readUserConfig();
         $settings = rex_string::yamlDecode($neon);
         return $settings['includes'];
     }
 
-    private static function userconfig(): string
+    private static function readUserConfig(): string
+    {
+        $neon = rex_file::get(self::getUserConfigPath());
+
+        if (null === $neon) {
+            throw new \RuntimeException('Unable to read userconfig');
+        }
+
+        return $neon;
+    }
+
+    private static function getUserConfigPath(): string
     {
         return rex_addon::get('rexstan')->getDataPath('user-config.neon');
     }

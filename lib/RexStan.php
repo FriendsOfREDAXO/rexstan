@@ -73,14 +73,26 @@ final class RexStan
     private static function phpstanBinPath(): string
     {
         if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
-            return realpath(__DIR__.'/../vendor/bin/phpstan.bat');
+            $path = realpath(__DIR__.'/../vendor/bin/phpstan.bat');
+        } else {
+            $path = realpath(__DIR__.'/../vendor/bin/phpstan');
         }
 
-        return realpath(__DIR__.'/../vendor/bin/phpstan');
+        if (false === $path) {
+            throw new \RuntimeException('phpstan binary not found');
+        }
+
+        return $path;
     }
 
     private static function phpstanConfigPath(): string
     {
-        return realpath(__DIR__.'/../phpstan.neon');
+        $path = realpath(__DIR__.'/../phpstan.neon');
+
+        if (false === $path) {
+            throw new \RuntimeException('phpstan config not found');
+        }
+
+        return $path;
     }
 }
