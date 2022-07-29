@@ -68,15 +68,22 @@ final class RexSqlSetQueryTypeSpecifyingExtension implements MethodTypeSpecifyin
     {
         $args = $methodCall->getArgs();
 
-        if (2 !== count($args)) {
+        if (1 < count($args)) {
             return null;
         }
 
-        $queryExpr = $args[0]->value;
-        $parameterTypes = $scope->getType($args[1]->value);
+        if (1 === count($args)) {
+            $queryExpr = $args[0]->value;
 
-        $queryReflection = new QueryReflection();
-        $queryStrings = $queryReflection->resolvePreparedQueryStrings($queryExpr, $parameterTypes, $scope);
+            $queryReflection = new QueryReflection();
+            $queryStrings = $queryReflection->resolveQueryStrings($queryExpr, $scope);
+        } else {
+            $queryExpr = $args[0]->value;
+            $parameterTypes = $scope->getType($args[1]->value);
+
+            $queryReflection = new QueryReflection();
+            $queryStrings = $queryReflection->resolvePreparedQueryStrings($queryExpr, $parameterTypes, $scope);
+        }
 
         return $this->createGenericObject($queryStrings);
     }
