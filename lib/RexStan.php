@@ -17,7 +17,7 @@ final class RexStan
     }
 
     /**
-     * @return array<string, array<mixed>>|string
+     * @return array<string, mixed>|string
      */
     public static function runFromWeb()
     {
