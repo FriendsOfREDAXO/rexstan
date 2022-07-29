@@ -58,6 +58,7 @@ final class RexStan
     public static function execCmd(string $cmd, &$lastError)
     {
         $lastError = '';
+        // @phpstan-ignore-next-line
         set_error_handler(static function ($type, $msg) use (&$lastError) {
             $lastError = $msg;
         });
