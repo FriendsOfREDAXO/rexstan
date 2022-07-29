@@ -48,7 +48,7 @@ final class RexStan
         $phpstanBinary = self::phpstanBinPath();
 
         $cmd = $phpstanBinary .' clear-result-cache';
-        $output = self::execCmd($cmd, $lastError);
+        self::execCmd($cmd, $lastError);
     }
 
     /**
@@ -68,7 +68,7 @@ final class RexStan
             restore_error_handler();
         }
 
-        return $output;
+        return $output ?? '';
     }
 
     private static function phpstanBinPath(): string
