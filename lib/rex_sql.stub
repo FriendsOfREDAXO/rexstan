@@ -1,8 +1,0 @@
-<?php
-
-/**
-  * @template resultType
-  */
-class rex_sql {
-
-}
