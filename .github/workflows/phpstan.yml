@@ -26,4 +26,4 @@ jobs:
 
       - run: composer require redaxo/source
 
-      - run: vendor/bin/phpstan analyze
+      - run: composer phpstan
