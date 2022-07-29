@@ -1,0 +1,29 @@
+name: Static analysis
+
+on:
+  pull_request:
+
+jobs:
+
+  phpstan:
+    name: PHPStan
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        id: setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.0
+          coverage: none
+
+      - uses: "ramsey/composer-install@v2"
+        with:
+          composer-options: "--prefer-dist --no-progress --no-suggest"
+
+      - run: composer require redaxo/source
+
+      - run: vendor/bin/phpstan analyze
