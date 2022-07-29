@@ -19,5 +19,8 @@
         },
         "platform-check": false,
         "bin-compat": "full"
+    },
+    "scripts": {
+        "phpstan": "phpstan analyze -c phpstan.neon"
     }
 }

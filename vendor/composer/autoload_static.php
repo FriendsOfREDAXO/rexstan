@@ -50,6 +50,8 @@ class ComposerStaticInit7d28987f5749c840ef9609f53969aebc
         'redaxo\\phpstan\\RexClassDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/RexClassDynamicReturnTypeExtension.php',
         'redaxo\\phpstan\\RexFunctionsDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/RexFunctionsDynamicReturnTypeExtension.php',
         'redaxo\\phpstan\\RexSqlDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/RexSqlDynamicReturnTypeExtension.php',
+        'redaxo\\phpstan\\RexSqlGetValueDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/RexSqlGetValueDynamicReturnTypeExtension.php',
+        'redaxo\\phpstan\\RexSqlSetQueryTypeSpecifyingExtension' => __DIR__ . '/../..' . '/lib/RexSqlSetQueryTypeSpecifyingExtension.php',
         'rexstan_command' => __DIR__ . '/../..' . '/lib/command.php',
     );
 

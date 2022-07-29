@@ -1,5 +1,5 @@
 package: rexstan
-version: '1.0.25'
+version: '1.0.28'
 author: Friends Of REDAXO
 supportpage: https://github.com/FriendsOfREDAXO/rexstan
 
@@ -22,3 +22,6 @@ requires:
     php:
         version: '>=7.3, <8.3'
     redaxo: '^5.2'
+
+installer_ignore:
+    - phpstan.neon

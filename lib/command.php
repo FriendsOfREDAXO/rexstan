@@ -5,6 +5,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class rexstan_command extends rex_console_command
 {
+    /**
+     * @return void
+     */
     protected function configure()
     {
         $this

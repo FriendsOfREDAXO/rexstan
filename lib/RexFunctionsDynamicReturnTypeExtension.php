@@ -50,7 +50,7 @@ final class RexFunctionsDynamicReturnTypeExtension implements DynamicFunctionRet
             $resolvedType = $this->resolveTypeFromString($typeString->getValue());
 
             if (null !== $resolvedType) {
-                if ($defaultArgType) {
+                if (null !== $defaultArgType) {
                     return TypeCombinator::union($resolvedType, $defaultArgType);
                 }
                 return $resolvedType;
