@@ -11,7 +11,7 @@ require_once __DIR__ .'/lib/RexStan.php';
 $cliPhpVerssion = RexStan::execCmd('php -r "echo PHP_VERSION_ID;"', $lastError);
 if (is_numeric($cliPhpVerssion)) {
     if ($cliPhpVerssion < 70300) {
-        $addon->setProperty('installmsg', 'PHP CLI version is too old. Please upgrade to PHP 7.3 or higher.');
+        $addon->setProperty('installmsg', 'PHP CLI version '.$cliPhpVerssion.' is too old. Please upgrade to PHP 7.3 or higher.');
         return;
     }
 } else {
