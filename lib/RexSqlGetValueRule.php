@@ -76,8 +76,7 @@ final class RexSqlGetValueRule implements Rule
             $lastKey = array_key_last($parts);
             $fieldName = $parts[$lastKey];
 
-            $valueNameType = new ConstantStringType($fieldName);
-            if ($sqlResultType->hasOffsetValueType($valueNameType)->yes()) {
+            if ($sqlResultType->hasOffsetValueType(new ConstantStringType($fieldName))->yes()) {
                 return [];
             }
         }
