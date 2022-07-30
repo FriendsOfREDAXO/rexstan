@@ -21,6 +21,7 @@
         "bin-compat": "full"
     },
     "scripts": {
-        "phpstan": "phpstan analyze -c phpstan.dev.neon"
+        "phpstan": "phpstan analyze -c phpstan.dev.neon",
+        "tests": "php tests/run.php"
     }
 }
