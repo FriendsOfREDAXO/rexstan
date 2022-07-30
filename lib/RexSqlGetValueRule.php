@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace redaxo\phpstan;
 
+use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantArrayType;
 use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\Generic\GenericObjectType;
+use PHPStan\Type\VerbosityLevel;
 use rex_sql;
 use function count;
-use PhpParser\Node;
 
 /**
  * @implements Rule<MethodCall>
@@ -37,18 +37,13 @@ final class RexSqlGetValueRule implements Rule
             return [];
         }
 
-        $classReflection = $scope->getClassReflection();
-        if ($classReflection === null) {
-            return [];
-        }
-
-        $className = $classReflection->getName();
-        if ($className !== rex_sql::class) {
+        $varType = $scope->getType($methodCall->var);
+        if ($varType->getClassName() !== rex_sql::class) {
             return [];
         }
 
         $methodName = $methodCall->name->toString();
-        if (strtolower($methodName) !== 'getvalue') {
+        if ('getvalue' !== strtolower($methodName)) {
             return [];
         }
 
@@ -76,7 +71,7 @@ final class RexSqlGetValueRule implements Rule
 
         return [
             RuleErrorBuilder::message(
-                'New Person instance can be created only in PersonFactory.'
+                sprintf('Value %s was not selected in the used sql-query.', $valueNameType->describe(VerbosityLevel::precise()))
             )->build(),
         ];
     }

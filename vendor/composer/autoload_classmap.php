@@ -13,6 +13,7 @@ return array(
     'redaxo\\phpstan\\RexFunctionsDynamicReturnTypeExtension' => $baseDir . '/lib/RexFunctionsDynamicReturnTypeExtension.php',
     'redaxo\\phpstan\\RexSqlDynamicReturnTypeExtension' => $baseDir . '/lib/RexSqlDynamicReturnTypeExtension.php',
     'redaxo\\phpstan\\RexSqlGetValueDynamicReturnTypeExtension' => $baseDir . '/lib/RexSqlGetValueDynamicReturnTypeExtension.php',
+    'redaxo\\phpstan\\RexSqlGetValueRule' => $baseDir . '/lib/RexSqlGetValueRule.php',
     'redaxo\\phpstan\\RexSqlSetQueryTypeSpecifyingExtension' => $baseDir . '/lib/RexSqlSetQueryTypeSpecifyingExtension.php',
     'rexstan_command' => $baseDir . '/lib/command.php',
 );
