@@ -68,7 +68,7 @@ final class RexSqlSetQueryTypeSpecifyingExtension implements MethodTypeSpecifyin
     {
         $args = $methodCall->getArgs();
 
-        if (1 < count($args)) {
+        if (0 === count($args)) {
             return null;
         }
 
