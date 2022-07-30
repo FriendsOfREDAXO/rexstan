@@ -12,6 +12,7 @@ use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantArrayType;
 use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\Generic\GenericObjectType;
+use PHPStan\Type\TypeWithClassName;
 use PHPStan\Type\VerbosityLevel;
 use rex_sql;
 use function count;
@@ -38,7 +39,7 @@ final class RexSqlGetValueRule implements Rule
         }
 
         $varType = $scope->getType($methodCall->var);
-        if ($varType->getClassName() !== rex_sql::class) {
+        if (!$varType instanceof TypeWithClassName || $varType->getClassName() !== rex_sql::class) {
             return [];
         }
 
