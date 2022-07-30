@@ -70,6 +70,18 @@ final class RexSqlGetValueRule implements Rule
             return [];
         }
 
+        // support table.field notation
+        if (strpos($valueNameType->getValue(), '.') !== false) {
+            $parts = explode('.', $valueNameType->getValue());
+            $lastKey = array_key_last($parts);
+            $fieldName = $parts[$lastKey];
+
+            $valueNameType = new ConstantStringType($fieldName);
+            if ($sqlResultType->hasOffsetValueType($valueNameType)->yes()) {
+                return [];
+            }
+        }
+
         return [
             RuleErrorBuilder::message(
                 sprintf('Value %s was not selected in the used sql-query.', $valueNameType->describe(VerbosityLevel::precise()))
