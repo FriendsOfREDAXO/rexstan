@@ -10,7 +10,6 @@ parameters:
     #    - ../mblock/
 
     excludePaths:
-        - ./tests/
         - */vendor/*
 
     # don't report not found ignores
