@@ -36,6 +36,10 @@ final class RexSqlGetValueRule implements Rule
         }
 
         $classReflection = $scope->getClassReflection();
+        if ($classReflection === null) {
+            return [];
+        }
+        
         $className = $classReflection->getName();
         if ($className !== rex_sql::class) {
             return [];
