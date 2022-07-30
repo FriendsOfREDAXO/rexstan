@@ -39,7 +39,7 @@ final class RexSqlGetValueRule implements Rule
         }
 
         $varType = $scope->getType($methodCall->var);
-        if (!$varType instanceof TypeWithClassName || $varType->getClassName() !== rex_sql::class) {
+        if (!$varType instanceof TypeWithClassName || rex_sql::class !== $varType->getClassName()) {
             return [];
         }
 
@@ -71,7 +71,7 @@ final class RexSqlGetValueRule implements Rule
         }
 
         // support table.field notation
-        if (strpos($valueNameType->getValue(), '.') !== false) {
+        if (false !== strpos($valueNameType->getValue(), '.')) {
             $parts = explode('.', $valueNameType->getValue());
             $lastKey = array_key_last($parts);
             $fieldName = $parts[$lastKey];
