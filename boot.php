@@ -18,6 +18,7 @@ $sql->setQuery('
             LIMIT   1
         ');
 $sql->getValue('abc');
+
 exit();
 
 function getName(int $id): int

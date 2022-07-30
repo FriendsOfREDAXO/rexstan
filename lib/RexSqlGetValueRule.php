@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace redaxo\phpstan;
 
+use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
@@ -14,17 +15,21 @@ use function count;
 use PhpParser\Node;
 
 /**
- * @implements Rule<ClassMethod>
+ * @implements Rule<MethodCall>
  */
 final class RexSqlGetValueRule implements Rule
 {
     public function getNodeType(): string
     {
-        return ClassMethod::class;
+        return MethodCall::class;
     }
 
     public function processNode(Node $methodCall, Scope $scope): array
     {
+        if (!$methodCall->name instanceof Node\Identifier) {
+            return [];
+        }
+
         $args = $methodCall->getArgs();
         if (1 < count($args)) {
             return [];
