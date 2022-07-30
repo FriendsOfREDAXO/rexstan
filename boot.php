@@ -19,6 +19,7 @@ $sql->setQuery('
         ');
 $sql->getValue('abc');
 
+
 exit();
 
 function getName(int $id): int

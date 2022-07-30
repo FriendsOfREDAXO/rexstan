@@ -8,7 +8,9 @@ use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantArrayType;
+use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\Generic\GenericObjectType;
 use rex_sql;
 use function count;
@@ -39,7 +41,7 @@ final class RexSqlGetValueRule implements Rule
         if ($classReflection === null) {
             return [];
         }
-        
+
         $className = $classReflection->getName();
         if ($className !== rex_sql::class) {
             return [];
