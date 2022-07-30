@@ -1,13 +1,14 @@
-name: Static analysis
+name: Unit tests
 
 on:
   push:
+      branches: [main]
   pull_request:
 
 jobs:
 
-  phpstan:
-    name: PHPStan
+  phpunit:
+    name: PHPUnit
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
