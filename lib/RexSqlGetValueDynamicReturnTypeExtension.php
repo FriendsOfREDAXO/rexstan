@@ -7,10 +7,7 @@ namespace redaxo\phpstan;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
-use PHPStan\Type\Constant\ConstantArrayType;
-use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
-use PHPStan\Type\Generic\GenericObjectType;
 use PHPStan\Type\Type;
 use rex_sql;
 use function count;
@@ -38,26 +35,8 @@ final class RexSqlGetValueDynamicReturnTypeExtension implements DynamicMethodRet
             return null;
         }
 
-        $statementType = $scope->getType($methodCall->var);
-        if (!$statementType instanceof GenericObjectType) {
-            return null;
-        }
-        if (rex_sql::class !== $statementType->getClassName()) {
-            return null;
-        }
-
-        $valueNameType = $scope->getType($args[0]->value);
-        if (!$valueNameType instanceof ConstantStringType) {
-            return null;
-        }
-
-        $sqlResultType = $statementType->getTypes()[0];
-        if (!$sqlResultType instanceof ConstantArrayType) {
-            return null;
-        }
-
-        if ($sqlResultType->hasOffsetValueType($valueNameType)->yes()) {
-            return $sqlResultType->getOffsetValueType($valueNameType);
+        if (RexSqlReflection::hasOffsetValueType($methodCall, $scope)) {
+            return RexSqlReflection::getOffsetValueType($methodCall, $scope);
         }
 
         return null;

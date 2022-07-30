@@ -9,12 +9,7 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use PHPStan\Type\Constant\ConstantArrayType;
-use PHPStan\Type\Constant\ConstantStringType;
-use PHPStan\Type\Generic\GenericObjectType;
-use PHPStan\Type\TypeWithClassName;
 use PHPStan\Type\VerbosityLevel;
-use rex_sql;
 use function count;
 
 /**
@@ -29,57 +24,24 @@ final class RexSqlGetValueRule implements Rule
 
     public function processNode(Node $methodCall, Scope $scope): array
     {
-        if (!$methodCall->name instanceof Node\Identifier) {
-            return [];
-        }
-
         $args = $methodCall->getArgs();
         if (1 < count($args)) {
             return [];
         }
 
-        $varType = $scope->getType($methodCall->var);
-        if (!$varType instanceof TypeWithClassName || rex_sql::class !== $varType->getClassName()) {
+        if (!$methodCall->name instanceof Node\Identifier) {
             return [];
         }
 
-        $methodName = $methodCall->name->toString();
-        if ('getvalue' !== strtolower($methodName)) {
+        if (!RexSqlReflection::isSqlResultType($methodCall, $scope)) {
             return [];
         }
 
-        $statementType = $scope->getType($methodCall->var);
-        if (!$statementType instanceof GenericObjectType) {
-            return [];
-        }
-        if (rex_sql::class !== $statementType->getClassName()) {
+        if (RexSqlReflection::hasOffsetValueType($methodCall, $scope)) {
             return [];
         }
 
         $valueNameType = $scope->getType($args[0]->value);
-        if (!$valueNameType instanceof ConstantStringType) {
-            return [];
-        }
-
-        $sqlResultType = $statementType->getTypes()[0];
-        if (!$sqlResultType instanceof ConstantArrayType) {
-            return [];
-        }
-
-        if ($sqlResultType->hasOffsetValueType($valueNameType)->yes()) {
-            return [];
-        }
-
-        // support table.field notation
-        if (false !== strpos($valueNameType->getValue(), '.')) {
-            $parts = explode('.', $valueNameType->getValue());
-            $lastKey = array_key_last($parts);
-            $fieldName = $parts[$lastKey];
-
-            if ($sqlResultType->hasOffsetValueType(new ConstantStringType($fieldName))->yes()) {
-                return [];
-            }
-        }
 
         return [
             RuleErrorBuilder::message(
