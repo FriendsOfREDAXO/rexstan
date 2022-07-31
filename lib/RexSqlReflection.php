@@ -4,40 +4,27 @@ declare(strict_types=1);
 
 namespace redaxo\phpstan;
 
+use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Type\Constant\ConstantArrayType;
 use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\Generic\GenericObjectType;
 use PHPStan\Type\Type;
+use PHPStan\Type\TypeCombinator;
 use rex_sql;
+use staabm\PHPStanDba\QueryReflection\QueryReflection;
+use staabm\PHPStanDba\QueryReflection\QueryReflector;
+use staabm\PHPStanDba\UnresolvableQueryException;
 use function count;
 
 final class RexSqlReflection
 {
-    public static function isSqlResultType(MethodCall $methodCall, Scope $scope): bool
-    {
-        return null !== self::getSqlResultType($methodCall, $scope);
-    }
-
     public static function getSqlResultType(MethodCall $methodCall, Scope $scope): ?ConstantArrayType
     {
-        $type = $scope->getType($methodCall->var);
+        $objectType = $scope->getType($methodCall->var);
 
-        if (!$type instanceof GenericObjectType) {
-            return null;
-        }
-
-        if (rex_sql::class !== $type->getClassName()) {
-            return null;
-        }
-
-        $sqlResultType = $type->getTypes()[0];
-        if (!$sqlResultType instanceof ConstantArrayType) {
-            return null;
-        }
-
-        return $sqlResultType;
+        return self::getResultTypeFromStatementType($objectType);
     }
 
     public static function hasOffsetValueType(MethodCall $methodCall, Scope $scope): bool
@@ -48,7 +35,7 @@ final class RexSqlReflection
     public static function getOffsetValueType(MethodCall $methodCall, Scope $scope): ?Type
     {
         $args = $methodCall->getArgs();
-        if (1 < count($args)) {
+        if (count($args) < 1) {
             return null;
         }
 
@@ -76,6 +63,66 @@ final class RexSqlReflection
             if ($sqlResultType->hasOffsetValueType($valueNameType)->yes()) {
                 return $sqlResultType->getOffsetValueType($valueNameType);
             }
+        }
+
+        return null;
+    }
+
+    public static function getResultTypeFromStatementType(Type $statementType): ?ConstantArrayType
+    {
+        if (!$statementType instanceof GenericObjectType) {
+            return null;
+        }
+
+        if (rex_sql::class !== $statementType->getClassName()) {
+            return null;
+        }
+
+        $sqlResultType = $statementType->getTypes()[0];
+        if (!$sqlResultType instanceof ConstantArrayType) {
+            return null;
+        }
+
+        return $sqlResultType;
+    }
+
+    /**
+     * @throws UnresolvableQueryException
+     */
+    public static function inferStatementType(Expr $queryExpr, ?Type $parameterTypes, Scope $scope): ?Type
+    {
+        if (null === $parameterTypes) {
+            $queryReflection = new QueryReflection();
+            $queryStrings = $queryReflection->resolveQueryStrings($queryExpr, $scope);
+        } else {
+            $queryReflection = new QueryReflection();
+            $queryStrings = $queryReflection->resolvePreparedQueryStrings($queryExpr, $parameterTypes, $scope);
+        }
+
+        return self::createGenericObject($queryStrings);
+    }
+
+    /**
+     * @param iterable<string>            $queryStrings
+     */
+    private static function createGenericObject(iterable $queryStrings): ?Type
+    {
+        $queryReflection = new QueryReflection();
+        $genericObjects = [];
+
+        foreach ($queryStrings as $queryString) {
+            $assocType = $queryReflection->getResultType($queryString, QueryReflector::FETCH_TYPE_ASSOC);
+
+            if (null !== $assocType) {
+                $genericObjects[] = new GenericObjectType(rex_sql::class, [$assocType]);
+            }
+        }
+
+        if (count($genericObjects) > 1) {
+            return TypeCombinator::union(...$genericObjects);
+        }
+        if (1 === count($genericObjects)) {
+            return $genericObjects[0];
         }
 
         return null;

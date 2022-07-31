@@ -2,12 +2,11 @@
 
 namespace RexSqlGetValue;
 
-use rex_sql;
 use rex;
-
+use rex_sql;
 use function PHPStan\Testing\assertType;
 
-function preparedQuery(int $id):void
+function preparedQuery(int $id): void
 {
     $sql = rex_sql::factory();
     $sql->setQuery('
@@ -20,7 +19,7 @@ function preparedQuery(int $id):void
     assertType('string', $sql->getValue('name'));
 }
 
-function regularQuery():void
+function regularQuery(): void
 {
     $sql = rex_sql::factory();
     $sql->setQuery('
@@ -33,7 +32,7 @@ function regularQuery():void
     assertType('string', $sql->getValue('name'));
 }
 
-function unknownValue():void
+function unknownValue(): void
 {
     $sql = rex_sql::factory();
     $sql->setQuery('
@@ -45,4 +44,3 @@ function unknownValue():void
 
     assertType('bool|float|int|string|null', $sql->getValue('doesNotExist'));
 }
-

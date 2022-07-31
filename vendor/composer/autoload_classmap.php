@@ -12,6 +12,7 @@ return array(
     'redaxo\\phpstan\\RexClassDynamicReturnTypeExtension' => $baseDir . '/lib/RexClassDynamicReturnTypeExtension.php',
     'redaxo\\phpstan\\RexFunctionsDynamicReturnTypeExtension' => $baseDir . '/lib/RexFunctionsDynamicReturnTypeExtension.php',
     'redaxo\\phpstan\\RexSqlDynamicReturnTypeExtension' => $baseDir . '/lib/RexSqlDynamicReturnTypeExtension.php',
+    'redaxo\\phpstan\\RexSqlGetArrayDynamicReturnTypeExtension' => $baseDir . '/lib/RexSqlGetArrayDynamicReturnTypeExtension.php',
     'redaxo\\phpstan\\RexSqlGetValueDynamicReturnTypeExtension' => $baseDir . '/lib/RexSqlGetValueDynamicReturnTypeExtension.php',
     'redaxo\\phpstan\\RexSqlGetValueRule' => $baseDir . '/lib/RexSqlGetValueRule.php',
     'redaxo\\phpstan\\RexSqlReflection' => $baseDir . '/lib/RexSqlReflection.php',

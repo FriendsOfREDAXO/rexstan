@@ -25,7 +25,7 @@ final class RexSqlGetValueRule implements Rule
     public function processNode(Node $methodCall, Scope $scope): array
     {
         $args = $methodCall->getArgs();
-        if (1 < count($args)) {
+        if (count($args) < 1) {
             return [];
         }
 
@@ -33,7 +33,7 @@ final class RexSqlGetValueRule implements Rule
             return [];
         }
 
-        if (!RexSqlReflection::isSqlResultType($methodCall, $scope)) {
+        if (null === RexSqlReflection::getSqlResultType($methodCall, $scope)) {
             return [];
         }
 
