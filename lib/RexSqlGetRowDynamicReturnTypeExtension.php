@@ -32,6 +32,14 @@ final class RexSqlGetRowDynamicReturnTypeExtension implements DynamicMethodRetur
         MethodCall $methodCall,
         Scope $scope
     ): ?Type {
+        $args = $methodCall->getArgs();
+
+        // TODO implement me
+        $fetchType = null;
+        if (count($args) >= 1) {
+            $fetchType = $args[0]->value;
+        }
+
         return RexSqlReflection::getSqlResultType($methodCall, $scope);
     }
 }
