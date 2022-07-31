@@ -35,8 +35,9 @@ final class RexSqlGetValueDynamicReturnTypeExtension implements DynamicMethodRet
             return null;
         }
 
-        if (RexSqlReflection::hasOffsetValueType($methodCall, $scope)) {
-            return RexSqlReflection::getOffsetValueType($methodCall, $scope);
+        $offsetValueType = RexSqlReflection::getOffsetValueType($methodCall, $scope);
+        if (null !== $offsetValueType) {
+            return $offsetValueType;
         }
 
         return null;

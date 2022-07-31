@@ -27,11 +27,6 @@ final class RexSqlReflection
         return self::getResultTypeFromStatementType($objectType);
     }
 
-    public static function hasOffsetValueType(MethodCall $methodCall, Scope $scope): bool
-    {
-        return null !== self::getOffsetValueType($methodCall, $scope);
-    }
-
     public static function getOffsetValueType(MethodCall $methodCall, Scope $scope): ?Type
     {
         $args = $methodCall->getArgs();

@@ -33,11 +33,16 @@ final class RexSqlGetValueRule implements Rule
             return [];
         }
 
+        if (!in_array(strtolower($methodCall->name->toString()), ['getvalue', 'getarrayvalue', 'getdatetimevalue'], true)) {
+            return [];
+        }
+
         if (null === RexSqlReflection::getSqlResultType($methodCall, $scope)) {
             return [];
         }
 
-        if (RexSqlReflection::hasOffsetValueType($methodCall, $scope)) {
+        $offsetValueType = RexSqlReflection::getOffsetValueType($methodCall, $scope);
+        if (null !== $offsetValueType) {
             return [];
         }
 

@@ -43,4 +43,6 @@ function unknownValue(): void
         ');
 
     assertType('bool|float|int|string|null', $sql->getValue('doesNotExist'));
+    $sql->getDateTimeValue('doesNotExist');
+    $sql->getArrayValue('doesNotExist');
 }
