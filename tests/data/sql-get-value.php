@@ -46,3 +46,16 @@ function unknownValue(): void
     $sql->getDateTimeValue('doesNotExist');
     $sql->getArrayValue('doesNotExist');
 }
+
+function tableNamePrefix(): void
+{
+    $sql = rex_sql::factory();
+    $sql->setQuery('
+            SELECT  name
+            FROM    ' . rex::getTable('article') . '
+            WHERE   id = 1
+            LIMIT   1
+        ');
+
+    assertType('string', $sql->getValue('rex_article.name'));
+}
