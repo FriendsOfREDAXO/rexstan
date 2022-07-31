@@ -11,13 +11,9 @@ use PHPStan\Analyser\TypeSpecifier;
 use PHPStan\Analyser\TypeSpecifierAwareExtension;
 use PHPStan\Analyser\TypeSpecifierContext;
 use PHPStan\Reflection\MethodReflection;
-use PHPStan\Type\Generic\GenericObjectType;
 use PHPStan\Type\MethodTypeSpecifyingExtension;
 use PHPStan\Type\Type;
-use PHPStan\Type\TypeCombinator;
 use rex_sql;
-use staabm\PHPStanDba\QueryReflection\QueryReflection;
-use staabm\PHPStanDba\QueryReflection\QueryReflector;
 use staabm\PHPStanDba\UnresolvableQueryException;
 use function count;
 
@@ -74,43 +70,12 @@ final class RexSqlSetQueryTypeSpecifyingExtension implements MethodTypeSpecifyin
 
         if (1 === count($args)) {
             $queryExpr = $args[0]->value;
-
-            $queryReflection = new QueryReflection();
-            $queryStrings = $queryReflection->resolveQueryStrings($queryExpr, $scope);
+            $parameterTypes = null;
         } else {
             $queryExpr = $args[0]->value;
             $parameterTypes = $scope->getType($args[1]->value);
-
-            $queryReflection = new QueryReflection();
-            $queryStrings = $queryReflection->resolvePreparedQueryStrings($queryExpr, $parameterTypes, $scope);
         }
 
-        return $this->createGenericObject($queryStrings);
-    }
-
-    /**
-     * @param iterable<string>            $queryStrings
-     */
-    private function createGenericObject(iterable $queryStrings): ?Type
-    {
-        $queryReflection = new QueryReflection();
-        $genericObjects = [];
-
-        foreach ($queryStrings as $queryString) {
-            $assocType = $queryReflection->getResultType($queryString, QueryReflector::FETCH_TYPE_ASSOC);
-
-            if (null !== $assocType) {
-                $genericObjects[] = new GenericObjectType(rex_sql::class, [$assocType]);
-            }
-        }
-
-        if (count($genericObjects) > 1) {
-            return TypeCombinator::union(...$genericObjects);
-        }
-        if (1 === count($genericObjects)) {
-            return $genericObjects[0];
-        }
-
-        return null;
+        return RexSqlReflection::inferStatementType($queryExpr, $parameterTypes, $scope);
     }
 }

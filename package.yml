@@ -25,3 +25,4 @@ requires:
 
 installer_ignore:
     - phpstan.dev.neon
+    - tests/

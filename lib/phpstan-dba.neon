@@ -22,3 +22,27 @@ services:
                 - 'rex_sql::getDBArray#0'
                 - 'rex_sql::prepareQuery#0'
                 - 'rex_sql::getQueryType#0'
+
+    -
+        class: redaxo\phpstan\RexSqlDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
+        class: redaxo\phpstan\RexSqlSetQueryTypeSpecifyingExtension
+        tags:
+            - phpstan.typeSpecifier.methodTypeSpecifyingExtension
+
+    -
+        class: redaxo\phpstan\RexSqlGetValueDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+    -
+        class: redaxo\phpstan\RexSqlGetArrayDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
+        class: redaxo\phpstan\RexSqlGetValueRule
+        tags:
+            - phpstan.rules.rule
