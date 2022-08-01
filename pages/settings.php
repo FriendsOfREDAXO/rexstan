@@ -24,6 +24,7 @@ foreach (rex_addon::getAvailableAddons() as $availableAddon) {
 $field = $form->addSelectField('extensions', RexStanUserConfig::getIncludes(), ['class' => 'form-control selectpicker']);
 $field->setAttribute('multiple', 'multiple');
 $field->setLabel('PHPStan Extensions');
+$field->setNotice('Weiterlesen bzgl. der verf&uuml;gbaren Extensions: <a href="https://phpstan.org/blog/what-is-bleeding-edge">Bleeding-Edge</a>, <a href="https://github.com/phpstan/phpstan-strict-rules#readme">Strict-Mode</a>, <a href="https://github.com/phpstan/phpstan-deprecation-rules#readme">Deprecation-Warnings</a>, <a href="https://github.com/phpstan/phpstan-phpunit#readme">PHPUnit</a>, <a href="https://staabm.github.io/archive.html#phpstan-dba">phpstan-dba</a>');
 $select = $field->getSelect();
 
 $select->addOption('Bleeding-Edge', realpath(__DIR__.'/../vendor/phpstan/phpstan/conf/bleedingEdge.neon'));
