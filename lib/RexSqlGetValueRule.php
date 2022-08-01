@@ -10,8 +10,8 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
-use PHPStan\Type\VerbosityLevel;
 use function count;
+use function in_array;
 
 /**
  * @implements Rule<MethodCall>
