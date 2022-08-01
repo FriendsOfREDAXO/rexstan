@@ -35,3 +35,29 @@ QueryReflection::setupReflector(
     new PdoMysqlQueryReflector($pdo),
     $config
 );
+
+// on a git checkout require the root composer autoloader
+// without also including static files (to prevent cannot re-declare function errors)
+$basePath = rex_path::base();
+if(is_file($basePath . '/vendor/autoload.php')) {
+    call_user_func( function() use ($basePath) {
+        $loader = new \Composer\Autoload\ClassLoader();
+
+        foreach ( require $basePath . '/vendor/composer/autoload_namespaces.php' as $namespace => $path ) {
+            $loader->set( $namespace, $path );
+        }
+
+        foreach ( require $basePath . '/vendor/composer/autoload_psr4.php' as $namespace => $path ) {
+            $loader->setPsr4( $namespace, $path );
+        }
+
+        $classMap = require $basePath . '/vendor/composer/autoload_classmap.php';
+
+        if ( $classMap ) {
+            $loader->addClassMap( $classMap );
+        }
+
+        $loader->register( true );
+    } );
+}
+
