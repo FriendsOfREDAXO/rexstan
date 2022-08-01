@@ -34,6 +34,7 @@ $select->addOption('PHPUnit', realpath(__DIR__.'/../vendor/phpstan/phpstan-phpun
 $select->addOption('phpstan-dba', realpath(__DIR__.'/../lib/phpstan-dba.neon'));
 
 $fragment = new rex_fragment();
+$fragment->setVar('heading', '<i>Einstellungen werden <a href="'. rex_url::backendPage('rexstan/faq') .'">im FAQ erklärt</a></i>', false);
 $fragment->setVar('class', 'edit', false);
 $fragment->setVar('title', 'Settings', false);
 $fragment->setVar('body', $form->get(), false);
