@@ -38,6 +38,7 @@ QueryReflection::setupReflector(
 
 // on a git checkout require the root composer autoloader
 // without also including static files (to prevent cannot re-declare function errors)
+// to prevent errors like "Class XY extends unknown class PHPUnit\Framework\TestCase"
 $basePath = rex_path::base();
 if (is_file($basePath . '/vendor/autoload.php')) {
     call_user_func(function () use ($basePath) {
