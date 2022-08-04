@@ -53,8 +53,26 @@ parameters:
 
     disallowedSuperglobals:
         -
+            superglobal: '$_GET'
+            message: 'use rex_request::get() or rex_get() instead.'
+        -
+            superglobal: '$_POST'
+            message: 'use rex_request::post() or rex_post() instead.'
+        -
+            superglobal: '$_REQUEST'
+            message: 'use rex_request::request() or rex_request() instead.'
+        -
+            superglobal: '$_COOKIE'
+            message: 'use rex_request::cookie() or rex_cookie() instead.'
+        -
             superglobal: '$_SESSION'
-            message: 'use rex_request::session() and rex_request::setSession() instead for proper per instance scoping.'
+            message: 'use rex_request::session(), rex_request::setSession() or rex_session(), rex_set_session() instead for proper per instance scoping.'
+        -
+            superglobal: '$_ENV'
+            message: 'use rex_request::env() or rex_env() instead.'
+        -
+            superglobal: '$_SERVER'
+            message: 'use rex_request::server() or rex_server() instead.'
 
 services:
     -
