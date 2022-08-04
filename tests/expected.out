@@ -8,3 +8,5 @@
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/superglobals.php:8:Using $_COOKIE is forbidden, use rex_request::cookie() or rex_cookie() instead.
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/superglobals.php:9:Using $_SERVER is forbidden, use rex_request::server() or rex_server() instead.
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/superglobals.php:10:Using $_ENV is forbidden, use rex_request::env() or rex_env() instead.
+/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/superglobals.php:11:Using $_FILES is forbidden, use rex_request::files() or rex_files() instead.
+/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/superglobals.php:13:Calling setcookie() is forbidden, use rex_response::sendCookie() or rex_response::clearCookie() instead.

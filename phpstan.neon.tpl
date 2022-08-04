@@ -77,6 +77,10 @@ parameters:
             superglobal: '$_SERVER'
             message: 'use rex_request::server() or rex_server() instead.'
 
+    disallowedFunctionCalls:
+        -
+            function: 'setcookie()'
+            message: 'use rex_response::sendCookie() or rex_response::clearCookie() instead.'
 services:
     -
         class: redaxo\phpstan\RexClassDynamicReturnTypeExtension
