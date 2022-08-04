@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'staabm\\PHPStanDba\\' => array($vendorDir . '/staabm/phpstan-dba/src'),
+    'Spaze\\PHPStan\\Rules\\Disallowed\\' => array($vendorDir . '/spaze/phpstan-disallowed-calls/src'),
     'PHPStan\\' => array($vendorDir . '/phpstan/phpstan-deprecation-rules/src', $vendorDir . '/phpstan/phpstan-phpunit/src', $vendorDir . '/phpstan/phpstan-strict-rules/src', $vendorDir . '/phpstan/phpstan-symfony/src'),
     'Composer\\Semver\\' => array($vendorDir . '/composer/semver/src'),
 );

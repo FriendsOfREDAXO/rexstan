@@ -6,7 +6,8 @@
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-strict-rules": "^1.2",
         "phpstan/phpstan-phpunit": "^1.1",
-        "staabm/phpstan-dba": "^0.2.40"
+        "staabm/phpstan-dba": "^0.2.40",
+        "spaze/phpstan-disallowed-calls": "^2.5"
     },
     "autoload": {
         "classmap": [

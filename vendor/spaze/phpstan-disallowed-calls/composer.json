@@ -1,0 +1,53 @@
+{
+	"name": "spaze/phpstan-disallowed-calls",
+	"type": "phpstan-extension",
+	"description": "PHPStan rules to detect disallowed method & function calls, constant, namespace & superglobal usages",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Michal Špaček",
+			"homepage": "https://www.michalspacek.cz",
+			"email": "mail@michalspacek.cz"
+		}
+	],
+	"extra": {
+		"phpstan": {
+			"includes": [
+				"extension.neon"
+			]
+		}
+	},
+	"require": {
+		"php": "^7.1 || ^8.0",
+		"phpstan/phpstan": "^1.0"
+	},
+	"require-dev": {
+		"nette/neon": "^3.2",
+		"nikic/php-parser": "^4.13",
+		"phpunit/phpunit": "^7.0 || ^9.4.2",
+		"php-parallel-lint/php-parallel-lint": "^1.2",
+		"php-parallel-lint/php-console-highlighter": "^1.0",
+		"spaze/coding-standard": "^0.0"
+	},
+	"autoload": {
+		"psr-4": {"Spaze\\PHPStan\\Rules\\Disallowed\\": "src"}
+	},
+	"scripts": {
+		"lint": "vendor/bin/parallel-lint --colors src/ tests/",
+		"phpcs": "vendor/bin/phpcs src/ tests/",
+		"cs-fix": "vendor/bin/phpcbf src/ tests/",
+		"phpstan": "vendor/bin/phpstan --ansi analyse --configuration phpstan.neon",
+		"phpunit": "vendor/bin/phpunit --colors=always",
+		"test": [
+			"@lint",
+			"@phpcs",
+			"@phpstan",
+			"@phpunit"
+		]
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
+}

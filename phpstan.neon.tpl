@@ -2,6 +2,7 @@
 
 includes:
     - %REXSTAN_USERCONFIG%
+    - vendor/spaze/phpstan-disallowed-calls/extension.neon
 
 parameters:
     ### parameters we expect from user-config.neon
@@ -49,6 +50,11 @@ parameters:
     # https://phpstan.org/config-reference#universal-object-crates
     universalObjectCratesClasses:
         - rex_fragment
+
+    disallowedSuperglobals:
+        -
+            superglobal: '$_SESSION'
+            message: 'use rex_request::session() and rex_request::setSession() instead for proper per instance scoping.'
 
 services:
     -
