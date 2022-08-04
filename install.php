@@ -46,7 +46,10 @@ if (!is_file($userConfig)) {
 
 $template = rex_file::get(__DIR__.'/phpstan.neon.tpl');
 $template = str_replace('%REXSTAN_USERCONFIG%', $userConfig, $template);
-rex_file::put(__DIR__.'/phpstan.neon', $template);
+$configPath = __DIR__.'/phpstan.neon';
+if (rex_file::put($configPath, $template) === false) { 
+    $addon->setProperty('installmsg', sprintf('Unable to write rexstan config "%s", $configPath));
+}
 
 // make sure the phpstan binary is executable
 @chmod(__DIR__.'/vendor/bin/phpstan', 0775);
