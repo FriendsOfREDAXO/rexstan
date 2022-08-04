@@ -1,6 +1,6 @@
 <?php
 
-function($value) {
+static function ($value) {
     $_SESSION['foo'] = 'bar';
     $x = $_GET['foo'];
     $x = $_POST['foo'];
@@ -10,5 +10,5 @@ function($value) {
     $x = $_ENV['foo'];
     $x = $_FILES['foo'];
 
-    setcookie("TestCookie", $value);
+    setcookie('TestCookie', $value);
 };
