@@ -8,4 +8,5 @@ function() {
     $x = $_COOKIE['foo'];
     $x = $_SERVER['foo'];
     $x = $_ENV['foo'];
+    $x = $_FILES['foo'];
 };

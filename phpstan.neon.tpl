@@ -68,6 +68,9 @@ parameters:
             superglobal: '$_SESSION'
             message: 'use rex_request::session(), rex_request::setSession() or rex_session(), rex_set_session() instead for proper per instance scoping.'
         -
+            superglobal: '$_FILES'
+            message: 'use rex_request::files() or rex_files() instead.'
+        -
             superglobal: '$_ENV'
             message: 'use rex_request::env() or rex_env() instead.'
         -
