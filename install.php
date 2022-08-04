@@ -47,7 +47,7 @@ if (!is_file($userConfig)) {
 $template = rex_file::get(__DIR__.'/phpstan.neon.tpl');
 $template = str_replace('%REXSTAN_USERCONFIG%', $userConfig, $template);
 $configPath = __DIR__.'/phpstan.neon';
-if (rex_file::put($configPath, $template) === false) {
+if (false === rex_file::put($configPath, $template)) {
     $addon->setProperty('installmsg', sprintf('Unable to write rexstan config "%s"', $configPath));
 }
 
