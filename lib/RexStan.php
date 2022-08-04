@@ -91,7 +91,7 @@ final class RexStan
         $path = realpath(__DIR__.'/../phpstan.neon');
 
         if (false === $path) {
-            throw new \RuntimeException('phpstan config not found');
+            throw new \RuntimeException(sprintf('phpstan config "%s" not found. This file is usually created while AddOn setup. Try re-install of rexstan.', $path));
         }
 
         return $path;
