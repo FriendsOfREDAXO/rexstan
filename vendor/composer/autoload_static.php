@@ -15,6 +15,10 @@ class ComposerStaticInit7d28987f5749c840ef9609f53969aebc
         array (
             'staabm\\PHPStanDba\\' => 18,
         ),
+        'S' => 
+        array (
+            'Spaze\\PHPStan\\Rules\\Disallowed\\' => 31,
+        ),
         'P' => 
         array (
             'PHPStan\\' => 8,
@@ -29,6 +33,10 @@ class ComposerStaticInit7d28987f5749c840ef9609f53969aebc
         'staabm\\PHPStanDba\\' => 
         array (
             0 => __DIR__ . '/..' . '/staabm/phpstan-dba/src',
+        ),
+        'Spaze\\PHPStan\\Rules\\Disallowed\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src',
         ),
         'PHPStan\\' => 
         array (

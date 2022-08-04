@@ -1,0 +1,147 @@
+parameters:
+	allowInRootDir: null
+	disallowedNamespaces: []
+	disallowedClasses: []
+	disallowedMethodCalls: []
+	disallowedStaticCalls: []
+	disallowedFunctionCalls: []
+	disallowedConstants: []
+	disallowedSuperglobals: []
+
+parametersSchema:
+	allowInRootDir: schema(string(), nullable())
+	# These should be defined using `structure` with listed keys but it seems to me that PHPStan requires
+	# all keys to be present in a structure but `message` & `allow*`/`disallow*` are optional.
+	disallowedNamespaces: listOf(
+		arrayOf(
+			anyOf(
+				string(),
+				listOf(string()),
+				arrayOf(anyOf(int(), string(), bool()))
+			)
+		)
+	)
+	disallowedClasses: listOf(
+		arrayOf(
+			anyOf(
+				string(),
+				listOf(string()),
+				arrayOf(anyOf(int(), string(), bool()))
+			)
+		)
+	)
+	disallowedMethodCalls: listOf(
+		arrayOf(
+			anyOf(
+				string(),
+				listOf(string()),
+				arrayOf(anyOf(int(), string(), bool()))
+			)
+		)
+	)
+	disallowedStaticCalls: listOf(
+		arrayOf(
+			anyOf(
+				string(),
+				listOf(string()),
+				arrayOf(anyOf(int(), string(), bool()))
+			)
+		)
+	)
+	disallowedFunctionCalls: listOf(
+		arrayOf(
+			anyOf(
+				string(),
+				listOf(string()),
+				arrayOf(anyOf(int(), string(), bool()))
+			)
+		)
+	)
+	disallowedConstants: listOf(
+		arrayOf(
+			anyOf(
+				string(),
+				listOf(string()),
+				arrayOf(anyOf(int(), string(), bool()))
+			)
+		)
+	)
+	disallowedSuperglobals: listOf(
+		arrayOf(
+			anyOf(
+				string(),
+				listOf(string()),
+				arrayOf(anyOf(int(), string(), bool()))
+			)
+		)
+	)
+
+services:
+	- Spaze\PHPStan\Rules\Disallowed\IsAllowedFileHelper(allowInRootDir: %allowInRootDir%)
+	- Spaze\PHPStan\Rules\Disallowed\DisallowedCallFactory
+	- Spaze\PHPStan\Rules\Disallowed\DisallowedConstantFactory
+	- Spaze\PHPStan\Rules\Disallowed\DisallowedHelper
+	- Spaze\PHPStan\Rules\Disallowed\DisallowedNamespaceFactory
+	- Spaze\PHPStan\Rules\Disallowed\DisallowedNamespaceHelper
+	- Spaze\PHPStan\Rules\Disallowed\DisallowedSuperglobalFactory
+	- Spaze\PHPStan\Rules\Disallowed\DisallowedVariableHelper
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Usages\NamespaceUsages(forbiddenNamespaces: %disallowedNamespaces%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Usages\NamespaceUsages(forbiddenNamespaces: %disallowedClasses%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Calls\MethodCalls(forbiddenCalls: %disallowedMethodCalls%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Calls\NewCalls(forbiddenCalls: %disallowedMethodCalls%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Calls\StaticCalls(forbiddenCalls: %disallowedStaticCalls%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Calls\EvalCalls(forbiddenCalls: %disallowedFunctionCalls%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Calls\EchoCalls(forbiddenCalls: %disallowedFunctionCalls%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Calls\PrintCalls(forbiddenCalls: %disallowedFunctionCalls%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Calls\EmptyCalls(forbiddenCalls: %disallowedFunctionCalls%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Calls\ExitDieCalls(forbiddenCalls: %disallowedFunctionCalls%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Calls\FunctionCalls(forbiddenCalls: %disallowedFunctionCalls%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Calls\ShellExecCalls(forbiddenCalls: %disallowedFunctionCalls%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Usages\ConstantUsages(disallowedConstants: %disallowedConstants%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Usages\ClassConstantUsages(disallowedConstants: %disallowedConstants%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Usages\VariableUsages(disallowedVariables: @Spaze\PHPStan\Rules\Disallowed\DisallowedSuperglobalFactory::getDisallowedVariables(%disallowedSuperglobals%))
+		tags:
+			- phpstan.rules.rule
