@@ -12,8 +12,21 @@ if (is_string($phpstanResult)) {
     return;
 }
 
-if (!is_array($phpstanResult) || !is_array($phpstanResult['files'])) {
-    echo '<p>No phpstan result</p>';
+if (
+    !is_array($phpstanResult)
+    || !is_array($phpstanResult['files'])
+    || (array_key_exists('errors', $phpstanResult) && count($phpstanResult['errors']) > 0)
+) {
+    // print general php errors, like out of memory...
+    if (count($phpstanResult['errors']) > 0) {
+        echo '<p>phpstan errors</p>';
+
+        foreach ($phpstanResult['errors'] as $error) {
+            echo rex_view::error(nl2br($error));
+        }
+    } else {
+        echo '<p>No phpstan result</p>';
+    }
 } else {
     $totalErrors = $phpstanResult['totals']['file_errors'];
 
