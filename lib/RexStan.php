@@ -98,12 +98,13 @@ final class RexStan
     }
 
     /**
-     * Returns the CLI memory limit in bytes
+     * Returns the CLI memory limit in bytes.
      *
      * @return int
      */
-    public static function getCliMemoryLimit() {
-        $cliMemLimit = RexStan::execCmd("php -r 'echo ini_get(\"memory_limit\");'", $lastError);
+    public static function getCliMemoryLimit()
+    {
+        $cliMemLimit = self::execCmd("php -r 'echo ini_get(\"memory_limit\");'", $lastError);
 
         $val = trim($cliMemLimit);
         if ('' != $val) {
