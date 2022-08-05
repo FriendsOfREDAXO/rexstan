@@ -22,7 +22,7 @@ if (
         echo '<p>phpstan errors</p>';
 
         foreach ($phpstanResult['errors'] as $error) {
-            echo '<p>'. nl2br($error) .'</p>';
+            echo rex_view::error(nl2br($error));
         }
     } else {
         echo '<p>No phpstan result</p>';
