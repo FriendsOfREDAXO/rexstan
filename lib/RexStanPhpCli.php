@@ -1,10 +1,12 @@
 <?php
 
-final class RexStanPhpCli {
+final class RexStanPhpCli
+{
     /**
      * @return numeric-string|null
      */
-    static public function detectVersion() {
+    public static function detectVersion()
+    {
         $cliPhpVerssion = RexStan::execCmd('php -r "echo PHP_VERSION_ID;"', $lastError);
         if (is_numeric($cliPhpVerssion)) {
             return $cliPhpVerssion;
