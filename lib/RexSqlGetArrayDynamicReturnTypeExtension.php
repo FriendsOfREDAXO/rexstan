@@ -8,8 +8,10 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\ArrayType;
+use PHPStan\Type\ConstantScalarType;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\IntegerType;
+use PHPStan\Type\StringType;
 use PHPStan\Type\Type;
 use rex_sql;
 use function count;
@@ -46,6 +48,15 @@ final class RexSqlGetArrayDynamicReturnTypeExtension implements DynamicMethodRet
             $parameterTypes = $scope->getType($args[1]->value);
         }
 
+        $fetch = \PDO::FETCH_ASSOC;
+        if (count($args) >= 3) {
+            $fetchType = $scope->getType($args[2]->value);
+
+            if ($fetchType instanceof ConstantScalarType) {
+                $fetch = $fetchType->getValue();
+            }
+        }
+
         $statementType = RexSqlReflection::inferStatementType($queryExpr, $parameterTypes, $scope);
         if (null === $statementType) {
             return null;
@@ -56,6 +67,11 @@ final class RexSqlGetArrayDynamicReturnTypeExtension implements DynamicMethodRet
             return null;
         }
 
-        return new ArrayType(new IntegerType(), $resultType);
+        $keyType = new StringType();
+        if ($fetch === \PDO::FETCH_NUM) {
+            $keyType = new IntegerType();
+        }
+
+        return new ArrayType($keyType, $resultType);
     }
 }
