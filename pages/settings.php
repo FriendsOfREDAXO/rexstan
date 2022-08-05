@@ -38,8 +38,9 @@ $footer = '';
 if (($cliMemLimit / 1024 / 1024) < 256) {
     $footer = '
         <i>
-            Das memory_limit in der PHP CLI ist mit '. round($cliMemLimit / 1024 / 1024) .' MB ggf. zu niedrig.<br />
-            Bitte setzen Sie das memory_limit in der PHP CLI auf mindestens 256 MB.<br /><br />
+            Das <code>memory_limit</code> in der PHP CLI ist mit '. round($cliMemLimit / 1024 / 1024) .' MB ggf. zu niedrig.<br />
+            Dies kann dazu führen, dass die Analyse nicht beendet werden kann.<br />
+            Bitte setzen Sie das <code>memory_limit</code> in der PHP CLI auf mindestens 256 MB - je nach Projektgr&ouml;ße ggf. auch mehr.<br /><br />
             '. nl2br(RexStan::execCmd('php --ini', $lastError)) .'
         </i>
     ';
