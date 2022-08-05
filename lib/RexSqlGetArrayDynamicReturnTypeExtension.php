@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace redaxo\phpstan;
 
+use PDO;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
@@ -11,9 +12,9 @@ use PHPStan\Type\ArrayType;
 use PHPStan\Type\ConstantScalarType;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\IntegerType;
-use PHPStan\Type\StringType;
 use PHPStan\Type\Type;
 use rex_sql;
+use staabm\PHPStanDba\QueryReflection\QueryReflector;
 use function count;
 use function in_array;
 
@@ -48,16 +49,18 @@ final class RexSqlGetArrayDynamicReturnTypeExtension implements DynamicMethodRet
             $parameterTypes = $scope->getType($args[1]->value);
         }
 
-        $fetch = \PDO::FETCH_ASSOC;
+        $fetch = QueryReflector::FETCH_TYPE_ASSOC;
         if (count($args) >= 3) {
             $fetchType = $scope->getType($args[2]->value);
 
             if ($fetchType instanceof ConstantScalarType) {
-                $fetch = $fetchType->getValue();
+                if (PDO::FETCH_NUM === $fetchType->getValue()) {
+                    $fetch = QueryReflector::FETCH_TYPE_NUMERIC;
+                }
             }
         }
 
-        $statementType = RexSqlReflection::inferStatementType($queryExpr, $parameterTypes, $scope);
+        $statementType = RexSqlReflection::inferStatementType($queryExpr, $parameterTypes, $scope, $fetch);
         if (null === $statementType) {
             return null;
         }
@@ -67,11 +70,6 @@ final class RexSqlGetArrayDynamicReturnTypeExtension implements DynamicMethodRet
             return null;
         }
 
-        $keyType = new StringType();
-        if ($fetch === \PDO::FETCH_NUM) {
-            $keyType = new IntegerType();
-        }
-
-        return new ArrayType($keyType, $resultType);
+        return new ArrayType(new IntegerType(), $resultType);
     }
 }

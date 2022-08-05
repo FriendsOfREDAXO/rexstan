@@ -2,6 +2,7 @@
 
 namespace RexSqlGetArray;
 
+use PDO;
 use rex;
 use rex_sql;
 use function PHPStan\Testing\assertType;
@@ -15,7 +16,7 @@ function getArray(): void
             LIMIT   1
         ');
 
-    assertType('array<string, array{name: string}>', $array);
+    assertType('array<int, array{name: string}>', $array);
 }
 
 function getArray0(int $id): void
@@ -28,7 +29,7 @@ function getArray0(int $id): void
             LIMIT   1
         ', [$id]);
 
-    assertType('array<string, array{name: string}>', $array);
+    assertType('array<int, array{name: string}>', $array);
 }
 
 function getArray1(int $id): void
@@ -39,9 +40,9 @@ function getArray1(int $id): void
             FROM    ' . rex::getTable('article') . '
             WHERE   id = ?
             LIMIT   1
-        ', [$id], \PDO::FETCH_ASSOC);
+        ', [$id], PDO::FETCH_ASSOC);
 
-    assertType('array<string, array{name: string}>', $array);
+    assertType('array<int, array{name: string}>', $array);
 }
 
 function getArray2(int $id): void
@@ -52,7 +53,7 @@ function getArray2(int $id): void
             FROM    ' . rex::getTable('article') . '
             WHERE   id = ?
             LIMIT   1
-        ', [$id], \PDO::FETCH_NUM);
+        ', [$id], PDO::FETCH_NUM);
 
-    assertType('array<int, array{name: string}>', $array);
+    assertType('array<int, array{string}>', $array);
 }
