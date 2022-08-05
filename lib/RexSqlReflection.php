@@ -82,9 +82,10 @@ final class RexSqlReflection
     }
 
     /**
+     * @param QueryReflector::FETCH_* $fetchType
      * @throws UnresolvableQueryException
      */
-    public static function inferStatementType(Expr $queryExpr, ?Type $parameterTypes, Scope $scope): ?Type
+    public static function inferStatementType(Expr $queryExpr, ?Type $parameterTypes, Scope $scope, int $fetchType): ?Type
     {
         if (null === $parameterTypes) {
             $queryReflection = new QueryReflection();
@@ -94,22 +95,23 @@ final class RexSqlReflection
             $queryStrings = $queryReflection->resolvePreparedQueryStrings($queryExpr, $parameterTypes, $scope);
         }
 
-        return self::createGenericObject($queryStrings);
+        return self::createGenericObject($queryStrings, $fetchType);
     }
 
     /**
+     * @param QueryReflector::FETCH_* $fetchType
      * @param iterable<string>            $queryStrings
      */
-    private static function createGenericObject(iterable $queryStrings): ?Type
+    private static function createGenericObject(iterable $queryStrings, int $fetchType): ?Type
     {
         $queryReflection = new QueryReflection();
         $genericObjects = [];
 
         foreach ($queryStrings as $queryString) {
-            $assocType = $queryReflection->getResultType($queryString, QueryReflector::FETCH_TYPE_ASSOC);
+            $resultType = $queryReflection->getResultType($queryString, $fetchType);
 
-            if (null !== $assocType) {
-                $genericObjects[] = new GenericObjectType(rex_sql::class, [$assocType]);
+            if (null !== $resultType) {
+                $genericObjects[] = new GenericObjectType(rex_sql::class, [$resultType]);
             }
         }
 

@@ -14,6 +14,7 @@ use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\MethodTypeSpecifyingExtension;
 use PHPStan\Type\Type;
 use rex_sql;
+use staabm\PHPStanDba\QueryReflection\QueryReflector;
 use staabm\PHPStanDba\UnresolvableQueryException;
 use function count;
 
@@ -76,6 +77,6 @@ final class RexSqlSetQueryTypeSpecifyingExtension implements MethodTypeSpecifyin
             $parameterTypes = $scope->getType($args[1]->value);
         }
 
-        return RexSqlReflection::inferStatementType($queryExpr, $parameterTypes, $scope);
+        return RexSqlReflection::inferStatementType($queryExpr, $parameterTypes, $scope, QueryReflector::FETCH_TYPE_ASSOC);
     }
 }
