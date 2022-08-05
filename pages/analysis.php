@@ -21,7 +21,7 @@ if (
     if (count($phpstanResult['errors']) > 0) {
         echo '<p>phpstan errors</p>';
 
-        foreach($phpstanResult['errors'] as $error) {
+        foreach ($phpstanResult['errors'] as $error) {
             echo '<p>'. nl2br($error) .'</p>';
         }
     } else {
