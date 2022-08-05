@@ -33,11 +33,24 @@ $select->addOption('Deprecation Warnings', realpath(__DIR__.'/../vendor/phpstan/
 $select->addOption('PHPUnit', realpath(__DIR__.'/../vendor/phpstan/phpstan-phpunit/rules.neon'));
 $select->addOption('phpstan-dba', realpath(__DIR__.'/../lib/phpstan-dba.neon'));
 
+$cliMemLimit = RexStan::getCliMemoryLimit();
+$footer = '';
+if (($cliMemLimit / 1024 / 1024) < 256) {
+    $footer = '
+        <i>
+            Das memory_limit in der PHP CLI ist mit '. round($cliMemLimit / 1024 / 1024) .' MB ggf. zu niedrig.<br />
+            Bitte setzen Sie das memory_limit in der PHP CLI auf mindestens 256 MB.<br /><br />
+            '. nl2br(RexStan::execCmd('php --ini', $lastError)) .'
+        </i>
+    ';
+}
+
 $fragment = new rex_fragment();
 $fragment->setVar('heading', '<i>Einstellungen werden <a href="'. rex_url::backendPage('rexstan/faq') .'">im FAQ erklärt</a></i>', false);
 $fragment->setVar('class', 'edit', false);
 $fragment->setVar('title', 'Settings', false);
 $fragment->setVar('body', $form->get(), false);
+$fragment->setVar('footer', $footer, false);
 echo $fragment->parse('core/page/section.php');
 
 $form_name = $form->getName();

@@ -96,4 +96,34 @@ final class RexStan
 
         return $path;
     }
+
+    /**
+     * Returns the CLI memory limit in bytes
+     *
+     * @return int
+     */
+    public static function getCliMemoryLimit() {
+        $cliMemLimit = RexStan::execCmd("php -r 'echo ini_get(\"memory_limit\");'", $lastError);
+
+        $val = trim($cliMemLimit);
+        if ('' != $val) {
+            $last = strtolower($val[strlen($val) - 1]);
+        } else {
+            $last = '';
+        }
+        $val = (int) $val;
+        switch ($last) {
+            // The 'G' modifier is available since PHP 5.1.0
+            case 'g':
+                $val *= 1024;
+            // no break
+            case 'm':
+                $val *= 1024;
+            // no break
+            case 'k':
+                $val *= 1024;
+        }
+
+        return $val;
+    }
 }
