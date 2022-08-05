@@ -8,7 +8,9 @@ if (isset($REX['PATH_PROVIDER'])) {
 }
 
 require_once __DIR__ .'/lib/RexStan.php';
-$cliPhpVerssion = RexStan::execCmd('php -r "echo PHP_VERSION_ID;"', $lastError);
+require_once __DIR__ .'/lib/RexStanPhpCli.php';
+
+$cliPhpVerssion = RexStanPhpCli::detectVersion();
 if (is_numeric($cliPhpVerssion)) {
     if ($cliPhpVerssion < 70300) {
         $addon->setProperty('installmsg', 'PHP CLI version '.$cliPhpVerssion.' is too old. Please upgrade to PHP 7.3 or higher.');
