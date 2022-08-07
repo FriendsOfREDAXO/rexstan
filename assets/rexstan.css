@@ -8,12 +8,24 @@
     }
 }
 
-
 .rexstan-achievement {
     font-size: 50px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    height : 100px;
-    display : flex;
-    align-items : center;
-    justify-content : center;
+.rexstan-linenumber {
+    display: inline-block;
+    width: 5rem;
+    text-align: right;
+}
+
+.rexstan .panel-heading:not(.collapsed) .rexstan-open {
+    display: none;
+}
+
+.rexstan .panel-heading.collapsed .rexstan-closed {
+    display: none;
 }
