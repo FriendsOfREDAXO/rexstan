@@ -111,8 +111,6 @@ if (
     $section = new rex_fragment();
     $section->setVar('sectionAttributes', ['class' => 'rexstan'], false);
 
-    $collapsed = (15 < $totalErrors);
-
     foreach ($phpstanResult['files'] as $file => $fileResult) {
         $shortFile = str_replace($basePath, '', $file);
         $title = '<i class="rexstan-open fa fa-folder-o"></i>'.
@@ -123,8 +121,7 @@ if (
 
         $section->setVar('title', $title, false);
         $section->setVar('collapse', $collapsed);
-        $section->setVar('collapsed', $collapsed);
-
+        $section->setVar('collapsed', 15 < $totalErrors && 1 < count($phpstanResult['files']));
         $content = '<ul class="list-group">';
         foreach ($fileResult['messages'] as $message) {
             $content .= '<li class="list-group-item">';
