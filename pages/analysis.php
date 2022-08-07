@@ -2,12 +2,19 @@
 
 /** @var rex_addon $this */
 
+// Run phpstan analysis
+
 $phpstanResult = RexStan::runFromWeb();
 
-if (is_string($phpstanResult)) {
-    echo rex_view::error(nl2br($phpstanResult));
+// present results
 
-    echo '<p>Die Web UI funktionert nicht auf allen Systemen, siehe README.</p>';
+if (is_string($phpstanResult)) {
+    echo rex_view::error(
+        '<h4>PHPSTAN: Fehler</h4>'
+        .nl2br($phpstanResult)
+    );
+
+    echo rex_view::info('Die Web UI funktionert nicht auf allen Systemen, siehe README.');
 
     return;
 }
@@ -19,13 +26,14 @@ if (
 ) {
     // print general php errors, like out of memory...
     if (count($phpstanResult['errors']) > 0) {
-        echo '<p>phpstan errors</p>';
-
+        $msg = '<h4>PHPSTAN: Laufzeit-Fehler</h4><ul>';
         foreach ($phpstanResult['errors'] as $error) {
-            echo rex_view::error(nl2br($error));
+            $msg .= '<li>'.nl2br($error).'<br /></li>';
         }
+        $msg .= '</li>';
+        echo rex_view::error($msg);
     } else {
-        echo '<p>No phpstan result</p>';
+        echo rex_view::warning('No phpstan result');
     }
 } else {
     $totalErrors = $phpstanResult['totals']['file_errors'];
@@ -61,7 +69,7 @@ if (
                 break;
             case 8:
                 $emoji = '🥇';
-            break;
+                break;
         }
 
         echo '<span class="rexstan-achievement">'.$emoji .'</span>';
@@ -97,40 +105,41 @@ if (
         return;
     }
 
-    echo '<p><strong>'. $totalErrors .'</strong> Probleme gefunden in <strong>'. count($phpstanResult['files']) .'</strong> Dateien</p>';
+    echo rex_view::warning('Level-<strong>'.RexStanUserConfig::getLevel().'</strong>-Analyse: <strong>'. $totalErrors .'</strong> Probleme gefunden in <strong>'. count($phpstanResult['files']) .'</strong> Dateien');
 
-    echo '<table class="table table-hover">
-               <thead>
-                <tr>
-                <th>Error</th>
-                <th>Datei</th>
-</tr>
-</thead>   ';
-
-    echo '<tbody>';
     $basePath = rex_path::src('addons/');
+    $section = new rex_fragment();
+    $section->setVar('sectionAttributes', ['class' => 'rexstan'], false);
+
+    $collapsed = (15 < $totalErrors);
 
     foreach ($phpstanResult['files'] as $file => $fileResult) {
         $shortFile = str_replace($basePath, '', $file);
+        $title = '<i class="rexstan-open fa fa-folder-o"></i>'.
+                 '<i class="rexstan-closed fa fa-folder-open-o"></i> '.
+                 '<span class="text-muted">'.rex_escape(dirname($shortFile)).DIRECTORY_SEPARATOR.'</span>'
+                 .rex_escape(basename($shortFile)).
+                 ' <span class="badge">'.$fileResult['errors'].'</span>';
 
-        echo '<tr class="rexstan-error-file">';
-        echo '<td colspan="2"><span>'.rex_escape(dirname($shortFile)).DIRECTORY_SEPARATOR.'</span>'.rex_escape(basename($shortFile)).'</td>';
-        echo '</tr>';
+        $section->setVar('title', $title, false);
+        $section->setVar('collapse', $collapsed);
+        $section->setVar('collapsed', $collapsed);
 
+        $content = '<ul class="list-group">';
         foreach ($fileResult['messages'] as $message) {
+            $content .= '<li class="list-group-item">';
+            $content .= '<span class="rexstan-linenumber">' .sprintf('%5d', $message['line']).': </span> ';
             $error = rex_escape($message['message']);
-
             $url = rex_editor::factory()->getUrl($file, $message['line']);
             if ($url) {
                 $error = '<a href="'. $url .'">'. rex_escape($message['message']) .'</a>';
             }
-
-            echo '<tr class="rexstan-error-message">';
-            echo '<td>'.$error.'</td>';
-            echo '<td>'. rex_escape(basename($shortFile)).':'.$message['line'] .'</td>';
-            echo '</tr>';
+            $content .= $error;
+            $content .= '</li>';
         }
+        $content .= '</ul>';
+
+        $section->setVar('content', $content, false);
+        echo $section->parse('core/page/section.php');
     }
-    echo '</tbody>';
-    echo '</table>';
 }
