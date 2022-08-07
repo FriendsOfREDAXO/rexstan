@@ -120,7 +120,7 @@ if (
                  ' <span class="badge">'.$fileResult['errors'].'</span>';
 
         $section->setVar('title', $title, false);
-        $section->setVar('collapse', $collapsed);
+        $section->setVar('collapse', true);
         $section->setVar('collapsed', 15 < $totalErrors && 1 < count($phpstanResult['files']));
         $content = '<ul class="list-group">';
         foreach ($fileResult['messages'] as $message) {
