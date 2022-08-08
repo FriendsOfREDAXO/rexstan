@@ -16,9 +16,15 @@
     justify-content: center;
 }
 
+.rexstan-message {
+    padding-left: 6rem;
+    text-indent:-5rem;
+}
+
 .rexstan-linenumber {
     display: inline-block;
     width: 5rem;
+    padding-right: 0.5rem;
     text-align: right;
 }
 
