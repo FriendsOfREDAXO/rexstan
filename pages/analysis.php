@@ -124,8 +124,8 @@ if (
         $section->setVar('collapsed', 15 < $totalErrors && 1 < count($phpstanResult['files']));
         $content = '<ul class="list-group">';
         foreach ($fileResult['messages'] as $message) {
-            $content .= '<li class="list-group-item">';
-            $content .= '<span class="rexstan-linenumber">' .sprintf('%5d', $message['line']).': </span> ';
+            $content .= '<li class="list-group-item rexstan-message">';
+            $content .= '<span class="rexstan-linenumber">' .sprintf('%5d', $message['line']).':</span>';
             $error = rex_escape($message['message']);
             $url = rex_editor::factory()->getUrl($file, $message['line']);
             if ($url) {
