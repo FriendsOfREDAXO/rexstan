@@ -2,7 +2,6 @@
 
 includes:
     - vendor/spaze/phpstan-disallowed-calls/extension.neon
-    - /Users/christoph/Sites/rexdev/rexstan/redaxo/src/addons/rexstan/vendor/phpstan/phpstan-strict-rules/rules.neon
 
 parameters:
     level: 5
