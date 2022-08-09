@@ -44,10 +44,12 @@ if (!is_file($userConfig)) {
     RexStanUserConfig::save(0, $paths, []);
 }
 
-$template = rex_file::get(__DIR__.'/phpstan.neon.tpl');
-$template = str_replace('%REXSTAN_USERCONFIG%', $userConfig, $template);
+$configFile = '# rexstan auto generated file - do not edit, delete, rename'. PHP_EOL . PHP_EOL .
+    'includes:'. PHP_EOL .
+    '    - ' . $addon->getPath('default-config.neon') . PHP_EOL .
+    '    - ' . $userConfig. PHP_EOL;
 $configPath = __DIR__.'/phpstan.neon';
-if (false === rex_file::put($configPath, $template)) {
+if (false === rex_file::put($configPath, $configFile)) {
     $addon->setProperty('installmsg', sprintf('Unable to write rexstan config "%s"', $configPath));
 }
 
