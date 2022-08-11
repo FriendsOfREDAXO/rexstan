@@ -24,7 +24,7 @@ foreach (rex_addon::getAvailableAddons() as $availableAddon) {
 $field = $form->addSelectField('extensions', RexStanUserConfig::getIncludes(), ['class' => 'form-control selectpicker']);
 $field->setAttribute('multiple', 'multiple');
 $field->setLabel('PHPStan Extensions');
-$field->setNotice('Weiterlesen bzgl. der verf&uuml;gbaren Extensions: <a href="https://phpstan.org/blog/what-is-bleeding-edge">Bleeding-Edge</a>, <a href="https://github.com/phpstan/phpstan-strict-rules#readme">Strict-Mode</a>, <a href="https://github.com/phpstan/phpstan-deprecation-rules#readme">Deprecation-Warnings</a>, <a href="https://github.com/phpstan/phpstan-phpunit#readme">PHPUnit</a>, <a href="https://staabm.github.io/archive.html#phpstan-dba">phpstan-dba</a>');
+$field->setNotice('Weiterlesen bzgl. der verf&uuml;gbaren Extensions: <a href="https://phpstan.org/blog/what-is-bleeding-edge">Bleeding-Edge</a>, <a href="https://github.com/phpstan/phpstan-strict-rules#readme">Strict-Mode</a>, <a href="https://github.com/phpstan/phpstan-deprecation-rules#readme">Deprecation-Warnings</a>, <a href="https://github.com/phpstan/phpstan-phpunit#readme">PHPUnit</a>, <a href="https://staabm.github.io/archive.html#phpstan-dba">phpstan-dba</a>, <a href="https://tomasvotruba.com/blog/2018/05/21/is-your-code-readable-by-humans-cognitive-complexity-tells-you/">cognitive complexity</a>');
 $select = $field->getSelect();
 
 $select->addOption('Bleeding-Edge', realpath(__DIR__.'/../vendor/phpstan/phpstan/conf/bleedingEdge.neon'));
@@ -32,6 +32,7 @@ $select->addOption('Strict-Mode', realpath(__DIR__.'/../vendor/phpstan/phpstan-s
 $select->addOption('Deprecation Warnings', realpath(__DIR__.'/../vendor/phpstan/phpstan-deprecation-rules/rules.neon'));
 $select->addOption('PHPUnit', realpath(__DIR__.'/../vendor/phpstan/phpstan-phpunit/rules.neon'));
 $select->addOption('phpstan-dba', realpath(__DIR__.'/../lib/phpstan-dba.neon'));
+$select->addOption('cognitive complexity', realpath(__DIR__.'/../lib/cognitive-complexity.neon'));
 
 $fragment = new rex_fragment();
 $fragment->setVar('heading', '<i>Einstellungen werden <a href="'. rex_url::backendPage('rexstan/faq') .'">im FAQ erklärt</a></i>', false);
