@@ -30,6 +30,12 @@ parameters:
             message: '#^Variable \$this might not be defined\.#'
             path: '*/fragments/*'
 
+    # functions which the redaxo-core polyfills, but phpstan does not recognize them
+    # see https://github.com/phpstan/phpstan/issues/7732
+        - '#Function str_ends_with not found.#'
+        - '#Function str_starts_with not found.#'
+        - '#Function str_contains not found.#'
+
     # autoload core/core-addon symbols which are not autoloadable
     scanDirectories:
         - ../../core/functions/
