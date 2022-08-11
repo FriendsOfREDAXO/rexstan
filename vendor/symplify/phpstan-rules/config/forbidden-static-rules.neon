@@ -1,0 +1,4 @@
+rules:
+    - Symplify\PHPStanRules\Rules\NoStaticPropertyRule
+    - Symplify\PHPStanRules\Rules\NoClassWithStaticMethodWithoutStaticNameRule
+

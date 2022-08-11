@@ -7,7 +7,11 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'staabm\\PHPStanDba\\' => array($vendorDir . '/staabm/phpstan-dba/src'),
+    'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
+    'Symplify\\PHPStanRules\\' => array($vendorDir . '/symplify/phpstan-rules/src', $vendorDir . '/symplify/phpstan-rules/packages'),
     'Spaze\\PHPStan\\Rules\\Disallowed\\' => array($vendorDir . '/spaze/phpstan-disallowed-calls/src'),
+    'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
+    'PHPStan\\PhpDocParser\\' => array($vendorDir . '/phpstan/phpdoc-parser/src'),
     'PHPStan\\' => array($vendorDir . '/phpstan/phpstan-deprecation-rules/src', $vendorDir . '/phpstan/phpstan-phpunit/src', $vendorDir . '/phpstan/phpstan-strict-rules/src', $vendorDir . '/phpstan/phpstan-symfony/src'),
     'Composer\\Semver\\' => array($vendorDir . '/composer/semver/src'),
 );

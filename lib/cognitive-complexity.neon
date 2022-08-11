@@ -1,0 +1,3 @@
+includes:
+    - ../vendor/symplify/phpstan-rules/config/packages/cognitive-complexity/cognitive-complexity-services.neon
+    - ../vendor/symplify/phpstan-rules/config/packages/cognitive-complexity/cognitive-complexity-rules.neon

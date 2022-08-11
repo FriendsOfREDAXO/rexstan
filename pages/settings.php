@@ -32,6 +32,7 @@ $select->addOption('Strict-Mode', realpath(__DIR__.'/../vendor/phpstan/phpstan-s
 $select->addOption('Deprecation Warnings', realpath(__DIR__.'/../vendor/phpstan/phpstan-deprecation-rules/rules.neon'));
 $select->addOption('PHPUnit', realpath(__DIR__.'/../vendor/phpstan/phpstan-phpunit/rules.neon'));
 $select->addOption('phpstan-dba', realpath(__DIR__.'/../lib/phpstan-dba.neon'));
+$select->addOption('cognitive complexity', realpath(__DIR__.'/../lib/cognitive-complexity.neon'));
 
 $fragment = new rex_fragment();
 $fragment->setVar('heading', '<i>Einstellungen werden <a href="'. rex_url::backendPage('rexstan/faq') .'">im FAQ erklärt</a></i>', false);
