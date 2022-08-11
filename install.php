@@ -19,8 +19,8 @@ if (is_numeric($cliPhpVerssion)) {
     return;
 }
 
-$userConfig = $addon->getDataPath('user-config.neon');
-if (!is_file($userConfig)) {
+$userConfigPath = $addon->getDataPath('user-config.neon');
+if (!is_file($userConfigPath)) {
     $paths = [];
 
     $projectAddon = rex_addon::get('project');
@@ -44,12 +44,12 @@ if (!is_file($userConfig)) {
     RexStanUserConfig::save(0, $paths, []);
 }
 
-$configFile = '# rexstan auto generated file - do not edit, delete, rename'. PHP_EOL . PHP_EOL .
+$configFileContent = '# rexstan auto generated file - do not edit, delete, rename'. PHP_EOL . PHP_EOL .
     'includes:'. PHP_EOL .
     '    - ' . $addon->getPath('default-config.neon') . PHP_EOL .
-    '    - ' . $userConfig. PHP_EOL;
+    '    - ' . $userConfigPath. PHP_EOL;
 $configPath = __DIR__.'/phpstan.neon';
-if (false === rex_file::put($configPath, $configFile)) {
+if (false === rex_file::put($configPath, $configFileContent)) {
     $addon->setProperty('installmsg', sprintf('Unable to write rexstan config "%s"', $configPath));
 }
 
