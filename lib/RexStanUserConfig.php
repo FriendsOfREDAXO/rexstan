@@ -42,14 +42,14 @@ final class RexStanUserConfig
     {
         self::ensureDefaultConfLoaded();
         self::ensureUserConfLoaded();
-        return (int) self::$userConf['parameters']['level'] ?? self::$defaultConf['parameters']['level'];
+        return (int) (self::$userConf['parameters']['level'] ?? self::$defaultConf['parameters']['level'] );
     }
 
     public static function getPhpVersion(): int
     {
         self::ensureDefaultConfLoaded();
         self::ensureUserConfLoaded();
-        return (int) self::$userConf['parameters']['phpVersion'] ?? self::$defaultConf['parameters']['phpVersion'];
+        return (int) (self::$userConf['parameters']['phpVersion'] ?? self::$defaultConf['parameters']['phpVersion']);
     }
 
     /**
