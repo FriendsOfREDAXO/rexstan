@@ -3,28 +3,53 @@
 final class RexStanUserConfig
 {
     /**
+     * Dateinamen.
+     */
+    private const DEF_CONFIG = 'default-config.neon';
+    private const USR_CONFIG = 'user-config.neon';
+
+    /**
+     * @var array<mixed>  Cache: Array mit der User-Konfiguration; null = noch nicht eingelesen
+     */
+    private static $userConf;
+
+    /**
+     * @var array<mixed>  Cache: Array mit der Default-Konfiguration; null = noch nicht eingelesen
+     */
+    private static $defaultConf;
+
+    /**
      * @param array<string> $paths
      * @param array<string> $includes
      *
      * @return void
      */
-    public static function save(int $level, array $paths, array $includes)
+    public static function save(int $level, array $paths, array $includes, int $phpVersion)
     {
-        $file = [];
-        $file['includes'] = $includes;
-        $file['parameters']['level'] = $level;
-        $file['parameters']['paths'] = $paths;
+        self::ensureUserConfLoaded();
 
-        $prefix = "# rexstan auto generated file - do not edit\n\n";
+        self::$userConf['includes'] = $includes;
+        self::$userConf['parameters']['level'] = $level;
+        self::$userConf['parameters']['paths'] = $paths;
+        self::$userConf['parameters']['phpVersion'] = $phpVersion;
 
-        rex_file::put(self::getUserConfigPath(), $prefix . rex_string::yamlEncode($file, 3));
+        $prefix = "# rexstan auto generated file - do not edit, rename or remove\n\n";
+
+        rex_file::put(self::getUserConfigPath(), $prefix . rex_string::yamlEncode(self::$userConf, 3));
     }
 
     public static function getLevel(): int
     {
-        $neon = self::readUserConfig();
-        $settings = rex_string::yamlDecode($neon);
-        return (int) $settings['parameters']['level'];
+        self::ensureDefaultConfLoaded();
+        self::ensureUserConfLoaded();
+        return (int) self::$userConf['parameters']['level'] ?? self::$defaultConf['parameters']['level'];
+    }
+
+    public static function getPhpVersion(): int
+    {
+        self::ensureDefaultConfLoaded();
+        self::ensureUserConfLoaded();
+        return (int) self::$userConf['parameters']['phpVersion'] ?? self::$defaultConf['parameters']['phpVersion'];
     }
 
     /**
@@ -32,9 +57,9 @@ final class RexStanUserConfig
      */
     public static function getPaths(): array
     {
-        $neon = self::readUserConfig();
-        $settings = rex_string::yamlDecode($neon);
-        return $settings['parameters']['paths'];
+        self::ensureDefaultConfLoaded();
+        self::ensureUserConfLoaded();
+        return self::$userConf['parameters']['paths'] ?? self::$defaultConf['parameters']['paths'];
     }
 
     /**
@@ -42,24 +67,44 @@ final class RexStanUserConfig
      */
     public static function getIncludes(): array
     {
-        $neon = self::readUserConfig();
-        $settings = rex_string::yamlDecode($neon);
-        return $settings['includes'];
+        self::ensureDefaultConfLoaded();
+        self::ensureUserConfLoaded();
+        return self::$userConf['includes'] ?? self::$defaultConf['includes'];
     }
 
-    private static function readUserConfig(): string
+    /**
+     * liefert den Pfadnamen der Default-Settings ('default-config.neon' im Addon-Verzeichnis).
+     */
+    private static function getDefaultConfigPath(): string
     {
-        $neon = rex_file::get(self::getUserConfigPath());
-
-        if (null === $neon) {
-            throw new \RuntimeException('Unable to read userconfig');
-        }
-
-        return $neon;
+        return rex_path::addon('rexstan', self::DEF_CONFIG);
     }
 
+    /**
+     * liefert den Pfadnamen der User-Settings ('user-config.neon' im Data-Verzeichnis).
+     */
     private static function getUserConfigPath(): string
     {
-        return rex_addon::get('rexstan')->getDataPath('user-config.neon');
+        return rex_path::addonData('rexstan', self::USR_CONFIG);
+    }
+
+    /**
+     * Stellt sicher, dass die User-Konfigurationsdatei geladen ist.
+     */
+    private static function ensureUserConfLoaded(): void
+    {
+        if (null === self::$userConf) {
+            self::$userConf = rex_file::getConfig(self::getUserConfigPath(), []);
+        }
+    }
+
+    /**
+     * Stellt sicher, dass die Default-Konfigurationsdatei geladen ist.
+     */
+    private static function ensureDefaultConfLoaded(): void
+    {
+        if (null === self::$defaultConf) {
+            self::$defaultConf = rex_file::getConfig(self::getDefaultConfigPath(), []);
+        }
     }
 }
