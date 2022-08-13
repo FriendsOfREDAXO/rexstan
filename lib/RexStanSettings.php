@@ -194,6 +194,13 @@ final class RexStanSettings extends rex_config_form
      */
     protected function save(): bool
     {
+    
+        // für alle Fälle
+        $level = RexStanUserConfig::getLevel();
+        $paths = RexStanUserConfig::getPaths();
+        $phpVersion = RexStanUserConfig::getPhpVersion();
+        $includes = RexStanUserConfig::getIncludes();
+    
         foreach ($this->getSaveElements() as $fieldsetElements) {
             foreach ($fieldsetElements as $element) {
                 // read-only-fields nicht speichern
