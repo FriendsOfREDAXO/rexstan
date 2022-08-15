@@ -667,16 +667,16 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "11.1.1",
+            "version": "11.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "34037922eb8c128b8df13bbe11fd9fb25799dfd6"
+                "reference": "c1c82fcd26a98b3cf03f4b69ce1e53201841a551"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/34037922eb8c128b8df13bbe11fd9fb25799dfd6",
-                "reference": "34037922eb8c128b8df13bbe11fd9fb25799dfd6",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/c1c82fcd26a98b3cf03f4b69ce1e53201841a551",
+                "reference": "c1c82fcd26a98b3cf03f4b69ce1e53201841a551",
                 "shasum": ""
             },
             "require": {
@@ -715,7 +715,7 @@
             ],
             "description": "Set of Symplify rules for PHPStan",
             "support": {
-                "source": "https://github.com/symplify/phpstan-rules/tree/11.1.1"
+                "source": "https://github.com/symplify/phpstan-rules/tree/11.1.4"
             },
             "funding": [
                 {
@@ -727,7 +727,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-08-08T21:47:18+00:00"
+            "time": "2022-08-13T19:35:32+00:00"
         },
         {
             "name": "webmozart/assert",
