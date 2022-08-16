@@ -32,6 +32,8 @@ namespace redaxo\phpstan;
 use rex_addon;
 use rex_config;
 use rex_config_form;
+use rex_extension;
+use rex_extension_point;
 use rex_path;
 use RexStanUserConfig;
 
