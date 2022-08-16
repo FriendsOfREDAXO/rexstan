@@ -239,6 +239,9 @@ final class RexStanSettings extends rex_config_form
 
         // Für die phpstan-Konfigurationseinträge: separat sichern
         RexStanUserConfig::save($level, $paths, $includes, $phpVersion);
+        
+        // Just a notification via EP
+        rex_extension::registerPoint(new rex_extension_point('REXSTAN_SETTINGS_SAVED', '', []));
 
         return true;
     }
