@@ -23,12 +23,12 @@ final class RexStanUserConfig
 
     public static function getLevel(): int
     {
-        return self::getConfig()['parameters']['level'] ?? 0;
+        return (int) (self::getConfig()['parameters']['level']);
     }
 
     public static function getPhpVersion(): int
     {
-        return self::getConfig()['parameters']['phpVersion'] ?? 0;
+        return (int) (self::getConfig()['parameters']['phpVersion']);
     }
 
     /**
