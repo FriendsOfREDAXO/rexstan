@@ -16,7 +16,7 @@ final class RexStanUserConfig
     /**
      * @var array<mixed>  Cache: Array mit der Default-Konfiguration; null = noch nicht eingelesen
      */
-    private static $defaultConf;
+    private static $defaultConf = [];
 
     /**
      * @param array<string> $paths
