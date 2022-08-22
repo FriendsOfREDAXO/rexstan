@@ -16,7 +16,7 @@ if (rex_post($form_name . '_save')) {
     $level = (int) $postData['level'];
     $addonPaths = $postData['addons'] ?? [];
     $extensions = $postData['extensions'] ?? [];
-    $phpversion = (int) $postData['phpversion'] ?? [];
+    $phpversion = (int) $postData['phpversion'];
 
     $paths = [];
     foreach ($addonPaths as $addonPath) {

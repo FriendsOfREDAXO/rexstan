@@ -106,7 +106,7 @@ final class RexStanSettings
 
         $field = $form->addSelectField('phpversion', null, ['class' => 'form-control selectpicker']);
         $field->setLabel('PHP-Version');
-        $field->setNotice('Referenz-Version für die Code-Analyse');
+        $field->setNotice('<a href="https://phpstan.org/config-reference#phpversion">Referenz PHP-Version für die Code-Analyse</a>');
         $select = $field->getSelect();
         $select->addOptions($phpVersions);
 
