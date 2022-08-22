@@ -75,11 +75,11 @@ final class RexStanSettings extends rex_config_form
      * @var array<string>
      */
     private static $phpVersionList = [
-        70300 => '7.3 [Mindestanforderung für REDAXO]',
-        70400 => '7.4',
-        80000 => '8.0',
-        80100 => '8.1',
-        80200 => '8.2',
+       70333 => '7.3 [Mindestanforderung für REDAXO]',
+       70430 => '7.4',
+       80022 => '8.0',
+       80109 => '8.1',
+       80200 => '8.2',
     ];
 
     /**
