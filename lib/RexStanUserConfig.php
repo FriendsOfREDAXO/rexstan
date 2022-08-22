@@ -47,7 +47,7 @@ final class RexStanUserConfig
         $neon = self::readUserConfig();
         $userConf = rex_string::yamlDecode($neon);
 
-        $neon = rex_file::get(rex_path::addon('rexstan', 'default-config.neon'), []);
+        $neon = rex_file::get(rex_path::addon('rexstan', 'default-config.neon'), '');
         $defaultConf = rex_string::yamlDecode($neon);
 
         return $userConf + $defaultConf;
