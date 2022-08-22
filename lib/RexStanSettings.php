@@ -116,12 +116,22 @@ final class RexStanSettings extends rex_config_form
 
         /**
          * Die aktuelle PHP-Version des Servers (SAPI) markieren.
+         * Die aktuelle PHP-Version in Terminal/Konsole (CLI) markieren
          */
 
-        $version = (int) (PHP_VERSION_ID / 100) * 100;
+        $sapiVersion = (int) (PHP_VERSION_ID / 100);
+        $cliVersion = (int) shell_exec('php -r \'echo PHP_VERSION_ID;\'');
+        $cliVersion = (int) ($cliVersion/100);
+
         $phpVersions = self::$phpVersionList;
-        if (isset($phpVersions[$version])) {
-            $phpVersions[$version] .= ' [aktuelle Webserver-Version (SAPI)]';
+        foreach( $phpVersions as $key=>&$label ) {
+            $key = (int) $key/100;
+            if( $key === $sapiVersion) {
+                $label .= ' [aktuelle Webserver-Version (SAPI)]';
+            }
+            if( $key === $cliVersion) {
+                $label .= ' [aktuelle Konsolen-Version (CLI)]';
+            }
         }
 
         $field = $this->addInputField('number', 'level', null, ['class' => 'form-control', 'min' => 0, 'max' => 9]);
