@@ -37,7 +37,7 @@ final class RexStanSettings
      * @var array<int, string>
      */
     private static $phpVersionList = [
-        70333 => '7.3.x [Mindestanforderung für REDAXO    ]',
+        70333 => '7.3.x [Mindestanforderung für REDAXO]',
         70430 => '7.4.x',
         80022 => '8.0.x',
         80109 => '8.1.x',
