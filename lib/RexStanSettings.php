@@ -1,31 +1,4 @@
 <?php
-/**
- * Formular-Klasse basierend auf rex_config_form mit folgenden Anpassungen:.
- *
- *   - class->getValue()
- *     Daten einlesen für ausgewählte Felder aus phpstan-Konfigurationsdateien
- *       a) user_config.neon
- *       b) default_config.neon (= Fallback)
- *     Für alle anderen via rex_config
- *   - class->save()
- *     Daten werden für ausgewählte Felder in user_config.neon gespeichert.
- *     Alle anderen via rex_config
- *   - class->init()
- *     Baut die Eingabefelder in das Formular ein
- *     Bereitet Daten für die Felder auf
- *
- * Immer mal wieder anzupassende Auswahllisten (z.B. phpVersionen, Extensons)
- * sind im vorderen Teil der Klasse zu finden. Init() bereitet daraus
- * Selects auf.
- *
- * Formularausgabe:
- *      $form = RexStanSettings::factory( 'rexstan' );
- *      $fragment = new \rex_fragment();
- *      $fragment->setVar('class', 'edit', false);
- *      $fragment->setVar('title', 'titel', false);
- *      $fragment->setVar('body', $form->get(), false);
- *      echo $fragment->parse('core/page/section.php');.
- */
 
 namespace redaxo\phpstan;
 
