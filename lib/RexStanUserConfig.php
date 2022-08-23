@@ -3,48 +3,54 @@
 final class RexStanUserConfig
 {
     /**
-     * @param array<string> $paths
-     * @param array<string> $includes
+     * @param list<string> $paths
+     * @param list<string> $includes
      *
      * @return void
      */
-    public static function save(int $level, array $paths, array $includes)
+    public static function save(int $level, array $paths, array $includes, int $phpVersion)
     {
         $file = [];
         $file['includes'] = $includes;
         $file['parameters']['level'] = $level;
         $file['parameters']['paths'] = $paths;
+        $file['parameters']['phpVersion'] = $phpVersion;
 
-        $prefix = "# rexstan auto generated file - do not edit\n\n";
+        $prefix = "# rexstan auto generated file - do not edit, rename or remove\n\n";
 
         rex_file::put(self::getUserConfigPath(), $prefix . rex_string::yamlEncode($file, 3));
     }
 
     public static function getLevel(): int
     {
-        $neon = self::readUserConfig();
-        $settings = rex_string::yamlDecode($neon);
-        return (int) $settings['parameters']['level'];
+        return (int) (self::getConfig()['parameters']['level']);
+    }
+
+    public static function getPhpVersion(): int
+    {
+        return (int) (self::getConfig()['parameters']['phpVersion']);
     }
 
     /**
-     * @return array<string>
+     * @return list<string>
      */
     public static function getPaths(): array
     {
-        $neon = self::readUserConfig();
-        $settings = rex_string::yamlDecode($neon);
-        return $settings['parameters']['paths'];
+        return self::getConfig()['parameters']['paths'] ?? [];
     }
 
     /**
-     * @return array<string>
+     * @return array<string, mixed>
      */
-    public static function getIncludes(): array
+    private static function getConfig(): array
     {
         $neon = self::readUserConfig();
-        $settings = rex_string::yamlDecode($neon);
-        return $settings['includes'];
+        $userConf = rex_string::yamlDecode($neon);
+
+        $neon = rex_file::get(rex_path::addon('rexstan', 'default-config.neon'), '');
+        $defaultConf = rex_string::yamlDecode($neon);
+
+        return $userConf + $defaultConf;
     }
 
     private static function readUserConfig(): string

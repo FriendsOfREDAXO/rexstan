@@ -41,7 +41,7 @@ if (!is_file($userConfigPath)) {
         }
     }
 
-    RexStanUserConfig::save(0, $paths, []);
+    RexStanUserConfig::save(0, $paths, [], 70300);
 }
 
 $configFileContent = '# rexstan auto generated file - do not edit, delete, rename'. PHP_EOL . PHP_EOL .
