@@ -61,5 +61,6 @@ return array(
     'redaxo\\phpstan\\RexSqlGetValueRule' => $baseDir . '/lib/RexSqlGetValueRule.php',
     'redaxo\\phpstan\\RexSqlReflection' => $baseDir . '/lib/RexSqlReflection.php',
     'redaxo\\phpstan\\RexSqlSetQueryTypeSpecifyingExtension' => $baseDir . '/lib/RexSqlSetQueryTypeSpecifyingExtension.php',
+    'redaxo\\phpstan\\RexStanSettings' => $baseDir . '/lib/RexStanSettings.php',
     'rexstan_command' => $baseDir . '/lib/command.php',
 );

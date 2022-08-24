@@ -55,37 +55,43 @@ includes:
 ```
 </details>
 
+## Disabling rules
+
+You can disable rules using configuration parameters:
+
+```neon
+parameters:
+	strictRules:
+		booleansInConditions: false
+		uselessCast: false
+		requireParentConstructorCall: false
+		disallowedConstructs: false
+		overwriteVariablesWithLoop: false
+		closureUsesThis: false
+		matchingInheritedMethodNames: false
+		numericOperandsInArithmeticOperators: false
+		strictCalls: false
+		switchConditionsMatchingType: false
+		noVariableVariables: false
+```
 
 ## Enabling rules one-by-one
 
 If you don't want to start using all the available strict rules at once but only one or two, you can!
 
-### Without extension-installer
-
-Just don't include the whole `rules.neon` from this package in your configuration, but look at its contents and copy only the rules you want to your configuration under the `services` key:
-
-```neon
-services:
-	-
-		class: PHPStan\Rules\StrictCalls\StrictFunctionCallsRule
-		tags:
-			- phpstan.rules.rule
-
-	-
-		class: PHPStan\Rules\SwitchConditions\MatchingTypeInSwitchCaseConditionRule
-		tags:
-			- phpstan.rules.rule
-```
-
-### With extension-installer
-
-Unfortunately, by using `phpstan/extension-installer` you can't enable it one by one, ***but you can [ignore specific errors](https://phpstan.org/user-guide/ignoring-errors) instead***.
-
-For example:
+You can disable all rules from the included `rules.neon` with:
 
 ```neon
 parameters:
-	ignoreErrors:
-		- '#Construct empty\(\) is not allowed. Use more strict comparison.#'
-		- '#Call to function in_array\(\) requires parameter \#3 to be set.#'
+	strictRules:
+		allRules: false
+```
+
+Then you can re-enable individual rules with configuration parameters:
+
+```neon
+parameters:
+	strictRules:
+		allRules: false
+		booleansInConditions: true
 ```
