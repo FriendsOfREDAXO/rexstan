@@ -484,16 +484,16 @@
         },
         {
             "name": "phpstan/phpstan-symfony",
-            "version": "1.2.11",
+            "version": "1.2.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-symfony.git",
-                "reference": "a14d467083e8a4ca6860921e68f646831a88260c"
+                "reference": "016e441a19a2af79ca0c60920ba0d61747b4e855"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/a14d467083e8a4ca6860921e68f646831a88260c",
-                "reference": "a14d467083e8a4ca6860921e68f646831a88260c",
+                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/016e441a19a2af79ca0c60920ba0d61747b4e855",
+                "reference": "016e441a19a2af79ca0c60920ba0d61747b4e855",
                 "shasum": ""
             },
             "require": {
@@ -549,9 +549,9 @@
             "description": "Symfony Framework extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-symfony/issues",
-                "source": "https://github.com/phpstan/phpstan-symfony/tree/1.2.11"
+                "source": "https://github.com/phpstan/phpstan-symfony/tree/1.2.13"
             },
-            "time": "2022-08-25T20:39:28+00:00"
+            "time": "2022-08-28T13:34:45+00:00"
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
