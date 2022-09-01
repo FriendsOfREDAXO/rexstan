@@ -11,6 +11,11 @@ services:
         arguments:
             minimumLineCount: 4
 
+    # required for "PreventDuplicateClassMethodRule"
+    -
+        class: Symplify\PHPStanRules\Collector\ClassMethod\ClassMethodContentCollector
+        tags: [phpstan.collector]
+
     -
         class: Symplify\PHPStanRules\ObjectCalisthenics\Rules\NoShortNameRule
         tags: [phpstan.rules.rule]
@@ -42,7 +47,6 @@ services:
                 'PhpCsFixer\Finder': 'Symfony\Component\Finder\Finder'
                 # smart file system
                 'Symfony\Component\Finder\SplFileInfo': 'Symplify\SmartFileSystem\SmartFileInfo'
-                'Symfony\Component\Filesystem\Filesystem': 'Symplify\SmartFileSystem\SmartFileSystem'
 
     -
         class: Symplify\PHPStanRules\Rules\ForbiddenFuncCallRule
