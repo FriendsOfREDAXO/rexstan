@@ -66,8 +66,8 @@ class ComposerStaticInit7d28987f5749c840ef9609f53969aebc
         array (
             0 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
             1 => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src',
-            2 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
-            3 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
+            2 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
+            3 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
         ),
         'Composer\\Semver\\' => 
         array (
