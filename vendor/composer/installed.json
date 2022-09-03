@@ -281,17 +281,17 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.8.3",
-            "version_normalized": "1.8.3.0",
+            "version": "1.8.4",
+            "version_normalized": "1.8.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "5583623b61caafebd62bc78a99533aa9d769d097"
+                "reference": "eed4c9da531f6ebb4787235b6fb486e2c20f34e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/5583623b61caafebd62bc78a99533aa9d769d097",
-                "reference": "5583623b61caafebd62bc78a99533aa9d769d097",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/eed4c9da531f6ebb4787235b6fb486e2c20f34e5",
+                "reference": "eed4c9da531f6ebb4787235b6fb486e2c20f34e5",
                 "shasum": ""
             },
             "require": {
@@ -300,7 +300,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2022-09-01T15:27:34+00:00",
+            "time": "2022-09-03T13:08:04+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -323,7 +323,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.8.3"
+                "source": "https://github.com/phpstan/phpstan/tree/1.8.4"
             },
             "funding": [
                 {
@@ -694,17 +694,17 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "11.1.6",
-            "version_normalized": "11.1.6.0",
+            "version": "11.1.9",
+            "version_normalized": "11.1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "cdc32e41315225ce96e8aba6814000d965c32592"
+                "reference": "955b239d4a360af1bec7652e3dce9a3b86ee2acc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/cdc32e41315225ce96e8aba6814000d965c32592",
-                "reference": "cdc32e41315225ce96e8aba6814000d965c32592",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/955b239d4a360af1bec7652e3dce9a3b86ee2acc",
+                "reference": "955b239d4a360af1bec7652e3dce9a3b86ee2acc",
                 "shasum": ""
             },
             "require": {
@@ -715,7 +715,7 @@
                 "phpstan/phpstan": "^1.8.1",
                 "webmozart/assert": "^1.10"
             },
-            "time": "2022-08-31T08:14:48+00:00",
+            "time": "2022-09-02T10:08:04+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "branch-alias": {
@@ -725,8 +725,7 @@
                     "includes": [
                         "config/services/services.neon",
                         "config/packages/cognitive-complexity/cognitive-complexity-services.neon",
-                        "config/packages/symfony/services.neon",
-                        "config/packages/nette/services.neon"
+                        "config/packages/symfony/services.neon"
                     ]
                 }
             },
@@ -745,7 +744,7 @@
             ],
             "description": "Set of Symplify rules for PHPStan",
             "support": {
-                "source": "https://github.com/symplify/phpstan-rules/tree/11.1.6"
+                "source": "https://github.com/symplify/phpstan-rules/tree/11.1.9"
             },
             "funding": [
                 {
