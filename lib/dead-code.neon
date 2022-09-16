@@ -1,3 +1,6 @@
+includes:
+    - ../vendor/symplify/phpstan-rules/config/services/services.neon
+
 # these rule focus on the whole-project analysis, see https://phpstan.org/developing-extensions/collectors
 rules:
     - Symplify\PHPStanRules\Rules\DeadCode\UnusedPublicClassConstRule
