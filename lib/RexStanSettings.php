@@ -19,6 +19,7 @@ final class RexStanSettings
         'PHPUnit' => 'vendor/phpstan/phpstan-phpunit/rules.neon',
         'phpstan-dba' => 'lib/phpstan-dba.neon',
         'cognitive complexity' => 'lib/cognitive-complexity.neon',
+        'code complexity' => 'lib/code-complexity.neon',
     ];
 
     /**

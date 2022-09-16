@@ -1,0 +1,3 @@
+includes:
+    - ../vendor/symplify/phpstan-rules/config/services/services.neon
+    - ../vendor/symplify/phpstan-rules/config/code-complexity-rules.neon
