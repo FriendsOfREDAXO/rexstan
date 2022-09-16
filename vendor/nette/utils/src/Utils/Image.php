@@ -124,7 +124,7 @@ class Image
 
 	public const EMPTY_GIF = "GIF89a\x01\x00\x01\x00\x80\x00\x00\x00\x00\x00\x00\x00\x00!\xf9\x04\x01\x00\x00\x00\x00,\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02D\x01\x00;";
 
-	private const FORMATS = [self::JPEG => 'jpeg', self::PNG => 'png', self::GIF => 'gif', self::WEBP => 'webp', self::AVIF => 'avif', self::BMP => 'bmp'];
+	private const Formats = [self::JPEG => 'jpeg', self::PNG => 'png', self::GIF => 'gif', self::WEBP => 'webp', self::AVIF => 'avif', self::BMP => 'bmp'];
 
 	/** @var resource|\GdImage */
 	private $image;
@@ -161,7 +161,7 @@ class Image
 			throw new UnknownImageFileException(is_file($file) ? "Unknown type of file '$file'." : "File '$file' not found.");
 		}
 
-		return self::invokeSafe('imagecreatefrom' . self::FORMATS[$type], $file, "Unable to open file '$file'.", __METHOD__);
+		return self::invokeSafe('imagecreatefrom' . self::Formats[$type], $file, "Unable to open file '$file'.", __METHOD__);
 	}
 
 
@@ -234,20 +234,20 @@ class Image
 	/**
 	 * Returns the type of image from file.
 	 */
-	public static function detectTypeFromFile(string $file): ?int
+	public static function detectTypeFromFile(string $file, &$width = null, &$height = null): ?int
 	{
-		$type = @getimagesize($file)[2]; // @ - files smaller than 12 bytes causes read error
-		return isset(self::FORMATS[$type]) ? $type : null;
+		[$width, $height, $type] = @getimagesize($file); // @ - files smaller than 12 bytes causes read error
+		return isset(self::Formats[$type]) ? $type : null;
 	}
 
 
 	/**
 	 * Returns the type of image from string.
 	 */
-	public static function detectTypeFromString(string $s): ?int
+	public static function detectTypeFromString(string $s, &$width = null, &$height = null): ?int
 	{
-		$type = @getimagesizefromstring($s)[2]; // @ - strings smaller than 12 bytes causes read error
-		return isset(self::FORMATS[$type]) ? $type : null;
+		[$width, $height, $type] = @getimagesizefromstring($s); // @ - strings smaller than 12 bytes causes read error
+		return isset(self::Formats[$type]) ? $type : null;
 	}
 
 
@@ -256,11 +256,26 @@ class Image
 	 */
 	public static function typeToExtension(int $type): string
 	{
-		if (!isset(self::FORMATS[$type])) {
+		if (!isset(self::Formats[$type])) {
 			throw new Nette\InvalidArgumentException("Unsupported image type '$type'.");
 		}
 
-		return self::FORMATS[$type];
+		return self::Formats[$type];
+	}
+
+
+	/**
+	 * Returns the `Image::XXX` constant for given file extension.
+	 */
+	public static function extensionToType(string $extension): int
+	{
+		$extensions = array_flip(self::Formats) + ['jpg' => self::JPEG];
+		$extension = strtolower($extension);
+		if (!isset($extensions[$extension])) {
+			throw new Nette\InvalidArgumentException("Unsupported file extension '$extension'.");
+		}
+
+		return $extensions[$extension];
 	}
 
 
@@ -587,16 +602,7 @@ class Image
 	 */
 	public function save(string $file, ?int $quality = null, ?int $type = null): void
 	{
-		if ($type === null) {
-			$extensions = array_flip(self::FORMATS) + ['jpg' => self::JPEG];
-			$ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-			if (!isset($extensions[$ext])) {
-				throw new Nette\InvalidArgumentException("Unsupported file extension '$ext'.");
-			}
-
-			$type = $extensions[$ext];
-		}
-
+		$type = $type ?? self::extensionToType(pathinfo($file, PATHINFO_EXTENSION));
 		$this->output($type, $quality, $file);
 	}
 
@@ -729,7 +735,7 @@ class Image
 	public function __clone()
 	{
 		ob_start(function () {});
-		imagegd2($this->image);
+		imagepng($this->image, null, 0);
 		$this->setImageResource(imagecreatefromstring(ob_get_clean()));
 	}
 
