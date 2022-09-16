@@ -27,8 +27,8 @@ final class RexStanSettings
     private static $phpstanExtensionDocLinks = [
         'Bleeding-Edge' => 'https://phpstan.org/blog/what-is-bleeding-edge',
         'Strict-Mode' => 'https://github.com/phpstan/phpstan-strict-rules#readme',
-        'Deprecation Warnings' => 'https://github.com/phpstan/phpstan-deprecation-rules#readme">Deprecation-Warnings',
-        'PHPUnit' => 'https://github.com/phpstan/phpstan-phpunit#readme">PHPUnit',
+        'Deprecation Warnings' => 'https://github.com/phpstan/phpstan-deprecation-rules#readme',
+        'PHPUnit' => 'https://github.com/phpstan/phpstan-phpunit#readme',
         'phpstan-dba' => 'https://staabm.github.io/archive.html#phpstan-dba',
         'cognitive complexity' => 'https://tomasvotruba.com/blog/2018/05/21/is-your-code-readable-by-humans-cognitive-complexity-tells-you/',
     ];
