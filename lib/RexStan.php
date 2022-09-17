@@ -41,7 +41,7 @@ final class RexStan
     }
 
     /**
-     * @return array<string, int>|null
+     * @return array{'Overall-Errors': int, 'Classes-Cognitive-Complexity': int, 'Deprecations': int, 'Invalid-Phpdocs': int, 'Unknown-Types': int, 'Anonymous-Variables': int}|null
      */
     public static function analyzeBaseline() {
         $phpstanBinary = self::phpstanBinPath();
