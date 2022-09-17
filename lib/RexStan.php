@@ -41,7 +41,7 @@ final class RexStan
     }
 
     /**
-     * @return null|string
+     * @return array|null
      */
     public static function analyzeBaseline() {
         $phpstanBinary = self::phpstanBinPath();
@@ -56,7 +56,16 @@ final class RexStan
         // returns a json array
         if ('[' === $output[0]) {
             // return the analysis result as an array
-            return json_decode($output, true);
+            $array = json_decode($output, true);
+
+            if (!array_key_exists(0, $array)) {
+                throw new \Exception('The baseline analysis result is not an array');
+            }
+            if (!array_key_exists('phpstan-baseline.neon', $array[0])) {
+                throw new \Exception('The baseline analysis result is not an array');
+            }
+            
+            return $array[0]['phpstan-baseline.neon'];
         }
 
         return null;
