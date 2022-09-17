@@ -65,7 +65,6 @@ final class RexStan
                 throw new \Exception('The baseline analysis result is not an array');
             }
 
-            // @phpstan-ignore-next-line
             return $array[0]['phpstan-baseline.neon'];
         }
 
