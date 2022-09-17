@@ -16,11 +16,11 @@ use Safe\Exceptions\LzfException;
 function lzf_compress(string $data): string
 {
     error_clear_last();
-    $safeResult = \lzf_compress($data);
-    if ($safeResult === false) {
+    $result = \lzf_compress($data);
+    if ($result === false) {
         throw LzfException::createFromPhpError();
     }
-    return $safeResult;
+    return $result;
 }
 
 
@@ -36,9 +36,9 @@ function lzf_compress(string $data): string
 function lzf_decompress(string $data): string
 {
     error_clear_last();
-    $safeResult = \lzf_decompress($data);
-    if ($safeResult === false) {
+    $result = \lzf_decompress($data);
+    if ($result === false) {
         throw LzfException::createFromPhpError();
     }
-    return $safeResult;
+    return $result;
 }

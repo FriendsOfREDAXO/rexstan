@@ -15,8 +15,8 @@ use Safe\Exceptions\DirException;
 function chdir(string $directory): void
 {
     error_clear_last();
-    $safeResult = \chdir($directory);
-    if ($safeResult === false) {
+    $result = \chdir($directory);
+    if ($result === false) {
         throw DirException::createFromPhpError();
     }
 }
@@ -31,9 +31,6 @@ function chdir(string $directory): void
  * only when using the CLI, CGI or Embed SAPI. Also, this function
  * requires root privileges.
  *
- * Calling this function does not change the values of the __DIR__
- * and __FILE__ magic constants.
- *
  * @param string $directory The path to change the root directory to.
  * @throws DirException
  *
@@ -41,8 +38,8 @@ function chdir(string $directory): void
 function chroot(string $directory): void
 {
     error_clear_last();
-    $safeResult = \chroot($directory);
-    if ($safeResult === false) {
+    $result = \chroot($directory);
+    if ($result === false) {
         throw DirException::createFromPhpError();
     }
 }
@@ -64,11 +61,11 @@ function chroot(string $directory): void
 function getcwd(): string
 {
     error_clear_last();
-    $safeResult = \getcwd();
-    if ($safeResult === false) {
+    $result = \getcwd();
+    if ($result === false) {
         throw DirException::createFromPhpError();
     }
-    return $safeResult;
+    return $result;
 }
 
 
@@ -77,7 +74,7 @@ function getcwd(): string
  * closedir, readdir, and
  * rewinddir calls.
  *
- * @param string $directory The directory path that is to be opened
+ * @param string $path The directory path that is to be opened
  * @param resource $context For a description of the context parameter,
  * refer to the streams section of
  * the manual.
@@ -85,18 +82,44 @@ function getcwd(): string
  * @throws DirException
  *
  */
-function opendir(string $directory, $context = null)
+function opendir(string $path, $context = null)
 {
     error_clear_last();
     if ($context !== null) {
-        $safeResult = \opendir($directory, $context);
+        $result = \opendir($path, $context);
     } else {
-        $safeResult = \opendir($directory);
+        $result = \opendir($path);
     }
-    if ($safeResult === false) {
+    if ($result === false) {
         throw DirException::createFromPhpError();
     }
-    return $safeResult;
+    return $result;
+}
+
+
+/**
+ * Resets the directory stream indicated by
+ * dir_handle to the beginning of the
+ * directory.
+ *
+ * @param resource $dir_handle The directory handle resource previously opened
+ * with opendir. If the directory handle is
+ * not specified, the last link opened by opendir
+ * is assumed.
+ * @throws DirException
+ *
+ */
+function rewinddir($dir_handle = null): void
+{
+    error_clear_last();
+    if ($dir_handle !== null) {
+        $result = \rewinddir($dir_handle);
+    } else {
+        $result = \rewinddir();
+    }
+    if ($result === false) {
+        throw DirException::createFromPhpError();
+    }
 }
 
 
@@ -123,12 +146,12 @@ function scandir(string $directory, int $sorting_order = SCANDIR_SORT_ASCENDING,
 {
     error_clear_last();
     if ($context !== null) {
-        $safeResult = \scandir($directory, $sorting_order, $context);
+        $result = \scandir($directory, $sorting_order, $context);
     } else {
-        $safeResult = \scandir($directory, $sorting_order);
+        $result = \scandir($directory, $sorting_order);
     }
-    if ($safeResult === false) {
+    if ($result === false) {
         throw DirException::createFromPhpError();
     }
-    return $safeResult;
+    return $result;
 }

@@ -6,14 +6,9 @@ use Safe\Exceptions\JsonException;
 
 /**
  * Returns a string containing the JSON representation of the supplied
- * value.  If the parameter is an array or object,
- * it will be serialized recursively.
+ * value.
  *
- * If a value to be serialized is an object, then by default only publicly visible
- * properties will be included. Alternatively, a class may implement JsonSerializable
- * to control how its values are serialized to JSON.
- *
- * The encoding is affected by the supplied flags
+ * The encoding is affected by the supplied options
  * and additionally the encoding of float values depends on the value of
  * serialize_precision.
  *
@@ -24,7 +19,7 @@ use Safe\Exceptions\JsonException;
  *
  * PHP implements a superset of JSON as specified in the original
  * RFC 7159.
- * @param int $flags Bitmask consisting of
+ * @param int $options Bitmask consisting of
  * JSON_FORCE_OBJECT,
  * JSON_HEX_QUOT,
  * JSON_HEX_TAG,
@@ -47,12 +42,32 @@ use Safe\Exceptions\JsonException;
  * @throws JsonException
  *
  */
-function json_encode($value, int $flags = 0, int $depth = 512): string
+function json_encode($value, int $options = 0, int $depth = 512): string
 {
     error_clear_last();
-    $safeResult = \json_encode($value, $flags, $depth);
-    if ($safeResult === false) {
+    $result = \json_encode($value, $options, $depth);
+    if ($result === false) {
         throw JsonException::createFromPhpError();
     }
-    return $safeResult;
+    return $result;
+}
+
+
+/**
+ * Returns the error string of the last json_encode or json_decode
+ * call, which did not specify JSON_THROW_ON_ERROR.
+ *
+ * @return string Returns the error message on success, "No error" if no
+ * error has occurred.
+ * @throws JsonException
+ *
+ */
+function json_last_error_msg(): string
+{
+    error_clear_last();
+    $result = \json_last_error_msg();
+    if ($result === false) {
+        throw JsonException::createFromPhpError();
+    }
+    return $result;
 }

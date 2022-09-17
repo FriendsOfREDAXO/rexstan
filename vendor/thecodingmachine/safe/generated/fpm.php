@@ -15,8 +15,8 @@ use Safe\Exceptions\FpmException;
 function fastcgi_finish_request(): void
 {
     error_clear_last();
-    $safeResult = \fastcgi_finish_request();
-    if ($safeResult === false) {
+    $result = \fastcgi_finish_request();
+    if ($result === false) {
         throw FpmException::createFromPhpError();
     }
 }

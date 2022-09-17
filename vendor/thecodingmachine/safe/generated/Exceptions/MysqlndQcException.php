@@ -1,7 +1,7 @@
 <?php
 namespace Safe\Exceptions;
 
-class GettextException extends \ErrorException implements SafeExceptionInterface
+class MysqlndQcException extends \ErrorException implements SafeExceptionInterface
 {
     public static function createFromPhpError(): self
     {

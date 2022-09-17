@@ -17,11 +17,11 @@ use Safe\Exceptions\ApcuException;
 function apcu_cache_info(bool $limited = false): array
 {
     error_clear_last();
-    $safeResult = \apcu_cache_info($limited);
-    if ($safeResult === false) {
+    $result = \apcu_cache_info($limited);
+    if ($result === false) {
         throw ApcuException::createFromPhpError();
     }
-    return $safeResult;
+    return $result;
 }
 
 
@@ -39,8 +39,8 @@ function apcu_cache_info(bool $limited = false): array
 function apcu_cas(string $key, int $old, int $new): void
 {
     error_clear_last();
-    $safeResult = \apcu_cas($key, $old, $new);
-    if ($safeResult === false) {
+    $result = \apcu_cas($key, $old, $new);
+    if ($result === false) {
         throw ApcuException::createFromPhpError();
     }
 }
@@ -61,11 +61,11 @@ function apcu_cas(string $key, int $old, int $new): void
 function apcu_dec(string $key, int $step = 1, ?bool &$success = null, int $ttl = 0): int
 {
     error_clear_last();
-    $safeResult = \apcu_dec($key, $step, $success, $ttl);
-    if ($safeResult === false) {
+    $result = \apcu_dec($key, $step, $success, $ttl);
+    if ($result === false) {
         throw ApcuException::createFromPhpError();
     }
-    return $safeResult;
+    return $result;
 }
 
 
@@ -84,11 +84,11 @@ function apcu_dec(string $key, int $step = 1, ?bool &$success = null, int $ttl =
 function apcu_inc(string $key, int $step = 1, ?bool &$success = null, int $ttl = 0): int
 {
     error_clear_last();
-    $safeResult = \apcu_inc($key, $step, $success, $ttl);
-    if ($safeResult === false) {
+    $result = \apcu_inc($key, $step, $success, $ttl);
+    if ($result === false) {
         throw ApcuException::createFromPhpError();
     }
-    return $safeResult;
+    return $result;
 }
 
 
@@ -104,9 +104,9 @@ function apcu_inc(string $key, int $step = 1, ?bool &$success = null, int $ttl =
 function apcu_sma_info(bool $limited = false): array
 {
     error_clear_last();
-    $safeResult = \apcu_sma_info($limited);
-    if ($safeResult === false) {
+    $result = \apcu_sma_info($limited);
+    if ($result === false) {
         throw ApcuException::createFromPhpError();
     }
-    return $safeResult;
+    return $result;
 }

@@ -109,7 +109,6 @@ use Safe\Exceptions\PasswordException;
  * the password_verify function to verify the hash without
  * needing separate storage for the salt or algorithm information.
  * @throws PasswordException
- * @deprecated The Safe version of this function is no longer needed in PHP 8.0+
  *
  */
 function password_hash(string $password, $algo, array $options = null): string

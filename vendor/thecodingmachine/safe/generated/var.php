@@ -53,8 +53,8 @@ use Safe\Exceptions\VarException;
 function settype(&$var, string $type): void
 {
     error_clear_last();
-    $safeResult = \settype($var, $type);
-    if ($safeResult === false) {
+    $result = \settype($var, $type);
+    if ($result === false) {
         throw VarException::createFromPhpError();
     }
 }

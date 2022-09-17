@@ -15,17 +15,16 @@ use Safe\Exceptions\Bzip2Exception;
 function bzclose($bz): void
 {
     error_clear_last();
-    $safeResult = \bzclose($bz);
-    if ($safeResult === false) {
+    $result = \bzclose($bz);
+    if ($result === false) {
         throw Bzip2Exception::createFromPhpError();
     }
 }
 
 
 /**
- * This function is supposed to force a write of all buffered bzip2 data for the file pointer
- * bz,
- * but is implemented as null function in libbz2, and as such does nothing.
+ * Forces a write of all buffered bzip2 data for the file pointer
+ * bz.
  *
  * @param resource $bz The file pointer. It must be valid and must point to a file
  * successfully opened by bzopen.
@@ -35,8 +34,8 @@ function bzclose($bz): void
 function bzflush($bz): void
 {
     error_clear_last();
-    $safeResult = \bzflush($bz);
-    if ($safeResult === false) {
+    $result = \bzflush($bz);
+    if ($result === false) {
         throw Bzip2Exception::createFromPhpError();
     }
 }
@@ -60,11 +59,11 @@ function bzflush($bz): void
 function bzread($bz, int $length = 1024): string
 {
     error_clear_last();
-    $safeResult = \bzread($bz, $length);
-    if ($safeResult === false) {
+    $result = \bzread($bz, $length);
+    if ($result === false) {
         throw Bzip2Exception::createFromPhpError();
     }
-    return $safeResult;
+    return $result;
 }
 
 
@@ -86,12 +85,12 @@ function bzwrite($bz, string $data, int $length = null): int
 {
     error_clear_last();
     if ($length !== null) {
-        $safeResult = \bzwrite($bz, $data, $length);
+        $result = \bzwrite($bz, $data, $length);
     } else {
-        $safeResult = \bzwrite($bz, $data);
+        $result = \bzwrite($bz, $data);
     }
-    if ($safeResult === false) {
+    if ($result === false) {
         throw Bzip2Exception::createFromPhpError();
     }
-    return $safeResult;
+    return $result;
 }

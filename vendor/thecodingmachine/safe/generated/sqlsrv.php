@@ -21,8 +21,8 @@ use Safe\Exceptions\SqlsrvException;
 function sqlsrv_begin_transaction($conn): void
 {
     error_clear_last();
-    $safeResult = \sqlsrv_begin_transaction($conn);
-    if ($safeResult === false) {
+    $result = \sqlsrv_begin_transaction($conn);
+    if ($result === false) {
         throw SqlsrvException::createFromPhpError();
     }
 }
@@ -43,8 +43,8 @@ function sqlsrv_begin_transaction($conn): void
 function sqlsrv_cancel($stmt): void
 {
     error_clear_last();
-    $safeResult = \sqlsrv_cancel($stmt);
-    if ($safeResult === false) {
+    $result = \sqlsrv_cancel($stmt);
+    if ($result === false) {
         throw SqlsrvException::createFromPhpError();
     }
 }
@@ -90,11 +90,11 @@ function sqlsrv_cancel($stmt): void
 function sqlsrv_client_info($conn): array
 {
     error_clear_last();
-    $safeResult = \sqlsrv_client_info($conn);
-    if ($safeResult === false) {
+    $result = \sqlsrv_client_info($conn);
+    if ($result === false) {
         throw SqlsrvException::createFromPhpError();
     }
-    return $safeResult;
+    return $result;
 }
 
 
@@ -108,8 +108,8 @@ function sqlsrv_client_info($conn): array
 function sqlsrv_close($conn): void
 {
     error_clear_last();
-    $safeResult = \sqlsrv_close($conn);
-    if ($safeResult === false) {
+    $result = \sqlsrv_close($conn);
+    if ($result === false) {
         throw SqlsrvException::createFromPhpError();
     }
 }
@@ -132,8 +132,8 @@ function sqlsrv_close($conn): void
 function sqlsrv_commit($conn): void
 {
     error_clear_last();
-    $safeResult = \sqlsrv_commit($conn);
-    if ($safeResult === false) {
+    $result = \sqlsrv_commit($conn);
+    if ($result === false) {
         throw SqlsrvException::createFromPhpError();
     }
 }
@@ -184,8 +184,8 @@ function sqlsrv_commit($conn): void
 function sqlsrv_configure(string $setting, $value): void
 {
     error_clear_last();
-    $safeResult = \sqlsrv_configure($setting, $value);
-    if ($safeResult === false) {
+    $result = \sqlsrv_configure($setting, $value);
+    if ($result === false) {
         throw SqlsrvException::createFromPhpError();
     }
 }
@@ -203,8 +203,8 @@ function sqlsrv_configure(string $setting, $value): void
 function sqlsrv_execute($stmt): void
 {
     error_clear_last();
-    $safeResult = \sqlsrv_execute($stmt);
-    if ($safeResult === false) {
+    $result = \sqlsrv_execute($stmt);
+    if ($result === false) {
         throw SqlsrvException::createFromPhpError();
     }
 }
@@ -226,8 +226,8 @@ function sqlsrv_execute($stmt): void
 function sqlsrv_free_stmt($stmt): void
 {
     error_clear_last();
-    $safeResult = \sqlsrv_free_stmt($stmt);
-    if ($safeResult === false) {
+    $result = \sqlsrv_free_stmt($stmt);
+    if ($result === false) {
         throw SqlsrvException::createFromPhpError();
     }
 }
@@ -255,14 +255,14 @@ function sqlsrv_get_field($stmt, int $fieldIndex, int $getAsType = null)
 {
     error_clear_last();
     if ($getAsType !== null) {
-        $safeResult = \sqlsrv_get_field($stmt, $fieldIndex, $getAsType);
+        $result = \sqlsrv_get_field($stmt, $fieldIndex, $getAsType);
     } else {
-        $safeResult = \sqlsrv_get_field($stmt, $fieldIndex);
+        $result = \sqlsrv_get_field($stmt, $fieldIndex);
     }
-    if ($safeResult === false) {
+    if ($result === false) {
         throw SqlsrvException::createFromPhpError();
     }
-    return $safeResult;
+    return $result;
 }
 
 
@@ -279,11 +279,11 @@ function sqlsrv_get_field($stmt, int $fieldIndex, int $getAsType = null)
 function sqlsrv_next_result($stmt): ?bool
 {
     error_clear_last();
-    $safeResult = \sqlsrv_next_result($stmt);
-    if ($safeResult === false) {
+    $result = \sqlsrv_next_result($stmt);
+    if ($result === false) {
         throw SqlsrvException::createFromPhpError();
     }
-    return $safeResult;
+    return $result;
 }
 
 
@@ -300,11 +300,11 @@ function sqlsrv_next_result($stmt): ?bool
 function sqlsrv_num_fields($stmt): int
 {
     error_clear_last();
-    $safeResult = \sqlsrv_num_fields($stmt);
-    if ($safeResult === false) {
+    $result = \sqlsrv_num_fields($stmt);
+    if ($result === false) {
         throw SqlsrvException::createFromPhpError();
     }
-    return $safeResult;
+    return $result;
 }
 
 
@@ -328,11 +328,11 @@ function sqlsrv_num_fields($stmt): int
 function sqlsrv_num_rows($stmt): int
 {
     error_clear_last();
-    $safeResult = \sqlsrv_num_rows($stmt);
-    if ($safeResult === false) {
+    $result = \sqlsrv_num_rows($stmt);
+    if ($result === false) {
         throw SqlsrvException::createFromPhpError();
     }
-    return $safeResult;
+    return $result;
 }
 
 
@@ -361,16 +361,16 @@ function sqlsrv_prepare($conn, string $sql, array $params = null, array $options
 {
     error_clear_last();
     if ($options !== null) {
-        $safeResult = \sqlsrv_prepare($conn, $sql, $params, $options);
+        $result = \sqlsrv_prepare($conn, $sql, $params, $options);
     } elseif ($params !== null) {
-        $safeResult = \sqlsrv_prepare($conn, $sql, $params);
+        $result = \sqlsrv_prepare($conn, $sql, $params);
     } else {
-        $safeResult = \sqlsrv_prepare($conn, $sql);
+        $result = \sqlsrv_prepare($conn, $sql);
     }
-    if ($safeResult === false) {
+    if ($result === false) {
         throw SqlsrvException::createFromPhpError();
     }
-    return $safeResult;
+    return $result;
 }
 
 
@@ -398,16 +398,16 @@ function sqlsrv_query($conn, string $sql, array $params = null, array $options =
 {
     error_clear_last();
     if ($options !== null) {
-        $safeResult = \sqlsrv_query($conn, $sql, $params, $options);
+        $result = \sqlsrv_query($conn, $sql, $params, $options);
     } elseif ($params !== null) {
-        $safeResult = \sqlsrv_query($conn, $sql, $params);
+        $result = \sqlsrv_query($conn, $sql, $params);
     } else {
-        $safeResult = \sqlsrv_query($conn, $sql);
+        $result = \sqlsrv_query($conn, $sql);
     }
-    if ($safeResult === false) {
+    if ($result === false) {
         throw SqlsrvException::createFromPhpError();
     }
-    return $safeResult;
+    return $result;
 }
 
 
@@ -422,8 +422,8 @@ function sqlsrv_query($conn, string $sql, array $params = null, array $options =
 function sqlsrv_rollback($conn): void
 {
     error_clear_last();
-    $safeResult = \sqlsrv_rollback($conn);
-    if ($safeResult === false) {
+    $result = \sqlsrv_rollback($conn);
+    if ($result === false) {
         throw SqlsrvException::createFromPhpError();
     }
 }

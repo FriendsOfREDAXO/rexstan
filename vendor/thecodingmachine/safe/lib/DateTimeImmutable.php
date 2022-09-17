@@ -2,6 +2,10 @@
 
 namespace Safe;
 
+use DateInterval;
+use DateTime;
+use DateTimeInterface;
+use DateTimeZone;
 use Safe\Exceptions\DatetimeException;
 
 /**
@@ -19,7 +23,7 @@ class DateTimeImmutable extends \DateTimeImmutable
     /**
      * DateTimeImmutable constructor.
      * @param string $time
-     * @param \DateTimeZone|null $timezone
+     * @param DateTimeZone|null $timezone
      * @throws \Exception
      */
     public function __construct($time = 'now', $timezone = null)
@@ -48,12 +52,12 @@ class DateTimeImmutable extends \DateTimeImmutable
     /**
      * @param string $format
      * @param string $time
-     * @param \DateTimeZone|null $timezone
+     * @param DateTimeZone|null $timezone
      * @throws DatetimeException
      */
     public static function createFromFormat($format, $time, $timezone = null): self
     {
-        $datetime = \DateTimeImmutable::createFromFormat($format, $time, $timezone);
+        $datetime = parent::createFromFormat($format, $time, $timezone);
         if ($datetime === false) {
             throw DatetimeException::createFromPhpError();
         }
@@ -76,12 +80,12 @@ class DateTimeImmutable extends \DateTimeImmutable
     }
 
     /**
-     * @param \DateTimeInterface $datetime2
+     * @param DateTimeInterface $datetime2
      * @param bool $absolute
-     * @return \DateInterval
+     * @return DateInterval
      * @throws DatetimeException
      */
-    public function diff($datetime2, $absolute = false): \DateInterval
+    public function diff($datetime2, $absolute = false): DateInterval
     {
         /** @var \DateInterval|false $result */
         $result = $this->innerDateTime->diff($datetime2, $absolute);
@@ -174,7 +178,7 @@ class DateTimeImmutable extends \DateTimeImmutable
     }
 
     /**
-     * @param \DateTimeZone $timezone
+     * @param DateTimeZone $timezone
      * @return DateTimeImmutable
      * @throws DatetimeException
      */
@@ -189,7 +193,7 @@ class DateTimeImmutable extends \DateTimeImmutable
     }
 
     /**
-     * @param \DateInterval $interval
+     * @param DateInterval $interval
      * @return DateTimeImmutable
      * @throws DatetimeException
      */
@@ -220,7 +224,7 @@ class DateTimeImmutable extends \DateTimeImmutable
     //overload getters to use the inner datetime immutable instead of itself
 
     /**
-     * @param \DateInterval $interval
+     * @param DateInterval $interval
      * @return DateTimeImmutable
      */
     public function add($interval): self
@@ -229,14 +233,12 @@ class DateTimeImmutable extends \DateTimeImmutable
     }
 
     /**
-     * @param \DateTime $dateTime
+     * @param DateTime $dateTime
      * @return DateTimeImmutable
      */
     public static function createFromMutable($dateTime): self
     {
-        $date = \DateTimeImmutable::createFromMutable($dateTime);
-
-        return self::createFromRegular($date);
+        return self::createFromRegular(parent::createFromMutable($dateTime));
     }
 
     /**
@@ -248,7 +250,7 @@ class DateTimeImmutable extends \DateTimeImmutable
         return self::createFromRegular(parent::__set_state($array));
     }
 
-    public function getTimezone(): \DateTimeZone
+    public function getTimezone(): DateTimeZone
     {
         return $this->innerDateTime->getTimezone();
     }
