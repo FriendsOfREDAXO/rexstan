@@ -41,6 +41,28 @@ final class RexStan
     }
 
     /**
+     * @return null|string
+     */
+    public static function analyzeBaseline() {
+        $phpstanBinary = self::phpstanBinPath();
+        $analyzeBinary = self::phpstanBaselineAnalyzeBinPath();
+        $configPath = self::phpstanConfigPath();
+
+        $addon = rex_addon::get('rexstan');
+        $dataDir = $addon->getDataPath();
+
+        self::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline', $lastError);
+        $output = self::execCmd('cd '.$dataDir.' && '. $analyzeBinary .' *phpstan-baseline.neon --json', $lastError);
+        // returns a json array
+        if ('[' === $output[0]) {
+            // return the analysis result as an array
+            return json_decode($output, true);
+        }
+
+        return null;
+    }
+
+    /**
      * @return void
      */
     public static function clearResultCache()
@@ -81,6 +103,21 @@ final class RexStan
 
         if (false === $path) {
             throw new \RuntimeException('phpstan binary not found');
+        }
+
+        return $path;
+    }
+
+    private static function phpstanBaselineAnalyzeBinPath(): string
+    {
+        if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
+            $path = realpath(__DIR__.'/../vendor/bin/phpstan-baseline-analyze.bat');
+        } else {
+            $path = realpath(__DIR__.'/../vendor/bin/phpstan-baseline-analyze');
+        }
+
+        if (false === $path) {
+            throw new \RuntimeException('phpstan-baseline-analyze binary not found');
         }
 
         return $path;

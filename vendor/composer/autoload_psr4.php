@@ -9,6 +9,7 @@ return array(
     'staabm\\PHPStanDba\\' => array($vendorDir . '/staabm/phpstan-dba/src'),
     'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
     'Symplify\\PHPStanRules\\' => array($vendorDir . '/symplify/phpstan-rules/src', $vendorDir . '/symplify/phpstan-rules/packages'),
+    'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Spaze\\PHPStan\\Rules\\Disallowed\\' => array($vendorDir . '/spaze/phpstan-disallowed-calls/src'),
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
     'PHPStan\\PhpDocParser\\' => array($vendorDir . '/phpstan/phpdoc-parser/src'),
