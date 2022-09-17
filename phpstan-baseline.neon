@@ -1,0 +1,1606 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Using \\$_SERVER is forbidden, use rex_request\\:\\:server\\(\\) or rex_server\\(\\) instead\\.$#"
+			count: 2
+			path: ../2factor_auth/lib/method_email.php
+
+		-
+			message: "#^Using \\$_SERVER is forbidden, use rex_request\\:\\:server\\(\\) or rex_server\\(\\) instead\\.$#"
+			count: 1
+			path: ../2factor_auth/lib/method_totp.php
+
+		-
+			message: "#^Undefined variable\\: \\$this$#"
+			count: 1
+			path: ../developer/boot.php
+
+		-
+			message: "#^Variable \\$this might not be defined\\.$#"
+			count: 2
+			path: ../developer/boot.php
+
+		-
+			message: "#^Method rex_developer_command\\:\\:configure\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/command.php
+
+		-
+			message: "#^Method rex_developer_manager\\:\\:getBasePath\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/manager.php
+
+		-
+			message: "#^Method rex_developer_manager\\:\\:register\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/manager.php
+
+		-
+			message: "#^Method rex_developer_manager\\:\\:registerDefault\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/manager.php
+
+		-
+			message: "#^Method rex_developer_manager\\:\\:setBasePath\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/manager.php
+
+		-
+			message: "#^Method rex_developer_manager\\:\\:setBasePath\\(\\) has parameter \\$basePath with no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/manager.php
+
+		-
+			message: "#^Method rex_developer_manager\\:\\:start\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/manager.php
+
+		-
+			message: "#^Method rex_developer_manager\\:\\:synchronize\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/manager.php
+
+		-
+			message: "#^Parameter \\#2 \\$start of static method rex_developer_manager\\:\\:register\\(\\) expects int, bool given\\.$#"
+			count: 4
+			path: ../developer/lib/manager.php
+
+		-
+			message: "#^Property rex_developer_manager\\:\\:\\$basePath has no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/manager.php
+
+		-
+			message: "#^Property rex_developer_manager\\:\\:\\$synchronizers has no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/manager.php
+
+		-
+			message: "#^Method rex_developer_synchronizer\\:\\:addNewItems\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Method rex_developer_synchronizer\\:\\:addNewItems\\(\\) has parameter \\$dirs with no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Method rex_developer_synchronizer\\:\\:addNewItems\\(\\) has parameter \\$idList with no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Method rex_developer_synchronizer\\:\\:addNewItems\\(\\) has parameter \\$withId with no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Method rex_developer_synchronizer\\:\\:deleteItem\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Method rex_developer_synchronizer\\:\\:editItem\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Method rex_developer_synchronizer\\:\\:getNewAndExistingDirs\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Method rex_developer_synchronizer\\:\\:glob\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Method rex_developer_synchronizer\\:\\:glob\\(\\) has parameter \\$flags with no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Method rex_developer_synchronizer\\:\\:glob\\(\\) has parameter \\$pattern with no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Method rex_developer_synchronizer\\:\\:removeItems\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Method rex_developer_synchronizer\\:\\:removeItems\\(\\) has parameter \\$existing with no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Method rex_developer_synchronizer\\:\\:removeItems\\(\\) has parameter \\$force with no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Method rex_developer_synchronizer\\:\\:removeItems\\(\\) has parameter \\$idList with no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Method rex_developer_synchronizer\\:\\:run\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Method rex_developer_synchronizer\\:\\:synchronizeReceivedItems\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Method rex_developer_synchronizer\\:\\:synchronizeReceivedItems\\(\\) has parameter \\$existing with no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Method rex_developer_synchronizer\\:\\:synchronizeReceivedItems\\(\\) has parameter \\$force with no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Method rex_developer_synchronizer\\:\\:synchronizeReceivedItems\\(\\) has parameter \\$idList with no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Property rex_developer_synchronizer\\:\\:\\$baseDir has no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Property rex_developer_synchronizer\\:\\:\\$dirname has no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^Property rex_developer_synchronizer\\:\\:\\$files has no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer.php
+
+		-
+			message: "#^If condition is always true\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Method rex_developer_synchronizer_default\\:\\:addItem\\(\\) should return int but returns string\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Method rex_developer_synchronizer_default\\:\\:deleteItem\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Method rex_developer_synchronizer_default\\:\\:editItem\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Method rex_developer_synchronizer_default\\:\\:setAddedCallback\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Method rex_developer_synchronizer_default\\:\\:setCommonCreateUpdateColumns\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Method rex_developer_synchronizer_default\\:\\:setDeletedCallback\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Method rex_developer_synchronizer_default\\:\\:setEditedCallback\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Method rex_developer_synchronizer_default\\:\\:setIdColumn\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Method rex_developer_synchronizer_default\\:\\:setNameColumn\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Method rex_developer_synchronizer_default\\:\\:setUpdatedColumn\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Parameter \\#1 \\$id of method rex_developer_synchronizer_item\\:\\:setId\\(\\) expects int, string given\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Parameter \\#2 \\$content of method rex_developer_synchronizer_item\\:\\:setFile\\(\\) expects string, Closure given\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Property rex_developer_synchronizer_default\\:\\:\\$addedCallback has no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Property rex_developer_synchronizer_default\\:\\:\\$columns has no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Property rex_developer_synchronizer_default\\:\\:\\$commonCreateUpdateColumns has no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Property rex_developer_synchronizer_default\\:\\:\\$deletedCallback has no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Property rex_developer_synchronizer_default\\:\\:\\$editedCallback has no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Property rex_developer_synchronizer_default\\:\\:\\$idColumn has no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Property rex_developer_synchronizer_default\\:\\:\\$metadata has no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Property rex_developer_synchronizer_default\\:\\:\\$nameColumn has no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Property rex_developer_synchronizer_default\\:\\:\\$table has no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Property rex_developer_synchronizer_default\\:\\:\\$updatedColumn has no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_default.php
+
+		-
+			message: "#^Method rex_developer_synchronizer_item\\:\\:setFile\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_item.php
+
+		-
+			message: "#^Method rex_developer_synchronizer_item\\:\\:setFiles\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_item.php
+
+		-
+			message: "#^Method rex_developer_synchronizer_item\\:\\:setId\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_item.php
+
+		-
+			message: "#^Method rex_developer_synchronizer_item\\:\\:setName\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_item.php
+
+		-
+			message: "#^Method rex_developer_synchronizer_item\\:\\:setUpdated\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_item.php
+
+		-
+			message: "#^Property rex_developer_synchronizer_item\\:\\:\\$files has no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_item.php
+
+		-
+			message: "#^Property rex_developer_synchronizer_item\\:\\:\\$id has no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_item.php
+
+		-
+			message: "#^Property rex_developer_synchronizer_item\\:\\:\\$name has no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_item.php
+
+		-
+			message: "#^Property rex_developer_synchronizer_item\\:\\:\\$updated has no type specified\\.$#"
+			count: 1
+			path: ../developer/lib/synchronizer_item.php
+
+		-
+			message: "#^Method rex_effect_abstract\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effect_abstract.php
+
+		-
+			message: "#^Method rex_effect_convert2img\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effects/effect_convert2img.php
+
+		-
+			message: "#^Method rex_effect_crop\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effects/effect_crop.php
+
+		-
+			message: "#^Method rex_effect_filter_blur\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effects/effect_filter_blur.php
+
+		-
+			message: "#^Method rex_effect_filter_brightness\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effects/effect_filter_brightness.php
+
+		-
+			message: "#^Method rex_effect_filter_colorize\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effects/effect_filter_colorize.php
+
+		-
+			message: "#^Method rex_effect_filter_contrast\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effects/effect_filter_contrast.php
+
+		-
+			message: "#^Method rex_effect_filter_greyscale\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effects/effect_filter_greyscale.php
+
+		-
+			message: "#^Method rex_effect_filter_sepia\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effects/effect_filter_sepia.php
+
+		-
+			message: "#^Method rex_effect_filter_sharpen\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effects/effect_filter_sharpen.php
+
+		-
+			message: "#^Method rex_effect_flip\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effects/effect_flip.php
+
+		-
+			message: "#^Method rex_effect_header\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effects/effect_header.php
+
+		-
+			message: "#^Method rex_effect_image_format\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effects/effect_image_format.php
+
+		-
+			message: "#^Method rex_effect_image_properties\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effects/effect_image_properties.php
+
+		-
+			message: "#^Method rex_effect_insert_image\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effects/effect_insert_image.php
+
+		-
+			message: "#^Method rex_effect_mediapath\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effects/effect_mediapath.php
+
+		-
+			message: "#^Method rex_effect_mirror\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effects/effect_mirror.php
+
+		-
+			message: "#^Method rex_effect_mirror\\:\\:imagereflection\\(\\) has parameter \\$bgColor with no type specified\\.$#"
+			count: 1
+			path: ../media_manager/lib/effects/effect_mirror.php
+
+		-
+			message: "#^Method rex_effect_mirror\\:\\:imagereflection\\(\\) has parameter \\$image with no type specified\\.$#"
+			count: 1
+			path: ../media_manager/lib/effects/effect_mirror.php
+
+		-
+			message: "#^Method rex_effect_mirror\\:\\:imagereflection\\(\\) has parameter \\$reflectionHeight with no type specified\\.$#"
+			count: 1
+			path: ../media_manager/lib/effects/effect_mirror.php
+
+		-
+			message: "#^Method rex_effect_mirror\\:\\:imagereflection\\(\\) has parameter \\$reflectionOpacity with no type specified\\.$#"
+			count: 1
+			path: ../media_manager/lib/effects/effect_mirror.php
+
+		-
+			message: "#^Method rex_effect_mirror\\:\\:imagereflection\\(\\) has parameter \\$transparent with no type specified\\.$#"
+			count: 1
+			path: ../media_manager/lib/effects/effect_mirror.php
+
+		-
+			message: "#^Offset 'bg_b' on non\\-empty\\-array\\<string, mixed\\> in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 1
+			path: ../media_manager/lib/effects/effect_mirror.php
+
+		-
+			message: "#^Offset 'bg_g' on non\\-empty\\-array\\<string, mixed\\> in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 1
+			path: ../media_manager/lib/effects/effect_mirror.php
+
+		-
+			message: "#^Offset 'bg_r' on non\\-empty\\-array\\<string, mixed\\> in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 1
+			path: ../media_manager/lib/effects/effect_mirror.php
+
+		-
+			message: "#^Method rex_effect_resize\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effects/effect_resize.php
+
+		-
+			message: "#^Method rex_effect_resize\\:\\:resizeMax\\(\\) has parameter \\$height with no type specified\\.$#"
+			count: 1
+			path: ../media_manager/lib/effects/effect_resize.php
+
+		-
+			message: "#^Method rex_effect_resize\\:\\:resizeMax\\(\\) has parameter \\$width with no type specified\\.$#"
+			count: 1
+			path: ../media_manager/lib/effects/effect_resize.php
+
+		-
+			message: "#^Method rex_effect_resize\\:\\:resizeMin\\(\\) has parameter \\$height with no type specified\\.$#"
+			count: 1
+			path: ../media_manager/lib/effects/effect_resize.php
+
+		-
+			message: "#^Method rex_effect_resize\\:\\:resizeMin\\(\\) has parameter \\$width with no type specified\\.$#"
+			count: 1
+			path: ../media_manager/lib/effects/effect_resize.php
+
+		-
+			message: "#^Method rex_effect_rotate\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effects/effect_rotate.php
+
+		-
+			message: "#^Method rex_effect_rounded_corners\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effects/effect_rounded_corners.php
+
+		-
+			message: "#^Method rex_effect_workspace\\:\\:getParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 2
+			path: ../media_manager/lib/effects/effect_workspace.php
+
+		-
+			message: "#^Offset 'bg_b' on non\\-empty\\-array\\<string, mixed\\> in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 1
+			path: ../media_manager/lib/effects/effect_workspace.php
+
+		-
+			message: "#^Offset 'bg_g' on non\\-empty\\-array\\<string, mixed\\> in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 1
+			path: ../media_manager/lib/effects/effect_workspace.php
+
+		-
+			message: "#^Offset 'bg_r' on non\\-empty\\-array\\<string, mixed\\> in isset\\(\\) always exists and is not nullable\\.$#"
+			count: 1
+			path: ../media_manager/lib/effects/effect_workspace.php
+
+		-
+			message: "#^Method rex_media_manager\\:\\:mediaIsInUse\\(\\) has parameter \\$ep with generic class rex_extension_point but does not specify its types\\: T$#"
+			count: 1
+			path: ../media_manager/lib/media_manager.php
+
+		-
+			message: "#^Method rex_media_manager\\:\\:mediaUpdated\\(\\) has parameter \\$ep with generic class rex_extension_point but does not specify its types\\: T$#"
+			count: 1
+			path: ../media_manager/lib/media_manager.php
+
+		-
+			message: "#^Method rex_managed_media_test\\:\\:testConstructor\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../media_manager/tests/managed_media_test.php
+
+		-
+			message: "#^Method rex_media_manager_test\\:\\:dataGetUrl\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../media_manager/tests/media_manager_test.php
+
+		-
+			message: "#^Method rex_media_manager_test\\:\\:testCreate\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../media_manager/tests/media_manager_test.php
+
+		-
+			message: "#^Method rex_media_manager_test\\:\\:testGetCacheFilename\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../media_manager/tests/media_manager_test.php
+
+		-
+			message: "#^Method rex_media_manager_test\\:\\:testGetMediaFile\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../media_manager/tests/media_manager_test.php
+
+		-
+			message: "#^Method rex_media_manager_test\\:\\:testGetUrl\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../media_manager/tests/media_manager_test.php
+
+		-
+			message: "#^Method rex_media_manager_test\\:\\:testGetUrl\\(\\) has parameter \\$expectedBuster with no type specified\\.$#"
+			count: 1
+			path: ../media_manager/tests/media_manager_test.php
+
+		-
+			message: "#^Method rex_media_manager_test\\:\\:testGetUrl\\(\\) has parameter \\$file with no type specified\\.$#"
+			count: 1
+			path: ../media_manager/tests/media_manager_test.php
+
+		-
+			message: "#^Method rex_media_manager_test\\:\\:testGetUrl\\(\\) has parameter \\$timestamp with no type specified\\.$#"
+			count: 1
+			path: ../media_manager/tests/media_manager_test.php
+
+		-
+			message: "#^Method rex_media_manager_test\\:\\:testGetUrl\\(\\) has parameter \\$type with no type specified\\.$#"
+			count: 1
+			path: ../media_manager/tests/media_manager_test.php
+
+		-
+			message: "#^Using \\$_GET is forbidden, use rex_request\\:\\:get\\(\\) or rex_get\\(\\) instead\\.$#"
+			count: 2
+			path: ../media_manager/tests/media_manager_test.php
+
+		-
+			message: "#^Function rex_mediapool_Mediaform\\(\\) has parameter \\$buttonTitle with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/functions/function_rex_mediapool.php
+
+		-
+			message: "#^Function rex_mediapool_Mediaform\\(\\) has parameter \\$closeForm with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/functions/function_rex_mediapool.php
+
+		-
+			message: "#^Function rex_mediapool_Mediaform\\(\\) has parameter \\$fileChooser with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/functions/function_rex_mediapool.php
+
+		-
+			message: "#^Function rex_mediapool_Mediaform\\(\\) has parameter \\$formTitle with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/functions/function_rex_mediapool.php
+
+		-
+			message: "#^Function rex_mediapool_Mediaform\\(\\) has parameter \\$rexFileCategory with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/functions/function_rex_mediapool.php
+
+		-
+			message: "#^Function rex_mediapool_Syncform\\(\\) has parameter \\$rexFileCategory with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/functions/function_rex_mediapool.php
+
+		-
+			message: "#^Function rex_mediapool_Uploadform\\(\\) has parameter \\$rexFileCategory with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/functions/function_rex_mediapool.php
+
+		-
+			message: "#^Function rex_mediapool_getMediaTypeBlacklist\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/functions/function_rex_mediapool.php
+
+		-
+			message: "#^Function rex_mediapool_getMediaTypeWhitelist\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/functions/function_rex_mediapool.php
+
+		-
+			message: "#^Function rex_mediapool_getMediaTypeWhitelist\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/functions/function_rex_mediapool.php
+
+		-
+			message: "#^Function rex_mediapool_isAllowedMediaType\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/functions/function_rex_mediapool.php
+
+		-
+			message: "#^Function rex_mediapool_saveMedia\\(\\) has parameter \\$FILE with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/functions/function_rex_mediapool.php
+
+		-
+			message: "#^Function rex_mediapool_saveMedia\\(\\) has parameter \\$FILEINFOS with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/functions/function_rex_mediapool.php
+
+		-
+			message: "#^Function rex_mediapool_saveMedia\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/functions/function_rex_mediapool.php
+
+		-
+			message: "#^Function rex_mediapool_syncFile\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/functions/function_rex_mediapool.php
+
+		-
+			message: "#^Function rex_mediapool_updateMedia\\(\\) has parameter \\$FILE with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/functions/function_rex_mediapool.php
+
+		-
+			message: "#^Function rex_mediapool_updateMedia\\(\\) has parameter \\$FILEINFOS with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/functions/function_rex_mediapool.php
+
+		-
+			message: "#^Function rex_mediapool_updateMedia\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/functions/function_rex_mediapool.php
+
+		-
+			message: "#^Constructor of class rex_form_widget_media_element has an unused parameter \\$tag\\.$#"
+			count: 1
+			path: ../mediapool/lib/form_element/media.php
+
+		-
+			message: "#^Method rex_form_widget_media_element\\:\\:setCategoryId\\(\\) has parameter \\$categoryId with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/form_element/media.php
+
+		-
+			message: "#^Method rex_form_widget_media_element\\:\\:setPreview\\(\\) has parameter \\$preview with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/form_element/media.php
+
+		-
+			message: "#^Method rex_form_widget_media_element\\:\\:setTypes\\(\\) has parameter \\$types with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/form_element/media.php
+
+		-
+			message: "#^Property rex_form_widget_media_element\\:\\:\\$args has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/form_element/media.php
+
+		-
+			message: "#^Constructor of class rex_form_widget_medialist_element has an unused parameter \\$tag\\.$#"
+			count: 1
+			path: ../mediapool/lib/form_element/medialist.php
+
+		-
+			message: "#^Method rex_form_widget_medialist_element\\:\\:setCategoryId\\(\\) has parameter \\$categoryId with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/form_element/medialist.php
+
+		-
+			message: "#^Method rex_form_widget_medialist_element\\:\\:setPreview\\(\\) has parameter \\$preview with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/form_element/medialist.php
+
+		-
+			message: "#^Method rex_form_widget_medialist_element\\:\\:setTypes\\(\\) has parameter \\$types with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/form_element/medialist.php
+
+		-
+			message: "#^Property rex_form_widget_medialist_element\\:\\:\\$args has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/form_element/medialist.php
+
+		-
+			message: "#^Method rex_media\\:\\:getValue\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Method rex_media\\:\\:hasValue\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Method rex_media\\:\\:isDocType\\(\\) has parameter \\$type with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Method rex_media\\:\\:isImageType\\(\\) has parameter \\$extension with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Method rex_media\\:\\:toImage\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Parameter \\#2 \\$createCallback of static method rex_media\\:\\:getInstance\\(\\) expects \\(callable\\(\\.\\.\\.mixed\\)\\: static\\(rex_media\\)\\|null\\)\\|null, Closure\\(mixed\\)\\: static\\(rex_media\\)\\|null given\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Parameter \\#2 \\$getInstanceCallback of static method rex_media\\:\\:getInstanceList\\(\\) expects callable\\(\\.\\.\\.mixed\\)\\: static\\(rex_media\\)\\|null, callable\\(string\\)\\: static\\(rex_media\\) given\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Property rex_media\\:\\:\\$category_id has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Property rex_media\\:\\:\\$createdate has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Property rex_media\\:\\:\\$createuser has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Property rex_media\\:\\:\\$height has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Property rex_media\\:\\:\\$id has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Property rex_media\\:\\:\\$name has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Property rex_media\\:\\:\\$originalname has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Property rex_media\\:\\:\\$size has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Property rex_media\\:\\:\\$title has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Property rex_media\\:\\:\\$type has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Property rex_media\\:\\:\\$updatedate has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Property rex_media\\:\\:\\$updateuser has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Property rex_media\\:\\:\\$width has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: ../mediapool/lib/media.php
+
+		-
+			message: "#^Parameter \\#2 \\$createCallback of static method rex_media_category\\:\\:getInstance\\(\\) expects \\(callable\\(\\.\\.\\.mixed\\)\\: static\\(rex_media_category\\)\\|null\\)\\|null, Closure\\(mixed\\)\\: static\\(rex_media_category\\)\\|null given\\.$#"
+			count: 1
+			path: ../mediapool/lib/media_category.php
+
+		-
+			message: "#^Parameter \\#2 \\$getInstanceCallback of static method rex_media_category\\:\\:getInstanceList\\(\\) expects callable\\(\\.\\.\\.mixed\\)\\: rex_media_category\\|null, array\\{'rex_media_category', 'get'\\} given\\.$#"
+			count: 1
+			path: ../mediapool/lib/media_category.php
+
+		-
+			message: "#^Parameter \\#2 \\$getInstanceCallback of static method rex_media_category\\:\\:getInstanceList\\(\\) expects callable\\(\\.\\.\\.mixed\\)\\: rex_media\\|null, array\\{'rex_media', 'get'\\} given\\.$#"
+			count: 1
+			path: ../mediapool/lib/media_category.php
+
+		-
+			message: "#^Parameter \\#3 \\$createListCallback of static method rex_media_category\\:\\:getInstanceList\\(\\) expects \\(callable\\(\\.\\.\\.mixed\\)\\: array\\)\\|null, Closure\\(mixed\\)\\: array given\\.$#"
+			count: 2
+			path: ../mediapool/lib/media_category.php
+
+		-
+			message: "#^Property rex_media_category\\:\\:\\$createdate has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media_category.php
+
+		-
+			message: "#^Property rex_media_category\\:\\:\\$createuser has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media_category.php
+
+		-
+			message: "#^Property rex_media_category\\:\\:\\$id has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media_category.php
+
+		-
+			message: "#^Property rex_media_category\\:\\:\\$name has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media_category.php
+
+		-
+			message: "#^Property rex_media_category\\:\\:\\$parentId has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media_category.php
+
+		-
+			message: "#^Property rex_media_category\\:\\:\\$path has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media_category.php
+
+		-
+			message: "#^Property rex_media_category\\:\\:\\$updatedate has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media_category.php
+
+		-
+			message: "#^Property rex_media_category\\:\\:\\$updateuser has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media_category.php
+
+		-
+			message: "#^Unsafe usage of new static\\(\\)\\.$#"
+			count: 1
+			path: ../mediapool/lib/media_category.php
+
+		-
+			message: "#^Left side of && is always true\\.$#"
+			count: 1
+			path: ../mediapool/lib/media_category_select.php
+
+		-
+			message: "#^Method rex_media_category_select\\:\\:__construct\\(\\) has parameter \\$checkPerms with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media_category_select.php
+
+		-
+			message: "#^Property rex_media_category_select\\:\\:\\$loaded has no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/media_category_select.php
+
+		-
+			message: "#^Method rex_mediapool\\:\\:getAllowedExtensions\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/lib/mediapool.php
+
+		-
+			message: "#^Method rex_mediapool\\:\\:getAllowedExtensions\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/lib/mediapool.php
+
+		-
+			message: "#^Method rex_mediapool\\:\\:getBlockedExtensions\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/lib/mediapool.php
+
+		-
+			message: "#^Method rex_mediapool\\:\\:isAllowedExtension\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/lib/mediapool.php
+
+		-
+			message: "#^Method rex_media_perm\\:\\:getFieldParams\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/lib/perm.php
+
+		-
+			message: "#^Method rex_media_perm\\:\\:hasCategoryPerm\\(\\) has parameter \\$categoryId with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/perm.php
+
+		-
+			message: "#^Method rex_media_service\\:\\:addMedia\\(\\) has parameter \\$allowedExtensions with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/lib/service_media.php
+
+		-
+			message: "#^Method rex_media_service\\:\\:addMedia\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/lib/service_media.php
+
+		-
+			message: "#^Method rex_media_service\\:\\:updateMedia\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/lib/service_media.php
+
+		-
+			message: "#^Offset 'file' on array\\{category_id\\: int, title\\: string, file\\: array\\{name\\: string, path\\: mixed, tmp_name\\?\\: string, error\\?\\: int\\}\\} in empty\\(\\) always exists and is not falsy\\.$#"
+			count: 1
+			path: ../mediapool/lib/service_media.php
+
+		-
+			message: "#^Ternary operator condition is always true\\.$#"
+			count: 1
+			path: ../mediapool/lib/service_media.php
+
+		-
+			message: "#^Method rex_media_category_service\\:\\:editCategory\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/lib/service_media_category.php
+
+		-
+			message: "#^Variable \\$warning in empty\\(\\) always exists and is always falsy\\.$#"
+			count: 1
+			path: ../mediapool/lib/service_media_category.php
+
+		-
+			message: "#^Method rex_var_media\\:\\:getWidget\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/lib/var_media.php
+
+		-
+			message: "#^Method rex_var_media\\:\\:getWidget\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/var_media.php
+
+		-
+			message: "#^Method rex_var_media\\:\\:getWidget\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/var_media.php
+
+		-
+			message: "#^Method rex_var_medialist\\:\\:getWidget\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/lib/var_medialist.php
+
+		-
+			message: "#^Method rex_var_medialist\\:\\:getWidget\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/var_medialist.php
+
+		-
+			message: "#^Method rex_var_medialist\\:\\:getWidget\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/lib/var_medialist.php
+
+		-
+			message: "#^Using \\$_FILES is forbidden, use rex_request\\:\\:files\\(\\) or rex_files\\(\\) instead\\.$#"
+			count: 1
+			path: ../mediapool/pages/media.detail.php
+
+		-
+			message: "#^Access to an undefined property rex_media\\:\\:\\$med_foo\\.$#"
+			count: 2
+			path: ../mediapool/tests/media_test.php
+
+		-
+			message: "#^Method rex_media_test\\:\\:testGetValue\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../mediapool/tests/media_test.php
+
+		-
+			message: "#^Method rex_media_test\\:\\:testHasValue\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../mediapool/tests/media_test.php
+
+		-
+			message: "#^Method rex_mediapool_test\\:\\:provideIsAllowedExtension\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../mediapool/tests/mediapool_test.php
+
+		-
+			message: "#^Method rex_mediapool_test\\:\\:provideIsAllowedMimeType\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../mediapool/tests/mediapool_test.php
+
+		-
+			message: "#^Method rex_mediapool_test\\:\\:testIsAllowedExtension\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../mediapool/tests/mediapool_test.php
+
+		-
+			message: "#^Method rex_mediapool_test\\:\\:testIsAllowedExtension\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../mediapool/tests/mediapool_test.php
+
+		-
+			message: "#^Method rex_mediapool_test\\:\\:testIsAllowedExtension\\(\\) has parameter \\$expected with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/tests/mediapool_test.php
+
+		-
+			message: "#^Method rex_mediapool_test\\:\\:testIsAllowedExtension\\(\\) has parameter \\$filename with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/tests/mediapool_test.php
+
+		-
+			message: "#^Method rex_mediapool_test\\:\\:testIsAllowedMimeType\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: ../mediapool/tests/mediapool_test.php
+
+		-
+			message: "#^Method rex_mediapool_test\\:\\:testIsAllowedMimeType\\(\\) has parameter \\$expected with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/tests/mediapool_test.php
+
+		-
+			message: "#^Method rex_mediapool_test\\:\\:testIsAllowedMimeType\\(\\) has parameter \\$filename with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/tests/mediapool_test.php
+
+		-
+			message: "#^Method rex_mediapool_test\\:\\:testIsAllowedMimeType\\(\\) has parameter \\$path with no type specified\\.$#"
+			count: 1
+			path: ../mediapool/tests/mediapool_test.php
+
+		-
+			message: "#^Function rex_metainfo_cleanup\\(\\) has parameter \\$epOrParams with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/extensions/extension_cleanup.php
+
+		-
+			message: "#^Function rex_metainfo_extensions_handler\\(\\) has parameter \\$ep with generic class rex_extension_point but does not specify its types\\: T$#"
+			count: 1
+			path: ../metainfo/functions/function_metainfo.php
+
+		-
+			message: "#^Method rex_metainfo_article_handler\\:\\:buildFilterCondition\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../metainfo/lib/handler/article_handler.php
+
+		-
+			message: "#^Method rex_metainfo_article_handler\\:\\:extendForm\\(\\) has parameter \\$ep with generic class rex_extension_point but does not specify its types\\: T$#"
+			count: 1
+			path: ../metainfo/lib/handler/article_handler.php
+
+		-
+			message: "#^Method rex_metainfo_article_handler\\:\\:getForm\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../metainfo/lib/handler/article_handler.php
+
+		-
+			message: "#^Method rex_metainfo_article_handler\\:\\:handleSave\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../metainfo/lib/handler/article_handler.php
+
+		-
+			message: "#^Method rex_metainfo_article_handler\\:\\:handleSave\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../metainfo/lib/handler/article_handler.php
+
+		-
+			message: "#^Method rex_metainfo_category_handler\\:\\:buildFilterCondition\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../metainfo/lib/handler/category_handler.php
+
+		-
+			message: "#^Method rex_metainfo_category_handler\\:\\:extendForm\\(\\) has parameter \\$ep with generic class rex_extension_point but does not specify its types\\: T$#"
+			count: 1
+			path: ../metainfo/lib/handler/category_handler.php
+
+		-
+			message: "#^Method rex_metainfo_category_handler\\:\\:handleSave\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../metainfo/lib/handler/category_handler.php
+
+		-
+			message: "#^Method rex_metainfo_category_handler\\:\\:handleSave\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../metainfo/lib/handler/category_handler.php
+
+		-
+			message: "#^Method rex_metainfo_category_handler\\:\\:renderToggleButton\\(\\) has parameter \\$ep with generic class rex_extension_point but does not specify its types\\: T$#"
+			count: 1
+			path: ../metainfo/lib/handler/category_handler.php
+
+		-
+			message: "#^Method rex_metainfo_clang_handler\\:\\:buildFilterCondition\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../metainfo/lib/handler/clang_handler.php
+
+		-
+			message: "#^Method rex_metainfo_clang_handler\\:\\:extendForm\\(\\) has parameter \\$ep with generic class rex_extension_point but does not specify its types\\: T$#"
+			count: 1
+			path: ../metainfo/lib/handler/clang_handler.php
+
+		-
+			message: "#^Method rex_metainfo_clang_handler\\:\\:handleSave\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../metainfo/lib/handler/clang_handler.php
+
+		-
+			message: "#^Method rex_metainfo_clang_handler\\:\\:handleSave\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../metainfo/lib/handler/clang_handler.php
+
+		-
+			message: "#^Method rex_metainfo_clang_handler\\:\\:renderToggleButton\\(\\) has parameter \\$ep with generic class rex_extension_point but does not specify its types\\: T$#"
+			count: 1
+			path: ../metainfo/lib/handler/clang_handler.php
+
+		-
+			message: "#^Return type \\(void\\) of method rex_metainfo_clang_handler\\:\\:buildFilterCondition\\(\\) should be compatible with return type \\(string\\) of method rex_metainfo_handler\\:\\:buildFilterCondition\\(\\)$#"
+			count: 1
+			path: ../metainfo/lib/handler/clang_handler.php
+
+		-
+			message: "#^Elseif condition is always true\\.$#"
+			count: 1
+			path: ../metainfo/lib/handler/handler.php
+
+		-
+			message: "#^Method rex_metainfo_handler\\:\\:buildFilterCondition\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../metainfo/lib/handler/handler.php
+
+		-
+			message: "#^Method rex_metainfo_handler\\:\\:extendForm\\(\\) has parameter \\$ep with generic class rex_extension_point but does not specify its types\\: T$#"
+			count: 1
+			path: ../metainfo/lib/handler/handler.php
+
+		-
+			message: "#^Method rex_metainfo_handler\\:\\:fetchRequestValues\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../metainfo/lib/handler/handler.php
+
+		-
+			message: "#^Method rex_metainfo_handler\\:\\:handleSave\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../metainfo/lib/handler/handler.php
+
+		-
+			message: "#^Method rex_metainfo_handler\\:\\:handleSave\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../metainfo/lib/handler/handler.php
+
+		-
+			message: "#^Method rex_metainfo_handler\\:\\:renderFormAndSave\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../metainfo/lib/handler/handler.php
+
+		-
+			message: "#^Method rex_metainfo_handler\\:\\:renderMetaFields\\(\\) has parameter \\$epParams with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../metainfo/lib/handler/handler.php
+
+		-
+			message: "#^Method rex_metainfo_media_handler\\:\\:buildFilterCondition\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../metainfo/lib/handler/media_handler.php
+
+		-
+			message: "#^Method rex_metainfo_media_handler\\:\\:extendForm\\(\\) has parameter \\$ep with generic class rex_extension_point but does not specify its types\\: T$#"
+			count: 1
+			path: ../metainfo/lib/handler/media_handler.php
+
+		-
+			message: "#^Method rex_metainfo_media_handler\\:\\:handleSave\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../metainfo/lib/handler/media_handler.php
+
+		-
+			message: "#^Method rex_metainfo_media_handler\\:\\:handleSave\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../metainfo/lib/handler/media_handler.php
+
+		-
+			message: "#^Method rex_metainfo_media_handler\\:\\:isMediaInUse\\(\\) has parameter \\$ep with generic class rex_extension_point but does not specify its types\\: T$#"
+			count: 1
+			path: ../metainfo/lib/handler/media_handler.php
+
+		-
+			message: "#^Method rex_input\\:\\:addAttributes\\(\\) has parameter \\$attributes with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input.php
+
+		-
+			message: "#^Method rex_input\\:\\:getAttribute\\(\\) has parameter \\$default with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input.php
+
+		-
+			message: "#^Method rex_input\\:\\:getAttribute\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input.php
+
+		-
+			message: "#^Method rex_input\\:\\:hasAttribute\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input.php
+
+		-
+			message: "#^Method rex_input\\:\\:setAttribute\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input.php
+
+		-
+			message: "#^Method rex_input\\:\\:setAttribute\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input.php
+
+		-
+			message: "#^Method rex_input\\:\\:setAttributes\\(\\) has parameter \\$attributes with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input.php
+
+		-
+			message: "#^Method rex_input\\:\\:setValue\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input.php
+
+		-
+			message: "#^Property rex_input\\:\\:\\$value has no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input.php
+
+		-
+			message: "#^Method rex_input_date\\:\\:setAttribute\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/date.php
+
+		-
+			message: "#^Method rex_input_date\\:\\:setAttribute\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/date.php
+
+		-
+			message: "#^Method rex_input_date\\:\\:setEndYear\\(\\) has parameter \\$endYear with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/date.php
+
+		-
+			message: "#^Method rex_input_date\\:\\:setStartYear\\(\\) has parameter \\$startYear with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/date.php
+
+		-
+			message: "#^Method rex_input_date\\:\\:setValue\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/date.php
+
+		-
+			message: "#^Property rex_input_date\\:\\:\\$daySelect has no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/date.php
+
+		-
+			message: "#^Property rex_input_date\\:\\:\\$endYear has no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/date.php
+
+		-
+			message: "#^Property rex_input_date\\:\\:\\$monthSelect has no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/date.php
+
+		-
+			message: "#^Property rex_input_date\\:\\:\\$startYear has no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/date.php
+
+		-
+			message: "#^Property rex_input_date\\:\\:\\$yearSelect has no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/date.php
+
+		-
+			message: "#^Method rex_input_datetime\\:\\:getValue\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/datetime.php
+
+		-
+			message: "#^Method rex_input_datetime\\:\\:setAttribute\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/datetime.php
+
+		-
+			message: "#^Method rex_input_datetime\\:\\:setAttribute\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/datetime.php
+
+		-
+			message: "#^Method rex_input_datetime\\:\\:setEndYear\\(\\) has parameter \\$endYear with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/datetime.php
+
+		-
+			message: "#^Method rex_input_datetime\\:\\:setStartYear\\(\\) has parameter \\$startYear with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/datetime.php
+
+		-
+			message: "#^Method rex_input_datetime\\:\\:setValue\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/datetime.php
+
+		-
+			message: "#^Parameter \\#1 \\$arr1 of function array_merge expects array, string given\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/datetime.php
+
+		-
+			message: "#^Parameter \\#2 \\.\\.\\.\\$args of function array_merge expects array, string given\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/datetime.php
+
+		-
+			message: "#^Return type \\(array\\) of method rex_input_datetime\\:\\:getValue\\(\\) should be compatible with return type \\(string\\) of method rex_input\\:\\:getValue\\(\\)$#"
+			count: 1
+			path: ../metainfo/lib/input/datetime.php
+
+		-
+			message: "#^Method rex_input_linkbutton\\:\\:setButtonId\\(\\) has parameter \\$buttonId with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/linkbutton.php
+
+		-
+			message: "#^Method rex_input_linkbutton\\:\\:setCategoryId\\(\\) has parameter \\$categoryId with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/linkbutton.php
+
+		-
+			message: "#^Property rex_input_linkbutton\\:\\:\\$buttonId has no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/linkbutton.php
+
+		-
+			message: "#^Property rex_input_linkbutton\\:\\:\\$categoryId has no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/linkbutton.php
+
+		-
+			message: "#^Method rex_input_linklistbutton\\:\\:setButtonId\\(\\) has parameter \\$buttonId with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/linklistbutton.php
+
+		-
+			message: "#^Method rex_input_linklistbutton\\:\\:setCategoryId\\(\\) has parameter \\$categoryId with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/linklistbutton.php
+
+		-
+			message: "#^Property rex_input_linklistbutton\\:\\:\\$buttonId has no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/linklistbutton.php
+
+		-
+			message: "#^Property rex_input_linklistbutton\\:\\:\\$categoryId has no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/linklistbutton.php
+
+		-
+			message: "#^Method rex_input_mediabutton\\:\\:setButtonId\\(\\) has parameter \\$buttonId with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/mediabutton.php
+
+		-
+			message: "#^Method rex_input_mediabutton\\:\\:setCategoryId\\(\\) has parameter \\$categoryId with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/mediabutton.php
+
+		-
+			message: "#^Method rex_input_mediabutton\\:\\:setPreview\\(\\) has parameter \\$preview with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/mediabutton.php
+
+		-
+			message: "#^Method rex_input_mediabutton\\:\\:setTypes\\(\\) has parameter \\$types with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/mediabutton.php
+
+		-
+			message: "#^Property rex_input_mediabutton\\:\\:\\$args has no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/mediabutton.php
+
+		-
+			message: "#^Property rex_input_mediabutton\\:\\:\\$buttonId has no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/mediabutton.php
+
+		-
+			message: "#^Method rex_input_medialistbutton\\:\\:setButtonId\\(\\) has parameter \\$buttonId with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/medialistbutton.php
+
+		-
+			message: "#^Method rex_input_medialistbutton\\:\\:setCategoryId\\(\\) has parameter \\$categoryId with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/medialistbutton.php
+
+		-
+			message: "#^Method rex_input_medialistbutton\\:\\:setPreview\\(\\) has parameter \\$preview with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/medialistbutton.php
+
+		-
+			message: "#^Method rex_input_medialistbutton\\:\\:setTypes\\(\\) has parameter \\$types with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/medialistbutton.php
+
+		-
+			message: "#^Property rex_input_medialistbutton\\:\\:\\$args has no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/medialistbutton.php
+
+		-
+			message: "#^Property rex_input_medialistbutton\\:\\:\\$buttonId has no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/medialistbutton.php
+
+		-
+			message: "#^Method rex_input_select\\:\\:setAttribute\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/select.php
+
+		-
+			message: "#^Method rex_input_select\\:\\:setAttribute\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/select.php
+
+		-
+			message: "#^Method rex_input_select\\:\\:setValue\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/select.php
+
+		-
+			message: "#^Method rex_input_time\\:\\:setAttribute\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/time.php
+
+		-
+			message: "#^Method rex_input_time\\:\\:setAttribute\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/time.php
+
+		-
+			message: "#^Method rex_input_time\\:\\:setValue\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/time.php
+
+		-
+			message: "#^Property rex_input_time\\:\\:\\$hourSelect has no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/time.php
+
+		-
+			message: "#^Property rex_input_time\\:\\:\\$minuteSelect has no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/input/time.php
+
+		-
+			message: "#^Constructor of class rex_form_restrictons_element has an unused parameter \\$tag\\.$#"
+			count: 1
+			path: ../metainfo/lib/restrictions_element.php
+
+		-
+			message: "#^Method rex_metainfo_table_manager\\:\\:__construct\\(\\) has parameter \\$DBID with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/table_manager.php
+
+		-
+			message: "#^Method rex_metainfo_table_manager\\:\\:__construct\\(\\) has parameter \\$tableName with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/table_manager.php
+
+		-
+			message: "#^Method rex_metainfo_table_manager\\:\\:addColumn\\(\\) has parameter \\$default with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/table_manager.php
+
+		-
+			message: "#^Method rex_metainfo_table_manager\\:\\:addColumn\\(\\) has parameter \\$length with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/table_manager.php
+
+		-
+			message: "#^Method rex_metainfo_table_manager\\:\\:addColumn\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/table_manager.php
+
+		-
+			message: "#^Method rex_metainfo_table_manager\\:\\:addColumn\\(\\) has parameter \\$nullable with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/table_manager.php
+
+		-
+			message: "#^Method rex_metainfo_table_manager\\:\\:addColumn\\(\\) has parameter \\$type with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/table_manager.php
+
+		-
+			message: "#^Method rex_metainfo_table_manager\\:\\:deleteColumn\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/table_manager.php
+
+		-
+			message: "#^Method rex_metainfo_table_manager\\:\\:editColumn\\(\\) has parameter \\$default with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/table_manager.php
+
+		-
+			message: "#^Method rex_metainfo_table_manager\\:\\:editColumn\\(\\) has parameter \\$length with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/table_manager.php
+
+		-
+			message: "#^Method rex_metainfo_table_manager\\:\\:editColumn\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/table_manager.php
+
+		-
+			message: "#^Method rex_metainfo_table_manager\\:\\:editColumn\\(\\) has parameter \\$nullable with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/table_manager.php
+
+		-
+			message: "#^Method rex_metainfo_table_manager\\:\\:editColumn\\(\\) has parameter \\$oldname with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/table_manager.php
+
+		-
+			message: "#^Method rex_metainfo_table_manager\\:\\:editColumn\\(\\) has parameter \\$type with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/table_manager.php
+
+		-
+			message: "#^Method rex_metainfo_table_manager\\:\\:hasColumn\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/table_manager.php
+
+		-
+			message: "#^Property rex_metainfo_table_manager\\:\\:\\$tableName has no type specified\\.$#"
+			count: 1
+			path: ../metainfo/lib/table_manager.php
