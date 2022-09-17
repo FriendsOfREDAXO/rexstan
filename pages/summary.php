@@ -2,6 +2,10 @@
 
 $result = RexStan::analyzeBaseline();
 
+if ($result === null) {
+    throw new \Exception('Could not analyze baseline');
+}
+
 echo '<pre>';
     echo 'Errors Insgesamt: '. $result['Overall-Errors'] ."\n";
     echo 'Cognitive-Complexity Insgesamt: '. $result['Classes-Cognitive-Complexity']."\n";
