@@ -13,3 +13,5 @@ foreach($baselineResults as $baselineResult) {
     echo 'Anonymous-Variables Insgesamt: ' .$result['Anonymous-Variables']."\n";
 }
 echo '</pre>';
+
+echo '<p>Die Zusammenfassung ist abhängig von den in den Einstellungen definierten PHPStan-Extensions</p>';
