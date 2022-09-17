@@ -2,6 +2,8 @@
 
 includes:
     - vendor/spaze/phpstan-disallowed-calls/extension.neon
+    # required for dead-code.neon and code-complexity.neon
+    - vendor/symplify/phpstan-rules/config/services/services.neon
 
 parameters:
     level: 5
