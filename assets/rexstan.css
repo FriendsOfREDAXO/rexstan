@@ -25,3 +25,9 @@
 .rexstan .panel-heading.collapsed .rexstan-closed {
     display: none;
 }
+
+.rexstan .panel-heading {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
