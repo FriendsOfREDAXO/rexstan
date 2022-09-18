@@ -1,6 +1,8 @@
 <?php
 
 $result = RexStan::analyzeBaseline();
+$settingsUrl = rex_url::backendPage('rexstan/settings');
+
 
 if ($result === null) {
     throw new \Exception('Could not analyze baseline');
@@ -15,4 +17,4 @@ echo '<pre>';
     echo 'Anonymous-Variables Insgesamt: ' .$result['Anonymous-Variables']."\n";
 echo '</pre>';
 
-echo '<p>Die Zusammenfassung ist abhängig von den in den Einstellungen definierten PHPStan-Extensions</p>';
+echo '<p>Die Zusammenfassung ist abhängig von den in den <a href="'. $settingsUrl .'">Einstellungen</a> definierten PHPStan-Extensions</p>';
