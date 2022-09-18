@@ -17,10 +17,10 @@ final class RexStanSettings
         'Strict-Mode' => 'vendor/phpstan/phpstan-strict-rules/rules.neon',
         'Deprecation Warnings' => 'vendor/phpstan/phpstan-deprecation-rules/rules.neon',
         'PHPUnit' => 'vendor/phpstan/phpstan-phpunit/rules.neon',
-        'phpstan-dba' => 'lib/phpstan-dba.neon',
-        'cognitive complexity' => 'lib/cognitive-complexity.neon',
-        'code complexity' => 'lib/code-complexity.neon',
-        'dead code' => 'lib/dead-code.neon',
+        'phpstan-dba' => 'config/phpstan-dba.neon',
+        'cognitive complexity' => 'config/cognitive-complexity.neon',
+        'code complexity' => 'config/code-complexity.neon',
+        'dead code' => 'config/dead-code.neon',
     ];
 
     /**

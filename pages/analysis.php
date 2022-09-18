@@ -2,17 +2,23 @@
 
 /** @var rex_addon $this */
 
-// Run phpstan analysis
-
 $phpstanResult = RexStan::runFromWeb();
+$settingsUrl = rex_url::backendPage('rexstan/settings');
 
-// present results
 
 if (is_string($phpstanResult)) {
-    echo rex_view::error(
-        '<h4>PHPSTAN: Fehler</h4>'
-        .nl2br($phpstanResult)
-    );
+    // we moved settings files into config/.
+    if (stripos($phpstanResult, "neon' is missing or is not readable.") !== false) {
+        echo rex_view::warning(
+            "Das Einstellungsformat hat sich geändert. Bitte die <a href='". $settingsUrl ."'>Einstellungen öffnen</a> und erneut abspeichern. <br/><br/>".nl2br($phpstanResult)
+        );
+    } else {
+        echo rex_view::error(
+            '<h4>PHPSTAN: Fehler</h4>'
+            .nl2br($phpstanResult)
+        );
+    }
+
 
     echo rex_view::info('Die Web UI funktionert nicht auf allen Systemen, siehe README.');
 
