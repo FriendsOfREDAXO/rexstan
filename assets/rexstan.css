@@ -1,3 +1,16 @@
+/* Interims-Fix für https://github.com/redaxo/redaxo/issues/5316 */
+.panel-heading .form-control-clear {
+    color: black
+}
+body.rex-theme-dark .panel-heading .form-control-clear {
+    color: white;
+}
+@media (prefers-color-scheme: dark) {
+    body:not(.rex-theme-light) .panel-heading .form-control-clear {
+        color: white;
+    }
+}
+
 .rexstan-achievement {
     font-size: 50px;
     height: 100px;
@@ -30,4 +43,26 @@
   position: sticky;
   top: 0;
   z-index: 5;
+}
+
+.rexstan-sticky-headline {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.rexstan-toolbar {
+    display: inline-flex;
+}
+
+.rexstan-search-applied > :not(.rexstan-search-hit) {
+    display: none;
+}
+
+.rexstan-badge-info {
+    background-color: #4b9ad9 !important; /* $color-b */
+}
+
+.rexstan-badge-success {
+    background-color: #5bb585 !important; /* $color-d */
 }
