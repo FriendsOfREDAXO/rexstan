@@ -5,10 +5,9 @@
 $phpstanResult = RexStan::runFromWeb();
 $settingsUrl = rex_url::backendPage('rexstan/settings');
 
-
 if (is_string($phpstanResult)) {
     // we moved settings files into config/.
-    if (stripos($phpstanResult, "neon' is missing or is not readable.") !== false) {
+    if (false !== stripos($phpstanResult, "neon' is missing or is not readable.")) {
         echo rex_view::warning(
             "Das Einstellungsformat hat sich geändert. Bitte die <a href='". $settingsUrl ."'>Einstellungen öffnen</a> und erneut abspeichern. <br/><br/>".nl2br($phpstanResult)
         );
@@ -18,7 +17,6 @@ if (is_string($phpstanResult)) {
             .nl2br($phpstanResult)
         );
     }
-
 
     echo rex_view::info('Die Web UI funktionert nicht auf allen Systemen, siehe README.');
 
@@ -111,31 +109,94 @@ if (
         return;
     }
 
-    echo rex_view::warning('Level-<strong>'.RexStanUserConfig::getLevel().'</strong>-Analyse: <strong>'. $totalErrors .'</strong> Probleme gefunden in <strong>'. count($phpstanResult['files']) .'</strong> Dateien');
+    $baseId = 'rexstan-' . (string) random_int(1000000, 9999999);
+
+    // für die Kopfzeile:
+    // HTML für das Suchfeld erzeugen
+    $fragment = new rex_fragment();
+    $fragment->setVar('id', $baseId.'-search');
+    $searchWidget = $fragment->parse('core/form/search.php');
+
+    // Für die Kofzeile:
+    // Button-Group zum Ein-/Ausblenden aller Dateien.
+    $fragment = new rex_fragment();
+    $fragment->setVar('size', 'xs', false); // Trick: nötige zusätzliche Klasse über size einschleusen
+    $fragment->setVar('buttons', [
+        [
+            'icon' => 'view',
+            'attributes' => [
+                'class' => ['btn-default'],
+                'onclick' => 'javascript:Rexstan.showAll(\'section.rexstan div.collapse\')',
+                'title' => 'Alle einblenden',
+            ],
+        ],
+        [
+            'icon' => 'hide',
+            'attributes' => [
+                'class' => ['btn-default'],
+                'onclick' => 'javascript:Rexstan.hideAll(\'section.rexstan div.collapse\')',
+                'title' => 'Alle ausblenden',
+            ],
+        ],
+    ], false);
+    $collapseButtons = $fragment->parse('core/buttons/button_group.php');
+
+    // Kopfzeile:
+    // als leere Section (nur Header), weil über das Section-Fragment elegant Bedienelemente
+    // (hier: Suchfeld, collapse-Buttons) in einen Titel eingebaut werden können
+    $section = new rex_fragment();
+    $section->setVar('sectionAttributes', [
+        'class' => 'rexstan-sticky-headline',
+        'id' => $baseId,
+    ]);
+    $section->setVar('class', 'warning');
+    $section->setVar('options', '<div class="rexstan-toolbar">'.$searchWidget.'&nbsp;'.$collapseButtons.'</div>', false);
+    $section->setVar('title', 'Level-<strong>'.RexStanUserConfig::getLevel().'</strong>-Analyse: <strong>'. $totalErrors .'</strong> Probleme gefunden in <strong>'. count($phpstanResult['files']) .'</strong> Dateien', false);
+    echo $section->parse('core/page/section.php');
+
+    // für die Suchfilter und die zugehörigen Zähler werden die Listen mit den Meldungen pro Datei
+    // ('<ul class="list-group">') mit einer ID versehen; die Liste der IDs ($fileSectionId) wird
+    // später im JS für die Such/Filter-Zugriffe benötigt
 
     $basePath = rex_path::src('addons/');
+    $i = 0;
+    $fileSectionId = [];
+    $editor = rex_editor::factory();
+
     $section = new rex_fragment();
     $section->setVar('sectionAttributes', ['class' => 'rexstan'], false);
 
     foreach ($phpstanResult['files'] as $file => $fileResult) {
+        $blockId = $baseId . '-' . (string) $i++;
+        $fileSectionId[] = $blockId;
         $shortFile = str_replace($basePath, '', $file);
-        $title = '<i class="rexstan-open fa fa-folder-o"></i>'.
-                 '<i class="rexstan-closed fa fa-folder-open-o"></i> '.
-                 '<span class="text-muted">'.rex_escape(dirname($shortFile)).DIRECTORY_SEPARATOR.'</span>'
-                 .rex_escape(basename($shortFile)).
-                 ' <span class="badge">'.$fileResult['errors'].'</span>';
 
+        $section->setVar('sectionAttributes', [
+            'class' => 'rexstan',
+            'title' => strtolower($shortFile),
+        ], false);
+
+        $title = '<i class="rexstan-open fa fa-folder-o"></i>'.
+            '<i class="rexstan-closed fa fa-folder-open"></i> '.
+            '<span class="text-muted">'.rex_escape(dirname($shortFile)).DIRECTORY_SEPARATOR.'</span>'
+            .rex_escape(basename($shortFile)).
+            ' <span class="badge">'.$fileResult['errors'].'</span>'.
+            ' <span id="'.$blockId.'-badge" class="badge rexstan-badge-info"></span>';
         $section->setVar('title', $title, false);
+
         $section->setVar('collapse', true);
         // $section->setVar('collapsed', 15 < $totalErrors && 1 < count($phpstanResult['files']));
-        $content = '<ul class="list-group">';
+
+        $content = '<ul id="'.$blockId.'" class="list-group">';
         foreach ($fileResult['messages'] as $message) {
             $content .= '<li class="list-group-item rexstan-message">';
             $content .= '<span class="rexstan-linenumber">' .sprintf('%5d', $message['line']).':</span>';
             $error = rex_escape($message['message']);
-            $url = rex_editor::factory()->getUrl($file, $message['line']);
+            $url = $editor->getUrl($file, $message['line']);
             if ($url) {
-                $error = '<a href="'. $url .'">'. rex_escape($message['message']) .'</a>';
+                $error = '<a class="rexstan-search-item" href="'. $url .'">'. rex_escape($message['message']) .'</a>';
+            } else {
+                $error = '<span class="rexstan-search-item">'. rex_escape($message['message']) .'</span>';
             }
             $content .= $error;
             $content .= '</li>';
@@ -145,4 +206,9 @@ if (
         $section->setVar('content', $content, false);
         echo $section->parse('core/page/section.php');
     }
+
+    echo '<script>',
+    'Rexstan.stickyHeader(\''.$baseId.'\');',
+    'Rexstan.filterResults(\''.$baseId.'-search\', [\''.implode('\',\'', $fileSectionId).'\']);',
+    '</script>';
 }
