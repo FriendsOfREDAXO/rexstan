@@ -119,6 +119,7 @@ if (
 
     foreach ($phpstanResult['files'] as $file => $fileResult) {
         $shortFile = str_replace($basePath, '', $file);
+        $linkFile = preg_replace('/\s\(in context.*?$/','',$file);
         $title = '<i class="rexstan-open fa fa-folder-o"></i>'.
                  '<i class="rexstan-closed fa fa-folder-open-o"></i> '.
                  '<span class="text-muted">'.rex_escape(dirname($shortFile)).DIRECTORY_SEPARATOR.'</span>'
@@ -133,7 +134,7 @@ if (
             $content .= '<li class="list-group-item rexstan-message">';
             $content .= '<span class="rexstan-linenumber">' .sprintf('%5d', $message['line']).':</span>';
             $error = rex_escape($message['message']);
-            $url = rex_editor::factory()->getUrl($file, $message['line']);
+            $url = rex_editor::factory()->getUrl($linkFile, $message['line']);
             if ($url) {
                 $error = '<a href="'. $url .'">'. rex_escape($message['message']) .'</a>';
             }
