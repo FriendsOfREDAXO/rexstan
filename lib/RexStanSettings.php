@@ -13,6 +13,7 @@ final class RexStanSettings
      * @var array<string, string>
      */
     private static $phpstanExtensions = [
+        'REDAXO SuperGlobals' => 'config/rex-superglobals.neon',
         'Bleeding-Edge' => 'vendor/phpstan/phpstan/conf/bleedingEdge.neon',
         'Strict-Mode' => 'vendor/phpstan/phpstan-strict-rules/rules.neon',
         'Deprecation Warnings' => 'vendor/phpstan/phpstan-deprecation-rules/rules.neon',
