@@ -12,7 +12,7 @@ $cliPhpVersion = RexStan::execCmd('php -r "echo PHP_VERSION_ID;"', $lastError);
 if (is_numeric($cliPhpVersion)) {
     if ($cliPhpVersion < 70300) {
         $cliPhpPath = RexStan::execCmd('which php', $lastError);
-        $addon->setProperty('installmsg', 'PHP CLI version '.$cliPhpVersion.' on path "'. $cliPhpPath .'" is too old. Please upgrade to PHP 7.3 or higher or make sure the "php" command is symlinked to the correct executable.');
+        $addon->setProperty('installmsg', 'PHP CLI version '.$cliPhpVersion.' on path "'. $cliPhpPath .'" is too old. Please upgrade to PHP 7.3+.');
         return;
     }
 } else {
