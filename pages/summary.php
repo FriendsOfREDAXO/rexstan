@@ -12,32 +12,32 @@ if (null === $result) {
     <thead>
         <tr class="info">
             <th>Fehlerklasse</th>
-            <th>Anzahl</th>
+            <th>Σ Anzahl</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>Errors Insgesamt:</td>
+            <td>Errors</td>
             <td><?= $result['Overall-Errors'] ?></td>
         </tr>
         <tr>
-            <td>Cognitive-Complexity Insgesamt:</td>
+            <td>Cognitive-Complexity</td>
             <td><?= $result['Classes-Cognitive-Complexity'] ?></td>
         </tr>
         <tr>
-            <td>Deprecations Insgesamt:</td>
+            <td>Deprecations</td>
             <td><?= $result['Deprecations'] ?></td>
         </tr>
         <tr>
-            <td>Invalide PHPDocs Insgesamt:</td>
+            <td>Invalide PHPDocs</td>
             <td><?= $result['Invalid-Phpdocs'] ?></td>
         </tr>
         <tr>
-            <td>Unknown-Types Insgesamt:</td>
+            <td>Unknown-Types</td>
             <td><?= $result['Unknown-Types'] ?></td>
         </tr>
         <tr>
-            <td>Anonymous-Variables Insgesamt:</td>
+            <td>Anonymous-Variables</td>
             <td><?= $result['Anonymous-Variables'] ?></td>
         </tr>
     </tbody>
