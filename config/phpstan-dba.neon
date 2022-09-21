@@ -46,3 +46,24 @@ services:
         class: redaxo\phpstan\RexSqlGetValueRule
         tags:
             - phpstan.rules.rule
+
+    -
+        class: redaxo\phpstan\RexMediaGetValueDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+    -
+        class: redaxo\phpstan\RexArticleGetValueDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+    -
+        class: redaxo\phpstan\RexCategoryGetValueDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+    -
+        class: redaxo\phpstan\RexArticleSliceGetValueDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+    -
+        class: redaxo\phpstan\RexUserGetValueDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
