@@ -78,6 +78,7 @@ return array(
     'UnhandledMatchError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
     'ValueError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
     'redaxo\\phpstan\\RexArticleGetValueDynamicReturnTypeExtension' => $baseDir . '/lib/RexArticleGetValueDynamicReturnTypeExtension.php',
+    'redaxo\\phpstan\\RexCategoryGetValueDynamicReturnTypeExtension' => $baseDir . '/lib/RexCategoryGetValueDynamicReturnTypeExtension.php',
     'redaxo\\phpstan\\RexClassDynamicReturnTypeExtension' => $baseDir . '/lib/RexClassDynamicReturnTypeExtension.php',
     'redaxo\\phpstan\\RexFunctionsDynamicReturnTypeExtension' => $baseDir . '/lib/RexFunctionsDynamicReturnTypeExtension.php',
     'redaxo\\phpstan\\RexMediaGetValueDynamicReturnTypeExtension' => $baseDir . '/lib/RexMediaGetValueDynamicReturnTypeExtension.php',
