@@ -251,6 +251,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
         'redaxo\\phpstan\\RexClassDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/RexClassDynamicReturnTypeExtension.php',
         'redaxo\\phpstan\\RexFunctionsDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/RexFunctionsDynamicReturnTypeExtension.php',
+        'redaxo\\phpstan\\RexMediaGetValueDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/RexMediaGetValueDynamicReturnTypeExtension.php',
         'redaxo\\phpstan\\RexSqlDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/RexSqlDynamicReturnTypeExtension.php',
         'redaxo\\phpstan\\RexSqlGetArrayDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/RexSqlGetArrayDynamicReturnTypeExtension.php',
         'redaxo\\phpstan\\RexSqlGetValueDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/RexSqlGetValueDynamicReturnTypeExtension.php',

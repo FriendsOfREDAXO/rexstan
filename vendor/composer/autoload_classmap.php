@@ -79,6 +79,7 @@ return array(
     'ValueError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
     'redaxo\\phpstan\\RexClassDynamicReturnTypeExtension' => $baseDir . '/lib/RexClassDynamicReturnTypeExtension.php',
     'redaxo\\phpstan\\RexFunctionsDynamicReturnTypeExtension' => $baseDir . '/lib/RexFunctionsDynamicReturnTypeExtension.php',
+    'redaxo\\phpstan\\RexMediaGetValueDynamicReturnTypeExtension' => $baseDir . '/lib/RexMediaGetValueDynamicReturnTypeExtension.php',
     'redaxo\\phpstan\\RexSqlDynamicReturnTypeExtension' => $baseDir . '/lib/RexSqlDynamicReturnTypeExtension.php',
     'redaxo\\phpstan\\RexSqlGetArrayDynamicReturnTypeExtension' => $baseDir . '/lib/RexSqlGetArrayDynamicReturnTypeExtension.php',
     'redaxo\\phpstan\\RexSqlGetValueDynamicReturnTypeExtension' => $baseDir . '/lib/RexSqlGetValueDynamicReturnTypeExtension.php',
