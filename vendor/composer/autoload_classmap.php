@@ -90,6 +90,7 @@ return array(
     'redaxo\\phpstan\\RexSqlReflection' => $baseDir . '/lib/RexSqlReflection.php',
     'redaxo\\phpstan\\RexSqlSetQueryTypeSpecifyingExtension' => $baseDir . '/lib/RexSqlSetQueryTypeSpecifyingExtension.php',
     'redaxo\\phpstan\\RexStanSettings' => $baseDir . '/lib/RexStanSettings.php',
+    'redaxo\\phpstan\\RexUserGetValueDynamicReturnTypeExtension' => $baseDir . '/lib/RexUserGetValueDynamicReturnTypeExtension.php',
     'rexstan_command' => $baseDir . '/lib/command.php',
     'staabm\\PHPStanBaselineAnalysis\\AnalyzeApplication' => $vendorDir . '/staabm/phpstan-baseline-analysis/lib/AnalyzeApplication.php',
     'staabm\\PHPStanBaselineAnalysis\\AnalyzerResult' => $vendorDir . '/staabm/phpstan-baseline-analysis/lib/AnalyzerResult.php',
