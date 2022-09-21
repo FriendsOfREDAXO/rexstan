@@ -10,23 +10,4 @@ $fragment->setVar('title', 'Settings', false);
 $fragment->setVar('body', $form->get(), false);
 echo $fragment->parse('core/page/section.php');
 
-$form_name = $form->getName();
-if (rex_post($form_name . '_save')) {
-    $postData = rex_post($form_name);
-    $level = (int) $postData['level'];
-    $addonPaths = $postData['addons'] ?? [];
-    $extensions = $postData['extensions'] ?? [];
-    $phpversion = (int) $postData['phpversion'];
-
-    $paths = [];
-    foreach ($addonPaths as $addonPath) {
-        $paths[] = $addonPath;
-    }
-
-    $includes = [];
-    foreach ($extensions as $extensionPath) {
-        $includes[] = $extensionPath;
-    }
-
-    RexStanUserConfig::save($level, $paths, $includes, $phpversion);
-}
+redaxo\phpstan\RexStanSettings::save($form->getName());
