@@ -59,4 +59,8 @@ services:
         class: redaxo\phpstan\RexCategoryGetValueDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
+    -
+        class: redaxo\phpstan\RexArticleSliceGetValueDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
 
