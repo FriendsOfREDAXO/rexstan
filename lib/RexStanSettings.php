@@ -6,6 +6,7 @@ use rex_addon;
 use rex_config;
 use rex_config_form;
 use rex_path;
+use RexStanUserConfig;
 
 final class RexStanSettings
 {
@@ -114,5 +115,28 @@ final class RexStanSettings
         $select->addOptions($phpVersions);
 
         return $form;
+    }
+
+    public static function save(string $form_name): void
+    {
+        if (rex_post($form_name . '_save')) {
+            $postData = rex_post($form_name);
+            $level = (int) $postData['level'];
+            $addonPaths = $postData['addons'] ?? [];
+            $extensions = $postData['extensions'] ?? [];
+            $phpversion = (int) $postData['phpversion'];
+
+            $paths = [];
+            foreach ($addonPaths as $addonPath) {
+                $paths[] = $addonPath;
+            }
+
+            $includes = [];
+            foreach ($extensions as $extensionPath) {
+                $includes[] = $extensionPath;
+            }
+
+            RexStanUserConfig::save($level, $paths, $includes, $phpversion);
+        }
     }
 }
