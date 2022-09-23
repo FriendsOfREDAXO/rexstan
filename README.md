@@ -44,6 +44,19 @@ This might be usefull, to e.g. create reports, so you can track reported problem
 
 If you use rexstan with [docker-redaxo](https://github.com/FriendsOfREDAXO/docker-redaxo) you might need to set the /tmp folder writable. Open the docker console and run: `chmod 777 -R /tmp && chmod o+t -R /tmp`
 
+## PHP Memory limits 
+
+If you encounter problems with memory consumption, the PHP memory limit should be increased. 
+
+Set the PHP Memory limit in php.ini to: `memory_limit = 256M` or more
+
+**For REDAXO Docker Image**
+
+Open the Docker console and set the new memory limit with : 
+`printf 'memory_limit = 256M\n' >> /usr/local/etc/php/conf.d/uploads.ini \`
+
+Restart the container
+
 ## 💌 Support rexstan
 
 [Consider supporting the project](https://github.com/sponsors/staabm), so we can make this tool even better even faster for everyone.
