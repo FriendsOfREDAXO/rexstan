@@ -46,7 +46,7 @@ If you use rexstan with [docker-redaxo](https://github.com/FriendsOfREDAXO/docke
 
 It may be that there is not enough memory available. Therefore, the PHP memory limit should be increased. Open the Docker console and set the new memory limit with : 
 
-`printf 'memory_limit = 512M\n' >> /usr/local/etc/php/conf.d/uploads.ini \
+`printf 'memory_limit = 512M\n' >> /usr/local/etc/php/conf.d/uploads.ini \`
 
 ## 💌 Support rexstan
 
