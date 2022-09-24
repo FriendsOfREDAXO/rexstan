@@ -43,6 +43,10 @@ services:
             - phpstan.broker.dynamicMethodReturnTypeExtension
 
     -
+        class: redaxo\phpstan\RexGetValueRule
+        tags:
+            - phpstan.rules.rule
+    -
         class: redaxo\phpstan\RexSqlGetValueRule
         tags:
             - phpstan.rules.rule

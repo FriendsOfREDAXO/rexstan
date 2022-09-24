@@ -83,6 +83,7 @@ return array(
     'redaxo\\phpstan\\RexClassDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexClassDynamicReturnTypeExtension.php',
     'redaxo\\phpstan\\RexFunctionsDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexFunctionsDynamicReturnTypeExtension.php',
     'redaxo\\phpstan\\RexGetValueReflection' => $baseDir . '/lib/reflection/RexGetValueReflection.php',
+    'redaxo\\phpstan\\RexGetValueRule' => $baseDir . '/lib/rule/RexGetValueRule.php',
     'redaxo\\phpstan\\RexMediaGetValueDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexMediaGetValueDynamicReturnTypeExtension.php',
     'redaxo\\phpstan\\RexSqlDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexSqlDynamicReturnTypeExtension.php',
     'redaxo\\phpstan\\RexSqlGetArrayDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexSqlGetArrayDynamicReturnTypeExtension.php',
