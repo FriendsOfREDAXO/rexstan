@@ -9,6 +9,7 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use PHPStan\Type\TypeUtils;
 use PHPStan\Type\VerbosityLevel;
 use rex_article;
 use rex_article_slice;
@@ -64,6 +65,11 @@ final class RexGetValueRule implements Rule
         }
 
         $nameType = $scope->getType($args[0]->value);
+        $names = TypeUtils::getConstantStrings($nameType);
+        if (0 === count($names)) {
+            return [];
+        }
+
         $valueReflection = new RexGetValueReflection();
         if (null !== $valueReflection->getValueType($nameType, $methodReflection->getDeclaringClass()->getName())) {
             return [];
