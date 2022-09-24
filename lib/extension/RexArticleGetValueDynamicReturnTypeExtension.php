@@ -40,16 +40,7 @@ final class RexArticleGetValueDynamicReturnTypeExtension implements DynamicMetho
         }
 
         $nameType = $scope->getType($args[0]->value);
-        if (!$nameType instanceof ConstantStringType) {
-            return null;
-        }
-
-        $queryReflection = new QueryReflection();
-        $resultType = $queryReflection->getResultType('SELECT * FROM rex_article', QueryReflector::FETCH_TYPE_ASSOC);
-        if ($resultType instanceof ConstantArrayType && $resultType->hasOffsetValueType($nameType)->yes()) {
-            return $resultType->getOffsetValueType($nameType);
-        }
-
-        return null;
+        $valueReflection = new RexGetValueReflection();
+        return $valueReflection->getValueType($nameType, $this->getClass());
     }
 }
