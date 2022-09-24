@@ -16,7 +16,7 @@ if (is_numeric($cliPhpVersion)) {
         } else {
             $cliPhpPath = RexStan::execCmd('which php', $lastError);
         }
-        
+
         $addon->setProperty('installmsg', 'PHP CLI version '.$cliPhpVersion.' on path "'. $cliPhpPath .'" is too old. Please upgrade to PHP 7.3+.');
         return;
     }

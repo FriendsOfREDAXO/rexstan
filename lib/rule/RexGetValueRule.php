@@ -9,8 +9,12 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\VerbosityLevel;
+use rex_article;
+use rex_article_slice;
+use rex_category;
+use rex_media;
+use rex_user;
 use function count;
 use function in_array;
 
@@ -23,11 +27,11 @@ final class RexGetValueRule implements Rule
      * @var array<class-string>
      */
     private $classes = [
-        \rex_user::class,
-        \rex_article_slice::class,
-        \rex_article::class,
-        \rex_category::class,
-        \rex_media::class
+        rex_user::class,
+        rex_article_slice::class,
+        rex_article::class,
+        rex_category::class,
+        rex_media::class,
     ];
 
     public function getNodeType(): string
@@ -61,7 +65,7 @@ final class RexGetValueRule implements Rule
 
         $nameType = $scope->getType($args[0]->value);
         $valueReflection = new RexGetValueReflection();
-        if ($valueReflection->getValueType($nameType, $methodReflection->getDeclaringClass()->getName()) !== null) {
+        if (null !== $valueReflection->getValueType($nameType, $methodReflection->getDeclaringClass()->getName())) {
             return [];
         }
 

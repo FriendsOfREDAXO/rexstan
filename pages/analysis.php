@@ -5,10 +5,9 @@
 $phpstanResult = RexStan::runFromWeb();
 $settingsUrl = rex_url::backendPage('rexstan/settings');
 
-
 if (is_string($phpstanResult)) {
     // we moved settings files into config/.
-    if (stripos($phpstanResult, "neon' is missing or is not readable.") !== false) {
+    if (false !== stripos($phpstanResult, "neon' is missing or is not readable.")) {
         echo rex_view::warning(
             "Das Einstellungsformat hat sich geändert. Bitte die <a href='". $settingsUrl ."'>Einstellungen öffnen</a> und erneut abspeichern. <br/><br/>".nl2br($phpstanResult)
         );
@@ -18,7 +17,6 @@ if (is_string($phpstanResult)) {
             .nl2br($phpstanResult)
         );
     }
-
 
     echo rex_view::info('Die Web UI funktionert nicht auf allen Systemen, siehe README.');
 
@@ -119,7 +117,7 @@ if (
 
     foreach ($phpstanResult['files'] as $file => $fileResult) {
         $shortFile = str_replace($basePath, '', $file);
-        $linkFile = preg_replace('/\s\(in context.*?$/','',$file);
+        $linkFile = preg_replace('/\s\(in context.*?$/', '', $file);
         $title = '<i class="rexstan-open fa fa-folder-o"></i>'.
                  '<i class="rexstan-closed fa fa-folder-open-o"></i> '.
                  '<span class="text-muted">'.rex_escape(dirname($shortFile)).DIRECTORY_SEPARATOR.'</span>'
