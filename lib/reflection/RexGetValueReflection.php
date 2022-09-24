@@ -7,6 +7,7 @@ namespace redaxo\phpstan;
 use PHPStan\ShouldNotHappenException;
 use PHPStan\Type\Constant\ConstantArrayType;
 use PHPStan\Type\Type;
+use PHPStan\Type\TypeCombinator;
 use PHPStan\Type\TypeUtils;
 use staabm\PHPStanDba\QueryReflection\QueryReflection;
 use staabm\PHPStanDba\QueryReflection\QueryReflector;
@@ -63,6 +64,6 @@ final class RexGetValueReflection {
             return $valueTypes[0];
         }
 
-        return $valueTypes;
+        return TypeCombinator::union($valueTypes);
     }
 }
