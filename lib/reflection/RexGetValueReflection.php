@@ -64,6 +64,6 @@ final class RexGetValueReflection {
             return $valueTypes[0];
         }
 
-        return TypeCombinator::union($valueTypes);
+        return TypeCombinator::union(...$valueTypes);
     }
 }
