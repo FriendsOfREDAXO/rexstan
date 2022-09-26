@@ -6,7 +6,7 @@
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-strict-rules": "^1.4",
         "phpstan/phpstan-phpunit": "^1.1",
-        "staabm/phpstan-dba": "^0.2.40",
+        "staabm/phpstan-dba": "^0.2.43",
         "spaze/phpstan-disallowed-calls": "^2.5",
         "symplify/phpstan-rules": "^11.1",
         "staabm/phpstan-baseline-analysis": "^0.8.2"
