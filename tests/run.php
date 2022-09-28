@@ -26,7 +26,7 @@ if ($output != $expected) {
     file_put_contents($exp, $expected);
 
     try {
-        passthru('git diff --color '.$out.' '.$exp);
+        passthru('git diff --color '.$exp.' '.$out);
     } finally {
         @unlink($out);
         @unlink($exp);
