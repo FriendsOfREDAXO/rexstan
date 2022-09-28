@@ -53,7 +53,15 @@ final class RexStan
         $dataDir = $addon->getDataPath();
 
         self::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline', $lastError);
+        if ($lastError !== '') {
+            throw new \Exception('Unable to generate baseline:'. $lastError);
+        }
+
         $output = self::execCmd('cd '.$dataDir.' && '. $analyzeBinary .' *phpstan-baseline.neon --json', $lastError);
+        if ($lastError !== '') {
+            throw new \Exception('Unable to analyze baseline: '.$lastError);
+        }
+
         // returns a json array
         if ('[' === $output[0]) {
             // return the analysis result as an array
