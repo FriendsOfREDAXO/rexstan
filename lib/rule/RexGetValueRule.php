@@ -9,7 +9,9 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use PHPStan\Type\ObjectType;
 use PHPStan\Type\TypeUtils;
+use PHPStan\Type\TypeWithClassName;
 use PHPStan\Type\VerbosityLevel;
 use rex_article;
 use rex_article_slice;
@@ -60,7 +62,12 @@ final class RexGetValueRule implements Rule
             return [];
         }
 
-        if (!in_array($methodReflection->getDeclaringClass()->getName(), $this->classes, true)) {
+        $callerType = $scope->getType($methodCall->var);
+        if (!$callerType instanceof TypeWithClassName) {
+            return [];
+        }
+
+        if (!in_array($callerType->getClassname(), $this->classes, true)) {
             return [];
         }
 
@@ -71,7 +78,7 @@ final class RexGetValueRule implements Rule
         }
 
         $valueReflection = new RexGetValueReflection();
-        if (null !== $valueReflection->getValueType($nameType, $methodReflection->getDeclaringClass()->getName())) {
+        if (null !== $valueReflection->getValueType($nameType, $callerType->getClassname())) {
             return [];
         }
 
