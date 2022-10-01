@@ -7,6 +7,12 @@ Analyzes PHPStan baseline files and creates aggregated error trend-reports.
 
 You need at least one of the supported PHPStan RuleSets/Rules configured in your project, to get meaningful results.
 
+## Installation
+
+```
+composer require staabm/phpstan-baseline-analysis
+```
+
 ## Supported PHPStan RuleSets
 - https://github.com/phpstan/phpstan-deprecation-rules
 
@@ -32,6 +38,25 @@ Analyzing app/portal/phpstan-baseline.neon
   Anonymous-Variables: 4
 ```
 
+## example graph analysis
+
+```
+$ git clone ...
+
+$ phpstan-baseline-analyze *phpstan-baseline.neon --json > now.json
+
+$ git checkout `git rev-list -n 1 --before="1 week ago" HEAD`
+$ phpstan-baseline-analyze *phpstan-baseline.neon --json > 1-week-ago.json
+
+$ git checkout `git rev-list -n 1 --before="2 week ago" HEAD`
+$ phpstan-baseline-analyze *phpstan-baseline.neon --json > 2-weeks-ago.json
+
+$ php phpstan-baseline-graph '*.json' > result.html
+```
+
+![PHPStan baseline analysis graph](https://user-images.githubusercontent.com/120441/193406129-72f6d56a-a8bb-4d45-95ec-ad68b9747264.png)
+
+
 ## example trend analysis
 
 the following example shows the evolution of errors in your phpstan baselines.
@@ -54,6 +79,77 @@ Analyzing Trend for app/portal/phpstan-baseline.neon
   Invalid-Phpdocs: 3 -> 1 => good
   Unknown-Types: 5 -> 15 => worse
   Anonymous-Variables: 4 -> 3 => good
+```
+
+## Usage example in a scheduled GitHub Action with Mattermost notification
+
+Copy the following workflow into your repository. Make sure to adjust as needed:
+- adjust the cron schedule pattern
+- actions/checkout might require a token - e.g. for private repos
+- adjust the comparison period, as you see fit
+- adjust the notification to your needs - e.g. use Slack, Discord, E-Mail,..
+
+```
+name: Trends Analyse
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 8 * * 4'
+
+jobs:
+
+  behat:
+    name: Trends
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - run: "composer global require staabm/phpstan-baseline-analysis"
+      - run: echo "$(composer global config bin-dir --absolute --quiet)" >> $GITHUB_PATH
+
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 50 # fetch the last X commits.
+
+      - run: "phpstan-baseline-analyze *baseline.neon --json > ../now.json"
+
+      - run: git checkout `git rev-list -n 1 --before="1 week ago" HEAD`
+
+      - run: "phpstan-baseline-analyze *baseline.neon --json > ../reference.json"
+
+      - name: analyze trend
+        shell: php {0}
+        run: |
+          <?php
+          exec('phpstan-baseline-trend ../reference.json ../now.json > ../trend.txt', $output, $exitCode);
+          $project = '${{ github.repository }}';
+
+          if ($exitCode == 0) {
+            # improvements
+            file_put_contents(
+              'mattermost.json',
+              json_encode(["username" => "github-action-trend-bot", "text" => $project ." :tada:\n". file_get_contents("../trend.txt")])
+            );
+          }
+          elseif ($exitCode == 1) {
+            # steady
+            file_put_contents(
+              'mattermost.json',
+              json_encode(["username" => "github-action-trend-bot", "text" => $project ." :green_heart:\n". file_get_contents("../trend.txt")])
+            );
+          }
+          elseif ($exitCode == 2) {
+            # got worse
+            file_put_contents(
+              'mattermost.json',
+              json_encode(["username" => "github-action-trend-bot", "text" => $project ." :broken_heart:\n". file_get_contents("../trend.txt")])
+            );
+          }
+
+      - run: 'curl -X POST -H "Content-Type: application/json" -d @mattermost.json ${{ secrets.MATTERMOST_WEBHOOK_URL }}'
+        if: always()
+
 ```
 
 ## 💌 Give back some love

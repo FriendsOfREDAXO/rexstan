@@ -10,7 +10,7 @@ if (null === $result) {
 }
 
 ?>
-<table class="table table-striped table-hover" style="width:auto;">
+<table class="table table-striped table-hover" style="width:auto; float: left; margin-right: 20px;">
     <thead>
         <tr class="info">
             <th>Fehlerklasse</th>
@@ -44,4 +44,7 @@ if (null === $result) {
         </tr>
     </tbody>
 </table>
+<div style="width: 80%">
+    <?php echo rex_file::get(rex_addon::get('rexstan')->getDataPath().'/baseline-graph.html'); ?>
+</div>
 <p>Die Zusammenfassung ist abhängig von den in den <a href="<?= $settingsUrl ?>">Einstellungen</a> definierten PHPStan-Extensions</p>

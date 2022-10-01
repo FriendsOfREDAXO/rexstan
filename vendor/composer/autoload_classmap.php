@@ -97,10 +97,13 @@ return array(
     'rexstan_command' => $baseDir . '/lib/command.php',
     'staabm\\PHPStanBaselineAnalysis\\AnalyzeApplication' => $vendorDir . '/staabm/phpstan-baseline-analysis/lib/AnalyzeApplication.php',
     'staabm\\PHPStanBaselineAnalysis\\AnalyzerResult' => $vendorDir . '/staabm/phpstan-baseline-analysis/lib/AnalyzerResult.php',
+    'staabm\\PHPStanBaselineAnalysis\\AnalyzerResultReader' => $vendorDir . '/staabm/phpstan-baseline-analysis/lib/AnalyzerResultReader.php',
     'staabm\\PHPStanBaselineAnalysis\\Baseline' => $vendorDir . '/staabm/phpstan-baseline-analysis/lib/Baseline.php',
     'staabm\\PHPStanBaselineAnalysis\\BaselineAnalyzer' => $vendorDir . '/staabm/phpstan-baseline-analysis/lib/BaselineAnalyzer.php',
     'staabm\\PHPStanBaselineAnalysis\\BaselineError' => $vendorDir . '/staabm/phpstan-baseline-analysis/lib/BaselineError.php',
     'staabm\\PHPStanBaselineAnalysis\\BaselineFinder' => $vendorDir . '/staabm/phpstan-baseline-analysis/lib/BaselineFinder.php',
+    'staabm\\PHPStanBaselineAnalysis\\GraphApplication' => $vendorDir . '/staabm/phpstan-baseline-analysis/lib/GraphApplication.php',
+    'staabm\\PHPStanBaselineAnalysis\\GraphTemplate' => $vendorDir . '/staabm/phpstan-baseline-analysis/lib/GraphTemplate.php',
     'staabm\\PHPStanBaselineAnalysis\\ResultPrinter' => $vendorDir . '/staabm/phpstan-baseline-analysis/lib/ResultPrinter.php',
     'staabm\\PHPStanBaselineAnalysis\\TrendApplication' => $vendorDir . '/staabm/phpstan-baseline-analysis/lib/TrendApplication.php',
 );

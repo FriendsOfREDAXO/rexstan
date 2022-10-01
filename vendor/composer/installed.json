@@ -707,17 +707,17 @@
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
-            "version": "0.8.2",
-            "version_normalized": "0.8.2.0",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-baseline-analysis.git",
-                "reference": "1cb13cfd4a9ce7576fbf9487e8f39fd09c125f16"
+                "reference": "b4c423728a1d7474d787ddf0cace5f80ed46ed08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/1cb13cfd4a9ce7576fbf9487e8f39fd09c125f16",
-                "reference": "1cb13cfd4a9ce7576fbf9487e8f39fd09c125f16",
+                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/b4c423728a1d7474d787ddf0cace5f80ed46ed08",
+                "reference": "b4c423728a1d7474d787ddf0cace5f80ed46ed08",
                 "shasum": ""
             },
             "require": {
@@ -732,10 +732,12 @@
                 "symfony/var-dumper": "^5.3",
                 "thecodingmachine/phpstan-safe-rule": "^1.2"
             },
-            "time": "2022-09-15T09:20:15+00:00",
+            "time": "2022-10-01T10:55:47+00:00",
+            "default-branch": true,
             "bin": [
                 "bin/phpstan-baseline-analyze",
-                "bin/phpstan-baseline-trend"
+                "bin/phpstan-baseline-trend",
+                "bin/phpstan-baseline-graph"
             ],
             "type": "library",
             "installation-source": "dist",
@@ -750,7 +752,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-baseline-analysis/issues",
-                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.8.2"
+                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/main"
             },
             "funding": [
                 {

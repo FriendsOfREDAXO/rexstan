@@ -40,6 +40,13 @@ final class RexStanUserConfig
     }
 
     /**
+     * @return non-empty-string
+     */
+    public static function getSignature():string {
+        return md5_file(self::getUserConfigPath());
+    }
+
+    /**
      * @return array<string, mixed>
      */
     private static function getConfig(): array
