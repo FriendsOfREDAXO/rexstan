@@ -25,7 +25,12 @@ final class UnusedPublicClassMethodRule implements Rule
     /**
      * @var string
      */
-    public const ERROR_MESSAGE = 'Class method "%s()" is never used';
+    public const ERROR_MESSAGE = 'Class method "%s()" is never used outside of its class';
+
+    /**
+     * @var string
+     */
+    public const TIP_MESSAGE = 'Either reduce the methods visibility or annotate it with @api.';
 
     public function getNodeType(): string
     {
@@ -55,6 +60,7 @@ final class UnusedPublicClassMethodRule implements Rule
                 $ruleErrors[] = RuleErrorBuilder::message($errorMessage)
                     ->file($filePath)
                     ->line($line)
+                    ->tip(self::TIP_MESSAGE)
                     ->build();
             }
         }
