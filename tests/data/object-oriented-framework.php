@@ -36,7 +36,6 @@ function doFoo() {
     assertType('int|string|null', $m->getValue('unknownColumn'));
 
     $m = rex_article_slice::fromSql(rex_sql::factory(1));
-    if ($m === null) throw new \Exception('m is null');
     assertType('rex_article_slice', $m);
     assertType('int<0, 4294967295>', $m->getValue('id'));
     assertType('int|string|null', $m->getValue('unknownColumn'));
