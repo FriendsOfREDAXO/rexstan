@@ -113,6 +113,8 @@ Das bedeutet dass man einen Parameter vom typ `rex_extension_point` mittels `<T>
  */
 function myExtension(rex_extension_point $ep) {
     $ep->getSubject(); // aufgrund des generic phpdocs, weiß rexstan dass "string" returned wird.
+    // ...
+    $ep->setSubject($xy); // aufgrund des generic phpdocs, weiß rexstan dass "string" als parameter erwartet wird
 }
 ```
 
