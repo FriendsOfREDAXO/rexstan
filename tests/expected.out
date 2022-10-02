@@ -11,12 +11,12 @@
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-get-value.php:45:Value 'doesNotExist' was not selected in the used sql-query.
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-get-value.php:46:Value 'doesNotExist' was not selected in the used sql-query.
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-get-value.php:47:Value 'doesNotExist' was not selected in the used sql-query.
-/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:47:Possible SQL-injection: expression should instead use prepared statements or at least be escaped via rex_sql::escape*().
-/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:48:Possible SQL-injection: expression should instead use prepared statements or at least be escaped via rex_sql::escape*().
-/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:49:Possible SQL-injection: expression should instead use prepared statements or at least be escaped via rex_sql::escape*().
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:50:Possible SQL-injection: expression should instead use prepared statements or at least be escaped via rex_sql::escape*().
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:51:Possible SQL-injection: expression should instead use prepared statements or at least be escaped via rex_sql::escape*().
-/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:55:Possible SQL-injection: expression should instead use prepared statements or at least be escaped via rex_sql::escape*().
+/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:52:Possible SQL-injection: expression should instead use prepared statements or at least be escaped via rex_sql::escape*().
+/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:53:Possible SQL-injection: expression should instead use prepared statements or at least be escaped via rex_sql::escape*().
+/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:54:Possible SQL-injection: expression should instead use prepared statements or at least be escaped via rex_sql::escape*().
+/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:58:Possible SQL-injection: expression should instead use prepared statements or at least be escaped via rex_sql::escape*().
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/superglobals.php:4:Using $_SESSION is forbidden, use rex_request::session(), rex_request::setSession() or rex_session(), rex_set_session() instead for proper per instance scoping.
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/superglobals.php:5:Using $_GET is forbidden, use rex_request::get() or rex_get() instead.
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/superglobals.php:6:Using $_POST is forbidden, use rex_request::post() or rex_post() instead.

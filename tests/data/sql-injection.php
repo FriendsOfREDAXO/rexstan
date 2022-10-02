@@ -38,6 +38,9 @@ function safeScalars($mixed, string $s, $numericS, int $i, float $f, bool $b)
     // query via variable
     $qry = 'SELECT * FROM ' . rex::getTablePrefix() . 'metainfo_type WHERE id=' . $i . ' LIMIT 2';
     $select->getArray($qry);
+
+    $articles = rex_sql::factory();
+    $articles->setQuery('select * from ' . rex::getTablePrefix() . "article where path like '%|$i|%'");
 }
 
 function injection($_id, string $langID): void

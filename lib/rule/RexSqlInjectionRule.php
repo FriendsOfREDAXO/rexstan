@@ -60,7 +60,7 @@ final class RexSqlInjectionRule implements Rule
             $sqlExpression = $finder->findQueryStringExpression($sqlExpression);
         }
 
-        if ($sqlExpression !== null && $this->containsRawValue($sqlExpression, $scope)) {
+        if (null !== $sqlExpression && $this->containsRawValue($sqlExpression, $scope)) {
             return [
                 RuleErrorBuilder::message('Possible SQL-injection: expression should instead use prepared statements or at least be escaped via rex_sql::escape*().')
                     ->build(),
@@ -77,6 +77,19 @@ final class RexSqlInjectionRule implements Rule
             $right = $expr->right;
 
             return $this->containsRawValue($left, $scope) || $this->containsRawValue($right, $scope);
+        }
+
+        if ($expr instanceof Node\Scalar\Encapsed) {
+            foreach ($expr->parts as $part) {
+                if (true === $this->containsRawValue($part, $scope)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        if ($expr instanceof Node\Scalar\EncapsedStringPart) {
+            return false;
         }
 
         $exprType = $scope->getType($expr);
