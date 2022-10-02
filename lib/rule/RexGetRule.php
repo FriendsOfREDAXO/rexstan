@@ -104,9 +104,6 @@ final class RexGetRule implements Rule
                 case rex_category::class:
                     $object = rex_category::get($id->getValue());
                     break;
-                case rex_media::class:
-                    $object = rex_media::get($id->getValue());
-                    break;
                 default: throw new ShouldNotHappenException();
             }
 
