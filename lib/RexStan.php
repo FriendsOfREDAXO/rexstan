@@ -1,5 +1,7 @@
 <?php
 
+use staabm\PHPStanBaselineAnalysis\ResultPrinter;
+
 final class RexStan
 {
     /**
@@ -41,7 +43,7 @@ final class RexStan
     }
 
     /**
-     * @return array{\staabm\PHPStanBaselineAnalysis\ResultPrinter::KEY_*: int}|null
+     * @return array{ResultPrinter::KEY_*: int}|null
      */
     public static function analyzeBaseline()
     {
