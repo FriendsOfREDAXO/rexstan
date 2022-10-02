@@ -1,5 +1,7 @@
 <?php
 
+use staabm\PHPStanBaselineAnalysis\ResultPrinter;
+
 $result = RexStan::analyzeBaseline();
 $settingsUrl = rex_url::backendPage('rexstan/settings');
 
