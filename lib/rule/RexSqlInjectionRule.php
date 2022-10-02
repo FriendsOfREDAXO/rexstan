@@ -12,6 +12,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\MixedType;
 use PHPStan\Type\TypeWithClassName;
+use rex;
 use rex_i18n;
 use rex_sql;
 use function count;
