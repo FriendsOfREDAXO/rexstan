@@ -10,16 +10,9 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use PHPStan\ShouldNotHappenException;
 use PHPStan\Type\MixedType;
-use PHPStan\Type\TypeUtils;
 use PHPStan\Type\TypeWithClassName;
-use PHPStan\Type\VerbosityLevel;
-use rex_article;
-use rex_category;
-use rex_media;
 use rex_sql;
-use rex_user;
 use function count;
 use function in_array;
 
@@ -53,7 +46,7 @@ final class RexSqlInjectionRule implements Rule
             return [];
         }
 
-        if ($callerType->getClassname() !== rex_sql::class) {
+        if (rex_sql::class !== $callerType->getClassname()) {
             return [];
         }
 
@@ -68,9 +61,8 @@ final class RexSqlInjectionRule implements Rule
         return [];
     }
 
-    private function containsRawValue(Node\Expr $expr, Scope $scope):bool
+    private function containsRawValue(Node\Expr $expr, Scope $scope): bool
     {
-
         if ($expr instanceof Concat) {
             $left = $expr->left;
             $right = $expr->right;
@@ -98,5 +90,4 @@ final class RexSqlInjectionRule implements Rule
 
         return false;
     }
-
 }

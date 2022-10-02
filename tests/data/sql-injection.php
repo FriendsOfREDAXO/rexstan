@@ -7,7 +7,8 @@ use rex_sql;
 /**
  * @return void
  */
-function safeArray($_id, string $langID) {
+function safeArray($_id, string $langID)
+{
     $select = rex_sql::factory();
     $select->setTable('article');
     $select->setWhere(['id' => $_id, 'clang_id' => $langID]);
@@ -17,7 +18,8 @@ function safeArray($_id, string $langID) {
  * @param numeric-string  $numericS
  * @return void
  */
-function safeScalars($numericS, int $i, float $f, bool $b) {
+function safeScalars($numericS, int $i, float $f, bool $b)
+{
     $select = rex_sql::factory();
     $select->setTable('article');
     $select->setWhere('id = ' . $numericS);
@@ -35,6 +37,3 @@ function injection($_id, string $langID): void
     $select->setWhere('id = ' . $langID);
     $select->setQuery('SELECT * FROM rex_article WHERE id = ' . $_id);
 }
-
-
-
