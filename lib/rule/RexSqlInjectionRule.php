@@ -12,6 +12,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\MixedType;
 use PHPStan\Type\TypeWithClassName;
+use rex_i18n;
 use rex_sql;
 use function count;
 use function in_array;
@@ -53,7 +54,7 @@ final class RexSqlInjectionRule implements Rule
         $sqlExpression = $args[0]->value;
         if ($this->containsRawValue($sqlExpression, $scope)) {
             return [
-                RuleErrorBuilder::message('Possible SQL-injection: expression should instead use prepared statements or at least be escaped via rex_sql::escape().')
+                RuleErrorBuilder::message('Possible SQL-injection: expression should instead use prepared statements or at least be escaped via rex_sql::escape*().')
                     ->build(),
             ];
         }
@@ -77,6 +78,15 @@ final class RexSqlInjectionRule implements Rule
         }
 
         if ($exprType->isString()->yes()) {
+            if ($expr instanceof Node\Expr\StaticCall && $expr->class instanceof Node\Name && $expr->name instanceof Node\Identifier) {
+                if ($expr->class->toString() === rex::class && in_array(strtolower($expr->name->toString()), ['gettableprefix', 'gettable'], true)) {
+                    return false;
+                }
+                if ($expr->class->toString() === rex_i18n::class && strtolower($expr->name->toString()) === 'msg') {
+                    return false;
+                }
+            }
+
             if ($exprType->isLiteralString()->yes()) {
                 return false;
             }
