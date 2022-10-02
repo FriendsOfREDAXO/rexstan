@@ -15,6 +15,7 @@ use PHPStan\Type\TypeWithClassName;
 use rex;
 use rex_i18n;
 use rex_sql;
+use staabm\PHPStanDba\Ast\ExpressionFinder;
 use function count;
 use function in_array;
 
@@ -53,7 +54,13 @@ final class RexSqlInjectionRule implements Rule
         }
 
         $sqlExpression = $args[0]->value;
-        if ($this->containsRawValue($sqlExpression, $scope)) {
+
+        if ($sqlExpression instanceof Node\Expr\Variable) {
+            $finder = new ExpressionFinder();
+            $sqlExpression = $finder->findQueryStringExpression($sqlExpression);
+        }
+
+        if ($sqlExpression !== null && $this->containsRawValue($sqlExpression, $scope)) {
             return [
                 RuleErrorBuilder::message('Possible SQL-injection: expression should instead use prepared statements or at least be escaped via rex_sql::escape*().')
                     ->build(),

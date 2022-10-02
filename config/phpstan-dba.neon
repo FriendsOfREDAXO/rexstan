@@ -1,4 +1,9 @@
 services:
+    -
+        class: staabm\PHPStanDba\Ast\PreviousConnectingVisitor
+        tags:
+        	- phpstan.parser.richParserNodeVisitor
+
     # redaxos setQuery etc. APIs support both, prepared and unprepared statements..
     # therefore we need to register them twice, to also cover cases which don't pass parameters.
     -

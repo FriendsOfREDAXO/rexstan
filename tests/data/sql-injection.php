@@ -34,6 +34,10 @@ function safeScalars($mixed, string $s, $numericS, int $i, float $f, bool $b)
     $select->setWhere('id = ' . $b);
     $select->setQuery('SELECT * FROM rex_article WHERE id = ' . $i);
     $select->setQuery('INSERT INTO '.rex::getTablePrefix() . 'media_manager_type (status, name, description) SELECT 0, CONCAT(name, \' '.rex_i18n::msg('media_manager_type_name_copy').'\'), description FROM '.rex::getTablePrefix() . 'media_manager_type WHERE id = ?', [$i]);
+
+    // query via variable
+    $qry = 'SELECT * FROM ' . rex::getTablePrefix() . 'metainfo_type WHERE id=' . $i . ' LIMIT 2';
+    $select->getArray($qry);
 }
 
 function injection($_id, string $langID): void
@@ -45,4 +49,8 @@ function injection($_id, string $langID): void
     $select->setQuery('SELECT * FROM rex_article WHERE id = ' . $_id);
     $select->getArray('SELECT * FROM rex_article WHERE id = ' . $_id);
     $select->getDBArray('SELECT * FROM rex_article WHERE id = ' . $_id);
+
+    // query via variable
+    $qry = 'SELECT * FROM ' . rex::getTablePrefix() . 'metainfo_type WHERE id = ' . $_id;
+    $select->getArray($qry);
 }
