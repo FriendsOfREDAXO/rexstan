@@ -2,9 +2,9 @@
 
 namespace RexSqlInjection;
 
-use rex_sql;
 use rex;
 use rex_i18n;
+use rex_sql;
 
 /**
  * @return void
@@ -20,10 +20,14 @@ function safeArray($_id, string $langID)
  * @param numeric-string  $numericS
  * @return void
  */
-function safeScalars($numericS, int $i, float $f, bool $b)
+function safeScalars($mixed, string $s, $numericS, int $i, float $f, bool $b)
 {
     $select = rex_sql::factory();
     $select->setTable('article');
+    $select->setWhere('id = ' . $select->escape($s));
+    $select->setWhere('id = ' . $select->escape($mixed));
+    $select->setWhere($select->escapeIdentifier($s). ' = ' . $select->escape($mixed));
+    $select->setWhere($select->escapeIdentifier($s). ' LIKE "' . $select->escapeLikeWildcards($mixed) . '"');
     $select->setWhere('id = ' . $numericS);
     $select->setWhere('id = ' . $i);
     $select->setWhere('id = ' . $f);

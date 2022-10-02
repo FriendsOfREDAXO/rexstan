@@ -78,11 +78,21 @@ final class RexSqlInjectionRule implements Rule
         }
 
         if ($exprType->isString()->yes()) {
+            if ($expr instanceof Node\Expr\MethodCall && $expr->name instanceof Node\Identifier) {
+                $callerType = $scope->getType($expr->var);
+
+                if ($callerType instanceof TypeWithClassName) {
+                    if (rex_sql::class === $callerType->getClassName() && in_array(strtolower($expr->name->toString()), ['escape', 'escapeidentifier', 'escapelikewildcards'], true)) {
+                        return false;
+                    }
+                }
+            }
+
             if ($expr instanceof Node\Expr\StaticCall && $expr->class instanceof Node\Name && $expr->name instanceof Node\Identifier) {
-                if ($expr->class->toString() === rex::class && in_array(strtolower($expr->name->toString()), ['gettableprefix', 'gettable'], true)) {
+                if (rex::class === $expr->class->toString() && in_array(strtolower($expr->name->toString()), ['gettableprefix', 'gettable'], true)) {
                     return false;
                 }
-                if ($expr->class->toString() === rex_i18n::class && strtolower($expr->name->toString()) === 'msg') {
+                if (rex_i18n::class === $expr->class->toString() && 'msg' === strtolower($expr->name->toString())) {
                     return false;
                 }
             }
