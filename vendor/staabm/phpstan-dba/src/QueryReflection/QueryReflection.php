@@ -7,6 +7,9 @@ namespace staabm\PHPStanDba\QueryReflection;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\BinaryOp\Concat;
 use PhpParser\Node\Identifier;
+use PhpParser\Node\Name;
+use PhpParser\Node\Scalar\Encapsed;
+use PhpParser\Node\Scalar\EncapsedStringPart;
 use PHPStan\Analyser\Scope;
 use PHPStan\ShouldNotHappenException;
 use PHPStan\Type\Constant\ConstantArrayType;
@@ -135,7 +138,7 @@ final class QueryReflection
 
         if ($type instanceof UnionType) {
             foreach (TypeUtils::getConstantStrings($type) as $constantString) {
-                yield $this->normalizeQueryString($constantString->getValue());
+                yield QuerySimulation::stripComments($this->normalizeQueryString($constantString->getValue()));
             }
 
             return;
@@ -143,7 +146,7 @@ final class QueryReflection
 
         $queryString = $this->resolveQueryExpr($queryExpr, $scope);
         if (null !== $queryString) {
-            yield $this->normalizeQueryString($queryString);
+            yield QuerySimulation::stripComments($this->normalizeQueryString($queryString));
         }
     }
 
@@ -185,15 +188,34 @@ final class QueryReflection
     /**
      * @throws UnresolvableQueryException
      */
-    private function resolveQueryStringExpr(Expr $queryExpr, Scope $scope): ?string
+    private function resolveQueryStringExpr(Expr $queryExpr, Scope $scope, bool $resolveVariables = true): ?string
     {
-        if ($queryExpr instanceof Expr\MethodCall && $queryExpr->name instanceof Identifier) {
-            $classReflection = $scope->getClassReflection();
+        if (true === $resolveVariables && $queryExpr instanceof Expr\Variable) {
+            $finder = new ExpressionFinder();
+            $assignExpr = $finder->findQueryStringExpression($queryExpr);
 
-            // XXX atm we only support inference-placeholder for method calls within the same class
-            if (null !== $classReflection && $classReflection->hasMethod($queryExpr->name->name)) {
-                $methodReflection = $classReflection->getMethod($queryExpr->name->name, $scope);
+            if (null !== $assignExpr) {
+                return $this->resolveQueryStringExpr($assignExpr, $scope);
+            }
 
+            return $this->resolveQueryStringExpr($queryExpr, $scope, false);
+        }
+
+        if ($queryExpr instanceof Expr\CallLike) {
+            $methodReflection = null;
+            if ($queryExpr instanceof Expr\StaticCall) {
+                if ($queryExpr->class instanceof Name && $queryExpr->name instanceof Identifier) {
+                    $classType = $scope->resolveTypeByName($queryExpr->class);
+                    $methodReflection = $scope->getMethodReflection($classType, $queryExpr->name->name);
+                }
+            } elseif ($queryExpr instanceof Expr\MethodCall && $queryExpr->name instanceof Identifier) {
+                $classReflection = $scope->getClassReflection();
+                if (null !== $classReflection && $classReflection->hasMethod($queryExpr->name->name)) {
+                    $methodReflection = $classReflection->getMethod($queryExpr->name->name, $scope);
+                }
+            }
+
+            if (null !== $methodReflection) {
                 // atm no resolved phpdoc for methods
                 // see https://github.com/phpstan/phpstan/discussions/7657
                 $phpDocString = $methodReflection->getDocComment();
@@ -220,6 +242,19 @@ final class QueryReflection
             }
 
             return $leftString.$rightString;
+        }
+
+        if ($queryExpr instanceof Encapsed) {
+            $string = '';
+            foreach ($queryExpr->parts as $part) {
+                $string .= $this->resolveQueryStringExpr($part, $scope);
+            }
+
+            return $string;
+        }
+
+        if ($queryExpr instanceof EncapsedStringPart) {
+            return $queryExpr->value;
         }
 
         $type = $scope->getType($queryExpr);
@@ -352,7 +387,7 @@ final class QueryReflection
     private static function reflector(): QueryReflector
     {
         if (null === self::$reflector) {
-            throw new DbaException('Reflector not initialized, call '.__CLASS__.'::setupReflector() first');
+            throw new DbaException('Reflector not initialized. Make sure a phpstan bootstrap file is configured which calls '.__CLASS__.'::setupReflector().');
         }
 
         return self::$reflector;
@@ -361,7 +396,7 @@ final class QueryReflection
     public static function getRuntimeConfiguration(): RuntimeConfiguration
     {
         if (null === self::$runtimeConfiguration) {
-            throw new DbaException('Runtime configuration not initialized, call '.__CLASS__.'::setupReflector() first');
+            throw new DbaException('Runtime configuration not initialized. Make sure a phpstan bootstrap file is configured which calls '.__CLASS__.'::setupReflector().');
         }
 
         return self::$runtimeConfiguration;
