@@ -60,4 +60,6 @@ if (false === rex_file::put($configPath, $configFileContent)) {
 }
 
 // make sure the phpstan binary is executable
-@chmod(__DIR__.'/vendor/bin/phpstan', 0775);
+foreach (glob(__DIR__.'/vendor/bin/*', GLOB_NOSORT) as $binaryPath) {
+    @chmod($binaryPath, 0775);
+}
