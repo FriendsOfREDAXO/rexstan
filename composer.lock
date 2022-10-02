@@ -732,16 +732,16 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.2.43",
+            "version": "0.2.45",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "b39afd744576706a116a152c4dff2b53c39ffc76"
+                "reference": "ac2596a171aee5d3cf2d750aab05b2d31a3befb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/b39afd744576706a116a152c4dff2b53c39ffc76",
-                "reference": "b39afd744576706a116a152c4dff2b53c39ffc76",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/ac2596a171aee5d3cf2d750aab05b2d31a3befb4",
+                "reference": "ac2596a171aee5d3cf2d750aab05b2d31a3befb4",
                 "shasum": ""
             },
             "require": {
@@ -781,9 +781,9 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.43"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.45"
             },
-            "time": "2022-09-25T16:56:05+00:00"
+            "time": "2022-10-02T18:45:50+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
