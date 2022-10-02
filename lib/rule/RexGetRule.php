@@ -73,16 +73,31 @@ final class RexGetRule implements Rule
         }
 
         $idType = $scope->getType($args[0]->value);
-        $ids = TypeUtils::getConstantScalars($idType);
-        if (0 === count($ids)) {
-            return [];
+
+        $ids = TypeUtils::getConstantStrings($idType);
+        foreach ($ids as $id) {
+            switch ($callerType->getClassName()) {
+                case rex_media::class:
+                    $object = rex_media::get($id->getValue());
+                    break;
+                default: throw new ShouldNotHappenException();
+            }
+
+            if (null === $object) {
+                return [
+                    RuleErrorBuilder::message(
+                        sprintf('No %s found with id %s.', $callerType->getClassname(), $idType->describe(VerbosityLevel::precise()))
+                    )->build(),
+                ];
+            }
         }
 
+        $ids = TypeUtils::getConstantIntegers($idType);
         foreach ($ids as $id) {
             switch ($callerType->getClassName()) {
                 case rex_user::class:
                     $object = rex_user::get($id->getValue());
-                break;
+                    break;
                 case rex_article::class:
                     $object = rex_article::get($id->getValue());
                     break;
