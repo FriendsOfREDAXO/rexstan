@@ -20,7 +20,7 @@ function safeArray($_id, string $langID)
  * @param numeric-string  $numericS
  * @return void
  */
-function safeScalars($mixed, string $s, $numericS, int $i, float $f, bool $b)
+function safeScalars($mixed, string $s, $numericS, int $i, float $f, bool $b, array $arr)
 {
     $select = rex_sql::factory();
     $select->setTable('article');
@@ -39,11 +39,13 @@ function safeScalars($mixed, string $s, $numericS, int $i, float $f, bool $b)
     $qry = 'SELECT * FROM ' . rex::getTablePrefix() . 'metainfo_type WHERE id=' . $i . ' LIMIT 2';
     $select->getArray($qry);
 
-    $articles = rex_sql::factory();
-    $articles->setQuery('select * from ' . rex::getTablePrefix() . "article where path like '%|$i|%'");
+    $select->setQuery('select * from ' . rex::getTablePrefix() . "article where path like '%|$i|%'");
+
+    $parentIds = $select->in($arr);
+    $select->setQuery('SELECT COUNT(*) as rowCount FROM rex_article WHERE id IN (' . $parentIds . ')');
 }
 
-function injection($_id, string $langID): void
+function injection($_id, string $langID, array $arr): void
 {
     $select = rex_sql::factory();
     $select->setTable('article');
@@ -56,4 +58,6 @@ function injection($_id, string $langID): void
     // query via variable
     $qry = 'SELECT * FROM ' . rex::getTablePrefix() . 'metainfo_type WHERE id = ' . $_id;
     $select->getArray($qry);
+
+    $select->setQuery('SELECT COUNT(*) as rowCount FROM ' . rex::getTablePrefix() . 'article WHERE id IN (' . implode(',',$arr) . ')');
 }

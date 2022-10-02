@@ -70,8 +70,19 @@ final class RexSqlInjectionRule implements Rule
         return [];
     }
 
-    private function containsRawValue(Node\Expr $expr, Scope $scope): bool
+    private function containsRawValue(Node\Expr $expr, Scope $scope, bool $resolveVariables = true): bool
     {
+        if ($resolveVariables === true && $expr instanceof Node\Expr\Variable) {
+            $finder = new ExpressionFinder();
+            $assignExpr = $finder->findQueryStringExpression($expr);
+
+            if (null !== $assignExpr) {
+                return $this->containsRawValue($assignExpr, $scope);
+            }
+
+            return $this->containsRawValue($expr, $scope, false);
+        }
+
         if ($expr instanceof Concat) {
             $left = $expr->left;
             $right = $expr->right;
@@ -103,7 +114,7 @@ final class RexSqlInjectionRule implements Rule
                 $callerType = $scope->getType($expr->var);
 
                 if ($callerType instanceof TypeWithClassName) {
-                    if (rex_sql::class === $callerType->getClassName() && in_array(strtolower($expr->name->toString()), ['escape', 'escapeidentifier', 'escapelikewildcards'], true)) {
+                    if (rex_sql::class === $callerType->getClassName() && in_array(strtolower($expr->name->toString()), ['escape', 'escapeidentifier', 'escapelikewildcards', 'in'], true)) {
                         return false;
                     }
                 }
