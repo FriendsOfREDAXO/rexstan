@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace redaxo\phpstan;
 
 use PhpParser\Node;
+use PhpParser\Node\Expr\StaticCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
@@ -20,7 +21,7 @@ use function count;
 use function in_array;
 
 /**
- * @implements Rule<Node\Expr\StaticCall>
+ * @implements Rule<StaticCall>
  */
 final class RexGetRule implements Rule
 {
@@ -36,7 +37,7 @@ final class RexGetRule implements Rule
 
     public function getNodeType(): string
     {
-        return Node\Expr\StaticCall::class;
+        return StaticCall::class;
     }
 
     public function processNode(Node $methodCall, Scope $scope): array
@@ -47,6 +48,9 @@ final class RexGetRule implements Rule
         }
 
         if (!$methodCall->name instanceof Node\Identifier) {
+            return [];
+        }
+        if (!$methodCall->class instanceof Node\Name) {
             return [];
         }
 
