@@ -73,7 +73,7 @@ final class RexGetRule implements Rule
         }
 
         $idType = $scope->getType($args[0]->value);
-        $ids = TypeUtils::getConstantTypes($idType);
+        $ids = TypeUtils::getConstantScalars($idType);
         if (0 === count($ids)) {
             return [];
         }
