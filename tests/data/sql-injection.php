@@ -43,4 +43,6 @@ function injection($_id, string $langID): void
     $select->setWhere('id = ' . $_id);
     $select->setWhere('id = ' . $langID);
     $select->setQuery('SELECT * FROM rex_article WHERE id = ' . $_id);
+    $select->getArray('SELECT * FROM rex_article WHERE id = ' . $_id);
+    $select->getDBArray('SELECT * FROM rex_article WHERE id = ' . $_id);
 }
