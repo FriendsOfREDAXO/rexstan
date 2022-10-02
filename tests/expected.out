@@ -1,13 +1,13 @@
-/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/any-get.php:11:No rex_user found with id 9999999.
-/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/any-get.php:12:No rex_media found with id 'does-not-exist.jpg'.
-/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/any-get.php:13:No rex_article found with id 9999999.
-/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/any-get.php:14:No rex_category found with id 9999999.
-/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/object-oriented-framework.php:18:Unknown name ''unknownColumn'' given to getValue().
-/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/object-oriented-framework.php:20:No rex_media found with id 'markus.jpg'.
-/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/object-oriented-framework.php:24:Unknown name ''unknownColumn'' given to getValue().
+/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/any-get.php:12:No rex_user found with id 9999999.
+/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/any-get.php:13:No rex_media found with id 'does-not-exist.jpg'.
+/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/any-get.php:14:No rex_article found with id 9999999.
+/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/any-get.php:15:No rex_category found with id 9999999.
+/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/object-oriented-framework.php:22:Unknown name ''unknownColumn'' given to getValue().
+/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/object-oriented-framework.php:24:No rex_media found with id 'markus.jpg'.
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/object-oriented-framework.php:30:Unknown name ''unknownColumn'' given to getValue().
-/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/object-oriented-framework.php:36:Unknown name ''unknownColumn'' given to getValue().
-/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/object-oriented-framework.php:41:Unknown name ''unknownColumn'' given to getValue().
+/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/object-oriented-framework.php:38:Unknown name ''unknownColumn'' given to getValue().
+/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/object-oriented-framework.php:46:Unknown name ''unknownColumn'' given to getValue().
+/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/object-oriented-framework.php:51:Unknown name ''unknownColumn'' given to getValue().
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-get-value.php:45:Value 'doesNotExist' was not selected in the used sql-query.
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-get-value.php:46:Value 'doesNotExist' was not selected in the used sql-query.
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-get-value.php:47:Value 'doesNotExist' was not selected in the used sql-query.
