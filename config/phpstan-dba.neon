@@ -54,6 +54,10 @@ services:
         class: redaxo\phpstan\RexSqlGetValueRule
         tags:
             - phpstan.rules.rule
+    -
+        class: redaxo\phpstan\RexSqlInjectionRule
+        tags:
+            - phpstan.rules.rule
 
     -
         class: redaxo\phpstan\RexMediaGetValueDynamicReturnTypeExtension

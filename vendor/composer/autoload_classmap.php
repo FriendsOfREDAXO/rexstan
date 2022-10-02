@@ -91,6 +91,7 @@ return array(
     'redaxo\\phpstan\\RexSqlGetArrayDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexSqlGetArrayDynamicReturnTypeExtension.php',
     'redaxo\\phpstan\\RexSqlGetValueDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexSqlGetValueDynamicReturnTypeExtension.php',
     'redaxo\\phpstan\\RexSqlGetValueRule' => $baseDir . '/lib/rule/RexSqlGetValueRule.php',
+    'redaxo\\phpstan\\RexSqlInjectionRule' => $baseDir . '/lib/rule/RexSqlInjectionRule.php',
     'redaxo\\phpstan\\RexSqlReflection' => $baseDir . '/lib/reflection/RexSqlReflection.php',
     'redaxo\\phpstan\\RexSqlSetQueryTypeSpecifyingExtension' => $baseDir . '/lib/extension/RexSqlSetQueryTypeSpecifyingExtension.php',
     'redaxo\\phpstan\\RexStanSettings' => $baseDir . '/lib/RexStanSettings.php',
