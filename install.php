@@ -59,7 +59,7 @@ if (false === rex_file::put($configPath, $configFileContent)) {
     $addon->setProperty('installmsg', sprintf('Unable to write rexstan config "%s"', $configPath));
 }
 
-// make sure the phpstan binary is executable
+// make sure the binaries are executable
 foreach (glob(__DIR__.'/vendor/bin/*', GLOB_NOSORT) as $binaryPath) {
     @chmod($binaryPath, 0775);
 }
