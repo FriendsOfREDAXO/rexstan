@@ -78,6 +78,7 @@ final class RexGetRule implements Rule
             $ids = TypeUtils::getConstantStrings($idType);
             foreach ($ids as $id) {
                 $object = rex_media::get($id->getValue());
+
                 if (null === $object) {
                     return [
                         RuleErrorBuilder::message(
