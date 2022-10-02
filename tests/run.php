@@ -19,8 +19,8 @@ if ($output != $expected) {
     var_dump($expected);
     */
 
-    $out = tempnam("/tmp", "rexstan_");
-    $exp = tempnam("/tmp", "rexstan_");
+    $out = tempnam('/tmp', 'rexstan_');
+    $exp = tempnam('/tmp', 'rexstan_');
 
     file_put_contents($out, $output);
     file_put_contents($exp, $expected);
