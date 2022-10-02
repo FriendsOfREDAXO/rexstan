@@ -254,6 +254,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'redaxo\\phpstan\\RexCategoryGetValueDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexCategoryGetValueDynamicReturnTypeExtension.php',
         'redaxo\\phpstan\\RexClassDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexClassDynamicReturnTypeExtension.php',
         'redaxo\\phpstan\\RexFunctionsDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexFunctionsDynamicReturnTypeExtension.php',
+        'redaxo\\phpstan\\RexGetRule' => __DIR__ . '/../..' . '/lib/rule/RexGetRule.php',
         'redaxo\\phpstan\\RexGetValueReflection' => __DIR__ . '/../..' . '/lib/reflection/RexGetValueReflection.php',
         'redaxo\\phpstan\\RexGetValueRule' => __DIR__ . '/../..' . '/lib/rule/RexGetValueRule.php',
         'redaxo\\phpstan\\RexMediaGetValueDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexMediaGetValueDynamicReturnTypeExtension.php',
