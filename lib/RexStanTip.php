@@ -11,7 +11,7 @@ final class RexStanTip
         '{Variable \$this might not be defined.}' => 'wie-mit-dem-fehler-variable-this-might-not-be-defined-umgehen',
     ];
 
-    public static function renderTip(string $message, ?string $tip)
+    public static function renderTip(string $message, ?string $tip): ?string
     {
         $faqUrl = rex_url::backendPage('rexstan/faq');
 
@@ -38,7 +38,7 @@ final class RexStanTip
     private static function escapeButPreserveUris($raw)
     {
         $escaped = rex_escape($raw);
-        return preg_replace(
+        return (string) preg_replace(
             "@([A-z]+?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@",
             '<a href="$1" target="_blank" rel="noreferrer noopener">$1</a>',
             $escaped
