@@ -16,7 +16,6 @@ use rex;
 use rex_i18n;
 use rex_sql;
 use staabm\PHPStanDba\Ast\ExpressionFinder;
-use staabm\PHPStanDba\PhpDoc\PhpDocUtil;
 use function count;
 use function in_array;
 
@@ -122,10 +121,9 @@ final class RexSqlInjectionRule implements Rule
             }
 
             if ($expr instanceof Node\Expr\StaticCall && $expr->class instanceof Node\Name && $expr->name instanceof Node\Identifier) {
-                if (PhpDocUtil::commentContains('@psalm-taint-escape sql', $expr, $scope)) {
+                if (rex::class === $expr->class->toString() && in_array(strtolower($expr->name->toString()), ['gettableprefix', 'gettable'], true)) {
                     return false;
                 }
-
                 if (rex_i18n::class === $expr->class->toString() && 'msg' === strtolower($expr->name->toString())) {
                     return false;
                 }
