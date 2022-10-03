@@ -17,7 +17,7 @@ final class RexStanTip
 
         foreach (self::FAQ_ANCHORS as $messagePattern => $anchor) {
             if (preg_match($messagePattern, $message)) {
-                return 'See <a href="'. $faqUrl .'#'. $anchor .'"><i class="rex-icon fa-book"></i> FAQ</a>';
+                return 'See: <a href="'. $faqUrl .'#'. $anchor .'"><i class="rex-icon fa-book"></i> FAQ</a>';
             }
         }
 
