@@ -61,3 +61,26 @@ function injection($_id, string $langID, array $arr): void
 
     $select->setQuery('SELECT COUNT(*) as rowCount FROM ' . rex::getTablePrefix() . 'article WHERE id IN (' . implode(',',$arr) . ')');
 }
+
+class Good {
+    protected const ORDER_ASC = 'ASC';
+    protected const ORDER_DESC = 'DESC';
+
+    /**
+     * @psalm-param self::ORDER_* $orderDirection
+     */
+    protected static function getSlicesWhere(array $params = [], string $orderDirection = 'ASC', ?int $limit = null)
+    {
+        $sql = rex_sql::factory();
+        $query = '
+            SELECT *
+            FROM '.rex::getTable('article_slice').'
+            ORDER BY ctype_id '.$orderDirection.', priority '.$orderDirection;
+
+        if (null !== $limit) {
+            $query .= ' LIMIT '.$limit;
+        }
+
+        $sql->setQuery($query, $params);
+    }
+}
