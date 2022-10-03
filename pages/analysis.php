@@ -143,7 +143,7 @@ if (
             }
 
             $rexstanTip = RexStanTip::renderTip($message['message'], $phpstanTip);
-            if ($rexstanTip !== null) {
+            if (null !== $rexstanTip) {
                 $error .= '<br /><span class="rexstan-tip">'. $rexstanTip .'</span>';
             }
 
