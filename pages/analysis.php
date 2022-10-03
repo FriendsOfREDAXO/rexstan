@@ -136,6 +136,17 @@ if (
             if ($url) {
                 $error = '<a href="'. $url .'">'. rex_escape($message['message']) .'</a>';
             }
+
+            $phpstanTip = null;
+            if (array_key_exists('tip', $message)) {
+                $phpstanTip = $message['tip'];
+            }
+
+            $rexstanTip = RexStanTip::renderTip($message['message'], $phpstanTip);
+            if ($rexstanTip !== null) {
+                $error .= '<br /><span class="rexstan-tip">'. $rexstanTip .'</span>';
+            }
+
             $content .= $error;
             $content .= '</li>';
         }
