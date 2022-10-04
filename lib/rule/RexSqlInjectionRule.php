@@ -9,12 +9,10 @@ use PhpParser\Node\Expr\BinaryOp\Concat;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\Printer\ExprPrinter;
-use PHPStan\Node\Printer\Printer;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\MixedType;
 use PHPStan\Type\TypeWithClassName;
-use PHPStan\Type\VerbosityLevel;
 use rex;
 use rex_i18n;
 use rex_sql;
@@ -82,7 +80,7 @@ final class RexSqlInjectionRule implements Rule
 
         if (null !== $sqlExpression) {
             $rawValue = $this->findInsecureSqlExpr($sqlExpression, $scope);
-            if ($rawValue !== null) {
+            if (null !== $rawValue) {
                 $description = $this->exprPrinter->printExpr($rawValue);
 
                 return [
@@ -115,7 +113,7 @@ final class RexSqlInjectionRule implements Rule
             $right = $expr->right;
 
             $leftInsecure = $this->findInsecureSqlExpr($left, $scope);
-            if ($leftInsecure !== null) {
+            if (null !== $leftInsecure) {
                 return $leftInsecure;
             }
 

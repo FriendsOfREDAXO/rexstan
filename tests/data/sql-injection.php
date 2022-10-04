@@ -59,10 +59,11 @@ function injection($_id, string $langID, array $arr): void
     $qry = 'SELECT * FROM ' . rex::getTablePrefix() . 'metainfo_type WHERE id = ' . $_id;
     $select->getArray($qry);
 
-    $select->setQuery('SELECT COUNT(*) as rowCount FROM ' . rex::getTablePrefix() . 'article WHERE id IN (' . implode(',',$arr) . ')');
+    $select->setQuery('SELECT COUNT(*) as rowCount FROM ' . rex::getTablePrefix() . 'article WHERE id IN (' . implode(',', $arr) . ')');
 }
 
-class Good {
+class Good
+{
     protected const ORDER_ASC = 'ASC';
     protected const ORDER_DESC = 'DESC';
 
@@ -71,7 +72,8 @@ class Good {
      */
     private $query;
 
-    public function __construct(string $q) {
+    public function __construct(string $q)
+    {
         $this->query = $q;
     }
 
@@ -93,13 +95,15 @@ class Good {
         $sql->setQuery($query, $params);
     }
 
-    protected function propertyIsIgnored() {
+    protected function propertyIsIgnored()
+    {
         $sql = rex_sql::factory();
         $sql->setQuery($this->query);
     }
 }
 
-class DeepConcatError {
+class DeepConcatError
+{
     /**
      * Ermittelt die metainfo felder mit dem Prefix $prefix limitiert auf die Kategorien $restrictions.
      *
