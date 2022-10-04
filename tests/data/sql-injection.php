@@ -45,18 +45,21 @@ function safeScalars($mixed, string $s, $numericS, int $i, float $f, bool $b, ar
     $select->setQuery('SELECT COUNT(*) as rowCount FROM rex_article WHERE id IN (' . $parentIds . ')');
 }
 
-function injection($_id, string $langID, array $arr): void
+function injection($mixed, string $langID, array $arr): void
 {
     $select = rex_sql::factory();
-    $select->setTable('article');
-    $select->setWhere('id = ' . $_id);
+    $select->select($mixed);
+    $select->setRawValue('id', $mixed);
+    $select->setWhere('id = ' . $mixed);
     $select->setWhere('id = ' . $langID);
-    $select->setQuery('SELECT * FROM rex_article WHERE id = ' . $_id);
-    $select->getArray('SELECT * FROM rex_article WHERE id = ' . $_id);
-    $select->getDBArray('SELECT * FROM rex_article WHERE id = ' . $_id);
+    $select->prepareQuery($mixed);
+    $select->setQuery('SELECT * FROM rex_article WHERE id = ' . $mixed);
+    $select->getArray('SELECT * FROM rex_article WHERE id = ' . $mixed);
+    $select->setDBQuery('SELECT * FROM rex_article WHERE id = ' . $mixed);
+    $select->getDBArray('SELECT * FROM rex_article WHERE id = ' . $mixed);
 
     // query via variable
-    $qry = 'SELECT * FROM ' . rex::getTablePrefix() . 'metainfo_type WHERE id = ' . $_id;
+    $qry = 'SELECT * FROM ' . rex::getTablePrefix() . 'metainfo_type WHERE id = ' . $mixed;
     $select->getArray($qry);
 
     $select->setQuery('SELECT COUNT(*) as rowCount FROM ' . rex::getTablePrefix() . 'article WHERE id IN (' . implode(',', $arr) . ')');

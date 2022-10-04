@@ -31,6 +31,20 @@ final class RexSqlInjectionRule implements Rule
      */
     private $exprPrinter;
 
+    /**
+     * @var array<string, int>
+     */
+    private $methods = [
+        'select' => 0,
+        'setrawvalue' => 1,
+        'setwhere' => 0,
+        'preparequery' => 0,
+        'setquery' => 0,
+        'getarray' => 0,
+        'setdbquery' => 0,
+        'getdbarray' => 0,
+    ];
+
     public function __construct(
         ExprPrinter $exprPrinter
     ) {
@@ -53,7 +67,7 @@ final class RexSqlInjectionRule implements Rule
             return [];
         }
 
-        if (!in_array(strtolower($methodCall->name->toString()), ['select', 'setwhere', 'setquery', 'setdbquery', 'preparequery', 'getarray', 'getdbarray'], true)) {
+        if (!array_key_exists(strtolower($methodCall->name->toString()), $this->methods)) {
             return [];
         }
 
@@ -66,7 +80,8 @@ final class RexSqlInjectionRule implements Rule
             return [];
         }
 
-        $sqlExpression = $args[0]->value;
+        $argNo = $this->methods[strtolower($methodCall->name->toString())];
+        $sqlExpression = $args[$argNo]->value;
 
         // we can't infer query strings from properties
         if ($sqlExpression instanceof Node\Expr\PropertyFetch) {
@@ -75,21 +90,22 @@ final class RexSqlInjectionRule implements Rule
 
         if ($sqlExpression instanceof Node\Expr\Variable) {
             $finder = new ExpressionFinder();
-            $sqlExpression = $finder->findQueryStringExpression($sqlExpression);
+            $queryStringExpression = $finder->findQueryStringExpression($sqlExpression);
+            if ($queryStringExpression !== null) {
+                $sqlExpression = $queryStringExpression;
+            }
         }
 
-        if (null !== $sqlExpression) {
-            $rawValue = $this->findInsecureSqlExpr($sqlExpression, $scope);
-            if (null !== $rawValue) {
-                $description = $this->exprPrinter->printExpr($rawValue);
+        $rawValue = $this->findInsecureSqlExpr($sqlExpression, $scope);
+        if (null !== $rawValue) {
+            $description = $this->exprPrinter->printExpr($rawValue);
 
-                return [
-                    RuleErrorBuilder::message(
-                        'Possible SQL-injection in expression '. $description .'.')
-                        ->tip('Consider use of more SQL-safe types, prepared statements or escape via rex_sql::escape*().')
-                        ->build(),
-                ];
-            }
+            return [
+                RuleErrorBuilder::message(
+                    'Possible SQL-injection in expression '. $description .'.')
+                    ->tip('Consider use of more SQL-safe types, prepared statements or escape via rex_sql::escape*().')
+                    ->build(),
+            ];
         }
 
         return [];
