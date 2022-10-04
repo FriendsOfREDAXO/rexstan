@@ -177,7 +177,7 @@ final class RexSqlInjectionRule implements Rule
                 $callerType = $scope->getType($expr->var);
 
                 if ($callerType instanceof TypeWithClassName) {
-                    if (rex_sql::class === $callerType->getClassName() && in_array($expr->name->toLowerString(), ['escape', 'escapeidentifier', 'escapelikewildcards', 'in'], true)) {
+                    if (rex_sql::class === $callerType->getClassName() && in_array($expr->name->toLowerString(), ['escape', 'escapeidentifier', 'in'], true)) {
                         return null;
                     }
                 }

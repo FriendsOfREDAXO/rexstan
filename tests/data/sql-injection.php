@@ -18,6 +18,7 @@ function injection($mixed, string $langID, array $arr): void
     $select->getArray('SELECT * FROM rex_article WHERE id = ' . $mixed);
     $select->setDBQuery('SELECT * FROM rex_article WHERE id = ' . $mixed);
     $select->getDBArray('SELECT * FROM rex_article WHERE id = ' . $mixed);
+    $select->setWhere('id LIKE "' . $select->escapeLikeWildcards($mixed) . '"'); // requires an additional ->escape() call
 
     // query via variable
     $qry = 'SELECT * FROM ' . rex::getTablePrefix() . 'metainfo_type WHERE id = ' . $mixed;
@@ -83,7 +84,7 @@ function safeScalars($mixed, string $s, $numericS, int $i, float $f, bool $b, ar
     $select->setWhere('id = ' . $select->escape($s));
     $select->setWhere('id = ' . $select->escape($mixed));
     $select->setWhere($select->escapeIdentifier($s). ' = ' . $select->escape($mixed));
-    $select->setWhere($select->escapeIdentifier($s). ' LIKE "' . $select->escapeLikeWildcards($mixed) . '"');
+    $select->setWhere('id LIKE "' . $select->escape($select->escapeLikeWildcards($mixed)) . '"');
     $select->setWhere('id = ' . $numericS);
     $select->setWhere('id = ' . $i);
     $select->setWhere('id = ' . $f);
