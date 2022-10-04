@@ -103,6 +103,7 @@ final class RexSqlInjectionRule implements Rule
 
         $rawValue = $this->findInsecureSqlExpr($sqlExpression, $scope);
         if (null !== $rawValue) {
+            /** @phpstan-ignore-next-line */
             $description = $this->exprPrinter->printExpr($rawValue);
 
             return [
