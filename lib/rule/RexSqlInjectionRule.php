@@ -70,6 +70,11 @@ final class RexSqlInjectionRule implements Rule
 
         $sqlExpression = $args[0]->value;
 
+        // we can't infer query strings from properties
+        if ($sqlExpression instanceof Node\Expr\PropertyFetch) {
+            return [];
+        }
+
         if ($sqlExpression instanceof Node\Expr\Variable) {
             $finder = new ExpressionFinder();
             $sqlExpression = $finder->findQueryStringExpression($sqlExpression);

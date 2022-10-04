@@ -67,6 +67,15 @@ class Good {
     protected const ORDER_DESC = 'DESC';
 
     /**
+     * @var string
+     */
+    private $query;
+
+    public function __construct(string $q) {
+        $this->query = $q;
+    }
+
+    /**
      * @psalm-param self::ORDER_* $orderDirection
      */
     protected static function getSlicesWhere(array $params = [], string $orderDirection = 'ASC', ?int $limit = null)
@@ -82,5 +91,10 @@ class Good {
         }
 
         $sql->setQuery($query, $params);
+    }
+
+    protected function propertyIsIgnored() {
+        $sql = rex_sql::factory();
+        $sql->setQuery($this->query);
     }
 }
