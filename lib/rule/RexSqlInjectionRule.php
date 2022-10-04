@@ -76,7 +76,7 @@ final class RexSqlInjectionRule implements Rule
         }
 
         if (null !== $sqlExpression) {
-            $rawValue = $this->containsRawValue($sqlExpression, $scope);
+            $rawValue = $this->findInsecureSqlExpr($sqlExpression, $scope);
             if ($rawValue !== null) {
                 $description = $this->exprPrinter->printExpr($rawValue);
 
@@ -92,28 +92,28 @@ final class RexSqlInjectionRule implements Rule
         return [];
     }
 
-    private function containsRawValue(Node\Expr $expr, Scope $scope, bool $resolveVariables = true): ?Node\Expr
+    private function findInsecureSqlExpr(Node\Expr $expr, Scope $scope, bool $resolveVariables = true): ?Node\Expr
     {
         if (true === $resolveVariables && $expr instanceof Node\Expr\Variable) {
             $finder = new ExpressionFinder();
             $assignExpr = $finder->findQueryStringExpression($expr);
 
             if (null !== $assignExpr) {
-                return $this->containsRawValue($assignExpr, $scope);
+                return $this->findInsecureSqlExpr($assignExpr, $scope);
             }
 
-            return $this->containsRawValue($expr, $scope, false);
+            return $this->findInsecureSqlExpr($expr, $scope, false);
         }
 
         if ($expr instanceof Concat) {
             $left = $expr->left;
             $right = $expr->right;
 
-            if (null !== $this->containsRawValue($left, $scope)) {
+            if (null !== $this->findInsecureSqlExpr($left, $scope)) {
                 return $left;
             }
 
-            if (null !== $this->containsRawValue($right, $scope)) {
+            if (null !== $this->findInsecureSqlExpr($right, $scope)) {
                 return $right;
             }
 
@@ -122,7 +122,7 @@ final class RexSqlInjectionRule implements Rule
 
         if ($expr instanceof Node\Scalar\Encapsed) {
             foreach ($expr->parts as $part) {
-                if (null !== $this->containsRawValue($part, $scope)) {
+                if (null !== $this->findInsecureSqlExpr($part, $scope)) {
                     return $part;
                 }
             }
