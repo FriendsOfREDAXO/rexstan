@@ -11,6 +11,10 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\Printer\ExprPrinter;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use PHPStan\Type\Type;
+use PHPStan\Type\BooleanType;
+use PHPStan\Type\FloatType;
+use PHPStan\Type\IntegerType;
 use PHPStan\Type\MixedType;
 use PHPStan\Type\TypeWithClassName;
 use rex;
@@ -67,7 +71,7 @@ final class RexSqlInjectionRule implements Rule
             return [];
         }
 
-        if (!array_key_exists(strtolower($methodCall->name->toString()), $this->methods)) {
+        if (!array_key_exists($methodCall->name->toLowerString(), $this->methods)) {
             return [];
         }
 
@@ -80,7 +84,7 @@ final class RexSqlInjectionRule implements Rule
             return [];
         }
 
-        $argNo = $this->methods[strtolower($methodCall->name->toString())];
+        $argNo = $this->methods[$methodCall->name->toLowerString()];
         $sqlExpression = $args[$argNo]->value;
 
         // we can't infer query strings from properties
@@ -172,26 +176,36 @@ final class RexSqlInjectionRule implements Rule
                 $callerType = $scope->getType($expr->var);
 
                 if ($callerType instanceof TypeWithClassName) {
-                    if (rex_sql::class === $callerType->getClassName() && in_array(strtolower($expr->name->toString()), ['escape', 'escapeidentifier', 'escapelikewildcards', 'in'], true)) {
+                    if (rex_sql::class === $callerType->getClassName() && in_array($expr->name->toLowerString(), ['escape', 'escapeidentifier', 'escapelikewildcards', 'in'], true)) {
                         return null;
                     }
                 }
             }
 
             if ($expr instanceof Node\Expr\StaticCall && $expr->class instanceof Node\Name && $expr->name instanceof Node\Identifier) {
-                if (rex::class === $expr->class->toString() && in_array(strtolower($expr->name->toString()), ['gettableprefix', 'gettable'], true)) {
+                if (rex::class === $expr->class->toString() && in_array($expr->name->toLowerString(), ['gettableprefix', 'gettable'], true)) {
                     return null;
                 }
-                if (rex_i18n::class === $expr->class->toString() && 'msg' === strtolower($expr->name->toString())) {
+                if (rex_i18n::class === $expr->class->toString() && 'msg' === $expr->name->toLowerString()) {
                     return null;
                 }
             }
 
-            if ($exprType->isLiteralString()->yes()) {
-                return null;
+            if ($expr instanceof Node\Expr\FuncCall && $expr->name instanceof Node\Name) {
+                if (in_array($expr->name->toLowerString(), ['implode', 'join'], true)) {
+                    $args = $expr->getArgs();
+
+                    if (count($args) >= 2) {
+                        $arrayValueType = $scope->getType($args[1]->value);
+
+                        if ($arrayValueType->isArray()->yes() && $this->isSafeType($arrayValueType->getIterableValueType())) {
+                            return null;
+                        }
+                    }
+                }
             }
 
-            if ($exprType->isNumericString()->yes()) {
+            if ($this->isSafeType($exprType)) {
                 return null;
             }
 
@@ -199,5 +213,32 @@ final class RexSqlInjectionRule implements Rule
         }
 
         return null;
+    }
+
+    private function isSafeType(Type $type):bool {
+        if ($type->isLiteralString()->yes()) {
+            return true;
+        }
+
+        if ($type->isNumericString()->yes()) {
+            return true;
+        }
+
+        $integer = new IntegerType();
+        if ($integer->isSuperTypeOf($type)->yes()) {
+            return true;
+        }
+
+        $bool = new BooleanType();
+        if ($bool->isSuperTypeOf($type)->yes()) {
+            return true;
+        }
+
+        $float = new FloatType();
+        if ($float->isSuperTypeOf($type)->yes()) {
+            return true;
+        }
+
+        return false;
     }
 }
