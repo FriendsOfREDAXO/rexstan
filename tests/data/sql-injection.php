@@ -98,3 +98,37 @@ class Good {
         $sql->setQuery($this->query);
     }
 }
+
+class DeepConcatError {
+    /**
+     * Ermittelt die metainfo felder mit dem Prefix $prefix limitiert auf die Kategorien $restrictions.
+     *
+     * @param string $prefix          Feldprefix
+     * @param string $filterCondition SQL Where-Bedingung zum einschränken der Metafelder
+     *
+     * @return rex_sql Metainfofelder
+     */
+    protected static function getSqlFields($prefix, $filterCondition = '')
+    {
+        // replace LIKE wildcards
+        $prefix = str_replace(['_', '%'], ['\_', '\%'], $prefix);
+
+        $qry = 'SELECT
+                            *
+                        FROM
+                            ' . rex::getTablePrefix() . 'metainfo_field p,
+                            ' . rex::getTablePrefix() . 'metainfo_type t
+                        WHERE
+                            `p`.`type_id` = `t`.`id` AND
+                            `p`.`name` LIKE "' . $prefix . '%"
+                            ' . $filterCondition . '
+                            ORDER BY
+                            priority';
+
+        $sqlFields = rex_sql::factory();
+        //$sqlFields->setDebug();
+        $sqlFields->setQuery($qry);
+
+        return $sqlFields;
+    }
+}

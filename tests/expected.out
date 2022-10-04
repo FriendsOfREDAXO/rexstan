@@ -17,7 +17,8 @@
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:55:Possible SQL-injection in expression $_id.
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:56:Possible SQL-injection in expression $_id.
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:60:Possible SQL-injection in expression $_id.
-/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:62:Possible SQL-injection in expression 'SELECT COUNT(*) as rowCount FROM ' . \rex::getTablePrefix() . 'article WHERE id IN (' . implode(',', $arr).
+/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:62:Possible SQL-injection in expression implode(',', $arr).
+/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:130:Possible SQL-injection in expression str_replace(['_', '%'], ['\\_', '\\%'], $prefix).
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/superglobals.php:4:Using $_SESSION is forbidden, use rex_request::session(), rex_request::setSession() or rex_session(), rex_set_session() instead for proper per instance scoping.
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/superglobals.php:5:Using $_GET is forbidden, use rex_request::get() or rex_get() instead.
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/superglobals.php:6:Using $_POST is forbidden, use rex_request::post() or rex_post() instead.

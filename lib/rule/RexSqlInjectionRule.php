@@ -114,12 +114,14 @@ final class RexSqlInjectionRule implements Rule
             $left = $expr->left;
             $right = $expr->right;
 
-            if (null !== $this->findInsecureSqlExpr($left, $scope)) {
-                return $left;
+            $leftInsecure = $this->findInsecureSqlExpr($left, $scope);
+            if ($leftInsecure !== null) {
+                return $leftInsecure;
             }
 
-            if (null !== $this->findInsecureSqlExpr($right, $scope)) {
-                return $right;
+            $rightInsecure = $this->findInsecureSqlExpr($right, $scope);
+            if (null !== $rightInsecure) {
+                return $rightInsecure;
             }
 
             return null;
