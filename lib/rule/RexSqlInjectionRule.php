@@ -53,7 +53,7 @@ final class RexSqlInjectionRule implements Rule
             return [];
         }
 
-        if (!in_array(strtolower($methodCall->name->toString()), ['setwhere', 'setquery', 'getarray', 'getdbarray'], true)) {
+        if (!in_array(strtolower($methodCall->name->toString()), ['select', 'setwhere', 'setquery', 'setdbquery', 'preparequery', 'getarray', 'getdbarray'], true)) {
             return [];
         }
 
