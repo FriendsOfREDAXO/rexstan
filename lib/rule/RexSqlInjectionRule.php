@@ -11,17 +11,18 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\Printer\ExprPrinter;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use PHPStan\Type\Type;
 use PHPStan\Type\BooleanType;
 use PHPStan\Type\FloatType;
 use PHPStan\Type\IntegerType;
 use PHPStan\Type\MixedType;
+use PHPStan\Type\Type;
 use PHPStan\Type\TypeWithClassName;
 use rex;
 use rex_i18n;
 use rex_sql;
 use staabm\PHPStanDba\Ast\ExpressionFinder;
 use staabm\PHPStanDba\PhpDoc\PhpDocUtil;
+use function array_key_exists;
 use function count;
 use function in_array;
 
@@ -95,7 +96,7 @@ final class RexSqlInjectionRule implements Rule
         if ($sqlExpression instanceof Node\Expr\Variable) {
             $finder = new ExpressionFinder();
             $queryStringExpression = $finder->findQueryStringExpression($sqlExpression);
-            if ($queryStringExpression !== null) {
+            if (null !== $queryStringExpression) {
                 $sqlExpression = $queryStringExpression;
             }
         }
@@ -215,7 +216,8 @@ final class RexSqlInjectionRule implements Rule
         return null;
     }
 
-    private function isSafeType(Type $type):bool {
+    private function isSafeType(Type $type): bool
+    {
         if ($type->isLiteralString()->yes()) {
             return true;
         }
