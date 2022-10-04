@@ -8,10 +8,13 @@ use PhpParser\Node;
 use PhpParser\Node\Expr\BinaryOp\Concat;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
+use PHPStan\Node\Printer\ExprPrinter;
+use PHPStan\Node\Printer\Printer;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\MixedType;
 use PHPStan\Type\TypeWithClassName;
+use PHPStan\Type\VerbosityLevel;
 use rex;
 use rex_i18n;
 use rex_sql;
@@ -25,6 +28,17 @@ use function in_array;
  */
 final class RexSqlInjectionRule implements Rule
 {
+    /**
+     * @var ExprPrinter
+     */
+    private $exprPrinter;
+
+    public function __construct(
+        ExprPrinter $exprPrinter
+    ) {
+        $this->exprPrinter = $exprPrinter;
+    }
+
     public function getNodeType(): string
     {
         return MethodCall::class;
@@ -61,19 +75,26 @@ final class RexSqlInjectionRule implements Rule
             $sqlExpression = $finder->findQueryStringExpression($sqlExpression);
         }
 
-        if (null !== $sqlExpression && $this->containsRawValue($sqlExpression, $scope)) {
-            return [
-                RuleErrorBuilder::message('Possible SQL-injection: expression should instead use prepared statements or at least be escaped via rex_sql::escape*().')
-                    ->build(),
-            ];
+        if (null !== $sqlExpression) {
+            $rawValue = $this->containsRawValue($sqlExpression, $scope);
+            if ($rawValue !== null) {
+                $description = $this->exprPrinter->printExpr($rawValue);
+
+                return [
+                    RuleErrorBuilder::message(
+                        'Possible SQL-injection in expression '. $description .'.')
+                        ->tip('Use prepared statements or at least escape via rex_sql::escape*()')
+                        ->build(),
+                ];
+            }
         }
 
         return [];
     }
 
-    private function containsRawValue(Node\Expr $expr, Scope $scope, bool $resolveVariables = true): bool
+    private function containsRawValue(Node\Expr $expr, Scope $scope, bool $resolveVariables = true): ?Node\Expr
     {
-        if ($resolveVariables === true && $expr instanceof Node\Expr\Variable) {
+        if (true === $resolveVariables && $expr instanceof Node\Expr\Variable) {
             $finder = new ExpressionFinder();
             $assignExpr = $finder->findQueryStringExpression($expr);
 
@@ -88,32 +109,40 @@ final class RexSqlInjectionRule implements Rule
             $left = $expr->left;
             $right = $expr->right;
 
-            return $this->containsRawValue($left, $scope) || $this->containsRawValue($right, $scope);
+            if (null !== $this->containsRawValue($left, $scope)) {
+                return $left;
+            }
+
+            if (null !== $this->containsRawValue($right, $scope)) {
+                return $right;
+            }
+
+            return null;
         }
 
         if ($expr instanceof Node\Scalar\Encapsed) {
             foreach ($expr->parts as $part) {
-                if (true === $this->containsRawValue($part, $scope)) {
-                    return true;
+                if (null !== $this->containsRawValue($part, $scope)) {
+                    return $part;
                 }
             }
-            return false;
+            return null;
         }
 
         if ($expr instanceof Node\Scalar\EncapsedStringPart) {
-            return false;
+            return null;
         }
 
         $exprType = $scope->getType($expr);
         $mixedType = new MixedType();
         if ($exprType->isSuperTypeOf($mixedType)->yes()) {
-            return true;
+            return $expr;
         }
 
         if ($exprType->isString()->yes()) {
             if ($expr instanceof Node\Expr\CallLike) {
                 if (PhpDocUtil::commentContains('@psalm-taint-escape sql', $expr, $scope)) {
-                    return false;
+                    return null;
                 }
             }
 
@@ -122,31 +151,31 @@ final class RexSqlInjectionRule implements Rule
 
                 if ($callerType instanceof TypeWithClassName) {
                     if (rex_sql::class === $callerType->getClassName() && in_array(strtolower($expr->name->toString()), ['escape', 'escapeidentifier', 'escapelikewildcards', 'in'], true)) {
-                        return false;
+                        return null;
                     }
                 }
             }
 
             if ($expr instanceof Node\Expr\StaticCall && $expr->class instanceof Node\Name && $expr->name instanceof Node\Identifier) {
                 if (rex::class === $expr->class->toString() && in_array(strtolower($expr->name->toString()), ['gettableprefix', 'gettable'], true)) {
-                    return false;
+                    return null;
                 }
                 if (rex_i18n::class === $expr->class->toString() && 'msg' === strtolower($expr->name->toString())) {
-                    return false;
+                    return null;
                 }
             }
 
             if ($exprType->isLiteralString()->yes()) {
-                return false;
+                return null;
             }
 
             if ($exprType->isNumericString()->yes()) {
-                return false;
+                return null;
             }
 
-            return true;
+            return $expr;
         }
 
-        return false;
+        return null;
     }
 }
