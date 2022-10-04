@@ -143,8 +143,9 @@ final class RexSqlInjectionRule implements Rule
 
         if ($expr instanceof Node\Scalar\Encapsed) {
             foreach ($expr->parts as $part) {
-                if (null !== $this->findInsecureSqlExpr($part, $scope)) {
-                    return $part;
+                $insecurePart = $this->findInsecureSqlExpr($part, $scope);
+                if (null !== $insecurePart) {
+                    return $insecurePart;
                 }
             }
             return null;
