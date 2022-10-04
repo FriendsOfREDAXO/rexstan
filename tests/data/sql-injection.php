@@ -6,6 +6,61 @@ use rex;
 use rex_i18n;
 use rex_sql;
 
+function injection($mixed, string $langID, array $arr): void
+{
+    $select = rex_sql::factory();
+    $select->select($mixed);
+    $select->setRawValue('id', $mixed);
+    $select->setWhere('id = ' . $mixed);
+    $select->setWhere('id = ' . $langID);
+    $select->prepareQuery($mixed);
+    $select->setQuery('SELECT * FROM rex_article WHERE id = ' . $mixed);
+    $select->getArray('SELECT * FROM rex_article WHERE id = ' . $mixed);
+    $select->setDBQuery('SELECT * FROM rex_article WHERE id = ' . $mixed);
+    $select->getDBArray('SELECT * FROM rex_article WHERE id = ' . $mixed);
+
+    // query via variable
+    $qry = 'SELECT * FROM ' . rex::getTablePrefix() . 'metainfo_type WHERE id = ' . $mixed;
+    $select->getArray($qry);
+
+    $select->setQuery('SELECT COUNT(*) as rowCount FROM ' . rex::getTablePrefix() . 'article WHERE id IN (' . implode(',', $arr) . ')');
+}
+
+class DeepConcatError
+{
+    /**
+     * Ermittelt die metainfo felder mit dem Prefix $prefix limitiert auf die Kategorien $restrictions.
+     *
+     * @param string $prefix          Feldprefix
+     * @param string $filterCondition SQL Where-Bedingung zum einschränken der Metafelder
+     *
+     * @return rex_sql Metainfofelder
+     */
+    protected static function getSqlFields($prefix, $filterCondition = '')
+    {
+        // replace LIKE wildcards
+        $prefix = str_replace(['_', '%'], ['\_', '\%'], $prefix);
+
+        $qry = 'SELECT
+                            *
+                        FROM
+                            ' . rex::getTablePrefix() . 'metainfo_field p,
+                            ' . rex::getTablePrefix() . 'metainfo_type t
+                        WHERE
+                            `p`.`type_id` = `t`.`id` AND
+                            `p`.`name` LIKE "' . $prefix . '%"
+                            ' . $filterCondition . '
+                            ORDER BY
+                            priority';
+
+        $sqlFields = rex_sql::factory();
+        //$sqlFields->setDebug();
+        $sqlFields->setQuery($qry);
+
+        return $sqlFields;
+    }
+}
+
 /**
  * @return void
  */
@@ -18,9 +73,10 @@ function safeArray($_id, string $langID)
 
 /**
  * @param numeric-string  $numericS
+ * @param int[] $intArr
  * @return void
  */
-function safeScalars($mixed, string $s, $numericS, int $i, float $f, bool $b, array $arr)
+function safeScalars($mixed, string $s, $numericS, int $i, float $f, bool $b, array $arr, $intArr)
 {
     $select = rex_sql::factory();
     $select->setTable('article');
@@ -43,26 +99,8 @@ function safeScalars($mixed, string $s, $numericS, int $i, float $f, bool $b, ar
 
     $parentIds = $select->in($arr);
     $select->setQuery('SELECT COUNT(*) as rowCount FROM rex_article WHERE id IN (' . $parentIds . ')');
-}
 
-function injection($mixed, string $langID, array $arr): void
-{
-    $select = rex_sql::factory();
-    $select->select($mixed);
-    $select->setRawValue('id', $mixed);
-    $select->setWhere('id = ' . $mixed);
-    $select->setWhere('id = ' . $langID);
-    $select->prepareQuery($mixed);
-    $select->setQuery('SELECT * FROM rex_article WHERE id = ' . $mixed);
-    $select->getArray('SELECT * FROM rex_article WHERE id = ' . $mixed);
-    $select->setDBQuery('SELECT * FROM rex_article WHERE id = ' . $mixed);
-    $select->getDBArray('SELECT * FROM rex_article WHERE id = ' . $mixed);
-
-    // query via variable
-    $qry = 'SELECT * FROM ' . rex::getTablePrefix() . 'metainfo_type WHERE id = ' . $mixed;
-    $select->getArray($qry);
-
-    $select->setQuery('SELECT COUNT(*) as rowCount FROM ' . rex::getTablePrefix() . 'article WHERE id IN (' . implode(',', $arr) . ')');
+    $select->setQuery('SELECT COUNT(*) as rowCount FROM ' . rex::getTablePrefix() . 'article WHERE id IN (' . implode(',', $intArr) . ')');
 }
 
 class Good
@@ -102,40 +140,5 @@ class Good
     {
         $sql = rex_sql::factory();
         $sql->setQuery($this->query);
-    }
-}
-
-class DeepConcatError
-{
-    /**
-     * Ermittelt die metainfo felder mit dem Prefix $prefix limitiert auf die Kategorien $restrictions.
-     *
-     * @param string $prefix          Feldprefix
-     * @param string $filterCondition SQL Where-Bedingung zum einschränken der Metafelder
-     *
-     * @return rex_sql Metainfofelder
-     */
-    protected static function getSqlFields($prefix, $filterCondition = '')
-    {
-        // replace LIKE wildcards
-        $prefix = str_replace(['_', '%'], ['\_', '\%'], $prefix);
-
-        $qry = 'SELECT
-                            *
-                        FROM
-                            ' . rex::getTablePrefix() . 'metainfo_field p,
-                            ' . rex::getTablePrefix() . 'metainfo_type t
-                        WHERE
-                            `p`.`type_id` = `t`.`id` AND
-                            `p`.`name` LIKE "' . $prefix . '%"
-                            ' . $filterCondition . '
-                            ORDER BY
-                            priority';
-
-        $sqlFields = rex_sql::factory();
-        //$sqlFields->setDebug();
-        $sqlFields->setQuery($qry);
-
-        return $sqlFields;
     }
 }
