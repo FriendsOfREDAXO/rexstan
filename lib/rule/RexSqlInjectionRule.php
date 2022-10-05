@@ -180,6 +180,7 @@ final class RexSqlInjectionRule implements Rule
                 $callerType = $scope->getType($expr->var);
 
                 if ($callerType instanceof TypeWithClassName) {
+                    // handle escaping methods
                     if (rex_sql::class === $callerType->getClassName() && in_array($expr->name->toLowerString(), ['escape', 'escapeidentifier', 'in'], true)) {
                         return null;
                     }
@@ -187,9 +188,12 @@ final class RexSqlInjectionRule implements Rule
             }
 
             if ($expr instanceof Node\Expr\StaticCall && $expr->class instanceof Node\Name && $expr->name instanceof Node\Identifier) {
+                // lets assume rex::getTable() and rex::getTablePrefix() return untainted values.
+                // these methods are used in nearly every query and would otherwise create a lot of false positives.
                 if (rex::class === $expr->class->toString() && in_array($expr->name->toLowerString(), ['gettableprefix', 'gettable'], true)) {
                     return null;
                 }
+                // translations could still lead to syntax errors, but since the input is not end-user controlled, we ignore it.
                 if (rex_i18n::class === $expr->class->toString() && 'msg' === $expr->name->toLowerString()) {
                     return null;
                 }
