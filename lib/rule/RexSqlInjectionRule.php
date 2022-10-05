@@ -28,6 +28,8 @@ use function in_array;
 
 /**
  * @implements Rule<MethodCall>
+ *
+ * @see https://psalm.dev/docs/security_analysis/
  */
 final class RexSqlInjectionRule implements Rule
 {
@@ -39,7 +41,7 @@ final class RexSqlInjectionRule implements Rule
     /**
      * @var array<string, int>
      */
-    private $methods = [
+    private $taintSinks = [
         'select' => 0,
         'setrawvalue' => 1,
         'setwhere' => 0,
@@ -72,7 +74,7 @@ final class RexSqlInjectionRule implements Rule
             return [];
         }
 
-        if (!array_key_exists($methodCall->name->toLowerString(), $this->methods)) {
+        if (!array_key_exists($methodCall->name->toLowerString(), $this->taintSinks)) {
             return [];
         }
 
@@ -85,7 +87,7 @@ final class RexSqlInjectionRule implements Rule
             return [];
         }
 
-        $argNo = $this->methods[$methodCall->name->toLowerString()];
+        $argNo = $this->taintSinks[$methodCall->name->toLowerString()];
         $sqlExpression = $args[$argNo]->value;
 
         // we can't infer query strings from properties
