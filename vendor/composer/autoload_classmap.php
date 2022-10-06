@@ -73,6 +73,7 @@ return array(
     'Nette\\Utils\\Validators' => $vendorDir . '/nette/utils/src/Utils/Validators.php',
     'PhpToken' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
     'RexStan' => $baseDir . '/lib/RexStan.php',
+    'RexStanTip' => $baseDir . '/lib/RexStanTip.php',
     'RexStanUserConfig' => $baseDir . '/lib/RexStanUserConfig.php',
     'Stringable' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
     'UnhandledMatchError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',

@@ -245,6 +245,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'Nette\\Utils\\Validators' => __DIR__ . '/..' . '/nette/utils/src/Utils/Validators.php',
         'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
         'RexStan' => __DIR__ . '/../..' . '/lib/RexStan.php',
+        'RexStanTip' => __DIR__ . '/../..' . '/lib/RexStanTip.php',
         'RexStanUserConfig' => __DIR__ . '/../..' . '/lib/RexStanUserConfig.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
