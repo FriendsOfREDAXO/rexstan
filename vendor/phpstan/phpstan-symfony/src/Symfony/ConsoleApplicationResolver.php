@@ -16,31 +16,34 @@ use function sprintf;
 final class ConsoleApplicationResolver
 {
 
+	/** @var string|null */
+	private $consoleApplicationLoader;
+
 	/** @var Application|null */
 	private $consoleApplication;
 
 	public function __construct(Configuration $configuration)
 	{
-		$consoleApplicationLoader = $configuration->getConsoleApplicationLoader();
-		if ($consoleApplicationLoader === null) {
-			return;
-		}
-		$this->consoleApplication = $this->loadConsoleApplication($consoleApplicationLoader);
+		$this->consoleApplicationLoader = $configuration->getConsoleApplicationLoader();
 	}
 
-	/**
-	 * @return Application|null
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint
-	 */
-	private function loadConsoleApplication(string $consoleApplicationLoader)
+	private function getConsoleApplication(): ?Application
 	{
-		if (!file_exists($consoleApplicationLoader)
-			|| !is_readable($consoleApplicationLoader)
-		) {
-			throw new ShouldNotHappenException(sprintf('Cannot load console application. Check the parameters.symfony.consoleApplicationLoader setting in PHPStan\'s config. The offending value is "%s".', $consoleApplicationLoader));
+		if ($this->consoleApplicationLoader === null) {
+			return null;
 		}
 
-		return require $consoleApplicationLoader;
+		if ($this->consoleApplication !== null) {
+			return $this->consoleApplication;
+		}
+
+		if (!file_exists($this->consoleApplicationLoader)
+			|| !is_readable($this->consoleApplicationLoader)
+		) {
+			throw new ShouldNotHappenException(sprintf('Cannot load console application. Check the parameters.symfony.consoleApplicationLoader setting in PHPStan\'s config. The offending value is "%s".', $this->consoleApplicationLoader));
+		}
+
+		return $this->consoleApplication = require $this->consoleApplicationLoader;
 	}
 
 	/**
@@ -48,7 +51,8 @@ final class ConsoleApplicationResolver
 	 */
 	public function findCommands(ClassReflection $classReflection): array
 	{
-		if ($this->consoleApplication === null) {
+		$consoleApplication = $this->getConsoleApplication();
+		if ($consoleApplication === null) {
 			return [];
 		}
 
@@ -58,7 +62,7 @@ final class ConsoleApplicationResolver
 		}
 
 		$commands = [];
-		foreach ($this->consoleApplication->all() as $name => $command) {
+		foreach ($consoleApplication->all() as $name => $command) {
 			$commandClass = new ObjectType(get_class($command));
 			$isLazyCommand = (new ObjectType('Symfony\Component\Console\Command\LazyCommand'))->isSuperTypeOf($commandClass)->yes();
 
