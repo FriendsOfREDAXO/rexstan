@@ -263,6 +263,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'redaxo\\phpstan\\RexSqlGetArrayDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexSqlGetArrayDynamicReturnTypeExtension.php',
         'redaxo\\phpstan\\RexSqlGetValueDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexSqlGetValueDynamicReturnTypeExtension.php',
         'redaxo\\phpstan\\RexSqlGetValueRule' => __DIR__ . '/../..' . '/lib/rule/RexSqlGetValueRule.php',
+        'redaxo\\phpstan\\RexSqlInjectionRule' => __DIR__ . '/../..' . '/lib/rule/RexSqlInjectionRule.php',
         'redaxo\\phpstan\\RexSqlReflection' => __DIR__ . '/../..' . '/lib/reflection/RexSqlReflection.php',
         'redaxo\\phpstan\\RexSqlSetQueryTypeSpecifyingExtension' => __DIR__ . '/../..' . '/lib/extension/RexSqlSetQueryTypeSpecifyingExtension.php',
         'redaxo\\phpstan\\RexStanSettings' => __DIR__ . '/../..' . '/lib/RexStanSettings.php',
