@@ -28,7 +28,9 @@ function injection($mixed, string $langID, array $arr): void
     $select->setQuery('SELECT COUNT(*) as rowCount FROM rex_article WHERE id IN (' . implode(', ', array_map('strval', $mixed)). ')');
     $select->setQuery(
         'SELECT COUNT(*) as rowCount FROM rex_article WHERE id IN (' .
-        implode(', ', array_map(function ($post) { return (string) $post->id; }, $mixed))
+        implode(', ', array_map(static function ($post) {
+            return (string) $post->id;
+        }, $mixed))
         . ')'
     );
 }
@@ -111,7 +113,9 @@ function safeScalars($mixed, string $s, $numericS, int $i, float $f, bool $b, ar
 
     $select->setQuery(
         'SELECT COUNT(*) as rowCount FROM rex_article WHERE id IN (' .
-        implode(', ', array_map(function ($post) { return (int) $post->id; }, $mixed))
+        implode(', ', array_map(static function ($post) {
+            return (int) $post->id;
+        }, $mixed))
         . ')'
     );
     $select->setQuery('SELECT COUNT(*) as rowCount FROM rex_article WHERE id IN (' . implode(', ', array_map('intval', $mixed)). ')');
