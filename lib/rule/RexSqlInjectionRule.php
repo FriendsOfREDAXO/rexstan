@@ -198,6 +198,8 @@ final class RexSqlInjectionRule implements Rule
                         return null;
                     }
                 }
+
+                return $expr;
             }
         }
 
