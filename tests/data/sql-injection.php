@@ -102,6 +102,8 @@ function safeScalars($mixed, string $s, $numericS, int $i, float $f, bool $b, ar
     $select->setQuery('SELECT COUNT(*) as rowCount FROM rex_article WHERE id IN (' . $parentIds . ')');
 
     $select->setQuery('SELECT COUNT(*) as rowCount FROM ' . rex::getTablePrefix() . 'article WHERE id IN (' . implode(',', $intArr) . ')');
+
+    $select->setQuery('OPTIMIZE TABLE ' . implode(', ', array_map([$select, 'escapeIdentifier'], $mixed)));
 }
 
 class Good
