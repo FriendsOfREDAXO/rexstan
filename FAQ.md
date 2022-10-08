@@ -91,6 +91,13 @@ Gleiches gilt für vergleichbare Fehler wie Bspw.
 - "Access to property YY on an unknown class X."
 - "Call to method MM on an unknown class X."
 
+##  Wie mit dem Fehler `Function X not found.` umgehen?
+
+Statt Funktionen zu verwenden, sollte man besser auf statische Methoden von Klassen zurückgreifen,
+da diese mittels Autoloading automatisch geladen werden können. Somit sind auch keine manuellen `require` oder `include` nötig.
+
+Ein `functions/` Ordner innerhalb von AddOns wird nur für Core AddOns behandelt, da diese hardkodiert in `rexstan` hinterlegt wurden.
+In nicht Core AddOns sollte man auf diesen Ordner verzeichten, um bestmögliche Analyseergebnisse zu gewährleisten.
 
 ## Wie mit dem Fehler `Call to an undefined method CC::MM().` umgehen?
 
