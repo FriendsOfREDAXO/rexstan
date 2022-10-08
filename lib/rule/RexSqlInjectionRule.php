@@ -12,6 +12,7 @@ use PHPStan\Node\Printer\ExprPrinter;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use PHPStan\ShouldNotHappenException;
 use PHPStan\Type\BooleanType;
 use PHPStan\Type\Constant\ConstantArrayType;
 use PHPStan\Type\Constant\ConstantStringType;
@@ -178,23 +179,7 @@ final class RexSqlInjectionRule implements Rule
 
                 $mappedType = $scope->getType($args[0]->value);
                 if ($mappedType->isCallable()->yes()) {
-                    if ($mappedType instanceof ConstantArrayType) {
-                        $valueTypes = $mappedType->getValueTypes();
-
-                        if (2 === count($valueTypes) && $valueTypes[0] instanceof TypeWithClassName && $this->reflectionProvider->hasClass($valueTypes[0]->getClassName())) {
-                            $classReflection = $this->reflectionProvider->getClass($valueTypes[0]->getClassName());
-                            if ($valueTypes[1] instanceof ConstantStringType && $classReflection->hasMethod($valueTypes[1]->getValue())) {
-                                $methodReflection = $classReflection->getMethod($valueTypes[1]->getValue(), $scope);
-                                $phpDocString = $methodReflection->getDocComment();
-                                if (null !== $phpDocString && false !== strpos($phpDocString, '@psalm-taint-escape sql')) {
-                                    return null;
-                                }
-                            }
-                        }
-                    }
-
-                    $parameterAcceptors = $mappedType->getCallableParametersAcceptors($scope);
-                    if (1 === count($parameterAcceptors) && $this->isSafeType($parameterAcceptors[0]->getReturnType())) {
+                    if ($this->isSafeCallable($mappedType, $scope)) {
                         return null;
                     }
                 }
@@ -288,6 +273,35 @@ final class RexSqlInjectionRule implements Rule
 
         $float = new FloatType();
         if ($float->isSuperTypeOf($type)->yes()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function isSafeCallable(Type $callableType, Scope $scope): bool
+    {
+        if (!$callableType->isCallable()->yes()) {
+            throw new ShouldNotHappenException();
+        }
+
+        if ($callableType instanceof ConstantArrayType) {
+            $valueTypes = $callableType->getValueTypes();
+
+            if (2 === count($valueTypes) && $valueTypes[0] instanceof TypeWithClassName && $this->reflectionProvider->hasClass($valueTypes[0]->getClassName())) {
+                $classReflection = $this->reflectionProvider->getClass($valueTypes[0]->getClassName());
+                if ($valueTypes[1] instanceof ConstantStringType && $classReflection->hasMethod($valueTypes[1]->getValue())) {
+                    $methodReflection = $classReflection->getMethod($valueTypes[1]->getValue(), $scope);
+                    $phpDocString = $methodReflection->getDocComment();
+                    if (null !== $phpDocString && false !== strpos($phpDocString, '@psalm-taint-escape sql')) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        $parameterAcceptors = $callableType->getCallableParametersAcceptors($scope);
+        if (1 === count($parameterAcceptors) && $this->isSafeType($parameterAcceptors[0]->getReturnType())) {
             return true;
         }
 
