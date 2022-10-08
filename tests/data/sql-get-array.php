@@ -57,3 +57,14 @@ function getArray2(int $id): void
 
     assertType('array<int, array{string}>', $array);
 }
+
+function getArray3(array $arr): void
+{
+    $sql = rex_sql::factory();
+    $array = $sql->getArray('
+            SELECT  name
+            FROM    ' . rex::getTable('article') . '
+            WHERE   id IN ('.$sql->in($arr).')');
+
+    assertType('array<int, array{name: string}>', $array);
+}
