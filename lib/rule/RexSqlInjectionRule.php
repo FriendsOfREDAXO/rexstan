@@ -196,7 +196,7 @@ final class RexSqlInjectionRule implements Rule
 
         if ($exprType->isString()->yes()) {
             if ($expr instanceof Node\Expr\CallLike) {
-                if (PhpDocUtil::commentContains('@psalm-taint-escape sql', $expr, $scope)) {
+                if ('sql' === PhpDocUtil::matchTaintEscape($expr, $scope)) {
                     return null;
                 }
             }
@@ -292,8 +292,8 @@ final class RexSqlInjectionRule implements Rule
                 $classReflection = $this->reflectionProvider->getClass($valueTypes[0]->getClassName());
                 if ($valueTypes[1] instanceof ConstantStringType && $classReflection->hasMethod($valueTypes[1]->getValue())) {
                     $methodReflection = $classReflection->getMethod($valueTypes[1]->getValue(), $scope);
-                    $phpDocString = $methodReflection->getDocComment();
-                    if (null !== $phpDocString && false !== strpos($phpDocString, '@psalm-taint-escape sql')) {
+
+                    if ('sql' === PhpDocUtil::matchTaintEscape($methodReflection, $scope)) {
                         return true;
                     }
                 }
