@@ -5,6 +5,7 @@ final class RexStanTip
     public const FAQ_ANCHORS = [
         '{with generic class rex_extension_point but does not specify its types}' => 'wie-mit-dem-fehler-parameter-ep-with-generic-class-rex-extension-point-but-does-not-specify-its-types-t-umgehen',
         '{Instantiated class .* not found}' => 'wie-mit-dem-fehler-instantiated-class-x-not-found-umgehen',
+        '{Function .* not found}' => 'wie-mit-dem-fehler-function-x-not-found-umgehen',
         '{unknown class}' => 'wie-mit-dem-fehler-instantiated-class-x-not-found-umgehen',
         '{Call to an undefined method}' => 'wie-mit-dem-fehler-call-to-an-undefined-method-cc-mm-umgehen',
         '{Loose comparison via}' => 'wie-mit-dem-fehler-loose-comparison-via-is-not-allowed-umgehen',
