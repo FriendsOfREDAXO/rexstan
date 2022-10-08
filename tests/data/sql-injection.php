@@ -25,6 +25,14 @@ function injection($mixed, string $langID, array $arr): void
     $select->getArray($qry);
 
     $select->setQuery('SELECT COUNT(*) as rowCount FROM ' . rex::getTablePrefix() . 'article WHERE id IN (' . implode(',', $arr) . ')');
+    $select->setQuery('SELECT COUNT(*) as rowCount FROM rex_article WHERE id IN (' . implode(', ', array_map('strval', $mixed)). ')');
+    $select->setQuery(
+        'SELECT COUNT(*) as rowCount FROM rex_article WHERE id IN (' .
+        implode(', ', array_map(static function ($post) {
+            return (string) $post->id;
+        }, $mixed))
+        . ')'
+    );
 }
 
 class DeepConcatError
@@ -102,6 +110,16 @@ function safeScalars($mixed, string $s, $numericS, int $i, float $f, bool $b, ar
     $select->setQuery('SELECT COUNT(*) as rowCount FROM rex_article WHERE id IN (' . $parentIds . ')');
 
     $select->setQuery('SELECT COUNT(*) as rowCount FROM ' . rex::getTablePrefix() . 'article WHERE id IN (' . implode(',', $intArr) . ')');
+
+    $select->setQuery(
+        'SELECT COUNT(*) as rowCount FROM rex_article WHERE id IN (' .
+        implode(', ', array_map(static function ($post) {
+            return (int) $post->id;
+        }, $mixed))
+        . ')'
+    );
+    $select->setQuery('SELECT COUNT(*) as rowCount FROM rex_article WHERE id IN (' . implode(', ', array_map('intval', $mixed)). ')');
+    $select->setQuery('OPTIMIZE TABLE ' . implode(', ', array_map([$select, 'escapeIdentifier'], $mixed)));
 }
 
 class Good

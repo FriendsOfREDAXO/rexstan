@@ -23,7 +23,11 @@
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:21:Possible SQL-injection in expression $select->escapeLikeWildcards($mixed).
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:25:Possible SQL-injection in expression $mixed.
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:27:Possible SQL-injection in expression implode(',', $arr).
-/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:59:Possible SQL-injection in expression str_replace(['_', '%'], ['\\_', '\\%'], $prefix).
+/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:28:Possible SQL-injection in expression array_map('strval', $mixed).
+/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:29:Possible SQL-injection in expression array_map(static function ($post) {
+    return (string) $post->id;
+}, $mixed).
+/Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/sql-injection.php:67:Possible SQL-injection in expression str_replace(['_', '%'], ['\\_', '\\%'], $prefix).
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/superglobals.php:4:Using $_SESSION is forbidden, use rex_request::session(), rex_request::setSession() or rex_session(), rex_set_session() instead for proper per instance scoping.
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/superglobals.php:5:Using $_GET is forbidden, use rex_request::get() or rex_get() instead.
 /Users/staabm/workspace/redaxo/redaxo/src/addons/rexstan/tests/data/superglobals.php:6:Using $_POST is forbidden, use rex_request::post() or rex_post() instead.

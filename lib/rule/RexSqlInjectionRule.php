@@ -9,9 +9,13 @@ use PhpParser\Node\Expr\BinaryOp\Concat;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\Printer\ExprPrinter;
+use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use PHPStan\ShouldNotHappenException;
 use PHPStan\Type\BooleanType;
+use PHPStan\Type\Constant\ConstantArrayType;
+use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\FloatType;
 use PHPStan\Type\IntegerType;
 use PHPStan\Type\MixedType;
@@ -39,6 +43,11 @@ final class RexSqlInjectionRule implements Rule
     private $exprPrinter;
 
     /**
+     * @var ReflectionProvider
+     */
+    private $reflectionProvider;
+
+    /**
      * @var array<string, int>
      */
     private $taintSinks = [
@@ -53,9 +62,11 @@ final class RexSqlInjectionRule implements Rule
     ];
 
     public function __construct(
-        ExprPrinter $exprPrinter
+        ExprPrinter $exprPrinter,
+        ReflectionProvider $reflectionProvider
     ) {
         $this->exprPrinter = $exprPrinter;
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function getNodeType(): string
@@ -162,6 +173,21 @@ final class RexSqlInjectionRule implements Rule
             return null;
         }
 
+        if ($expr instanceof Node\Expr\FuncCall && $expr->name instanceof Node\Name) {
+            if (in_array($expr->name->toLowerString(), ['array_map'], true)) {
+                $args = $expr->getArgs();
+
+                $mappedType = $scope->getType($args[0]->value);
+                if ($mappedType->isCallable()->yes()) {
+                    if ($this->isSafeCallable($mappedType, $scope)) {
+                        return null;
+                    }
+                }
+
+                return $expr;
+            }
+        }
+
         $exprType = $scope->getType($expr);
         $mixedType = new MixedType();
         if ($exprType->isSuperTypeOf($mixedType)->yes()) {
@@ -203,8 +229,11 @@ final class RexSqlInjectionRule implements Rule
                     $args = $expr->getArgs();
 
                     if (count($args) >= 2) {
-                        $arrayValueType = $scope->getType($args[1]->value);
+                        if ($args[1]->value instanceof Node\Expr\FuncCall) {
+                            return $this->findInsecureSqlExpr($args[1]->value, $scope);
+                        }
 
+                        $arrayValueType = $scope->getType($args[1]->value);
                         if ($arrayValueType->isArray()->yes() && $this->isSafeType($arrayValueType->getIterableValueType())) {
                             return null;
                         }
@@ -244,6 +273,35 @@ final class RexSqlInjectionRule implements Rule
 
         $float = new FloatType();
         if ($float->isSuperTypeOf($type)->yes()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function isSafeCallable(Type $callableType, Scope $scope): bool
+    {
+        if (!$callableType->isCallable()->yes()) {
+            throw new ShouldNotHappenException();
+        }
+
+        if ($callableType instanceof ConstantArrayType) {
+            $valueTypes = $callableType->getValueTypes();
+
+            if (2 === count($valueTypes) && $valueTypes[0] instanceof TypeWithClassName && $this->reflectionProvider->hasClass($valueTypes[0]->getClassName())) {
+                $classReflection = $this->reflectionProvider->getClass($valueTypes[0]->getClassName());
+                if ($valueTypes[1] instanceof ConstantStringType && $classReflection->hasMethod($valueTypes[1]->getValue())) {
+                    $methodReflection = $classReflection->getMethod($valueTypes[1]->getValue(), $scope);
+                    $phpDocString = $methodReflection->getDocComment();
+                    if (null !== $phpDocString && false !== strpos($phpDocString, '@psalm-taint-escape sql')) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        $parameterAcceptors = $callableType->getCallableParametersAcceptors($scope);
+        if (1 === count($parameterAcceptors) && $this->isSafeType($parameterAcceptors[0]->getReturnType())) {
             return true;
         }
 
