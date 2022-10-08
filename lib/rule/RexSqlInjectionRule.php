@@ -201,17 +201,6 @@ final class RexSqlInjectionRule implements Rule
                 }
             }
 
-            if ($expr instanceof Node\Expr\MethodCall && $expr->name instanceof Node\Identifier) {
-                $callerType = $scope->getType($expr->var);
-
-                if ($callerType instanceof TypeWithClassName) {
-                    // handle escaping methods
-                    if (rex_sql::class === $callerType->getClassName() && in_array($expr->name->toLowerString(), ['escape', 'escapeidentifier', 'in'], true)) {
-                        return null;
-                    }
-                }
-            }
-
             if ($expr instanceof Node\Expr\StaticCall && $expr->class instanceof Node\Name && $expr->name instanceof Node\Identifier) {
                 // lets assume rex::getTable() and rex::getTablePrefix() return untainted values.
                 // these methods are used in nearly every query and would otherwise create a lot of false positives.
