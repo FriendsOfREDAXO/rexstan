@@ -119,15 +119,20 @@ class DisallowedHelper
 	{
 		foreach ($disallowedCalls as $disallowedCall) {
 			if ($this->callMatches($disallowedCall, $name) && !$this->isAllowed($scope, $node, $disallowedCall)) {
+				$errorBuilder = RuleErrorBuilder::message(sprintf(
+					$message ?? 'Calling %s is forbidden, %s%s',
+					($displayName && $displayName !== $name) ? "{$name}() (as {$displayName}())" : "{$name}()",
+					$disallowedCall->getMessage(),
+					$disallowedCall->getCall() !== $name ? " [{$name}() matches {$disallowedCall->getCall()}()]" : ''
+				));
+				if ($disallowedCall->getErrorIdentifier()) {
+					$errorBuilder->identifier($disallowedCall->getErrorIdentifier());
+				}
+				if ($disallowedCall->getErrorTip()) {
+					$errorBuilder->tip($disallowedCall->getErrorTip());
+				}
 				return [
-					RuleErrorBuilder::message(sprintf(
-						$message ?? 'Calling %s is forbidden, %s%s',
-						($displayName && $displayName !== $name) ? "{$name}() (as {$displayName}())" : "{$name}()",
-						$disallowedCall->getMessage(),
-						$disallowedCall->getCall() !== $name ? " [{$name}() matches {$disallowedCall->getCall()}()]" : ''
-					))
-						->identifier($disallowedCall->getErrorIdentifier())
-						->build(),
+					$errorBuilder->build(),
 				];
 			}
 		}
@@ -225,15 +230,20 @@ class DisallowedHelper
 	{
 		foreach ($disallowedConstants as $disallowedConstant) {
 			if ($disallowedConstant->getConstant() === $constant && !$this->isAllowedPath($scope, $disallowedConstant)) {
+				$errorBuilder = RuleErrorBuilder::message(sprintf(
+					'Using %s%s is forbidden, %s',
+					$disallowedConstant->getConstant(),
+					$displayName && $displayName !== $disallowedConstant->getConstant() ? ' (as ' . $displayName . ')' : '',
+					$disallowedConstant->getMessage()
+				));
+				if ($disallowedConstant->getErrorIdentifier()) {
+					$errorBuilder->identifier($disallowedConstant->getErrorIdentifier());
+				}
+				if ($disallowedConstant->getErrorTip()) {
+					$errorBuilder->tip($disallowedConstant->getErrorTip());
+				}
 				return [
-					RuleErrorBuilder::message(sprintf(
-						'Using %s%s is forbidden, %s',
-						$disallowedConstant->getConstant(),
-						$displayName && $displayName !== $disallowedConstant->getConstant() ? ' (as ' . $displayName . ')' : '',
-						$disallowedConstant->getMessage()
-					))
-						->identifier($disallowedConstant->getErrorIdentifier())
-						->build(),
+					$errorBuilder->build(),
 				];
 			}
 		}
