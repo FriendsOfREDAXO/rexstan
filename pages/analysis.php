@@ -74,6 +74,9 @@ if (
             case 8:
                 $emoji = '🥇';
                 break;
+            case 9:
+                $emoji = '🏆';
+                break;
         }
 
         echo '<span class="rexstan-achievement">'.$emoji .'</span>';
