@@ -93,7 +93,7 @@ final class RexStanSettings
         $select = $field->getSelect();
         foreach (rex_addon::getAvailableAddons() as $availableAddon) {
             $availablePlugins = $availableAddon->getAvailablePlugins();
-            $optGroup = 0 < count($availablePlugins) || ('developer' === $availableAddon->getName() && class_exists(rex_developer_manager::class));
+            $optGroup = 0 < count($availablePlugins) || 'developer' === $availableAddon->getName();
             if ($optGroup) {
                 $select->addOptgroup($availableAddon->getName());
             }
@@ -102,7 +102,7 @@ final class RexStanSettings
                 foreach ($availablePlugins as $availablePlugin) {
                     $select->addOption($availableAddon->getName() . ' ⇒ ' . $availablePlugin->getName(), $availablePlugin->getPath());
                 }
-                if ('developer' === $availableAddon->getName()) {
+                if ('developer' === $availableAddon->getName() && class_exists(rex_developer_manager::class)) {
                     $select->addOption('developer: modules', rex_developer_manager::getBasePath() .'/modules/');
                     $select->addOption('developer: templates', rex_developer_manager::getBasePath() .'/templates/');
                 }
