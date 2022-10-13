@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "92df21114b70176f7fd1a6128460296d",
+    "content-hash": "be557ffcfbb129dc539028d317f92d74",
     "packages": [
         {
             "name": "composer/semver",
@@ -680,16 +680,16 @@
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
-            "version": "dev-main",
+            "version": "0.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-baseline-analysis.git",
-                "reference": "b4c423728a1d7474d787ddf0cace5f80ed46ed08"
+                "reference": "1cb13cfd4a9ce7576fbf9487e8f39fd09c125f16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/b4c423728a1d7474d787ddf0cace5f80ed46ed08",
-                "reference": "b4c423728a1d7474d787ddf0cace5f80ed46ed08",
+                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/1cb13cfd4a9ce7576fbf9487e8f39fd09c125f16",
+                "reference": "1cb13cfd4a9ce7576fbf9487e8f39fd09c125f16",
                 "shasum": ""
             },
             "require": {
@@ -704,11 +704,9 @@
                 "symfony/var-dumper": "^5.3",
                 "thecodingmachine/phpstan-safe-rule": "^1.2"
             },
-            "default-branch": true,
             "bin": [
                 "bin/phpstan-baseline-analyze",
-                "bin/phpstan-baseline-trend",
-                "bin/phpstan-baseline-graph"
+                "bin/phpstan-baseline-trend"
             ],
             "type": "library",
             "autoload": {
@@ -722,7 +720,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-baseline-analysis/issues",
-                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/main"
+                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.8.2"
             },
             "funding": [
                 {
@@ -730,7 +728,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-10-01T10:55:47+00:00"
+            "time": "2022-09-15T09:20:15+00:00"
         },
         {
             "name": "staabm/phpstan-dba",
@@ -1132,18 +1130,9 @@
         }
     ],
     "packages-dev": [],
-    "aliases": [
-        {
-            "package": "staabm/phpstan-baseline-analysis",
-            "version": "dev-main",
-            "alias": "0.9",
-            "alias_normalized": "0.9.0.0"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "staabm/phpstan-baseline-analysis": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
