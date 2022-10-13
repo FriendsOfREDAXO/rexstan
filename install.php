@@ -8,7 +8,7 @@ if (isset($REX['PATH_PROVIDER'])) {
 }
 
 require_once __DIR__ .'/lib/RexStan.php';
-$cliPhpVersion = RexStan::execCmd('php -r "echo PHP_VERSION_ID;"', $lastError);
+$cliPhpVersion = RexStan::execCmd(RexStan::phpExecutable().' -r "echo PHP_VERSION_ID;"', $lastError);
 if (is_numeric($cliPhpVersion)) {
     if ($cliPhpVersion < 70300) {
         if (DIRECTORY_SEPARATOR === '\\') {
