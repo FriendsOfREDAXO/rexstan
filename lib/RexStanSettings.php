@@ -62,16 +62,6 @@ final class RexStanSettings
             $extensionLinks[] = '<a href="'.$link.'">'.$label.'</a>';
         }
 
-        $scanTargets = [];
-        foreach (rex_addon::getAvailableAddons() as $availableAddon) {
-            $scanTargets[$availableAddon->getPath()] = $availableAddon->getName();
-
-            if ('developer' === $availableAddon->getName() && class_exists(rex_developer_manager::class)) {
-                $scanTargets[rex_developer_manager::getBasePath() .'/modules/'] = 'developer: modules';
-                $scanTargets[rex_developer_manager::getBasePath() .'/templates/'] = 'developer: templates';
-            }
-        }
-
         $sapiVersion = (int) (PHP_VERSION_ID / 100);
         $cliVersion = (int) shell_exec('php -r \'echo PHP_VERSION_ID;\'');
         $cliVersion = (int) ($cliVersion / 100);
@@ -98,7 +88,24 @@ final class RexStanSettings
         $field->setLabel('AddOns');
         $field->setNotice('AddOns, die untersucht werden sollen');
         $select = $field->getSelect();
-        $select->addOptions($scanTargets);
+        foreach (rex_addon::getAvailableAddons() as $availableAddon) {
+            $availablePlugins = $availableAddon->getAvailablePlugins();
+            $optGroup = 0 < count($availablePlugins) || 'developer' === $availableAddon->getName(); 
+            if ($optGroup) {
+                $select->addOptgroup($availableAddon->getName());
+            }
+            $select->addOption($availableAddon->getName(),$availableAddon->getPath());
+            if ($optGroup) {
+                foreach( $availablePlugins as $availablePlugin ) {
+                    $select->addOption($availableAddon->getName() . ' ⇒ ' . $availablePlugin->getName(),$availablePlugin->getPath());
+                }
+                if ('developer' === $availableAddon->getName()) {
+                    $select->addOption('developer: modules',\rex_developer_manager::getBasePath() .'/modules/');
+                    $select->addOption('developer: templates',\rex_developer_manager::getBasePath() .'/templates/');
+                }
+                $select->endOptgroup();
+            }
+        }
 
         $field = $form->addSelectField('extensions', null, ['class' => 'form-control selectpicker']);
         $field->setAttribute('multiple', 'multiple');
