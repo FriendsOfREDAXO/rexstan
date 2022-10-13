@@ -59,7 +59,7 @@ final class RexStan
     }
 
     /**
-     * @return array{ResultPrinter::KEY_*: int}|null
+     * @return array<ResultPrinter::KEY_*, int>|null
      */
     public static function analyzeBaseline()
     {
