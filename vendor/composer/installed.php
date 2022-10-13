@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'eb1f6cc35b25fb310b454866baf4f3477247c07b',
+        'reference' => 'b173595418f446fb1123a4b33f677b06b7da6922',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'eb1f6cc35b25fb310b454866baf4f3477247c07b',
+            'reference' => 'b173595418f446fb1123a4b33f677b06b7da6922',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -119,15 +119,12 @@
             'dev_requirement' => false,
         ),
         'staabm/phpstan-baseline-analysis' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => 'b4c423728a1d7474d787ddf0cace5f80ed46ed08',
+            'pretty_version' => '0.8.2',
+            'version' => '0.8.2.0',
+            'reference' => '1cb13cfd4a9ce7576fbf9487e8f39fd09c125f16',
             'type' => 'library',
             'install_path' => __DIR__ . '/../staabm/phpstan-baseline-analysis',
-            'aliases' => array(
-                0 => '0.9',
-                1 => '9999999-dev',
-            ),
+            'aliases' => array(),
             'dev_requirement' => false,
         ),
         'staabm/phpstan-dba' => array(
