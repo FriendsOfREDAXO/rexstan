@@ -1,13 +1,13 @@
 {
     "require": {
         "php": ">=7.4",
-        "phpstan/phpstan": "^1.8",
+        "phpstan/phpstan": "^1.8.9",
         "phpstan/phpstan-symfony": "^1.2",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-strict-rules": "^1.4",
         "phpstan/phpstan-phpunit": "^1.1",
-        "staabm/phpstan-dba": "^0.2.43",
-        "spaze/phpstan-disallowed-calls": "^2.5",
+        "staabm/phpstan-dba": "^0.2.48",
+        "spaze/phpstan-disallowed-calls": "^2.7",
         "symplify/phpstan-rules": "^11.1",
         "staabm/phpstan-baseline-analysis": "dev-main as 0.9"
     },

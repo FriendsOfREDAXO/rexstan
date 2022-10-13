@@ -74,6 +74,9 @@ if (
             case 8:
                 $emoji = '🥇';
                 break;
+            case 9:
+                $emoji = '🏆';
+                break;
         }
 
         echo '<span class="rexstan-achievement">'.$emoji .'</span>';
@@ -136,6 +139,17 @@ if (
             if ($url) {
                 $error = '<a href="'. $url .'">'. rex_escape($message['message']) .'</a>';
             }
+
+            $phpstanTip = null;
+            if (array_key_exists('tip', $message)) {
+                $phpstanTip = $message['tip'];
+            }
+
+            $rexstanTip = RexStanTip::renderTip($message['message'], $phpstanTip);
+            if (null !== $rexstanTip) {
+                $error .= '<br /><span class="rexstan-tip" title="Tipp">💡 '. $rexstanTip .'</span>';
+            }
+
             $content .= $error;
             $content .= '</li>';
         }

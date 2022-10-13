@@ -83,7 +83,7 @@ final class RexGetValueRule implements Rule
 
         return [
             RuleErrorBuilder::message(
-                sprintf("Unknown name '%s' given to getValue().", $nameType->describe(VerbosityLevel::precise()))
+                sprintf('Unknown name %s given to getValue().', $nameType->describe(VerbosityLevel::precise()))
             )->build(),
         ];
     }

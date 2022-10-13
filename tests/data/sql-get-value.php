@@ -59,3 +59,15 @@ function tableNamePrefix(): void
 
     assertType('string', $sql->getValue('rex_article.name'));
 }
+
+function tableNamePrefix(): void
+{
+    $sql = rex_sql::factory();
+    $sql->setQuery('
+            SELECT  name
+            FROM    ' . rex::getTablePrefix() . 'article
+            WHERE   id = 1
+            LIMIT   1
+        ');
+    assertType('string', $sql->getValue('rex_article.name'));
+}

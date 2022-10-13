@@ -4,6 +4,22 @@ use staabm\PHPStanBaselineAnalysis\ResultPrinter;
 
 final class RexStan
 {
+    public static function phpExecutable(): string {
+        if ('Darwin' === PHP_OS_FAMILY) {
+            $executable = 'php';
+            $customConfig = '/Library/Application Support/appsolute/MAMP PRO/conf/php'.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION.'.ini';
+            if (is_file($customConfig)) {
+                $executable .= ' -c "'.$customConfig.'"';
+            }
+
+            $mampPhp = '/Applications/MAMP/bin/php/php'.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION.'/bin/';
+            if (is_executable($mampPhp.'php')) {
+                return 'PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:'.$mampPhp.'" '.$executable;
+            }
+        }
+        return 'php';
+    }
+
     /**
      * @return string
      */
@@ -140,7 +156,7 @@ final class RexStan
         if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
             $path = realpath(__DIR__.'/../vendor/bin/phpstan.bat');
         } else {
-            $path = realpath(__DIR__.'/../vendor/bin/phpstan');
+            $path = self::phpExecutable().' '.realpath(__DIR__.'/../vendor/bin/phpstan');
         }
 
         if (false === $path) {
@@ -155,7 +171,7 @@ final class RexStan
         if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
             $path = realpath(__DIR__.'/../vendor/bin/phpstan-baseline-analyze.bat');
         } else {
-            $path = realpath(__DIR__.'/../vendor/bin/phpstan-baseline-analyze');
+            $path = self::phpExecutable().' '.realpath(__DIR__.'/../vendor/bin/phpstan-baseline-analyze');
         }
 
         if (false === $path) {

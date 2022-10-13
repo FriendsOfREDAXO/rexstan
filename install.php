@@ -8,7 +8,7 @@ if (isset($REX['PATH_PROVIDER'])) {
 }
 
 require_once __DIR__ .'/lib/RexStan.php';
-$cliPhpVersion = RexStan::execCmd('php -r "echo PHP_VERSION_ID;"', $lastError);
+$cliPhpVersion = RexStan::execCmd(RexStan::phpExecutable().' -r "echo PHP_VERSION_ID;"', $lastError);
 if (is_numeric($cliPhpVersion)) {
     if ($cliPhpVersion < 70300) {
         if (DIRECTORY_SEPARATOR === '\\') {
@@ -59,5 +59,7 @@ if (false === rex_file::put($configPath, $configFileContent)) {
     $addon->setProperty('installmsg', sprintf('Unable to write rexstan config "%s"', $configPath));
 }
 
-// make sure the phpstan binary is executable
-@chmod(__DIR__.'/vendor/bin/phpstan', 0775);
+// make sure the binaries are executable
+foreach (glob(__DIR__.'/vendor/bin/*', GLOB_NOSORT) as $binaryPath) {
+    @chmod($binaryPath, 0775);
+}

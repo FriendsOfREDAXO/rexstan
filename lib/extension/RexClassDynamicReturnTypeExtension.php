@@ -31,10 +31,6 @@ final class RexClassDynamicReturnTypeExtension implements DynamicStaticMethodRet
     {
         $name = strtolower($methodReflection->getName());
 
-        if ('gettableprefix' === $name) {
-            return new ConstantStringType('rex_');
-        }
-
         $args = $methodCall->getArgs();
         if (count($args) < 1) {
             return null;

@@ -222,6 +222,19 @@ class PhpDocParser
 					$tagValue = $this->parseAssertTagValue($tokens);
 					break;
 
+				case '@phpstan-this-out':
+				case '@phpstan-self-out':
+				case '@psalm-this-out':
+				case '@psalm-self-out':
+					$tagValue = $this->parseSelfOutTagValue($tokens);
+					break;
+
+				case '@param-out':
+				case '@phpstan-param-out':
+				case '@psalm-param-out':
+					$tagValue = $this->parseParamOutTagValue($tokens);
+					break;
+
 				default:
 					$tagValue = new Ast\PhpDoc\GenericTagValueNode($this->parseOptionalDescription($tokens));
 					break;
@@ -497,6 +510,23 @@ class PhpDocParser
 		}
 
 		return ['parameter' => $parameter];
+	}
+
+	private function parseSelfOutTagValue(TokenIterator $tokens): Ast\PhpDoc\SelfOutTagValueNode
+	{
+		$type = $this->typeParser->parse($tokens);
+		$description = $this->parseOptionalDescription($tokens);
+
+		return new Ast\PhpDoc\SelfOutTagValueNode($type, $description);
+	}
+
+	private function parseParamOutTagValue(TokenIterator $tokens): Ast\PhpDoc\ParamOutTagValueNode
+	{
+		$type = $this->typeParser->parse($tokens);
+		$parameterName = $this->parseRequiredVariableName($tokens);
+		$description = $this->parseOptionalDescription($tokens);
+
+		return new Ast\PhpDoc\ParamOutTagValueNode($type, $parameterName, $description);
 	}
 
 	private function parseOptionalVariableName(TokenIterator $tokens): string
