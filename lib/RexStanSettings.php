@@ -5,7 +5,10 @@ namespace redaxo\phpstan;
 use rex_addon;
 use rex_config;
 use rex_config_form;
+use rex_developer_manager;
 use rex_path;
+
+use function count;
 
 final class RexStanSettings
 {
@@ -90,18 +93,18 @@ final class RexStanSettings
         $select = $field->getSelect();
         foreach (rex_addon::getAvailableAddons() as $availableAddon) {
             $availablePlugins = $availableAddon->getAvailablePlugins();
-            $optGroup = 0 < count($availablePlugins) || 'developer' === $availableAddon->getName(); 
+            $optGroup = 0 < count($availablePlugins) || 'developer' === $availableAddon->getName();
             if ($optGroup) {
                 $select->addOptgroup($availableAddon->getName());
             }
-            $select->addOption($availableAddon->getName(),$availableAddon->getPath());
+            $select->addOption($availableAddon->getName(), $availableAddon->getPath());
             if ($optGroup) {
-                foreach( $availablePlugins as $availablePlugin ) {
-                    $select->addOption($availableAddon->getName() . ' ⇒ ' . $availablePlugin->getName(),$availablePlugin->getPath());
+                foreach ($availablePlugins as $availablePlugin) {
+                    $select->addOption($availableAddon->getName() . ' ⇒ ' . $availablePlugin->getName(), $availablePlugin->getPath());
                 }
                 if ('developer' === $availableAddon->getName()) {
-                    $select->addOption('developer: modules',\rex_developer_manager::getBasePath() .'/modules/');
-                    $select->addOption('developer: templates',\rex_developer_manager::getBasePath() .'/templates/');
+                    $select->addOption('developer: modules', rex_developer_manager::getBasePath() .'/modules/');
+                    $select->addOption('developer: templates', rex_developer_manager::getBasePath() .'/templates/');
                 }
                 $select->endOptgroup();
             }
