@@ -186,7 +186,7 @@ final class RexStan
         if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
             $path = realpath(__DIR__.'/../vendor/bin/phpstan-baseline-graph.bat');
         } else {
-            $path = realpath(__DIR__.'/../vendor/bin/phpstan-baseline-graph');
+            $path = self::phpExecutable().' '.realpath(__DIR__.'/../vendor/bin/phpstan-baseline-graph');
         }
 
         if (false === $path) {
