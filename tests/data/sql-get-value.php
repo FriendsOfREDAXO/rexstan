@@ -71,3 +71,27 @@ function tableNamePrefix(): void
         ');
     assertType('string', $sql->getValue('rex_article.name'));
 }
+
+function escaped(string $s): void
+{
+    $sql = rex_sql::factory();
+    $sql->setQuery('
+            SELECT  name
+            FROM    ' . rex::getTablePrefix() . 'article
+            WHERE   id = "'. $sql->escape($s) .'"
+            LIMIT   1
+        ');
+    assertType('string', $sql->getValue('rex_article.name'));
+}
+
+function escapedWildcard(string $s): void
+{
+    $sql = rex_sql::factory();
+    $sql->setQuery('
+            SELECT  name
+            FROM    ' . rex::getTablePrefix() . 'article
+            WHERE   id LIKE "'. $sql->escape($sql->escapeLikeWildcards($s)) .'"
+            LIMIT   1
+        ');
+    assertType('string', $sql->getValue('rex_article.name'));
+}
