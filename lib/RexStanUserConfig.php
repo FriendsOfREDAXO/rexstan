@@ -1,5 +1,7 @@
 <?php
 
+use function Safe\md5_file;
+
 final class RexStanUserConfig
 {
     /**
