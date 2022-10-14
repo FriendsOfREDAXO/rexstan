@@ -12,6 +12,7 @@ if (is_dir(__DIR__.'/../../../vendor/')) {
     $REX['HTDOCS_PATH'] = realpath(__DIR__.'/../../../');
     $REX['BACKEND_FOLDER'] = '';
 } else {
+    // default redaxo5 directory layout
     $REX['HTDOCS_PATH'] = realpath(__DIR__.'/../../../../');
     $REX['BACKEND_FOLDER'] = 'redaxo';
 }
