@@ -18,10 +18,18 @@ final class RexStanUserConfig
      */
     public static function save(int $level, array $paths, array $includes, int $phpVersion)
     {
+        $scanDirectories = [];
+        foreach($paths as $path) {
+            if (is_dir($path.'functions/')) {
+                $scanDirectories[] = $path.'functions/';
+            }
+        }
+
         $file = [];
         $file['includes'] = $includes;
         $file['parameters']['level'] = $level;
         $file['parameters']['paths'] = $paths;
+        $file['parameters']['scanDirectories'] = $scanDirectories;
         $file['parameters']['phpVersion'] = $phpVersion;
 
         $prefix = "# rexstan auto generated file - do not edit, rename or remove\n\n";
