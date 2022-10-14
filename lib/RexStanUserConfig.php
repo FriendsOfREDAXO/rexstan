@@ -42,7 +42,8 @@ final class RexStanUserConfig
     /**
      * @return non-empty-string
      */
-    public static function getSignature():string {
+    public static function getSignature(): string
+    {
         $md5 = md5_file(self::getUserConfigPath());
         if (!$md5) {
             throw new \PHPStan\ShouldNotHappenException();

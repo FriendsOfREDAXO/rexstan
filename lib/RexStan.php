@@ -4,7 +4,8 @@ use staabm\PHPStanBaselineAnalysis\ResultPrinter;
 
 final class RexStan
 {
-    public static function phpExecutable(): string {
+    public static function phpExecutable(): string
+    {
         if ('Darwin' === PHP_OS_FAMILY) {
             $executable = 'php';
             $customConfig = '/Library/Application Support/appsolute/MAMP PRO/conf/php'.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION.'.ini';
