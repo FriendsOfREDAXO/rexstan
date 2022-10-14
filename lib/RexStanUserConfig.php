@@ -1,7 +1,5 @@
 <?php
 
-use function Safe\md5_file;
-
 final class RexStanUserConfig
 {
     /**
@@ -45,7 +43,11 @@ final class RexStanUserConfig
      * @return non-empty-string
      */
     public static function getSignature():string {
-        return md5_file(self::getUserConfigPath());
+        $md5 = md5_file(self::getUserConfigPath());
+        if (!$md5) {
+            throw new \PHPStan\ShouldNotHappenException();
+        }
+        return $md5;
     }
 
     /**
