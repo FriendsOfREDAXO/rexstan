@@ -47,7 +47,7 @@ function unknownValue(): void
     $sql->getArrayValue('doesNotExist');
 }
 
-function tableNamePrefix(): void
+function tableNamePrefixedString(): void
 {
     $sql = rex_sql::factory();
     $sql->setQuery('
