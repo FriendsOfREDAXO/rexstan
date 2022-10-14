@@ -7,8 +7,14 @@ use staabm\PHPStanDba\QueryReflection\RuntimeConfiguration;
 unset($REX);
 $REX['REDAXO'] = false;
 
-$REX['HTDOCS_PATH'] = realpath(__DIR__.'/../../../../');
-$REX['BACKEND_FOLDER'] = 'redaxo';
+if (is_dir(__DIR__.'/../../../vendor/')) {
+    // yakamara directoy layout
+    $REX['HTDOCS_PATH'] = realpath(__DIR__.'/../../../');
+    $REX['BACKEND_FOLDER'] = '';
+} else {
+    $REX['HTDOCS_PATH'] = realpath(__DIR__.'/../../../../');
+    $REX['BACKEND_FOLDER'] = 'redaxo';
+}
 $REX['LOAD_PAGE'] = false;
 
 require __DIR__.'/../../core/boot.php';
