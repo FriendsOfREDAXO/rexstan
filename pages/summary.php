@@ -10,36 +10,27 @@ if (null === $result) {
 }
 
 ?>
-<table class="table table-striped table-hover" style="width:auto;">
-    <thead>
-        <tr class="info">
-            <th>Fehlerklasse</th>
-            <th>Σ Anzahl</th>
-        </tr>
-    </thead>
+<div style="width: 80%; background-color: rgb(32, 43, 53)">
+    <?php echo rex_file::get(rex_addon::get('rexstan')->getDataPath().'/baseline-graph.html'); ?>
+</div>
+<table class="table table-striped table-hover" style="width: auto;">
     <tbody>
         <tr>
+            <th class="info">Fehlerklasse</th>
             <td>Errors</td>
-            <td><?= $result[ResultPrinter::KEY_OVERALL_ERRORS] ?></td>
-        </tr>
-        <tr>
             <td>Cognitive-Complexity</td>
-            <td><?= $result[ResultPrinter::KEY_CLASSES_COMPLEXITY] ?></td>
-        </tr>
-        <tr>
             <td>Deprecations</td>
-            <td><?= $result[ResultPrinter::KEY_DEPRECATIONS] ?></td>
-        </tr>
-        <tr>
             <td>Invalide PHPDocs</td>
-            <td><?= $result[ResultPrinter::KEY_INVALID_PHPDOCS] ?></td>
-        </tr>
-        <tr>
             <td>Unknown-Types</td>
-            <td><?= $result[ResultPrinter::KEY_UNKNOWN_TYPES] ?></td>
+            <td>Anonymous-Variables</td>
         </tr>
         <tr>
-            <td>Anonymous-Variables</td>
+            <th class="info">Σ Anzahl</th>
+            <td><?= $result[ResultPrinter::KEY_OVERALL_ERRORS] ?></td>
+            <td><?= $result[ResultPrinter::KEY_CLASSES_COMPLEXITY] ?></td>
+            <td><?= $result[ResultPrinter::KEY_DEPRECATIONS] ?></td>
+            <td><?= $result[ResultPrinter::KEY_INVALID_PHPDOCS] ?></td>
+            <td><?= $result[ResultPrinter::KEY_UNKNOWN_TYPES] ?></td>
             <td><?= $result[ResultPrinter::KEY_ANONYMOUS_VARIABLES] ?></td>
         </tr>
     </tbody>

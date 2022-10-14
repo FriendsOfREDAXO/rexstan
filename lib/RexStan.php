@@ -1,5 +1,7 @@
 <?php
 
+use staabm\PHPStanBaselineAnalysis\ResultPrinter;
+
 final class RexStan
 {
     public static function phpExecutable(): string {
@@ -57,16 +59,27 @@ final class RexStan
     }
 
     /**
-     * @return array{'Overall-Errors': int, 'Classes-Cognitive-Complexity': int, 'Deprecations': int, 'Invalid-Phpdocs': int, 'Unknown-Types': int, 'Anonymous-Variables': int}|null
+     * @return array<ResultPrinter::KEY_*, int>|null
      */
     public static function analyzeBaseline()
     {
         $phpstanBinary = self::phpstanBinPath();
         $analyzeBinary = self::phpstanBaselineAnalyzeBinPath();
+        $graphBinary = self::phpstanBaselineGraphBinPath();
         $configPath = self::phpstanConfigPath();
 
         $addon = rex_addon::get('rexstan');
         $dataDir = $addon->getDataPath();
+        $configSignature = RexStanUserConfig::getSignature();
+
+        // generate a summary graph only once within X minutes
+        // to reduce data consumption
+        $currentTime = time();
+        $currentTimeSlot = $currentTime - ($currentTime % (15 * 60));
+
+        $summaryPath = $dataDir.'/'.$configSignature.'/'. $currentTimeSlot .'-summary.json';
+        $baselineGlob = $dataDir.'/'.$configSignature.'/*-summary.json';
+        $htmlGraphPath = $dataDir.'/baseline-graph.html';
 
         self::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline', $lastError);
         if ('' !== $lastError) {
@@ -76,6 +89,17 @@ final class RexStan
         $output = self::execCmd('cd '.$dataDir.' && '. $analyzeBinary .' *phpstan-baseline.neon --json', $lastError);
         if ('' !== $lastError) {
             throw new \Exception('Unable to analyze baseline: '.$lastError);
+        }
+
+        if (!is_file($summaryPath)) {
+            rex_dir::create(dirname($summaryPath));
+            rex_file::put($summaryPath, $output);
+
+            $htmlOutput = self::execCmd('cd '.$dataDir.' && '. $graphBinary ." '". $baselineGlob ."'", $lastError);
+            if ('' !== $lastError) {
+                throw new \Exception('Unable to graph baseline: '.$lastError);
+            }
+            rex_file::put($htmlGraphPath, $htmlOutput);
         }
 
         // returns a json array
@@ -152,6 +176,21 @@ final class RexStan
 
         if (false === $path) {
             throw new \RuntimeException('phpstan-baseline-analyze binary not found');
+        }
+
+        return $path;
+    }
+
+    private static function phpstanBaselineGraphBinPath(): string
+    {
+        if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
+            $path = realpath(__DIR__.'/../vendor/bin/phpstan-baseline-graph.bat');
+        } else {
+            $path = self::phpExecutable().' '.realpath(__DIR__.'/../vendor/bin/phpstan-baseline-graph');
+        }
+
+        if (false === $path) {
+            throw new \RuntimeException('phpstan-baseline-graph binary not found');
         }
 
         return $path;

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4b6ef082da4f2a120a8f1eef45ac997a",
+    "content-hash": "c0b31b9a1fbbae2847383ed3aec3de34",
     "packages": [
         {
             "name": "composer/semver",
@@ -298,16 +298,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.10.0",
+            "version": "1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "87fa2d526e56737a2ae8fa201a61b15efae59b8a"
+                "reference": "7d1e81213b0c7eb8d5a9f524456cbc2778ed5c65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/87fa2d526e56737a2ae8fa201a61b15efae59b8a",
-                "reference": "87fa2d526e56737a2ae8fa201a61b15efae59b8a",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/7d1e81213b0c7eb8d5a9f524456cbc2778ed5c65",
+                "reference": "7d1e81213b0c7eb8d5a9f524456cbc2778ed5c65",
                 "shasum": ""
             },
             "require": {
@@ -337,9 +337,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.10.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.11.0"
             },
-            "time": "2022-10-12T19:19:18+00:00"
+            "time": "2022-10-14T13:32:28+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -680,16 +680,16 @@
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
-            "version": "0.8.2",
+            "version": "0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-baseline-analysis.git",
-                "reference": "1cb13cfd4a9ce7576fbf9487e8f39fd09c125f16"
+                "reference": "8116766e5595d34251a6e4e7c5084c1e0681e9d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/1cb13cfd4a9ce7576fbf9487e8f39fd09c125f16",
-                "reference": "1cb13cfd4a9ce7576fbf9487e8f39fd09c125f16",
+                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/8116766e5595d34251a6e4e7c5084c1e0681e9d3",
+                "reference": "8116766e5595d34251a6e4e7c5084c1e0681e9d3",
                 "shasum": ""
             },
             "require": {
@@ -706,7 +706,8 @@
             },
             "bin": [
                 "bin/phpstan-baseline-analyze",
-                "bin/phpstan-baseline-trend"
+                "bin/phpstan-baseline-trend",
+                "bin/phpstan-baseline-graph"
             ],
             "type": "library",
             "autoload": {
@@ -720,7 +721,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-baseline-analysis/issues",
-                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.8.2"
+                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.9"
             },
             "funding": [
                 {
@@ -728,7 +729,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-09-15T09:20:15+00:00"
+            "time": "2022-10-13T15:17:23+00:00"
         },
         {
             "name": "staabm/phpstan-dba",

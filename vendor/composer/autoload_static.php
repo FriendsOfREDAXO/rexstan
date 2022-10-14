@@ -271,10 +271,13 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'rexstan_command' => __DIR__ . '/../..' . '/lib/command.php',
         'staabm\\PHPStanBaselineAnalysis\\AnalyzeApplication' => __DIR__ . '/..' . '/staabm/phpstan-baseline-analysis/lib/AnalyzeApplication.php',
         'staabm\\PHPStanBaselineAnalysis\\AnalyzerResult' => __DIR__ . '/..' . '/staabm/phpstan-baseline-analysis/lib/AnalyzerResult.php',
+        'staabm\\PHPStanBaselineAnalysis\\AnalyzerResultReader' => __DIR__ . '/..' . '/staabm/phpstan-baseline-analysis/lib/AnalyzerResultReader.php',
         'staabm\\PHPStanBaselineAnalysis\\Baseline' => __DIR__ . '/..' . '/staabm/phpstan-baseline-analysis/lib/Baseline.php',
         'staabm\\PHPStanBaselineAnalysis\\BaselineAnalyzer' => __DIR__ . '/..' . '/staabm/phpstan-baseline-analysis/lib/BaselineAnalyzer.php',
         'staabm\\PHPStanBaselineAnalysis\\BaselineError' => __DIR__ . '/..' . '/staabm/phpstan-baseline-analysis/lib/BaselineError.php',
         'staabm\\PHPStanBaselineAnalysis\\BaselineFinder' => __DIR__ . '/..' . '/staabm/phpstan-baseline-analysis/lib/BaselineFinder.php',
+        'staabm\\PHPStanBaselineAnalysis\\GraphApplication' => __DIR__ . '/..' . '/staabm/phpstan-baseline-analysis/lib/GraphApplication.php',
+        'staabm\\PHPStanBaselineAnalysis\\GraphTemplate' => __DIR__ . '/..' . '/staabm/phpstan-baseline-analysis/lib/GraphTemplate.php',
         'staabm\\PHPStanBaselineAnalysis\\ResultPrinter' => __DIR__ . '/..' . '/staabm/phpstan-baseline-analysis/lib/ResultPrinter.php',
         'staabm\\PHPStanBaselineAnalysis\\TrendApplication' => __DIR__ . '/..' . '/staabm/phpstan-baseline-analysis/lib/TrendApplication.php',
     );
