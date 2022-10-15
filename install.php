@@ -1,5 +1,8 @@
 <?php
 
+use rexstan\RexStan;
+use rexstan\RexStanUserConfig;
+
 $addon = rex_addon::get('rexstan');
 
 if (isset($REX['PATH_PROVIDER'])) {

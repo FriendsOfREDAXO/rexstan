@@ -1,10 +1,11 @@
 <?php
 
-namespace redaxo\phpstan;
+namespace rexstan;
 
 use rex_addon;
 use rex_config;
 use rex_config_form;
+use rex_developer_manager;
 use rex_path;
 
 final class RexStanSettings

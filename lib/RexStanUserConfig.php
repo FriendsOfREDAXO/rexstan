@@ -1,5 +1,13 @@
 <?php
 
+namespace rexstan;
+
+use rex_addon;
+use rex_file;
+use rex_path;
+use rex_string;
+use RuntimeException;
+
 final class RexStanUserConfig
 {
     /**
@@ -70,7 +78,7 @@ final class RexStanUserConfig
         $neon = rex_file::get(self::getUserConfigPath());
 
         if (null === $neon) {
-            throw new \RuntimeException('Unable to read userconfig');
+            throw new RuntimeException('Unable to read userconfig');
         }
 
         return $neon;

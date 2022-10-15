@@ -29,58 +29,58 @@ services:
                 - 'rex_sql::getQueryType#0'
 
     -
-        class: redaxo\phpstan\RexSqlDynamicReturnTypeExtension
+        class: rexstan\RexSqlDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
 
     -
-        class: redaxo\phpstan\RexSqlSetQueryTypeSpecifyingExtension
+        class: rexstan\RexSqlSetQueryTypeSpecifyingExtension
         tags:
             - phpstan.typeSpecifier.methodTypeSpecifyingExtension
 
     -
-        class: redaxo\phpstan\RexSqlGetValueDynamicReturnTypeExtension
+        class: rexstan\RexSqlGetValueDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
     -
-        class: redaxo\phpstan\RexSqlGetArrayDynamicReturnTypeExtension
+        class: rexstan\RexSqlGetArrayDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
 
     -
-        class: redaxo\phpstan\RexGetRule
+        class: rexstan\RexGetRule
         tags:
             - phpstan.rules.rule
     -
-        class: redaxo\phpstan\RexGetValueRule
+        class: rexstan\RexGetValueRule
         tags:
             - phpstan.rules.rule
     -
-        class: redaxo\phpstan\RexSqlGetValueRule
+        class: rexstan\RexSqlGetValueRule
         tags:
             - phpstan.rules.rule
     -
-        class: redaxo\phpstan\RexSqlInjectionRule
+        class: rexstan\RexSqlInjectionRule
         tags:
             - phpstan.rules.rule
 
     -
-        class: redaxo\phpstan\RexMediaGetValueDynamicReturnTypeExtension
+        class: rexstan\RexMediaGetValueDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
     -
-        class: redaxo\phpstan\RexArticleGetValueDynamicReturnTypeExtension
+        class: rexstan\RexArticleGetValueDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
     -
-        class: redaxo\phpstan\RexCategoryGetValueDynamicReturnTypeExtension
+        class: rexstan\RexCategoryGetValueDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
     -
-        class: redaxo\phpstan\RexArticleSliceGetValueDynamicReturnTypeExtension
+        class: rexstan\RexArticleSliceGetValueDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
     -
-        class: redaxo\phpstan\RexUserGetValueDynamicReturnTypeExtension
+        class: rexstan\RexUserGetValueDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
