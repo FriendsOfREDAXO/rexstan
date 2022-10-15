@@ -1,6 +1,15 @@
 <?php
 
+namespace rexstan;
+
+use Exception;
+use rex_addon;
+use rex_dir;
+use rex_file;
+use RuntimeException;
 use staabm\PHPStanBaselineAnalysis\ResultPrinter;
+use function array_key_exists;
+use function dirname;
 
 final class RexStan
 {
@@ -84,12 +93,12 @@ final class RexStan
 
         self::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline', $lastError);
         if ('' !== $lastError) {
-            throw new \Exception('Unable to generate baseline:'. $lastError);
+            throw new Exception('Unable to generate baseline:'. $lastError);
         }
 
         $output = self::execCmd('cd '.$dataDir.' && '. $analyzeBinary .' *phpstan-baseline.neon --json', $lastError);
         if ('' !== $lastError) {
-            throw new \Exception('Unable to analyze baseline: '.$lastError);
+            throw new Exception('Unable to analyze baseline: '.$lastError);
         }
 
         if (!is_file($summaryPath)) {
@@ -98,7 +107,7 @@ final class RexStan
 
             $htmlOutput = self::execCmd('cd '.$dataDir.' && '. $graphBinary ." '". $baselineGlob ."'", $lastError);
             if ('' !== $lastError) {
-                throw new \Exception('Unable to graph baseline: '.$lastError);
+                throw new Exception('Unable to graph baseline: '.$lastError);
             }
             rex_file::put($htmlGraphPath, $htmlOutput);
         }
@@ -109,10 +118,10 @@ final class RexStan
             $array = json_decode($output, true);
 
             if (!array_key_exists(0, $array)) {
-                throw new \Exception('The baseline analysis result is not an array');
+                throw new Exception('The baseline analysis result is not an array');
             }
             if (!array_key_exists('phpstan-baseline.neon', $array[0])) {
-                throw new \Exception('The baseline analysis result is not an array');
+                throw new Exception('The baseline analysis result is not an array');
             }
 
             return $array[0]['phpstan-baseline.neon'];
@@ -161,7 +170,7 @@ final class RexStan
         }
 
         if (false === $path) {
-            throw new \RuntimeException('phpstan binary not found');
+            throw new RuntimeException('phpstan binary not found');
         }
 
         return $path;
@@ -176,7 +185,7 @@ final class RexStan
         }
 
         if (false === $path) {
-            throw new \RuntimeException('phpstan-baseline-analyze binary not found');
+            throw new RuntimeException('phpstan-baseline-analyze binary not found');
         }
 
         return $path;
@@ -191,7 +200,7 @@ final class RexStan
         }
 
         if (false === $path) {
-            throw new \RuntimeException('phpstan-baseline-graph binary not found');
+            throw new RuntimeException('phpstan-baseline-graph binary not found');
         }
 
         return $path;
@@ -202,7 +211,7 @@ final class RexStan
         $path = realpath(__DIR__.'/../phpstan.neon');
 
         if (false === $path) {
-            throw new \RuntimeException(sprintf('phpstan config "%s" not found. This file is usually created while AddOn setup. Try re-install of rexstan.', $path));
+            throw new RuntimeException(sprintf('phpstan config "%s" not found. This file is usually created while AddOn setup. Try re-install of rexstan.', $path));
         }
 
         return $path;

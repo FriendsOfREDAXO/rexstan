@@ -57,11 +57,11 @@ parameters:
 
 services:
     -
-        class: redaxo\phpstan\RexClassDynamicReturnTypeExtension
+        class: rexstan\RexClassDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicStaticMethodReturnTypeExtension
 
     -
-        class: redaxo\phpstan\RexFunctionsDynamicReturnTypeExtension
+        class: rexstan\RexFunctionsDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicFunctionReturnTypeExtension

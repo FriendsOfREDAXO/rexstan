@@ -2,6 +2,10 @@
 
 /** @var rex_addon $this */
 
+use rexstan\RexStan;
+use rexstan\RexStanTip;
+use rexstan\RexStanUserConfig;
+
 $phpstanResult = RexStan::runFromWeb();
 $settingsUrl = rex_url::backendPage('rexstan/settings');
 

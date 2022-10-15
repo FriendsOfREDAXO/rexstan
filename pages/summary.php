@@ -1,5 +1,6 @@
 <?php
 
+use rexstan\RexStan;
 use staabm\PHPStanBaselineAnalysis\ResultPrinter;
 
 $result = RexStan::analyzeBaseline();

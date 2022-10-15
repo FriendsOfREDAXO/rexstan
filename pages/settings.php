@@ -1,6 +1,9 @@
 <?php
 
-$form = redaxo\phpstan\RexStanSettings::createForm();
+use rexstan\RexStanSettings;
+use rexstan\RexStanUserConfig;
+
+$form = RexStanSettings::createForm();
 $faqUrl = rex_url::backendPage('rexstan/faq');
 
 $fragment = new rex_fragment();
