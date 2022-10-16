@@ -23,6 +23,10 @@ final class RexStanUserConfig
             if (is_dir($path.'functions/')) {
                 $scanDirectories[] = $path.'functions/';
             }
+
+            foreach(glob($path.'plugins/*/functions/', GLOB_ONLYDIR) as $pluginFunctionsPath) {
+                $scanDirectories[] = $pluginFunctionsPath;
+            }
         }
 
         $file = [];
