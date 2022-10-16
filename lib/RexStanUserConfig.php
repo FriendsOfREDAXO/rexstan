@@ -4,6 +4,7 @@ namespace rexstan;
 
 use rex_addon;
 use rex_file;
+use rex_package;
 use rex_path;
 use rex_string;
 use RuntimeException;
@@ -18,10 +19,19 @@ final class RexStanUserConfig
      */
     public static function save(int $level, array $paths, array $includes, int $phpVersion)
     {
+        $scanDirectories = [];
+        foreach (rex_package::getAvailablePackages() as $package) {
+            $functionsPath = $package->getPath('functions/');
+            if (is_dir($functionsPath)) {
+                $scanDirectories[] = $functionsPath;
+            }
+        }
+
         $file = [];
         $file['includes'] = $includes;
         $file['parameters']['level'] = $level;
         $file['parameters']['paths'] = $paths;
+        $file['parameters']['scanDirectories'] = $scanDirectories;
         $file['parameters']['phpVersion'] = $phpVersion;
 
         $prefix = "# rexstan auto generated file - do not edit, rename or remove\n\n";

@@ -38,12 +38,9 @@ parameters:
         - '#Function str_starts_with not found.#'
         - '#Function str_contains not found.#'
 
-    # autoload core/core-addon symbols which are not autoloadable
+    # autoload core symbols which are not autoloadable
     scanDirectories:
         - ../../core/functions/
-        - ../structure/functions/
-        - ../metainfo/functions/
-        - ../mediapool/functions/
 
     phpVersion: 70300 # PHP 7.3
     treatPhpDocTypesAsCertain: false
