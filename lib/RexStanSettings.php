@@ -54,7 +54,7 @@ final class RexStanSettings
     {
         $extensions = [];
         foreach (self::$phpstanExtensions as $label => $path) {
-            $extensions[rex_path::addon('rexstan', $path)] = $label;
+            $extensions[rex_path::relative(rex_path::addon('rexstan', $path))] = $label;
         }
 
         $extensionLinks = [];
@@ -64,7 +64,7 @@ final class RexStanSettings
 
         $scanTargets = [];
         foreach (rex_addon::getAvailableAddons() as $availableAddon) {
-            $scanTargets[$availableAddon->getPath()] = $availableAddon->getName();
+            $scanTargets[rex_path::relative($availableAddon->getPath())] = $availableAddon->getName();
 
             if ('developer' === $availableAddon->getName() && class_exists(rex_developer_manager::class)) {
                 $scanTargets[rex_developer_manager::getBasePath() .'/modules/'] = 'developer: modules';
