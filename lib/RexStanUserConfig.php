@@ -4,6 +4,7 @@ namespace rexstan;
 
 use rex_addon;
 use rex_file;
+use rex_package;
 use rex_path;
 use rex_string;
 use RuntimeException;
@@ -19,13 +20,10 @@ final class RexStanUserConfig
     public static function save(int $level, array $paths, array $includes, int $phpVersion)
     {
         $scanDirectories = [];
-        foreach($paths as $path) {
-            if (is_dir($path.'functions/')) {
-                $scanDirectories[] = $path.'functions/';
-            }
-
-            foreach(glob($path.'plugins/*/functions/', GLOB_ONLYDIR) as $pluginFunctionsPath) {
-                $scanDirectories[] = $pluginFunctionsPath;
+        foreach (rex_package::getAvailablePackages() as $package) {
+            $functionsPath = $package->getPath('functions/');
+            if (is_dir($functionsPath)) {
+                $scanDirectories[] = $functionsPath;
             }
         }
 
