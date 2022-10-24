@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f48e661e0cdddb86e0e0a5c9c71aab76",
+    "content-hash": "c0c1f93d0dbe2d9ad18f61e6e4810ea8",
     "packages": [
         {
             "name": "composer/semver",
@@ -623,16 +623,16 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v2.7.0",
+            "version": "v2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "1cd98848bc1805156b4547e75e97274be70af4a7"
+                "reference": "7a68d5ce86b134889540313b359c4750625c1ece"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/1cd98848bc1805156b4547e75e97274be70af4a7",
-                "reference": "1cd98848bc1805156b4547e75e97274be70af4a7",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/7a68d5ce86b134889540313b359c4750625c1ece",
+                "reference": "7a68d5ce86b134889540313b359c4750625c1ece",
                 "shasum": ""
             },
             "require": {
@@ -672,11 +672,14 @@
                 }
             ],
             "description": "PHPStan rules to detect disallowed method & function calls, constant, namespace & superglobal usages",
+            "keywords": [
+                "static analysis"
+            ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.7.0"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.8.0"
             },
-            "time": "2022-10-08T18:34:05+00:00"
+            "time": "2022-10-22T03:45:12+00:00"
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
