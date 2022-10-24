@@ -8,22 +8,22 @@ use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\CollectedDataNode;
 use PHPStan\Rules\Rule;
-use Symplify\PHPStanRules\Collector\FunctionLike\ParamTypeSeaLevelCollector;
+use Symplify\PHPStanRules\Collector\ClassLike\PropertyTypeSeaLevelCollector;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
- * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\ParamTypeDeclarationSeaLevelRule\ParamTypeDeclarationSeaLevelRuleTest
+ * @see \Symplify\PHPStanRules\Tests\Rules\Explicit\PropertyTypeDeclarationSeaLevelRule\PropertyTypeDeclarationSeaLevelRuleTest
  *
  * @implements Rule<CollectedDataNode>
  */
-final class ParamTypeDeclarationSeaLevelRule implements Rule
+final class PropertyTypeDeclarationSeaLevelRule implements Rule
 {
     /**
      * @var string
      */
-    public const ERROR_MESSAGE = 'Out of %d possible param types, only %d %% actually have it. Add more param types to get over %d %%';
+    public const ERROR_MESSAGE = 'Out of %d possible property types, only %d %% actually have it. Add more property types to get over %d %%';
     /**
      * @var float
      */
@@ -48,33 +48,33 @@ final class ParamTypeDeclarationSeaLevelRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        $paramSeaLevelDataByFilePath = $node->get(ParamTypeSeaLevelCollector::class);
+        $propertySeaLevelDataByFilePath = $node->get(PropertyTypeSeaLevelCollector::class);
 
-        $typedParamCount = 0;
-        $paramCount = 0;
+        $typedPropertyCount = 0;
+        $propertyCount = 0;
 
-        foreach ($paramSeaLevelDataByFilePath as $paramSeaLevelData) {
-            foreach ($paramSeaLevelData as $nestedParamSeaLevelData) {
-                $typedParamCount += $nestedParamSeaLevelData[0];
-                $paramCount += $nestedParamSeaLevelData[1];
+        foreach ($propertySeaLevelDataByFilePath as $propertySeaLevelData) {
+            foreach ($propertySeaLevelData as $nestedPropertySeaLevelData) {
+                $typedPropertyCount += $nestedPropertySeaLevelData[0];
+                $propertyCount += $nestedPropertySeaLevelData[1];
             }
         }
 
-        if ($paramCount === 0) {
+        if ($propertyCount === 0) {
             return [];
         }
 
-        $paramTypeDeclarationSeaLevel = $typedParamCount / $paramCount;
+        $propertyTypeDeclarationSeaLevel = $typedPropertyCount / $propertyCount;
 
         // has the code met the minimal sea level of types?
-        if ($paramTypeDeclarationSeaLevel >= $this->minimalLevel) {
+        if ($propertyTypeDeclarationSeaLevel >= $this->minimalLevel) {
             return [];
         }
 
         $errorMessage = sprintf(
             self::ERROR_MESSAGE,
-            $paramCount,
-            $paramTypeDeclarationSeaLevel * 100,
+            $propertyCount,
+            $propertyTypeDeclarationSeaLevel * 100,
             $this->minimalLevel * 100
         );
 
@@ -88,18 +88,14 @@ final class ParamTypeDeclarationSeaLevelRule implements Rule
                 <<<'CODE_SAMPLE'
 final class SomeClass
 {
-    public function run($name, $age)
-    {
-    }
+    public $name;
 }
 CODE_SAMPLE
                 ,
                 <<<'CODE_SAMPLE'
 final class SomeClass
 {
-    public function run(string $name, int $age)
-    {
-    }
+    public string $name;
 }
 CODE_SAMPLE
             ),

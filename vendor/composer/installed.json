@@ -304,17 +304,17 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.11.0",
-            "version_normalized": "1.11.0.0",
+            "version": "1.13.0",
+            "version_normalized": "1.13.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "7d1e81213b0c7eb8d5a9f524456cbc2778ed5c65"
+                "reference": "33aefcdab42900e36366d0feab6206e2dd68f947"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/7d1e81213b0c7eb8d5a9f524456cbc2778ed5c65",
-                "reference": "7d1e81213b0c7eb8d5a9f524456cbc2778ed5c65",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/33aefcdab42900e36366d0feab6206e2dd68f947",
+                "reference": "33aefcdab42900e36366d0feab6206e2dd68f947",
                 "shasum": ""
             },
             "require": {
@@ -329,7 +329,7 @@
                 "phpunit/phpunit": "^9.5",
                 "symfony/process": "^5.2"
             },
-            "time": "2022-10-14T13:32:28+00:00",
+            "time": "2022-10-21T09:57:39+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -346,7 +346,7 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.11.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.13.0"
             },
             "install-path": "../phpstan/phpdoc-parser"
         },
@@ -647,17 +647,17 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v2.7.0",
-            "version_normalized": "2.7.0.0",
+            "version": "v2.8.0",
+            "version_normalized": "2.8.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "1cd98848bc1805156b4547e75e97274be70af4a7"
+                "reference": "7a68d5ce86b134889540313b359c4750625c1ece"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/1cd98848bc1805156b4547e75e97274be70af4a7",
-                "reference": "1cd98848bc1805156b4547e75e97274be70af4a7",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/7a68d5ce86b134889540313b359c4750625c1ece",
+                "reference": "7a68d5ce86b134889540313b359c4750625c1ece",
                 "shasum": ""
             },
             "require": {
@@ -672,7 +672,7 @@
                 "phpunit/phpunit": "^7.0 || ^9.4.2",
                 "spaze/coding-standard": "^1.3"
             },
-            "time": "2022-10-08T18:34:05+00:00",
+            "time": "2022-10-22T03:45:12+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -699,9 +699,12 @@
                 }
             ],
             "description": "PHPStan rules to detect disallowed method & function calls, constant, namespace & superglobal usages",
+            "keywords": [
+                "static analysis"
+            ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.7.0"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.8.0"
             },
             "install-path": "../spaze/phpstan-disallowed-calls"
         },
@@ -907,17 +910,17 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "11.1.10",
-            "version_normalized": "11.1.10.0",
+            "version": "11.1.11",
+            "version_normalized": "11.1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "a49cb445ad1ef58a3f4c9ab43cbd48572a933bc9"
+                "reference": "28ef193bf7122c5d66a181cb69889c0d4145ac43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/a49cb445ad1ef58a3f4c9ab43cbd48572a933bc9",
-                "reference": "a49cb445ad1ef58a3f4c9ab43cbd48572a933bc9",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/28ef193bf7122c5d66a181cb69889c0d4145ac43",
+                "reference": "28ef193bf7122c5d66a181cb69889c0d4145ac43",
                 "shasum": ""
             },
             "require": {
@@ -928,7 +931,7 @@
                 "phpstan/phpstan": "^1.8.1",
                 "webmozart/assert": "^1.10"
             },
-            "time": "2022-09-29T10:38:28+00:00",
+            "time": "2022-10-23T14:56:17+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "branch-alias": {
@@ -957,7 +960,7 @@
             ],
             "description": "Set of Symplify rules for PHPStan",
             "support": {
-                "source": "https://github.com/symplify/phpstan-rules/tree/11.1.10"
+                "source": "https://github.com/symplify/phpstan-rules/tree/11.1.11"
             },
             "funding": [
                 {
