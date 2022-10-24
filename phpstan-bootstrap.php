@@ -7,7 +7,15 @@ use staabm\PHPStanDba\QueryReflection\RuntimeConfiguration;
 unset($REX);
 $REX['REDAXO'] = false;
 
-$REX['HTDOCS_PATH'] = realpath(__DIR__.'/../../../../');
+if (is_dir(__DIR__.'/../../../vendor/')) {
+    // yakamara directoy layout
+    $REX['HTDOCS_PATH'] = realpath(__DIR__.'/../../../');
+    require __DIR__ . '/../../../src/path_provider.php';
+    $REX['PATH_PROVIDER'] = new app_path_provider();
+} else {
+    // default redaxo5 directory layout
+    $REX['HTDOCS_PATH'] = realpath(__DIR__.'/../../../../');
+}
 $REX['BACKEND_FOLDER'] = 'redaxo';
 $REX['LOAD_PAGE'] = false;
 
