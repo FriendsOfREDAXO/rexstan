@@ -3,6 +3,8 @@
 namespace PHPStan\Type\PHPUnit\Assert;
 
 use Closure;
+use Countable;
+use EmptyIterator;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\BinaryOp\Identical;
@@ -11,6 +13,7 @@ use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\Instanceof_;
 use PhpParser\Node\Name;
+use PhpParser\Node\Scalar\LNumber;
 use PHPStan\Analyser\Scope;
 use PHPStan\Analyser\SpecifiedTypes;
 use PHPStan\Analyser\TypeSpecifier;
@@ -154,6 +157,18 @@ class AssertTypeSpecifyingExtensionHelper
 					return new Identical(
 						$actual->value,
 						new ConstFetch(new Name('null'))
+					);
+				},
+				'Empty' => static function (Scope $scope, Arg $actual): Expr\BinaryOp\BooleanOr {
+					return new Expr\BinaryOp\BooleanOr(
+						new Instanceof_($actual->value, new Name(EmptyIterator::class)),
+						new Expr\BinaryOp\BooleanOr(
+							new Expr\BinaryOp\BooleanAnd(
+								new Instanceof_($actual->value, new Name(Countable::class)),
+								new Identical(new FuncCall(new Name('count'), [new Arg($actual->value)]), new LNumber(0))
+							),
+							new Expr\Empty_($actual->value)
+						)
 					);
 				},
 				'IsArray' => static function (Scope $scope, Arg $actual): FuncCall {
