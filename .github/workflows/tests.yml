@@ -24,6 +24,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
+          extensions: gd, intl, pdo_mysql
           coverage: none
 
       - uses: "ramsey/composer-install@v2"
@@ -31,5 +32,15 @@ jobs:
           composer-options: "--prefer-dist --no-progress --no-suggest"
 
       - run: composer require redaxo/source
+
+      -
+        name: Init database
+        run: |
+             sudo /etc/init.d/mysql start
+             mysql -uroot -h127.0.0.1 -proot -e 'create database redaxo5;'
+
+      -   name: Setup REDAXO
+          run: |
+             php vendor/bin/console setup:run -n --lang=de_de --agree-license --db-password=root --db-createdb=no --db-setup=normal --admin-username=admin
 
       - run: composer test
