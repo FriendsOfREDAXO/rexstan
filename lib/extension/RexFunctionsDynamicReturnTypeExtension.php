@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace rexstan;
 
+use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\StaticCall;
 use PHPStan\Analyser\Scope;
@@ -63,6 +64,9 @@ final class RexFunctionsDynamicReturnTypeExtension implements DynamicFunctionRet
         return $this->getType($functionCall->getArgs(), $scope);
     }
 
+    /**
+     * @param Arg[] $args
+     */
     private function getType(array $args, Scope $scope): ?Type
     {
         if (count($args) < 2) {
