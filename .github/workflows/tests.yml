@@ -41,6 +41,6 @@ jobs:
                     path: vendor/redaxo/source/redaxo/src/addons/rexstan
 
             -   run: php vendor/bin/console package:install rexstan
-            -   run: php vendor/bin/console package:install activate
+            -   run: php vendor/bin/console package:activate rexstan
 
             -   run: cd vendor/redaxo/source/redaxo/src/addons/rexstan && composer test
