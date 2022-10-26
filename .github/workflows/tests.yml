@@ -17,8 +17,6 @@ jobs:
         php-version: ['8.0', '8.1', '8.2']
 
     steps:
-      - uses: actions/checkout@v2
-
       - name: Setup PHP
         id: setup-php
         uses: shivammathur/setup-php@v2
@@ -26,10 +24,6 @@ jobs:
           php-version: ${{ matrix.php-version }}
           extensions: gd, intl, pdo_mysql
           coverage: none
-
-      - uses: "ramsey/composer-install@v2"
-        with:
-          composer-options: "--prefer-dist --no-progress --no-suggest"
 
       - run: composer require redaxo/source
 
@@ -41,6 +35,17 @@ jobs:
 
       -   name: Setup REDAXO
           run: |
-             php vendor/bin/console setup:run -n --lang=de_de --agree-license --db-password=root --db-createdb=no --db-setup=normal --admin-username=admin --admin-password=adminpassword --error-email=test@redaxo.invalid --ansi
+             php vendor/bin/console setup:run -n --lang=de_de --agree-license --db-host=127.0.0.1 --db-password=root --db-createdb=no --db-setup=normal --admin-username=admin --admin-password=adminpassword --error-email=test@redaxo.invalid --ansi
+
+      - uses: actions/checkout@v3
+        path: vendor/redaxo/source/redaxo/src/addons/rexstan
+
+      - run: ls -l vendor/redaxo/source/redaxo/src/addons
+      - run: ls -l vendor/redaxo/source/redaxo/src/addons/rexstan
+
+      - uses: "ramsey/composer-install@v2"
+        with:
+            working-directory: vendor/redaxo/source/redaxo/src/addons/rexstan
+            composer-options: "--prefer-dist --no-progress --no-suggest"
 
       - run: composer test
