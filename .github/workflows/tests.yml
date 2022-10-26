@@ -40,9 +40,7 @@ jobs:
                 with:
                     path: vendor/redaxo/source/redaxo/src/addons/rexstan
 
-            -   uses: "ramsey/composer-install@v2"
-                with:
-                    working-directory: vendor/redaxo/source/redaxo/src/addons/rexstan
-                    composer-options: "--prefer-dist --no-progress --no-suggest"
+            -   run: php vendor/bin/console package:install rexstan
+            -   run: php vendor/bin/console package:install activate
 
             -   run: cd vendor/redaxo/source/redaxo/src/addons/rexstan && composer test
