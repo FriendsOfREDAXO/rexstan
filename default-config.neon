@@ -62,3 +62,4 @@ services:
         class: rexstan\RexFunctionsDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicFunctionReturnTypeExtension
+            - phpstan.broker.dynamicStaticMethodReturnTypeExtension

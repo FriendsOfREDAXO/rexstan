@@ -28,12 +28,12 @@
     return (string) $post->id;
 }, $mixed).
 /tests/data/sql-injection.php:67:Possible SQL-injection in expression str_replace(['_', '%'], ['\\_', '\\%'], $prefix).
-/tests/data/superglobals.php:4:Using $_SESSION is forbidden, use rex_request::session(), rex_request::setSession() or rex_session(), rex_set_session() instead for proper per instance scoping.
-/tests/data/superglobals.php:5:Using $_GET is forbidden, use rex_request::get() or rex_get() instead.
-/tests/data/superglobals.php:6:Using $_POST is forbidden, use rex_request::post() or rex_post() instead.
-/tests/data/superglobals.php:7:Using $_REQUEST is forbidden, use rex_request::request() or rex_request() instead.
-/tests/data/superglobals.php:8:Using $_COOKIE is forbidden, use rex_request::cookie() or rex_cookie() instead.
-/tests/data/superglobals.php:9:Using $_SERVER is forbidden, use rex_request::server() or rex_server() instead.
-/tests/data/superglobals.php:10:Using $_ENV is forbidden, use rex_request::env() or rex_env() instead.
-/tests/data/superglobals.php:11:Using $_FILES is forbidden, use rex_request::files() or rex_files() instead.
-/tests/data/superglobals.php:13:Calling setcookie() is forbidden, use rex_response::sendCookie() or rex_response::clearCookie() instead.
+/tests/data/superglobals.php:6:Using $_SESSION is forbidden, use rex_request::session(), rex_request::setSession() or rex_session(), rex_set_session() instead for proper per instance scoping.
+/tests/data/superglobals.php:7:Using $_GET is forbidden, use rex_request::get() or rex_get() instead.
+/tests/data/superglobals.php:8:Using $_POST is forbidden, use rex_request::post() or rex_post() instead.
+/tests/data/superglobals.php:9:Using $_REQUEST is forbidden, use rex_request::request() or rex_request() instead.
+/tests/data/superglobals.php:10:Using $_COOKIE is forbidden, use rex_request::cookie() or rex_cookie() instead.
+/tests/data/superglobals.php:11:Using $_SERVER is forbidden, use rex_request::server() or rex_server() instead.
+/tests/data/superglobals.php:12:Using $_ENV is forbidden, use rex_request::env() or rex_env() instead.
+/tests/data/superglobals.php:13:Using $_FILES is forbidden, use rex_request::files() or rex_files() instead.
+/tests/data/superglobals.php:15:Calling setcookie() is forbidden, use rex_response::sendCookie() or rex_response::clearCookie() instead.

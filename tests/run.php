@@ -8,7 +8,8 @@ $output = trim((string) shell_exec('php vendor/bin/phpstan analyze tests/ --erro
 $output = preg_replace('/\s*$/', '', $output);
 $expected = trim((string) file_get_contents(__DIR__.'/expected.out'));
 
-function relativePath(string $path):string {
+function relativePath(string $path): string
+{
     $projectRoot = realpath(__DIR__.'/../');
 
     $projectRoot = str_replace('\\', '/', $projectRoot);

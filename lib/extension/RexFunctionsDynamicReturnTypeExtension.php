@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace rexstan;
 
+use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\FuncCall;
+use PhpParser\Node\Expr\StaticCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\FunctionReflection;
+use PHPStan\Reflection\MethodReflection;
 use PHPStan\ShouldNotHappenException;
 use PHPStan\Type\ArrayType;
 use PHPStan\Type\BooleanType;
 use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\DynamicFunctionReturnTypeExtension;
+use PHPStan\Type\DynamicStaticMethodReturnTypeExtension;
 use PHPStan\Type\FloatType;
 use PHPStan\Type\IntegerType;
 use PHPStan\Type\MixedType;
@@ -19,11 +23,34 @@ use PHPStan\Type\ObjectWithoutClassType;
 use PHPStan\Type\StringType;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
+use rex_request;
 use function count;
 use function in_array;
 
-final class RexFunctionsDynamicReturnTypeExtension implements DynamicFunctionReturnTypeExtension
+final class RexFunctionsDynamicReturnTypeExtension implements DynamicFunctionReturnTypeExtension, DynamicStaticMethodReturnTypeExtension
 {
+    public function getClass(): string
+    {
+        return rex_request::class;
+    }
+
+    public function isStaticMethodSupported(MethodReflection $methodReflection): bool
+    {
+        return in_array(
+            strtolower($methodReflection->getName()),
+            ['get', 'post', 'request', 'server', 'session', 'cookie', 'files', 'env'],
+            true
+        );
+    }
+
+    public function getTypeFromStaticMethodCall(
+        MethodReflection $methodReflection,
+        StaticCall $methodCall,
+        Scope $scope
+    ): ?Type {
+        return $this->getType($methodCall->getArgs(), $scope);
+    }
+
     public function isFunctionSupported(FunctionReflection $functionReflection): bool
     {
         return in_array($functionReflection->getName(), ['rex_get', 'rex_post', 'rex_request', 'rex_server', 'rex_session', 'rex_cookie', 'rex_files', 'rex_env'], true);
@@ -34,8 +61,14 @@ final class RexFunctionsDynamicReturnTypeExtension implements DynamicFunctionRet
         FuncCall $functionCall,
         Scope $scope
     ): ?Type {
-        $args = $functionCall->getArgs();
+        return $this->getType($functionCall->getArgs(), $scope);
+    }
 
+    /**
+     * @param Arg[] $args
+     */
+    private function getType(array $args, Scope $scope): ?Type
+    {
         if (count($args) < 2) {
             return null;
         }
