@@ -37,7 +37,8 @@ jobs:
                     php vendor/bin/console setup:run -n --lang=de_de --agree-license --db-host=127.0.0.1 --db-password=root --db-createdb=no --db-setup=normal --admin-username=admin --admin-password=adminpassword --error-email=test@redaxo.invalid --ansi
 
             -   uses: actions/checkout@v3
-                path: vendor/redaxo/source/redaxo/src/addons/rexstan
+                with:
+                    path: vendor/redaxo/source/redaxo/src/addons/rexstan
 
             -   run: ls -l vendor/redaxo/source/redaxo/src/addons
             -   run: ls -l vendor/redaxo/source/redaxo/src/addons/rexstan
