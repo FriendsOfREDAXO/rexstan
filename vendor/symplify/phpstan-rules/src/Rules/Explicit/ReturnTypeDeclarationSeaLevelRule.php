@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Explicit;
 
+use Nette\Utils\Strings;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\CollectedDataNode;
@@ -53,10 +54,18 @@ final class ReturnTypeDeclarationSeaLevelRule implements Rule
         $typedReturnCount = 0;
         $returnCount = 0;
 
+        $printedClassMethods = '';
+
         foreach ($returnSeaLevelDataByFilePath as $returnSeaLevelData) {
             foreach ($returnSeaLevelData as $nestedReturnSeaLevelData) {
                 $typedReturnCount += $nestedReturnSeaLevelData[0];
                 $returnCount += $nestedReturnSeaLevelData[1];
+
+                /** @var string $printedClassMethod */
+                $printedClassMethod = $nestedReturnSeaLevelData[2];
+                if ($printedClassMethod !== '') {
+                    $printedClassMethods .= PHP_EOL . PHP_EOL . trim($printedClassMethod);
+                }
             }
         }
 
@@ -77,6 +86,11 @@ final class ReturnTypeDeclarationSeaLevelRule implements Rule
             $returnTypeDeclarationSeaLevel * 100,
             $this->minimalLevel * 100
         );
+
+        $errorMessage .= $printedClassMethods . PHP_EOL;
+
+        // keep error printable
+        $errorMessage = Strings::truncate($errorMessage, 8000);
 
         return [$errorMessage];
     }

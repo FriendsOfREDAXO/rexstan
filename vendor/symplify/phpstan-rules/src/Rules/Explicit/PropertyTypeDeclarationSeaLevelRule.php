@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Explicit;
 
+use Nette\Utils\Strings;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\CollectedDataNode;
@@ -60,7 +61,11 @@ final class PropertyTypeDeclarationSeaLevelRule implements Rule
                 $typedPropertyCount += $nestedPropertySeaLevelData[0];
                 $propertyCount += $nestedPropertySeaLevelData[1];
 
-                $printedUntypedPropertiesContents .= $nestedPropertySeaLevelData[2] . PHP_EOL . PHP_EOL;
+                /** @var string $printedPropertyContent */
+                $printedPropertyContent = $nestedPropertySeaLevelData[2];
+                if ($printedPropertyContent !== '') {
+                    $printedUntypedPropertiesContents .= PHP_EOL . PHP_EOL . trim($printedPropertyContent);
+                }
             }
         }
 
@@ -82,7 +87,10 @@ final class PropertyTypeDeclarationSeaLevelRule implements Rule
             $this->minimalLevel * 100
         );
 
-        $errorMessage .= $printedUntypedPropertiesContents;
+        $errorMessage .= $printedUntypedPropertiesContents . PHP_EOL;
+
+        // keep error printable
+        $errorMessage = Strings::truncate($errorMessage, 8000);
 
         return [$errorMessage];
     }
