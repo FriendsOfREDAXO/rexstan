@@ -52,7 +52,7 @@ final class RexStan
         $phpstanBinary = self::phpstanBinPath();
         $configPath = self::phpstanConfigPath();
 
-        $cmd = $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress 2>&1';
+        $cmd = $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress';
         $output = self::execCmd($cmd, $lastError);
 
         if ('{' === $output[0]) {
@@ -143,22 +143,36 @@ final class RexStan
 
     /**
      * @param string $lastError
+     * @param-out string $lastError
+     *
      * @return string
      */
     public static function execCmd(string $cmd, &$lastError)
     {
+        $descriptorspec = array(
+            0 => array("pipe", "r"),  // stdin
+            1 => array("pipe", "w"),  // stdout
+            2 => array("pipe", "w")   // stderr
+        );
+
         $lastError = '';
-        // @phpstan-ignore-next-line
-        set_error_handler(static function ($type, $msg) use (&$lastError) {
-            $lastError = $msg;
-        });
-        try {
-            $output = @shell_exec($cmd);
-        } finally {
-            restore_error_handler();
+        $output = '';
+
+        $process = proc_open($cmd, $descriptorspec, $pipes);
+        if (is_resource($process))
+        {
+            fclose($pipes[0]);
+
+            $output = stream_get_contents($pipes[1]);
+            fclose($pipes[1]);
+
+            $lastError = stream_get_contents($pipes[2]);
+            fclose($pipes[2]);
+
+            proc_close($process);
         }
 
-        return $output ?? '';
+        return $output === false ? '' : $output;
     }
 
     private static function phpstanBinPath(): string
