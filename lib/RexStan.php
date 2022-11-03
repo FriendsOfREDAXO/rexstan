@@ -172,7 +172,7 @@ final class RexStan
             proc_close($process);
         }
 
-        return $output;
+        return $output === false ? '' : $output;
     }
 
     private static function phpstanBinPath(): string
