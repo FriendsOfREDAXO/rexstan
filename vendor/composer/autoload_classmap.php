@@ -84,6 +84,7 @@ return array(
     'rexstan\\RexGetValueReflection' => $baseDir . '/lib/reflection/RexGetValueReflection.php',
     'rexstan\\RexGetValueRule' => $baseDir . '/lib/rule/RexGetValueRule.php',
     'rexstan\\RexMediaGetValueDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexMediaGetValueDynamicReturnTypeExtension.php',
+    'rexstan\\RexModuleInputValueCollector' => $baseDir . '/lib/collector/RexModuleInputValueCollector.php',
     'rexstan\\RexSqlDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexSqlDynamicReturnTypeExtension.php',
     'rexstan\\RexSqlGetArrayDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexSqlGetArrayDynamicReturnTypeExtension.php',
     'rexstan\\RexSqlGetValueDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexSqlGetValueDynamicReturnTypeExtension.php',

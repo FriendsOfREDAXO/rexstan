@@ -256,6 +256,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'rexstan\\RexGetValueReflection' => __DIR__ . '/../..' . '/lib/reflection/RexGetValueReflection.php',
         'rexstan\\RexGetValueRule' => __DIR__ . '/../..' . '/lib/rule/RexGetValueRule.php',
         'rexstan\\RexMediaGetValueDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexMediaGetValueDynamicReturnTypeExtension.php',
+        'rexstan\\RexModuleInputValueCollector' => __DIR__ . '/../..' . '/lib/collector/RexModuleInputValueCollector.php',
         'rexstan\\RexSqlDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexSqlDynamicReturnTypeExtension.php',
         'rexstan\\RexSqlGetArrayDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexSqlGetArrayDynamicReturnTypeExtension.php',
         'rexstan\\RexSqlGetValueDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexSqlGetValueDynamicReturnTypeExtension.php',
