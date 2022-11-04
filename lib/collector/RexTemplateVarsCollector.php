@@ -12,11 +12,11 @@ use rex_var;
 use function get_class;
 
 /**
- * @implements Collector<FileNode, array<int, array{class-string, string}>>
+ * @implements Collector<FileNode, array<int, array{class-string, int, string}>>
  */
-final class RexModuleOutputValueCollector implements Collector
+final class RexTemplateVarsCollector implements Collector
 {
-    public const FILE_SUFFIX = '.output.php';
+    public const FILE_SUFFIX = '.template.php';
 
     public function getNodeType(): string
     {
@@ -41,7 +41,8 @@ final class RexModuleOutputValueCollector implements Collector
 
             $vars[] = [
                 $class,
-                (string) $var->getArg('id', 0, true),
+                (int) $var->getArg('id', 0, true),
+                (string) $var->getArg('key'),
             ];
         }
 

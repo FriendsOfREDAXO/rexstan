@@ -62,17 +62,27 @@ services:
             - phpstan.broker.dynamicStaticMethodReturnTypeExtension
 
     -
-        class: rexstan\RexModuleInputValueCollector
+        class: rexstan\RexModuleInputVarsCollector
         tags:
             - phpstan.collector
 
     -
-        class: rexstan\RexModuleOutputValueCollector
+        class: rexstan\RexModuleOutputVarsCollector
         tags:
             - phpstan.collector
 
     -
         class: rexstan\RexModuleVarsRule
+        tags:
+            - phpstan.rules.rule
+
+    -
+        class: rexstan\RexTemplateVarsCollector
+        tags:
+            - phpstan.collector
+
+    -
+        class: rexstan\RexTemplateVarsRule
         tags:
             - phpstan.rules.rule
 
