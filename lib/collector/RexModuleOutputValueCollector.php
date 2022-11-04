@@ -13,8 +13,8 @@ use rex_var;
 /**
  * @implements Collector<FileNode, array{class-string, string}>
  */
-final class RexModuleInputValueCollector implements Collector {
-    const FILE_SUFFIX = '.input.php';
+final class RexModuleOutputValueCollector implements Collector {
+    const FILE_SUFFIX = '.output.php';
 
     public function getNodeType(): string
     {
@@ -38,4 +38,5 @@ final class RexModuleInputValueCollector implements Collector {
         }
         return $vars;
     }
+
 }

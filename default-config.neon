@@ -65,3 +65,13 @@ services:
         class: rexstan\RexModuleInputValueCollector
         tags:
             - phpstan.collector
+
+    -
+        class: rexstan\RexModuleOutputValueCollector
+        tags:
+            - phpstan.collector
+
+    -
+        class: rexstan\RexModuleVarsRule
+        tags:
+            - phpstan.rules.rule
