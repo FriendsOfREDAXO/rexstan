@@ -1,6 +1,9 @@
 /tests/data/Module Navigationspunkt (Anker).input.php:-1:Module "Module Navigationspunkt (Anker)" contains input value "rex_var_value[3]" which is not used in module output.
 /tests/data/Module Navigationspunkt (Anker).input.php:-1:Module "Module Navigationspunkt (Anker)" contains ouput value "rex_var_link[1]" which is not used in module input.
 /tests/data/Module Navigationspunkt (Anker).input.php:-1:Module "Module Navigationspunkt (Anker)" contains ouput value "rex_var_value[10]" which is not used in module input.
+/tests/data/Template ctypes.template.php:-1:Template "Template ctypes" includes invalid template by ID "rex_var_template[99999999]"
+/tests/data/Template ctypes.template.php:-1:Template "Template ctypes" includes invalid template by ID "rex_var_template[99999999]"
+/tests/data/Template ctypes.template.php:-1:Template "Template ctypes" includes invalid template by key "rex_var_template[doesNotExist]"
 /tests/data/any-get.php:12:No rex_user found with id 9999999.
 /tests/data/any-get.php:13:No rex_media found with id 'does-not-exist.jpg'.
 /tests/data/any-get.php:14:No rex_article found with id 9999999.
