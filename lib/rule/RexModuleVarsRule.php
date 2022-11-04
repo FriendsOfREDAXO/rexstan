@@ -59,6 +59,26 @@ final class RexModuleVarsRule implements Rule
             }
         }
 
+        foreach($allOutputValues as $outputFile => $outputValues) {
+            $inputFile = str_replace(RexModuleOutputValueCollector::FILE_SUFFIX, RexModuleInputValueCollector::FILE_SUFFIX, $outputFile);
+
+            if (!array_key_exists($inputFile, $allInputValues)) {
+                continue;
+            }
+
+            $inputValues = $allInputValues[$inputFile];
+            foreach($outputValues[0] as [$varClass, $id]) {
+                if (!$this->arrayContainsVar($inputValues[0], $varClass, $id))
+                {
+                    $errors[] = RuleErrorBuilder::message(sprintf(
+                        'Module "%s" contains ouput value "%s" which is not used in module input.',
+                        str_replace(RexModuleInputValueCollector::FILE_SUFFIX, '', basename($inputFile)),
+                        $varClass.'['.$id.']',
+                    ))->file($inputFile)->build();
+                }
+            }
+        }
+
         return $errors;
     }
 
