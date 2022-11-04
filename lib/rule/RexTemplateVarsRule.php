@@ -11,7 +11,6 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use rex_template;
 use rex_var_template;
-use function array_key_exists;
 
 /**
  * @implements Rule<CollectedDataNode>
@@ -30,9 +29,9 @@ final class RexTemplateVarsRule implements Rule
         $errors = [];
         foreach ($allTemplateVars as $templateFile => $templateValues) {
             foreach ($templateValues[0] as [$varClass, $id, $key]) {
-                if ($varClass === rex_var_template::class) {
+                if (rex_var_template::class === $varClass) {
                     $template = null;
-                    if ($id !== 0) {
+                    if (0 !== $id) {
                         if (!rex_template::exists($id)) {
                             $errors[] = RuleErrorBuilder::message(sprintf(
                                 'Template "%s" includes invalid template by ID "%s"',
@@ -42,16 +41,15 @@ final class RexTemplateVarsRule implements Rule
                         }
                     }
 
-                    if ($key !== '') {
+                    if ('' !== $key) {
                         $template = rex_template::forKey($key);
-                        if ($template === null) {
+                        if (null === $template) {
                             $errors[] = RuleErrorBuilder::message(sprintf(
                                 'Template "%s" includes invalid template by key "%s"',
                                 str_replace(RexTemplateVarsCollector::FILE_SUFFIX, '', basename($templateFile)),
                                 $varClass.'['.$key.']',
                             ))->file($templateFile)->build();
                         }
-
                     }
                 }
             }
