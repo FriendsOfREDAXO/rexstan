@@ -26,3 +26,16 @@ REX_LINK[1]
 <?php foreach (explode(',', 'REX_LINKLIST[id=10]') as $article_id): ?>
     <a href="<?=rex_getUrl($article_id);?>">zum Artikel mit der ID <?=$article_id;?></a>
 <?php endforeach;?>
+
+REX_CLANG_ID
+REX_CTYPE_ID
+
+<?php
+    echo '
+<video class="bgvid" preload="auto" loop="loop" autoplay="false" muted="muted" volume="0">
+    <source src="'.rex_url::base('media/REX_MEDIA[1]').'" type="video/mp4">Video not supported</video>';
+?>
+<?php
+echo '
+<video class="bgvid" preload="auto" loop="loop" autoplay="false" muted="muted" volume="0">
+    <source src="'.rex_url::base('media/REX_MEDIA[2]').'" type="video/mp4">Video not supported</video>';

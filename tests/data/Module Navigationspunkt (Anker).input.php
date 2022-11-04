@@ -21,3 +21,14 @@ NAVIGATIONS-ANKER
 
 REX_LINKLIST[id=1 widget=1]
 REX_LINKLIST[id=5 widget=1]
+
+<div class="photo form-group choice column>
+    <label class="col-sm-2 control-label">Bild</label>
+    <div class="col-sm-10">
+        REX_MEDIA[id="1" widget="1"]
+    </div>
+<div class="col-sm-10">
+    REX_MEDIA[id="9" widget="9"]
+</div>
+</div>
+
