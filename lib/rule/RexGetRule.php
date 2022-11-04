@@ -78,7 +78,7 @@ final class RexGetRule implements Rule
             $ids = TypeUtils::getConstantStrings($idType);
             foreach ($ids as $id) {
                 // don't report errors on magic rex-vars, which get resolved at code generation time.
-                if (strpos($id->getValue(), 'REX_') === 0) {
+                if (0 === strpos($id->getValue(), 'REX_')) {
                     continue;
                 }
 

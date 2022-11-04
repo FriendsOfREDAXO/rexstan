@@ -10,6 +10,7 @@ use RuntimeException;
 use staabm\PHPStanBaselineAnalysis\ResultPrinter;
 use function array_key_exists;
 use function dirname;
+use function is_resource;
 
 final class RexStan
 {
@@ -149,18 +150,17 @@ final class RexStan
      */
     public static function execCmd(string $cmd, &$lastError)
     {
-        $descriptorspec = array(
-            0 => array("pipe", "r"),  // stdin
-            1 => array("pipe", "w"),  // stdout
-            2 => array("pipe", "w")   // stderr
-        );
+        $descriptorspec = [
+            0 => ['pipe', 'r'],  // stdin
+            1 => ['pipe', 'w'],  // stdout
+            2 => ['pipe', 'w'],   // stderr
+        ];
 
         $lastError = '';
         $output = '';
 
         $process = proc_open($cmd, $descriptorspec, $pipes);
-        if (is_resource($process))
-        {
+        if (is_resource($process)) {
             fclose($pipes[0]);
 
             $output = stream_get_contents($pipes[1]);
@@ -172,7 +172,7 @@ final class RexStan
             proc_close($process);
         }
 
-        return $output === false ? '' : $output;
+        return false === $output ? '' : $output;
     }
 
     private static function phpstanBinPath(): string
