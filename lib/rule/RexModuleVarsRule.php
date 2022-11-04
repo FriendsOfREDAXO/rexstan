@@ -69,7 +69,7 @@ final class RexModuleVarsRule implements Rule
     }
 
     /**
-     * @param list<array{class-string, string}>  $values
+     * @param list<array{class-string, int}>  $values
      * @param class-string $varClass
      * @return bool
      */
