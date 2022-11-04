@@ -75,3 +75,4 @@ services:
         class: rexstan\RexModuleVarsRule
         tags:
             - phpstan.rules.rule
+
