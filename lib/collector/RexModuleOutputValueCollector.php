@@ -33,7 +33,7 @@ final class RexModuleOutputValueCollector implements Collector {
         foreach($it as $var) {
             $vars[] = [
                 get_class($var),
-                $var->getArg('id', 0, true)
+                (string) $var->getArg('id', 0, true)
             ];
         }
         return $vars;
