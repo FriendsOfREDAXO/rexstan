@@ -84,7 +84,7 @@ final class RexModuleVarsRule implements Rule
 
     /**
      * @param list<array{class-string, string}>  $values
-     * @param class-string string $varClass
+     * @param class-string $varClass
      * @param string $id
      * @return bool
      */
