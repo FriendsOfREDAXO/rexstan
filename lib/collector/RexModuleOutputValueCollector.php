@@ -9,12 +9,14 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Collectors\Collector;
 use PHPStan\Node\FileNode;
 use rex_var;
+use function get_class;
 
 /**
  * @implements Collector<FileNode, array<int, array{class-string, string}>>
  */
-final class RexModuleOutputValueCollector implements Collector {
-    const FILE_SUFFIX = '.output.php';
+final class RexModuleOutputValueCollector implements Collector
+{
+    public const FILE_SUFFIX = '.output.php';
 
     public function getNodeType(): string
     {
@@ -23,27 +25,26 @@ final class RexModuleOutputValueCollector implements Collector {
 
     public function processNode(Node $node, Scope $scope)
     {
-        if (strpos($scope->getFile(), self::FILE_SUFFIX) === false) {
+        if (false === strpos($scope->getFile(), self::FILE_SUFFIX)) {
             return null;
         }
 
         $it = rex_var::varsIterator(\Safe\file_get_contents($scope->getFile()));
 
         $vars = [];
-        foreach($it as $var) {
+        foreach ($it as $var) {
             $class = get_class($var);
 
-            if ($class === false) {
+            if (false === $class) {
                 continue;
             }
 
             $vars[] = [
                 $class,
-                (string) $var->getArg('id', 0, true)
+                (string) $var->getArg('id', 0, true),
             ];
         }
 
         return $vars;
     }
-
 }

@@ -5,29 +5,17 @@ declare(strict_types=1);
 namespace rexstan;
 
 use PhpParser\Node;
-use PhpParser\Node\Expr\StaticCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\CollectedDataNode;
-use PHPStan\Node\FileNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use PHPStan\ShouldNotHappenException;
-use PHPStan\Type\TypeUtils;
-use PHPStan\Type\TypeWithClassName;
-use PHPStan\Type\VerbosityLevel;
-use rex_article;
-use rex_category;
-use rex_media;
-use rex_user;
-use function count;
-use function in_array;
+use function array_key_exists;
 
 /**
  * @implements Rule<CollectedDataNode>
  */
 final class RexModuleVarsRule implements Rule
 {
-
     public function getNodeType(): string
     {
         return CollectedDataNode::class;
@@ -39,7 +27,7 @@ final class RexModuleVarsRule implements Rule
         $allOutputValues = $node->get(RexModuleOutputValueCollector::class);
 
         $errors = [];
-        foreach($allInputValues as $inputFile => $inputValues) {
+        foreach ($allInputValues as $inputFile => $inputValues) {
             $outputFile = str_replace(RexModuleInputValueCollector::FILE_SUFFIX, RexModuleOutputValueCollector::FILE_SUFFIX, $inputFile);
 
             if (!array_key_exists($outputFile, $allOutputValues)) {
@@ -47,9 +35,8 @@ final class RexModuleVarsRule implements Rule
             }
 
             $outputValues = $allOutputValues[$outputFile];
-            foreach($inputValues[0] as [$varClass, $id]) {
-                if (!$this->arrayContainsVar($outputValues[0], $varClass, $id))
-                {
+            foreach ($inputValues[0] as [$varClass, $id]) {
+                if (!$this->arrayContainsVar($outputValues[0], $varClass, $id)) {
                     $errors[] = RuleErrorBuilder::message(sprintf(
                         'Module "%s" contains input value "%s" which is not used in module output.',
                         str_replace(RexModuleInputValueCollector::FILE_SUFFIX, '', basename($inputFile)),
@@ -59,7 +46,7 @@ final class RexModuleVarsRule implements Rule
             }
         }
 
-        foreach($allOutputValues as $outputFile => $outputValues) {
+        foreach ($allOutputValues as $outputFile => $outputValues) {
             $inputFile = str_replace(RexModuleOutputValueCollector::FILE_SUFFIX, RexModuleInputValueCollector::FILE_SUFFIX, $outputFile);
 
             if (!array_key_exists($inputFile, $allInputValues)) {
@@ -67,9 +54,8 @@ final class RexModuleVarsRule implements Rule
             }
 
             $inputValues = $allInputValues[$inputFile];
-            foreach($outputValues[0] as [$varClass, $id]) {
-                if (!$this->arrayContainsVar($inputValues[0], $varClass, $id))
-                {
+            foreach ($outputValues[0] as [$varClass, $id]) {
+                if (!$this->arrayContainsVar($inputValues[0], $varClass, $id)) {
                     $errors[] = RuleErrorBuilder::message(sprintf(
                         'Module "%s" contains ouput value "%s" which is not used in module input.',
                         str_replace(RexModuleInputValueCollector::FILE_SUFFIX, '', basename($inputFile)),
@@ -85,13 +71,11 @@ final class RexModuleVarsRule implements Rule
     /**
      * @param list<array{class-string, string}>  $values
      * @param class-string $varClass
-     * @param string $id
      * @return bool
      */
     private function arrayContainsVar(array $values, string $varClass, string $id)
     {
-        foreach($values as [$_varClass, $_id])
-        {
+        foreach ($values as [$_varClass, $_id]) {
             if ($_varClass === $varClass && $_id === $id) {
                 return true;
             }
