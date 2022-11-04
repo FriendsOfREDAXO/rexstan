@@ -18,3 +18,6 @@ NAVIGATIONS-ANKER
 		</div>
 	</div>
 </fieldset>
+
+REX_LINKLIST[id=1 widget=1]
+REX_LINKLIST[id=5 widget=1]

@@ -19,3 +19,10 @@
 ?>
 REX_VALUE[10]
 REX_LINK[1]
+
+<?php foreach (explode(',', 'REX_LINKLIST[id=1]') as $article_id): ?>
+    <a href="<?=rex_getUrl($article_id);?>">zum Artikel mit der ID <?=$article_id;?></a>
+<?php endforeach;?>
+<?php foreach (explode(',', 'REX_LINKLIST[id=10]') as $article_id): ?>
+    <a href="<?=rex_getUrl($article_id);?>">zum Artikel mit der ID <?=$article_id;?></a>
+<?php endforeach;?>
