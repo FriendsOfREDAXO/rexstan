@@ -11,7 +11,7 @@ use PHPStan\Node\FileNode;
 use rex_var;
 
 /**
- * @implements Collector<FileNode, array{class-string, string}>
+ * @implements Collector<FileNode, array<int, array{class-string, string}>>
  */
 final class RexModuleOutputValueCollector implements Collector {
     const FILE_SUFFIX = '.output.php';
