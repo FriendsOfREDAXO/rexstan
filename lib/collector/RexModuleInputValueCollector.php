@@ -31,11 +31,18 @@ final class RexModuleInputValueCollector implements Collector {
 
         $vars = [];
         foreach($it as $var) {
+            $class = get_class($var);
+
+            if ($class === false) {
+                continue;
+            }
+
             $vars[] = [
-                get_class($var),
+                $class,
                 (string) $var->getArg('id', 0, true)
             ];
         }
+
         return $vars;
     }
 }
