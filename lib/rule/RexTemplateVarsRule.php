@@ -30,7 +30,7 @@ final class RexTemplateVarsRule implements Rule
         foreach ($allTemplateVars as $templateFile => $templateValues) {
             foreach ($templateValues[0] as [$varClass, $id, $key]) {
                 if (rex_var_template::class === $varClass) {
-                    $template = null;
+                
                     if (0 !== $id) {
                         if (!rex_template::exists($id)) {
                             $errors[] = RuleErrorBuilder::message(sprintf(
