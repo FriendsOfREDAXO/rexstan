@@ -29,6 +29,11 @@ final class RexTemplateVarsCollector implements Collector
             return null;
         }
 
+        // requires redaxo 5.15+
+        if (!method_exists(rex_var::class, 'varsIterator')) {
+            return null;
+        }
+
         $it = rex_var::varsIterator(\Safe\file_get_contents($scope->getFile()));
 
         $vars = [];
