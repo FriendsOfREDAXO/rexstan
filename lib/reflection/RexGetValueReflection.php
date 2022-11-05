@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace redaxo\phpstan;
+namespace rexstan;
 
 use PHPStan\ShouldNotHappenException;
 use PHPStan\Type\Constant\ConstantArrayType;

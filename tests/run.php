@@ -2,11 +2,24 @@
 
 chdir(__DIR__.'/../');
 
-@shell_exec('php vendor/bin/phpstan clear-result-cache > /dev/null 2>&1');
+@shell_exec('php vendor/bin/phpstan clear-result-cache');
 
-$output = trim((string) shell_exec('php vendor/bin/phpstan analyze tests/* --error-format=raw'));
+$output = trim((string) shell_exec('php vendor/bin/phpstan analyze tests/ --error-format=raw'));
 $output = preg_replace('/\s*$/', '', $output);
 $expected = trim((string) file_get_contents(__DIR__.'/expected.out'));
+
+function relativePath(string $path): string
+{
+    $projectRoot = realpath(__DIR__.'/../');
+
+    $projectRoot = str_replace('\\', '/', $projectRoot);
+    $path = str_replace('\\', '/', $path);
+
+    return str_replace($projectRoot, '', $path);
+}
+
+$output = relativePath($output);
+$expected = relativePath($expected);
 
 if ($output != $expected) {
     echo "ERROR, output does not match\n\n";

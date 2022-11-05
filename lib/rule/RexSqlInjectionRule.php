@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace redaxo\phpstan;
+namespace rexstan;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\BinaryOp\Concat;

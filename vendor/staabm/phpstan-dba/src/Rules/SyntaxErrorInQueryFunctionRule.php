@@ -10,6 +10,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use PHPStan\ShouldNotHappenException;
 use PHPStan\Type\MixedType;
 use staabm\PHPStanDba\QueryReflection\QueryReflection;
 use staabm\PHPStanDba\Tests\SyntaxErrorInQueryFunctionRuleTest;
@@ -57,10 +58,13 @@ final class SyntaxErrorInQueryFunctionRule implements Rule
             return [];
         }
 
-        $unsupportedFunction = true;
         $queryArgPosition = null;
+        $unsupportedFunction = true;
         foreach ($this->functionNames as $functionName) {
-            sscanf($functionName, '%[^#]#%s', $functionName, $queryArgPosition);
+            sscanf($functionName, '%[^#]#%i', $functionName, $queryArgPosition);
+            if (!\is_string($functionName) || !\is_int($queryArgPosition)) {
+                throw new ShouldNotHappenException('Invalid functionName definition');
+            }
 
             if (strtolower($functionName) === strtolower($calledFunctionName)) {
                 $unsupportedFunction = false;
@@ -68,6 +72,9 @@ final class SyntaxErrorInQueryFunctionRule implements Rule
             }
         }
 
+        if (null === $queryArgPosition) {
+            throw new ShouldNotHappenException('Invalid classMethod definition');
+        }
         if ($unsupportedFunction) {
             return [];
         }

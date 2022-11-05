@@ -1,5 +1,9 @@
 <?php
 
+namespace rexstan;
+
+use rex_url;
+
 final class RexStanTip
 {
     public const FAQ_ANCHORS = [

@@ -1,5 +1,5 @@
 package: rexstan
-version: '1.0.53'
+version: '1.0.58'
 author: Friends Of REDAXO
 supportpage: https://github.com/FriendsOfREDAXO/rexstan
 
@@ -17,7 +17,7 @@ page:
         faq: { title: translate:faq, subPath: FAQ.md, icon: rex-icon fa-book }
 
 console_commands:
-    rexstan:analyze: rexstan_command
+    rexstan:analyze: rexstan\rexstan_command
 
 requires:
     php:

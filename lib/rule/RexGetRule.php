@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace redaxo\phpstan;
+namespace rexstan;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\StaticCall;
@@ -77,6 +77,11 @@ final class RexGetRule implements Rule
         if (rex_media::class === $callerType->getClassName()) {
             $ids = TypeUtils::getConstantStrings($idType);
             foreach ($ids as $id) {
+                // don't report errors on magic rex-vars, which get resolved at code generation time.
+                if (0 === strpos($id->getValue(), 'REX_')) {
+                    continue;
+                }
+
                 $object = rex_media::get($id->getValue());
 
                 if (null === $object) {

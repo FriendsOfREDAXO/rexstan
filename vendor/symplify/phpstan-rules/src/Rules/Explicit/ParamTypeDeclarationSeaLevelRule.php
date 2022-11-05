@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Explicit;
 
-use Nette\Utils\Arrays;
+use Nette\Utils\Strings;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\CollectedDataNode;
@@ -24,13 +24,13 @@ final class ParamTypeDeclarationSeaLevelRule implements Rule
     /**
      * @var string
      */
-    public const ERROR_MESSAGE = 'The param type sea level %d %% has not passed minimal required level of %d %%. Add more param types to rise above the required level';
+    public const ERROR_MESSAGE = 'Out of %d possible param types, only %d %% actually have it. Add more param types to get over %d %%';
     /**
      * @var float
      */
-    private $minimalLevel = 0.20;
+    private $minimalLevel = 0.80;
 
-    public function __construct(float $minimalLevel = 0.20)
+    public function __construct(float $minimalLevel = 0.80)
     {
         $this->minimalLevel = $minimalLevel;
     }
@@ -54,11 +54,19 @@ final class ParamTypeDeclarationSeaLevelRule implements Rule
         $typedParamCount = 0;
         $paramCount = 0;
 
-        foreach ($paramSeaLevelDataByFilePath as $paramSeaLevelData) {
-            $paramSeaLevelData = Arrays::flatten($paramSeaLevelData);
+        $printedClassMethods = '';
 
-            $typedParamCount += $paramSeaLevelData[0];
-            $paramCount += $paramSeaLevelData[1];
+        foreach ($paramSeaLevelDataByFilePath as $paramSeaLevelData) {
+            foreach ($paramSeaLevelData as $nestedParamSeaLevelData) {
+                $typedParamCount += $nestedParamSeaLevelData[0];
+                $paramCount += $nestedParamSeaLevelData[1];
+
+                /** @var string $printedClassMethod */
+                $printedClassMethod = $nestedParamSeaLevelData[2];
+                if ($printedClassMethod !== '') {
+                    $printedClassMethods .= PHP_EOL . PHP_EOL . $printedClassMethod;
+                }
+            }
         }
 
         if ($paramCount === 0) {
@@ -68,11 +76,22 @@ final class ParamTypeDeclarationSeaLevelRule implements Rule
         $paramTypeDeclarationSeaLevel = $typedParamCount / $paramCount;
 
         // has the code met the minimal sea level of types?
-        if ($paramTypeDeclarationSeaLevel > $this->minimalLevel) {
+        if ($paramTypeDeclarationSeaLevel >= $this->minimalLevel) {
             return [];
         }
 
-        $errorMessage = sprintf(self::ERROR_MESSAGE, $paramTypeDeclarationSeaLevel * 100, $this->minimalLevel * 100);
+        $errorMessage = sprintf(
+            self::ERROR_MESSAGE,
+            $paramCount,
+            $paramTypeDeclarationSeaLevel * 100,
+            $this->minimalLevel * 100
+        );
+
+        $errorMessage .= $printedClassMethods . PHP_EOL;
+
+        // keep error printable
+        $errorMessage = Strings::truncate($errorMessage, 8000);
+
         return [$errorMessage];
     }
 

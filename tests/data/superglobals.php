@@ -1,5 +1,7 @@
 <?php
 
+namespace SuperGlobals;
+
 static function ($value) {
     $_SESSION['foo'] = 'bar';
     $x = $_GET['foo'];

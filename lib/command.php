@@ -1,5 +1,8 @@
 <?php
 
+namespace rexstan;
+
+use rex_console_command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
