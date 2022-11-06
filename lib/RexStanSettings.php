@@ -116,4 +116,73 @@ final class RexStanSettings
 
         return $form;
     }
+
+    /**
+     * @return array<string, string>
+     */
+    public static function getSettings()
+    {
+        $addon = rex_addon::get('rexstan');
+
+        $scanTargets = [];
+        $config_scanTargets = explode('|', trim(strval($addon->getConfig('addons')), '|'));
+        foreach ($config_scanTargets as $scanpath) {
+            foreach (rex_addon::getAvailableAddons() as $availableAddon) {
+                if (pathinfo($scanpath)['basename'] === $availableAddon->getName()) {
+                    $scanTargets[] = $availableAddon->getName();
+                    break;
+                }
+                if (isset(pathinfo($scanpath)['dirname']) && pathinfo(pathinfo($scanpath)['dirname'])['basename'] === 'developer') {
+                    if (pathinfo($scanpath)['basename'] === 'modules' || pathinfo($scanpath)['basename'] === 'templates') {
+                        $scanTargets[] = 'developer:' . pathinfo($scanpath)['basename'];
+                        break;
+                    }
+                }
+            }
+        }
+
+        $extensions = [];
+        $config_extensions = explode('|', trim(strval($addon->getConfig('extensions')), '|'));
+        foreach ($config_extensions as $extpath) {
+            foreach (self::$phpstanExtensions as $label => $path) {
+                if (pathinfo($extpath)['basename'] === pathinfo($path)['basename']) {
+                    $extensions[] = $label;
+                    break;
+                }
+            }
+        }
+
+        $settings = [];
+        $settings['Level'] = strval($addon->getConfig('level'));
+        $settings['AddOns'] = implode(', ', $scanTargets);
+        $settings['Extensions'] = implode(', ', $extensions);
+        $settings['PHP-Version'] = self::$phpVersionList[$addon->getConfig('phpversion')];
+
+        return $settings;
+    }
+
+    /**
+     * @return string
+     */
+    public static function outputSettings()
+    {
+        $settings = self::getSettings();
+
+        $output = '';
+
+        if (count($settings) > 0) {
+            $output = '<table class="table table-striped table-hover">';
+            $output .= '<tbody>';
+
+            foreach ($settings as $label => $value) {
+                $output .=  '<tr><td>' . $label . '</td><td>' . $value . '</td></tr>';
+            }
+
+            $output .= '</tbody>';
+            $output .= '</table>';
+        }
+
+        return $output;
+    }
+
 }

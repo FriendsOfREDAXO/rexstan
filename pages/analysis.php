@@ -4,6 +4,7 @@
 
 use rexstan\RexStan;
 use rexstan\RexStanTip;
+use rexstan\RexStanSettings;
 use rexstan\RexStanUserConfig;
 
 $phpstanResult = RexStan::runFromWeb();
@@ -113,6 +114,7 @@ if (
         } else {
             echo '<p>In den <a href="'. rex_url::backendPage('rexstan/settings') .'">Einstellungen</a>, solltest du jetzt das nächste Level anvisieren.</p>';
         }
+        echo RexStanSettings::outputSettings();
         return;
     }
 
