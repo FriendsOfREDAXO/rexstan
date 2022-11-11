@@ -874,16 +874,16 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "11.1.16",
+            "version": "11.1.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "dd42d2c7de9a819cfd754d4a3274c3c08dc3845a"
+                "reference": "238f7e5505f9f9b42c800b3fbe0dd05f511882fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/dd42d2c7de9a819cfd754d4a3274c3c08dc3845a",
-                "reference": "dd42d2c7de9a819cfd754d4a3274c3c08dc3845a",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/238f7e5505f9f9b42c800b3fbe0dd05f511882fe",
+                "reference": "238f7e5505f9f9b42c800b3fbe0dd05f511882fe",
                 "shasum": ""
             },
             "require": {
@@ -921,7 +921,7 @@
             ],
             "description": "Set of Symplify rules for PHPStan",
             "support": {
-                "source": "https://github.com/symplify/phpstan-rules/tree/11.1.16"
+                "source": "https://github.com/symplify/phpstan-rules/tree/11.1.17"
             },
             "funding": [
                 {
@@ -933,7 +933,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-10-27T10:44:43+00:00"
+            "time": "2022-11-10T15:18:43+00:00"
         },
         {
             "name": "thecodingmachine/safe",
