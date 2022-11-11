@@ -156,7 +156,19 @@ final class RexStanSettings
         $level = intval($addon->getConfig('level'));
         $addons = implode(', ', $scanTargets);
         $extensions = implode(', ', $extensions);
+
+        $sapiVersion = (int) (PHP_VERSION_ID / 100);
+        $cliVersion = (int) shell_exec('php -r \'echo PHP_VERSION_ID;\'');
+        $cliVersion = (int) ($cliVersion / 100);
+
         $phpVersion = self::$phpVersionList[$addon->getConfig('phpversion')];
+        if ((int) ($addon->getConfig('phpversion') / 100)  === $sapiVersion) {
+            $phpVersion .= ' [aktuelle Webserver-Version (WEB-SAPI)]';
+        }
+        if ((int) ($addon->getConfig('phpversion') / 100) === $cliVersion) {
+            $phpVersion .= ' [aktuelle Konsolen-Version (CLI-SAPI)]';
+        }
+
         $settings = new RexStanConfigVO($level, $addons, $extensions, $phpVersion);
         return $settings;
     }
