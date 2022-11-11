@@ -7,6 +7,7 @@ use rex_config;
 use rex_config_form;
 use rex_developer_manager;
 use rex_path;
+use RexStanConfigVO;
 
 final class RexStanSettings
 {
@@ -118,7 +119,7 @@ final class RexStanSettings
     }
 
     /**
-     * @return array<string, string>
+     * @return RexStanConfigVO
      */
     public static function getSettings()
     {
@@ -152,12 +153,11 @@ final class RexStanSettings
             }
         }
 
-        $settings = [];
-        $settings['Level'] = strval($addon->getConfig('level'));
-        $settings['AddOns'] = implode(', ', $scanTargets);
-        $settings['Extensions'] = implode(', ', $extensions);
-        $settings['PHP-Version'] = self::$phpVersionList[$addon->getConfig('phpversion')];
-
+        $level = intval($addon->getConfig('level'));
+        $addons = implode(', ', $scanTargets);
+        $extensions = implode(', ', $extensions);
+        $phpVersion = self::$phpVersionList[$addon->getConfig('phpversion')];
+        $settings = new RexStanConfigVO($level, $addons, $extensions, $phpVersion);
         return $settings;
     }
 
@@ -170,17 +170,16 @@ final class RexStanSettings
 
         $output = '';
 
-        if (count($settings) > 0) {
-            $output = '<table class="table table-striped table-hover">';
-            $output .= '<tbody>';
+        $output = '<table class="table table-striped table-hover">';
+        $output .= '<tbody>';
 
-            foreach ($settings as $label => $value) {
-                $output .=  '<tr><td>' . $label . '</td><td>' . $value . '</td></tr>';
-            }
+        $output .=  '<tr><td>Level</td><td>' . $settings->getLevel() . '</td></tr>';
+        $output .=  '<tr><td>AddOns</td><td>' . $settings->getAddons() . '</td></tr>';
+        $output .=  '<tr><td>Extensions</td><td>' . $settings->getExtensions() . '</td></tr>';
+        $output .=  '<tr><td>PHP-Version</td><td>' . $settings->getPhpVersion() . '</td></tr>';
 
-            $output .= '</tbody>';
-            $output .= '</table>';
-        }
+        $output .= '</tbody>';
+        $output .= '</table>';
 
         return $output;
     }
