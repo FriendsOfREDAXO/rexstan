@@ -5,7 +5,7 @@ namespace Spaze\PHPStan\Rules\Disallowed;
 
 use Spaze\PHPStan\Rules\Disallowed\Params\DisallowedCallParam;
 
-class DisallowedCall
+class DisallowedCall implements Disallowed
 {
 
 	/** @var string */
@@ -16,6 +16,9 @@ class DisallowedCall
 
 	/** @var string[] */
 	private $allowIn;
+
+	/** @var string[] */
+	private $allowExceptIn;
 
 	/** @var string[] */
 	private $allowInCalls;
@@ -40,11 +43,10 @@ class DisallowedCall
 
 
 	/**
-	 * DisallowedCall constructor.
-	 *
 	 * @param string $call
 	 * @param string|null $message
 	 * @param string[] $allowIn
+	 * @param string[] $allowExceptIn
 	 * @param string[] $allowInCalls
 	 * @param array<int, DisallowedCallParam> $allowParamsInAllowed
 	 * @param array<int, DisallowedCallParam> $allowParamsAnywhere
@@ -57,6 +59,7 @@ class DisallowedCall
 		string $call,
 		?string $message,
 		array $allowIn,
+		array $allowExceptIn,
 		array $allowInCalls,
 		array $allowParamsInAllowed,
 		array $allowParamsAnywhere,
@@ -68,6 +71,7 @@ class DisallowedCall
 		$this->call = $call;
 		$this->message = $message;
 		$this->allowIn = $allowIn;
+		$this->allowExceptIn = $allowExceptIn;
 		$this->allowInCalls = $allowInCalls;
 		$this->allowParamsInAllowed = $allowParamsInAllowed;
 		$this->allowParamsAnywhere = $allowParamsAnywhere;
@@ -90,12 +94,17 @@ class DisallowedCall
 	}
 
 
-	/**
-	 * @return string[]
-	 */
+	/** @inheritDoc */
 	public function getAllowIn(): array
 	{
 		return $this->allowIn;
+	}
+
+
+	/** @inheritDoc */
+	public function getAllowExceptIn(): array
+	{
+		return $this->allowExceptIn;
 	}
 
 

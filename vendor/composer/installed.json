@@ -352,17 +352,17 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.9.1",
-            "version_normalized": "1.9.1.0",
+            "version": "1.9.2",
+            "version_normalized": "1.9.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "a59c8b5bfd4a236f27efc8b5ce72c313c2b54b5f"
+                "reference": "d6fdf01c53978b6429f1393ba4afeca39cc68afa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a59c8b5bfd4a236f27efc8b5ce72c313c2b54b5f",
-                "reference": "a59c8b5bfd4a236f27efc8b5ce72c313c2b54b5f",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d6fdf01c53978b6429f1393ba4afeca39cc68afa",
+                "reference": "d6fdf01c53978b6429f1393ba4afeca39cc68afa",
                 "shasum": ""
             },
             "require": {
@@ -371,7 +371,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2022-11-04T13:35:59+00:00",
+            "time": "2022-11-10T09:56:11+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -394,7 +394,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.9.1"
+                "source": "https://github.com/phpstan/phpstan/tree/1.9.2"
             },
             "funding": [
                 {
@@ -647,17 +647,17 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v2.8.0",
-            "version_normalized": "2.8.0.0",
+            "version": "v2.9.0",
+            "version_normalized": "2.9.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "7a68d5ce86b134889540313b359c4750625c1ece"
+                "reference": "885582f4f2a5dbf1824c25bac4ca14c846e00813"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/7a68d5ce86b134889540313b359c4750625c1ece",
-                "reference": "7a68d5ce86b134889540313b359c4750625c1ece",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/885582f4f2a5dbf1824c25bac4ca14c846e00813",
+                "reference": "885582f4f2a5dbf1824c25bac4ca14c846e00813",
                 "shasum": ""
             },
             "require": {
@@ -672,7 +672,7 @@
                 "phpunit/phpunit": "^7.0 || ^9.4.2",
                 "spaze/coding-standard": "^1.3"
             },
-            "time": "2022-10-22T03:45:12+00:00",
+            "time": "2022-11-04T18:47:12+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -704,7 +704,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.8.0"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.9.0"
             },
             "install-path": "../spaze/phpstan-disallowed-calls"
         },
@@ -824,27 +824,27 @@
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.26.0",
-            "version_normalized": "1.26.0.0",
+            "version": "v1.27.0",
+            "version_normalized": "1.27.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "cfa0ae98841b9e461207c13ab093d76b0fa7bace"
+                "reference": "7a6ff3f1959bb01aefccb463a0f2cd3d3d2fd936"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/cfa0ae98841b9e461207c13ab093d76b0fa7bace",
-                "reference": "cfa0ae98841b9e461207c13ab093d76b0fa7bace",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/7a6ff3f1959bb01aefccb463a0f2cd3d3d2fd936",
+                "reference": "7a6ff3f1959bb01aefccb463a0f2cd3d3d2fd936",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.1"
             },
-            "time": "2022-05-10T07:21:04+00:00",
+            "time": "2022-11-03T14:55:06+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.26-dev"
+                    "dev-main": "1.27-dev"
                 },
                 "thanks": {
                     "name": "symfony/polyfill",
@@ -890,7 +890,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/v1.26.0"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.27.0"
             },
             "funding": [
                 {
@@ -910,17 +910,17 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "11.1.16",
-            "version_normalized": "11.1.16.0",
+            "version": "11.1.17",
+            "version_normalized": "11.1.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "dd42d2c7de9a819cfd754d4a3274c3c08dc3845a"
+                "reference": "238f7e5505f9f9b42c800b3fbe0dd05f511882fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/dd42d2c7de9a819cfd754d4a3274c3c08dc3845a",
-                "reference": "dd42d2c7de9a819cfd754d4a3274c3c08dc3845a",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/238f7e5505f9f9b42c800b3fbe0dd05f511882fe",
+                "reference": "238f7e5505f9f9b42c800b3fbe0dd05f511882fe",
                 "shasum": ""
             },
             "require": {
@@ -931,7 +931,7 @@
                 "phpstan/phpstan": "^1.8.1",
                 "webmozart/assert": "^1.10"
             },
-            "time": "2022-10-27T10:44:43+00:00",
+            "time": "2022-11-10T15:18:43+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "branch-alias": {
@@ -960,7 +960,7 @@
             ],
             "description": "Set of Symplify rules for PHPStan",
             "support": {
-                "source": "https://github.com/symplify/phpstan-rules/tree/11.1.16"
+                "source": "https://github.com/symplify/phpstan-rules/tree/11.1.17"
             },
             "funding": [
                 {
