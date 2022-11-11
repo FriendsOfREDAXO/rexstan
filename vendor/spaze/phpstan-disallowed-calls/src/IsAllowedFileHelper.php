@@ -48,4 +48,23 @@ class IsAllowedFileHelper
 		return $file !== null && fnmatch($this->absolutizePath($allowedPath), $file);
 	}
 
+
+	public function isAllowedPath(Scope $scope, Disallowed $disallowed): bool
+	{
+		foreach ($disallowed->getAllowIn() as $allowedPath) {
+			if ($this->matches($scope, $allowedPath)) {
+				return true;
+			}
+		}
+		if ($disallowed->getAllowExceptIn()) {
+			foreach ($disallowed->getAllowExceptIn() as $allowedExceptPath) {
+				if ($this->matches($scope, $allowedExceptPath)) {
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+
 }

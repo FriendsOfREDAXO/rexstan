@@ -51,6 +51,14 @@ class DisallowedHelper
 				return $this->hasAllowedParamsInAllowed($scope, $node, $disallowedCall);
 			}
 		}
+		if ($disallowedCall->getAllowExceptIn()) {
+			foreach ($disallowedCall->getAllowExceptIn() as $allowedExceptPath) {
+				if ($this->isAllowedFileHelper->matches($scope, $allowedExceptPath)) {
+					return false;
+				}
+			}
+			return true;
+		}
 		if ($disallowedCall->getAllowExceptParams()) {
 			return $this->hasAllowedParams($scope, $node, $disallowedCall->getAllowExceptParams(), false);
 		}
@@ -204,22 +212,6 @@ class DisallowedHelper
 
 
 	/**
-	 * @param Scope $scope
-	 * @param DisallowedConstant $disallowedConstant
-	 * @return bool
-	 */
-	private function isAllowedPath(Scope $scope, DisallowedConstant $disallowedConstant): bool
-	{
-		foreach ($disallowedConstant->getAllowIn() as $allowedPath) {
-			if ($this->isAllowedFileHelper->matches($scope, $allowedPath)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-
-	/**
 	 * @param string $constant
 	 * @param Scope $scope
 	 * @param string|null $displayName
@@ -229,7 +221,7 @@ class DisallowedHelper
 	public function getDisallowedConstantMessage(string $constant, Scope $scope, ?string $displayName, array $disallowedConstants): array
 	{
 		foreach ($disallowedConstants as $disallowedConstant) {
-			if ($disallowedConstant->getConstant() === $constant && !$this->isAllowedPath($scope, $disallowedConstant)) {
+			if ($disallowedConstant->getConstant() === $constant && !$this->isAllowedFileHelper->isAllowedPath($scope, $disallowedConstant)) {
 				$errorBuilder = RuleErrorBuilder::message(sprintf(
 					'Using %s%s is forbidden, %s',
 					$disallowedConstant->getConstant(),
