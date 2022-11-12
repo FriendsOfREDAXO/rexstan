@@ -177,7 +177,7 @@ final class RexStan
                 usleep(500000);
                 $status = proc_get_status($process);
             }
-            $exitCode = $status['exitcode'];
+            $exitCode = false !== $status && $status['exitcode'];
 
             proc_close($process);
         }
