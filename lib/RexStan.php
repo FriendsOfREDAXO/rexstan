@@ -40,7 +40,7 @@ final class RexStan
         $configPath = self::phpstanConfigPath();
 
         $cmd = $phpstanBinary .' analyse -c '. $configPath;
-        $output = self::execCmd($cmd, $lastError);
+        $output = self::execCmd($cmd, $stderrOutput, $exitCode);
 
         return $output;
     }
@@ -54,7 +54,7 @@ final class RexStan
         $configPath = self::phpstanConfigPath();
 
         $cmd = $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress';
-        $output = self::execCmd($cmd, $lastError);
+        $output = self::execCmd($cmd, $stderrOutput, $exitCode);
 
         if ('{' === $output[0]) {
             // return the analysis result as an array
@@ -62,7 +62,7 @@ final class RexStan
         }
 
         if ('' == $output) {
-            $output = $lastError;
+            $output = $stderrOutput;
         }
 
         // return the error string as is
@@ -92,23 +92,23 @@ final class RexStan
         $baselineGlob = $dataDir.'/'.$configSignature.'/*-summary.json';
         $htmlGraphPath = $dataDir.'/baseline-graph.html';
 
-        self::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline', $lastError);
-        if ('' !== $lastError) {
-            throw new Exception('Unable to generate baseline:'. $lastError);
+        self::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline', $stderrOutput, $exitCode);
+        if (0 !== $exitCode) {
+            throw new Exception('Unable to generate baseline:'. $stderrOutput);
         }
 
-        $output = self::execCmd('cd '.$dataDir.' && '. $analyzeBinary .' *phpstan-baseline.neon --json', $lastError);
-        if ('' !== $lastError) {
-            throw new Exception('Unable to analyze baseline: '.$lastError);
+        $output = self::execCmd('cd '.$dataDir.' && '. $analyzeBinary .' *phpstan-baseline.neon --json', $stderrOutput, $exitCode);
+        if (0 !== $exitCode) {
+            throw new Exception('Unable to analyze baseline: '.$stderrOutput);
         }
 
         if (!is_file($summaryPath)) {
             rex_dir::create(dirname($summaryPath));
             rex_file::put($summaryPath, $output);
 
-            $htmlOutput = self::execCmd('cd '.$dataDir.' && '. $graphBinary ." '". $baselineGlob ."'", $lastError);
-            if ('' !== $lastError) {
-                throw new Exception('Unable to graph baseline: '.$lastError);
+            $htmlOutput = self::execCmd('cd '.$dataDir.' && '. $graphBinary ." '". $baselineGlob ."'", $stderrOutput, $exitCode);
+            if (0 !== $exitCode) {
+                throw new Exception('Unable to graph baseline: '.$stderrOutput);
             }
             rex_file::put($htmlGraphPath, $htmlOutput);
         }
@@ -139,16 +139,18 @@ final class RexStan
         $phpstanBinary = self::phpstanBinPath();
 
         $cmd = $phpstanBinary .' clear-result-cache';
-        self::execCmd($cmd, $lastError);
+        self::execCmd($cmd, $stderrOutput, $exitCode);
     }
 
     /**
-     * @param string $lastError
-     * @param-out string $lastError
+     * @param string $stderrOutput
+     * @param int $exitCode
+     * @param-out string $stderrOutput
+     * @param-out int $exitCode
      *
      * @return string
      */
-    public static function execCmd(string $cmd, &$lastError)
+    public static function execCmd(string $cmd, &$stderrOutput, &$exitCode)
     {
         $descriptorspec = [
             0 => ['pipe', 'r'],  // stdin
@@ -156,7 +158,7 @@ final class RexStan
             2 => ['pipe', 'w'],   // stderr
         ];
 
-        $lastError = '';
+        $stderrOutput = '';
         $output = '';
 
         $process = proc_open($cmd, $descriptorspec, $pipes);
@@ -166,8 +168,16 @@ final class RexStan
             $output = stream_get_contents($pipes[1]);
             fclose($pipes[1]);
 
-            $lastError = stream_get_contents($pipes[2]);
+            $stderrOutput = stream_get_contents($pipes[2]);
             fclose($pipes[2]);
+
+            $status = proc_get_status($process);
+            while (false !== $status && $status['running']) {
+                // sleep half a second
+                usleep(500000);
+                $status = proc_get_status($process);
+            }
+            $exitCode = false !== $status && $status['exitcode'];
 
             proc_close($process);
         }
