@@ -12,6 +12,11 @@ use RuntimeException;
 final class RexStanUserConfig
 {
     /**
+     * Cache key to invalidate the summary signature in case of default-config.neon changes.
+     */
+    const DEFAULT_SETTINGS_VERSION = 'v1-native-type-coverage';
+
+    /**
      * @param list<string> $paths
      * @param list<string> $includes
      *
@@ -66,7 +71,7 @@ final class RexStanUserConfig
         if (!$md5) {
             throw new \PHPStan\ShouldNotHappenException();
         }
-        return $md5;
+        return self::DEFAULT_SETTINGS_VERSION.'|'.$md5;
     }
 
     /**
