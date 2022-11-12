@@ -18,8 +18,6 @@ function doFoo()
 function rexVarsShoudNotError()
 {
     rex_media::get('REX_MEDIA[1]');
-    rex_media::get('REX_MEDIA[1]');
 
-    rex_media::get('REX_VALUE[1]');
     rex_media::get('REX_VALUE[1]');
 }
