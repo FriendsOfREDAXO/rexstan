@@ -172,7 +172,7 @@ final class RexStan
             fclose($pipes[2]);
 
             $status = proc_get_status($process);
-            while ($status['running']) {
+            while (false !== $status && $status['running']) {
                 // sleep half a second
                 usleep(500000);
                 $status = proc_get_status($process);
