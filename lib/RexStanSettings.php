@@ -21,7 +21,7 @@ final class RexStanSettings
         'PHPUnit' => 'vendor/phpstan/phpstan-phpunit/rules.neon',
         'phpstan-dba' => 'config/phpstan-dba.neon',
         'cognitive complexity' => 'config/cognitive-complexity.neon',
-        'code complexity' => 'config/code-complexity.neon',
+        'report mixed' => 'config/code-complexity.neon',
         'dead code' => 'config/dead-code.neon',
     ];
 
