@@ -39,3 +39,18 @@ REX_CTYPE_ID
 echo '
 <video class="bgvid" preload="auto" loop="loop" autoplay="false" muted="muted" volume="0">
     <source src="'.rex_url::base('media/REX_MEDIA[2]').'" type="video/mp4">Video not supported</video>';
+
+$cols = "REX_VALUE[1]";
+if ($cols == "") {
+    echo $cols;
+}
+if ("" == $cols) {
+    echo $cols;
+}
+
+if ($cols === "") {
+    echo $cols;
+}
+if ("" === $cols) {
+    echo $cols;
+}

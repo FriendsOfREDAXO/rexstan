@@ -31,4 +31,3 @@ REX_LINKLIST[id=5 widget=1]
     REX_MEDIA[id="9" widget="9"]
 </div>
 </div>
-
