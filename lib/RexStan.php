@@ -56,7 +56,7 @@ final class RexStan
         $cmd = $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress';
         $output = self::execCmd($cmd, $stderrOutput, $exitCode);
 
-        if ('{' === $output[0]) {
+        if ('' !== $output && '{' === $output[0]) {
             // return the analysis result as an array
             return json_decode($output, true);
         }
