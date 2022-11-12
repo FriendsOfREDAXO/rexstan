@@ -2,10 +2,8 @@
 
 namespace staabm\PHPStanBaselineAnalysis;
 
-use Safe\DateTimeImmutable;
 use function Safe\file_get_contents;
 use function Safe\json_decode;
-use function Safe\strtotime;
 
 final class AnalyzerResultReader {
     /**
@@ -15,12 +13,13 @@ final class AnalyzerResultReader {
      */
     public function readFile(string $filePath): array
     {
+        \Safe\fwrite(STDERR, 'Reading file '.$filePath.PHP_EOL);
+
         $content = file_get_contents($filePath);
         if ($content === '') {
             throw new \RuntimeException('File '. $filePath .' is empty');
         }
         $json = json_decode($content, true);
-
         if (!is_array($json)) {
             throw new \RuntimeException('Expecting array, got ' . gettype($json));
         }
@@ -38,7 +37,7 @@ final class AnalyzerResultReader {
                     throw new \RuntimeException('Expecting string, got ' . gettype($baselinePath));
                 }
                 if (!is_array($resultArray)) {
-                    throw new \RuntimeException('Expecting string, got ' . gettype($resultArray));
+                    throw new \RuntimeException('Expecting array, got ' . gettype($resultArray));
                 }
 
                 $result = new AnalyzerResult();
@@ -69,6 +68,15 @@ final class AnalyzerResultReader {
                 }
                 if (array_key_exists(ResultPrinter::KEY_ANONYMOUS_VARIABLES, $resultArray)) {
                     $result->anonymousVariables = $resultArray[ResultPrinter::KEY_ANONYMOUS_VARIABLES];
+                }
+                if (array_key_exists(ResultPrinter::KEY_PROPERTY_TYPE_COVERAGE, $resultArray)) {
+                    $result->propertyTypeCoverage = $resultArray[ResultPrinter::KEY_PROPERTY_TYPE_COVERAGE];
+                }
+                if (array_key_exists(ResultPrinter::KEY_PARAM_TYPE_COVERAGE, $resultArray)) {
+                    $result->paramTypeCoverage = $resultArray[ResultPrinter::KEY_PARAM_TYPE_COVERAGE];
+                }
+                if (array_key_exists(ResultPrinter::KEY_RETURN_TYPE_COVERAGE, $resultArray)) {
+                    $result->returnTypeCoverage = $resultArray[ResultPrinter::KEY_RETURN_TYPE_COVERAGE];
                 }
 
                 $decoded[$baselinePath] = $result;
