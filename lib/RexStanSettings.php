@@ -23,7 +23,6 @@ final class RexStanSettings
         'cognitive complexity' => 'config/cognitive-complexity.neon',
         'report mixed' => 'config/code-complexity.neon',
         'dead code' => 'config/dead-code.neon',
-        'native types coverage' => 'config/native-type-coverage.neon',
     ];
 
     /**
