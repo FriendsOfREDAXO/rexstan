@@ -177,7 +177,12 @@ final class RexStan
                 usleep(500000);
                 $status = proc_get_status($process);
             }
-            $exitCode = false !== $status && $status['exitcode'];
+            if (false === $status) {
+                // cannot happen, see https://github.com/phpstan/phpstan/issues/8355
+                $exitCode = -1;
+            } else {
+                $exitCode = $status['exitcode'];
+            }
 
             proc_close($process);
         }
