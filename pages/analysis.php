@@ -123,6 +123,11 @@ if (
     $section->setVar('sectionAttributes', ['class' => 'rexstan'], false);
 
     foreach ($phpstanResult['files'] as $file => $fileResult) {
+        // skip project wide errors, which don't relate to a single file
+        if ($file === 'N/A') {
+            continue;
+        }
+
         $shortFile = str_replace($basePath, '', $file);
         $linkFile = preg_replace('/\s\(in context.*?$/', '', $file);
         $title = '<i class="rexstan-open fa fa-folder-o"></i>'.
