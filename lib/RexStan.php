@@ -144,7 +144,7 @@ final class RexStan
 
     /**
      * @param string $stderrOutput
-     * @param int $stderrOutput
+     * @param int $exitCode
      * @param-out string $stderrOutput
      * @param-out int $exitCode
      *
