@@ -172,17 +172,18 @@ final class RexStan
             fclose($pipes[2]);
 
             $status = proc_get_status($process);
-            while (false !== $status && $status['running']) {
+            if (false === $status) {
+                throw new Exception('Unable to get process status');
+            }
+            while ($status['running']) {
                 // sleep half a second
                 usleep(500000);
                 $status = proc_get_status($process);
+                if (false === $status) {
+                    throw new Exception('Unable to get process status');
+                }
             }
-            if (false === $status) {
-                // cannot happen, see https://github.com/phpstan/phpstan/issues/8355
-                $exitCode = -1;
-            } else {
-                $exitCode = $status['exitcode'];
-            }
+            $exitCode = $status['exitcode'];
 
             proc_close($process);
         }
