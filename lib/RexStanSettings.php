@@ -14,7 +14,7 @@ final class RexStanSettings
     /**
      * @var array<string, string>
      */
-    private static $phpstanExtensions = [
+    public static $phpstanExtensions = [
         'REDAXO SuperGlobals' => 'config/rex-superglobals.neon',
         'Bleeding-Edge' => 'vendor/phpstan/phpstan/conf/bleedingEdge.neon',
         'Strict-Mode' => 'vendor/phpstan/phpstan-strict-rules/rules.neon',
@@ -119,76 +119,31 @@ final class RexStanSettings
     }
 
     /**
-     * @return RexStanConfigVO
-     */
-    public static function getSettings()
-    {
-        $addon = rex_addon::get('rexstan');
-
-        $scanTargets = [];
-        $config_scanTargets = explode('|', trim(strval($addon->getConfig('addons')), '|'));
-        foreach ($config_scanTargets as $scanpath) {
-            foreach (rex_addon::getAvailableAddons() as $availableAddon) {
-                if (pathinfo($scanpath)['basename'] === $availableAddon->getName()) {
-                    $scanTargets[] = $availableAddon->getName();
-                    break;
-                }
-                if (isset(pathinfo($scanpath)['dirname']) && pathinfo(pathinfo($scanpath)['dirname'])['basename'] === 'developer') {
-                    if (pathinfo($scanpath)['basename'] === 'modules' || pathinfo($scanpath)['basename'] === 'templates') {
-                        $scanTargets[] = 'developer:' . pathinfo($scanpath)['basename'];
-                        break;
-                    }
-                }
-            }
-        }
-
-        $extensions = [];
-        $config_extensions = explode('|', trim(strval($addon->getConfig('extensions')), '|'));
-        foreach ($config_extensions as $extpath) {
-            foreach (self::$phpstanExtensions as $label => $path) {
-                if (pathinfo($extpath)['basename'] === pathinfo($path)['basename']) {
-                    $extensions[] = $label;
-                    break;
-                }
-            }
-        }
-
-        $level = intval($addon->getConfig('level'));
-        $addons = implode(', ', $scanTargets);
-        $extensions = implode(', ', $extensions);
-
-        $sapiVersion = (int) (PHP_VERSION_ID / 100);
-        $cliVersion = (int) shell_exec('php -r \'echo PHP_VERSION_ID;\'');
-        $cliVersion = (int) ($cliVersion / 100);
-
-        $phpVersion = self::$phpVersionList[$addon->getConfig('phpversion')];
-        if ((int) ($addon->getConfig('phpversion') / 100)  === $sapiVersion) {
-            $phpVersion .= ' [aktuelle Webserver-Version (WEB-SAPI)]';
-        }
-        if ((int) ($addon->getConfig('phpversion') / 100) === $cliVersion) {
-            $phpVersion .= ' [aktuelle Konsolen-Version (CLI-SAPI)]';
-        }
-
-        $settings = new RexStanConfigVO($level, $addons, $extensions, $phpVersion);
-        return $settings;
-    }
-
-    /**
      * @return string
      */
     public static function outputSettings()
     {
-        $settings = self::getSettings();
+        $sapiVersion = (int) (PHP_VERSION_ID / 100);
+        $cliVersion = (int) shell_exec('php -r \'echo PHP_VERSION_ID;\'');
+        $cliVersion = (int) ($cliVersion / 100);
+
+        $phpVersion = self::$phpVersionList[RexStanUserConfig::getPhpVersion()];
+        if ((int) (RexStanUserConfig::getPhpVersion() / 100)  === $sapiVersion) {
+            $phpVersion .= ' [aktuelle Webserver-Version (WEB-SAPI)]';
+        }
+        if ((int) (RexStanUserConfig::getPhpVersion() / 100) === $cliVersion) {
+            $phpVersion .= ' [aktuelle Konsolen-Version (CLI-SAPI)]';
+        }
 
         $output = '';
 
         $output = '<table class="table table-striped table-hover">';
         $output .= '<tbody>';
 
-        $output .=  '<tr><td>Level</td><td>' . $settings->getLevel() . '</td></tr>';
-        $output .=  '<tr><td>AddOns</td><td>' . $settings->getAddons() . '</td></tr>';
-        $output .=  '<tr><td>Extensions</td><td>' . $settings->getExtensions() . '</td></tr>';
-        $output .=  '<tr><td>PHP-Version</td><td>' . $settings->getPhpVersion() . '</td></tr>';
+        $output .=  '<tr><td>Level</td><td>' . RexStanUserConfig::getLevel() . '</td></tr>';
+        $output .=  '<tr><td>AddOns</td><td>' . RexStanUserConfig::getAddOns() . '</td></tr>';
+        $output .=  '<tr><td>Extensions</td><td>' . RexStanUserConfig::getExtensions() . '</td></tr>';
+        $output .=  '<tr><td>PHP-Version</td><td>' . $phpVersion . '</td></tr>';
 
         $output .= '</tbody>';
         $output .= '</table>';
