@@ -10,6 +10,7 @@ use RuntimeException;
 use staabm\PHPStanBaselineAnalysis\ResultPrinter;
 use function array_key_exists;
 use function dirname;
+use function proc_open;
 use function is_resource;
 
 final class RexStan
