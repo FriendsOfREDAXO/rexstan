@@ -161,7 +161,11 @@ final class RexStan
 
         $stderrOutput = '';
         $output = '';
-
+        
+        if (!function_exists('proc_open')) {
+            throw new Exception('Function proc_open() is not available');
+        }
+        
         $process = proc_open($cmd, $descriptorspec, $pipes);
         if (is_resource($process)) {
             fclose($pipes[0]);
