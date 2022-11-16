@@ -46,10 +46,10 @@ if (null === $result) {
         <td>Return Types</td>
     </tr>
     <tr>
-        <th class="info">Fortschritt in %</th>
-        <td><?= $result[ResultPrinter::KEY_PROPERTY_TYPE_COVERAGE] ?></td>
-        <td><?= $result[ResultPrinter::KEY_PARAM_TYPE_COVERAGE] ?></td>
-        <td><?= $result[ResultPrinter::KEY_RETURN_TYPE_COVERAGE] ?></td>
+        <th class="info">Fortschritt</th>
+        <td><?= $result[ResultPrinter::KEY_PROPERTY_TYPE_COVERAGE] ?> %</td>
+        <td><?= $result[ResultPrinter::KEY_PARAM_TYPE_COVERAGE] ?> %</td>
+        <td><?= $result[ResultPrinter::KEY_RETURN_TYPE_COVERAGE] ?> %</td>
     </tr>
     </tbody>
 </table>
