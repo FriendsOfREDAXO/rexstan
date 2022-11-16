@@ -46,6 +46,13 @@ if (
 } else {
     $totalErrors = $phpstanResult['totals']['file_errors'];
 
+    // skip project wide errors, which don't relate to a single file.
+    // these include the symplify sea level rules, we only use in the baseline summary.
+    if (array_key_exists('N/A', $phpstanResult['files'])) {
+        $totalErrors -= $phpstanResult['files']['N/A']['errors'];
+        unset($phpstanResult['files']['N/A']);
+    }
+
     if (0 === $totalErrors) {
         $level = RexStanUserConfig::getLevel();
 
@@ -123,11 +130,6 @@ if (
     $section->setVar('sectionAttributes', ['class' => 'rexstan'], false);
 
     foreach ($phpstanResult['files'] as $file => $fileResult) {
-        // skip project wide errors, which don't relate to a single file
-        if ($file === 'N/A') {
-            continue;
-        }
-
         $shortFile = str_replace($basePath, '', $file);
         $linkFile = preg_replace('/\s\(in context.*?$/', '', $file);
         $title = '<i class="rexstan-open fa fa-folder-o"></i>'.
