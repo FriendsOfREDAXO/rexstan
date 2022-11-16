@@ -10,8 +10,9 @@ use RuntimeException;
 use staabm\PHPStanBaselineAnalysis\ResultPrinter;
 use function array_key_exists;
 use function dirname;
-use function proc_open;
+use function function_exists;
 use function is_resource;
+use function proc_open;
 
 final class RexStan
 {
@@ -161,11 +162,11 @@ final class RexStan
 
         $stderrOutput = '';
         $output = '';
-        
+
         if (!function_exists('proc_open')) {
             throw new Exception('Function proc_open() is not available');
         }
-        
+
         $process = proc_open($cmd, $descriptorspec, $pipes);
         if (is_resource($process)) {
             fclose($pipes[0]);
