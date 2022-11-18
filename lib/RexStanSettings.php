@@ -18,7 +18,7 @@ final class RexStanSettings
         'Bleeding-Edge' => 'vendor/phpstan/phpstan/conf/bleedingEdge.neon',
         'Strict-Mode' => 'vendor/phpstan/phpstan-strict-rules/rules.neon',
         'Deprecation Warnings' => 'vendor/phpstan/phpstan-deprecation-rules/rules.neon',
-        'PHPUnit' => 'vendor/phpstan/phpstan-phpunit/rules.neon',
+        'PHPUnit' => 'config/phpstan-phpunit.neon',
         'phpstan-dba' => 'config/phpstan-dba.neon',
         'cognitive complexity' => 'config/cognitive-complexity.neon',
         'report mixed' => 'config/code-complexity.neon',
