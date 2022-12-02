@@ -304,17 +304,17 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.13.0",
-            "version_normalized": "1.13.0.0",
+            "version": "1.14.0",
+            "version_normalized": "1.14.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "33aefcdab42900e36366d0feab6206e2dd68f947"
+                "reference": "df1a79430e14e30cd192fe6c05842133d076e58d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/33aefcdab42900e36366d0feab6206e2dd68f947",
-                "reference": "33aefcdab42900e36366d0feab6206e2dd68f947",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/df1a79430e14e30cd192fe6c05842133d076e58d",
+                "reference": "df1a79430e14e30cd192fe6c05842133d076e58d",
                 "shasum": ""
             },
             "require": {
@@ -329,7 +329,7 @@
                 "phpunit/phpunit": "^9.5",
                 "symfony/process": "^5.2"
             },
-            "time": "2022-10-21T09:57:39+00:00",
+            "time": "2022-11-27T19:09:16+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -346,7 +346,7 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.13.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.14.0"
             },
             "install-path": "../phpstan/phpdoc-parser"
         },
@@ -647,17 +647,17 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v2.9.0",
-            "version_normalized": "2.9.0.0",
+            "version": "v2.10.0",
+            "version_normalized": "2.10.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "885582f4f2a5dbf1824c25bac4ca14c846e00813"
+                "reference": "332969d0aa67ddb8597c2f1248268d69ebf5f9c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/885582f4f2a5dbf1824c25bac4ca14c846e00813",
-                "reference": "885582f4f2a5dbf1824c25bac4ca14c846e00813",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/332969d0aa67ddb8597c2f1248268d69ebf5f9c7",
+                "reference": "332969d0aa67ddb8597c2f1248268d69ebf5f9c7",
                 "shasum": ""
             },
             "require": {
@@ -672,7 +672,7 @@
                 "phpunit/phpunit": "^7.0 || ^9.4.2",
                 "spaze/coding-standard": "^1.3"
             },
-            "time": "2022-11-04T18:47:12+00:00",
+            "time": "2022-11-23T04:26:38+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -704,7 +704,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.9.0"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.10.0"
             },
             "install-path": "../spaze/phpstan-disallowed-calls"
         },
@@ -767,17 +767,17 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.2.51",
-            "version_normalized": "0.2.51.0",
+            "version": "0.2.53",
+            "version_normalized": "0.2.53.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "0f46ee86370633d8a69eaf5cdb5319af496df2ed"
+                "reference": "afb452df151e72dfb0bc69feaae15c2599322f0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/0f46ee86370633d8a69eaf5cdb5319af496df2ed",
-                "reference": "0f46ee86370633d8a69eaf5cdb5319af496df2ed",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/afb452df151e72dfb0bc69feaae15c2599322f0d",
+                "reference": "afb452df151e72dfb0bc69feaae15c2599322f0d",
                 "shasum": ""
             },
             "require": {
@@ -798,7 +798,7 @@
                 "phpunit/phpunit": "^9",
                 "vlucas/phpdotenv": "^5.4"
             },
-            "time": "2022-11-02T19:49:13+00:00",
+            "time": "2022-12-02T17:42:55+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -819,7 +819,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.51"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.53"
             },
             "install-path": "../staabm/phpstan-dba"
         },
