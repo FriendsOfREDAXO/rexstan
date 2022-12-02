@@ -4,8 +4,6 @@ includes:
     - vendor/spaze/phpstan-disallowed-calls/extension.neon
     # required for dead-code.neon, code-complexity.neon, native-type-coverage.neon
     - vendor/symplify/phpstan-rules/config/services/services.neon
-    # enable native type coverage per default.
-    - config/native-type-coverage.neon
 
 parameters:
     level: 5

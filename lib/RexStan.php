@@ -39,7 +39,7 @@ final class RexStan
     public static function runFromCli()
     {
         $phpstanBinary = self::phpstanBinPath();
-        $configPath = self::phpstanConfigPath();
+        $configPath = self::phpstanConfigPath(__DIR__.'/../phpstan.neon');
 
         $cmd = $phpstanBinary .' analyse -c '. $configPath;
         $output = self::execCmd($cmd, $stderrOutput, $exitCode);
@@ -53,7 +53,7 @@ final class RexStan
     public static function runFromWeb()
     {
         $phpstanBinary = self::phpstanBinPath();
-        $configPath = self::phpstanConfigPath();
+        $configPath = self::phpstanConfigPath(__DIR__.'/../phpstan.neon');
 
         $cmd = $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress';
         $output = self::execCmd($cmd, $stderrOutput, $exitCode);
@@ -79,7 +79,7 @@ final class RexStan
         $phpstanBinary = self::phpstanBinPath();
         $analyzeBinary = self::phpstanBaselineAnalyzeBinPath();
         $graphBinary = self::phpstanBaselineGraphBinPath();
-        $configPath = self::phpstanConfigPath();
+        $configPath = self::phpstanConfigPath(__DIR__.'/../phpstan-summary.neon');
 
         $addon = rex_addon::get('rexstan');
         $dataDir = $addon->getDataPath();
@@ -242,14 +242,15 @@ final class RexStan
         return $path;
     }
 
-    private static function phpstanConfigPath(): string
+    private static function phpstanConfigPath(string $pathToFile): string
     {
-        $path = realpath(__DIR__.'/../phpstan.neon');
+        $path = realpath($pathToFile);
 
         if (false === $path) {
-            throw new RuntimeException(sprintf('phpstan config "%s" not found. This file is usually created while AddOn setup. Try re-install of rexstan.', $path));
+            throw new RuntimeException(sprintf('phpstan config "%s" not found. This file is usually created while AddOn setup. Try re-install of rexstan.', $pathToFile));
         }
 
         return $path;
     }
+
 }

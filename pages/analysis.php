@@ -46,13 +46,6 @@ if (
 } else {
     $totalErrors = $phpstanResult['totals']['file_errors'];
 
-    // skip project wide errors, which don't relate to a single file.
-    // these include the symplify sea level rules, we only use in the baseline summary.
-    if (array_key_exists('N/A', $phpstanResult['files'])) {
-        $totalErrors -= $phpstanResult['files']['N/A']['errors'];
-        unset($phpstanResult['files']['N/A']);
-    }
-
     if (0 === $totalErrors) {
         $level = RexStanUserConfig::getLevel();
 
