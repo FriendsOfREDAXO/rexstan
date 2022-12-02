@@ -161,3 +161,19 @@ class Good
         $sql->setQuery($this->query);
     }
 }
+
+function bug238()
+{
+    global $META_TAG_DESCRIPTOR;
+    $sql = rex_sql::factory();
+    $sql->setDebug(false);
+    $META_TAG_DESCRIPTOR = [];
+    $META_TAG_DESCRIPTOR['1'] = [
+        'regex' => "/\/inserat\/\?.*id=[0-9]+.*/",
+        'title' => static function (rex_sql $sql) {
+            $lady = $sql->getArray(
+            "SELECT name,ort,kategorie,handy,strasse FROM rex_inserate WHERE id={$_GET['id']}"
+        )[0];
+        },
+    ];
+}
