@@ -71,7 +71,7 @@ final class RexStanUserConfig
         if (!$md5) {
             throw new \PHPStan\ShouldNotHappenException();
         }
-        return self::DEFAULT_SETTINGS_VERSION.'|'.$md5;
+        return self::DEFAULT_SETTINGS_VERSION.'-'.$md5;
     }
 
     /**
