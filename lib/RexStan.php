@@ -90,9 +90,9 @@ final class RexStan
         $currentTime = time();
         $currentTimeSlot = $currentTime - ($currentTime % (15 * 60));
 
-        $summaryPath = $dataDir.'/'.$configSignature.'/'. $currentTimeSlot .'-summary.json';
-        $baselineGlob = $dataDir.'/'.$configSignature.'/*-summary.json';
-        $htmlGraphPath = $dataDir.'/baseline-graph.html';
+        $summaryPath = $dataDir.$configSignature.DIRECTORY_SEPARATOR. $currentTimeSlot .'-summary.json';
+        $baselineGlob = $dataDir.$configSignature.DIRECTORY_SEPARATOR.'*-summary.json';
+        $htmlGraphPath = $dataDir.'baseline-graph.html';
 
         self::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline', $stderrOutput, $exitCode);
         if (0 !== $exitCode) {
