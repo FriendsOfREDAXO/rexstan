@@ -1,3 +1,17 @@
+.rexstan-navigation-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: -28px;
+    margin-right: 3px;
+    vertical-align: top;
+}
+
+.rexstan-navigation-icon svg {
+    fill: currentColor;
+    filter: grayscale(1);
+}
+
 .rexstan-achievement {
     font-size: 50px;
     height: 100px;
