@@ -20,7 +20,7 @@ final class RexStan
     {
         if ('Windows' !== PHP_OS_FAMILY) {
             $executable = 'php';
-            $path = "$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin";
+            $path = '$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin';
             
             if ('Darwin' === PHP_OS_FAMILY) {
                 $customConfig = '/Library/Application Support/appsolute/MAMP PRO/conf/php'.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION.'.ini';
