@@ -34,7 +34,7 @@ final class RexStan
                }
             }
             
-            return 'PATH="$path" '.$executable;
+            return 'PATH="'. $path .'" '.$executable;
         }
         
         return 'php';
