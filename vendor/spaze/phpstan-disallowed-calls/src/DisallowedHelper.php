@@ -5,6 +5,8 @@ namespace Spaze\PHPStan\Rules\Disallowed;
 
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\CallLike;
+use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Expr\StaticCall;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
@@ -95,7 +97,7 @@ class DisallowedHelper
 	/**
 	 * @param Scope $scope
 	 * @param CallLike|null $node
-	 * @param array<int, DisallowedCallParam> $allowConfig
+	 * @param array<int|string, DisallowedCallParam> $allowConfig
 	 * @param bool $paramsRequired
 	 * @return bool
 	 */
@@ -105,12 +107,12 @@ class DisallowedHelper
 			return true;
 		}
 
-		foreach ($allowConfig as $param => $value) {
+		foreach ($allowConfig as $param) {
 			$type = $this->getArgType($node, $scope, $param);
 			if (!$type instanceof ConstantScalarType) {
 				return !$paramsRequired;
 			}
-			if (!$value->matches($type)) {
+			if (!$param->matches($type)) {
 				return false;
 			}
 		}
@@ -118,10 +120,24 @@ class DisallowedHelper
 	}
 
 
-	private function getArgType(CallLike $node, Scope $scope, int $param): ?Type
+	/**
+	 * @param CallLike $node
+	 * @param Scope $scope
+	 * @param DisallowedCallParam $param
+	 * @return Type|null
+	 */
+	private function getArgType(CallLike $node, Scope $scope, DisallowedCallParam $param): ?Type
 	{
-		$arg = $node->getArgs()[$param - 1] ?? null;
-		return $arg ? $scope->getType($arg->value) : null;
+		foreach ($node->getArgs() as $arg) {
+			if ($arg->name && $arg->name->name === $param->getName()) {
+				$found = $arg;
+				break;
+			}
+		}
+		if (!isset($found)) {
+			$found = $node->getArgs()[$param->getPosition() - 1] ?? null;
+		}
+		return isset($found) ? $scope->getType($found->value) : null;
 	}
 
 
@@ -162,7 +178,7 @@ class DisallowedHelper
 
 	/**
 	 * @param Name|Expr $class
-	 * @param CallLike $node
+	 * @param MethodCall|StaticCall $node
 	 * @param Scope $scope
 	 * @param DisallowedCall[] $disallowedCalls
 	 * @return RuleError[]
