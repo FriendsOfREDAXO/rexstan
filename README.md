@@ -64,5 +64,6 @@ Restart the container
 
 ## Credits
 
+- rexstan by [Markus Staab](https://github.com/staabm)
 - rexstan logo by Ralph Zumkeller, yakamara.de
 - PHPStan by [Ondřej Mirtes](https://github.com/ondrejmirtes) and [contributors](https://github.com/phpstan/phpstan-src/graphs/contributors) 
