@@ -1,7 +1,7 @@
 {
     "require": {
         "php": ">=7.4",
-        "phpstan/phpstan": "^1.9.2",
+        "phpstan/phpstan": "^1.9.3",
         "phpstan/phpstan-symfony": "^1.2",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-strict-rules": "^1.4",
