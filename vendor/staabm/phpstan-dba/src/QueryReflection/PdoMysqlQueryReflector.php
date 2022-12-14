@@ -25,7 +25,7 @@ class PdoMysqlQueryReflector extends BasePdoQueryReflector
     {
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        parent::__construct($pdo, new MysqlTypeMapper());
+        parent::__construct($pdo);
     }
 
     /** @return PDOException|list<ColumnMeta>|null */
@@ -49,6 +49,7 @@ class PdoMysqlQueryReflector extends BasePdoQueryReflector
             $this->pdo->beginTransaction();
         } catch (PDOException $e) {
             // not all drivers may support transactions
+            throw new \RuntimeException('Failed to start transaction', $e->getCode(), $e);
         }
 
         try {
@@ -60,6 +61,7 @@ class PdoMysqlQueryReflector extends BasePdoQueryReflector
                 $this->pdo->rollBack();
             } catch (PDOException $e) {
                 // not all drivers may support transactions
+                throw new \RuntimeException('Failed to rollback transaction', $e->getCode(), $e);
             }
         }
 
@@ -88,6 +90,11 @@ class PdoMysqlQueryReflector extends BasePdoQueryReflector
         }
 
         return $this->cache[$queryString];
+    }
+
+    public function setupDbaApi(?DbaApi $dbaApi): void
+    {
+        $this->typeMapper = new MysqlTypeMapper($dbaApi);
     }
 
     /**
