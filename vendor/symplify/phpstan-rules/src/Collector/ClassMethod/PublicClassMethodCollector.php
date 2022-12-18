@@ -11,9 +11,11 @@ use PHPStan\Collectors\Collector;
 use PHPStan\Reflection\ClassReflection;
 use Symplify\PHPStanRules\Matcher\Collector\PublicClassMethodMatcher;
 use Symplify\PHPStanRules\PhpDoc\ApiDocStmtAnalyzer;
+use Twig\Extension\ExtensionInterface;
 
 /**
  * @implements Collector<ClassMethod, array{class-string, string, int}|null>
+ * @deprecated
  */
 final class PublicClassMethodCollector implements Collector
 {
@@ -41,6 +43,15 @@ final class PublicClassMethodCollector implements Collector
      */
     public function processNode(Node $node, Scope $scope): ?array
     {
+        $classReflection = $scope->getClassReflection();
+
+        // skip
+        if ($classReflection instanceof ClassReflection && $classReflection->isSubclassOf(
+            ExtensionInterface::class
+        )) {
+            return null;
+        }
+
         if ($this->publicClassMethodMatcher->shouldSkipClassMethod($node)) {
             return null;
         }

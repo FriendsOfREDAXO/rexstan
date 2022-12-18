@@ -26,6 +26,10 @@ final class PropertyTypeDeclarationSeaLevelRule implements Rule
      */
     public const ERROR_MESSAGE = 'Out of %d possible property types, only %d %% actually have it. Add more property types to get over %d %%';
     /**
+     * @var \Symplify\PHPStanRules\Formatter\SeaLevelRuleErrorFormatter
+     */
+    private $seaLevelRuleErrorFormatter;
+    /**
      * @var float
      */
     private $minimalLevel = 0.80;
@@ -33,17 +37,9 @@ final class PropertyTypeDeclarationSeaLevelRule implements Rule
      * @var bool
      */
     private $printSuggestions = true;
-    /**
-     * @var \Symplify\PHPStanRules\Formatter\SeaLevelRuleErrorFormatter
-     */
-    private $seaLevelRuleErrorFormatter;
 
-
-    public function __construct(
-        SeaLevelRuleErrorFormatter $seaLevelRuleErrorFormatter,
-        float $minimalLevel = 0.80,
-        bool $printSuggestions = true
-    ) {
+    public function __construct(SeaLevelRuleErrorFormatter $seaLevelRuleErrorFormatter, float $minimalLevel = 0.80, bool $printSuggestions = true)
+    {
         $this->seaLevelRuleErrorFormatter = $seaLevelRuleErrorFormatter;
         $this->minimalLevel = $minimalLevel;
         $this->printSuggestions = $printSuggestions;
@@ -75,7 +71,7 @@ final class PropertyTypeDeclarationSeaLevelRule implements Rule
                 $typedPropertyCount += $nestedPropertySeaLevelData[0];
                 $propertyCount += $nestedPropertySeaLevelData[1];
 
-                if ($this->printSuggestions === false) {
+                if (! $this->printSuggestions) {
                     continue;
                 }
 

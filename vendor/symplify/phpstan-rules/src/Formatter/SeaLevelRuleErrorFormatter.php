@@ -6,8 +6,8 @@ namespace Symplify\PHPStanRules\Formatter;
 
 use Nette\Utils\Strings;
 
-final class SeaLevelRuleErrorFormatter {
-
+final class SeaLevelRuleErrorFormatter
+{
     /**
      * @param string[] $errors
      * @return string[]
@@ -19,7 +19,6 @@ final class SeaLevelRuleErrorFormatter {
         int $typedPropertyCount,
         array $errors
     ): array {
-
         if ($propertyCount === 0) {
             return [];
         }
@@ -38,7 +37,7 @@ final class SeaLevelRuleErrorFormatter {
             $minimalLevel * 100
         );
 
-        if (count($errors) > 0) {
+        if ($errors !== []) {
             $errorMessage .= PHP_EOL . PHP_EOL;
             $errorMessage .= implode(PHP_EOL . PHP_EOL, $errors);
             $errorMessage .= PHP_EOL;
