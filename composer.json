@@ -9,7 +9,8 @@
         "staabm/phpstan-dba": "^0.2.53",
         "spaze/phpstan-disallowed-calls": "^2.11",
         "symplify/phpstan-rules": "^11.1",
-        "staabm/phpstan-baseline-analysis": "^0.9"
+        "staabm/phpstan-baseline-analysis": "^0.9",
+        "tomasvotruba/unused-public": "0.0.10.72"
     },
     "autoload": {
         "classmap": [

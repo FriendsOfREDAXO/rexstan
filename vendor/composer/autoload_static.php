@@ -109,6 +109,10 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         array (
             'Webmozart\\Assert\\' => 17,
         ),
+        'T' => 
+        array (
+            'TomasVotruba\\UnusedPublic\\' => 26,
+        ),
         'S' => 
         array (
             'Symplify\\PHPStanRules\\' => 22,
@@ -136,6 +140,10 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'TomasVotruba\\UnusedPublic\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tomasvotruba/unused-public/src',
         ),
         'Symplify\\PHPStanRules\\' => 
         array (

@@ -1117,6 +1117,52 @@
             "install-path": "../thecodingmachine/safe"
         },
         {
+            "name": "tomasvotruba/unused-public",
+            "version": "0.0.10.72",
+            "version_normalized": "0.0.10.72",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TomasVotruba/unused-public.git",
+                "reference": "6c425fcb79c11d6e2124f2db5fa56b69580b164f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/6c425fcb79c11d6e2124f2db5fa56b69580b164f",
+                "reference": "6c425fcb79c11d6e2124f2db5fa56b69580b164f",
+                "shasum": ""
+            },
+            "require": {
+                "nette/utils": "^3.2",
+                "php": "^7.2|8.0",
+                "phpstan/phpstan": "^1.9.3"
+            },
+            "time": "2022-12-16T10:34:15+00:00",
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "config/extension.neon"
+                    ]
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "TomasVotruba\\UnusedPublic\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Detect unused public properties, constants and methods in your code",
+            "support": {
+                "issues": "https://github.com/TomasVotruba/unused-public/issues",
+                "source": "https://github.com/TomasVotruba/unused-public/tree/0.0.10.72"
+            },
+            "install-path": "../tomasvotruba/unused-public"
+        },
+        {
             "name": "webmozart/assert",
             "version": "1.11.0",
             "version_normalized": "1.11.0.0",
