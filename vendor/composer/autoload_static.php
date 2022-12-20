@@ -112,6 +112,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'T' => 
         array (
             'TomasVotruba\\UnusedPublic\\' => 26,
+            'TomasVotruba\\TypeCoverage\\' => 26,
         ),
         'S' => 
         array (
@@ -144,6 +145,10 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'TomasVotruba\\UnusedPublic\\' => 
         array (
             0 => __DIR__ . '/..' . '/tomasvotruba/unused-public/src',
+        ),
+        'TomasVotruba\\TypeCoverage\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tomasvotruba/type-coverage/src',
         ),
         'Symplify\\PHPStanRules\\' => 
         array (

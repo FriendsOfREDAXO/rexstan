@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "78b67d88175d57e260ea37731e62e492",
+    "content-hash": "2e1a097cf18374bf37a926aafb9dbba7",
     "packages": [
         {
             "name": "composer/semver",
@@ -621,16 +621,16 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v2.11.0",
+            "version": "v2.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "8648e5615494833105886e23c3051530e959a6a1"
+                "reference": "59afcfe02e38087ca92d0e9e2ee9af078be7ec9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/8648e5615494833105886e23c3051530e959a6a1",
-                "reference": "8648e5615494833105886e23c3051530e959a6a1",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/59afcfe02e38087ca92d0e9e2ee9af078be7ec9e",
+                "reference": "59afcfe02e38087ca92d0e9e2ee9af078be7ec9e",
                 "shasum": ""
             },
             "require": {
@@ -675,9 +675,9 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.11.0"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.11.1"
             },
-            "time": "2022-12-07T03:23:12+00:00"
+            "time": "2022-12-19T21:49:38+00:00"
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
@@ -1073,6 +1073,49 @@
                 "source": "https://github.com/thecodingmachine/safe/tree/v1.3.3"
             },
             "time": "2020-10-28T17:51:34+00:00"
+        },
+        {
+            "name": "tomasvotruba/type-coverage",
+            "version": "0.0.1.72",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TomasVotruba/type-coverage.git",
+                "reference": "3eb1b4589ef6daaf3333a796bace2d9e008a4dfb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/3eb1b4589ef6daaf3333a796bace2d9e008a4dfb",
+                "reference": "3eb1b4589ef6daaf3333a796bace2d9e008a4dfb",
+                "shasum": ""
+            },
+            "require": {
+                "nette/utils": "^3.2",
+                "php": "^7.2|8.0",
+                "phpstan/phpstan": "^1.9.3"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "config/extension.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TomasVotruba\\TypeCoverage\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Measure type coverage of your project",
+            "support": {
+                "issues": "https://github.com/TomasVotruba/type-coverage/issues",
+                "source": "https://github.com/TomasVotruba/type-coverage/tree/0.0.1.72"
+            },
+            "time": "2022-12-19T12:32:38+00:00"
         },
         {
             "name": "tomasvotruba/unused-public",
