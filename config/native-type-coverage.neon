@@ -1,34 +1,9 @@
-services:
-    -
-        class: Symplify\PHPStanRules\Rules\Explicit\PropertyTypeDeclarationSeaLevelRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            minimalLevel: 0.99
-            printSuggestions: false
+includes:
+    - ../vendor/tomasvotruba/type-coverage/config/extension.neon
 
-    -
-        class: Symplify\PHPStanRules\Rules\Explicit\ParamTypeDeclarationSeaLevelRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            minimalLevel: 0.99
-            printSuggestions: false
-
-    -
-        class: Symplify\PHPStanRules\Rules\Explicit\ReturnTypeDeclarationSeaLevelRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            minimalLevel: 0.99
-            printSuggestions: false
-
-    # for "type declaration sea level"
-    -
-        class: Symplify\PHPStanRules\Collector\FunctionLike\ParamTypeSeaLevelCollector
-        tags: [phpstan.collector]
-
-    -
-        class: Symplify\PHPStanRules\Collector\FunctionLike\ReturnTypeSeaLevelCollector
-        tags: [phpstan.collector]
-
-    -
-        class: Symplify\PHPStanRules\Collector\ClassLike\PropertyTypeSeaLevelCollector
-        tags: [phpstan.collector]
+parameters:
+    type_coverage:
+        return_type: 99
+        param_type: 99
+        property_type: 99
+        print_suggestions: false
