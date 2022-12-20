@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\Formatter;
+namespace TomasVotruba\TypeCoverage\Formatter;
 
 use Nette\Utils\Strings;
 
-final class SeaLevelRuleErrorFormatter
+final class TypeCoverageFormatter
 {
     /**
      * @param string[] $errors
@@ -14,7 +14,7 @@ final class SeaLevelRuleErrorFormatter
      */
     public function formatErrors(
         string $message,
-        float $minimalLevel,
+        int $minimalLevel,
         int $propertyCount,
         int $typedPropertyCount,
         array $errors
@@ -23,19 +23,14 @@ final class SeaLevelRuleErrorFormatter
             return [];
         }
 
-        $propertyTypeDeclarationSeaLevel = $typedPropertyCount / $propertyCount;
+        $propertyTypeDeclarationSeaLevel = 100 * ($typedPropertyCount / $propertyCount);
 
         // has the code met the minimal sea level of types?
         if ($propertyTypeDeclarationSeaLevel >= $minimalLevel) {
             return [];
         }
 
-        $errorMessage = sprintf(
-            $message,
-            $propertyCount,
-            $propertyTypeDeclarationSeaLevel * 100,
-            $minimalLevel * 100
-        );
+        $errorMessage = sprintf($message, $propertyCount, $propertyTypeDeclarationSeaLevel, $minimalLevel);
 
         if ($errors !== []) {
             $errorMessage .= PHP_EOL . PHP_EOL;

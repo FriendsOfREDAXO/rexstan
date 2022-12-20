@@ -645,17 +645,17 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v2.11.0",
-            "version_normalized": "2.11.0.0",
+            "version": "v2.11.1",
+            "version_normalized": "2.11.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "8648e5615494833105886e23c3051530e959a6a1"
+                "reference": "59afcfe02e38087ca92d0e9e2ee9af078be7ec9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/8648e5615494833105886e23c3051530e959a6a1",
-                "reference": "8648e5615494833105886e23c3051530e959a6a1",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/59afcfe02e38087ca92d0e9e2ee9af078be7ec9e",
+                "reference": "59afcfe02e38087ca92d0e9e2ee9af078be7ec9e",
                 "shasum": ""
             },
             "require": {
@@ -670,7 +670,7 @@
                 "phpunit/phpunit": "^7.0 || ^9.4.2",
                 "spaze/coding-standard": "^1.3"
             },
-            "time": "2022-12-07T03:23:12+00:00",
+            "time": "2022-12-19T21:49:38+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -702,7 +702,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.11.0"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.11.1"
             },
             "install-path": "../spaze/phpstan-disallowed-calls"
         },
@@ -910,17 +910,17 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "11.1.18",
-            "version_normalized": "11.1.18.0",
+            "version": "11.1.20",
+            "version_normalized": "11.1.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "ba5c25c60476ec4b0a2e4deebcadd1b3e45f041b"
+                "reference": "3e1c9d5425281d4886100ac812d8c742ae98d4f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/ba5c25c60476ec4b0a2e4deebcadd1b3e45f041b",
-                "reference": "ba5c25c60476ec4b0a2e4deebcadd1b3e45f041b",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/3e1c9d5425281d4886100ac812d8c742ae98d4f4",
+                "reference": "3e1c9d5425281d4886100ac812d8c742ae98d4f4",
                 "shasum": ""
             },
             "require": {
@@ -931,7 +931,7 @@
                 "phpstan/phpstan": "^1.8.1",
                 "webmozart/assert": "^1.10"
             },
-            "time": "2022-12-16T14:02:12+00:00",
+            "time": "2022-12-19T12:25:41+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "branch-alias": {
@@ -960,7 +960,7 @@
             ],
             "description": "Set of Symplify rules for PHPStan",
             "support": {
-                "source": "https://github.com/symplify/phpstan-rules/tree/11.1.18"
+                "source": "https://github.com/symplify/phpstan-rules/tree/11.1.20"
             },
             "funding": [
                 {
@@ -1115,6 +1115,52 @@
                 "source": "https://github.com/thecodingmachine/safe/tree/v1.3.3"
             },
             "install-path": "../thecodingmachine/safe"
+        },
+        {
+            "name": "tomasvotruba/type-coverage",
+            "version": "0.0.1.72",
+            "version_normalized": "0.0.1.72",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TomasVotruba/type-coverage.git",
+                "reference": "3eb1b4589ef6daaf3333a796bace2d9e008a4dfb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/3eb1b4589ef6daaf3333a796bace2d9e008a4dfb",
+                "reference": "3eb1b4589ef6daaf3333a796bace2d9e008a4dfb",
+                "shasum": ""
+            },
+            "require": {
+                "nette/utils": "^3.2",
+                "php": "^7.2|8.0",
+                "phpstan/phpstan": "^1.9.3"
+            },
+            "time": "2022-12-19T12:32:38+00:00",
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "config/extension.neon"
+                    ]
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "TomasVotruba\\TypeCoverage\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Measure type coverage of your project",
+            "support": {
+                "issues": "https://github.com/TomasVotruba/type-coverage/issues",
+                "source": "https://github.com/TomasVotruba/type-coverage/tree/0.0.1.72"
+            },
+            "install-path": "../tomasvotruba/type-coverage"
         },
         {
             "name": "tomasvotruba/unused-public",
