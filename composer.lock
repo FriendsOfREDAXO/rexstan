@@ -621,16 +621,16 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v2.11.0",
+            "version": "v2.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "8648e5615494833105886e23c3051530e959a6a1"
+                "reference": "59afcfe02e38087ca92d0e9e2ee9af078be7ec9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/8648e5615494833105886e23c3051530e959a6a1",
-                "reference": "8648e5615494833105886e23c3051530e959a6a1",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/59afcfe02e38087ca92d0e9e2ee9af078be7ec9e",
+                "reference": "59afcfe02e38087ca92d0e9e2ee9af078be7ec9e",
                 "shasum": ""
             },
             "require": {
@@ -675,9 +675,9 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.11.0"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.11.1"
             },
-            "time": "2022-12-07T03:23:12+00:00"
+            "time": "2022-12-19T21:49:38+00:00"
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
