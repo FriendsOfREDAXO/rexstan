@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ef5d59ae67c21fb2422c6a64314e353e",
+    "content-hash": "c22e565ddc5eae86c026594a82784a3a",
     "packages": [
         {
             "name": "composer/semver",
@@ -1249,21 +1249,21 @@
         },
         {
             "name": "tomasvotruba/unused-public",
-            "version": "0.0.25.72",
+            "version": "0.0.26.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/unused-public.git",
-                "reference": "4970e63f07d7a7e80b31bb19fd5d665f533c6666"
+                "reference": "3469a7770766d4a9ee62dd539fd3af4193d02768"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/4970e63f07d7a7e80b31bb19fd5d665f533c6666",
-                "reference": "4970e63f07d7a7e80b31bb19fd5d665f533c6666",
+                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/3469a7770766d4a9ee62dd539fd3af4193d02768",
+                "reference": "3469a7770766d4a9ee62dd539fd3af4193d02768",
                 "shasum": ""
             },
             "require": {
                 "nette/utils": "^3.2",
-                "php": "^7.2|8.0",
+                "php": "^7.2 || 8.0.*",
                 "phpstan/phpstan": "^1.9.3",
                 "symfony/finder": "^5.0|^4.0|^3.0",
                 "webmozart/assert": "^1.11"
@@ -1288,9 +1288,9 @@
             "description": "Detect unused public properties, constants and methods in your code",
             "support": {
                 "issues": "https://github.com/TomasVotruba/unused-public/issues",
-                "source": "https://github.com/TomasVotruba/unused-public/tree/0.0.25.72"
+                "source": "https://github.com/TomasVotruba/unused-public/tree/0.0.26.72"
             },
-            "time": "2022-12-23T01:05:44+00:00"
+            "time": "2022-12-23T11:43:54+00:00"
         },
         {
             "name": "webmozart/assert",
