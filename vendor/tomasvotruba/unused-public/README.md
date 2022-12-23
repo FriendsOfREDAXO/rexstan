@@ -1,4 +1,12 @@
-# Find Unused Public Constants, Properties and Methods in Your Code
+# Find Unused Public Elements in Your Code
+
+<br>
+
+<div align="center">
+    <img src="/docs/unused_public.jpg" style="width: 10em">
+</div>
+
+<br>
 
 It's easy to find unused private class elements, because they're not used in the class itself:
 
@@ -59,7 +67,27 @@ parameters:
         methods: true
         properties: true
         constants: true
-        static_properties: true
+```
+
+<br>
+
+## Exclude Twig Methods
+
+Some methods are used only in TWIG templates, and could be reported false positively as unused.
+
+```twig
+{{ book.getTitle() }}
+```
+
+How can we exclude them? Add your TWIG template directories in config to exclude methods names:
+
+
+```neon
+# phpstan.neon
+parameters:
+    unused_public:
+        twig_template_paths:
+            - templates
 ```
 
 <br>

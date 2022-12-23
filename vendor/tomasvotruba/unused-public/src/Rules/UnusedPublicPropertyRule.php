@@ -13,7 +13,9 @@ use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use TomasVotruba\UnusedPublic\Collectors\PublicPropertyCollector;
 use TomasVotruba\UnusedPublic\Collectors\PublicPropertyFetchCollector;
+use TomasVotruba\UnusedPublic\Collectors\PublicStaticPropertyFetchCollector;
 use TomasVotruba\UnusedPublic\Configuration;
+use TomasVotruba\UnusedPublic\Enum\RuleTips;
 
 /**
  * @see \TomasVotruba\UnusedPublic\Tests\Rules\UnusedPublicPropertyRule\UnusedPublicPropertyRuleTest
@@ -23,12 +25,7 @@ final class UnusedPublicPropertyRule implements Rule
     /**
      * @var string
      */
-    public const ERROR_MESSAGE = 'Property "%s()" is never used outside of its class';
-
-    /**
-     * @var string
-     */
-    public const TIP_MESSAGE = 'Either reduce the property visibility or annotate it or its class with @api.';
+    public const ERROR_MESSAGE = 'Public property "%s::$%s" is never used';
     /**
      * @readonly
      * @var \TomasVotruba\UnusedPublic\Configuration
@@ -57,6 +54,9 @@ final class UnusedPublicPropertyRule implements Rule
 
         $publicPropertyCollector = $node->get(PublicPropertyCollector::class);
         $publicPropertyFetchCollector = $node->get(PublicPropertyFetchCollector::class);
+        $publicStaticPropertyFetchCollector = $node->get(PublicStaticPropertyFetchCollector::class);
+
+        $publicPropertyFetchCollector = array_merge($publicPropertyFetchCollector, $publicStaticPropertyFetchCollector);
 
         $ruleErrors = [];
 
@@ -68,12 +68,12 @@ final class UnusedPublicPropertyRule implements Rule
                     }
 
                     /** @var string $propertyName */
-                    $errorMessage = sprintf(self::ERROR_MESSAGE, $propertyName);
+                    $errorMessage = sprintf(self::ERROR_MESSAGE, $className, $propertyName);
 
                     $ruleErrors[] = RuleErrorBuilder::message($errorMessage)
                         ->file($filePath)
                         ->line($line)
-                        ->tip(self::TIP_MESSAGE)
+                        ->tip(RuleTips::SOLUTION_MESSAGE)
                         ->build();
                 }
             }

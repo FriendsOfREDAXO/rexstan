@@ -12,7 +12,6 @@ use PHPStan\Reflection\ClassReflection;
 use TomasVotruba\UnusedPublic\ApiDocStmtAnalyzer;
 use TomasVotruba\UnusedPublic\Configuration;
 use TomasVotruba\UnusedPublic\PublicClassMethodMatcher;
-use Twig\Extension\ExtensionInterface;
 
 /**
  * @implements Collector<ClassMethod, array{class-string, string, int}|null>
@@ -55,10 +54,18 @@ final class PublicClassMethodCollector implements Collector
             return null;
         }
 
+        // skip test methods
+        $classMethodName = $node->name->toString();
+        if (strncmp($classMethodName, 'test', strlen('test')) === 0) {
+            return null;
+        }
+
         $classReflection = $scope->getClassReflection();
 
         // skip
-        if ($classReflection instanceof ClassReflection && $classReflection->isSubclassOf(ExtensionInterface::class)) {
+        if ($classReflection instanceof ClassReflection && $classReflection->isSubclassOf(
+            'Twig\Extension\ExtensionInterface'
+        )) {
             return null;
         }
 

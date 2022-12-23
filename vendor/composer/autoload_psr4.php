@@ -12,6 +12,7 @@ return array(
     'TomasVotruba\\TypeCoverage\\' => array($vendorDir . '/tomasvotruba/type-coverage/src'),
     'Symplify\\PHPStanRules\\' => array($vendorDir . '/symplify/phpstan-rules/src', $vendorDir . '/symplify/phpstan-rules/packages'),
     'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
+    'Symfony\\Component\\Finder\\' => array($vendorDir . '/symfony/finder'),
     'Spaze\\PHPStan\\Rules\\Disallowed\\' => array($vendorDir . '/spaze/phpstan-disallowed-calls/src'),
     'Safe\\' => array($vendorDir . '/thecodingmachine/safe/lib', $vendorDir . '/thecodingmachine/safe/deprecated', $vendorDir . '/thecodingmachine/safe/generated'),
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),

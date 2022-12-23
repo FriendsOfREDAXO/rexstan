@@ -9,6 +9,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
     public static $files = array (
         '9b38cf48e83f5d8f60375221cd213eee' => __DIR__ . '/..' . '/phpstan/phpstan/bootstrap.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
+        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '51fcf4e06c07cc00c920b44bcd900e7a' => __DIR__ . '/..' . '/thecodingmachine/safe/deprecated/apc.php',
         '47f619d9197b36cf5ab70738d7743fe2' => __DIR__ . '/..' . '/thecodingmachine/safe/deprecated/libevent.php',
         'ea6bb8a12ef9b68f6ada99058e530760' => __DIR__ . '/..' . '/thecodingmachine/safe/deprecated/mssql.php',
@@ -118,6 +119,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         array (
             'Symplify\\PHPStanRules\\' => 22,
             'Symfony\\Polyfill\\Php80\\' => 23,
+            'Symfony\\Component\\Finder\\' => 25,
             'Spaze\\PHPStan\\Rules\\Disallowed\\' => 31,
             'Safe\\' => 5,
         ),
@@ -158,6 +160,10 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'Symfony\\Polyfill\\Php80\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
+        ),
+        'Symfony\\Component\\Finder\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/finder',
         ),
         'Spaze\\PHPStan\\Rules\\Disallowed\\' => 
         array (

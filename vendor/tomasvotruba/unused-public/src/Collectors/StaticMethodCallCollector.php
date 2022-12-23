@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace TomasVotruba\UnusedPublic\Collectors;
 
 use PhpParser\Node;
-use PhpParser\Node\Expr\StaticPropertyFetch;
-use PhpParser\Node\Identifier;
+use PhpParser\Node\Expr;
+use PhpParser\Node\Expr\StaticCall;
 use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
 use PHPStan\Collectors\Collector;
 use TomasVotruba\UnusedPublic\Configuration;
 
 /**
- * @implements Collector<StaticPropertyFetch, string[]>
+ * @implements Collector<StaticCall, array<string>|null>
  */
-final class PublicStaticPropertyFetchCollector implements Collector
+final class StaticMethodCallCollector implements Collector
 {
     /**
      * @readonly
@@ -26,19 +26,22 @@ final class PublicStaticPropertyFetchCollector implements Collector
     {
         $this->configuration = $configuration;
     }
-
     public function getNodeType(): string
     {
-        return StaticPropertyFetch::class;
+        return StaticCall::class;
     }
 
     /**
-     * @param StaticPropertyFetch $node
+     * @param StaticCall $node
      * @return string[]|null
      */
     public function processNode(Node $node, Scope $scope): ?array
     {
-        if (! $this->configuration->isUnusedPropertyEnabled()) {
+        if (! $this->configuration->isUnusedMethodEnabled()) {
+            return null;
+        }
+
+        if ($node->name instanceof Expr) {
             return null;
         }
 
@@ -46,18 +49,6 @@ final class PublicStaticPropertyFetchCollector implements Collector
             return null;
         }
 
-        if (! $node->name instanceof Identifier) {
-            return null;
-        }
-
-        if ($node->class->toString() === 'self') {
-            // self fetch is allowed
-            return null;
-        }
-
-        $className = $node->class->toString();
-        $propertyName = $node->name->toString();
-
-        return [$className . '::' . $propertyName];
+        return [$node->class->toString() . '::' . $node->name->toString()];
     }
 }

@@ -27,11 +27,6 @@ final class Configuration
         return $this->parameters['methods'] ?? false;
     }
 
-    public function isUnusedStaticPropertyEnabled(): bool
-    {
-        return $this->parameters['static_properties'] ?? false;
-    }
-
     public function isUnusedPropertyEnabled(): bool
     {
         return $this->parameters['properties'] ?? false;
@@ -40,5 +35,13 @@ final class Configuration
     public function isUnusedConstantsEnabled(): bool
     {
         return $this->parameters['constants'] ?? false;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getTwigTemplatePaths(): array
+    {
+        return $this->parameters['twig_template_paths'];
     }
 }
