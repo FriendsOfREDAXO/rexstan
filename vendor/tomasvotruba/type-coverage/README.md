@@ -3,7 +3,7 @@
 <br>
 
 <div align="center">
-    <img src="/docs/required_type_level.jpg" style="width: 10em">
+    <img src="/docs/required_type_level.jpg" style="width: 25em" alt="AI abilities sea level rising... as way to rise type coverage for class elements">
 </div>
 
 <br>
@@ -25,7 +25,7 @@ final class ConferenceFactory
     {
         $talks = $this->talkFactory->create($data);
 
-        return new Confernece($talks);
+        return new Conference($talks);
     }
 }
 ```
@@ -47,7 +47,7 @@ How do we get to the 100 %?
      {
          $talks = $this->talkFactory->create($data);
 
-         return new Confernece($talks);
+         return new Conference($talks);
      }
  }
 ```

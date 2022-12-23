@@ -304,17 +304,17 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.15.2",
-            "version_normalized": "1.15.2.0",
+            "version": "1.15.3",
+            "version_normalized": "1.15.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "5941477f100993652218928039d530b75a13a9ca"
+                "reference": "61800f71a5526081d1b5633766aa88341f1ade76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/5941477f100993652218928039d530b75a13a9ca",
-                "reference": "5941477f100993652218928039d530b75a13a9ca",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/61800f71a5526081d1b5633766aa88341f1ade76",
+                "reference": "61800f71a5526081d1b5633766aa88341f1ade76",
                 "shasum": ""
             },
             "require": {
@@ -329,7 +329,7 @@
                 "phpunit/phpunit": "^9.5",
                 "symfony/process": "^5.2"
             },
-            "time": "2022-12-16T06:42:48+00:00",
+            "time": "2022-12-20T20:56:55+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -346,7 +346,7 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.15.2"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.15.3"
             },
             "install-path": "../phpstan/phpdoc-parser"
         },
@@ -708,17 +708,17 @@
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
-            "version": "0.9.1",
-            "version_normalized": "0.9.1.0",
+            "version": "0.9.2",
+            "version_normalized": "0.9.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-baseline-analysis.git",
-                "reference": "a8d992891f69b9abd1eee89efb642b9b1caf4204"
+                "reference": "e1187378ab21d8cb6ea3e43856f6671053551201"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/a8d992891f69b9abd1eee89efb642b9b1caf4204",
-                "reference": "a8d992891f69b9abd1eee89efb642b9b1caf4204",
+                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/e1187378ab21d8cb6ea3e43856f6671053551201",
+                "reference": "e1187378ab21d8cb6ea3e43856f6671053551201",
                 "shasum": ""
             },
             "require": {
@@ -732,9 +732,10 @@
                 "phpunit/phpunit": "^9.5",
                 "symfony/var-dumper": "^5.3",
                 "symplify/phpstan-rules": "^11.0",
-                "thecodingmachine/phpstan-safe-rule": "^1.2"
+                "thecodingmachine/phpstan-safe-rule": "^1.2",
+                "tomasvotruba/type-coverage": "^0.0.4"
             },
-            "time": "2022-11-12T21:39:56+00:00",
+            "time": "2022-12-23T11:47:05+00:00",
             "bin": [
                 "bin/phpstan-baseline-analyze",
                 "bin/phpstan-baseline-trend",
@@ -753,7 +754,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-baseline-analysis/issues",
-                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.9.1"
+                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.9.2"
             },
             "funding": [
                 {
@@ -1046,17 +1047,17 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "11.1.20",
-            "version_normalized": "11.1.20.0",
+            "version": "11.1.21",
+            "version_normalized": "11.1.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "3e1c9d5425281d4886100ac812d8c742ae98d4f4"
+                "reference": "5f49166c8786a043ba733ba3dc35833d595b0263"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/3e1c9d5425281d4886100ac812d8c742ae98d4f4",
-                "reference": "3e1c9d5425281d4886100ac812d8c742ae98d4f4",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/5f49166c8786a043ba733ba3dc35833d595b0263",
+                "reference": "5f49166c8786a043ba733ba3dc35833d595b0263",
                 "shasum": ""
             },
             "require": {
@@ -1067,7 +1068,7 @@
                 "phpstan/phpstan": "^1.8.1",
                 "webmozart/assert": "^1.10"
             },
-            "time": "2022-12-19T12:25:41+00:00",
+            "time": "2022-12-22T15:37:17+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "branch-alias": {
@@ -1096,7 +1097,7 @@
             ],
             "description": "Set of Symplify rules for PHPStan",
             "support": {
-                "source": "https://github.com/symplify/phpstan-rules/tree/11.1.20"
+                "source": "https://github.com/symplify/phpstan-rules/tree/11.1.21"
             },
             "funding": [
                 {
@@ -1254,25 +1255,25 @@
         },
         {
             "name": "tomasvotruba/type-coverage",
-            "version": "0.0.1.72",
-            "version_normalized": "0.0.1.72",
+            "version": "0.0.5.72",
+            "version_normalized": "0.0.5.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/type-coverage.git",
-                "reference": "3eb1b4589ef6daaf3333a796bace2d9e008a4dfb"
+                "reference": "f9b9760e757917bea259e4420de14b497b5c3381"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/3eb1b4589ef6daaf3333a796bace2d9e008a4dfb",
-                "reference": "3eb1b4589ef6daaf3333a796bace2d9e008a4dfb",
+                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/f9b9760e757917bea259e4420de14b497b5c3381",
+                "reference": "f9b9760e757917bea259e4420de14b497b5c3381",
                 "shasum": ""
             },
             "require": {
                 "nette/utils": "^3.2",
-                "php": "^7.2|8.0",
+                "php": "^7.2 || 8.0.*",
                 "phpstan/phpstan": "^1.9.3"
             },
-            "time": "2022-12-19T12:32:38+00:00",
+            "time": "2022-12-23T11:43:43+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1294,33 +1295,33 @@
             "description": "Measure type coverage of your project",
             "support": {
                 "issues": "https://github.com/TomasVotruba/type-coverage/issues",
-                "source": "https://github.com/TomasVotruba/type-coverage/tree/0.0.1.72"
+                "source": "https://github.com/TomasVotruba/type-coverage/tree/0.0.5.72"
             },
             "install-path": "../tomasvotruba/type-coverage"
         },
         {
             "name": "tomasvotruba/unused-public",
-            "version": "0.0.25.72",
-            "version_normalized": "0.0.25.72",
+            "version": "0.0.26.72",
+            "version_normalized": "0.0.26.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/unused-public.git",
-                "reference": "4970e63f07d7a7e80b31bb19fd5d665f533c6666"
+                "reference": "3469a7770766d4a9ee62dd539fd3af4193d02768"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/4970e63f07d7a7e80b31bb19fd5d665f533c6666",
-                "reference": "4970e63f07d7a7e80b31bb19fd5d665f533c6666",
+                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/3469a7770766d4a9ee62dd539fd3af4193d02768",
+                "reference": "3469a7770766d4a9ee62dd539fd3af4193d02768",
                 "shasum": ""
             },
             "require": {
                 "nette/utils": "^3.2",
-                "php": "^7.2|8.0",
+                "php": "^7.2 || 8.0.*",
                 "phpstan/phpstan": "^1.9.3",
                 "symfony/finder": "^5.0|^4.0|^3.0",
                 "webmozart/assert": "^1.11"
             },
-            "time": "2022-12-23T01:05:44+00:00",
+            "time": "2022-12-23T11:43:54+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1342,7 +1343,7 @@
             "description": "Detect unused public properties, constants and methods in your code",
             "support": {
                 "issues": "https://github.com/TomasVotruba/unused-public/issues",
-                "source": "https://github.com/TomasVotruba/unused-public/tree/0.0.25.72"
+                "source": "https://github.com/TomasVotruba/unused-public/tree/0.0.26.72"
             },
             "install-path": "../tomasvotruba/unused-public"
         },
