@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c22e565ddc5eae86c026594a82784a3a",
+    "content-hash": "c7d19b4a1a3db2658d9ffda9abc884cc",
     "packages": [
         {
             "name": "composer/semver",
@@ -1207,21 +1207,21 @@
         },
         {
             "name": "tomasvotruba/type-coverage",
-            "version": "0.0.1.72",
+            "version": "0.0.5.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/type-coverage.git",
-                "reference": "3eb1b4589ef6daaf3333a796bace2d9e008a4dfb"
+                "reference": "f9b9760e757917bea259e4420de14b497b5c3381"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/3eb1b4589ef6daaf3333a796bace2d9e008a4dfb",
-                "reference": "3eb1b4589ef6daaf3333a796bace2d9e008a4dfb",
+                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/f9b9760e757917bea259e4420de14b497b5c3381",
+                "reference": "f9b9760e757917bea259e4420de14b497b5c3381",
                 "shasum": ""
             },
             "require": {
                 "nette/utils": "^3.2",
-                "php": "^7.2|8.0",
+                "php": "^7.2 || 8.0.*",
                 "phpstan/phpstan": "^1.9.3"
             },
             "type": "phpstan-extension",
@@ -1244,9 +1244,9 @@
             "description": "Measure type coverage of your project",
             "support": {
                 "issues": "https://github.com/TomasVotruba/type-coverage/issues",
-                "source": "https://github.com/TomasVotruba/type-coverage/tree/0.0.1.72"
+                "source": "https://github.com/TomasVotruba/type-coverage/tree/0.0.5.72"
             },
-            "time": "2022-12-19T12:32:38+00:00"
+            "time": "2022-12-23T11:43:43+00:00"
         },
         {
             "name": "tomasvotruba/unused-public",
