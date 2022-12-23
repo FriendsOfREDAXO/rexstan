@@ -13,34 +13,41 @@ use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use TomasVotruba\UnusedPublic\Collectors\MethodCallCollector;
 use TomasVotruba\UnusedPublic\Collectors\PublicClassMethodCollector;
+use TomasVotruba\UnusedPublic\Collectors\StaticMethodCallCollector;
 use TomasVotruba\UnusedPublic\Configuration;
+use TomasVotruba\UnusedPublic\Enum\RuleTips;
+use TomasVotruba\UnusedPublic\Twig\PossibleTwigMethodCallsProvider;
+use TomasVotruba\UnusedPublic\Twig\UsedMethodAnalyzer;
 
 /**
  * @see \TomasVotruba\UnusedPublic\Tests\Rules\UnusedPublicClassMethodRule\UnusedPublicClassMethodRuleTest
- *
- * @see \TomasVotruba\UnusedPublic\Collectors\PublicClassMethodCollector
- * @see \TomasVotruba\UnusedPublic\Collectors\MethodCallCollector
  */
 final class UnusedPublicClassMethodRule implements Rule
 {
     /**
      * @var string
      */
-    public const ERROR_MESSAGE = 'Class method "%s()" is never used outside of its class';
-
-    /**
-     * @var string
-     */
-    public const TIP_MESSAGE = 'Either reduce the methods visibility or annotate it or its class with @api.';
+    public const ERROR_MESSAGE = 'Public method "%s::%s()" is never used';
     /**
      * @readonly
      * @var \TomasVotruba\UnusedPublic\Configuration
      */
     private $configuration;
-
-    public function __construct(Configuration $configuration)
+    /**
+     * @readonly
+     * @var \TomasVotruba\UnusedPublic\Twig\PossibleTwigMethodCallsProvider
+     */
+    private $possibleTwigMethodCallsProvider;
+    /**
+     * @readonly
+     * @var \TomasVotruba\UnusedPublic\Twig\UsedMethodAnalyzer
+     */
+    private $usedMethodAnalyzer;
+    public function __construct(Configuration $configuration, PossibleTwigMethodCallsProvider $possibleTwigMethodCallsProvider, UsedMethodAnalyzer $usedMethodAnalyzer)
     {
         $this->configuration = $configuration;
+        $this->possibleTwigMethodCallsProvider = $possibleTwigMethodCallsProvider;
+        $this->usedMethodAnalyzer = $usedMethodAnalyzer;
     }
 
     public function getNodeType(): string
@@ -58,24 +65,30 @@ final class UnusedPublicClassMethodRule implements Rule
             return [];
         }
 
+        $twigMethodNames = $this->possibleTwigMethodCallsProvider->provide();
+
         $methodCallCollector = $node->get(MethodCallCollector::class);
+        $staticMethodCallCollector = $node->get(StaticMethodCallCollector::class);
+
+        $methodCallCollector = array_merge_recursive($methodCallCollector, $staticMethodCallCollector);
+
         $publicClassMethodCollector = $node->get(PublicClassMethodCollector::class);
 
         $ruleErrors = [];
 
         foreach ($publicClassMethodCollector as $filePath => $declarations) {
             foreach ($declarations as [$className, $methodName, $line]) {
-                if ($this->isClassMethod($className, $methodName, $methodCallCollector)) {
+                if ($this->isUsedClassMethod($className, $methodName, $methodCallCollector, $twigMethodNames)) {
                     continue;
                 }
 
                 /** @var string $methodName */
-                $errorMessage = sprintf(self::ERROR_MESSAGE, $methodName);
+                $errorMessage = sprintf(self::ERROR_MESSAGE, $className, $methodName);
 
                 $ruleErrors[] = RuleErrorBuilder::message($errorMessage)
                     ->file($filePath)
                     ->line($line)
-                    ->tip(self::TIP_MESSAGE)
+                    ->tip(RuleTips::SOLUTION_MESSAGE)
                     ->build();
             }
         }
@@ -85,10 +98,19 @@ final class UnusedPublicClassMethodRule implements Rule
 
     /**
      * @param mixed[] $usedClassMethods
+     * @param string[] $twigMethodNames
      */
-    private function isClassMethod(string $className, string $constantName, array $usedClassMethods): bool
-    {
-        $publicMethodReference = $className . '::' . $constantName;
+    private function isUsedClassMethod(
+        string $className,
+        string $methodName,
+        array $usedClassMethods,
+        array $twigMethodNames
+    ): bool {
+        if ($this->usedMethodAnalyzer->isUsedInTwig($methodName, $twigMethodNames)) {
+            return true;
+        }
+
+        $publicMethodReference = $className . '::' . $methodName;
         $usedClassMethods = Arrays::flatten($usedClassMethods);
 
         return in_array($publicMethodReference, $usedClassMethods, true);

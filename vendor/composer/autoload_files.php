@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     '9b38cf48e83f5d8f60375221cd213eee' => $vendorDir . '/phpstan/phpstan/bootstrap.php',
     'a4a119a56e50fbb293281d9a48007e0e' => $vendorDir . '/symfony/polyfill-php80/bootstrap.php',
+    '6e3fae29631ef280660b3cdad06f25a8' => $vendorDir . '/symfony/deprecation-contracts/function.php',
     '51fcf4e06c07cc00c920b44bcd900e7a' => $vendorDir . '/thecodingmachine/safe/deprecated/apc.php',
     '47f619d9197b36cf5ab70738d7743fe2' => $vendorDir . '/thecodingmachine/safe/deprecated/libevent.php',
     'ea6bb8a12ef9b68f6ada99058e530760' => $vendorDir . '/thecodingmachine/safe/deprecated/mssql.php',

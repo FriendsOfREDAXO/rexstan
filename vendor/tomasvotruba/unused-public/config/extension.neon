@@ -3,7 +3,7 @@ parametersSchema:
         methods: bool()
         properties: bool()
         constants: bool()
-        static_properties: bool()
+        twig_template_paths: listOf(string())
     ])
 
 # default parameters
@@ -12,12 +12,14 @@ parameters:
         methods: false
         properties: false
         constants: false
-        static_properties: false
+        twig_template_paths: []
 
 services:
     - TomasVotruba\UnusedPublic\PublicClassMethodMatcher
     - TomasVotruba\UnusedPublic\ApiDocStmtAnalyzer
     - TomasVotruba\UnusedPublic\ClassMethodCallReferenceResolver
+    - TomasVotruba\UnusedPublic\Twig\PossibleTwigMethodCallsProvider
+    - TomasVotruba\UnusedPublic\Twig\UsedMethodAnalyzer
 
     -
         factory: TomasVotruba\UnusedPublic\Configuration
@@ -37,9 +39,8 @@ services:
         tags:
             - phpstan.collector
 
-    # static_properties
     -
-        class: TomasVotruba\UnusedPublic\Collectors\PublicStaticPropertyCollector
+        class: TomasVotruba\UnusedPublic\Collectors\StaticMethodCallCollector
         tags:
             - phpstan.collector
 
@@ -71,6 +72,5 @@ services:
 # rules
 rules:
     - TomasVotruba\UnusedPublic\Rules\UnusedPublicClassMethodRule
-    - TomasVotruba\UnusedPublic\Rules\UnusedPublicStaticPropertyRule
     - TomasVotruba\UnusedPublic\Rules\UnusedPublicClassConstRule
     - TomasVotruba\UnusedPublic\Rules\UnusedPublicPropertyRule
