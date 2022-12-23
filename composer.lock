@@ -681,16 +681,16 @@
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
-            "version": "0.9.1",
+            "version": "0.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-baseline-analysis.git",
-                "reference": "a8d992891f69b9abd1eee89efb642b9b1caf4204"
+                "reference": "e1187378ab21d8cb6ea3e43856f6671053551201"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/a8d992891f69b9abd1eee89efb642b9b1caf4204",
-                "reference": "a8d992891f69b9abd1eee89efb642b9b1caf4204",
+                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/e1187378ab21d8cb6ea3e43856f6671053551201",
+                "reference": "e1187378ab21d8cb6ea3e43856f6671053551201",
                 "shasum": ""
             },
             "require": {
@@ -704,7 +704,8 @@
                 "phpunit/phpunit": "^9.5",
                 "symfony/var-dumper": "^5.3",
                 "symplify/phpstan-rules": "^11.0",
-                "thecodingmachine/phpstan-safe-rule": "^1.2"
+                "thecodingmachine/phpstan-safe-rule": "^1.2",
+                "tomasvotruba/type-coverage": "^0.0.4"
             },
             "bin": [
                 "bin/phpstan-baseline-analyze",
@@ -723,7 +724,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-baseline-analysis/issues",
-                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.9.1"
+                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.9.2"
             },
             "funding": [
                 {
@@ -731,7 +732,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-11-12T21:39:56+00:00"
+            "time": "2022-12-23T11:47:05+00:00"
         },
         {
             "name": "staabm/phpstan-dba",
