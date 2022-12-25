@@ -101,7 +101,7 @@ final class RexStan
         $baselineGlob = $dataDir.$configSignature.DIRECTORY_SEPARATOR.'*-summary.json';
         $htmlGraphPath = $dataDir.'baseline-graph.html';
 
-        self::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline', $stderrOutput, $exitCode);
+        self::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline --allow-empty-baseline', $stderrOutput, $exitCode);
         if (0 !== $exitCode) {
             throw new Exception('Unable to generate baseline:'. $stderrOutput);
         }
