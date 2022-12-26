@@ -1007,16 +1007,16 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "11.1.21",
+            "version": "11.1.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "5f49166c8786a043ba733ba3dc35833d595b0263"
+                "reference": "f967770be67705c930691ed3de7bac9beadec9c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/5f49166c8786a043ba733ba3dc35833d595b0263",
-                "reference": "5f49166c8786a043ba733ba3dc35833d595b0263",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/f967770be67705c930691ed3de7bac9beadec9c5",
+                "reference": "f967770be67705c930691ed3de7bac9beadec9c5",
                 "shasum": ""
             },
             "require": {
@@ -1035,7 +1035,6 @@
                 "phpstan": {
                     "includes": [
                         "config/services/services.neon",
-                        "config/packages/cognitive-complexity/cognitive-complexity-services.neon",
                         "config/packages/symfony/services.neon"
                     ]
                 }
@@ -1054,7 +1053,7 @@
             ],
             "description": "Set of Symplify rules for PHPStan",
             "support": {
-                "source": "https://github.com/symplify/phpstan-rules/tree/11.1.21"
+                "source": "https://github.com/symplify/phpstan-rules/tree/11.1.24"
             },
             "funding": [
                 {
@@ -1066,7 +1065,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-12-22T15:37:17+00:00"
+            "time": "2022-12-23T14:59:23+00:00"
         },
         {
             "name": "thecodingmachine/safe",
