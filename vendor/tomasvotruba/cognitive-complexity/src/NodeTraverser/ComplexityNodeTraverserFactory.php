@@ -2,20 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\CognitiveComplexity\NodeTraverser;
+namespace TomasVotruba\CognitiveComplexity\NodeTraverser;
 
 use PhpParser\NodeTraverser;
-use Symplify\PHPStanRules\CognitiveComplexity\NodeVisitor\ComplexityNodeVisitor;
-use Symplify\PHPStanRules\CognitiveComplexity\NodeVisitor\NestingNodeVisitor;
+use TomasVotruba\CognitiveComplexity\NodeVisitor\ComplexityNodeVisitor;
+use TomasVotruba\CognitiveComplexity\NodeVisitor\NestingNodeVisitor;
 
 final class ComplexityNodeTraverserFactory
 {
     /**
-     * @var \Symplify\PHPStanRules\CognitiveComplexity\NodeVisitor\NestingNodeVisitor
+     * @readonly
+     * @var \TomasVotruba\CognitiveComplexity\NodeVisitor\NestingNodeVisitor
      */
     private $nestingNodeVisitor;
     /**
-     * @var \Symplify\PHPStanRules\CognitiveComplexity\NodeVisitor\ComplexityNodeVisitor
+     * @readonly
+     * @var \TomasVotruba\CognitiveComplexity\NodeVisitor\ComplexityNodeVisitor
      */
     private $complexityNodeVisitor;
     public function __construct(NestingNodeVisitor $nestingNodeVisitor, ComplexityNodeVisitor $complexityNodeVisitor)

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\CognitiveComplexity\DataCollector;
+namespace TomasVotruba\CognitiveComplexity\DataCollector;
 
 final class CognitiveComplexityDataCollector
 {

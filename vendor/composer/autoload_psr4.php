@@ -10,6 +10,7 @@ return array(
     'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
     'TomasVotruba\\UnusedPublic\\' => array($vendorDir . '/tomasvotruba/unused-public/src'),
     'TomasVotruba\\TypeCoverage\\' => array($vendorDir . '/tomasvotruba/type-coverage/src'),
+    'TomasVotruba\\CognitiveComplexity\\' => array($vendorDir . '/tomasvotruba/cognitive-complexity/src'),
     'Symplify\\PHPStanRules\\' => array($vendorDir . '/symplify/phpstan-rules/src', $vendorDir . '/symplify/phpstan-rules/packages'),
     'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Symfony\\Component\\Finder\\' => array($vendorDir . '/symfony/finder'),

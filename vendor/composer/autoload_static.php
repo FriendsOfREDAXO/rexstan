@@ -114,6 +114,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         array (
             'TomasVotruba\\UnusedPublic\\' => 26,
             'TomasVotruba\\TypeCoverage\\' => 26,
+            'TomasVotruba\\CognitiveComplexity\\' => 33,
         ),
         'S' => 
         array (
@@ -151,6 +152,10 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'TomasVotruba\\TypeCoverage\\' => 
         array (
             0 => __DIR__ . '/..' . '/tomasvotruba/type-coverage/src',
+        ),
+        'TomasVotruba\\CognitiveComplexity\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tomasvotruba/cognitive-complexity/src',
         ),
         'Symplify\\PHPStanRules\\' => 
         array (

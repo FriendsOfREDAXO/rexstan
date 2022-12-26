@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Symplify\PHPStanRules\CognitiveComplexity\NodeVisitor;
+namespace TomasVotruba\CognitiveComplexity\NodeVisitor;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\Closure;
@@ -14,8 +14,8 @@ use PhpParser\Node\Stmt\Foreach_;
 use PhpParser\Node\Stmt\If_;
 use PhpParser\Node\Stmt\While_;
 use PhpParser\NodeVisitorAbstract;
-use Symplify\PHPStanRules\CognitiveComplexity\DataCollector\CognitiveComplexityDataCollector;
-use Symplify\PHPStanRules\CognitiveComplexity\NodeAnalyzer\ComplexityAffectingNodeFinder;
+use TomasVotruba\CognitiveComplexity\DataCollector\CognitiveComplexityDataCollector;
+use TomasVotruba\CognitiveComplexity\NodeAnalyzer\ComplexityAffectingNodeFinder;
 
 final class NestingNodeVisitor extends NodeVisitorAbstract
 {
@@ -43,11 +43,13 @@ final class NestingNodeVisitor extends NodeVisitorAbstract
      */
     private $previousNestingLevel = 0;
     /**
-     * @var \Symplify\PHPStanRules\CognitiveComplexity\DataCollector\CognitiveComplexityDataCollector
+     * @readonly
+     * @var \TomasVotruba\CognitiveComplexity\DataCollector\CognitiveComplexityDataCollector
      */
     private $cognitiveComplexityDataCollector;
     /**
-     * @var \Symplify\PHPStanRules\CognitiveComplexity\NodeAnalyzer\ComplexityAffectingNodeFinder
+     * @readonly
+     * @var \TomasVotruba\CognitiveComplexity\NodeAnalyzer\ComplexityAffectingNodeFinder
      */
     private $complexityAffectingNodeFinder;
     public function __construct(CognitiveComplexityDataCollector $cognitiveComplexityDataCollector, ComplexityAffectingNodeFinder $complexityAffectingNodeFinder)
