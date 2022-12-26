@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "818dc35204a15effb51a91fe47f44545",
+    "content-hash": "c818e6858ee11bff16680dbebf8af0e2",
     "packages": [
         {
             "name": "composer/semver",
@@ -1294,16 +1294,16 @@
         },
         {
             "name": "tomasvotruba/unused-public",
-            "version": "0.0.26.72",
+            "version": "0.0.28.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/unused-public.git",
-                "reference": "3469a7770766d4a9ee62dd539fd3af4193d02768"
+                "reference": "7cce70a243d7e06a4d4d95ef7e299ad68d27b159"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/3469a7770766d4a9ee62dd539fd3af4193d02768",
-                "reference": "3469a7770766d4a9ee62dd539fd3af4193d02768",
+                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/7cce70a243d7e06a4d4d95ef7e299ad68d27b159",
+                "reference": "7cce70a243d7e06a4d4d95ef7e299ad68d27b159",
                 "shasum": ""
             },
             "require": {
@@ -1333,9 +1333,9 @@
             "description": "Detect unused public properties, constants and methods in your code",
             "support": {
                 "issues": "https://github.com/TomasVotruba/unused-public/issues",
-                "source": "https://github.com/TomasVotruba/unused-public/tree/0.0.26.72"
+                "source": "https://github.com/TomasVotruba/unused-public/tree/0.0.28.72"
             },
-            "time": "2022-12-23T11:43:54+00:00"
+            "time": "2022-12-24T15:45:52+00:00"
         },
         {
             "name": "webmozart/assert",
