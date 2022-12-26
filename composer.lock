@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c7d19b4a1a3db2658d9ffda9abc884cc",
+    "content-hash": "818dc35204a15effb51a91fe47f44545",
     "packages": [
         {
             "name": "composer/semver",
@@ -1205,6 +1205,49 @@
                 "source": "https://github.com/thecodingmachine/safe/tree/v1.3.3"
             },
             "time": "2020-10-28T17:51:34+00:00"
+        },
+        {
+            "name": "tomasvotruba/cognitive-complexity",
+            "version": "v0.1.0.72",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TomasVotruba/cognitive-complexity.git",
+                "reference": "7b9ab638c21d82319b9dad4a3a297581197986c7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TomasVotruba/cognitive-complexity/zipball/7b9ab638c21d82319b9dad4a3a297581197986c7",
+                "reference": "7b9ab638c21d82319b9dad4a3a297581197986c7",
+                "shasum": ""
+            },
+            "require": {
+                "nette/utils": "^3.2",
+                "php": "^7.2 || 8.0.*",
+                "phpstan/phpstan": "^1.9.3"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "config/extension.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TomasVotruba\\CognitiveComplexity\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHPStan rules to measure cognitive complexity of your classes and methods",
+            "support": {
+                "issues": "https://github.com/TomasVotruba/cognitive-complexity/issues",
+                "source": "https://github.com/TomasVotruba/cognitive-complexity/tree/v0.1.0.72"
+            },
+            "time": "2022-12-23T12:54:08+00:00"
         },
         {
             "name": "tomasvotruba/type-coverage",
