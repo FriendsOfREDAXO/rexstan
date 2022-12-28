@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c818e6858ee11bff16680dbebf8af0e2",
+    "content-hash": "77774fdbb9e64c975c501d8e5641134e",
     "packages": [
         {
             "name": "composer/semver",
@@ -621,16 +621,16 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v2.11.2",
+            "version": "v2.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "f1f319bda7cc706f6bc5079f5a564ebfcc8ad5f3"
+                "reference": "59afcfe02e38087ca92d0e9e2ee9af078be7ec9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/f1f319bda7cc706f6bc5079f5a564ebfcc8ad5f3",
-                "reference": "f1f319bda7cc706f6bc5079f5a564ebfcc8ad5f3",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/59afcfe02e38087ca92d0e9e2ee9af078be7ec9e",
+                "reference": "59afcfe02e38087ca92d0e9e2ee9af078be7ec9e",
                 "shasum": ""
             },
             "require": {
@@ -675,9 +675,9 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.11.2"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.11.1"
             },
-            "time": "2022-12-26T14:16:10+00:00"
+            "time": "2022-12-19T21:49:38+00:00"
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
@@ -1068,6 +1068,63 @@
             "time": "2022-12-23T14:59:23+00:00"
         },
         {
+            "name": "thecodingmachine/phpstan-safe-rule",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thecodingmachine/phpstan-safe-rule.git",
+                "reference": "8a7b88e0d54f209a488095085f183e9174c40e1e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thecodingmachine/phpstan-safe-rule/zipball/8a7b88e0d54f209a488095085f183e9174c40e1e",
+                "reference": "8a7b88e0d54f209a488095085f183e9174c40e1e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0",
+                "phpstan/phpstan": "^1.0",
+                "thecodingmachine/safe": "^1.0 || ^2.0"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^7.5.2 || ^8.0",
+                "squizlabs/php_codesniffer": "^3.4"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                },
+                "phpstan": {
+                    "includes": [
+                        "phpstan-safe-rule.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TheCodingMachine\\Safe\\PHPStan\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Négrier",
+                    "email": "d.negrier@thecodingmachine.com"
+                }
+            ],
+            "description": "A PHPStan rule to detect safety issues. Must be used in conjunction with thecodingmachine/safe",
+            "support": {
+                "issues": "https://github.com/thecodingmachine/phpstan-safe-rule/issues",
+                "source": "https://github.com/thecodingmachine/phpstan-safe-rule/tree/v1.2.0"
+            },
+            "time": "2022-01-17T10:12:29+00:00"
+        },
+        {
             "name": "thecodingmachine/safe",
             "version": "v1.3.3",
             "source": {
@@ -1294,16 +1351,16 @@
         },
         {
             "name": "tomasvotruba/unused-public",
-            "version": "0.0.28.72",
+            "version": "0.0.26.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/unused-public.git",
-                "reference": "7cce70a243d7e06a4d4d95ef7e299ad68d27b159"
+                "reference": "3469a7770766d4a9ee62dd539fd3af4193d02768"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/7cce70a243d7e06a4d4d95ef7e299ad68d27b159",
-                "reference": "7cce70a243d7e06a4d4d95ef7e299ad68d27b159",
+                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/3469a7770766d4a9ee62dd539fd3af4193d02768",
+                "reference": "3469a7770766d4a9ee62dd539fd3af4193d02768",
                 "shasum": ""
             },
             "require": {
@@ -1333,9 +1390,9 @@
             "description": "Detect unused public properties, constants and methods in your code",
             "support": {
                 "issues": "https://github.com/TomasVotruba/unused-public/issues",
-                "source": "https://github.com/TomasVotruba/unused-public/tree/0.0.28.72"
+                "source": "https://github.com/TomasVotruba/unused-public/tree/0.0.26.72"
             },
-            "time": "2022-12-24T15:45:52+00:00"
+            "time": "2022-12-23T11:43:54+00:00"
         },
         {
             "name": "webmozart/assert",

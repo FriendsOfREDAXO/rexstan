@@ -115,6 +115,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
             'TomasVotruba\\UnusedPublic\\' => 26,
             'TomasVotruba\\TypeCoverage\\' => 26,
             'TomasVotruba\\CognitiveComplexity\\' => 33,
+            'TheCodingMachine\\Safe\\PHPStan\\' => 30,
         ),
         'S' => 
         array (
@@ -156,6 +157,10 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'TomasVotruba\\CognitiveComplexity\\' => 
         array (
             0 => __DIR__ . '/..' . '/tomasvotruba/cognitive-complexity/src',
+        ),
+        'TheCodingMachine\\Safe\\PHPStan\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/thecodingmachine/phpstan-safe-rule/src',
         ),
         'Symplify\\PHPStanRules\\' => 
         array (
