@@ -11,7 +11,7 @@ chdir(__DIR__.'/../');
 
 @shell_exec('php vendor/bin/phpstan clear-result-cache');
 
-$output = trim((string) shell_exec('php vendor/bin/phpstan analyze tests/ --error-format=raw'));
+$output = trim((string) shell_exec('php vendor/bin/phpstan analyze tests/ --error-format=raw --level=5'));
 $output = (string) preg_replace('/\s*$/', '', $output);
 $expected = trim(file_get_contents(__DIR__.'/expected.out'));
 
