@@ -16,10 +16,16 @@ final class MethodCallReference
      * @var string
      */
     private $method;
-    public function __construct(string $class, string $method)
+    /**
+     * @readonly
+     * @var bool
+     */
+    private $isLocal;
+    public function __construct(string $class, string $method, bool $isLocal)
     {
         $this->class = $class;
         $this->method = $method;
+        $this->isLocal = $isLocal;
     }
 
     public function getClass(): string
@@ -30,5 +36,10 @@ final class MethodCallReference
     public function getMethod(): string
     {
         return $this->method;
+    }
+
+    public function isLocal(): bool
+    {
+        return $this->isLocal;
     }
 }

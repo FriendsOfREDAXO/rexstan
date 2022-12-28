@@ -60,13 +60,24 @@ With PHPStan extension installer, everything is ready to run.
 
 Enable each item on their own with simple configuration:
 
-```neon
+```yaml
 # phpstan.neon
 parameters:
     unused_public:
         methods: true
         properties: true
         constants: true
+```
+
+<br>
+
+Do you want to check local-only method calls that should not be removed, but be turned into `private`/`protected` instead?
+
+```yaml
+# phpstan.neon
+parameters:
+    unused_public:
+        local_methods: true
 ```
 
 <br>
@@ -94,19 +105,17 @@ parameters:
 
 ## Known Limitations
 
-In some cases, the method reports false positives:
+In some cases, the rules report false positives:
 
-* it's not possible to detect unused public method that are called only in Twig templates
-* following cases are skipped
-    * public function in Twig extensions - those are functions/filters callable
+* when used only in templates, apart Twig paths, it's not possible to detect them
 
 <br>
 
-## Skip False Positives
+## Skip Public-Only Methods
 
-Is element reported as unused, but it's actually used?
+Open-source vendors design public API to be used by projects. Is element reported as unused, but it's actually designed to be used public?
 
-Mark the class or element wit `@api` to declare it as public API and skip it:
+Mark the class or element with `@api` annotation to skip it:
 
 ```php
 final class Book

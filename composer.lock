@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "77774fdbb9e64c975c501d8e5641134e",
+    "content-hash": "e7b557f46315314a72670de74a0ee97c",
     "packages": [
         {
             "name": "composer/semver",
@@ -621,16 +621,16 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v2.11.1",
+            "version": "v2.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "59afcfe02e38087ca92d0e9e2ee9af078be7ec9e"
+                "reference": "f1f319bda7cc706f6bc5079f5a564ebfcc8ad5f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/59afcfe02e38087ca92d0e9e2ee9af078be7ec9e",
-                "reference": "59afcfe02e38087ca92d0e9e2ee9af078be7ec9e",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/f1f319bda7cc706f6bc5079f5a564ebfcc8ad5f3",
+                "reference": "f1f319bda7cc706f6bc5079f5a564ebfcc8ad5f3",
                 "shasum": ""
             },
             "require": {
@@ -675,9 +675,9 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.11.1"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.11.2"
             },
-            "time": "2022-12-19T21:49:38+00:00"
+            "time": "2022-12-26T14:16:10+00:00"
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
@@ -861,16 +861,16 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v5.4.11",
+            "version": "v5.4.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "7872a66f57caffa2916a584db1aa7f12adc76f8c"
+                "reference": "40c08632019838dfb3350f18cf5563b8080055fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/7872a66f57caffa2916a584db1aa7f12adc76f8c",
-                "reference": "7872a66f57caffa2916a584db1aa7f12adc76f8c",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/40c08632019838dfb3350f18cf5563b8080055fc",
+                "reference": "40c08632019838dfb3350f18cf5563b8080055fc",
                 "shasum": ""
             },
             "require": {
@@ -904,7 +904,7 @@
             "description": "Finds files and directories via an intuitive fluent interface",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/finder/tree/v5.4.11"
+                "source": "https://github.com/symfony/finder/tree/v5.4.17"
             },
             "funding": [
                 {
@@ -920,7 +920,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-07-29T07:37:50+00:00"
+            "time": "2022-12-22T10:31:03+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
@@ -1265,16 +1265,16 @@
         },
         {
             "name": "tomasvotruba/cognitive-complexity",
-            "version": "v0.1.0.72",
+            "version": "0.0.1.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/cognitive-complexity.git",
-                "reference": "7b9ab638c21d82319b9dad4a3a297581197986c7"
+                "reference": "bd6a1e9f8b34a026d7cb2519ad3cfabf094e01fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/cognitive-complexity/zipball/7b9ab638c21d82319b9dad4a3a297581197986c7",
-                "reference": "7b9ab638c21d82319b9dad4a3a297581197986c7",
+                "url": "https://api.github.com/repos/TomasVotruba/cognitive-complexity/zipball/bd6a1e9f8b34a026d7cb2519ad3cfabf094e01fb",
+                "reference": "bd6a1e9f8b34a026d7cb2519ad3cfabf094e01fb",
                 "shasum": ""
             },
             "require": {
@@ -1302,9 +1302,9 @@
             "description": "PHPStan rules to measure cognitive complexity of your classes and methods",
             "support": {
                 "issues": "https://github.com/TomasVotruba/cognitive-complexity/issues",
-                "source": "https://github.com/TomasVotruba/cognitive-complexity/tree/v0.1.0.72"
+                "source": "https://github.com/TomasVotruba/cognitive-complexity/tree/0.0.1.72"
             },
-            "time": "2022-12-23T12:54:08+00:00"
+            "time": "2022-12-23T12:54:43+00:00"
         },
         {
             "name": "tomasvotruba/type-coverage",
@@ -1351,16 +1351,16 @@
         },
         {
             "name": "tomasvotruba/unused-public",
-            "version": "0.0.26.72",
+            "version": "0.0.28.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/unused-public.git",
-                "reference": "3469a7770766d4a9ee62dd539fd3af4193d02768"
+                "reference": "7cce70a243d7e06a4d4d95ef7e299ad68d27b159"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/3469a7770766d4a9ee62dd539fd3af4193d02768",
-                "reference": "3469a7770766d4a9ee62dd539fd3af4193d02768",
+                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/7cce70a243d7e06a4d4d95ef7e299ad68d27b159",
+                "reference": "7cce70a243d7e06a4d4d95ef7e299ad68d27b159",
                 "shasum": ""
             },
             "require": {
@@ -1390,9 +1390,9 @@
             "description": "Detect unused public properties, constants and methods in your code",
             "support": {
                 "issues": "https://github.com/TomasVotruba/unused-public/issues",
-                "source": "https://github.com/TomasVotruba/unused-public/tree/0.0.26.72"
+                "source": "https://github.com/TomasVotruba/unused-public/tree/0.0.28.72"
             },
-            "time": "2022-12-23T11:43:54+00:00"
+            "time": "2022-12-24T15:45:52+00:00"
         },
         {
             "name": "webmozart/assert",

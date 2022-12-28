@@ -28,6 +28,8 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->ruleWithConfiguration(\Rector\Php55\Rector\String_\StringClassNameToClassConstantRector::class, [
         'Twig\Extension\ExtensionInterface',
         'PHPUnit\Framework\TestCase',
+        'Symfony\Bundle\FrameworkBundle\Controller\Controller',
+        'Symfony\Component\EventDispatcher\EventSubscriberInterface',
     ]);
 
     $rectorConfig->skip([

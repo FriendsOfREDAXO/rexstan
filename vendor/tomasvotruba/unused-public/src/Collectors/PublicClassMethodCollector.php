@@ -19,6 +19,14 @@ use TomasVotruba\UnusedPublic\PublicClassMethodMatcher;
 final class PublicClassMethodCollector implements Collector
 {
     /**
+     * @var string[]
+     */
+    private const SKIPPED_TYPES = [
+        'Symfony\Component\EventDispatcher\EventSubscriberInterface',
+        'Twig\Extension\ExtensionInterface',
+        'Symfony\Bundle\FrameworkBundle\Controller\Controller',
+    ];
+    /**
      * @readonly
      * @var \TomasVotruba\UnusedPublic\ApiDocStmtAnalyzer
      */
@@ -39,6 +47,7 @@ final class PublicClassMethodCollector implements Collector
         $this->publicClassMethodMatcher = $publicClassMethodMatcher;
         $this->configuration = $configuration;
     }
+
     public function getNodeType(): string
     {
         return ClassMethod::class;
@@ -50,7 +59,7 @@ final class PublicClassMethodCollector implements Collector
      */
     public function processNode(Node $node, Scope $scope): ?array
     {
-        if (! $this->configuration->isUnusedMethodEnabled()) {
+        if (! $this->configuration->shouldCollectMethods()) {
             return null;
         }
 
@@ -63,10 +72,12 @@ final class PublicClassMethodCollector implements Collector
         $classReflection = $scope->getClassReflection();
 
         // skip
-        if ($classReflection instanceof ClassReflection && $classReflection->isSubclassOf(
-            'Twig\Extension\ExtensionInterface'
-        )) {
-            return null;
+        if ($classReflection instanceof ClassReflection) {
+            foreach (self::SKIPPED_TYPES as $skippedType) {
+                if ($classReflection->isSubclassOf($skippedType)) {
+                    return null;
+                }
+            }
         }
 
         if ($this->publicClassMethodMatcher->shouldSkipClassMethod($node)) {

@@ -23,6 +23,11 @@ final class PossibleTwigMethodCallsProvider
      * @var string
      */
     private const TWIG_METHOD_CALL_REGEX = '#\w+\.(?<method_name>\w+)#';
+
+    /**
+     * @var string[]
+     */
+    private $resolvedTwigMethodNames = [];
     /**
      * @readonly
      * @var \TomasVotruba\UnusedPublic\Configuration
@@ -39,6 +44,10 @@ final class PossibleTwigMethodCallsProvider
      */
     public function provide(): array
     {
+        if ($this->resolvedTwigMethodNames !== []) {
+            return $this->resolvedTwigMethodNames;
+        }
+
         $twigMethodNames = [];
 
         foreach ($this->configuration->getTwigTemplatePaths() as $twigTemplatePath) {
@@ -60,6 +69,8 @@ final class PossibleTwigMethodCallsProvider
                 }
             }
         }
+
+        $this->resolvedTwigMethodNames = $twigMethodNames;
 
         return $twigMethodNames;
     }
