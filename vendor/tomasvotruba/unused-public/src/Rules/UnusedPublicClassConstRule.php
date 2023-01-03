@@ -25,6 +25,7 @@ final class UnusedPublicClassConstRule implements Rule
      * @var string
      */
     public const ERROR_MESSAGE = 'Public constant "%s::%s" is never used';
+
     /**
      * @readonly
      * @var \TomasVotruba\UnusedPublic\Configuration

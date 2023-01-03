@@ -23,11 +23,13 @@ final class PublicPropertyCollector implements Collector
      * @var \TomasVotruba\UnusedPublic\ApiDocStmtAnalyzer
      */
     private $apiDocStmtAnalyzer;
+
     /**
      * @readonly
      * @var \TomasVotruba\UnusedPublic\Configuration
      */
     private $configuration;
+
     public function __construct(ApiDocStmtAnalyzer $apiDocStmtAnalyzer, Configuration $configuration)
     {
         $this->apiDocStmtAnalyzer = $apiDocStmtAnalyzer;

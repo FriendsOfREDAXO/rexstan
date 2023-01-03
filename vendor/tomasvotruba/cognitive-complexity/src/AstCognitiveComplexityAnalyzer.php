@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace TomasVotruba\CognitiveComplexity;
 
 use PhpParser\Node\Stmt\Class_;
-use PhpParser\Node\Stmt\ClassMethod;
-use PhpParser\Node\Stmt\Function_;
 use TomasVotruba\CognitiveComplexity\DataCollector\CognitiveComplexityDataCollector;
 use TomasVotruba\CognitiveComplexity\NodeTraverser\ComplexityNodeTraverserFactory;
 use TomasVotruba\CognitiveComplexity\NodeVisitor\NestingNodeVisitor;
@@ -23,18 +21,24 @@ final class AstCognitiveComplexityAnalyzer
      * @var \TomasVotruba\CognitiveComplexity\NodeTraverser\ComplexityNodeTraverserFactory
      */
     private $complexityNodeTraverserFactory;
+
     /**
      * @readonly
      * @var \TomasVotruba\CognitiveComplexity\DataCollector\CognitiveComplexityDataCollector
      */
     private $cognitiveComplexityDataCollector;
+
     /**
      * @readonly
      * @var \TomasVotruba\CognitiveComplexity\NodeVisitor\NestingNodeVisitor
      */
     private $nestingNodeVisitor;
-    public function __construct(ComplexityNodeTraverserFactory $complexityNodeTraverserFactory, CognitiveComplexityDataCollector $cognitiveComplexityDataCollector, NestingNodeVisitor $nestingNodeVisitor)
-    {
+
+    public function __construct(
+        ComplexityNodeTraverserFactory $complexityNodeTraverserFactory,
+        CognitiveComplexityDataCollector $cognitiveComplexityDataCollector,
+        NestingNodeVisitor $nestingNodeVisitor
+    ) {
         $this->complexityNodeTraverserFactory = $complexityNodeTraverserFactory;
         $this->cognitiveComplexityDataCollector = $cognitiveComplexityDataCollector;
         $this->nestingNodeVisitor = $nestingNodeVisitor;

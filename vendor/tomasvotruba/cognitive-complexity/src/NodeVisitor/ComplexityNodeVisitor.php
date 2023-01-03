@@ -16,13 +16,17 @@ final class ComplexityNodeVisitor extends NodeVisitorAbstract
      * @var \TomasVotruba\CognitiveComplexity\DataCollector\CognitiveComplexityDataCollector
      */
     private $cognitiveComplexityDataCollector;
+
     /**
      * @readonly
      * @var \TomasVotruba\CognitiveComplexity\NodeAnalyzer\ComplexityAffectingNodeFinder
      */
     private $complexityAffectingNodeFinder;
-    public function __construct(CognitiveComplexityDataCollector $cognitiveComplexityDataCollector, ComplexityAffectingNodeFinder $complexityAffectingNodeFinder)
-    {
+
+    public function __construct(
+        CognitiveComplexityDataCollector $cognitiveComplexityDataCollector,
+        ComplexityAffectingNodeFinder $complexityAffectingNodeFinder
+    ) {
         $this->cognitiveComplexityDataCollector = $cognitiveComplexityDataCollector;
         $this->complexityAffectingNodeFinder = $complexityAffectingNodeFinder;
     }

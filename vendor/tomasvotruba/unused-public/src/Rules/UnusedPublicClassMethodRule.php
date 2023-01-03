@@ -28,28 +28,37 @@ final class UnusedPublicClassMethodRule implements Rule
      * @var string
      */
     public const ERROR_MESSAGE = 'Public method "%s::%s()" is never used';
+
     /**
      * @readonly
      * @var \TomasVotruba\UnusedPublic\Configuration
      */
     private $configuration;
+
     /**
      * @readonly
      * @var \TomasVotruba\UnusedPublic\Twig\PossibleTwigMethodCallsProvider
      */
     private $possibleTwigMethodCallsProvider;
+
     /**
      * @readonly
      * @var \TomasVotruba\UnusedPublic\Twig\UsedMethodAnalyzer
      */
     private $usedMethodAnalyzer;
+
     /**
      * @readonly
      * @var \TomasVotruba\UnusedPublic\CollectorMapper\MethodCallCollectorMapper
      */
     private $methodCallCollectorMapper;
-    public function __construct(Configuration $configuration, PossibleTwigMethodCallsProvider $possibleTwigMethodCallsProvider, UsedMethodAnalyzer $usedMethodAnalyzer, MethodCallCollectorMapper $methodCallCollectorMapper)
-    {
+
+    public function __construct(
+        Configuration $configuration,
+        PossibleTwigMethodCallsProvider $possibleTwigMethodCallsProvider,
+        UsedMethodAnalyzer $usedMethodAnalyzer,
+        MethodCallCollectorMapper $methodCallCollectorMapper
+    ) {
         $this->configuration = $configuration;
         $this->possibleTwigMethodCallsProvider = $possibleTwigMethodCallsProvider;
         $this->usedMethodAnalyzer = $usedMethodAnalyzer;

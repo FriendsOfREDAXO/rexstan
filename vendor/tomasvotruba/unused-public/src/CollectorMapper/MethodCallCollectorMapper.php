@@ -15,8 +15,10 @@ final class MethodCallCollectorMapper
      * @param array<string, mixed[]> $staticCallReferencesByFile
      * @return string[]
      */
-    public function mapToMethodCallReferences(array $methodCallReferencesByFile, array $staticCallReferencesByFile): array
-    {
+    public function mapToMethodCallReferences(
+        array $methodCallReferencesByFile,
+        array $staticCallReferencesByFile
+    ): array {
         $methodCallReferences = $this->mergeAndFlatten($methodCallReferencesByFile, $staticCallReferencesByFile);
         // remove ReferenceMaker::LOCAL prefix
         return array_map(static function (string $methodCallReference): string {

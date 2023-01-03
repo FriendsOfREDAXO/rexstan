@@ -26,23 +26,30 @@ final class PublicClassMethodCollector implements Collector
         'Twig\Extension\ExtensionInterface',
         'Symfony\Bundle\FrameworkBundle\Controller\Controller',
     ];
+
     /**
      * @readonly
      * @var \TomasVotruba\UnusedPublic\ApiDocStmtAnalyzer
      */
     private $apiDocStmtAnalyzer;
+
     /**
      * @readonly
      * @var \TomasVotruba\UnusedPublic\PublicClassMethodMatcher
      */
     private $publicClassMethodMatcher;
+
     /**
      * @readonly
      * @var \TomasVotruba\UnusedPublic\Configuration
      */
     private $configuration;
-    public function __construct(ApiDocStmtAnalyzer $apiDocStmtAnalyzer, PublicClassMethodMatcher $publicClassMethodMatcher, Configuration $configuration)
-    {
+
+    public function __construct(
+        ApiDocStmtAnalyzer $apiDocStmtAnalyzer,
+        PublicClassMethodMatcher $publicClassMethodMatcher,
+        Configuration $configuration
+    ) {
         $this->apiDocStmtAnalyzer = $apiDocStmtAnalyzer;
         $this->publicClassMethodMatcher = $publicClassMethodMatcher;
         $this->configuration = $configuration;
@@ -73,6 +80,11 @@ final class PublicClassMethodCollector implements Collector
 
         // skip
         if ($classReflection instanceof ClassReflection) {
+            // skip acceptance tests, codeception
+            if (substr_compare($classReflection->getName(), 'Cest', -strlen('Cest')) === 0) {
+                return null;
+            }
+
             foreach (self::SKIPPED_TYPES as $skippedType) {
                 if ($classReflection->isSubclassOf($skippedType)) {
                     return null;

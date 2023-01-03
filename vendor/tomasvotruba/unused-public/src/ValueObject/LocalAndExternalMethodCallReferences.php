@@ -11,11 +11,13 @@ final class LocalAndExternalMethodCallReferences
      * @readonly
      */
     private $localMethodCallReferences;
+
     /**
      * @var string[]
      * @readonly
      */
     private $externalMethodCallReferences;
+
     /**
      * @param string[] $localMethodCallReferences
      * @param string[] $externalMethodCallReferences
@@ -25,6 +27,7 @@ final class LocalAndExternalMethodCallReferences
         $this->localMethodCallReferences = $localMethodCallReferences;
         $this->externalMethodCallReferences = $externalMethodCallReferences;
     }
+
     /**
      * @return string[]
      */

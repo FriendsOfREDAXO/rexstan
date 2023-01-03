@@ -26,6 +26,7 @@ final class UnusedPublicPropertyRule implements Rule
      * @var string
      */
     public const ERROR_MESSAGE = 'Public property "%s::$%s" is never used';
+
     /**
      * @readonly
      * @var \TomasVotruba\UnusedPublic\Configuration

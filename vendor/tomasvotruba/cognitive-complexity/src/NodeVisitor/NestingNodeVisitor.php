@@ -42,18 +42,23 @@ final class NestingNodeVisitor extends NodeVisitorAbstract
      * @var int
      */
     private $previousNestingLevel = 0;
+
     /**
      * @readonly
      * @var \TomasVotruba\CognitiveComplexity\DataCollector\CognitiveComplexityDataCollector
      */
     private $cognitiveComplexityDataCollector;
+
     /**
      * @readonly
      * @var \TomasVotruba\CognitiveComplexity\NodeAnalyzer\ComplexityAffectingNodeFinder
      */
     private $complexityAffectingNodeFinder;
-    public function __construct(CognitiveComplexityDataCollector $cognitiveComplexityDataCollector, ComplexityAffectingNodeFinder $complexityAffectingNodeFinder)
-    {
+
+    public function __construct(
+        CognitiveComplexityDataCollector $cognitiveComplexityDataCollector,
+        ComplexityAffectingNodeFinder $complexityAffectingNodeFinder
+    ) {
         $this->cognitiveComplexityDataCollector = $cognitiveComplexityDataCollector;
         $this->complexityAffectingNodeFinder = $complexityAffectingNodeFinder;
     }

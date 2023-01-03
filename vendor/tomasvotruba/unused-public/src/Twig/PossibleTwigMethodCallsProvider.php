@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace TomasVotruba\UnusedPublic\Twig;
 
+use FilesystemIterator;
 use Nette\Utils\Strings;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Finder\SplFileInfo;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use TomasVotruba\UnusedPublic\Configuration;
 use Webmozart\Assert\Assert;
 
@@ -16,7 +17,7 @@ final class PossibleTwigMethodCallsProvider
      * @see https://regex101.com/r/3gLWCt/1
      * @var string
      */
-    private const TWIG_INNER_REGEX = '#\{\{(?<contents>.*?)\}\}#';
+    private const TWIG_INNER_REGEX = '#\{(\{|%)(?<contents>.*?)(\}|%)\}#';
 
     /**
      * @see https://regex101.com/r/G7zAue/1
@@ -28,6 +29,7 @@ final class PossibleTwigMethodCallsProvider
      * @var string[]
      */
     private $resolvedTwigMethodNames = [];
+
     /**
      * @readonly
      * @var \TomasVotruba\UnusedPublic\Configuration
@@ -55,10 +57,15 @@ final class PossibleTwigMethodCallsProvider
             Assert::directory($absoluteTwigTemplatePath);
             Assert::fileExists($absoluteTwigTemplatePath);
 
-            $fileInfos = $this->findTwigFileInfos($absoluteTwigTemplatePath);
+            $twigFiles = $this->findTwigFiles($absoluteTwigTemplatePath);
 
-            foreach ($fileInfos as $fileInfo) {
-                $matches = Strings::matchAll($fileInfo->getContents(), self::TWIG_INNER_REGEX);
+            foreach ($twigFiles as $twigFile) {
+                $templateContent = file_get_contents($twigFile);
+                if ($templateContent === false) {
+                    continue;
+                }
+
+                $matches = Strings::matchAll($templateContent, self::TWIG_INNER_REGEX);
                 foreach ($matches as $match) {
                     $twigContents = $match['contents'];
 
@@ -76,15 +83,22 @@ final class PossibleTwigMethodCallsProvider
     }
 
     /**
-     * @return SplFileInfo[]
+     * @return list<string>
      */
-    private function findTwigFileInfos(string $directory): array
+    private function findTwigFiles(string $directory): array
     {
-        $twigFinder = Finder::create()
-            ->files()
-            ->in($directory)
-            ->name('*.twig');
+        $recursiveDirectoryIterator = new RecursiveDirectoryIterator(
+            $directory,
+            FilesystemIterator::CURRENT_AS_PATHNAME
+        );
 
-        return iterator_to_array($twigFinder->getIterator());
+        $files = [];
+        foreach (new RecursiveIteratorIterator($recursiveDirectoryIterator) as $filePath) {
+            if (substr_compare((string) $filePath, '.twig', -strlen('.twig')) === 0) {
+                $files[] = $filePath;
+            }
+        }
+
+        return $files;
     }
 }

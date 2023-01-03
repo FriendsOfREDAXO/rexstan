@@ -11,16 +11,19 @@ final class MethodCallReference
      * @var string
      */
     private $class;
+
     /**
      * @readonly
      * @var string
      */
     private $method;
+
     /**
      * @readonly
      * @var bool
      */
     private $isLocal;
+
     public function __construct(string $class, string $method, bool $isLocal)
     {
         $this->class = $class;

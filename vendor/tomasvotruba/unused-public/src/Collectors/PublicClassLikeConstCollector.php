@@ -22,16 +22,19 @@ final class PublicClassLikeConstCollector implements Collector
      * @var \TomasVotruba\UnusedPublic\ApiDocStmtAnalyzer
      */
     private $apiDocStmtAnalyzer;
+
     /**
      * @readonly
      * @var \TomasVotruba\UnusedPublic\Configuration
      */
     private $configuration;
+
     public function __construct(ApiDocStmtAnalyzer $apiDocStmtAnalyzer, Configuration $configuration)
     {
         $this->apiDocStmtAnalyzer = $apiDocStmtAnalyzer;
         $this->configuration = $configuration;
     }
+
     public function getNodeType(): string
     {
         return ClassConst::class;

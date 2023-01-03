@@ -34,18 +34,23 @@ final class FunctionLikeCognitiveComplexityRule implements Rule
      * @var string
      */
     public const ERROR_MESSAGE = 'Cognitive complexity for "%s" is %d, keep it under %d';
+
     /**
      * @readonly
      * @var \TomasVotruba\CognitiveComplexity\AstCognitiveComplexityAnalyzer
      */
     private $astCognitiveComplexityAnalyzer;
+
     /**
      * @readonly
      * @var \TomasVotruba\CognitiveComplexity\Configuration
      */
     private $configuration;
-    public function __construct(AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer, Configuration $configuration)
-    {
+
+    public function __construct(
+        AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer,
+        Configuration $configuration
+    ) {
         $this->astCognitiveComplexityAnalyzer = $astCognitiveComplexityAnalyzer;
         $this->configuration = $configuration;
     }

@@ -15,11 +15,13 @@ final class ComplexityNodeTraverserFactory
      * @var \TomasVotruba\CognitiveComplexity\NodeVisitor\NestingNodeVisitor
      */
     private $nestingNodeVisitor;
+
     /**
      * @readonly
      * @var \TomasVotruba\CognitiveComplexity\NodeVisitor\ComplexityNodeVisitor
      */
     private $complexityNodeVisitor;
+
     public function __construct(NestingNodeVisitor $nestingNodeVisitor, ComplexityNodeVisitor $complexityNodeVisitor)
     {
         $this->nestingNodeVisitor = $nestingNodeVisitor;

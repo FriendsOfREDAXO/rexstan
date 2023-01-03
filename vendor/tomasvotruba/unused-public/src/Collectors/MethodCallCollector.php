@@ -26,22 +26,29 @@ final class MethodCallCollector implements Collector
      * @var \PHPStan\Reflection\ReflectionProvider
      */
     private $reflectionProvider;
+
     /**
      * @readonly
      * @var \TomasVotruba\UnusedPublic\ClassMethodCallReferenceResolver
      */
     private $classMethodCallReferenceResolver;
+
     /**
      * @readonly
      * @var \TomasVotruba\UnusedPublic\Configuration
      */
     private $configuration;
-    public function __construct(ReflectionProvider $reflectionProvider, ClassMethodCallReferenceResolver $classMethodCallReferenceResolver, Configuration $configuration)
-    {
+
+    public function __construct(
+        ReflectionProvider $reflectionProvider,
+        ClassMethodCallReferenceResolver $classMethodCallReferenceResolver,
+        Configuration $configuration
+    ) {
         $this->reflectionProvider = $reflectionProvider;
         $this->classMethodCallReferenceResolver = $classMethodCallReferenceResolver;
         $this->configuration = $configuration;
     }
+
     public function getNodeType(): string
     {
         return MethodCall::class;
