@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb9b72a467ec825c2fde755a88a429f7",
+    "content-hash": "18ca3ebc9c363ba82189fe159180d92a",
     "packages": [
         {
             "name": "composer/semver",
@@ -1135,16 +1135,16 @@
         },
         {
             "name": "tomasvotruba/cognitive-complexity",
-            "version": "0.0.1.72",
+            "version": "0.0.5.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/cognitive-complexity.git",
-                "reference": "bd6a1e9f8b34a026d7cb2519ad3cfabf094e01fb"
+                "reference": "b7ce4c001279dba61c91a7967d860a083524ca21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/cognitive-complexity/zipball/bd6a1e9f8b34a026d7cb2519ad3cfabf094e01fb",
-                "reference": "bd6a1e9f8b34a026d7cb2519ad3cfabf094e01fb",
+                "url": "https://api.github.com/repos/TomasVotruba/cognitive-complexity/zipball/b7ce4c001279dba61c91a7967d860a083524ca21",
+                "reference": "b7ce4c001279dba61c91a7967d860a083524ca21",
                 "shasum": ""
             },
             "require": {
@@ -1172,9 +1172,9 @@
             "description": "PHPStan rules to measure cognitive complexity of your classes and methods",
             "support": {
                 "issues": "https://github.com/TomasVotruba/cognitive-complexity/issues",
-                "source": "https://github.com/TomasVotruba/cognitive-complexity/tree/0.0.1.72"
+                "source": "https://github.com/TomasVotruba/cognitive-complexity/tree/0.0.5.72"
             },
-            "time": "2022-12-23T12:54:43+00:00"
+            "time": "2022-12-29T13:35:37+00:00"
         },
         {
             "name": "tomasvotruba/type-coverage",
