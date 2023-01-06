@@ -621,16 +621,16 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v2.11.2",
+            "version": "v2.11.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "f1f319bda7cc706f6bc5079f5a564ebfcc8ad5f3"
+                "reference": "800f5f8f6e30cb2136488996e82899a029176c0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/f1f319bda7cc706f6bc5079f5a564ebfcc8ad5f3",
-                "reference": "f1f319bda7cc706f6bc5079f5a564ebfcc8ad5f3",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/800f5f8f6e30cb2136488996e82899a029176c0b",
+                "reference": "800f5f8f6e30cb2136488996e82899a029176c0b",
                 "shasum": ""
             },
             "require": {
@@ -675,9 +675,9 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.11.2"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.11.3"
             },
-            "time": "2022-12-26T14:16:10+00:00"
+            "time": "2023-01-06T18:04:04+00:00"
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
