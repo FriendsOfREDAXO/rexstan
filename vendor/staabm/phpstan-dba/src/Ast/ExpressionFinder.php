@@ -27,6 +27,8 @@ final class ExpressionFinder
     }
 
     /**
+     * @api
+     *
      * @param Variable|MethodCall $expr
      *
      * @deprecated use findAssignmentExpression() instead
@@ -107,8 +109,6 @@ final class ExpressionFinder
     }
 
     /**
-     * XXX use astral simpleNameResolver instead.
-     *
      * @param Expr|Variable|MethodCall $node
      *
      * @return string|null

@@ -48,6 +48,9 @@ final class QueryReflection
         self::reflector()->setupDbaApi($dbaApi);
     }
 
+    /**
+     * @api
+     */
     public static function setupReflector(QueryReflector $reflector, RuntimeConfiguration $runtimeConfiguration): void
     {
         self::$reflector = $reflector;
@@ -56,8 +59,20 @@ final class QueryReflection
 
     public function validateQueryString(string $queryString): ?Error
     {
-        if ('SELECT' !== $this->getQueryType($queryString)) {
-            return null;
+        if (self::getRuntimeConfiguration()->isAnalyzingWriteQueries()) {
+            if (!\in_array(self::getQueryType($queryString), [
+                'SELECT',
+                'INSERT',
+                'DELETE',
+                'UPDATE',
+                'REPLACE',
+            ], true)) {
+                return null;
+            }
+        } else {
+            if ('SELECT' !== self::getQueryType($queryString)) {
+                return null;
+            }
         }
 
         // this method cannot validate queries which contain placeholders.
@@ -73,7 +88,7 @@ final class QueryReflection
      */
     public function getResultType(string $queryString, int $fetchType): ?Type
     {
-        if ('SELECT' !== $this->getQueryType($queryString)) {
+        if ('SELECT' !== self::getQueryType($queryString)) {
             return null;
         }
 
@@ -111,6 +126,8 @@ final class QueryReflection
     }
 
     /**
+     * @api
+     *
      * @deprecated use resolvePreparedQueryStrings() instead
      *
      * @throws UnresolvableQueryException
@@ -257,7 +274,7 @@ final class QueryReflection
     {
         $query = ltrim($query);
 
-        if (preg_match('/^\s*\(?\s*(SELECT|SHOW|UPDATE|INSERT|DELETE|REPLACE|CREATE|CALL|OPTIMIZE)/i', $query, $matches)) {
+        if (1 === preg_match('/^\s*\(?\s*(SELECT|SHOW|UPDATE|INSERT|DELETE|REPLACE|CREATE|CALL|OPTIMIZE)/i', $query, $matches)) {
             return strtoupper($matches[1]);
         }
 
