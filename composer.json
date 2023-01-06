@@ -10,7 +10,7 @@
         "spaze/phpstan-disallowed-calls": "^2.11",
         "symplify/phpstan-rules": "^11.1",
         "staabm/phpstan-baseline-analysis": "^0.9",
-        "tomasvotruba/unused-public": "0.0.33.*",
+        "tomasvotruba/unused-public": "0.0.34.*",
         "tomasvotruba/type-coverage": "0.0.5.*",
         "tomasvotruba/cognitive-complexity": "0.0.5.*",
         "thecodingmachine/safe": "^1.3",

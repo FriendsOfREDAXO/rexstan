@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eea57f1989ca817e73437f7044d80577",
+    "content-hash": "749ae20e8a9db82d720f981449674ac8",
     "packages": [
         {
             "name": "composer/semver",
@@ -1221,16 +1221,16 @@
         },
         {
             "name": "tomasvotruba/unused-public",
-            "version": "0.0.33.72",
+            "version": "0.0.34.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/unused-public.git",
-                "reference": "4572210524a8d93e4185a955f74af3cb4c1acdff"
+                "reference": "c00a1a70be2dc08568044e6ec2855de7737b87f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/4572210524a8d93e4185a955f74af3cb4c1acdff",
-                "reference": "4572210524a8d93e4185a955f74af3cb4c1acdff",
+                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/c00a1a70be2dc08568044e6ec2855de7737b87f5",
+                "reference": "c00a1a70be2dc08568044e6ec2855de7737b87f5",
                 "shasum": ""
             },
             "require": {
@@ -1259,7 +1259,7 @@
             "description": "Detect unused public properties, constants and methods in your code",
             "support": {
                 "issues": "https://github.com/TomasVotruba/unused-public/issues",
-                "source": "https://github.com/TomasVotruba/unused-public/tree/0.0.33.72"
+                "source": "https://github.com/TomasVotruba/unused-public/tree/0.0.34.72"
             },
             "funding": [
                 {
@@ -1271,7 +1271,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-12-29T19:33:02+00:00"
+            "time": "2023-01-06T15:39:59+00:00"
         },
         {
             "name": "webmozart/assert",
