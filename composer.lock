@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "749ae20e8a9db82d720f981449674ac8",
+    "content-hash": "3d429195747c03fbc542b3a9f8ed5040",
     "packages": [
         {
             "name": "composer/semver",
@@ -738,16 +738,16 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.2.54",
+            "version": "0.2.55",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "246281fe4479cab7388ed480fc58a5b63b2d833f"
+                "reference": "af71a9ea81a9fa95b04b7abf304d73da8a86183c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/246281fe4479cab7388ed480fc58a5b63b2d833f",
-                "reference": "246281fe4479cab7388ed480fc58a5b63b2d833f",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/af71a9ea81a9fa95b04b7abf304d73da8a86183c",
+                "reference": "af71a9ea81a9fa95b04b7abf304d73da8a86183c",
                 "shasum": ""
             },
             "require": {
@@ -763,10 +763,12 @@
                 "ext-pdo": "*",
                 "friendsofphp/php-cs-fixer": "3.4.0",
                 "php-parallel-lint/php-parallel-lint": "^1.3",
+                "phpstan/extension-installer": "^1.2",
                 "phpstan/phpstan-php-parser": "^1.1",
                 "phpstan/phpstan-phpunit": "^1.0",
                 "phpstan/phpstan-strict-rules": "^1.1",
                 "phpunit/phpunit": "^9",
+                "tomasvotruba/unused-public": "^0.0.34",
                 "vlucas/phpdotenv": "^5.4"
             },
             "type": "phpstan-extension",
@@ -788,9 +790,9 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.54"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.55"
             },
-            "time": "2022-12-14T19:36:18+00:00"
+            "time": "2023-01-06T19:26:33+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
