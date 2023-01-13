@@ -23,11 +23,13 @@ final class PropertyTypeCoverageRule implements Rule
      * @var string
      */
     public const ERROR_MESSAGE = 'Out of %d possible property types, only %d %% actually have it. Add more property types to get over %d %%';
+
     /**
      * @readonly
      * @var \TomasVotruba\TypeCoverage\Formatter\TypeCoverageFormatter
      */
     private $typeCoverageFormatter;
+
     /**
      * @readonly
      * @var \TomasVotruba\TypeCoverage\Configuration

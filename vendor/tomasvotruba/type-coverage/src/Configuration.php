@@ -11,6 +11,7 @@ final class Configuration
      * @readonly
      */
     private $parameters;
+
     /**
      * @param array<string, mixed> $parameters
      */

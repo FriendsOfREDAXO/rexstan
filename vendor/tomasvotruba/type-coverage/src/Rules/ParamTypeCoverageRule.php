@@ -23,16 +23,19 @@ final class ParamTypeCoverageRule implements Rule
      * @var string
      */
     public const ERROR_MESSAGE = 'Out of %d possible param types, only %d %% actually have it. Add more param types to get over %d %%';
+
     /**
      * @readonly
      * @var \TomasVotruba\TypeCoverage\Formatter\TypeCoverageFormatter
      */
     private $typeCoverageFormatter;
+
     /**
      * @readonly
      * @var \TomasVotruba\TypeCoverage\Configuration
      */
     private $configuration;
+
     public function __construct(TypeCoverageFormatter $typeCoverageFormatter, Configuration $configuration)
     {
         $this->typeCoverageFormatter = $typeCoverageFormatter;

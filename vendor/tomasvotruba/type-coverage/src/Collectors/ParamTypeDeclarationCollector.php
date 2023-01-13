@@ -23,6 +23,7 @@ final class ParamTypeDeclarationCollector implements Collector
      * @var \PhpParser\PrettyPrinter\Standard
      */
     private $printerStandard;
+
     public function __construct(Standard $printerStandard)
     {
         $this->printerStandard = $printerStandard;
