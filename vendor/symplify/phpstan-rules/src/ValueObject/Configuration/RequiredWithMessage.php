@@ -7,10 +7,12 @@ namespace Symplify\PHPStanRules\ValueObject\Configuration;
 final class RequiredWithMessage
 {
     /**
+     * @readonly
      * @var string
      */
     private $required;
     /**
+     * @readonly
      * @var string|null
      */
     private $message;

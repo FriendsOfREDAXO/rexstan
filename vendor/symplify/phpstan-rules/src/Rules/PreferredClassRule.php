@@ -30,6 +30,7 @@ final class PreferredClassRule extends AbstractSymplifyRule
     public const ERROR_MESSAGE = 'Instead of "%s" class/interface use "%s"';
     /**
      * @var string[]
+     * @readonly
      */
     private $oldToPreferredClasses;
     /**

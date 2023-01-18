@@ -45,8 +45,6 @@ services:
                 PHPStan\Node\ClassMethod: 'PhpParser\Node\Stmt\ClassMethod'
                 DateTime: 'Nette\Utils\DateTime'
                 'PhpCsFixer\Finder': 'Symfony\Component\Finder\Finder'
-                # smart file system
-                'Symfony\Component\Finder\SplFileInfo': 'Symplify\SmartFileSystem\SmartFileInfo'
 
     -
         class: Symplify\PHPStanRules\Rules\ForbiddenFuncCallRule
@@ -83,10 +81,3 @@ services:
                 - PHPStan\Rules\Rule
                 - PHP_CodeSniffer\Sniffs\Sniff
                 - PHP_CodeSniffer\Fixer
-
-    -
-        class: Symplify\PHPStanRules\Rules\Enum\RequireNewArgumentConstantRule
-        tags: [phpstan.rules.rule]
-        arguments:
-            constantArgByNewByType:
-                Symfony\Component\Console\Input\InputOption: [0, 2]

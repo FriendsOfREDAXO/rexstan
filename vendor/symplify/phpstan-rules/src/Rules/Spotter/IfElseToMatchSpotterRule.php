@@ -31,14 +31,17 @@ final class IfElseToMatchSpotterRule implements Rule
      */
     public const ERROR_MESSAGE = 'If/else construction can be replace with more robust match()';
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\IfElseBranchAnalyzer
      */
     private $ifElseBranchAnalyzer;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\IfResemblingMatchAnalyzer
      */
     private $ifResemblingMatchAnalyzer;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\CacheIfAnalyzer
      */
     private $cacheIfAnalyzer;

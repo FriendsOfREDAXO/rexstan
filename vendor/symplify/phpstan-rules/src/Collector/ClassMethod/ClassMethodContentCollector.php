@@ -30,6 +30,7 @@ final class ClassMethodContentCollector implements Collector
      */
     private const EXCLUDED_METHOD_NAMES = ['getNodeType', 'getNodeTypes'];
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Printer\DuplicatedClassMethodPrinter
      */
     private $duplicatedClassMethodPrinter;

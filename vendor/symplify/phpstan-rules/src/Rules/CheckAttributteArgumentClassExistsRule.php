@@ -29,6 +29,7 @@ final class CheckAttributteArgumentClassExistsRule implements Rule
      */
     public const ERROR_MESSAGE = 'Class was not found';
     /**
+     * @readonly
      * @var \PHPStan\Reflection\ReflectionProvider
      */
     private $reflectionProvider;

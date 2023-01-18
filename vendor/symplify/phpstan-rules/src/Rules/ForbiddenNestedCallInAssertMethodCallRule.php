@@ -24,6 +24,7 @@ final class ForbiddenNestedCallInAssertMethodCallRule implements Rule
      */
     public const ERROR_MESSAGE = 'Decouple method call in assert to standalone line to make test core more readable';
     /**
+     * @readonly
      * @var \PhpParser\NodeFinder
      */
     private $nodeFinder;

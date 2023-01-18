@@ -46,6 +46,7 @@ final class NoNestedFuncCallRule implements Rule
         'str_ends_with',
     ];
     /**
+     * @readonly
      * @var \PhpParser\NodeFinder
      */
     private $nodeFinder;

@@ -11,6 +11,7 @@ use Symplify\PHPStanRules\TypeAnalyzer\ContainsTypeAnalyser;
 final class PositionMatcher
 {
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\TypeAnalyzer\ContainsTypeAnalyser
      */
     private $containsTypeAnalyser;

@@ -31,6 +31,7 @@ final class ForbiddenTestsNamespaceOutsideTestsDirectoryRule implements Rule
      */
     private const DESCRIPTION = '"Tests" namespace can be only in "/tests" directory';
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Location\DirectoryChecker
      */
     private $directoryChecker;

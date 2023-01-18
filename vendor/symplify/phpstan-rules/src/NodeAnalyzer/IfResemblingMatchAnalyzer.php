@@ -16,10 +16,12 @@ use Symplify\PHPStanRules\ValueObject\Spotter\IfAndCondExpr;
 final class IfResemblingMatchAnalyzer
 {
     /**
+     * @readonly
      * @var \PhpParser\PrettyPrinter\Standard
      */
     private $printerStandard;
     /**
+     * @readonly
      * @var \PhpParser\NodeFinder
      */
     private $nodeFinder;

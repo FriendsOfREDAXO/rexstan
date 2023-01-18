@@ -54,6 +54,7 @@ final class ClassNameRespectsParentSuffixRule implements Rule
      */
     private $parentClasses = [];
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Naming\ClassToSuffixResolver
      */
     private $classToSuffixResolver;

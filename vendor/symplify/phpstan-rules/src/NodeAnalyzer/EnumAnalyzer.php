@@ -15,6 +15,7 @@ use Symplify\PHPStanRules\PhpDoc\BarePhpDocParser;
 final class EnumAnalyzer
 {
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\PhpDoc\BarePhpDocParser
      */
     private $barePhpDocParser;

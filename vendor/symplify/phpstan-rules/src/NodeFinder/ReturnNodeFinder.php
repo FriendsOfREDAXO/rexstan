@@ -15,6 +15,7 @@ use Symplify\PHPStanRules\NodeTraverser\SimpleCallableNodeTraverser;
 final class ReturnNodeFinder
 {
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeTraverser\SimpleCallableNodeTraverser
      */
     private $simpleCallableNodeTraverser;

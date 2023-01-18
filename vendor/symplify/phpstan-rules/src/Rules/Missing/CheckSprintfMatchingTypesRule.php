@@ -36,14 +36,17 @@ final class CheckSprintfMatchingTypesRule implements Rule
      */
     private const SPECIFIERS = '[bcdeEfFgGosuxX%s]';
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\SprintfSpecifierTypeResolver
      */
     private $sprintfSpecifierTypeResolver;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\TypeAnalyzer\MatchingTypeAnalyzer
      */
     private $matchingTypeAnalyzer;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\TypeResolver\ArgTypeResolver
      */
     private $argTypeResolver;

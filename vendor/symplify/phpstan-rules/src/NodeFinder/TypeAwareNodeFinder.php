@@ -14,6 +14,7 @@ use PhpParser\NodeFinder;
 final class TypeAwareNodeFinder
 {
     /**
+     * @readonly
      * @var \PhpParser\NodeFinder
      */
     private $nodeFinder;

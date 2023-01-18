@@ -31,10 +31,12 @@ final class CheckClassNamespaceFollowPsr4Rule implements Rule
      */
     private $autoloadPsr4Paths = [];
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Composer\Psr4PathValidator
      */
     private $psr4PathValidator;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Composer\ClassNamespaceMatcher
      */
     private $classNamespaceMatcher;

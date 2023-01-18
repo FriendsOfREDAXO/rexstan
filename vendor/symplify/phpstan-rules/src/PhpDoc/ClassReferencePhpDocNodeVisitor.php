@@ -18,6 +18,7 @@ final class ClassReferencePhpDocNodeVisitor extends AbstractPhpDocNodeVisitor
      */
     private $className;
     /**
+     * @readonly
      * @var \PHPStan\Reflection\ReflectionProvider
      */
     private $reflectionProvider;

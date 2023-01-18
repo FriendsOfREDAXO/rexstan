@@ -38,10 +38,12 @@ final class PreventDoubleSetParameterRule implements Rule
      */
     private $setParametersNamesByFile = [];
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyPhpConfigClosureAnalyzer
      */
     private $symfonyPhpConfigClosureAnalyzer;
     /**
+     * @readonly
      * @var \PhpParser\NodeFinder
      */
     private $nodeFinder;

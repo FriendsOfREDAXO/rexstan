@@ -7,10 +7,12 @@ namespace Symplify\PHPStanRules\ValueObject;
 final class MethodCallReference
 {
     /**
+     * @readonly
      * @var string
      */
     private $class;
     /**
+     * @readonly
      * @var string
      */
     private $method;

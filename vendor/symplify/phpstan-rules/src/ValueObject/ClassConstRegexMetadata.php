@@ -7,18 +7,22 @@ namespace Symplify\PHPStanRules\ValueObject;
 final class ClassConstRegexMetadata
 {
     /**
+     * @readonly
      * @var string
      */
     private $constantName;
     /**
+     * @readonly
      * @var string
      */
     private $regexValue;
     /**
+     * @readonly
      * @var string
      */
     private $filePath;
     /**
+     * @readonly
      * @var int
      */
     private $line;

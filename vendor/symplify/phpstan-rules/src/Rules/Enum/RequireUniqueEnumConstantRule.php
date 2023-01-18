@@ -25,6 +25,7 @@ final class RequireUniqueEnumConstantRule implements Rule
      */
     public const ERROR_MESSAGE = 'Enum constants "%s" are duplicated. Make them unique instead';
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\EnumAnalyzer
      */
     private $enumAnalyzer;

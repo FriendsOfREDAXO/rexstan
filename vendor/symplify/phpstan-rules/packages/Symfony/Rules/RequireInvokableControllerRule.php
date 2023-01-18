@@ -10,6 +10,7 @@ use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symplify\PHPStanRules\Enum\MethodName;
 use Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
@@ -26,6 +27,7 @@ final class RequireInvokableControllerRule implements Rule
      */
     public const ERROR_MESSAGE = 'Use invokable controller with __invoke() method instead of named action method';
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer
      */
     private $symfonyControllerAnalyzer;
@@ -51,7 +53,7 @@ final class RequireInvokableControllerRule implements Rule
     {
         $classReflection = $node->getClassReflection();
         if (
-            ! $classReflection->isSubclassOf('Symfony\Bundle\FrameworkBundle\Controller\AbstractController') &&
+            ! $classReflection->isSubclassOf(AbstractController::class) &&
             ! $classReflection->isSubclassOf('Symfony\Bundle\FrameworkBundle\Controller\Controller')
         ) {
             return [];

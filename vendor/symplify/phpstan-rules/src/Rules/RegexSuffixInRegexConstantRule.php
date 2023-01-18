@@ -29,10 +29,12 @@ final class RegexSuffixInRegexConstantRule implements Rule
      */
     public const ERROR_MESSAGE = 'Name your constant with "_REGEX" suffix, instead of "%s"';
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\RegexFuncCallAnalyzer
      */
     private $regexFuncCallAnalyzer;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\RegexStaticCallAnalyzer
      */
     private $regexStaticCallAnalyzer;

@@ -37,6 +37,11 @@ final class NoMissingAssingNoVoidMethodCallRule implements Rule
      * @var string[]
      */
     private const SKIPPED_TYPES = [
+        'Symfony\Component\Stopwatch\Stopwatch',
+        'Dotenv\Dotenv',
+        'Symfony\Component\Form\FormBuilderInterface',
+        'Symfony\Component\OptionsResolver\Options',
+        'Symfony\Component\Form\FormInterface',
         'Symfony\Component\Finder\Finder',
         'PhpParser\NodeTraverser',
         'Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator',
@@ -49,6 +54,7 @@ final class NoMissingAssingNoVoidMethodCallRule implements Rule
         'React\Promise\PromiseInterface',
     ];
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\MethodCall\AllowedChainCallSkipper
      */
     private $allowedChainCallSkipper;

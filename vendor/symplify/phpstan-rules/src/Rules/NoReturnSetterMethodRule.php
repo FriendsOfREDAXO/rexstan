@@ -34,6 +34,7 @@ final class NoReturnSetterMethodRule implements Rule
      */
     private const SETTER_START_REGEX = '#^set[A-Z]#';
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder
      */
     private $typeAwareNodeFinder;

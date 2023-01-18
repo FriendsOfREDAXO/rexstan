@@ -17,6 +17,7 @@ final class FlatConcatFindingNodeVisitor extends NodeVisitorAbstract
      */
     private $foundNodes = [];
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\FileCheckingFuncCallAnalyzer
      */
     private $fileCheckingFuncCallAnalyzer;
