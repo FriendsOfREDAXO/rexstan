@@ -28,7 +28,7 @@ function relativePath(string $path): string
 $output = relativePath($output);
 $expected = relativePath($expected);
 
-if ($output != $expected) {
+if ($output !== $expected) {
     echo "ERROR, output does not match\n\n";
 
     /*
