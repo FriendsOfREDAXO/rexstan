@@ -2,7 +2,7 @@
 
 parameters:
     scanFiles:
-        - ../../core/vendor/symfony/polyfill-php80/bootstrap.php
-        - ../../core/vendor/symfony/polyfill-php81/bootstrap.php
+        - ../../../core/vendor/symfony/polyfill-php80/bootstrap.php
+        - ../../../core/vendor/symfony/polyfill-php81/bootstrap.php
 
     phpVersion: 70300 # PHP 7.3
