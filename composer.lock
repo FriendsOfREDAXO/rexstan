@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb6778c591b69fa8a747377899c2fd17",
+    "content-hash": "a2b4e04012a6ce42106876eb0e0d0816",
     "packages": [
         {
             "name": "composer/semver",
@@ -299,16 +299,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.15.3",
+            "version": "1.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "61800f71a5526081d1b5633766aa88341f1ade76"
+                "reference": "57090cfccbfaa639e703c007486d605a6e80f56d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/61800f71a5526081d1b5633766aa88341f1ade76",
-                "reference": "61800f71a5526081d1b5633766aa88341f1ade76",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/57090cfccbfaa639e703c007486d605a6e80f56d",
+                "reference": "57090cfccbfaa639e703c007486d605a6e80f56d",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.15.3"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.16.0"
             },
-            "time": "2022-12-20T20:56:55+00:00"
+            "time": "2023-01-29T14:41:23+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -880,16 +880,16 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "11.2.2.72",
+            "version": "11.2.3.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "face190bca1fbeacd96f2daccb2aa5975e73051b"
+                "reference": "01f3fa724fcb28e92abd504d8eebb3d669253a36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/face190bca1fbeacd96f2daccb2aa5975e73051b",
-                "reference": "face190bca1fbeacd96f2daccb2aa5975e73051b",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/01f3fa724fcb28e92abd504d8eebb3d669253a36",
+                "reference": "01f3fa724fcb28e92abd504d8eebb3d669253a36",
                 "shasum": ""
             },
             "require": {
@@ -927,7 +927,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/11.2.2.72"
+                "source": "https://github.com/symplify/phpstan-rules/tree/11.2.3.72"
             },
             "funding": [
                 {
@@ -939,7 +939,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-20T11:45:54+00:00"
+            "time": "2023-01-30T16:21:14+00:00"
         },
         {
             "name": "thecodingmachine/phpstan-safe-rule",
