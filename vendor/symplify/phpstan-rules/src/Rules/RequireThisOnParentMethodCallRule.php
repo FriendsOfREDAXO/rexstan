@@ -31,6 +31,7 @@ final class RequireThisOnParentMethodCallRule implements Rule
      */
     public const ERROR_MESSAGE = 'Use "$this-><method>()" instead of "parent::<method>()" unless in the same named method';
     /**
+     * @readonly
      * @var \PhpParser\NodeFinder
      */
     private $nodeFinder;

@@ -29,14 +29,17 @@ final class BoolishClassMethodPrefixRule implements Rule
      */
     public const ERROR_MESSAGE = 'Method "%s()" returns bool type, so the name should start with is/has/was...';
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Naming\BoolishNameAnalyser
      */
     private $boolishNameAnalyser;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeFinder\ReturnNodeFinder
      */
     private $returnNodeFinder;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\ParentGuard\ParentClassMethodGuard
      */
     private $parentClassMethodGuard;

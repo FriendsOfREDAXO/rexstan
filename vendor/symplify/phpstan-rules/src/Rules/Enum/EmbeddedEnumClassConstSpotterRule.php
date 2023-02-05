@@ -27,19 +27,23 @@ final class EmbeddedEnumClassConstSpotterRule implements Rule
      */
     public const ERROR_MESSAGE = 'Constants "%s" should be extract to standalone enum class';
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\ClassAnalyzer
      */
     private $classAnalyzer;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Matcher\SharedNamePrefixMatcher
      */
     private $sharedNamePrefixMatcher;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Enum\EnumConstantAnalyzer
      */
     private $enumConstantAnalyzer;
     /**
      * @var array<class-string>
+     * @readonly
      */
     private $parentTypes;
 

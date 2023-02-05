@@ -1,12 +1,19 @@
 <?php
 
+use function Safe\tempnam;
+use function Safe\file_get_contents;
+use function Safe\file_put_contents;
+use function Safe\realpath;
+
+require (__DIR__. '/../vendor/autoload.php');
+
 chdir(__DIR__.'/../');
 
 @shell_exec('php vendor/bin/phpstan clear-result-cache');
 
-$output = trim((string) shell_exec('php vendor/bin/phpstan analyze tests/ --error-format=raw'));
-$output = preg_replace('/\s*$/', '', $output);
-$expected = trim((string) file_get_contents(__DIR__.'/expected.out'));
+$output = trim((string) shell_exec('php vendor/bin/phpstan analyze tests/ --error-format=raw --level=5'));
+$output = (string) preg_replace('/\s*$/', '', $output);
+$expected = trim(file_get_contents(__DIR__.'/expected.out'));
 
 function relativePath(string $path): string
 {
@@ -21,7 +28,7 @@ function relativePath(string $path): string
 $output = relativePath($output);
 $expected = relativePath($expected);
 
-if ($output != $expected) {
+if ($output !== $expected) {
     echo "ERROR, output does not match\n\n";
 
     /*

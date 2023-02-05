@@ -13,6 +13,7 @@ use PHPStan\Type\FileTypeMapper;
 final class PhpDocResolver
 {
     /**
+     * @readonly
      * @var \PHPStan\Type\FileTypeMapper
      */
     private $fileTypeMapper;

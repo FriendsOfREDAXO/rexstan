@@ -31,10 +31,12 @@ final class ReflectionParser
     private $classesByFilename = [];
 
     /**
+     * @readonly
      * @var \PhpParser\Parser
      */
     private $parser;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder
      */
     private $typeAwareNodeFinder;

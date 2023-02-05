@@ -11,6 +11,7 @@ use Symplify\PHPStanRules\ValueObject\ClassNamespaceAndDirectory;
 final class ClassNamespaceMatcher
 {
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Location\DirectoryChecker
      */
     private $directoryChecker;

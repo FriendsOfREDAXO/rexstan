@@ -16,14 +16,17 @@ use Symplify\PHPStanRules\Reflection\ReflectionParser;
 final class MethodCallNodeFinder
 {
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Reflection\ReflectionParser
      */
     private $reflectionParser;
     /**
+     * @readonly
      * @var \PhpParser\NodeFinder
      */
     private $nodeFinder;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Printer\NodeComparator
      */
     private $nodeComparator;

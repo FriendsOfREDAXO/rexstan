@@ -30,10 +30,12 @@ final class RequireSpecificReturnTypeOverAbstractRule implements Rule
      */
     public const ERROR_MESSAGE = 'Provide more specific return type "%s" over abstract one';
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeFinder\ReturnNodeFinder
      */
     private $returnNodeFinder;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Reflection\MethodNodeAnalyser
      */
     private $methodNodeAnalyser;

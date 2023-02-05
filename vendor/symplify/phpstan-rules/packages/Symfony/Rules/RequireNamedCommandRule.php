@@ -38,10 +38,12 @@ final class RequireNamedCommandRule implements Rule
      */
     private const COMMAND_ATTRIBUTE = 'Symfony\Component\Console\Attribute\AsCommand';
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\AttributeFinder
      */
     private $attributeFinder;
     /**
+     * @readonly
      * @var \PhpParser\NodeFinder
      */
     private $nodeFinder;

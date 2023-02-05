@@ -19,13 +19,16 @@ use staabm\PHPStanDba\TypeMapping\TypeMapper;
  */
 class PdoMysqlQueryReflector extends BasePdoQueryReflector
 {
+    /**
+     * @api
+     */
     public const NAME = 'pdo-mysql';
 
     public function __construct(PDO $pdo)
     {
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        parent::__construct($pdo, new MysqlTypeMapper());
+        parent::__construct($pdo);
     }
 
     /** @return PDOException|list<ColumnMeta>|null */
@@ -45,22 +48,14 @@ class PdoMysqlQueryReflector extends BasePdoQueryReflector
             return $this->cache[$queryString] = null;
         }
 
-        try {
-            $this->pdo->beginTransaction();
-        } catch (PDOException $e) {
-            // not all drivers may support transactions
-        }
+        $this->pdo->beginTransaction();
 
         try {
             $stmt = $this->pdo->query($simulatedQuery);
         } catch (PDOException $e) {
             return $this->cache[$queryString] = $e;
         } finally {
-            try {
-                $this->pdo->rollBack();
-            } catch (PDOException $e) {
-                // not all drivers may support transactions
-            }
+            $this->pdo->rollBack();
         }
 
         $this->cache[$queryString] = [];
@@ -88,6 +83,11 @@ class PdoMysqlQueryReflector extends BasePdoQueryReflector
         }
 
         return $this->cache[$queryString];
+    }
+
+    public function setupDbaApi(?DbaApi $dbaApi): void
+    {
+        $this->typeMapper = new MysqlTypeMapper($dbaApi);
     }
 
     /**

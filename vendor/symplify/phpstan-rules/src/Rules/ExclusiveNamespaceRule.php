@@ -37,6 +37,7 @@ final class ExclusiveNamespaceRule implements Rule
     private const EXCLUDED_NAMESPACE_REGEX = '#\\\\(Exception|Contract)\\\\#';
     /**
      * @var string[]
+     * @readonly
      */
     private $namespaceParts;
 

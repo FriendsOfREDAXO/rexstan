@@ -7,18 +7,22 @@ namespace Symplify\PHPStanRules\ValueObject\Metadata;
 final class ClassMethodMetadata
 {
     /**
+     * @readonly
      * @var string
      */
     private $methodName;
     /**
+     * @readonly
      * @var int
      */
     private $lineCount;
     /**
+     * @readonly
      * @var string
      */
     private $fileName;
     /**
+     * @readonly
      * @var int
      */
     private $line;

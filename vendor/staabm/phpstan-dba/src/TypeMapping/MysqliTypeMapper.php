@@ -6,6 +6,7 @@ namespace staabm\PHPStanDba\TypeMapping;
 
 use PHPStan\ShouldNotHappenException;
 use PHPStan\Type\Type;
+use staabm\PHPStanDba\QueryReflection\DbaApi;
 
 final class MysqliTypeMapper
 {
@@ -20,7 +21,7 @@ final class MysqliTypeMapper
      */
     private $typeMapper;
 
-    public function __construct()
+    public function __construct(?DbaApi $dbaApi)
     {
         $constants = get_defined_constants(true);
         foreach ($constants['mysqli'] as $c => $n) {
@@ -28,12 +29,12 @@ final class MysqliTypeMapper
                 // skip bool constants like MYSQLI_IS_MARIADB
                 continue;
             }
-            if (preg_match('/^MYSQLI_TYPE_(.*)/', $c, $m)) {
+            if (1 === preg_match('/^MYSQLI_TYPE_(.*)/', $c, $m)) {
                 if (!\is_string($m[1])) {
                     throw new ShouldNotHappenException();
                 }
                 $this->nativeTypes[$n] = $m[1];
-            } elseif (preg_match('/MYSQLI_(.*)_FLAG$/', $c, $m)) {
+            } elseif (1 === preg_match('/MYSQLI_(.*)_FLAG$/', $c, $m)) {
                 if (!\is_string($m[1])) {
                     throw new ShouldNotHappenException();
                 }
@@ -43,7 +44,7 @@ final class MysqliTypeMapper
             }
         }
 
-        $this->typeMapper = new MysqlTypeMapper();
+        $this->typeMapper = new MysqlTypeMapper($dbaApi);
     }
 
     public function mapToPHPStanType(int $mysqlType, int $mysqlFlags, int $length): Type

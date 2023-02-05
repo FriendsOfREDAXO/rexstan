@@ -15,6 +15,7 @@ final class SymfonyControllerAnalyzer
      */
     private const ROUTE_ATTRIBUTE = 'Symfony\Component\Routing\Annotation\Route';
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\AttributeFinder
      */
     private $attributeFinder;

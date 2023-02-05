@@ -27,7 +27,7 @@ use staabm\PHPStanDba\UnresolvableQueryException;
  */
 final class QuerySimulation
 {
-    public const DATE_FORMAT = 'Y-m-d';
+    private const DATE_FORMAT = 'Y-m-d';
 
     /**
      * @throws UnresolvableQueryException
@@ -129,7 +129,11 @@ final class QuerySimulation
         if (null === $queryString) {
             return null;
         }
-        $queryString .= ' LIMIT 0';
+
+        // make sure we don't unnecessarily transfer data, as we are only interested in the statement is succeeding
+        if ('SELECT' === QueryReflection::getQueryType($queryString)) {
+            $queryString .= ' LIMIT 0';
+        }
 
         return $queryString;
     }

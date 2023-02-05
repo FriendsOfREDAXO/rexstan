@@ -36,4 +36,8 @@ final class ReplayQueryReflector implements QueryReflector
 
         return $this->reflectionCache->getResultType($queryString, $fetchType);
     }
+
+    public function setupDbaApi(?DbaApi $dbaApi): void
+    {
+    }
 }

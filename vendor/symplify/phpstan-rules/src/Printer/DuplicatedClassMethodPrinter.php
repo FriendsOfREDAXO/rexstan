@@ -16,6 +16,7 @@ final class DuplicatedClassMethodPrinter
      */
     private const VARIABLE_REGEX = '#\$\w+[^\s]#';
     /**
+     * @readonly
      * @var \PhpParser\PrettyPrinter\Standard
      */
     private $standard;

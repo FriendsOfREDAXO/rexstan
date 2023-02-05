@@ -33,11 +33,17 @@ final class AllowedChainCallSkipper
         'Symfony\Component\Finder\Finder',
         'Symfony\Component\String\AbstractString',
         // symfony
+        'Symfony\Component\Mime\Email',
+        'Symfony\Component\Mime\Message',
+        'Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface',
         // php-scoper finder
         'Isolated\Symfony\Component\Finder\Finder',
         'React\ChildProcess\Process',
         'Symplify\EasyCodingStandard\Contract\Application\FileProcessorInterface',
         'Stringy\Stringy',
+        // fluent configs
+        'Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator',
+        'Symfony\Component\Routing\Loader\Configurator\ImportConfigurator',
         // also trinary logic ↓
         'Symfony\Component\Process\Process',
         'Symfony\Component\HttpFoundation\Request',
@@ -55,6 +61,7 @@ final class AllowedChainCallSkipper
         'PHPUnit\Framework\MockObject\Builder\InvocationMocker',
     ];
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Matcher\ObjectTypeMatcher
      */
     private $objectTypeMatcher;

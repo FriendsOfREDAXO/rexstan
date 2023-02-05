@@ -39,6 +39,7 @@ final class NoVoidGetterMethodRule implements Rule
         Node\Stmt\Throw_::class,
     ];
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder
      */
     private $typeAwareNodeFinder;

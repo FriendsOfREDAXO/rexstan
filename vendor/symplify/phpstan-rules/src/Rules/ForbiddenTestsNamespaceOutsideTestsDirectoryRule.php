@@ -31,6 +31,7 @@ final class ForbiddenTestsNamespaceOutsideTestsDirectoryRule implements Rule
      */
     private const DESCRIPTION = '"Tests" namespace can be only in "/tests" directory';
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Location\DirectoryChecker
      */
     private $directoryChecker;
@@ -62,7 +63,7 @@ final class ForbiddenTestsNamespaceOutsideTestsDirectoryRule implements Rule
             return [];
         }
 
-        if ($this->directoryChecker->isInDirectoryNames($scope, ['tests', 'packages-tests'])) {
+        if ($this->directoryChecker->isInDirectoryNames($scope, ['tests', 'rules-tests', 'packages-tests'])) {
             return [];
         }
 

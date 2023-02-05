@@ -37,6 +37,7 @@ final class ForbiddenArrayDestructRule implements Rule
      */
     private const VENDOR_DIRECTORY_REGEX = '#/vendor/#';
     /**
+     * @readonly
      * @var \PHPStan\Reflection\ReflectionProvider
      */
     private $reflectionProvider;

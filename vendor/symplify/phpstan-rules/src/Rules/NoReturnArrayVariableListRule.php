@@ -36,6 +36,7 @@ final class NoReturnArrayVariableListRule implements Rule
      */
     private const TESTS_DIRECTORY_REGEX = '#\/Tests\/#i';
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\ParentClassMethodNodeResolver
      */
     private $parentClassMethodNodeResolver;

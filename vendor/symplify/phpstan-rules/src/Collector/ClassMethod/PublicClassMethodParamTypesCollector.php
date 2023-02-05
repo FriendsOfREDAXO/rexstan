@@ -19,14 +19,17 @@ use Symplify\PHPStanRules\Printer\CollectorMetadataPrinter;
 final class PublicClassMethodParamTypesCollector implements Collector
 {
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\PhpDoc\ApiDocStmtAnalyzer
      */
     private $apiDocStmtAnalyzer;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Matcher\Collector\PublicClassMethodMatcher
      */
     private $publicClassMethodMatcher;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Printer\CollectorMetadataPrinter
      */
     private $collectorMetadataPrinter;

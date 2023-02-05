@@ -27,6 +27,7 @@ final class NoMixedCallableRule extends AbstractSymplifyRule
      */
     public const ERROR_MESSAGE = 'Make callable type explicit. Here is how: https://phpstan.org/writing-php-code/phpdoc-types#callables';
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\TypeResolver\ClassMethodReturnTypeResolver
      */
     private $classMethodReturnTypeResolver;

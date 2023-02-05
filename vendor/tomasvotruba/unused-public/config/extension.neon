@@ -1,0 +1,82 @@
+parametersSchema:
+    unused_public: structure([
+        methods: bool()
+        local_methods: bool()
+        properties: bool()
+        constants: bool()
+        twig_template_paths: listOf(string())
+    ])
+
+# default parameters
+parameters:
+    unused_public:
+        methods: false
+        local_methods: false
+        properties: false
+        constants: false
+        twig_template_paths: []
+
+services:
+    - TomasVotruba\UnusedPublic\PublicClassMethodMatcher
+    - TomasVotruba\UnusedPublic\ApiDocStmtAnalyzer
+    - TomasVotruba\UnusedPublic\ClassMethodCallReferenceResolver
+    - TomasVotruba\UnusedPublic\Twig\PossibleTwigMethodCallsProvider
+    - TomasVotruba\UnusedPublic\Twig\UsedMethodAnalyzer
+    - TomasVotruba\UnusedPublic\CollectorMapper\MethodCallCollectorMapper
+
+    -
+        factory: TomasVotruba\UnusedPublic\Configuration
+        arguments:
+            - %unused_public%
+
+    # collectors
+    -
+        class: TomasVotruba\UnusedPublic\Collectors\PublicClassMethodCollector
+        tags:
+            - phpstan.collector
+
+    -
+        class: TomasVotruba\UnusedPublic\Collectors\MethodCallCollector
+        tags:
+            - phpstan.collector
+
+    -
+        class: TomasVotruba\UnusedPublic\Collectors\StaticMethodCallCollector
+        tags:
+            - phpstan.collector
+
+    -
+        class: TomasVotruba\UnusedPublic\Collectors\PublicStaticPropertyFetchCollector
+        tags:
+            - phpstan.collector
+
+    -
+        class: TomasVotruba\UnusedPublic\Collectors\PublicClassLikeConstCollector
+        tags:
+            - phpstan.collector
+
+    -
+        class: TomasVotruba\UnusedPublic\Collectors\ClassConstFetchCollector
+        tags:
+            - phpstan.collector
+
+    -
+        class: TomasVotruba\UnusedPublic\Collectors\PublicPropertyCollector
+        tags:
+            - phpstan.collector
+
+    -
+        class: TomasVotruba\UnusedPublic\Collectors\PublicPropertyFetchCollector
+        tags:
+            - phpstan.collector
+
+    -
+        class: TomasVotruba\UnusedPublic\Collectors\AttributeCallableCollector
+        tags:
+            - phpstan.collector
+
+rules:
+    - TomasVotruba\UnusedPublic\Rules\UnusedPublicClassMethodRule
+    - TomasVotruba\UnusedPublic\Rules\UnusedPublicClassConstRule
+    - TomasVotruba\UnusedPublic\Rules\UnusedPublicPropertyRule
+    - TomasVotruba\UnusedPublic\Rules\LocalOnlyPublicClassMethodRule

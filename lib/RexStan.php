@@ -18,18 +18,25 @@ final class RexStan
 {
     public static function phpExecutable(): string
     {
-        if ('Darwin' === PHP_OS_FAMILY) {
+        if ('Windows' !== PHP_OS_FAMILY) {
             $executable = 'php';
-            $customConfig = '/Library/Application Support/appsolute/MAMP PRO/conf/php'.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION.'.ini';
-            if (is_file($customConfig)) {
-                $executable .= ' -c "'.$customConfig.'"';
+            $path = '$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin';
+
+            if ('Darwin' === PHP_OS_FAMILY) {
+                $customConfig = '/Library/Application Support/appsolute/MAMP PRO/conf/php'.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION.'.ini';
+                if (is_file($customConfig)) {
+                    $executable .= ' -c "'.$customConfig.'"';
+                }
+
+                $mampPhp = '/Applications/MAMP/bin/php/php'.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION.'/bin/';
+                if (is_executable($mampPhp.'php')) {
+                    $path .= ':'.$mampPhp;
+                }
             }
 
-            $mampPhp = '/Applications/MAMP/bin/php/php'.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION.'/bin/';
-            if (is_executable($mampPhp.'php')) {
-                return 'PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:'.$mampPhp.'" '.$executable;
-            }
+            return 'PATH="'. $path .'" '.$executable;
         }
+
         return 'php';
     }
 
@@ -94,7 +101,7 @@ final class RexStan
         $baselineGlob = $dataDir.$configSignature.DIRECTORY_SEPARATOR.'*-summary.json';
         $htmlGraphPath = $dataDir.'baseline-graph.html';
 
-        self::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline', $stderrOutput, $exitCode);
+        self::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline --allow-empty-baseline', $stderrOutput, $exitCode);
         if (0 !== $exitCode) {
             throw new Exception('Unable to generate baseline:'. $stderrOutput);
         }

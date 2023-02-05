@@ -1,3 +1,7 @@
 includes:
-    - ../vendor/symplify/phpstan-rules/config/packages/cognitive-complexity/cognitive-complexity-services.neon
-    - ../vendor/symplify/phpstan-rules/config/packages/cognitive-complexity/cognitive-complexity-rules.neon
+    - ../vendor/tomasvotruba/cognitive-complexity/config/extension.neon
+
+parameters:
+    cognitive_complexity:
+        class: 50
+        function: 8

@@ -30,6 +30,7 @@ final class ForbiddenInlineClassMethodRule implements Rule
      */
     public const ERROR_MESSAGE = 'Method "%s()" only calling another method call and has no added value. Use the inlined call instead';
     /**
+     * @readonly
      * @var \PhpParser\NodeFinder
      */
     private $nodeFinder;

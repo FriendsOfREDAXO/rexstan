@@ -43,6 +43,14 @@ final class QueryReflection
      */
     private static $runtimeConfiguration;
 
+    public function __construct(?DbaApi $dbaApi = null)
+    {
+        self::reflector()->setupDbaApi($dbaApi);
+    }
+
+    /**
+     * @api
+     */
     public static function setupReflector(QueryReflector $reflector, RuntimeConfiguration $runtimeConfiguration): void
     {
         self::$reflector = $reflector;
@@ -51,8 +59,24 @@ final class QueryReflection
 
     public function validateQueryString(string $queryString): ?Error
     {
-        if ('SELECT' !== $this->getQueryType($queryString)) {
-            return null;
+        $queryType = self::getQueryType($queryString);
+
+        if (self::getRuntimeConfiguration()->isAnalyzingWriteQueries()) {
+            if (\in_array($queryType, [
+                'INSERT',
+                'DELETE',
+                'UPDATE',
+                'REPLACE',
+            ], true)) {
+                // turn write queries into explain, so we don't need to execute a query which might modify data
+                $queryString = 'EXPLAIN '.$queryString;
+            } elseif ('SELECT' !== $queryType) {
+                return null;
+            }
+        } else {
+            if ('SELECT' !== $queryType) {
+                return null;
+            }
         }
 
         // this method cannot validate queries which contain placeholders.
@@ -68,7 +92,7 @@ final class QueryReflection
      */
     public function getResultType(string $queryString, int $fetchType): ?Type
     {
-        if ('SELECT' !== $this->getQueryType($queryString)) {
+        if ('SELECT' !== self::getQueryType($queryString)) {
             return null;
         }
 
@@ -106,6 +130,8 @@ final class QueryReflection
     }
 
     /**
+     * @api
+     *
      * @deprecated use resolvePreparedQueryStrings() instead
      *
      * @throws UnresolvableQueryException
@@ -202,13 +228,13 @@ final class QueryReflection
         }
 
         if ($queryExpr instanceof Expr\CallLike) {
-            if ('sql' === PhpDocUtil::matchTaintEscape($queryExpr, $scope)) {
-                return '1';
-            }
-
             $placeholder = PhpDocUtil::matchInferencePlaceholder($queryExpr, $scope);
             if (null !== $placeholder) {
                 return $placeholder;
+            }
+
+            if ('sql' === PhpDocUtil::matchTaintEscape($queryExpr, $scope)) {
+                return '1';
             }
         }
 
@@ -252,7 +278,7 @@ final class QueryReflection
     {
         $query = ltrim($query);
 
-        if (preg_match('/^\s*\(?\s*(SELECT|SHOW|UPDATE|INSERT|DELETE|REPLACE|CREATE|CALL|OPTIMIZE)/i', $query, $matches)) {
+        if (1 === preg_match('/^\s*\(?\s*(SELECT|SHOW|UPDATE|INSERT|DELETE|REPLACE|CREATE|CALL|OPTIMIZE)/i', $query, $matches)) {
             return strtoupper($matches[1]);
         }
 

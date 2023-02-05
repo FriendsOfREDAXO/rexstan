@@ -17,13 +17,14 @@ use staabm\PHPStanDba\TypeMapping\TypeMapper;
  */
 final class PdoPgSqlQueryReflector extends BasePdoQueryReflector
 {
+    /**
+     * @api
+     */
     public const NAME = 'pdo-pgsql';
 
     public function __construct(PDO $pdo)
     {
-        $typeMapper = new PgsqlTypeMapper();
-
-        parent::__construct($pdo, $typeMapper);
+        parent::__construct($pdo);
     }
 
     /** @return PDOException|list<PDOColumnMeta>|null */
@@ -47,6 +48,7 @@ final class PdoPgSqlQueryReflector extends BasePdoQueryReflector
             $this->pdo->beginTransaction();
         } catch (PDOException $e) {
             // not all drivers may support transactions
+            throw new \RuntimeException('Failed to start transaction', $e->getCode(), $e);
         }
 
         try {
@@ -58,6 +60,7 @@ final class PdoPgSqlQueryReflector extends BasePdoQueryReflector
                 $this->pdo->rollBack();
             } catch (PDOException $e) {
                 // not all drivers may support transactions
+                throw new \RuntimeException('Failed to rollback transaction', $e->getCode(), $e);
             }
         }
 
@@ -89,6 +92,11 @@ final class PdoPgSqlQueryReflector extends BasePdoQueryReflector
         }
 
         return $this->cache[$queryString];
+    }
+
+    public function setupDbaApi(?DbaApi $dbaApi): void
+    {
+        $this->typeMapper = new PgsqlTypeMapper($dbaApi);
     }
 
     /**

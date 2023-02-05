@@ -45,10 +45,12 @@ final class RequireEnumDocBlockOnConstantListPassRule implements Rule
         ParameterBagInterface::class,
     ];
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Reflection\MethodCallNodeAnalyzer
      */
     private $methodCallNodeAnalyzer;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\MethodCall\MethodCallClassConstFetchPositionResolver
      */
     private $methodCallClassConstFetchPositionResolver;

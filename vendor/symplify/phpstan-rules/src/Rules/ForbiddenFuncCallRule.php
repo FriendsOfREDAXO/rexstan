@@ -32,13 +32,16 @@ final class ForbiddenFuncCallRule implements Rule
     public const ERROR_MESSAGE = 'Function "%s()" cannot be used/left in the code';
     /**
      * @var string[]|array<(string | int), string>
+     * @readonly
      */
     private $forbiddenFunctions;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Matcher\ArrayStringAndFnMatcher
      */
     private $arrayStringAndFnMatcher;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Formatter\RequiredWithMessageFormatter
      */
     private $requiredWithMessageFormatter;

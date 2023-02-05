@@ -31,15 +31,18 @@ final class SeeAnnotationToTestRule implements Rule
      */
     public const ERROR_MESSAGE = 'Class "%s" is missing @see annotation with test case class reference';
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\PhpDoc\PhpDocResolver
      */
     private $phpDocResolver;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\PhpDoc\SeePhpDocTagNodesFinder
      */
     private $seePhpDocTagNodesFinder;
     /**
      * @var string[]
+     * @readonly
      */
     private $requiredSeeTypes;
 

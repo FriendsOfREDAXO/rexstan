@@ -20,10 +20,11 @@ final class MysqliQueryReflector implements QueryReflector, RecordingReflector
     private const MYSQL_SYNTAX_ERROR_CODE = 1064;
     private const MYSQL_UNKNOWN_COLUMN_IN_FIELDLIST = 1054;
     public const MYSQL_UNKNOWN_TABLE = 1146;
-    public const MYSQL_INCORRECT_TABLE = 1103;
+    private const MYSQL_INCORRECT_TABLE = 1103;
 
-    public const MYSQL_HOST_NOT_FOUND = 2002;
-
+    /**
+     * @api
+     */
     public const NAME = 'mysqli';
 
     private const MYSQL_ERROR_CODES = [
@@ -55,8 +56,7 @@ final class MysqliQueryReflector implements QueryReflector, RecordingReflector
         $this->db->set_charset('utf8');
         // enable exception throwing on php <8.1
         mysqli_report(\MYSQLI_REPORT_ERROR | \MYSQLI_REPORT_STRICT);
-
-        $this->typeMapper = new MysqliTypeMapper();
+        $this->db->autocommit(false);
     }
 
     public function validateQueryString(string $queryString): ?Error
@@ -122,6 +122,11 @@ final class MysqliQueryReflector implements QueryReflector, RecordingReflector
         return $arrayBuilder->getArray();
     }
 
+    public function setupDbaApi(?DbaApi $dbaApi): void
+    {
+        $this->typeMapper = new MysqliTypeMapper($dbaApi);
+    }
+
     /**
      * @return mysqli_sql_exception|list<object>|null
      */
@@ -141,7 +146,11 @@ final class MysqliQueryReflector implements QueryReflector, RecordingReflector
             return $this->cache[$queryString] = null;
         }
 
-        $this->db->begin_transaction(\MYSQLI_TRANS_START_READ_ONLY);
+        if (QueryReflection::getRuntimeConfiguration()->isAnalyzingWriteQueries()) {
+            $this->db->begin_transaction();
+        } else {
+            $this->db->begin_transaction(\MYSQLI_TRANS_START_READ_ONLY);
+        }
 
         try {
             $result = $this->db->query($simulatedQuery);

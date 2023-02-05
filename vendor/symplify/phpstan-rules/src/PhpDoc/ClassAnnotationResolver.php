@@ -14,10 +14,12 @@ use Symplify\PHPStanRules\PhpDocParser\SimplePhpDocParser;
 final class ClassAnnotationResolver
 {
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\PhpDocParser\SimplePhpDocParser
      */
     private $simplePhpDocParser;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\PhpDoc\PhpDocNodeTraverser\ClassReferencePhpDocNodeTraverser
      */
     private $classReferencePhpDocNodeTraverser;

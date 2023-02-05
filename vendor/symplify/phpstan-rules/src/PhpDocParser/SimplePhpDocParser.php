@@ -14,10 +14,12 @@ use PHPStan\PhpDocParser\Parser\TokenIterator;
 final class SimplePhpDocParser
 {
     /**
+     * @readonly
      * @var \PHPStan\PhpDocParser\Parser\PhpDocParser
      */
     private $phpDocParser;
     /**
+     * @readonly
      * @var \PHPStan\PhpDocParser\Lexer\Lexer
      */
     private $lexer;
@@ -37,7 +39,7 @@ final class SimplePhpDocParser
         return $this->parseDocBlock($docComment->getText());
     }
 
-    public function parseDocBlock(string $docBlock): PhpDocNode
+    private function parseDocBlock(string $docBlock): PhpDocNode
     {
         $tokens = $this->lexer->tokenize($docBlock);
         $tokenIterator = new TokenIterator($tokens);

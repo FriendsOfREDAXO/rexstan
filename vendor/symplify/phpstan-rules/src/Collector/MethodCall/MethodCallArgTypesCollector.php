@@ -18,10 +18,12 @@ use Symplify\PHPStanRules\ValueObject\MethodCallReference;
 final class MethodCallArgTypesCollector implements Collector
 {
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Matcher\ClassMethodCallReferenceResolver
      */
     private $classMethodCallReferenceResolver;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Printer\CollectorMetadataPrinter
      */
     private $collectorMetadataPrinter;

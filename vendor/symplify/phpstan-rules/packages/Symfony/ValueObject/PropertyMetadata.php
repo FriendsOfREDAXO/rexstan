@@ -12,14 +12,17 @@ use Symplify\PHPStanRules\Exception\ShouldNotHappenException;
 final class PropertyMetadata
 {
     /**
+     * @readonly
      * @var \PHPStan\Reflection\Php\PhpPropertyReflection
      */
     private $phpPropertyReflection;
     /**
+     * @readonly
      * @var \PHPStan\BetterReflection\Reflection\Adapter\ReflectionProperty
      */
     private $nativeReflectionProperty;
     /**
+     * @readonly
      * @var int
      */
     private $propertyLine;

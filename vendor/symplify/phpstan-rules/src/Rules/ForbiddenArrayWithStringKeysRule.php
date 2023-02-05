@@ -38,10 +38,12 @@ final class ForbiddenArrayWithStringKeysRule implements Rule
      */
     private const TEST_FILE_REGEX = '#(Test|TestCase)\.php$#';
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\ParentGuard\ParentElementResolver\ParentMethodReturnTypeResolver
      */
     private $parentMethodReturnTypeResolver;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\ArrayAnalyzer
      */
     private $arrayAnalyzer;

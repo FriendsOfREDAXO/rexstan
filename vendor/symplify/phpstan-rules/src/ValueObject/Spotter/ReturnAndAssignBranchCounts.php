@@ -7,10 +7,12 @@ namespace Symplify\PHPStanRules\ValueObject\Spotter;
 final class ReturnAndAssignBranchCounts
 {
     /**
+     * @readonly
      * @var int
      */
     private $returnTypeCount;
     /**
+     * @readonly
      * @var int
      */
     private $assignTypeCount;

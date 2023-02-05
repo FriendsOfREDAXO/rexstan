@@ -24,7 +24,7 @@ final class RexClassDynamicReturnTypeExtension implements DynamicStaticMethodRet
 
     public function isStaticMethodSupported(MethodReflection $methodReflection): bool
     {
-        return in_array(strtolower($methodReflection->getName()), ['gettable', 'gettableprefix', 'escapeidentifier'], true);
+        return in_array(strtolower($methodReflection->getName()), ['gettable', 'escapeidentifier'], true);
     }
 
     public function getTypeFromStaticMethodCall(MethodReflection $methodReflection, StaticCall $methodCall, Scope $scope): ?Type

@@ -12,6 +12,7 @@ use Symplify\PHPStanRules\PhpDocParser\PhpDocNodeTraverser;
 final class ClassReferencePhpDocNodeTraverser
 {
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\PhpDoc\ClassReferencePhpDocNodeVisitor
      */
     private $classReferencePhpDocNodeVisitor;

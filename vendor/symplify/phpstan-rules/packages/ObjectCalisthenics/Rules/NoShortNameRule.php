@@ -31,11 +31,13 @@ final class NoShortNameRule extends AbstractSymplifyRule
      */
     public const ERROR_MESSAGE = 'Do not name "%s", shorter than %d chars';
     /**
+     * @readonly
      * @var int
      */
     private $minNameLength;
     /**
      * @var string[]
+     * @readonly
      */
     private $allowedShortNames = ['i', 'j', 'y', 'z'];
     /**
