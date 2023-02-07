@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a2b4e04012a6ce42106876eb0e0d0816",
+    "content-hash": "24d6324babe37cc198d9cf886fa5de9a",
     "packages": [
         {
             "name": "composer/semver",
@@ -622,16 +622,16 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v2.11.5",
+            "version": "v2.11.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "cc97bfb42eaf100cc474674c5170695b439cd474"
+                "reference": "c8063f6c8a747180b2d3c48d2e1494a2a8188df1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/cc97bfb42eaf100cc474674c5170695b439cd474",
-                "reference": "cc97bfb42eaf100cc474674c5170695b439cd474",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/c8063f6c8a747180b2d3c48d2e1494a2a8188df1",
+                "reference": "c8063f6c8a747180b2d3c48d2e1494a2a8188df1",
                 "shasum": ""
             },
             "require": {
@@ -676,9 +676,9 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.11.5"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.11.6"
             },
-            "time": "2023-01-23T18:26:35+00:00"
+            "time": "2023-02-06T16:25:46+00:00"
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
