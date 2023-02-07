@@ -6,7 +6,7 @@ supportpage: https://github.com/FriendsOfREDAXO/rexstan
 page:
     title: translate:name
     perm: admin
-    icon: rex-icon fa-user-secret
+    icon: rexstan-navigation-icon
     popup: true
     linkAttr: { target: _rexstan }
     subpages:
