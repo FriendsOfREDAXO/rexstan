@@ -305,17 +305,17 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.15.3",
-            "version_normalized": "1.15.3.0",
+            "version": "1.16.1",
+            "version_normalized": "1.16.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "61800f71a5526081d1b5633766aa88341f1ade76"
+                "reference": "e27e92d939e2e3636f0a1f0afaba59692c0bf571"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/61800f71a5526081d1b5633766aa88341f1ade76",
-                "reference": "61800f71a5526081d1b5633766aa88341f1ade76",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/e27e92d939e2e3636f0a1f0afaba59692c0bf571",
+                "reference": "e27e92d939e2e3636f0a1f0afaba59692c0bf571",
                 "shasum": ""
             },
             "require": {
@@ -330,7 +330,7 @@
                 "phpunit/phpunit": "^9.5",
                 "symfony/process": "^5.2"
             },
-            "time": "2022-12-20T20:56:55+00:00",
+            "time": "2023-02-07T18:11:17+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -347,23 +347,23 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.15.3"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.16.1"
             },
             "install-path": "../phpstan/phpdoc-parser"
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.9.14",
-            "version_normalized": "1.9.14.0",
+            "version": "1.9.17",
+            "version_normalized": "1.9.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "e5fcc96289cf737304286a9b505fbed091f02e58"
+                "reference": "204e459e7822f2c586463029f5ecec31bb45a1f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e5fcc96289cf737304286a9b505fbed091f02e58",
-                "reference": "e5fcc96289cf737304286a9b505fbed091f02e58",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/204e459e7822f2c586463029f5ecec31bb45a1f2",
+                "reference": "204e459e7822f2c586463029f5ecec31bb45a1f2",
                 "shasum": ""
             },
             "require": {
@@ -372,7 +372,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2023-01-19T10:47:09+00:00",
+            "time": "2023-02-08T12:25:00+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -395,7 +395,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.9.14"
+                "source": "https://github.com/phpstan/phpstan/tree/1.9.17"
             },
             "funding": [
                 {
@@ -466,17 +466,17 @@
         },
         {
             "name": "phpstan/phpstan-phpunit",
-            "version": "1.3.3",
-            "version_normalized": "1.3.3.0",
+            "version": "1.3.4",
+            "version_normalized": "1.3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-phpunit.git",
-                "reference": "54a24bd23e9e80ee918cdc24f909d376c2e273f7"
+                "reference": "d77af96c1aaec28f7c0293677132eaaad079e01b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/54a24bd23e9e80ee918cdc24f909d376c2e273f7",
-                "reference": "54a24bd23e9e80ee918cdc24f909d376c2e273f7",
+                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/d77af96c1aaec28f7c0293677132eaaad079e01b",
+                "reference": "d77af96c1aaec28f7c0293677132eaaad079e01b",
                 "shasum": ""
             },
             "require": {
@@ -492,7 +492,7 @@
                 "phpstan/phpstan-strict-rules": "^1.0",
                 "phpunit/phpunit": "^9.5"
             },
-            "time": "2022-12-21T15:25:00+00:00",
+            "time": "2023-02-09T08:05:29+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -515,7 +515,7 @@
             "description": "PHPUnit extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-phpunit/issues",
-                "source": "https://github.com/phpstan/phpstan-phpunit/tree/1.3.3"
+                "source": "https://github.com/phpstan/phpstan-phpunit/tree/1.3.4"
             },
             "install-path": "../phpstan/phpstan-phpunit"
         },
@@ -572,23 +572,23 @@
         },
         {
             "name": "phpstan/phpstan-symfony",
-            "version": "1.2.20",
-            "version_normalized": "1.2.20.0",
+            "version": "1.2.23",
+            "version_normalized": "1.2.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-symfony.git",
-                "reference": "d89a521e7e31822409bf37f70691f7a12a6e7d76"
+                "reference": "8a8d0538ca943b20beda7e9799e14fb3683262d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/d89a521e7e31822409bf37f70691f7a12a6e7d76",
-                "reference": "d89a521e7e31822409bf37f70691f7a12a6e7d76",
+                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/8a8d0538ca943b20beda7e9799e14fb3683262d4",
+                "reference": "8a8d0538ca943b20beda7e9799e14fb3683262d4",
                 "shasum": ""
             },
             "require": {
                 "ext-simplexml": "*",
                 "php": "^7.2 || ^8.0",
-                "phpstan/phpstan": "^1.9.1"
+                "phpstan/phpstan": "^1.9.4"
             },
             "conflict": {
                 "symfony/framework-bundle": "<3.0"
@@ -610,7 +610,7 @@
                 "symfony/polyfill-php80": "^1.24",
                 "symfony/serializer": "^5.4"
             },
-            "time": "2023-01-15T12:28:31+00:00",
+            "time": "2023-02-06T10:42:02+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -640,23 +640,23 @@
             "description": "Symfony Framework extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-symfony/issues",
-                "source": "https://github.com/phpstan/phpstan-symfony/tree/1.2.20"
+                "source": "https://github.com/phpstan/phpstan-symfony/tree/1.2.23"
             },
             "install-path": "../phpstan/phpstan-symfony"
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v2.11.5",
-            "version_normalized": "2.11.5.0",
+            "version": "v2.11.6",
+            "version_normalized": "2.11.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "cc97bfb42eaf100cc474674c5170695b439cd474"
+                "reference": "c8063f6c8a747180b2d3c48d2e1494a2a8188df1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/cc97bfb42eaf100cc474674c5170695b439cd474",
-                "reference": "cc97bfb42eaf100cc474674c5170695b439cd474",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/c8063f6c8a747180b2d3c48d2e1494a2a8188df1",
+                "reference": "c8063f6c8a747180b2d3c48d2e1494a2a8188df1",
                 "shasum": ""
             },
             "require": {
@@ -671,7 +671,7 @@
                 "phpunit/phpunit": "^7.0 || ^9.4.2",
                 "spaze/coding-standard": "^1.3"
             },
-            "time": "2023-01-23T18:26:35+00:00",
+            "time": "2023-02-06T16:25:46+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -703,7 +703,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.11.5"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.11.6"
             },
             "install-path": "../spaze/phpstan-disallowed-calls"
         },
@@ -916,17 +916,17 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "11.2.2.72",
-            "version_normalized": "11.2.2.72",
+            "version": "11.2.3.72",
+            "version_normalized": "11.2.3.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "face190bca1fbeacd96f2daccb2aa5975e73051b"
+                "reference": "01f3fa724fcb28e92abd504d8eebb3d669253a36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/face190bca1fbeacd96f2daccb2aa5975e73051b",
-                "reference": "face190bca1fbeacd96f2daccb2aa5975e73051b",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/01f3fa724fcb28e92abd504d8eebb3d669253a36",
+                "reference": "01f3fa724fcb28e92abd504d8eebb3d669253a36",
                 "shasum": ""
             },
             "require": {
@@ -937,7 +937,7 @@
                 "phpstan/phpstan": "^1.9.11",
                 "webmozart/assert": "^1.10"
             },
-            "time": "2023-01-20T11:45:54+00:00",
+            "time": "2023-01-30T16:21:14+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "branch-alias": {
@@ -966,7 +966,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/11.2.2.72"
+                "source": "https://github.com/symplify/phpstan-rules/tree/11.2.3.72"
             },
             "funding": [
                 {
