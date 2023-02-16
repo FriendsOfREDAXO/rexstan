@@ -24,7 +24,7 @@ final class RegexClassConstCollector implements Collector
      * @param InClassNode $node
      * @return array<int, mixed[]>
      */
-    public function processNode(Node $node, Scope $scope): ?array
+    public function processNode(Node $node, Scope $scope): array
     {
         $classLike = $node->getOriginalNode();
 
