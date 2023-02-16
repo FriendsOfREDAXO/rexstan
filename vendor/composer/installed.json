@@ -769,28 +769,31 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.2.56",
-            "version_normalized": "0.2.56.0",
+            "version": "0.2.58",
+            "version_normalized": "0.2.58.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "7d0fb3b98ca4eae8157b787eea5c3bcbefecc867"
+                "reference": "7f5fc7e2feb8615553a05b6a60ba21d4cce793e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/7d0fb3b98ca4eae8157b787eea5c3bcbefecc867",
-                "reference": "7d0fb3b98ca4eae8157b787eea5c3bcbefecc867",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/7f5fc7e2feb8615553a05b6a60ba21d4cce793e1",
+                "reference": "7f5fc7e2feb8615553a05b6a60ba21d4cce793e1",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2.0",
                 "composer/semver": "^3.2",
-                "php": "^7.3 || ^8.0",
+                "php": "^7.2 || ^8.0",
                 "phpstan/phpstan": "^1.5.6"
+            },
+            "conflict": {
+                "sqlftw/sqlftw": "<0.1.6 || >0.1.6"
             },
             "require-dev": {
                 "dibi/dibi": "^4.2",
-                "doctrine/dbal": "^3.2",
+                "doctrine/dbal": "^2.13|^3.0",
                 "ext-mysqli": "*",
                 "ext-pdo": "*",
                 "friendsofphp/php-cs-fixer": "3.4.0",
@@ -799,11 +802,11 @@
                 "phpstan/phpstan-php-parser": "^1.1",
                 "phpstan/phpstan-phpunit": "^1.0",
                 "phpstan/phpstan-strict-rules": "^1.1",
-                "phpunit/phpunit": "^9",
+                "phpunit/phpunit": "^8.5|^9.5",
                 "tomasvotruba/unused-public": "^0.0.34",
                 "vlucas/phpdotenv": "^5.4"
             },
-            "time": "2023-01-08T09:26:01+00:00",
+            "time": "2023-02-16T21:20:49+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -822,9 +825,17 @@
             "license": [
                 "MIT"
             ],
+            "keywords": [
+                "Database Access Layer",
+                "PHPStan",
+                "code quality",
+                "dev",
+                "phpstan-extension",
+                "static analysis"
+            ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.56"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.58"
             },
             "install-path": "../staabm/phpstan-dba"
         },
