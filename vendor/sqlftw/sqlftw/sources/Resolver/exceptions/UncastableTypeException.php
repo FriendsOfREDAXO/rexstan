@@ -1,0 +1,30 @@
+<?php declare(strict_types = 1);
+/**
+ * This file is part of the SqlFtw library (https://github.com/sqlftw)
+ *
+ * Copyright (c) 2017 Vlasta Neubauer (@paranoiq)
+ *
+ * For the full copyright and license information read the file 'license.md', distributed with this source code
+ */
+
+namespace SqlFtw\Resolver;
+
+use Throwable;
+use function get_class;
+use function gettype;
+use function is_object;
+
+class UncastableTypeException extends ResolveException
+{
+
+    /**
+     * @param mixed $value
+     */
+    public function __construct(string $castType, $value, ?Throwable $previous = null)
+    {
+        $actualType = is_object($value) ? get_class($value) : gettype($value);
+
+        parent::__construct("Cannot cast value of type '{$actualType}' to {$castType}.", $previous);
+    }
+
+}

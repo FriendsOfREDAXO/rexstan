@@ -38,6 +38,7 @@ $config = new RuntimeConfiguration();
 // $config->debugMode(true);
 // $config->stringifyTypes(true);
 // $config->analyzeQueryPlans(true);
+$config->utilizeSqlAst(true);
 
 QueryReflection::setupReflector(
     new PdoMysqlQueryReflector($pdo),

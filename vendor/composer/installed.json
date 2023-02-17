@@ -85,6 +85,155 @@
             "install-path": "./semver"
         },
         {
+            "name": "dogma/dogma",
+            "version": "v0.2.17",
+            "version_normalized": "0.2.17.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paranoiq/dogma.git",
+                "reference": "0f8f60d3dce9deba721467764f8cfba06c92910d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paranoiq/dogma/zipball/0f8f60d3dce9deba721467764f8cfba06c92910d",
+                "reference": "0f8f60d3dce9deba721467764f8cfba06c92910d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-calendar": "*",
+                "nette/http": "~2.4|~3.0",
+                "nette/utils": "~2.4|~3.0",
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "dogma/dogma-dev": "0.1.29",
+                "phpstan/phpstan": "1.8.2"
+            },
+            "suggest": {
+                "ext-dom": "for Dom (basic functionality)",
+                "ext-fileinfo": "for Io (content type and encoding detection)",
+                "ext-iconv": "for Str (converting encoding when ext-mbstring is not available)",
+                "ext-intl": "for Str and Language (advanced unicode manipulation)",
+                "ext-mbstring": "for Str (basic functionality)",
+                "ext-recode": "for Str (converting encoding when ext-mbstring and ext-iconv are not available)",
+                "symfony/polyfill-intl-icu": "for Str and Language",
+                "symfony/polyfill-intl-normalizer": "for Str",
+                "symfony/polyfill-mbstring": "for Str"
+            },
+            "time": "2022-09-29T16:54:43+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.2-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "src",
+                    "tests"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Vlasta Neubauer",
+                    "homepage": "https://paranoiq.cz"
+                }
+            ],
+            "description": "The incomplete standard library",
+            "homepage": "http://github.com/paranoiq/dogma",
+            "support": {
+                "issues": "https://github.com/paranoiq/dogma/issues",
+                "source": "https://github.com/paranoiq/dogma/tree/v0.2.17"
+            },
+            "install-path": "../dogma/dogma"
+        },
+        {
+            "name": "nette/http",
+            "version": "v3.2.1",
+            "version_normalized": "3.2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/http.git",
+                "reference": "0e16cd4f911665679b96bf569318a0dc7f087eda"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/http/zipball/0e16cd4f911665679b96bf569318a0dc7f087eda",
+                "reference": "0e16cd4f911665679b96bf569318a0dc7f087eda",
+                "shasum": ""
+            },
+            "require": {
+                "nette/utils": "^3.2.1 || ~4.0.0",
+                "php": ">=7.2 <8.3"
+            },
+            "conflict": {
+                "nette/di": "<3.0.3",
+                "nette/schema": "<1.2"
+            },
+            "require-dev": {
+                "nette/di": "^3.0",
+                "nette/security": "^3.0",
+                "nette/tester": "^2.4",
+                "phpstan/phpstan": "^1.0",
+                "tracy/tracy": "^2.8"
+            },
+            "suggest": {
+                "ext-fileinfo": "to detect type of uploaded files"
+            },
+            "time": "2022-12-05T00:03:40+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0-only",
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "https://nette.org/contributors"
+                }
+            ],
+            "description": "🌐 Nette Http: abstraction for HTTP request, response and session. Provides careful data sanitization and utility for URL and cookies manipulation.",
+            "homepage": "https://nette.org",
+            "keywords": [
+                "cookies",
+                "http",
+                "nette",
+                "proxy",
+                "request",
+                "response",
+                "security",
+                "session",
+                "url"
+            ],
+            "support": {
+                "issues": "https://github.com/nette/http/issues",
+                "source": "https://github.com/nette/http/tree/v3.2.1"
+            },
+            "install-path": "../nette/http"
+        },
+        {
             "name": "nette/neon",
             "version": "v3.3.3",
             "version_normalized": "3.3.3.0",
@@ -706,6 +855,60 @@
                 "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.11.6"
             },
             "install-path": "../spaze/phpstan-disallowed-calls"
+        },
+        {
+            "name": "sqlftw/sqlftw",
+            "version": "v0.1.6",
+            "version_normalized": "0.1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SQLFTW/sqlftw.git",
+                "reference": "068ac9f5854b5ebf7c921c26d07e808a00dca5cd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SQLFTW/sqlftw/zipball/068ac9f5854b5ebf7c921c26d07e808a00dca5cd",
+                "reference": "068ac9f5854b5ebf7c921c26d07e808a00dca5cd",
+                "shasum": ""
+            },
+            "require": {
+                "dogma/dogma": "0.2.17",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "amphp/parallel-functions": "1.1.0",
+                "dogma/dogma-dev": "0.1.29",
+                "phpstan/phpstan": "1.9.15",
+                "phpstan/phpstan-strict-rules": "^1.0",
+                "rector/rector": "0.14.8"
+            },
+            "time": "2023-02-10T10:27:05+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "sources",
+                    "tests",
+                    "build"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Vlasta Neubauer",
+                    "homepage": "https://paranoiq.cz"
+                }
+            ],
+            "description": "Complete MySQL SQL dialect lexer, parser, AST and SQL serialisation",
+            "homepage": "https://github.com/sqlftw/sqlftw",
+            "support": {
+                "issues": "https://github.com/SQLFTW/sqlftw/issues",
+                "source": "https://github.com/SQLFTW/sqlftw/tree/v0.1.6"
+            },
+            "install-path": "../sqlftw/sqlftw"
         },
         {
             "name": "staabm/phpstan-baseline-analysis",

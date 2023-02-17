@@ -1,0 +1,23 @@
+
+directories:
+	- build
+	- sources
+	- tests
+	- //
+
+dictionariesByFileName:
+    *Collation.php: skip
+
+dictionariesByFileExtension:
+    neon: en custom
+    php: en php html iso custom mysql57
+
+dictionaryDirectories:
+    - build/spell-checker
+    - vendor/spell-checker/spell-checker
+    - vendor/spell-checker/dictionary-en
+
+checkLocalIgnores: true
+
+dictionaryFilesToCheck:
+    - custom.dic
