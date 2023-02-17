@@ -13,7 +13,7 @@ final class CoalesceReturnTypeExtension implements QueryFunctionReturnTypeExtens
 {
     public function isFunctionSupported(FunctionCall $expression): bool
     {
-        return \in_array($expression->getFunction()->getName(), [BuiltInFunction::COALESCE, BuiltInFunction::IFNULL, BuiltInFunction::NULLIF], true);
+        return \in_array($expression->getFunction()->getName(), [BuiltInFunction::COALESCE], true);
     }
 
     public function getReturnType(FunctionCall $expression, QueryScope $scope): Type
@@ -28,6 +28,7 @@ final class CoalesceReturnTypeExtension implements QueryFunctionReturnTypeExtens
             $results[] = $argType;
             if (!TypeCombinator::containsNull($argType)) {
                 $containsNonNullable = true;
+                break;
             }
         }
 

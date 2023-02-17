@@ -12,7 +12,9 @@ use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\MixedType;
 use PHPStan\Type\NullType;
 use PHPStan\Type\Type;
+use PHPStan\Type\TypeCombinator;
 use SqlFtw\Sql\Expression\BoolValue;
+use SqlFtw\Sql\Expression\CaseExpression;
 use SqlFtw\Sql\Expression\ExpressionNode;
 use SqlFtw\Sql\Expression\FunctionCall;
 use SqlFtw\Sql\Expression\Identifier;
@@ -51,10 +53,13 @@ final class QueryScope
         $this->extensions = [
             new PositiveIntReturnTypeExtension(),
             new CoalesceReturnTypeExtension(),
+            new IfNullReturnTypeExtension(),
+            new IfReturnTypeExtension(),
             new ConcatReturnTypeExtension(),
             new InstrReturnTypeExtension(),
             new StrCaseReturnTypeExtension(),
             new AvgReturnTypeExtension(),
+            new SumReturnTypeExtension(),
             new IsNullReturnTypeExtension(),
             new AbsReturnTypeExtension(),
             new RoundReturnTypeExtension(),
@@ -108,6 +113,15 @@ final class QueryScope
             }
 
             throw new ShouldNotHappenException('Unable to resolve column '.$expression->getName());
+        }
+
+        if ($expression instanceof CaseExpression) {
+            $resultTypes = [];
+            foreach ($expression->getResults() as $result) {
+                $resultTypes[] = $this->getType($result);
+            }
+
+            return TypeCombinator::union(...$resultTypes);
         }
 
         if ($expression instanceof FunctionCall) {
