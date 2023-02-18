@@ -36,7 +36,7 @@ final class RexSqlSetQueryDynamicReturnTypeExtension implements DynamicMethodRet
         try {
             return $this->inferStatementType($methodCall, $scope);
         } catch (UnresolvableQueryException $e) {
-            return new SpecifiedTypes();
+            return null;
         }
 
         return null;
