@@ -39,6 +39,11 @@ services:
             - phpstan.typeSpecifier.methodTypeSpecifyingExtension
 
     -
+        class: rexstan\RexSqlSetQueryDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
         class: rexstan\RexSqlGetValueDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
