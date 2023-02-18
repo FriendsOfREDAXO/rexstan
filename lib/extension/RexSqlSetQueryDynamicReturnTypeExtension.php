@@ -38,8 +38,6 @@ final class RexSqlSetQueryDynamicReturnTypeExtension implements DynamicMethodRet
         } catch (UnresolvableQueryException $e) {
             return null;
         }
-
-        return null;
     }
 
     /**
