@@ -95,3 +95,16 @@ function escapedWildcard(string $s): void
         ');
     assertType('string', $sql->getValue('rex_article.name'));
 }
+
+// see https://github.com/FriendsOfREDAXO/rexstan/issues/323
+function chainedQuery(int $id): void
+{
+    $sql = rex_sql::factory()->setQuery('
+            SELECT  name
+            FROM    ' . rex::getTable('article') . '
+            WHERE   id = ?
+            LIMIT   1
+        ', [$id]);
+
+    assertType('string', $sql->getValue('name'));
+}
