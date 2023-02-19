@@ -3,8 +3,13 @@
 /** @var rex_addon $this */
 
 use rexstan\RexStan;
+use rexstan\RexStanSettings;
 use rexstan\RexStanTip;
 use rexstan\RexStanUserConfig;
+
+if (rex_get('regenerate-baseline', 'bool')) {
+    RexStan::generateAnalysisBaseline();
+}
 
 $phpstanResult = RexStan::runFromWeb();
 $settingsUrl = rex_url::backendPage('rexstan/settings');
@@ -116,7 +121,12 @@ if (
         return;
     }
 
-    echo rex_view::warning('Level-<strong>'.RexStanUserConfig::getLevel().'</strong>-Analyse: <strong>'. $totalErrors .'</strong> Probleme gefunden in <strong>'. count($phpstanResult['files']) .'</strong> Dateien');
+    $baselineButton = '';
+    if (RexStanUserConfig::isBaselineEnabled()) {
+        $baselineButton .= ' <a href="'. rex_url::backendPage('rexstan/analysis', ['regenerate-baseline' => 1]) .'" class="btn btn-danger">Alle Probleme ignorieren</a>';
+    }
+
+    echo rex_view::warning('Level-<strong>'.RexStanUserConfig::getLevel().'</strong>-Analyse: <strong>'. $totalErrors .'</strong> Probleme gefunden in <strong>'. count($phpstanResult['files']) .'</strong> Dateien.'. $baselineButton);
 
     $basePath = rex_path::src('addons/');
     $section = new rex_fragment();

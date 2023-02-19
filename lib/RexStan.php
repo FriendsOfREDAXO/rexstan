@@ -79,9 +79,26 @@ final class RexStan
     }
 
     /**
+     * @return void
+     */
+    public static function generateAnalysisBaseline() {
+        $phpstanBinary = self::phpstanBinPath();
+        $configPath = self::phpstanConfigPath(__DIR__.'/../phpstan.neon');
+        $analysisBaselinePath = RexStanSettings::getAnalysisBaselinePath();
+
+        $addon = rex_addon::get('rexstan');
+        $dataDir = $addon->getDataPath();
+
+        self::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline '. $analysisBaselinePath .' --allow-empty-baseline', $stderrOutput, $exitCode);
+        if (0 !== $exitCode) {
+            throw new Exception('Unable to generate analysis baseline:'. $stderrOutput);
+        }
+    }
+
+    /**
      * @return array<ResultPrinter::KEY_*, int>|null
      */
-    public static function analyzeBaseline()
+    public static function analyzeSummaryBaseline()
     {
         $phpstanBinary = self::phpstanBinPath();
         $analyzeBinary = self::phpstanBaselineAnalyzeBinPath();

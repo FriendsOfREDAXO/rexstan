@@ -44,6 +44,20 @@ final class RexStanUserConfig
         rex_file::put(self::getUserConfigPath(), $prefix . rex_string::yamlEncode($file, 3));
     }
 
+    public static function isBaselineEnabled(): bool
+    {
+        $includes = self::getConfig()['includes'];
+        $baselineFile = RexStanSettings::getAnalysisBaselinePath();
+
+        foreach($includes as $include) {
+            if ($include === $baselineFile) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static function getLevel(): int
     {
         return (int) (self::getConfig()['parameters']['level']);

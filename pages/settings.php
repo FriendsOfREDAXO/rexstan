@@ -20,6 +20,7 @@ if (rex_post($form_name . '_save')) {
     $addonPaths = $postData['addons'] ?? [];
     $extensions = $postData['extensions'] ?? [];
     $phpversion = (int) $postData['phpversion'];
+    $analysisBaseline = $postData['baseline'] ?? null;
 
     $paths = [];
     foreach ($addonPaths as $addonPath) {
@@ -29,6 +30,10 @@ if (rex_post($form_name . '_save')) {
     $includes = [];
     foreach ($extensions as $extensionPath) {
         $includes[] = $extensionPath;
+    }
+
+    if ($analysisBaseline !== null) {
+        $includes[] = RexStanSettings::getAnalysisBaselinePath();
     }
 
     RexStanUserConfig::save($level, $paths, $includes, $phpversion);

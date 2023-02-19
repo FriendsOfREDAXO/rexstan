@@ -3,7 +3,7 @@
 use rexstan\RexStan;
 use staabm\PHPStanBaselineAnalysis\ResultPrinter;
 
-$result = RexStan::analyzeBaseline();
+$result = RexStan::analyzeSummaryBaseline();
 $settingsUrl = rex_url::backendPage('rexstan/settings');
 
 if (null === $result) {
