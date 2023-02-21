@@ -66,6 +66,10 @@ if (rex_version::compare(rex::getVersion(), '5.15.0-dev', '>=')) {
         '    - ' . $userConfigPath. PHP_EOL;
 }
 
+rex_dir::create($addon->getCachePath());
+$configFileContent .= PHP_EOL .'parameters:'. PHP_EOL .
+'    tmpDir: '.$addon->getCachePath() . PHP_EOL;
+
 $configPath = __DIR__.'/phpstan.neon';
 if (false === rex_file::put($configPath, $configFileContent)) {
     $addon->setProperty('installmsg', sprintf('Unable to write rexstan config "%s"', $configPath));
