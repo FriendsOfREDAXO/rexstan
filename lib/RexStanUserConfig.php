@@ -14,7 +14,7 @@ final class RexStanUserConfig
     /**
      * Cache key to invalidate the summary signature in case of default-config.neon changes.
      */
-    public const DEFAULT_SETTINGS_VERSION = 'v2-type-coverage-only-in-summary';
+    private const DEFAULT_SETTINGS_VERSION = 'v2-type-coverage-only-in-summary';
 
     /**
      * @param list<string> $paths
