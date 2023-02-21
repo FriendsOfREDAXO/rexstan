@@ -2,6 +2,7 @@
 
 // phpcs:disable Squiz.PHP.Heredoc.NotAllowed
 // phpcs:disable SlevomatCodingStandard.PHP.RequireNowdoc.RequiredNowdoc
+// spell-check-ignore: lng olu
 
 namespace SqlFtw\Parser;
 

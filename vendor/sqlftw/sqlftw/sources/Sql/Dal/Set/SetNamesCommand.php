@@ -10,6 +10,7 @@
 namespace SqlFtw\Sql\Dal\Set;
 
 use SqlFtw\Formatter\Formatter;
+use SqlFtw\Sql\Assignment;
 use SqlFtw\Sql\Charset;
 use SqlFtw\Sql\Collation;
 use SqlFtw\Sql\Expression\DefaultLiteral;
@@ -24,12 +25,12 @@ class SetNamesCommand extends Statement implements SetCommand
 
     private ?Collation $collation;
 
-    /** @var list<SetAssignment> */
+    /** @var list<Assignment> */
     private array $assignments;
 
     /**
      * @param Charset|DefaultLiteral $charset
-     * @param list<SetAssignment> $assignments
+     * @param list<Assignment> $assignments
      */
     public function __construct(SqlSerializable $charset, ?Collation $collation, array $assignments = [])
     {
@@ -52,7 +53,7 @@ class SetNamesCommand extends Statement implements SetCommand
     }
 
     /**
-     * @return list<SetAssignment>
+     * @return list<Assignment>
      */
     public function getAssignments(): array
     {

@@ -10,16 +10,17 @@
 namespace SqlFtw\Sql\Dal\Set;
 
 use SqlFtw\Formatter\Formatter;
+use SqlFtw\Sql\Assignment;
 use SqlFtw\Sql\Statement;
 
 class SetVariablesCommand extends Statement implements SetCommand
 {
 
-    /** @var non-empty-list<SetAssignment> */
+    /** @var non-empty-list<Assignment> */
     private array $assignments;
 
     /**
-     * @param non-empty-list<SetAssignment> $assignments
+     * @param non-empty-list<Assignment> $assignments
      */
     public function __construct(array $assignments)
     {
@@ -27,7 +28,7 @@ class SetVariablesCommand extends Statement implements SetCommand
     }
 
     /**
-     * @return non-empty-list<SetAssignment>
+     * @return non-empty-list<Assignment>
      */
     public function getAssignments(): array
     {

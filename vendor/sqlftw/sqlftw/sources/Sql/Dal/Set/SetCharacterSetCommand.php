@@ -10,6 +10,7 @@
 namespace SqlFtw\Sql\Dal\Set;
 
 use SqlFtw\Formatter\Formatter;
+use SqlFtw\Sql\Assignment;
 use SqlFtw\Sql\Charset;
 use SqlFtw\Sql\Statement;
 
@@ -18,11 +19,11 @@ class SetCharacterSetCommand extends Statement implements SetCommand
 
     private ?Charset $charset;
 
-    /** @var list<SetAssignment> */
+    /** @var list<Assignment> */
     private array $assignments;
 
     /**
-     * @param list<SetAssignment> $assignments
+     * @param list<Assignment> $assignments
      */
     public function __construct(?Charset $charset, array $assignments = [])
     {
@@ -36,7 +37,7 @@ class SetCharacterSetCommand extends Statement implements SetCommand
     }
 
     /**
-     * @return list<SetAssignment>
+     * @return list<Assignment>
      */
     public function getAssignments(): array
     {

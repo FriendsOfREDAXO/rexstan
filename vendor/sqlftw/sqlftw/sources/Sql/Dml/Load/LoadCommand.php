@@ -9,15 +9,13 @@
 
 namespace SqlFtw\Sql\Dml\Load;
 
-use Dogma\Arr;
 use SqlFtw\Formatter\Formatter;
+use SqlFtw\Sql\Assignment;
 use SqlFtw\Sql\Charset;
 use SqlFtw\Sql\Dml\DmlCommand;
 use SqlFtw\Sql\Dml\DuplicateOption;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
-use SqlFtw\Sql\Expression\RootNode;
 use SqlFtw\Sql\Statement;
-use function implode;
 
 abstract class LoadCommand extends Statement implements DmlCommand
 {
@@ -31,8 +29,8 @@ abstract class LoadCommand extends Statement implements DmlCommand
     /** @var non-empty-list<string>|null */
     private ?array $fields;
 
-    /** @var non-empty-array<string, RootNode>|null ($column => $expression) */
-    private ?array $setters;
+    /** @var non-empty-list<Assignment>|null */
+    private ?array $assignments;
 
     private ?int $ignoreRows;
 
@@ -47,7 +45,7 @@ abstract class LoadCommand extends Statement implements DmlCommand
 
     /**
      * @param non-empty-list<string>|null $fields
-     * @param non-empty-array<string, RootNode>|null $setters ($column => $expression)
+     * @param non-empty-list<Assignment>|null $assignments
      * @param non-empty-list<string>|null $partitions
      */
     public function __construct(
@@ -55,7 +53,7 @@ abstract class LoadCommand extends Statement implements DmlCommand
         ObjectIdentifier $table,
         ?Charset $charset = null,
         ?array $fields = null,
-        ?array $setters = null,
+        ?array $assignments = null,
         ?int $ignoreRows = null,
         ?LoadPriority $priority = null,
         bool $local = false,
@@ -66,7 +64,7 @@ abstract class LoadCommand extends Statement implements DmlCommand
         $this->table = $table;
         $this->charset = $charset;
         $this->fields = $fields;
-        $this->setters = $setters;
+        $this->assignments = $assignments;
         $this->ignoreRows = $ignoreRows;
         $this->priority = $priority;
         $this->local = $local;
@@ -102,11 +100,11 @@ abstract class LoadCommand extends Statement implements DmlCommand
     }
 
     /**
-     * @return non-empty-array<string, RootNode>|null ($column => $expression)
+     * @return non-empty-list<Assignment>|null
      */
-    public function getSetters(): ?array
+    public function getAssignments(): ?array
     {
-        return $this->setters;
+        return $this->assignments;
     }
 
     public function getIgnoreRows(): ?int
@@ -167,10 +165,8 @@ abstract class LoadCommand extends Statement implements DmlCommand
         if ($this->fields !== null) {
             $result .= ' (' . $formatter->formatNamesList($this->fields) . ')';
         }
-        if ($this->setters !== null) {
-            $result .= ' SET ' . implode(', ', Arr::mapPairs($this->setters, static function (string $field, RootNode $expression) use ($formatter): string {
-                return $formatter->formatName($field) . ' = ' . $expression->serialize($formatter);
-            }));
+        if ($this->assignments !== null) {
+            $result .= ' SET ' . $formatter->formatSerializablesList($this->assignments);
         }
 
         return $result;

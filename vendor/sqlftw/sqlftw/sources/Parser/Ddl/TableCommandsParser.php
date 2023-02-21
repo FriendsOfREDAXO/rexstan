@@ -417,7 +417,7 @@ class TableCommandsParser
                 case Keyword::CONVERT:
                     // CONVERT TO CHARACTER SET charset_name [COLLATE collation_name]
                     $tokenList->expectKeyword(Keyword::TO);
-                    if (!$tokenList->hasKeyword(Keyword::CHARSET)) {
+                    if (!$tokenList->hasKeyword(Keyword::CHARSET) && !$tokenList->hasKeywords(Keyword::CHAR, Keyword::SET)) {
                         $tokenList->expectKeywords(Keyword::CHARACTER, Keyword::SET);
                     }
                     if ($tokenList->hasKeyword(Keyword::DEFAULT)) {
@@ -893,7 +893,7 @@ class TableCommandsParser
         $engineAttribute = $secondaryEngineAttribute = $storage = null;
         $autoIncrement = false;
         $keywords = [
-            Keyword::AUTO_INCREMENT, Keyword::CHARACTER, Keyword::CHARSET, Keyword::CHECK, Keyword::COLLATE,
+            Keyword::AUTO_INCREMENT, Keyword::CHARACTER, Keyword::CHAR, Keyword::CHARSET, Keyword::CHECK, Keyword::COLLATE,
             Keyword::COLUMN_FORMAT, Keyword::COMMENT, Keyword::CONSTRAINT, Keyword::DEFAULT, Keyword::ENGINE_ATTRIBUTE,
             Keyword::INVISIBLE, Keyword::KEY, Keyword::NOT, Keyword::NULL, Keyword::ON, Keyword::PRIMARY, Keyword::REFERENCES,
             Keyword::SECONDARY_ENGINE_ATTRIBUTE, Keyword::SRID, Keyword::STORAGE, Keyword::UNIQUE, Keyword::VISIBLE,
@@ -1019,6 +1019,7 @@ class TableCommandsParser
                     $checks[] = $this->parseCheck($tokenList);
                     break;
                 case Keyword::CHARACTER:
+                case Keyword::CHAR:
                     $tokenList->expectKeyword(Keyword::SET);
                 case Keyword::CHARSET:
                     $type = $type->addCharset($tokenList->expectCharsetName());
@@ -1071,7 +1072,7 @@ class TableCommandsParser
         $checks = [];
         $null = $index = $comment = $generatedType = $reference = $visible = null;
         $keywords = [
-            Keyword::CHARACTER, Keyword::CHARSET, Keyword::CHECK, Keyword::COLLATE, Keyword::COMMENT,
+            Keyword::CHARACTER, Keyword::CHAR, Keyword::CHARSET, Keyword::CHECK, Keyword::COLLATE, Keyword::COMMENT,
             Keyword::INVISIBLE, Keyword::KEY, Keyword::NOT, Keyword::NULL, Keyword::PRIMARY, Keyword::REFERENCES,
             Keyword::SRID, Keyword::STORED, Keyword::UNIQUE, Keyword::VIRTUAL, Keyword::VISIBLE,
         ];
@@ -1136,6 +1137,7 @@ class TableCommandsParser
                     $checks[] = $this->parseCheck($tokenList);
                     break;
                 case Keyword::CHARACTER:
+                case Keyword::CHAR:
                     $tokenList->expectKeyword(Keyword::SET);
                 case Keyword::CHARSET:
                     $type = $type->addCharset($tokenList->expectCharsetName());
@@ -1350,6 +1352,7 @@ class TableCommandsParser
 
                 return [TableOption::AVG_ROW_LENGTH, $length];
             case Keyword::CHARACTER:
+            case Keyword::CHAR:
                 $tokenList->expectKeyword(Keyword::SET);
                 // fall-through
             case Keyword::CHARSET:
@@ -1358,6 +1361,7 @@ class TableCommandsParser
                 $charset = $tokenList->expectCharsetName();
                 if (isset($options[TableOption::CHARACTER_SET])) {
                     // charset can be specified twice (not represented in model)
+                    // todo: parser warning
                     /** @var Charset $previousCharset */
                     $previousCharset = $options[TableOption::CHARACTER_SET];
                     if (!$previousCharset->equals($charset)) {

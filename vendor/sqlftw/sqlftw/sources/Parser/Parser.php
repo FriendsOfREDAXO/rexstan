@@ -689,8 +689,9 @@ class Parser
                 $second = $tokenList->getKeyword();
                 switch ($second) {
                     case Keyword::CHARACTER:
+                    case Keyword::CHAR:
                     case Keyword::CHARSET:
-                        // SET {CHARACTER SET | CHARSET}
+                        // SET {CHARACTER SET | CHAR SET | CHARSET}
                         return $this->factory->getSetCommandsParser()->parseSetCharacterSet($tokenList->rewind($start));
                     case Keyword::DEFAULT:
                         // SET DEFAULT ROLE

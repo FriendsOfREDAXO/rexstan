@@ -1394,9 +1394,11 @@ class ExpressionParser
                 $collation = $tokenList->getCollationName();
             }
 
-            if ($tokenList->hasKeywords(Keyword::CHARSET)) {
+            if ($tokenList->hasKeyword(Keyword::CHARSET)) {
                 $charset = $tokenList->expectCharsetName();
             } elseif ($tokenList->hasKeywords(Keyword::CHARACTER, Keyword::SET)) {
+                $charset = $tokenList->expectCharsetName();
+            } elseif ($tokenList->hasKeywords(Keyword::CHAR, Keyword::SET)) {
                 $charset = $tokenList->expectCharsetName();
             } elseif ($tokenList->hasKeyword(Keyword::UNICODE)) {
                 $charset = new Charset(Charset::UNICODE);

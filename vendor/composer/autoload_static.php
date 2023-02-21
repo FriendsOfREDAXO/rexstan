@@ -189,10 +189,10 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         ),
         'PHPStan\\' => 
         array (
-            0 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
-            1 => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src',
-            2 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
-            3 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
+            0 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
+            1 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
+            2 => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src',
+            3 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
         ),
         'Composer\\Semver\\' => 
         array (
@@ -756,6 +756,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'SqlFtw\\Session\\Session' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Session/Session.php',
         'SqlFtw\\Session\\SessionUpdater' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Session/SessionUpdater.php',
         'SqlFtw\\SqlFtwException' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/SqlFtwException.php',
+        'SqlFtw\\Sql\\Assignment' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Sql/Assignment.php',
         'SqlFtw\\Sql\\Charset' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Sql/Charset.php',
         'SqlFtw\\Sql\\Collation' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Sql/Collation.php',
         'SqlFtw\\Sql\\Command' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Sql/Command.php',
@@ -811,7 +812,6 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'SqlFtw\\Sql\\Dal\\Restart\\RestartCommand' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Sql/Dal/Restart/RestartCommand.php',
         'SqlFtw\\Sql\\Dal\\Routine\\CreateFunctionSonameCommand' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Sql/Dal/Routines/CreateFunctionSonameCommand.php',
         'SqlFtw\\Sql\\Dal\\Set\\ResetPersistCommand' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Sql/Dal/Set/ResetPersistCommand.php',
-        'SqlFtw\\Sql\\Dal\\Set\\SetAssignment' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Sql/Dal/Set/SetAssignment.php',
         'SqlFtw\\Sql\\Dal\\Set\\SetCharacterSetCommand' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Sql/Dal/Set/SetCharacterSetCommand.php',
         'SqlFtw\\Sql\\Dal\\Set\\SetCommand' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Sql/Dal/Set/SetCommand.php',
         'SqlFtw\\Sql\\Dal\\Set\\SetNamesCommand' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Sql/Dal/Set/SetNamesCommand.php',
@@ -1088,7 +1088,6 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'SqlFtw\\Sql\\Ddl\\View\\ViewAlgorithm' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Sql/Ddl/View/ViewAlgorithm.php',
         'SqlFtw\\Sql\\Ddl\\View\\ViewCheckOption' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Sql/Ddl/View/ViewCheckOption.php',
         'SqlFtw\\Sql\\Ddl\\View\\ViewCommand' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Sql/Ddl/View/ViewCommand.php',
-        'SqlFtw\\Sql\\Dml\\Assignment' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Sql/Dml/Assignment.php',
         'SqlFtw\\Sql\\Dml\\Call\\CallCommand' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Sql/Dml/Call/CallCommand.php',
         'SqlFtw\\Sql\\Dml\\Delete\\DeleteCommand' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Sql/Dml/Delete/DeleteCommand.php',
         'SqlFtw\\Sql\\Dml\\DmlCommand' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Sql/Dml/DmlCommand.php',

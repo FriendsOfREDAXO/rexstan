@@ -11,6 +11,7 @@ namespace SqlFtw\Parser\Dml;
 
 use SqlFtw\Parser\ExpressionParser;
 use SqlFtw\Parser\TokenList;
+use SqlFtw\Sql\Assignment;
 use SqlFtw\Sql\Charset;
 use SqlFtw\Sql\Dml\DuplicateOption;
 use SqlFtw\Sql\Dml\Load\LoadDataCommand;
@@ -19,7 +20,7 @@ use SqlFtw\Sql\Dml\Load\LoadXmlCommand;
 use SqlFtw\Sql\EntityType;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
 use SqlFtw\Sql\Expression\Operator;
-use SqlFtw\Sql\Expression\RootNode;
+use SqlFtw\Sql\Expression\SimpleName;
 use SqlFtw\Sql\Keyword;
 
 class LoadCommandsParser
@@ -59,9 +60,9 @@ class LoadCommandsParser
 
         $format = $this->expressionParser->parseFileFormat($tokenList);
 
-        [$ignoreRows, $fields, $setters] = $this->parseRowsAndFields($tokenList);
+        [$ignoreRows, $fields, $assignments] = $this->parseRowsAndFields($tokenList);
 
-        return new LoadDataCommand($file, $table, $format, $charset, $fields, $setters, $ignoreRows, $priority, $local, $duplicateOption, $partitions);
+        return new LoadDataCommand($file, $table, $format, $charset, $fields, $assignments, $ignoreRows, $priority, $local, $duplicateOption, $partitions);
     }
 
     /**
@@ -85,9 +86,9 @@ class LoadCommandsParser
             $rowsTag = $tokenList->expectString();
         }
 
-        [$ignoreRows, $fields, $setters] = $this->parseRowsAndFields($tokenList);
+        [$ignoreRows, $fields, $assignments] = $this->parseRowsAndFields($tokenList);
 
-        return new LoadXmlCommand($file, $table, $rowsTag, $charset, $fields, $setters, $ignoreRows, $priority, $local, $duplicateOption);
+        return new LoadXmlCommand($file, $table, $rowsTag, $charset, $fields, $assignments, $ignoreRows, $priority, $local, $duplicateOption);
     }
 
     /**
@@ -117,7 +118,11 @@ class LoadCommandsParser
         }
 
         $charset = null;
-        if ($tokenList->hasKeywords(Keyword::CHARACTER, Keyword::SET) || $tokenList->hasKeyword(Keyword::CHARSET)) {
+        $keyword = $tokenList->getAnyKeyword(Keyword::CHARACTER, Keyword::CHAR, Keyword::CHARSET);
+        if ($keyword !== null) {
+            if ($keyword !== Keyword::CHARSET) {
+                $tokenList->expectKeyword(Keyword::SET);
+            }
             $charset = $tokenList->expectCharsetName();
         }
 
@@ -125,7 +130,7 @@ class LoadCommandsParser
     }
 
     /**
-     * @return array{int|null, non-empty-list<string>|null, non-empty-array<string, RootNode>|null}
+     * @return array{int|null, non-empty-list<string>|null, non-empty-list<Assignment>|null}
      */
     private function parseRowsAndFields(TokenList $tokenList): array
     {
@@ -147,18 +152,18 @@ class LoadCommandsParser
             }
         }
 
-        $setters = null;
+        $assignments = null;
         if ($tokenList->hasKeyword(Keyword::SET)) {
-            $setters = [];
+            $assignments = [];
             do {
-                $field = $tokenList->expectName(EntityType::COLUMN);
-                $tokenList->expectAnyOperator(Operator::EQUAL, Operator::ASSIGN);
+                $field = new SimpleName($tokenList->expectName(EntityType::COLUMN));
+                $operator = $tokenList->expectAnyOperator(Operator::EQUAL, Operator::ASSIGN);
                 $expression = $this->expressionParser->parseExpression($tokenList);
-                $setters[$field] = $expression;
+                $assignments[] = new Assignment($field, $expression, $operator);
             } while ($tokenList->hasSymbol(','));
         }
 
-        return [$ignoreRows, $fields, $setters];
+        return [$ignoreRows, $fields, $assignments];
     }
 
 }

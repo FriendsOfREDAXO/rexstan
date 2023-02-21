@@ -680,7 +680,11 @@ class QueryParser
         if ($tokenList->hasKeyword(Keyword::OUTFILE)) {
             $outFile = $tokenList->expectString();
             $charset = null;
-            if ($tokenList->hasKeywords(Keyword::CHARACTER, Keyword::SET) || $tokenList->hasKeyword(Keyword::CHARSET)) {
+            $keyword = $tokenList->getAnyKeyword(Keyword::CHARACTER, Keyword::CHAR, Keyword::CHARSET);
+            if ($keyword !== null) {
+                if ($keyword !== Keyword::CHARSET) {
+                    $tokenList->expectKeyword(Keyword::SET);
+                }
                 $charset = $tokenList->expectCharsetName();
             }
             $format = $this->expressionParser->parseFileFormat($tokenList);

@@ -10,11 +10,11 @@
 namespace SqlFtw\Sql\Dml\Load;
 
 use SqlFtw\Formatter\Formatter;
+use SqlFtw\Sql\Assignment;
 use SqlFtw\Sql\Charset;
 use SqlFtw\Sql\Dml\DuplicateOption;
 use SqlFtw\Sql\Dml\FileFormat;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
-use SqlFtw\Sql\Expression\RootNode;
 
 class LoadDataCommand extends LoadCommand
 {
@@ -23,7 +23,7 @@ class LoadDataCommand extends LoadCommand
 
     /**
      * @param non-empty-list<string>|null $fields
-     * @param non-empty-array<string, RootNode>|null $setters ($column => $expression)
+     * @param non-empty-list<Assignment>|null $assignments
      * @param non-empty-list<string>|null $partitions
      */
     public function __construct(
@@ -32,14 +32,14 @@ class LoadDataCommand extends LoadCommand
         ?FileFormat $format,
         ?Charset $charset = null,
         ?array $fields = null,
-        ?array $setters = null,
+        ?array $assignments = null,
         ?int $ignoreRows = null,
         ?LoadPriority $priority = null,
         bool $local = false,
         ?DuplicateOption $duplicateOption = null,
         ?array $partitions = null
     ) {
-        parent::__construct($file, $table, $charset, $fields, $setters, $ignoreRows, $priority, $local, $duplicateOption, $partitions);
+        parent::__construct($file, $table, $charset, $fields, $assignments, $ignoreRows, $priority, $local, $duplicateOption, $partitions);
 
         $this->format = $format;
     }

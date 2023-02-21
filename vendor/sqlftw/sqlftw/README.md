@@ -104,7 +104,7 @@ releasing dozens of alpha versions. so **do not expect any backwards compatibili
 designing a huge system on a first try is impossible, lots of concepts must settle and click into its place 
 and therefore lots of changes are still coming
 
-when using Composer, always lock your dependency on this package to an exact version. e.g. `"sqlftw/swlftw": "0.1.4"` 
+when using Composer, always lock your dependency on this package to an exact version. e.g. `sqlftw/sqlftw:0.1.4` 
 
 
 Author:

@@ -120,6 +120,7 @@ class ShowCommandsParser
                 // SHOW BINLOG EVENTS [IN 'log_name'] [FROM pos] [LIMIT [offset,] row_count]
                 return $this->parseShowBinlogEvents($tokenList);
             case Keyword::CHARSET:
+            case Keyword::CHAR:
             case Keyword::CHARACTER:
                 // SHOW CHARACTER SET [LIKE 'pattern' | WHERE expr]
                 return $this->parseShowCharacterSet($tokenList->rewind($position));
@@ -302,11 +303,11 @@ class ShowCommandsParser
     }
 
     /**
-     * SHOW {CHARACTER SET | CHARSET} [LIKE 'pattern' | WHERE expr]
+     * SHOW {CHARACTER SET | CHAR SET | CHARSET} [LIKE 'pattern' | WHERE expr]
      */
     private function parseShowCharacterSet(TokenList $tokenList): ShowCharacterSetCommand
     {
-        if ($tokenList->hasKeyword(Keyword::CHARACTER)) {
+        if ($tokenList->hasAnyKeyword(Keyword::CHARACTER, Keyword::CHAR)) {
             $tokenList->expectKeyword(Keyword::SET);
         } else {
             $tokenList->expectKeyword(Keyword::CHARSET);

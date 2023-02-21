@@ -9,13 +9,14 @@
 
 namespace SqlFtw\Sql\Dal\Set;
 
+use SqlFtw\Sql\Assignment;
 use SqlFtw\Sql\Dal\DalCommand;
 
 interface SetCommand extends DalCommand
 {
 
     /**
-     * @return list<SetAssignment>
+     * @return list<Assignment>
      */
     public function getAssignments(): array;
 

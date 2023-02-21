@@ -45,7 +45,7 @@ class SchemaCommandsParser
 
         $options = $this->parseOptions($tokenList);
         if ($options === null) {
-            $tokenList->missingAnyKeyword(Keyword::DEFAULT, Keyword::CHARACTER, Keyword::CHARSET, Keyword::COLLATE, Keyword::ENCRYPTION, Keyword::READ);
+            $tokenList->missingAnyKeyword(Keyword::DEFAULT, Keyword::CHARACTER, Keyword::CHAR, Keyword::CHARSET, Keyword::COLLATE, Keyword::ENCRYPTION, Keyword::READ);
         }
 
         return new AlterSchemaCommand($name, $options);
@@ -83,14 +83,14 @@ class SchemaCommandsParser
         $n = 0;
         while ($n < 2) {
             if ($tokenList->hasKeyword(Keyword::DEFAULT)) {
-                $keyword = $tokenList->expectAnyKeyword(Keyword::CHARACTER, Keyword::CHARSET, Keyword::COLLATE, Keyword::ENCRYPTION);
+                $keyword = $tokenList->expectAnyKeyword(Keyword::CHARACTER, Keyword::CHAR, Keyword::CHARSET, Keyword::COLLATE, Keyword::ENCRYPTION);
             } else {
-                $keyword = $tokenList->getAnyKeyword(Keyword::CHARACTER, Keyword::CHARSET, Keyword::COLLATE, Keyword::ENCRYPTION, Keyword::READ);
+                $keyword = $tokenList->getAnyKeyword(Keyword::CHARACTER, Keyword::CHAR, Keyword::CHARSET, Keyword::COLLATE, Keyword::ENCRYPTION, Keyword::READ);
             }
             if ($keyword === null) {
                 break;
-            } elseif ($keyword === Keyword::CHARACTER || $keyword === Keyword::CHARSET) {
-                if ($keyword === Keyword::CHARACTER) {
+            } elseif ($keyword === Keyword::CHARACTER || $keyword === Keyword::CHARSET || $keyword === Keyword::CHAR) {
+                if ($keyword !== Keyword::CHARSET) {
                     $tokenList->expectKeyword(Keyword::SET);
                 }
                 $tokenList->passSymbol('=');

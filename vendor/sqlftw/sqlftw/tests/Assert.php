@@ -148,7 +148,7 @@ class Assert extends DogmaAssert
         self::same($actual, $expected);
     }
 
-    public static function validCommand(string $query, ?Parser $parser = null): void
+    public static function validCommand(string $query, ?Parser $parser = null): Command
     {
         $parser = $parser ?? ParserHelper::getParserFactory()->getParser();
 
@@ -166,6 +166,8 @@ class Assert extends DogmaAssert
         }
 
         self::true(true);
+
+        return $command;
     }
 
     public static function validCommands(string $sql, ?Parser $parser = null): void

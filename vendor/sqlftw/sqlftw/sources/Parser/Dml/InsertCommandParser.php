@@ -12,7 +12,7 @@ namespace SqlFtw\Parser\Dml;
 use SqlFtw\Parser\ExpressionParser;
 use SqlFtw\Parser\TokenList;
 use SqlFtw\Parser\TokenType;
-use SqlFtw\Sql\Dml\Assignment;
+use SqlFtw\Sql\Assignment;
 use SqlFtw\Sql\Dml\Insert\InsertCommand;
 use SqlFtw\Sql\Dml\Insert\InsertPriority;
 use SqlFtw\Sql\Dml\Insert\InsertSelectCommand;
@@ -288,8 +288,8 @@ class InsertCommandParser
         $assignments = [];
         do {
             $column = $this->expressionParser->parseColumnIdentifier($tokenList);
-            $tokenList->expectOperator(Operator::EQUAL);
-            $assignments[] = new Assignment($column, $this->expressionParser->parseExpression($tokenList));
+            $operator = $tokenList->expectAnyOperator(Operator::EQUAL, Operator::ASSIGN);
+            $assignments[] = new Assignment($column, $this->expressionParser->parseExpression($tokenList), $operator);
         } while ($tokenList->hasSymbol(','));
 
         return $assignments;

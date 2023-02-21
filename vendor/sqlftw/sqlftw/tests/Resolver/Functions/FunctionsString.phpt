@@ -1,5 +1,7 @@
 <?php declare(strict_types = 1);
 
+// spell-check-ignore: abc abcabcabc abcd abcde bc bcde cd dcba ÁŠČŘ á áš áščř áščřáščř č čř ř řčšá š ščř
+
 namespace SqlFtw\Parser;
 
 use SqlFtw\Platform\Platform;

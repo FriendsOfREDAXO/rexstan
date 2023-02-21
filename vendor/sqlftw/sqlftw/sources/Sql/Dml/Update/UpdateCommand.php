@@ -10,7 +10,7 @@
 namespace SqlFtw\Sql\Dml\Update;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\Dml\Assignment;
+use SqlFtw\Sql\Assignment;
 use SqlFtw\Sql\Dml\DmlCommand;
 use SqlFtw\Sql\Dml\OptimizerHint\OptimizerHint;
 use SqlFtw\Sql\Dml\TableReference\TableReferenceList;

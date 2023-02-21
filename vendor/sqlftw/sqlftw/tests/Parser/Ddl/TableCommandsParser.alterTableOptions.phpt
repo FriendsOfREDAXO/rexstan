@@ -27,7 +27,7 @@ Assert::parseSerialize("ALTER TABLE tbl1 COLLATE ascii_general_ci");
 Assert::parseSerialize("ALTER TABLE tbl1 COLLATE 'ascii_general_ci'", "ALTER TABLE tbl1 COLLATE ascii_general_ci"); // '...' -> ...
 
 // COMMENT
-Assert::parseSerialize("ALTER TABLE tbl1 COMMENT 'ciom1'");
+Assert::parseSerialize("ALTER TABLE tbl1 COMMENT 'com1'");
 
 // COMPRESSION
 Assert::parseSerialize("ALTER TABLE tbl1 COMPRESSION 'ZLIB'");

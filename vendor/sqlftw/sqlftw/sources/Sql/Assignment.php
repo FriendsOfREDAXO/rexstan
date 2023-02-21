@@ -7,15 +7,14 @@
  * For the full copyright and license information read the file 'license.md', distributed with this source code
  */
 
-namespace SqlFtw\Sql\Dal\Set;
+namespace SqlFtw\Sql;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\Identifier;
 use SqlFtw\Sql\Expression\Operator;
 use SqlFtw\Sql\Expression\RootNode;
-use SqlFtw\Sql\SqlSerializable;
 
-class SetAssignment implements SqlSerializable
+class Assignment implements SqlSerializable
 {
 
     private Identifier $variable;
@@ -24,8 +23,12 @@ class SetAssignment implements SqlSerializable
 
     private string $operator;
 
-    public function __construct(Identifier $variable, RootNode $expression, string $operator = Operator::EQUAL)
+    public function __construct(Identifier $variable, RootNode $expression, string $operator)
     {
+        if ($operator !== Operator::ASSIGN && $operator !== Operator::EQUAL) {
+            throw new InvalidDefinitionException("Only operators := and = are allowed in assignment.");
+        }
+
         $this->variable = $variable;
         $this->expression = $expression;
         $this->operator = $operator;
@@ -39,6 +42,11 @@ class SetAssignment implements SqlSerializable
     public function getExpression(): RootNode
     {
         return $this->expression;
+    }
+
+    public function getOperator(): string
+    {
+        return $this->operator;
     }
 
     public function serialize(Formatter $formatter): string

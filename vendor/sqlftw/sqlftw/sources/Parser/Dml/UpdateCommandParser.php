@@ -13,7 +13,7 @@ use Countable;
 use SqlFtw\Parser\ExpressionParser;
 use SqlFtw\Parser\TokenList;
 use SqlFtw\Parser\TokenType;
-use SqlFtw\Sql\Dml\Assignment;
+use SqlFtw\Sql\Assignment;
 use SqlFtw\Sql\Dml\Update\UpdateCommand;
 use SqlFtw\Sql\Dml\WithClause;
 use SqlFtw\Sql\Expression\Operator;
@@ -69,10 +69,10 @@ class UpdateCommandParser
         do {
             $column = $this->expressionParser->parseColumnIdentifier($tokenList);
 
-            $tokenList->expectAnyOperator(Operator::EQUAL, Operator::ASSIGN);
+            $operator = $tokenList->expectAnyOperator(Operator::EQUAL, Operator::ASSIGN);
 
             $value = $this->expressionParser->parseAssignExpression($tokenList);
-            $values[] = new Assignment($column, $value);
+            $values[] = new Assignment($column, $value, $operator);
         } while ($tokenList->hasSymbol(','));
 
         $where = null;

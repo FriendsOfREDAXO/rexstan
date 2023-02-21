@@ -61,6 +61,9 @@ class AlterTableCommand extends Statement implements DdlTableCommand
                 AlterTableOption::checkValue($option);
             }
         }
+        if ($tableOptions === []) {
+            $tableOptions = null;
+        }
 
         $this->name = $name;
         $this->actions = is_array($actions) ? new AlterActionsList($actions) : $actions;
@@ -131,15 +134,16 @@ class AlterTableCommand extends Statement implements DdlTableCommand
 
         $result .= $this->actions->serialize($formatter);
 
-        if ($this->tableOptions !== null && !$this->actions->isEmpty()) {
-            $result .= ',';
-        }
-
-        if ($this->tableOptions !== null && !$this->tableOptions->isEmpty()) {
+        if ($this->tableOptions !== null) {
+            if (!$this->actions->isEmpty()) {
+                $result .= ',';
+            }
             $result .= "\n" . $formatter->indent . $this->tableOptions->serialize($formatter, ",\n", ' ');
         }
 
-        $result = rtrim($result, ',');
+        if (($this->tableOptions !== null || !$this->actions->isEmpty()) && $this->alterOptions !== []) {
+            $result .= ',';
+        }
 
         foreach ($this->alterOptions as $option => $value) {
             if ($option === AlterTableOption::ONLINE) {
@@ -153,6 +157,8 @@ class AlterTableCommand extends Statement implements DdlTableCommand
                 $result .= "\n" . $formatter->indent . $option . ' ' . $formatter->formatValue($value) . ',';
             }
         }
+
+        $result = rtrim($result, ',');
 
         if ($this->partitioning !== null) {
             $result .= "\n" . $this->partitioning->serialize($formatter);

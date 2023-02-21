@@ -10,7 +10,7 @@
 namespace SqlFtw\Sql\Dml\Insert;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\Dml\Assignment;
+use SqlFtw\Sql\Assignment;
 use SqlFtw\Sql\Dml\OptimizerHint\OptimizerHint;
 use SqlFtw\Sql\Expression\ColumnIdentifier;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
