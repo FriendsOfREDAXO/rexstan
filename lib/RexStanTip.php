@@ -6,7 +6,7 @@ use rex_url;
 
 final class RexStanTip
 {
-    public const FAQ_ANCHORS = [
+    private const FAQ_ANCHORS = [
         '{with generic class rex_extension_point but does not specify its types}' => 'wie-mit-dem-fehler-parameter-ep-with-generic-class-rex-extension-point-but-does-not-specify-its-types-t-umgehen',
         '{Instantiated class .* not found}' => 'wie-mit-dem-fehler-instantiated-class-x-not-found-umgehen',
         '{Function .* not found}' => 'wie-mit-dem-fehler-function-x-not-found-umgehen',

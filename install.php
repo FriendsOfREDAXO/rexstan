@@ -76,6 +76,9 @@ if (false === rex_file::put($configPath, $configFileContent)) {
 }
 
 // make sure the binaries are executable
-foreach (glob(__DIR__.'/vendor/bin/*', GLOB_NOSORT) as $binaryPath) {
-    @chmod($binaryPath, 0775);
+$binaries = glob(__DIR__.'/vendor/bin/*', GLOB_NOSORT);
+if ($binaries !== false) {
+    foreach ($binaries as $binaryPath) {
+        @chmod($binaryPath, 0775);
+    }
 }
