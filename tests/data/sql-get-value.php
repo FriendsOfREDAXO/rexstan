@@ -108,3 +108,21 @@ function chainedQuery(int $id): void
 
     assertType('string', $sql->getValue('name'));
 }
+
+function stringUnion(int $id): void
+{
+    $sql = rex_sql::factory()->setQuery('
+            SELECT  name, id
+            FROM    ' . rex::getTable('article') . '
+            WHERE   id = ?
+            LIMIT   1
+        ', [$id]);
+
+    if ($id > 0) {
+        $field = 'name';
+    } else {
+        $field = 'id';
+    }
+
+    assertType('int<0, 4294967295>|string', $sql->getValue($field));
+}
