@@ -120,9 +120,12 @@ function stringUnion(int $id): void
 
     if ($id > 0) {
         $field = 'name';
+        $tableField = rex::getTable('article') .'.name';
     } else {
         $field = 'id';
+        $tableField = rex::getTable('article') .'.id';
     }
 
     assertType('int<0, 4294967295>|string', $sql->getValue($field));
+    assertType('int<0, 4294967295>|string', $sql->getValue($tableField));
 }
