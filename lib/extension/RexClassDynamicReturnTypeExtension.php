@@ -38,9 +38,15 @@ final class RexClassDynamicReturnTypeExtension implements DynamicStaticMethodRet
         }
 
         if ('gettable' === $name) {
-            $tableName = $scope->getType($args[0]->value);
-            if ($tableName instanceof ConstantStringType) {
-                return new ConstantStringType('rex_'. $tableName->getValue());
+            $tableNames = $scope->getType($args[0]->value)->getConstantStrings();
+
+            $result = [];
+            foreach ($tableNames as $tableName) {
+                $result[] = new ConstantStringType('rex_'. $tableName->getValue());
+            }
+
+            if (count($result) >= 1) {
+                return TypeCombinator::union(...$result);
             }
         }
 

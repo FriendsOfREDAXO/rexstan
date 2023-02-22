@@ -140,5 +140,6 @@ function unionstring($mixed) {
     $select = rex_sql::factory();
     $select->setWhere($select->escapeIdentifier($unionS). ' = ' . $select->escape($mixed));
     assertType("'`id`'|'`pid`'", $select->escapeIdentifier($unionS));
+    assertType("'rex_id'|'rex_pid'", rex::getTable($unionS));
 }
 
