@@ -45,7 +45,7 @@ final class RexClassDynamicReturnTypeExtension implements DynamicStaticMethodRet
                 $result[] = new ConstantStringType('rex_'. $tableName->getValue());
             }
 
-            if (count($result) >= 1) {
+            if (count($result) > 0) {
                 return TypeCombinator::union(...$result);
             }
         }

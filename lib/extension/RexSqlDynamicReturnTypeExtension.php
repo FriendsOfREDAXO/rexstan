@@ -53,7 +53,7 @@ final class RexSqlDynamicReturnTypeExtension implements DynamicMethodReturnTypeE
                 $result[] = new ConstantStringType($escapedIdentifier);
             }
 
-            if (count($result) >= 1) {
+            if (count($result) > 0) {
                 return TypeCombinator::union(...$result);
             }
         }
