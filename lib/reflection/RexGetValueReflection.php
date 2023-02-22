@@ -58,7 +58,7 @@ final class RexGetValueReflection
         $resultType = $queryReflection->getResultType($query, QueryReflector::FETCH_TYPE_ASSOC);
         $valueTypes = [];
         foreach ($names as $constantName) {
-            if ($resultType->isConstantArray() && $resultType->hasOffsetValueType($constantName)->yes()) {
+            if ($resultType->isConstantArray()->yes() && $resultType->hasOffsetValueType($constantName)->yes()) {
                 $valueTypes[] = $resultType->getOffsetValueType($constantName);
             }
         }

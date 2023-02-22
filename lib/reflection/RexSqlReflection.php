@@ -39,25 +39,30 @@ final class RexSqlReflection
             return null;
         }
 
-        $valueNameType = $scope->getType($args[0]->value);
-        if (!$valueNameType instanceof ConstantStringType) {
-            return null;
-        }
+        $valueNameTypes = $scope->getType($args[0]->value)->getConstantStrings();
 
-        if ($sqlResultType->hasOffsetValueType($valueNameType)->yes()) {
-            return $sqlResultType->getOffsetValueType($valueNameType);
-        }
-
-        // support table.field and db.table.field notation
-        if (false !== strpos($valueNameType->getValue(), '.')) {
-            $parts = explode('.', $valueNameType->getValue());
-            $lastKey = array_key_last($parts);
-            $fieldName = $parts[$lastKey];
-
-            $valueNameType = new ConstantStringType($fieldName);
+        $results = [];
+        foreach($valueNameTypes as $valueNameType) {
             if ($sqlResultType->hasOffsetValueType($valueNameType)->yes()) {
-                return $sqlResultType->getOffsetValueType($valueNameType);
+                $results[] = $sqlResultType->getOffsetValueType($valueNameType);
+                continue;
             }
+
+            // support table.field and db.table.field notation
+            if (false !== strpos($valueNameType->getValue(), '.')) {
+                $parts = explode('.', $valueNameType->getValue());
+                $lastKey = array_key_last($parts);
+                $fieldName = $parts[$lastKey];
+
+                $valueNameType = new ConstantStringType($fieldName);
+                if ($sqlResultType->hasOffsetValueType($valueNameType)->yes()) {
+                    $results[] = $sqlResultType->getOffsetValueType($valueNameType);
+                }
+            }
+        }
+
+        if (count($results) > 0) {
+            return TypeCombinator::union(...$results);
         }
 
         return null;
@@ -74,7 +79,7 @@ final class RexSqlReflection
         }
 
         $sqlResultType = $statementType->getTypes()[0];
-        if (!$sqlResultType instanceof ConstantArrayType) {
+        if (!$sqlResultType->isConstantArray()->yes()) {
             return null;
         }
 
