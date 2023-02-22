@@ -71,7 +71,7 @@ final class RexGetValueRule implements Rule
         }
 
         $nameType = $scope->getType($args[0]->value);
-        $names = TypeUtils::getConstantStrings($nameType);
+        $names = $nameType->getConstantStrings();
         if (0 === count($names)) {
             return [];
         }

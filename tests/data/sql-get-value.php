@@ -108,3 +108,38 @@ function chainedQuery(int $id): void
 
     assertType('string', $sql->getValue('name'));
 }
+
+function stringUnion(int $id): void
+{
+    $sql = rex_sql::factory()->setQuery('
+            SELECT  name, id
+            FROM    ' . rex::getTable('article') . '
+            WHERE   id = ?
+            LIMIT   1
+        ', [$id]);
+
+    if ($id > 0) {
+        $field = 'name';
+        $tableField = rex::getTable('article') .'.name';
+    } else {
+        $field = 'id';
+        $tableField = rex::getTable('article') .'.id';
+    }
+
+    assertType('int<0, 4294967295>|string', $sql->getValue($field));
+    assertType('int<0, 4294967295>|string', $sql->getValue($tableField));
+}
+
+function unionstring($mixed) {
+    if (rand(0,1) ===1) {
+        $unionS = 'id';
+    } else {
+        $unionS = 'pid';
+    }
+
+    $select = rex_sql::factory();
+    $select->setWhere($select->escapeIdentifier($unionS). ' = ' . $select->escape($mixed));
+    assertType("'`id`'|'`pid`'", $select->escapeIdentifier($unionS));
+    assertType("'rex_id'|'rex_pid'", rex::getTable($unionS));
+}
+
