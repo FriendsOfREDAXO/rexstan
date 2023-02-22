@@ -68,7 +68,7 @@ final class RexSqlReflection
         return null;
     }
 
-    public static function getResultTypeFromStatementType(Type $statementType): ?ConstantArrayType
+    public static function getResultTypeFromStatementType(Type $statementType): ?Type
     {
         if (!$statementType instanceof GenericObjectType) {
             return null;
