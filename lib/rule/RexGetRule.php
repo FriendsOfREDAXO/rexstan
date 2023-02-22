@@ -75,7 +75,7 @@ final class RexGetRule implements Rule
         $idType = $scope->getType($args[0]->value);
 
         if (rex_media::class === $callerType->getClassName()) {
-            $ids = TypeUtils::getConstantStrings($idType);
+            $ids = $idType->getConstantStrings();
             foreach ($ids as $id) {
                 // don't report errors on magic rex-vars, which get resolved at code generation time.
                 if (0 === strpos($id->getValue(), 'REX_')) {
