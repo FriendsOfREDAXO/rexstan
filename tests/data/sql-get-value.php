@@ -129,3 +129,16 @@ function stringUnion(int $id): void
     assertType('int<0, 4294967295>|string', $sql->getValue($field));
     assertType('int<0, 4294967295>|string', $sql->getValue($tableField));
 }
+
+function unionstring($mixed) {
+    if (rand(0,1) ===1) {
+        $unionS = 'id';
+    } else {
+        $unionS = 'pid';
+    }
+
+    $select = rex_sql::factory();
+    $select->setWhere($select->escapeIdentifier($unionS). ' = ' . $select->escape($mixed));
+    assertType("'`id`'|'`pid`'", $select->escapeIdentifier($unionS));
+}
+

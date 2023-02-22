@@ -10,6 +10,7 @@ use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\DynamicStaticMethodReturnTypeExtension;
 use PHPStan\Type\Type;
+use PHPStan\Type\TypeCombinator;
 use rex;
 use rex_sql;
 use function count;
@@ -24,7 +25,7 @@ final class RexClassDynamicReturnTypeExtension implements DynamicStaticMethodRet
 
     public function isStaticMethodSupported(MethodReflection $methodReflection): bool
     {
-        return in_array(strtolower($methodReflection->getName()), ['gettable', 'escapeidentifier'], true);
+        return in_array(strtolower($methodReflection->getName()), ['gettable'], true);
     }
 
     public function getTypeFromStaticMethodCall(MethodReflection $methodReflection, StaticCall $methodCall, Scope $scope): ?Type
@@ -34,15 +35,6 @@ final class RexClassDynamicReturnTypeExtension implements DynamicStaticMethodRet
         $args = $methodCall->getArgs();
         if (count($args) < 1) {
             return null;
-        }
-
-        if ('escapeidentifier' === $name) {
-            $identifierName = $scope->getType($args[0]->value);
-            if ($identifierName instanceof ConstantStringType) {
-                // 1:1 copied rex_sql::escapeIdentifier()
-                $escapedIdentifier = '`' . str_replace('`', '``', $identifierName->getValue()) . '`';
-                return new ConstantStringType($escapedIdentifier);
-            }
         }
 
         if ('gettable' === $name) {
