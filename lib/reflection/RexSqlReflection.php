@@ -20,7 +20,7 @@ use function count;
 
 final class RexSqlReflection
 {
-    public static function getSqlResultType(MethodCall $methodCall, Scope $scope): ?ConstantArrayType
+    public static function getSqlResultType(MethodCall $methodCall, Scope $scope): ?Type
     {
         $objectType = $scope->getType($methodCall->var);
 
