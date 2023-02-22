@@ -27,7 +27,7 @@ final class RexGetValueReflection
         Type $name,
         string $class
     ): ?Type {
-        $names = TypeUtils::getConstantStrings($name);
+        $names = $name->getConstantStrings();
         if (0 === count($names)) {
             return null;
         }
@@ -57,9 +57,9 @@ final class RexGetValueReflection
         $queryReflection = new QueryReflection();
         $resultType = $queryReflection->getResultType($query, QueryReflector::FETCH_TYPE_ASSOC);
         $valueTypes = [];
-        foreach ($names as $name) {
-            if ($resultType instanceof ConstantArrayType && $resultType->hasOffsetValueType($name)->yes()) {
-                $valueTypes[] = $resultType->getOffsetValueType($name);
+        foreach ($names as $constantName) {
+            if ($resultType->isConstantArray() && $resultType->hasOffsetValueType($constantName)->yes()) {
+                $valueTypes[] = $resultType->getOffsetValueType($constantName);
             }
         }
 
