@@ -104,7 +104,7 @@ final class RexStanSettings
 
         $field = $form->addCheckboxField('baseline');
         $field->addOption('Baseline verwenden', 1);
-        $field->setNotice($baselineButton .'Weiterlesen: <a href="https://phpstan.org/user-guide/baseline">Baseline erklärung</a>');
+        $field->setNotice($baselineButton .'Weiterlesen: <a href="https://phpstan.org/user-guide/baseline">Baseline Erklärung</a>');
 
         $field = $form->addSelectField('addons', null, ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'required' => 'required']); // die Klasse selectpicker aktiviert den Selectpicker von Bootstrap
         $field->setAttribute('multiple', 'multiple');
