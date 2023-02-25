@@ -54,7 +54,7 @@ final class RexSqlGetValueRule implements Rule
         if (count($strings) === 1) {
             return [
                 RuleErrorBuilder::message(
-                    sprintf("Value '%s' was not selected in the used sql-query.", $valueNameType->getValue())
+                    sprintf("Value %s was not selected in the used sql-query.", $valueNameType->describe(VerbosityLevel::precise()))
                 )->build(),
             ];
         }
