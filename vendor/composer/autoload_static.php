@@ -1380,6 +1380,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'rexstan\\RexArticleSliceGetValueDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexArticleSliceGetValueDynamicReturnTypeExtension.php',
         'rexstan\\RexCategoryGetValueDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexCategoryGetValueDynamicReturnTypeExtension.php',
         'rexstan\\RexClassDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexClassDynamicReturnTypeExtension.php',
+        'rexstan\\RexCmd' => __DIR__ . '/../..' . '/lib/RexCmd.php',
         'rexstan\\RexFunctionsDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexFunctionsDynamicReturnTypeExtension.php',
         'rexstan\\RexGetRule' => __DIR__ . '/../..' . '/lib/rule/RexGetRule.php',
         'rexstan\\RexGetValueReflection' => __DIR__ . '/../..' . '/lib/reflection/RexGetValueReflection.php',
