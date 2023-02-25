@@ -1,6 +1,6 @@
 <?php
 
-use rexstan\RexStan;
+use rexstan\RexCmd;
 use rexstan\RexStanUserConfig;
 
 $addon = rex_addon::get('rexstan');
@@ -10,14 +10,14 @@ if (isset($REX['PATH_PROVIDER'])) {
     return;
 }
 
-require_once __DIR__ .'/lib/RexStan.php';
-$cliPhpVersion = RexStan::execCmd(RexStan::phpExecutable().' -r "echo PHP_VERSION_ID;"', $stderrOutput, $exitCode);
+require_once __DIR__ .'/lib/RexCmd.php';
+$cliPhpVersion = RexCmd::execCmd(RexCmd::phpExecutable().' -r "echo PHP_VERSION_ID;"', $stderrOutput, $exitCode);
 if (is_numeric($cliPhpVersion)) {
     if ($cliPhpVersion < 70300) {
         if (DIRECTORY_SEPARATOR === '\\') {
-            $cliPhpPath = RexStan::execCmd('where php', $stderrOutput, $exitCode);
+            $cliPhpPath = RexCmd::execCmd('where php', $stderrOutput, $exitCode);
         } else {
-            $cliPhpPath = RexStan::execCmd('which php', $stderrOutput, $exitCode);
+            $cliPhpPath = RexCmd::execCmd('which php', $stderrOutput, $exitCode);
         }
 
         $addon->setProperty('installmsg', 'PHP CLI version '.$cliPhpVersion.' on path "'. $cliPhpPath .'" is too old. Please upgrade to PHP 7.3+.');

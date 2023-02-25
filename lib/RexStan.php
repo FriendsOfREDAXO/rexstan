@@ -16,30 +16,6 @@ use function proc_open;
 
 final class RexStan
 {
-    public static function phpExecutable(): string
-    {
-        if ('Windows' !== PHP_OS_FAMILY) {
-            $executable = 'php';
-            $path = '$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin';
-
-            if ('Darwin' === PHP_OS_FAMILY) {
-                $customConfig = '/Library/Application Support/appsolute/MAMP PRO/conf/php'.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION.'.ini';
-                if (is_file($customConfig)) {
-                    $executable .= ' -c "'.$customConfig.'"';
-                }
-
-                $mampPhp = '/Applications/MAMP/bin/php/php'.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION.'/bin/';
-                if (is_executable($mampPhp.'php')) {
-                    $path .= ':'.$mampPhp;
-                }
-            }
-
-            return 'PATH="'. $path .'" '.$executable;
-        }
-
-        return 'php';
-    }
-
     /**
      * @return string
      */
@@ -173,7 +149,7 @@ final class RexStan
         if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
             $path = realpath(__DIR__.'/../vendor/bin/phpstan.bat');
         } else {
-            $path = self::phpExecutable().' '.realpath(__DIR__.'/../vendor/bin/phpstan');
+            $path = RexCmd::phpExecutable().' '.realpath(__DIR__.'/../vendor/bin/phpstan');
         }
 
         if (false === $path) {
@@ -188,7 +164,7 @@ final class RexStan
         if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
             $path = realpath(__DIR__.'/../vendor/bin/phpstan-baseline-analyze.bat');
         } else {
-            $path = self::phpExecutable().' '.realpath(__DIR__.'/../vendor/bin/phpstan-baseline-analyze');
+            $path = RexCmd::phpExecutable().' '.realpath(__DIR__.'/../vendor/bin/phpstan-baseline-analyze');
         }
 
         if (false === $path) {
@@ -203,7 +179,7 @@ final class RexStan
         if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
             $path = realpath(__DIR__.'/../vendor/bin/phpstan-baseline-graph.bat');
         } else {
-            $path = self::phpExecutable().' '.realpath(__DIR__.'/../vendor/bin/phpstan-baseline-graph');
+            $path = RexCmd::phpExecutable().' '.realpath(__DIR__.'/../vendor/bin/phpstan-baseline-graph');
         }
 
         if (false === $path) {

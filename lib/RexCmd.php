@@ -55,4 +55,28 @@ final class RexCmd {
 
         return false === $output ? '' : $output;
     }
+
+    public static function phpExecutable(): string
+    {
+        if ('Windows' !== PHP_OS_FAMILY) {
+            $executable = 'php';
+            $path = '$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin';
+
+            if ('Darwin' === PHP_OS_FAMILY) {
+                $customConfig = '/Library/Application Support/appsolute/MAMP PRO/conf/php'.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION.'.ini';
+                if (is_file($customConfig)) {
+                    $executable .= ' -c "'.$customConfig.'"';
+                }
+
+                $mampPhp = '/Applications/MAMP/bin/php/php'.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION.'/bin/';
+                if (is_executable($mampPhp.'php')) {
+                    $path .= ':'.$mampPhp;
+                }
+            }
+
+            return 'PATH="'. $path .'" '.$executable;
+        }
+
+        return 'php';
+    }
 }
