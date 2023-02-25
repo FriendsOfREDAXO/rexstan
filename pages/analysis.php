@@ -3,7 +3,6 @@
 /** @var rex_addon $this */
 
 use rexstan\RexStan;
-use rexstan\RexStanSettings;
 use rexstan\RexStanTip;
 use rexstan\RexStanUserConfig;
 
@@ -140,32 +139,7 @@ if (
 
     foreach ($phpstanResult['files'] as $file => $fileResult) {
         $linkFile = preg_replace('/\s\(in context.*?$/', '', $file);
-
-        // $section->setVar('collapsed', 15 < $totalErrors && 1 < count($phpstanResult['files']));
-        $content = '<ul class="list-group">';
-        foreach ($fileResult['messages'] as $message) {
-            $content .= '<li class="list-group-item rexstan-message">';
-            $content .= '<span class="rexstan-linenumber">' .sprintf('%5d', $message['line']).':</span>';
-            $error = rex_escape($message['message']);
-            $url = rex_editor::factory()->getUrl($linkFile, $message['line']);
-            if ($url) {
-                $error = '<a href="'. $url .'">'. rex_escape($message['message']) .'</a>';
-            }
-
-            $phpstanTip = null;
-            if (array_key_exists('tip', $message)) {
-                $phpstanTip = $message['tip'];
-            }
-
-            $rexstanTip = RexStanTip::renderTip($message['message'], $phpstanTip);
-            if (null !== $rexstanTip) {
-                $error .= '<br /><span class="rexstan-tip" title="Tipp">💡 '. $rexstanTip .'</span>';
-            }
-
-            $content .= $error;
-            $content .= '</li>';
-        }
-        $content .= '</ul>';
+        $content = rexstan_renderFileErrors($linkFile, $fileResult['messages']);
 
         $shortFile = str_replace($basePath, '', $file);
         $title = '<i class="rexstan-open fa fa-folder-o"></i>'.
@@ -179,4 +153,36 @@ if (
         $section->setVar('content', $content, false);
         echo $section->parse('core/page/section.php');
     }
+}
+
+/**
+ * @param list<array{message: string, line: string, tip?: string}>  $messages
+ */
+function rexstan_renderFileErrors(string $file, array $messages): string {
+    $content = '<ul class="list-group">';
+    foreach ($messages as $message) {
+        $content .= '<li class="list-group-item rexstan-message">';
+        $content .= '<span class="rexstan-linenumber">' .sprintf('%5d', $message['line']).':</span>';
+        $error = rex_escape($message['message']);
+        $url = rex_editor::factory()->getUrl($file, $message['line']);
+        if ($url) {
+            $error = '<a href="'. $url .'">'. rex_escape($message['message']) .'</a>';
+        }
+
+        $phpstanTip = null;
+        if (array_key_exists('tip', $message)) {
+            $phpstanTip = $message['tip'];
+        }
+
+        $rexstanTip = RexStanTip::renderTip($message['message'], $phpstanTip);
+        if (null !== $rexstanTip) {
+            $error .= '<br /><span class="rexstan-tip" title="Tipp">💡 '. $rexstanTip .'</span>';
+        }
+
+        $content .= $error;
+        $content .= '</li>';
+    }
+    $content .= '</ul>';
+
+    return $content;
 }
