@@ -49,7 +49,7 @@ final class RexStan
         $configPath = self::phpstanConfigPath(__DIR__.'/../phpstan.neon');
 
         $cmd = $phpstanBinary .' analyse -c '. $configPath;
-        $output = self::execCmd($cmd, $stderrOutput, $exitCode);
+        $output = RexCmd::execCmd($cmd, $stderrOutput, $exitCode);
 
         return $output;
     }
@@ -63,7 +63,7 @@ final class RexStan
         $configPath = self::phpstanConfigPath(__DIR__.'/../phpstan.neon');
 
         $cmd = $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress';
-        $output = self::execCmd($cmd, $stderrOutput, $exitCode);
+        $output = RexCmd::execCmd($cmd, $stderrOutput, $exitCode);
 
         if ('' !== $output && '{' === $output[0]) {
             // return the analysis result as an array
@@ -89,7 +89,7 @@ final class RexStan
         $addon = rex_addon::get('rexstan');
         $dataDir = $addon->getDataPath();
 
-        self::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline '. $analysisBaselinePath .' --allow-empty-baseline', $stderrOutput, $exitCode);
+        RexCmd::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline '. $analysisBaselinePath .' --allow-empty-baseline', $stderrOutput, $exitCode);
         if (0 !== $exitCode) {
             throw new Exception('Unable to generate analysis baseline:'. $stderrOutput);
         }
@@ -118,12 +118,12 @@ final class RexStan
         $baselineGlob = $dataDir.$configSignature.DIRECTORY_SEPARATOR.'*-summary.json';
         $htmlGraphPath = $dataDir.'baseline-graph.html';
 
-        self::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline --allow-empty-baseline', $stderrOutput, $exitCode);
+        RexCmd::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline --allow-empty-baseline', $stderrOutput, $exitCode);
         if (0 !== $exitCode) {
             throw new Exception('Unable to generate baseline:'. $stderrOutput);
         }
 
-        $output = self::execCmd('cd '.$dataDir.' && '. $analyzeBinary .' *phpstan-baseline.neon --json', $stderrOutput, $exitCode);
+        $output = RexCmd::execCmd('cd '.$dataDir.' && '. $analyzeBinary .' *phpstan-baseline.neon --json', $stderrOutput, $exitCode);
         if (0 !== $exitCode) {
             throw new Exception('Unable to analyze baseline: '.$stderrOutput);
         }
@@ -132,7 +132,7 @@ final class RexStan
             rex_dir::create(dirname($summaryPath));
             rex_file::put($summaryPath, $output);
 
-            $htmlOutput = self::execCmd('cd '.$dataDir.' && '. $graphBinary ." '". $baselineGlob ."'", $stderrOutput, $exitCode);
+            $htmlOutput = RexCmd::execCmd('cd '.$dataDir.' && '. $graphBinary ." '". $baselineGlob ."'", $stderrOutput, $exitCode);
             if (0 !== $exitCode) {
                 throw new Exception('Unable to graph baseline: '.$stderrOutput);
             }
@@ -165,60 +165,7 @@ final class RexStan
         $phpstanBinary = self::phpstanBinPath();
 
         $cmd = $phpstanBinary .' clear-result-cache';
-        self::execCmd($cmd, $stderrOutput, $exitCode);
-    }
-
-    /**
-     * @param string $stderrOutput
-     * @param int $exitCode
-     * @param-out string $stderrOutput
-     * @param-out int $exitCode
-     *
-     * @return string
-     */
-    public static function execCmd(string $cmd, &$stderrOutput, &$exitCode)
-    {
-        $descriptorspec = [
-            0 => ['pipe', 'r'],  // stdin
-            1 => ['pipe', 'w'],  // stdout
-            2 => ['pipe', 'w'],   // stderr
-        ];
-
-        $stderrOutput = '';
-        $output = '';
-
-        if (!function_exists('proc_open')) {
-            throw new Exception('Function proc_open() is not available');
-        }
-
-        $process = proc_open($cmd, $descriptorspec, $pipes);
-        if (is_resource($process)) {
-            fclose($pipes[0]);
-
-            $output = stream_get_contents($pipes[1]);
-            fclose($pipes[1]);
-
-            $stderrOutput = stream_get_contents($pipes[2]);
-            fclose($pipes[2]);
-
-            $status = proc_get_status($process);
-            if (false === $status) {
-                throw new Exception('Unable to get process status');
-            }
-            while ($status['running']) {
-                // sleep half a second
-                usleep(500000);
-                $status = proc_get_status($process);
-                if (false === $status) {
-                    throw new Exception('Unable to get process status');
-                }
-            }
-            $exitCode = $status['exitcode'];
-
-            proc_close($process);
-        }
-
-        return false === $output ? '' : $output;
+        RexCmd::execCmd($cmd, $stderrOutput, $exitCode);
     }
 
     private static function phpstanBinPath(): string
