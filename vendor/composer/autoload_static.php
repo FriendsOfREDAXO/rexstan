@@ -190,9 +190,9 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'PHPStan\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
-            1 => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src',
-            2 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
-            3 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
+            1 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
+            2 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
+            3 => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src',
         ),
         'Composer\\Semver\\' => 
         array (
@@ -1422,6 +1422,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'rexstan\\RexGetRule' => __DIR__ . '/../..' . '/lib/rule/RexGetRule.php',
         'rexstan\\RexGetValueReflection' => __DIR__ . '/../..' . '/lib/reflection/RexGetValueReflection.php',
         'rexstan\\RexGetValueRule' => __DIR__ . '/../..' . '/lib/rule/RexGetValueRule.php',
+        'rexstan\\RexLint' => __DIR__ . '/../..' . '/lib/RexLint.php',
         'rexstan\\RexMediaGetValueDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexMediaGetValueDynamicReturnTypeExtension.php',
         'rexstan\\RexResultsRenderer' => __DIR__ . '/../..' . '/lib/RexResultsRenderer.php',
         'rexstan\\RexSqlDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexSqlDynamicReturnTypeExtension.php',

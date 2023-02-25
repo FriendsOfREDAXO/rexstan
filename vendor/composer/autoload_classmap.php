@@ -1227,6 +1227,7 @@ return array(
     'rexstan\\RexGetRule' => $baseDir . '/lib/rule/RexGetRule.php',
     'rexstan\\RexGetValueReflection' => $baseDir . '/lib/reflection/RexGetValueReflection.php',
     'rexstan\\RexGetValueRule' => $baseDir . '/lib/rule/RexGetValueRule.php',
+    'rexstan\\RexLint' => $baseDir . '/lib/RexLint.php',
     'rexstan\\RexMediaGetValueDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexMediaGetValueDynamicReturnTypeExtension.php',
     'rexstan\\RexResultsRenderer' => $baseDir . '/lib/RexResultsRenderer.php',
     'rexstan\\RexSqlDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexSqlDynamicReturnTypeExtension.php',
