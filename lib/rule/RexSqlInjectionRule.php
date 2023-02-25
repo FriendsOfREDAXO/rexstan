@@ -43,11 +43,6 @@ final class RexSqlInjectionRule implements Rule
     private $exprPrinter;
 
     /**
-     * @var ReflectionProvider
-     */
-    private $reflectionProvider;
-
-    /**
      * @var array<string, int>
      */
     private $taintSinks = [
@@ -63,10 +58,8 @@ final class RexSqlInjectionRule implements Rule
 
     public function __construct(
         ExprPrinter $exprPrinter,
-        ReflectionProvider $reflectionProvider
     ) {
         $this->exprPrinter = $exprPrinter;
-        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function getNodeType(): string
@@ -277,15 +270,22 @@ final class RexSqlInjectionRule implements Rule
         if ($callableType instanceof ConstantArrayType) {
             $valueTypes = $callableType->getValueTypes();
 
-            if (2 === count($valueTypes) && $valueTypes[0] instanceof TypeWithClassName && $this->reflectionProvider->hasClass($valueTypes[0]->getClassName())) {
-                $classReflection = $this->reflectionProvider->getClass($valueTypes[0]->getClassName());
-                if ($valueTypes[1] instanceof ConstantStringType && $classReflection->hasMethod($valueTypes[1]->getValue())) {
-                    $methodReflection = $classReflection->getMethod($valueTypes[1]->getValue(), $scope);
+            if (2 === count($valueTypes)) {
+                list($objectType, $methodType) = $valueTypes;
 
-                    if ('sql' === PhpDocUtil::matchTaintEscape($methodReflection, $scope)) {
-                        return true;
+                $classReflections = $objectType->getObjectClassReflections();
+                $methodNames = $methodType->getConstantStrings();
+                foreach($classReflections as $classReflection) {
+                    foreach($methodNames as $methodStringType) {
+                        $methodReflection = $classReflection->getMethod($methodStringType->getValue(), $scope);
+
+                        if ('sql' !== PhpDocUtil::matchTaintEscape($methodReflection, $scope)) {
+                            return false;
+                        }
                     }
                 }
+
+                return true;
             }
         }
 
