@@ -6,6 +6,7 @@ use Exception;
 use rex_addon;
 use rex_dir;
 use rex_file;
+use rex_path;
 use RuntimeException;
 use staabm\PHPStanBaselineAnalysis\ResultPrinter;
 use function array_key_exists;
@@ -20,7 +21,8 @@ final class RexLint
     {
         $binary = self::linterBinPath();
 
-        $cmd = $binary.' '. \rex_path::src('addons/') .' --json --no-progress --no-colors --exclude .git --exclude .svn --exclude vendor';
+        $pathToLint = self::getPathsToLint();
+        $cmd = $binary.' '. implode(' ', $pathToLint) .' --json --no-progress --no-colors --exclude .git --exclude .svn --exclude vendor';
         $output = RexCmd::execCmd($cmd, $stderrOutput, $exitCode);
 
         $jsonResult = json_decode($output, true);
@@ -45,9 +47,27 @@ final class RexLint
                 }
                 return $errorPerFile;
             }
+        } else {
+            throw new \Exception('Unexpected result from parallel-lint: '. $output);
         }
 
         return [];
+    }
+
+    private static function getPathsToLint(): array {
+        $pathToLint = [
+            rex_path::src('addons/')
+        ];
+        $modulesDir = DeveloperAddonIntegration::getModulesDir();
+        if ($modulesDir !== null) {
+            $pathToLint[] = $modulesDir;
+        }
+
+        $templatesDir = DeveloperAddonIntegration::getTemplatesDir();
+        if ($templatesDir !== null) {
+            $pathToLint[] = $templatesDir;
+        }
+        return $pathToLint;
     }
 
     private static function linterBinPath(): string
