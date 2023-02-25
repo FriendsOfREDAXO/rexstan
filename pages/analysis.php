@@ -139,16 +139,8 @@ if (
     $section->setVar('sectionAttributes', ['class' => 'rexstan'], false);
 
     foreach ($phpstanResult['files'] as $file => $fileResult) {
-        $shortFile = str_replace($basePath, '', $file);
         $linkFile = preg_replace('/\s\(in context.*?$/', '', $file);
-        $title = '<i class="rexstan-open fa fa-folder-o"></i>'.
-                 '<i class="rexstan-closed fa fa-folder-open-o"></i> '.
-                 '<span class="text-muted">'.rex_escape(dirname($shortFile)).DIRECTORY_SEPARATOR.'</span>'
-                 .rex_escape(basename($shortFile)).
-                 ' <span class="badge">'.$fileResult['errors'].'</span>';
 
-        $section->setVar('title', $title, false);
-        $section->setVar('collapse', true);
         // $section->setVar('collapsed', 15 < $totalErrors && 1 < count($phpstanResult['files']));
         $content = '<ul class="list-group">';
         foreach ($fileResult['messages'] as $message) {
@@ -175,6 +167,15 @@ if (
         }
         $content .= '</ul>';
 
+        $shortFile = str_replace($basePath, '', $file);
+        $title = '<i class="rexstan-open fa fa-folder-o"></i>'.
+            '<i class="rexstan-closed fa fa-folder-open-o"></i> '.
+            '<span class="text-muted">'.rex_escape(dirname($shortFile)).DIRECTORY_SEPARATOR.'</span>'
+            .rex_escape(basename($shortFile)).
+            ' <span class="badge">'.$fileResult['errors'].'</span>';
+
+        $section->setVar('title', $title, false);
+        $section->setVar('collapse', true);
         $section->setVar('content', $content, false);
         echo $section->parse('core/page/section.php');
     }
