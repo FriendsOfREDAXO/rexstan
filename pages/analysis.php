@@ -133,26 +133,35 @@ if (
 
     echo rex_view::warning('Level-<strong>'.RexStanUserConfig::getLevel().'</strong>-Analyse: <strong>'. $totalErrors .'</strong> Probleme gefunden in <strong>'. count($phpstanResult['files']) .'</strong> Dateien.'. $baselineButton);
 
-    $basePath = rex_path::src('addons/');
-    $section = new rex_fragment();
-    $section->setVar('sectionAttributes', ['class' => 'rexstan'], false);
-
     foreach ($phpstanResult['files'] as $file => $fileResult) {
         $linkFile = preg_replace('/\s\(in context.*?$/', '', $file);
-        $content = rexstan_renderFileErrors($linkFile, $fileResult['messages']);
 
-        $shortFile = str_replace($basePath, '', $file);
-        $title = '<i class="rexstan-open fa fa-folder-o"></i>'.
-            '<i class="rexstan-closed fa fa-folder-open-o"></i> '.
-            '<span class="text-muted">'.rex_escape(dirname($shortFile)).DIRECTORY_SEPARATOR.'</span>'
-            .rex_escape(basename($shortFile)).
-            ' <span class="badge">'.$fileResult['errors'].'</span>';
-
-        $section->setVar('title', $title, false);
-        $section->setVar('collapse', true);
-        $section->setVar('content', $content, false);
-        echo $section->parse('core/page/section.php');
+        echo rexstan_renderFileBlock($linkFile, $fileResult['messages']);
     }
+}
+
+/**
+ * @param list<array{message: string, line: string, tip?: string}>  $messages
+ */
+function rexstan_renderFileBlock(string $file, array $messages): string
+{
+    $basePath = rex_path::src('addons/');
+
+    $content = rexstan_renderFileErrors($file, $messages);
+
+    $shortFile = str_replace($basePath, '', $file);
+    $title = '<i class="rexstan-open fa fa-folder-o"></i>'.
+        '<i class="rexstan-closed fa fa-folder-open-o"></i> '.
+        '<span class="text-muted">'.rex_escape(dirname($shortFile)).DIRECTORY_SEPARATOR.'</span>'
+        .rex_escape(basename($shortFile)).
+        ' <span class="badge">'.count($messages).'</span>';
+
+    $section = new rex_fragment();
+    $section->setVar('sectionAttributes', ['class' => 'rexstan'], false);
+    $section->setVar('title', $title, false);
+    $section->setVar('collapse', true);
+    $section->setVar('content', $content, false);
+    return $section->parse('core/page/section.php');
 }
 
 /**
