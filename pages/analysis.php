@@ -16,9 +16,15 @@ $settingsUrl = rex_url::backendPage('rexstan/settings');
 
 if (is_string($phpstanResult)) {
     // we moved settings files into config/.
-    if (false !== stripos($phpstanResult, "neon' is missing or is not readable.")) {
+    if (str_contains($phpstanResult, "neon' is missing or is not readable.")) {
         echo rex_view::warning(
-            "Das Einstellungsformat hat sich geändert. Bitte die <a href='". $settingsUrl ."'>Einstellungen öffnen</a> und erneut abspeichern. <br/><br/>".nl2br($phpstanResult)
+            "Das Einstellungsformat hat sich geändert. Bitte die <a href='".$settingsUrl."'>Einstellungen öffnen</a> und erneut abspeichern. <br/><br/>".nl2br(
+                $phpstanResult
+            )
+        );
+    } elseif (str_contains($phpstanResult, "polyfill-php8") && str_contains($phpstanResult, "does not exist")) {
+        echo rex_view::warning(
+            "Der REDAXO Core wurde aktualisiert. Bitte das rexstan AddOn re-installieren. <br/><br/>".nl2br($phpstanResult)
         );
     } else {
         echo rex_view::error(
