@@ -2,6 +2,8 @@
 
 namespace rexstan;
 
+use rex_developer_manager;
+
 final class DeveloperAddonIntegration {
     static public function getModulesDir(): ?string {
         if (class_exists(rex_developer_manager::class)) {
