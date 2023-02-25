@@ -12,8 +12,9 @@ if (count($errors) > 0) {
         echo RexResultsRenderer::renderFileBlock($file, $errors);
     }
 } else {
-    echo 'Untersuchte Pfade:<ul><li>'. implode('</li><li>', RexLint::getPathsToLint()) .'</li></ul>';
     echo rex_view::success('Gratulation, es wurden keine Syntax Fehler gefunden.');
+
+    echo '<p>Untersuchte Pfade<ul><li>'. implode('</li><li>', RexLint::getPathsToLint()) .'</li></ul></p>';
 }
 
 $cliVersion = RexCmd::getFormattedCliPhpVersion();
