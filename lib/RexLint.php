@@ -55,6 +55,9 @@ final class RexLint
         return [];
     }
 
+    /**
+     * @return list<string>
+     */
     private static function getPathsToLint(): array {
         $pathToLint = [
             rex_path::src('addons/')
