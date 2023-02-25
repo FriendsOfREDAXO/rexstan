@@ -57,8 +57,11 @@ final class RexSqlReflection
                 $valueNameType = new ConstantStringType($fieldName);
                 if ($sqlResultType->hasOffsetValueType($valueNameType)->yes()) {
                     $results[] = $sqlResultType->getOffsetValueType($valueNameType);
+                    continue;
                 }
             }
+
+            return null;
         }
 
         if (count($results) > 0) {

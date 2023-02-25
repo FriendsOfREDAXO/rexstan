@@ -11,6 +11,9 @@
 /tests/data/sql-get-value.php:45:Value 'doesNotExist' was not selected in the used sql-query.
 /tests/data/sql-get-value.php:46:Value 'doesNotExist' was not selected in the used sql-query.
 /tests/data/sql-get-value.php:47:Value 'doesNotExist' was not selected in the used sql-query.
+/tests/data/sql-get-value.php:162:All or one of the values 'doesNotExist'|'name' was not selected in the used sql-query.
+/tests/data/sql-get-value.php:163:All or one of the values 'doesNotExist'|'name' was not selected in the used sql-query.
+/tests/data/sql-get-value.php:164:All or one of the values 'doesNotExist'|'name' was not selected in the used sql-query.
 /tests/data/sql-injection.php:12:Possible SQL-injection in expression $mixed.
 /tests/data/sql-injection.php:13:Possible SQL-injection in expression $mixed.
 /tests/data/sql-injection.php:14:Possible SQL-injection in expression $mixed.
