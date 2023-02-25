@@ -2,6 +2,7 @@
 
 /** @var rex_addon $this */
 
+use rexstan\RexCmd;
 use rexstan\RexLint;
 use rexstan\RexResultsRenderer;
 
@@ -11,8 +12,9 @@ if (count($errors) > 0) {
         echo RexResultsRenderer::renderFileBlock($file, $errors);
     }
 } else {
+    echo 'Untersuchte Pfade:<ul><li>'. implode('</li><li>', RexLint::getPathsToLint()) .'</li></ul>';
     echo rex_view::success('Gratulation, es wurden keine Syntax Fehler gefunden.');
 }
 
-$cliVersion = \rexstan\RexCmd::getFormattedCliPhpVersion();
+$cliVersion = RexCmd::getFormattedCliPhpVersion();
 echo rex_view::warning('Verwendete CLI PHP Version: '. $cliVersion);
