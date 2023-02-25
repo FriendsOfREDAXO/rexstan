@@ -113,12 +113,15 @@ if (
 
     foreach ($phpstanResult['files'] as $file => $fileResult) {
         $linkFile = preg_replace('/\s\(in context.*?$/', '', $file);
+        if ($linkFile === null) {
+            throw new \PHPStan\ShouldNotHappenException();
+        }
 
         echo rexstan_renderFileBlock($linkFile, $fileResult['messages']);
     }
 }
 
-function rexstan_level9_jseffect() {
+function rexstan_level9_jseffect(): string {
     return
         '<script>
         var duration = 10 * 1000;
