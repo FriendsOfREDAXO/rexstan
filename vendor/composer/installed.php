@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '90af0ae681d16a540841fd606703526597deb725',
+        'reference' => '8965c9ea7df8504664d288688f3fc2edec338aca',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '90af0ae681d16a540841fd606703526597deb725',
+            'reference' => '8965c9ea7df8504664d288688f3fc2edec338aca',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -36,6 +36,18 @@
             'install_path' => __DIR__ . '/../dogma/dogma',
             'aliases' => array(),
             'dev_requirement' => false,
+        ),
+        'grogy/php-parallel-lint' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => '*',
+            ),
+        ),
+        'jakub-onderka/php-parallel-lint' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => '*',
+            ),
         ),
         'nette/http' => array(
             'pretty_version' => 'v3.2.1',
@@ -70,6 +82,15 @@
             'reference' => '570e980a201d8ed0236b0a62ddf2c9cbb2034039',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nikic/php-parser',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'php-parallel-lint/php-parallel-lint' => array(
+            'pretty_version' => 'v1.3.2',
+            'version' => '1.3.2.0',
+            'reference' => '6483c9832e71973ed29cf71bd6b3f4fde438a9de',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../php-parallel-lint/php-parallel-lint',
             'aliases' => array(),
             'dev_requirement' => false,
         ),

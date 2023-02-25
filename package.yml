@@ -12,6 +12,7 @@ page:
     subpages:
         settings: { title: translate:settings }
         analysis: { title: translate:analysis }
+        lint-analysis: { title: translate:lint_analysis }
         summary: { title: translate:summary }
         readme: { title: translate:readme, subPath: README.md }
         faq: { title: translate:faq, subPath: FAQ.md, icon: rex-icon fa-book }

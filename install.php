@@ -11,8 +11,8 @@ if (isset($REX['PATH_PROVIDER'])) {
 }
 
 require_once __DIR__ .'/lib/RexCmd.php';
-$cliPhpVersion = RexCmd::execCmd(RexCmd::phpExecutable().' -r "echo PHP_VERSION_ID;"', $stderrOutput, $exitCode);
-if (is_numeric($cliPhpVersion)) {
+$cliPhpVersion = RexCmd::getCliPhpVersion();
+if ($cliPhpVersion !== null) {
     if ($cliPhpVersion < 70300) {
         if (DIRECTORY_SEPARATOR === '\\') {
             $cliPhpPath = RexCmd::execCmd('where php', $stderrOutput, $exitCode);
