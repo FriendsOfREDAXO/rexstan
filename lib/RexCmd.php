@@ -85,4 +85,30 @@ final class RexCmd {
 
         return 'php';
     }
+
+    /**
+     * @return null|numeric-string
+     */
+    public static function getCliPhpVersion(): ?string {
+        $cliPhpVersion = self::execCmd(self::phpExecutable().' -r "echo PHP_VERSION_ID;"', $stderrOutput, $exitCode);
+
+        if (is_numeric($cliPhpVersion)) {
+            return $cliPhpVersion;
+        }
+
+        return null;
+    }
+
+    /**
+     * @return null|string
+     */
+    public static function getFormattedCliPhpVersion(): ?string {
+        $cliPhpVersion = self::execCmd(self::phpExecutable().' -r "echo phpversion();"', $stderrOutput, $exitCode);
+
+        if ($exitCode === 0) {
+            return $cliPhpVersion;
+        }
+
+        return null;
+    }
 }

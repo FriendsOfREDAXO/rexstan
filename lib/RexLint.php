@@ -45,6 +45,7 @@ final class RexLint
                     unset($error['file']);
                     $errorPerFile[$file][] = $error;
                 }
+                // @phpstan-ignore-next-line
                 return $errorPerFile;
             }
         } else {

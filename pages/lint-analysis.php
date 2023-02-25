@@ -11,7 +11,9 @@ if (count($errors) > 0) {
         echo RexResultsRenderer::renderFileBlock($file, $errors);
     }
 
-    return;
+} else {
+    echo rex_view::success('Gratulation, es wurden keine Syntax Fehler gefunden.');
 }
 
-echo rex_view::success('Gratulation, es wurden keine Syntax Fehler gefunden.');
+$cliVersion = \rexstan\RexCmd::getFormattedCliPhpVersion();
+echo rex_view::warning('Verwendete CLI PHP Version: '. $cliVersion);
