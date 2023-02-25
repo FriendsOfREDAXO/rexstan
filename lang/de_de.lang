@@ -1,6 +1,7 @@
 rexstan_name = rexstan
 
 rexstan_analysis = Web UI Analyse
+rexstan_lint_analysis = PHP Syntax Check
 rexstan_settings = Einstellungen
 rexstan_summary = Zusammenfassung
 rexstan_readme = Readme
