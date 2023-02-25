@@ -2,6 +2,12 @@
 
 namespace rexstan;
 
+use Exception;
+
+use function function_exists;
+use function is_resource;
+use function proc_open;
+
 final class RexCmd {
     /**
      * @param string $stderrOutput
