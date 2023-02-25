@@ -72,7 +72,7 @@ final class RexStanSettings
                 if ($modulesDir !== null) {
                     $scanTargets[$modulesDir] = 'developer: modules';
                 }
-                
+
                 $templatesDir = DeveloperAddonIntegration::getTemplatesDir();
                 if ($templatesDir !== null) {
                     $scanTargets[$templatesDir] = 'developer: templates';
