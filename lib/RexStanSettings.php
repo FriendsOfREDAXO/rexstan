@@ -67,9 +67,16 @@ final class RexStanSettings
         foreach (rex_addon::getAvailableAddons() as $availableAddon) {
             $scanTargets[$availableAddon->getPath()] = $availableAddon->getName();
 
-            if ('developer' === $availableAddon->getName() && class_exists(rex_developer_manager::class)) {
-                $scanTargets[rex_developer_manager::getBasePath() .'/modules/'] = 'developer: modules';
-                $scanTargets[rex_developer_manager::getBasePath() .'/templates/'] = 'developer: templates';
+            if ('developer' === $availableAddon->getName()) {
+                $modulesDir = DeveloperAddonIntegration::getModulesDir();
+                if ($modulesDir !== null) {
+                    $scanTargets[$modulesDir] = 'developer: modules';
+                }
+
+                $templatesDir = DeveloperAddonIntegration::getTemplatesDir();
+                if ($templatesDir !== null) {
+                    $scanTargets[$templatesDir] = 'developer: templates';
+                }
             }
         }
 
