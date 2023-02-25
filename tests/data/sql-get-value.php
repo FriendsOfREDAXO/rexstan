@@ -143,3 +143,23 @@ function unionstring($mixed) {
     assertType("'rex_id'|'rex_pid'", rex::getTable($unionS));
 }
 
+function maybeUnknownValue(): void
+{
+    if (rand(0,1) ===1) {
+        $val = 'doesNotExist';
+    } else {
+        $val = 'name';
+    }
+
+    $sql = rex_sql::factory();
+    $sql->setQuery('
+            SELECT  name
+            FROM    ' . rex::getTable('article') . '
+            WHERE   id = 1
+            LIMIT   1
+        ');
+
+    assertType('bool|float|int|string|null', $sql->getValue($val));
+    $sql->getDateTimeValue($val);
+    $sql->getArrayValue($val);
+}

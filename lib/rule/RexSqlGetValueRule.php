@@ -10,6 +10,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
+use PHPStan\Type\VerbosityLevel;
 use function count;
 use function in_array;
 
@@ -48,13 +49,19 @@ final class RexSqlGetValueRule implements Rule
         }
 
         $valueNameType = $scope->getType($args[0]->value);
-        if (!$valueNameType instanceof ConstantStringType) {
-            return [];
+        $strings = $valueNameType->getConstantStrings();
+
+        if (count($strings) == 1) {
+            return [
+                RuleErrorBuilder::message(
+                    sprintf("Value '%s' was not selected in the used sql-query.", $valueNameType->getValue())
+                )->build(),
+            ];
         }
 
         return [
             RuleErrorBuilder::message(
-                sprintf("Value '%s' was not selected in the used sql-query.", $valueNameType->getValue())
+                sprintf("All or one of the values %s was not selected in the used sql-query.", $valueNameType->describe(VerbosityLevel::precise()))
             )->build(),
         ];
     }
