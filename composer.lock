@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8b0476eccd867a2bf6ccc3b0ed796661",
+    "content-hash": "d95bdf8fc29b6da714fe284eefe412ec",
     "packages": [
         {
             "name": "composer/semver",
@@ -934,23 +934,23 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.2.62",
+            "version": "0.2.63",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "3c2e2c06119cc8636173e05e86ef1e3e18a6c07c"
+                "reference": "c64db58f1c18877b6c47f4eb9fb1a1f5c64d696f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/3c2e2c06119cc8636173e05e86ef1e3e18a6c07c",
-                "reference": "3c2e2c06119cc8636173e05e86ef1e3e18a6c07c",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/c64db58f1c18877b6c47f4eb9fb1a1f5c64d696f",
+                "reference": "c64db58f1c18877b6c47f4eb9fb1a1f5c64d696f",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2.0",
                 "composer/semver": "^3.2",
                 "php": "^7.2 || ^8.0",
-                "phpstan/phpstan": "^1.5.6"
+                "phpstan/phpstan": "^1.9.4"
             },
             "conflict": {
                 "sqlftw/sqlftw": "<0.1.6 || >0.1.7"
@@ -996,9 +996,9 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.62"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.63"
             },
-            "time": "2023-02-22T20:28:47+00:00"
+            "time": "2023-02-25T07:38:05+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
