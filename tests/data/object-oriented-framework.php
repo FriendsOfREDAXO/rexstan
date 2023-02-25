@@ -50,3 +50,13 @@ function doFoo()
     assertType('int<0, 4294967295>', $m->getValue('id'));
     assertType('int|string|null', $m->getValue('unknownColumn'));
 }
+
+function maybeArticle() {
+    if (rand(0, 1) === 1) {
+        $m = rex_article::get(1);
+    } else {
+        $m = rex_media::get('markus.jpg');
+    }
+    assertType('int<0, 4294967295>', $m->getValue('id'));
+    assertType('int|string|null', $m->getValue('unknownColumn'));
+}

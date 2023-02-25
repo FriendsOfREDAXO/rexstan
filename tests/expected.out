@@ -8,6 +8,7 @@
 /tests/data/object-oriented-framework.php:38:Unknown name 'unknownColumn' given to getValue().
 /tests/data/object-oriented-framework.php:46:Unknown name 'unknownColumn' given to getValue().
 /tests/data/object-oriented-framework.php:51:Unknown name 'unknownColumn' given to getValue().
+/tests/data/object-oriented-framework.php:58:No rex_media found with id 'markus.jpg'.
 /tests/data/sql-get-value.php:45:Value 'doesNotExist' was not selected in the used sql-query.
 /tests/data/sql-get-value.php:46:Value 'doesNotExist' was not selected in the used sql-query.
 /tests/data/sql-get-value.php:47:Value 'doesNotExist' was not selected in the used sql-query.
