@@ -7,7 +7,7 @@
 		"php": "^7.2 || ^8.0",
 		"composer-runtime-api": "^2.0",
 		"composer/semver": "^3.2",
-		"phpstan/phpstan": "^1.5.6"
+		"phpstan/phpstan": "^1.9.4"
 	},
 	"require-dev": {
 		"ext-mysqli": "*",
@@ -80,6 +80,9 @@
 			"phpstan analyse -c tests/stringify/config/phpstan.neon.dist",
 			"phpstan analyse -c tests/defaultFetchAssoc/config/phpstan.neon.dist",
 			"phpstan analyse -c tests/defaultFetchNumeric/config/phpstan.neon.dist"
+		],
+		"phpstan-baseline": [
+			"phpstan analyse -c phpstan.neon.dist --generate-baseline"
 		],
 		"phpunit": [
 			"phpunit -c tests/default/config/phpunit.xml",
