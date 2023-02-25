@@ -14,7 +14,7 @@ use function dirname;
 final class RexLint
 {
     /**
-     * @return list<array{type: string, file: string, line: int, message: string, normalizeMessage: string}>|null
+     * @return array<string, list<array{type: string, line: int, message: string, normalizeMessage: string}>|null
      */
     public static function runFromWeb()
     {
@@ -31,7 +31,19 @@ final class RexLint
         if (array_key_exists('results', $jsonResult)) {
             $results = $jsonResult['results'];
             if (array_key_exists('errors', $results)) {
-                return $results['errors'];
+                $lintErrors = $results['errors'];
+
+                $errorPerFile = [];
+                foreach($lintErrors as $error) {
+                    $file = $error['file'];
+
+                    if (!array_key_exists($file, $errorPerFile)) {
+                        $errorPerFile[$file] = [];
+                    }
+                    unset($error['file']);
+                    $errorPerFile[$file][] = $error;
+                }
+                return $errorPerFile;
             }
         }
 
