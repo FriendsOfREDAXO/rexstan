@@ -57,7 +57,7 @@ final class RexSqlInjectionRule implements Rule
     ];
 
     public function __construct(
-        ExprPrinter $exprPrinter,
+        ExprPrinter $exprPrinter
     ) {
         $this->exprPrinter = $exprPrinter;
     }
