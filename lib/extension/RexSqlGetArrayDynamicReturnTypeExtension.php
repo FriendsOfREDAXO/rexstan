@@ -52,8 +52,9 @@ final class RexSqlGetArrayDynamicReturnTypeExtension implements DynamicMethodRet
         $fetch = QueryReflector::FETCH_TYPE_ASSOC;
         if (count($args) >= 3) {
             $fetchType = $scope->getType($args[2]->value);
+            $scalars = $fetchType->getConstantScalarTypes();
 
-            if ($fetchType instanceof ConstantScalarType) {
+            foreach($scalars as $fetchType) {
                 if (PDO::FETCH_NUM === $fetchType->getValue()) {
                     $fetch = QueryReflector::FETCH_TYPE_NUMERIC;
                 }
