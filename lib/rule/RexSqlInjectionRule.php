@@ -94,7 +94,7 @@ final class RexSqlInjectionRule implements Rule
             return [];
         }
 
-        if (rex_sql::class !== $callerType->getClassname()) {
+        if (rex_sql::class !== $callerType->getClassName()) {
             return [];
         }
 
@@ -108,7 +108,7 @@ final class RexSqlInjectionRule implements Rule
 
         if ($sqlExpression instanceof Node\Expr\Variable) {
             $finder = new ExpressionFinder();
-            $queryStringExpression = $finder->findQueryStringExpression($sqlExpression);
+            $queryStringExpression = $finder->findAssignmentExpression($sqlExpression);
             if (null !== $queryStringExpression) {
                 $sqlExpression = $queryStringExpression;
             }
@@ -133,7 +133,7 @@ final class RexSqlInjectionRule implements Rule
     {
         if (true === $resolveVariables && $expr instanceof Node\Expr\Variable) {
             $finder = new ExpressionFinder();
-            $assignExpr = $finder->findQueryStringExpression($expr);
+            $assignExpr = $finder->findAssignmentExpression($expr);
 
             if (null !== $assignExpr) {
                 return $this->findInsecureSqlExpr($assignExpr, $scope);
