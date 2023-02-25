@@ -10,7 +10,6 @@ if (count($errors) > 0) {
     foreach ($errors as $file => $errors) {
         echo RexResultsRenderer::renderFileBlock($file, $errors);
     }
-
 } else {
     echo rex_view::success('Gratulation, es wurden keine Syntax Fehler gefunden.');
 }

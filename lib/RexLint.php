@@ -15,7 +15,7 @@ use function dirname;
 final class RexLint
 {
     /**
-     * @return array<string, list<array{type: string, line: int, message: string, normalizeMessage: string}>>|null
+     * @return array<string, list<array{type: string, line: int, message: string, normalizeMessage: string}>>
      */
     public static function runFromWeb()
     {
@@ -27,7 +27,7 @@ final class RexLint
 
         $jsonResult = json_decode($output, true);
         if (!is_array($jsonResult)) {
-            return null;
+            throw new \Exception('Unexpected result from parallel-lint: '. $output);
         }
 
         if (array_key_exists('results', $jsonResult)) {
