@@ -14,4 +14,4 @@ if (count($errors) > 0) {
     return;
 }
 
-echo rex_view::success('Gratulation, es wurden keine Lint Fehler gefunden.');
+echo rex_view::success('Gratulation, es wurden keine Syntax Fehler gefunden.');

@@ -14,7 +14,7 @@ use function dirname;
 final class RexLint
 {
     /**
-     * @return array<string, list<array{type: string, line: int, message: string, normalizeMessage: string}>|null
+     * @return array<string, list<array{type: string, line: int, message: string, normalizeMessage: string}>>|null
      */
     public static function runFromWeb()
     {
