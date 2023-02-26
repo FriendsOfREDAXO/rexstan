@@ -78,5 +78,5 @@ function getKeyPairArray(): void
         PDO::FETCH_KEY_PAIR
     );
 
-    assertType('array<string, int>', $data);
+    assertType('array<string, int<0, 4294967295>>', $data);
 }
