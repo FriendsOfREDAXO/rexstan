@@ -16,6 +16,7 @@ use PHPStan\Type\IntegerType;
 use PHPStan\Type\Type;
 use rex_sql;
 use staabm\PHPStanDba\QueryReflection\QueryReflector;
+use staabm\PHPStanDba\UnresolvableQueryException;
 use function count;
 use function in_array;
 
@@ -67,7 +68,12 @@ final class RexSqlGetArrayDynamicReturnTypeExtension implements DynamicMethodRet
             }
         }
 
-        $statementType = RexSqlReflection::inferStatementType($queryExpr, $parameterTypes, $scope, $fetch);
+        try {
+            $statementType = RexSqlReflection::inferStatementType($queryExpr, $parameterTypes, $scope, $fetch);
+        } catch (UnresolvableQueryException $e) {
+            return null;
+        }
+
         if (null === $statementType) {
             return null;
         }
