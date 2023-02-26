@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0ce22af9c3975db431b0d4831de779a7",
+    "content-hash": "847f611c157619b508cb936d0aa72056",
     "packages": [
         {
             "name": "composer/semver",
@@ -991,16 +991,16 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.2.63",
+            "version": "0.2.64",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "c64db58f1c18877b6c47f4eb9fb1a1f5c64d696f"
+                "reference": "b7d0f281cf1e94fa2c668eba55fc43534a3264ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/c64db58f1c18877b6c47f4eb9fb1a1f5c64d696f",
-                "reference": "c64db58f1c18877b6c47f4eb9fb1a1f5c64d696f",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/b7d0f281cf1e94fa2c668eba55fc43534a3264ed",
+                "reference": "b7d0f281cf1e94fa2c668eba55fc43534a3264ed",
                 "shasum": ""
             },
             "require": {
@@ -1018,6 +1018,7 @@
                 "ext-pdo": "*",
                 "php-parallel-lint/php-parallel-lint": "^1.3",
                 "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan-deprecation-rules": "^1.1",
                 "phpstan/phpstan-php-parser": "^1.1",
                 "phpstan/phpstan-phpunit": "^1.0",
                 "phpstan/phpstan-strict-rules": "^1.1",
@@ -1053,9 +1054,9 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.63"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.64"
             },
-            "time": "2023-02-25T07:38:05+00:00"
+            "time": "2023-02-26T12:14:46+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
