@@ -22,9 +22,17 @@ final class PublicClassMethodCollector implements Collector
      * @var string[]
      */
     private const SKIPPED_TYPES = [
+        // symfony
         'Symfony\Component\EventDispatcher\EventSubscriberInterface',
         'Twig\Extension\ExtensionInterface',
         'Symfony\Bundle\FrameworkBundle\Controller\Controller',
+        // laravel
+        'Illuminate\Console\Command',
+        'Livewire\Component',
+        'Illuminate\Http\Request',
+        'Illuminate\Contracts\Mail\Mailable',
+        'Illuminate\Contracts\Queue\ShouldQueue',
+        'Illuminate\Support\ServiceProvider',
     ];
 
     /**

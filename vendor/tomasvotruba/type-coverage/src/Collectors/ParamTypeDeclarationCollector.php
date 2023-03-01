@@ -12,8 +12,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Collectors\Collector;
 
 /**
- * @implements Collector<FunctionLike, array{int, int, string}>>
- *
  * @see \TomasVotruba\TypeCoverage\Rules\ParamTypeCoverageRule
  */
 final class ParamTypeDeclarationCollector implements Collector
@@ -38,7 +36,7 @@ final class ParamTypeDeclarationCollector implements Collector
      * @param FunctionLike $node
      * @return array{int, int, string}
      */
-    public function processNode(Node $node, Scope $scope): ?array
+    public function processNode(Node $node, Scope $scope): array
     {
         if ($this->shouldSkipFunctionLike($node)) {
             return [0, 0, ''];
