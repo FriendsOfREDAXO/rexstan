@@ -1238,6 +1238,8 @@ return array(
     'rexstan\\RexSqlReflection' => $baseDir . '/lib/reflection/RexSqlReflection.php',
     'rexstan\\RexSqlSetQueryDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexSqlSetQueryDynamicReturnTypeExtension.php',
     'rexstan\\RexSqlSetQueryTypeSpecifyingExtension' => $baseDir . '/lib/extension/RexSqlSetQueryTypeSpecifyingExtension.php',
+    'rexstan\\RexSqlSetTableDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexSqlSetTableDynamicReturnTypeExtension.php',
+    'rexstan\\RexSqlSetTableRule' => $baseDir . '/lib/rule/RexSqlSetTableRule.php',
     'rexstan\\RexStan' => $baseDir . '/lib/RexStan.php',
     'rexstan\\RexStanSettings' => $baseDir . '/lib/RexStanSettings.php',
     'rexstan\\RexStanTip' => $baseDir . '/lib/RexStanTip.php',

@@ -34,6 +34,7 @@
 /tests/data/sql-injection.php:67:Possible SQL-injection in expression str_replace(['_', '%'], ['\\_', '\\%'], $prefix).
 /tests/data/sql-injection.php:174:Possible SQL-injection in expression $_GET['id'].
 /tests/data/sql-injection.php:175:Using $_GET is forbidden, use rex_request::get() or rex_get() instead.
+/tests/data/sql-set-table.php:14:Table 'does_not_exist' does not exist.
 /tests/data/superglobals.php:6:Using $_SESSION is forbidden, use rex_request::session(), rex_request::setSession() or rex_session(), rex_set_session() instead for proper per instance scoping.
 /tests/data/superglobals.php:7:Using $_GET is forbidden, use rex_request::get() or rex_get() instead.
 /tests/data/superglobals.php:8:Using $_POST is forbidden, use rex_request::post() or rex_post() instead.

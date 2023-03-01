@@ -65,6 +65,10 @@ services:
         tags:
             - phpstan.rules.rule
     -
+        class: rexstan\RexSqlSetTableRule
+        tags:
+            - phpstan.rules.rule
+    -
         class: rexstan\RexSqlInjectionRule
         tags:
             - phpstan.rules.rule
