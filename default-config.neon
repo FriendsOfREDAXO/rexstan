@@ -13,6 +13,7 @@ parameters:
 
     # don't report not found ignores
     reportUnmatchedIgnoredErrors: false
+    reportWrongPhpDocTypeInVarTag: true
 
     ignoreErrors:
         # ignore errors when analyzing rex modules/templates, caused by rex-vars
