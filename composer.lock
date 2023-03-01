@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2c5dd6548962575c12414213f0a61041",
+    "content-hash": "40b444278f84b1068fcf4488d6064159",
     "packages": [
         {
             "name": "composer/semver",
@@ -1445,16 +1445,16 @@
         },
         {
             "name": "tomasvotruba/type-coverage",
-            "version": "0.0.9.72",
+            "version": "0.0.10.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/type-coverage.git",
-                "reference": "f0a5f3bbb3a755ee1fe9664a9a8a2c7ac35f650f"
+                "reference": "e284bbbb7c4e58f79a75616cb8443a87415ddb3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/f0a5f3bbb3a755ee1fe9664a9a8a2c7ac35f650f",
-                "reference": "f0a5f3bbb3a755ee1fe9664a9a8a2c7ac35f650f",
+                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/e284bbbb7c4e58f79a75616cb8443a87415ddb3e",
+                "reference": "e284bbbb7c4e58f79a75616cb8443a87415ddb3e",
                 "shasum": ""
             },
             "require": {
@@ -1482,7 +1482,7 @@
             "description": "Measure type coverage of your project",
             "support": {
                 "issues": "https://github.com/TomasVotruba/type-coverage/issues",
-                "source": "https://github.com/TomasVotruba/type-coverage/tree/0.0.9.72"
+                "source": "https://github.com/TomasVotruba/type-coverage/tree/0.0.10.72"
             },
             "funding": [
                 {
@@ -1494,7 +1494,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-12T10:34:13+00:00"
+            "time": "2023-02-27T10:24:57+00:00"
         },
         {
             "name": "tomasvotruba/unused-public",
