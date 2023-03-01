@@ -76,7 +76,7 @@ class DeepConcatError
 function safeArray($_id, string $langID)
 {
     $select = rex_sql::factory();
-    $select->setTable('article');
+    $select->setTable('rex_article');
     $select->setWhere(['id' => $_id, 'clang_id' => $langID]);
 }
 
@@ -88,7 +88,7 @@ function safeArray($_id, string $langID)
 function safeScalars($mixed, string $s, $numericS, int $i, float $f, bool $b, array $arr, $intArr)
 {
     $select = rex_sql::factory();
-    $select->setTable('article');
+    $select->setTable('rex_article');
     $select->setWhere('id = ' . $select->escape($s));
     $select->setWhere('id = ' . $select->escape($mixed));
     $select->setWhere($select->escapeIdentifier($s). ' = ' . $select->escape($mixed));
