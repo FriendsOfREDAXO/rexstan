@@ -17,8 +17,8 @@ use TomasVotruba\UnusedPublic\Collectors\PublicClassMethodCollector;
 use TomasVotruba\UnusedPublic\Collectors\StaticMethodCallCollector;
 use TomasVotruba\UnusedPublic\Configuration;
 use TomasVotruba\UnusedPublic\Enum\RuleTips;
-use TomasVotruba\UnusedPublic\Twig\PossibleTwigMethodCallsProvider;
-use TomasVotruba\UnusedPublic\Twig\UsedMethodAnalyzer;
+use TomasVotruba\UnusedPublic\Templates\TemplateMethodCallsProvider;
+use TomasVotruba\UnusedPublic\Templates\UsedMethodAnalyzer;
 use TomasVotruba\UnusedPublic\ValueObject\LocalAndExternalMethodCallReferences;
 
 /**
@@ -39,15 +39,15 @@ final class LocalOnlyPublicClassMethodRule implements Rule
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\Twig\UsedMethodAnalyzer
+     * @var \TomasVotruba\UnusedPublic\Templates\UsedMethodAnalyzer
      */
     private $usedMethodAnalyzer;
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\Twig\PossibleTwigMethodCallsProvider
+     * @var \TomasVotruba\UnusedPublic\Templates\TemplateMethodCallsProvider
      */
-    private $possibleTwigMethodCallsProvider;
+    private $templateMethodCallsProvider;
 
     /**
      * @readonly
@@ -58,12 +58,12 @@ final class LocalOnlyPublicClassMethodRule implements Rule
     public function __construct(
         Configuration $configuration,
         UsedMethodAnalyzer $usedMethodAnalyzer,
-        PossibleTwigMethodCallsProvider $possibleTwigMethodCallsProvider,
+        TemplateMethodCallsProvider $templateMethodCallsProvider,
         MethodCallCollectorMapper $methodCallCollectorMapper
     ) {
         $this->configuration = $configuration;
         $this->usedMethodAnalyzer = $usedMethodAnalyzer;
-        $this->possibleTwigMethodCallsProvider = $possibleTwigMethodCallsProvider;
+        $this->templateMethodCallsProvider = $templateMethodCallsProvider;
         $this->methodCallCollectorMapper = $methodCallCollectorMapper;
     }
 
@@ -82,7 +82,7 @@ final class LocalOnlyPublicClassMethodRule implements Rule
             return [];
         }
 
-        $twigMethodNames = $this->possibleTwigMethodCallsProvider->provide();
+        $twigMethodNames = $this->templateMethodCallsProvider->provideTwigMethodCalls();
 
         $localAndExternalMethodCallReferences = $this->methodCallCollectorMapper->mapToLocalAndExternal(
             $node->get(MethodCallCollector::class),

@@ -15,6 +15,8 @@ use TomasVotruba\UnusedPublic\Collectors\ClassConstFetchCollector;
 use TomasVotruba\UnusedPublic\Collectors\PublicClassLikeConstCollector;
 use TomasVotruba\UnusedPublic\Configuration;
 use TomasVotruba\UnusedPublic\Enum\RuleTips;
+use TomasVotruba\UnusedPublic\Enum\Template\BladeRegex;
+use TomasVotruba\UnusedPublic\Templates\TemplateRegexFinder;
 
 /**
  * @see \TomasVotruba\UnusedPublic\Tests\Rules\UnusedPublicClassConstRule\UnusedPublicClassConstRuleTest
@@ -32,9 +34,16 @@ final class UnusedPublicClassConstRule implements Rule
      */
     private $configuration;
 
-    public function __construct(Configuration $configuration)
+    /**
+     * @readonly
+     * @var \TomasVotruba\UnusedPublic\Templates\TemplateRegexFinder
+     */
+    private $templateRegexFinder;
+
+    public function __construct(Configuration $configuration, TemplateRegexFinder $templateRegexFinder)
     {
         $this->configuration = $configuration;
+        $this->templateRegexFinder = $templateRegexFinder;
     }
 
     public function getNodeType(): string
@@ -52,6 +61,13 @@ final class UnusedPublicClassConstRule implements Rule
             return [];
         }
 
+        $bladeConstFetchNames = $this->templateRegexFinder->find(
+            $this->configuration->getTemplatePaths(),
+            'blade.php',
+            [BladeRegex::INNER_REGEX, BladeRegex::TAG_REGEX],
+            BladeRegex::CONSTANT_FETCH_REGEX
+        );
+
         $classConstFetchCollector = $node->get(ClassConstFetchCollector::class);
         $publicClassLikeConstCollector = $node->get(PublicClassLikeConstCollector::class);
 
@@ -60,7 +76,12 @@ final class UnusedPublicClassConstRule implements Rule
         foreach ($publicClassLikeConstCollector as $filePath => $declarationsGroups) {
             foreach ($declarationsGroups as $declarationGroup) {
                 foreach ($declarationGroup as [$className, $constantName, $line]) {
-                    if ($this->isClassConstantUsed($className, $constantName, $classConstFetchCollector)) {
+                    if ($this->isClassConstantUsed(
+                        $className,
+                        $constantName,
+                        $classConstFetchCollector,
+                        $bladeConstFetchNames
+                    )) {
                         continue;
                     }
 
@@ -81,9 +102,19 @@ final class UnusedPublicClassConstRule implements Rule
 
     /**
      * @param mixed[] $usedConstFetches
+     * @param string[] $bladeConstFetchNames
      */
-    private function isClassConstantUsed(string $className, string $constantName, array $usedConstFetches): bool
-    {
+    private function isClassConstantUsed(
+        string $className,
+        string $constantName,
+        array $usedConstFetches,
+        array $bladeConstFetchNames
+    ): bool {
+        // used in template
+        if (in_array($constantName, $bladeConstFetchNames, true)) {
+            return true;
+        }
+
         $publicConstantReference = $className . '::' . $constantName;
 
         $usedConstFetches = Arrays::flatten($usedConstFetches);

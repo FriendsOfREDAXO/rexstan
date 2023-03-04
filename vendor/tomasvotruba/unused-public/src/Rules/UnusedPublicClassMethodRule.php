@@ -17,8 +17,8 @@ use TomasVotruba\UnusedPublic\Collectors\PublicClassMethodCollector;
 use TomasVotruba\UnusedPublic\Collectors\StaticMethodCallCollector;
 use TomasVotruba\UnusedPublic\Configuration;
 use TomasVotruba\UnusedPublic\Enum\RuleTips;
-use TomasVotruba\UnusedPublic\Twig\PossibleTwigMethodCallsProvider;
-use TomasVotruba\UnusedPublic\Twig\UsedMethodAnalyzer;
+use TomasVotruba\UnusedPublic\Templates\TemplateMethodCallsProvider;
+use TomasVotruba\UnusedPublic\Templates\UsedMethodAnalyzer;
 
 /**
  * @see \TomasVotruba\UnusedPublic\Tests\Rules\UnusedPublicClassMethodRule\UnusedPublicClassMethodRuleTest
@@ -38,13 +38,13 @@ final class UnusedPublicClassMethodRule implements Rule
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\Twig\PossibleTwigMethodCallsProvider
+     * @var \TomasVotruba\UnusedPublic\Templates\TemplateMethodCallsProvider
      */
-    private $possibleTwigMethodCallsProvider;
+    private $templateMethodCallsProvider;
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\Twig\UsedMethodAnalyzer
+     * @var \TomasVotruba\UnusedPublic\Templates\UsedMethodAnalyzer
      */
     private $usedMethodAnalyzer;
 
@@ -56,12 +56,12 @@ final class UnusedPublicClassMethodRule implements Rule
 
     public function __construct(
         Configuration $configuration,
-        PossibleTwigMethodCallsProvider $possibleTwigMethodCallsProvider,
+        TemplateMethodCallsProvider $templateMethodCallsProvider,
         UsedMethodAnalyzer $usedMethodAnalyzer,
         MethodCallCollectorMapper $methodCallCollectorMapper
     ) {
         $this->configuration = $configuration;
-        $this->possibleTwigMethodCallsProvider = $possibleTwigMethodCallsProvider;
+        $this->templateMethodCallsProvider = $templateMethodCallsProvider;
         $this->usedMethodAnalyzer = $usedMethodAnalyzer;
         $this->methodCallCollectorMapper = $methodCallCollectorMapper;
     }
@@ -81,7 +81,8 @@ final class UnusedPublicClassMethodRule implements Rule
             return [];
         }
 
-        $twigMethodNames = $this->possibleTwigMethodCallsProvider->provide();
+        $twigMethodNames = $this->templateMethodCallsProvider->provideTwigMethodCalls();
+        $bladeMethodNames = $this->templateMethodCallsProvider->provideBladeMethodCalls();
 
         $completeMethodCallReferences = $this->methodCallCollectorMapper->mapToMethodCallReferences(
             $node->get(MethodCallCollector::class),
@@ -99,7 +100,8 @@ final class UnusedPublicClassMethodRule implements Rule
                     $className,
                     $methodName,
                     $completeMethodCallReferences,
-                    $twigMethodNames
+                    $twigMethodNames,
+                    $bladeMethodNames
                 )) {
                     continue;
                 }
@@ -119,16 +121,22 @@ final class UnusedPublicClassMethodRule implements Rule
     }
 
     /**
-     * @param string[] $twigMethodNames
      * @param string[] $completeMethodCallReferences
+     * @param string[] $twigMethodNames
+     * @param string[] $bladeMethodNames
      */
     private function isUsedClassMethod(
         string $className,
         string $methodName,
         array $completeMethodCallReferences,
-        array $twigMethodNames
+        array $twigMethodNames,
+        array $bladeMethodNames
     ): bool {
         if ($this->usedMethodAnalyzer->isUsedInTwig($methodName, $twigMethodNames)) {
+            return true;
+        }
+
+        if (in_array($methodName, $bladeMethodNames, true)) {
             return true;
         }
 
