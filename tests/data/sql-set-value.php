@@ -20,6 +20,8 @@ function setArrayValue(): void
     $sql->setTable(rex::getTable('article'));
     $sql->setArrayValue('name', [1, 2, 3]);
     $sql->setArrayValue('doesNotExist', [1, 2, 3]);
+
+    $sql->setArrayValue('id', [1, 2, 3]);
 }
 
 function unionTableName(): void

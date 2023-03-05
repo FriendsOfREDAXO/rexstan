@@ -10,6 +10,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
+use PHPStan\Type\StringType;
 use PHPStan\Type\VerbosityLevel;
 use function count;
 use function in_array;
@@ -45,6 +46,14 @@ final class RexSqlSetValueRule implements Rule
 
         $offsetValueType = RexSqlReflection::getOffsetValueType($methodCall, $scope);
         if (null !== $offsetValueType) {
+            if (strtolower($methodCall->name->toString()) === 'setarrayvalue' && !$offsetValueType->accepts(new StringType(), false)->yes()) {
+                return [
+                    RuleErrorBuilder::message(
+                        sprintf("setArrayValue() expects a database column which can store string values.")
+                    )->build(),
+                ];
+            }
+
             return [];
         }
 
