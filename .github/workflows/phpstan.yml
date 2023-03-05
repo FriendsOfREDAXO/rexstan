@@ -26,10 +26,6 @@ jobs:
           php-version: ${{ matrix.php-version }}
           coverage: none
 
-      - uses: "ramsey/composer-install@v2"
-        with:
-          composer-options: "--prefer-dist --no-progress --no-suggest"
-
       - run: composer require redaxo/source --ignore-platform-req=php
 
       - run: composer phpstan
