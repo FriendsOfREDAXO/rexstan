@@ -1,7 +1,3 @@
-includes:
-    - default-config.neon
-    - config/_from-r5_15.neon
-
 parameters:
     level: 8
     paths:
