@@ -12,7 +12,7 @@ use rex_var;
 use function get_class;
 
 /**
- * @implements Collector<FileNode, array<int, array{class-string, int}>>
+ * @implements Collector<FileNode, array<int, array{string, array<string, scalar>}>>
  */
 final class RexModuleInputVarsCollector implements Collector
 {
