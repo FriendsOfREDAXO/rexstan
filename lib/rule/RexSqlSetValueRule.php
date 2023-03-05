@@ -54,7 +54,7 @@ final class RexSqlSetValueRule implements Rule
         if (count($strings) === 1) {
             return [
                 RuleErrorBuilder::message(
-                    sprintf("Value %s was not selected in the used sql-query.", $valueNameType->describe(VerbosityLevel::precise()))
+                    sprintf("Value %s does not exist in table selected via setTable().", $valueNameType->describe(VerbosityLevel::precise()))
                 )->build(),
             ];
         }
