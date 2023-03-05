@@ -190,9 +190,9 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'PHPStan\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
-            1 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
-            2 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
-            3 => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src',
+            1 => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src',
+            2 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
+            3 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
         ),
         'Composer\\Semver\\' => 
         array (
@@ -1433,7 +1433,10 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'rexstan\\RexSqlReflection' => __DIR__ . '/../..' . '/lib/reflection/RexSqlReflection.php',
         'rexstan\\RexSqlSetQueryDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexSqlSetQueryDynamicReturnTypeExtension.php',
         'rexstan\\RexSqlSetQueryTypeSpecifyingExtension' => __DIR__ . '/../..' . '/lib/extension/RexSqlSetQueryTypeSpecifyingExtension.php',
+        'rexstan\\RexSqlSetTableDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexSqlSetTableDynamicReturnTypeExtension.php',
         'rexstan\\RexSqlSetTableRule' => __DIR__ . '/../..' . '/lib/rule/RexSqlSetTableRule.php',
+        'rexstan\\RexSqlSetTableTypeSpecifyingExtension' => __DIR__ . '/../..' . '/lib/extension/RexSqlSetTableTypeSpecifyingExtension.php',
+        'rexstan\\RexSqlSetValueRule' => __DIR__ . '/../..' . '/lib/rule/RexSqlSetValueRule.php',
         'rexstan\\RexStan' => __DIR__ . '/../..' . '/lib/RexStan.php',
         'rexstan\\RexStanSettings' => __DIR__ . '/../..' . '/lib/RexStanSettings.php',
         'rexstan\\RexStanTip' => __DIR__ . '/../..' . '/lib/RexStanTip.php',
