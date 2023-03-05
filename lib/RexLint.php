@@ -22,7 +22,7 @@ final class RexLint
         $binary = self::linterBinPath();
 
         $pathToLint = self::getPathsToLint();
-        $cmd = $binary.' '. implode(' ', $pathToLint) .' --json --no-progress --no-colors --exclude .git --exclude .svn --exclude vendor --exclude node_modules';
+        $cmd = $binary.' '. implode(' ', $pathToLint) .' --json --no-progress --no-colors --exclude .git --exclude .svn --exclude .idea --exclude vendor --exclude node_modules';
         $output = RexCmd::execCmd($cmd, $stderrOutput, $exitCode);
 
         $jsonResult = json_decode($output, true);
