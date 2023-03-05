@@ -61,19 +61,4 @@ final class RexTemplateVarsRule implements Rule
 
         return $errors;
     }
-
-    /**
-     * @param list<array{class-string, string}>  $values
-     * @param class-string $varClass
-     * @return bool
-     */
-    private function arrayContainsVar(array $values, string $varClass, string $id)
-    {
-        foreach ($values as [$_varClass, $_id]) {
-            if ($_varClass === $varClass && $_id === $id) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
