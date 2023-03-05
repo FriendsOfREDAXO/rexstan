@@ -47,7 +47,8 @@
 /tests/data/sql-injection.php:67:Possible SQL-injection in expression str_replace(['_', '%'], ['\\_', '\\%'], $prefix).
 /tests/data/sql-injection.php:174:Possible SQL-injection in expression $_GET['id'].
 /tests/data/sql-injection.php:175:Using $_GET is forbidden, use rex_request::get() or rex_get() instead.
-/tests/data/sql-set-table.php:14:Table 'does_not_exist' does not exist.
+/tests/data/sql-set-table.php:15:Table 'does_not_exist' does not exist.
+/tests/data/sql-set-table.php:23:Table 'rex_does_not_exist' does not exist.
 /tests/data/sql-set-value.php:14:Value 'doesNotExist' does not exist in table selected via setTable().
 /tests/data/sql-set-value.php:22:Value 'doesNotExist' does not exist in table selected via setTable().
 /tests/data/sql-set-value.php:24:setArrayValue() expects a database column which can store string values.
