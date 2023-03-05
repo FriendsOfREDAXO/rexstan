@@ -26,6 +26,7 @@ jobs:
           php-version: ${{ matrix.php-version }}
           coverage: none
 
-      - run: composer require redaxo/source --ignore-platform-req=php
+      - run: composer config --unset platform.php
+      - run: composer require redaxo/source
 
       - run: composer phpstan
