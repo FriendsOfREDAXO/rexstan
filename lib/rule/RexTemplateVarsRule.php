@@ -24,6 +24,11 @@ final class RexTemplateVarsRule implements Rule
 
     public function processNode(Node $node, Scope $scope): array
     {
+        if (!method_exists('rex_template', 'exists')) {
+            // BC
+            return [];
+        }
+
         $allTemplateVars = $node->get(RexTemplateVarsCollector::class);
 
         $errors = [];
