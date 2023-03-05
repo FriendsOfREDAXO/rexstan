@@ -1,3 +1,16 @@
+/tests/data/addons/developer/Module Navigationspunkt (Anker).input.php:-1:Module "Module Navigationspunkt (Anker)" contains input value "REX_INPUT_VALUE[3]" which is not used in module output.
+/tests/data/addons/developer/Module Navigationspunkt (Anker).input.php:-1:Module "Module Navigationspunkt (Anker)" contains input value "REX_LINKLIST[5]" which is not used in module output.
+/tests/data/addons/developer/Module Navigationspunkt (Anker).input.php:-1:Module "Module Navigationspunkt (Anker)" contains input value "REX_MEDIA[9]" which is not used in module output.
+/tests/data/addons/developer/Module Navigationspunkt (Anker).input.php:-1:Module "Module Navigationspunkt (Anker)" contains input value "REX_VALUE[3]" which is not used in module output.
+/tests/data/addons/developer/Module Navigationspunkt (Anker).input.php:-1:Module "Module Navigationspunkt (Anker)" contains ouput value "REX_LINKLIST[10]" which is not used in module input.
+/tests/data/addons/developer/Module Navigationspunkt (Anker).input.php:-1:Module "Module Navigationspunkt (Anker)" contains ouput value "REX_LINK[1]" which is not used in module input.
+/tests/data/addons/developer/Module Navigationspunkt (Anker).input.php:-1:Module "Module Navigationspunkt (Anker)" contains ouput value "REX_MEDIA[2]" which is not used in module input.
+/tests/data/addons/developer/Module Navigationspunkt (Anker).input.php:-1:Module "Module Navigationspunkt (Anker)" contains ouput value "REX_VALUE[10]" which is not used in module input.
+/tests/data/addons/developer/Module Navigationspunkt (Anker).output.php:44:Loose comparison via "==" is not allowed.
+/tests/data/addons/developer/Module Navigationspunkt (Anker).output.php:47:Loose comparison via "==" is not allowed.
+/tests/data/addons/developer/Template ctypes.template.php:-1:Template "Template ctypes" includes invalid template by ID "REX_TEMPLATE[99999999]"
+/tests/data/addons/developer/Template ctypes.template.php:-1:Template "Template ctypes" includes invalid template by ID "REX_TEMPLATE[99999999]"
+/tests/data/addons/developer/Template ctypes.template.php:-1:Template "Template ctypes" includes invalid template by key "REX_TEMPLATE[doesNotExist]"
 /tests/data/any-get.php:12:No rex_user found with id 9999999.
 /tests/data/any-get.php:13:No rex_media found with id 'does-not-exist.jpg'.
 /tests/data/any-get.php:14:No rex_article found with id 9999999.

@@ -2,6 +2,7 @@
 
 namespace rexstan;
 
+use PHPStan\ShouldNotHappenException;
 use rex_editor;
 use rex_fragment;
 use rex_path;
@@ -64,6 +65,9 @@ final class RexResultsRenderer {
     static private function renderFileErrors(string $file, array $messages): string {
         $content = '<ul class="list-group">';
         foreach ($messages as $message) {
+            if (!is_numeric($message['line'])) {
+                throw new ShouldNotHappenException();
+            }
             $content .= '<li class="list-group-item rexstan-message">';
             $content .= '<span class="rexstan-linenumber">' .sprintf('%5d', $message['line']).':</span>';
             $error = rex_escape($message['message']);
