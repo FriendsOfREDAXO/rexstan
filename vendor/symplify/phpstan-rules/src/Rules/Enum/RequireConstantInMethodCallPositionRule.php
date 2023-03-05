@@ -28,11 +28,13 @@ final class RequireConstantInMethodCallPositionRule implements Rule
      */
     public const ERROR_MESSAGE = 'Parameter argument on position %d must use constant';
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Matcher\PositionMatcher
      */
     private $positionMatcher;
     /**
      * @var array<class-string, array<string, int[]>>
+     * @readonly
      */
     private $requiredConstantInMethodCall;
 

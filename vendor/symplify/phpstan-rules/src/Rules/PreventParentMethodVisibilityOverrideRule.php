@@ -24,6 +24,7 @@ final class PreventParentMethodVisibilityOverrideRule implements Rule
      */
     public const ERROR_MESSAGE = 'Change "%s()" method visibility to "%s" to respect parent method visibility.';
     /**
+     * @readonly
      * @var \PHPStan\Reflection\ReflectionProvider
      */
     private $reflectionProvider;

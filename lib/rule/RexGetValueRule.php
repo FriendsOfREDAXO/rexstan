@@ -66,18 +66,18 @@ final class RexGetValueRule implements Rule
             return [];
         }
 
-        if (!in_array($callerType->getClassname(), $this->classes, true)) {
+        if (!in_array($callerType->getClassName(), $this->classes, true)) {
             return [];
         }
 
         $nameType = $scope->getType($args[0]->value);
-        $names = TypeUtils::getConstantStrings($nameType);
+        $names = $nameType->getConstantStrings();
         if (0 === count($names)) {
             return [];
         }
 
         $valueReflection = new RexGetValueReflection();
-        if (null !== $valueReflection->getValueType($nameType, $callerType->getClassname())) {
+        if (null !== $valueReflection->getValueType($nameType, $callerType->getClassName())) {
             return [];
         }
 

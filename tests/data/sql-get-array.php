@@ -68,3 +68,15 @@ function getArray3(array $arr): void
 
     assertType('array<int, array{name: string}>', $array);
 }
+
+function getKeyPairArray(): void
+{
+    $sql = rex_sql::factory();
+    $data = $sql->getArray(
+        'select name,id from rex_article limit 1',
+        [],
+        PDO::FETCH_KEY_PAIR
+    );
+
+    assertType('array<string, int<0, 4294967295>>', $data);
+}

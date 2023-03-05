@@ -13,6 +13,7 @@ use Symplify\PHPStanRules\Enum\AttributeKey;
 final class NodeComparator
 {
     /**
+     * @readonly
      * @var \PhpParser\PrettyPrinter\Standard
      */
     private $standard;

@@ -24,6 +24,7 @@ final class ForbiddenMultipleClassLikeInOneFileRule implements Rule
      */
     public const ERROR_MESSAGE = 'Multiple class/interface/trait is not allowed in single file';
     /**
+     * @readonly
      * @var \PhpParser\NodeFinder
      */
     private $nodeFinder;

@@ -27,6 +27,7 @@ final class NoPublicPropertyByTypeRule implements Rule
     public const ERROR_MESSAGE = 'Class cannot have public properties. Use getter/setters instead';
     /**
      * @var string[]
+     * @readonly
      */
     private $classTypes;
     /**

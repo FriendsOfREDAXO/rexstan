@@ -9,12 +9,14 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\ArrayType;
+use PHPStan\Type\Constant\ConstantIntegerType;
 use PHPStan\Type\ConstantScalarType;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\IntegerType;
 use PHPStan\Type\Type;
 use rex_sql;
 use staabm\PHPStanDba\QueryReflection\QueryReflector;
+use staabm\PHPStanDba\UnresolvableQueryException;
 use function count;
 use function in_array;
 
@@ -49,18 +51,29 @@ final class RexSqlGetArrayDynamicReturnTypeExtension implements DynamicMethodRet
             $parameterTypes = $scope->getType($args[1]->value);
         }
 
+        $isFetchKeyPair = false;
         $fetch = QueryReflector::FETCH_TYPE_ASSOC;
         if (count($args) >= 3) {
             $fetchType = $scope->getType($args[2]->value);
+            $scalars = $fetchType->getConstantScalarTypes();
 
-            if ($fetchType instanceof ConstantScalarType) {
+            foreach($scalars as $fetchType) {
                 if (PDO::FETCH_NUM === $fetchType->getValue()) {
+                    $fetch = QueryReflector::FETCH_TYPE_NUMERIC;
+                }
+                if (PDO::FETCH_KEY_PAIR === $fetchType->getValue()) {
+                    $isFetchKeyPair = true;
                     $fetch = QueryReflector::FETCH_TYPE_NUMERIC;
                 }
             }
         }
 
-        $statementType = RexSqlReflection::inferStatementType($queryExpr, $parameterTypes, $scope, $fetch);
+        try {
+            $statementType = RexSqlReflection::inferStatementType($queryExpr, $parameterTypes, $scope, $fetch);
+        } catch (UnresolvableQueryException $e) {
+            return null;
+        }
+
         if (null === $statementType) {
             return null;
         }
@@ -68,6 +81,13 @@ final class RexSqlGetArrayDynamicReturnTypeExtension implements DynamicMethodRet
         $resultType = RexSqlReflection::getResultTypeFromStatementType($statementType);
         if (null === $resultType) {
             return null;
+        }
+
+        if ($isFetchKeyPair) {
+            return new ArrayType(
+                $resultType->getOffsetValueType(new ConstantIntegerType(0)),
+                $resultType->getOffsetValueType(new ConstantIntegerType(1))
+            );
         }
 
         return new ArrayType(new IntegerType(), $resultType);

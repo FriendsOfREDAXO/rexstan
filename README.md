@@ -61,3 +61,9 @@ Restart the container
 
 [Consider supporting the project](https://github.com/sponsors/staabm), so we can make this tool even better even faster for everyone.
 
+
+## Credits
+
+- rexstan by [Markus Staab](https://github.com/staabm)
+- rexstan logo by Ralph Zumkeller, yakamara.de
+- PHPStan by [Ondřej Mirtes](https://github.com/ondrejmirtes) and [contributors](https://github.com/phpstan/phpstan-src/graphs/contributors) 

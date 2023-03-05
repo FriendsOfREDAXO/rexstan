@@ -13,10 +13,12 @@ use Symplify\PHPStanRules\Reflection\ReflectionParser;
 final class ParentClassMethodNodeResolver
 {
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Reflection\ReflectionParser
      */
     private $reflectionParser;
     /**
+     * @readonly
      * @var \PHPStan\Reflection\ReflectionProvider
      */
     private $reflectionProvider;

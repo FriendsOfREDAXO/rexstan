@@ -1,0 +1,30 @@
+
+directories:
+	- build
+	- sources
+	- tests
+	- //
+
+dictionariesByFileName:
+    *Collation.php: skip
+
+dictionariesByFileExtension:
+    php: en php html iso custom mysql57
+    phpt: en php html iso custom mysql57
+    neon: en custom
+    json: en custom
+    md: en php custom
+
+dictionaryDirectories:
+    - build/spell-checker
+    - vendor/spell-checker/spell-checker
+    - vendor/spell-checker/dictionary-en
+
+checkLocalIgnores: true
+
+dictionaryFilesToCheck:
+    - custom.dic
+
+localIgnores:
+	*/composer.json: ag csf da ps sc tc tm tms
+	*/spell-checker.neon: ag csf da ps sc tc tm tms # WTF? cannot skip

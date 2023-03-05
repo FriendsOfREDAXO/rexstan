@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<ruleset name="SqlFtw">
+    <config name="php_version" value="70400"/>
+    <rule ref="../../vendor/dogma/dogma-dev/src/CodeSniffer/ruleset.xml">
+        <exclude name="Squiz.Strings.DoubleQuoteUsage.NotRequired"/>
+        <exclude name="Squiz.Arrays.ArrayDeclaration.ValueNoNewline"/>
+        <exclude name="PSR2.Methods.FunctionCallSignature.MultipleArguments"/>
+        <exclude name="PSR2.Methods.MethodDeclaration.Underscore"/>
+        <exclude name="PSR1.Methods.CamelCapsMethodName.NotCamelCaps"/>
+        <exclude name="Generic.CodeAnalysis.EmptyStatement"/>
+        <exclude name="SlevomatCodingStandard.ControlStructures.UselessIfConditionWithReturn.UselessIfCondition"/>
+        <exclude name="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall.MissingTrailingComma"/>
+    </rule>
+</ruleset>

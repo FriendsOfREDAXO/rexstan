@@ -16,6 +16,7 @@ use Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder;
 final class CacheIfAnalyzer
 {
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder
      */
     private $typeAwareNodeFinder;

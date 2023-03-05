@@ -18,9 +18,13 @@
 /tests/data/object-oriented-framework.php:38:Unknown name 'unknownColumn' given to getValue().
 /tests/data/object-oriented-framework.php:46:Unknown name 'unknownColumn' given to getValue().
 /tests/data/object-oriented-framework.php:51:Unknown name 'unknownColumn' given to getValue().
+/tests/data/object-oriented-framework.php:58:No rex_media found with id 'markus.jpg'.
 /tests/data/sql-get-value.php:45:Value 'doesNotExist' was not selected in the used sql-query.
 /tests/data/sql-get-value.php:46:Value 'doesNotExist' was not selected in the used sql-query.
 /tests/data/sql-get-value.php:47:Value 'doesNotExist' was not selected in the used sql-query.
+/tests/data/sql-get-value.php:162:All or one of the values 'doesNotExist'|'name' was not selected in the used sql-query.
+/tests/data/sql-get-value.php:163:All or one of the values 'doesNotExist'|'name' was not selected in the used sql-query.
+/tests/data/sql-get-value.php:164:All or one of the values 'doesNotExist'|'name' was not selected in the used sql-query.
 /tests/data/sql-injection.php:12:Possible SQL-injection in expression $mixed.
 /tests/data/sql-injection.php:13:Possible SQL-injection in expression $mixed.
 /tests/data/sql-injection.php:14:Possible SQL-injection in expression $mixed.
@@ -38,6 +42,15 @@
     return (string) $post->id;
 }, $mixed).
 /tests/data/sql-injection.php:67:Possible SQL-injection in expression str_replace(['_', '%'], ['\\_', '\\%'], $prefix).
+/tests/data/sql-injection.php:174:Possible SQL-injection in expression $_GET['id'].
+/tests/data/sql-injection.php:175:Using $_GET is forbidden, use rex_request::get() or rex_get() instead.
+/tests/data/sql-set-table.php:14:Table 'does_not_exist' does not exist.
+/tests/data/sql-set-value.php:14:Value 'doesNotExist' does not exist in table selected via setTable().
+/tests/data/sql-set-value.php:22:Value 'doesNotExist' does not exist in table selected via setTable().
+/tests/data/sql-set-value.php:24:setArrayValue() expects a database column which can store string values.
+/tests/data/sql-set-value.php:38:Value 'doesNotExist' does not exist in table selected via setTable().
+/tests/data/sql-set-value.php:48:Value 'doesNotExist' does not exist in table selected via setTable().
+/tests/data/sql-set-value.php:49:Value 'doesNotExist' does not exist in table selected via setTable().
 /tests/data/superglobals.php:6:Using $_SESSION is forbidden, use rex_request::session(), rex_request::setSession() or rex_session(), rex_set_session() instead for proper per instance scoping.
 /tests/data/superglobals.php:7:Using $_GET is forbidden, use rex_request::get() or rex_get() instead.
 /tests/data/superglobals.php:8:Using $_POST is forbidden, use rex_request::post() or rex_post() instead.

@@ -18,12 +18,16 @@ use staabm\PHPStanDba\TypeMapping\MysqliTypeMapper;
 final class MysqliQueryReflector implements QueryReflector, RecordingReflector
 {
     private const MYSQL_SYNTAX_ERROR_CODE = 1064;
+
     private const MYSQL_UNKNOWN_COLUMN_IN_FIELDLIST = 1054;
+
     public const MYSQL_UNKNOWN_TABLE = 1146;
-    public const MYSQL_INCORRECT_TABLE = 1103;
 
-    public const MYSQL_HOST_NOT_FOUND = 2002;
+    private const MYSQL_INCORRECT_TABLE = 1103;
 
+    /**
+     * @api
+     */
     public const NAME = 'mysqli';
 
     private const MYSQL_ERROR_CODES = [
@@ -35,7 +39,9 @@ final class MysqliQueryReflector implements QueryReflector, RecordingReflector
 
     private const MAX_CACHE_SIZE = 50;
 
-    /** @var array<string, mysqli_sql_exception|list<object>|null> */
+    /**
+     * @var array<string, mysqli_sql_exception|list<object>|null>
+     */
     private $cache = [];
 
     /**
@@ -55,14 +61,13 @@ final class MysqliQueryReflector implements QueryReflector, RecordingReflector
         $this->db->set_charset('utf8');
         // enable exception throwing on php <8.1
         mysqli_report(\MYSQLI_REPORT_ERROR | \MYSQLI_REPORT_STRICT);
-
-        $this->typeMapper = new MysqliTypeMapper();
+        $this->db->autocommit(false);
     }
 
     public function validateQueryString(string $queryString): ?Error
     {
         $result = $this->simulateQuery($queryString);
-        if (!$result instanceof mysqli_sql_exception) {
+        if (! $result instanceof mysqli_sql_exception) {
             return null;
         }
         $e = $result;
@@ -87,7 +92,7 @@ final class MysqliQueryReflector implements QueryReflector, RecordingReflector
     public function getResultType(string $queryString, int $fetchType): ?Type
     {
         $result = $this->simulateQuery($queryString);
-        if (!\is_array($result)) {
+        if (! \is_array($result)) {
             return null;
         }
 
@@ -96,10 +101,10 @@ final class MysqliQueryReflector implements QueryReflector, RecordingReflector
         $i = 0;
         foreach ($result as $val) {
             if (
-                !property_exists($val, 'name')
-                || !property_exists($val, 'type')
-                || !property_exists($val, 'flags')
-                || !property_exists($val, 'length')
+                ! property_exists($val, 'name')
+                || ! property_exists($val, 'type')
+                || ! property_exists($val, 'flags')
+                || ! property_exists($val, 'length')
             ) {
                 throw new ShouldNotHappenException();
             }
@@ -122,6 +127,11 @@ final class MysqliQueryReflector implements QueryReflector, RecordingReflector
         return $arrayBuilder->getArray();
     }
 
+    public function setupDbaApi(?DbaApi $dbaApi): void
+    {
+        $this->typeMapper = new MysqliTypeMapper($dbaApi);
+    }
+
     /**
      * @return mysqli_sql_exception|list<object>|null
      */
@@ -141,12 +151,16 @@ final class MysqliQueryReflector implements QueryReflector, RecordingReflector
             return $this->cache[$queryString] = null;
         }
 
-        $this->db->begin_transaction(\MYSQLI_TRANS_START_READ_ONLY);
+        if (QueryReflection::getRuntimeConfiguration()->isAnalyzingWriteQueries()) {
+            $this->db->begin_transaction();
+        } else {
+            $this->db->begin_transaction(\MYSQLI_TRANS_START_READ_ONLY);
+        }
 
         try {
             $result = $this->db->query($simulatedQuery);
 
-            if (!$result instanceof mysqli_result) {
+            if (! $result instanceof mysqli_result) {
                 return $this->cache[$queryString] = null;
             }
 

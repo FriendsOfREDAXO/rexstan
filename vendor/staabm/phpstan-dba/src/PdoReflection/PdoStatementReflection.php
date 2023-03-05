@@ -54,7 +54,7 @@ final class PdoStatementReflection
      */
     public function getFetchType(Type $fetchModeType): ?int
     {
-        if (!$fetchModeType instanceof ConstantIntegerType) {
+        if (! $fetchModeType instanceof ConstantIntegerType) {
             return null;
         }
 
@@ -87,7 +87,7 @@ final class PdoStatementReflection
         foreach ($queryStrings as $queryString) {
             $bothType = $queryReflection->getResultType($queryString, QueryReflector::FETCH_TYPE_BOTH);
 
-            if ($bothType) {
+            if (null !== $bothType) {
                 $genericObjects[] = new PdoStatementObjectType($bothType, $reflectionFetchType);
             }
         }

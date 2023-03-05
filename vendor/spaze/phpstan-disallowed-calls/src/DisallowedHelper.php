@@ -5,6 +5,8 @@ namespace Spaze\PHPStan\Rules\Disallowed;
 
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\CallLike;
+use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Expr\StaticCall;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
@@ -13,10 +15,11 @@ use PHPStan\Reflection\FunctionReflection;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use PHPStan\Type\ConstantScalarType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeWithClassName;
+use PHPStan\Type\UnionType;
+use Spaze\PHPStan\Rules\Disallowed\Exceptions\UnsupportedParamTypeException;
 use Spaze\PHPStan\Rules\Disallowed\Params\DisallowedCallParam;
 
 class DisallowedHelper
@@ -35,15 +38,13 @@ class DisallowedHelper
 	private function isAllowed(Scope $scope, ?CallLike $node, DisallowedCall $disallowedCall): bool
 	{
 		foreach ($disallowedCall->getAllowInCalls() as $call) {
-			if ($scope->getFunction() instanceof MethodReflection) {
-				$name = $this->getFullyQualified($scope->getFunction()->getDeclaringClass()->getDisplayName(false), $scope->getFunction());
-			} elseif ($scope->getFunction() instanceof FunctionReflection) {
-				$name = $scope->getFunction()->getName();
-			} else {
-				$name = '';
-			}
-			if (fnmatch($call, $name, FNM_NOESCAPE | FNM_CASEFOLD)) {
+			if ($this->callMatches($scope, $call)) {
 				return $this->hasAllowedParamsInAllowed($scope, $node, $disallowedCall);
+			}
+		}
+		foreach ($disallowedCall->getAllowExceptInCalls() as $call) {
+			if (!$this->callMatches($scope, $call)) {
+				return true;
 			}
 		}
 		foreach ($disallowedCall->getAllowIn() as $allowedPath) {
@@ -69,6 +70,19 @@ class DisallowedHelper
 	}
 
 
+	private function callMatches(Scope $scope, string $call): bool
+	{
+		if ($scope->getFunction() instanceof MethodReflection) {
+			$name = $this->getFullyQualified($scope->getFunction()->getDeclaringClass()->getDisplayName(false), $scope->getFunction());
+		} elseif ($scope->getFunction() instanceof FunctionReflection) {
+			$name = $scope->getFunction()->getName();
+		} else {
+			$name = '';
+		}
+		return fnmatch($call, $name, FNM_NOESCAPE | FNM_CASEFOLD);
+	}
+
+
 	private function hasAllowedParamsInAllowed(Scope $scope, ?CallLike $node, DisallowedCall $disallowedCall): bool
 	{
 		if ($disallowedCall->getAllowExceptParamsInAllowed()) {
@@ -84,7 +98,7 @@ class DisallowedHelper
 	/**
 	 * @param Scope $scope
 	 * @param CallLike|null $node
-	 * @param array<int, DisallowedCallParam> $allowConfig
+	 * @param array<int|string, DisallowedCallParam> $allowConfig
 	 * @param bool $paramsRequired
 	 * @return bool
 	 */
@@ -94,23 +108,48 @@ class DisallowedHelper
 			return true;
 		}
 
-		foreach ($allowConfig as $param => $value) {
+		foreach ($allowConfig as $param) {
 			$type = $this->getArgType($node, $scope, $param);
-			if (!$type instanceof ConstantScalarType) {
+			if ($type === null) {
 				return !$paramsRequired;
 			}
-			if (!$value->matches($type)) {
-				return false;
+			if ($type instanceof UnionType) {
+				$types = $type->getTypes();
+			} else {
+				$types = [$type];
+			}
+			foreach ($types as $type) {
+				try {
+					if (!$param->matches($type)) {
+						return false;
+					}
+				} catch (UnsupportedParamTypeException $e) {
+					return !$paramsRequired;
+				}
 			}
 		}
 		return true;
 	}
 
 
-	private function getArgType(CallLike $node, Scope $scope, int $param): ?Type
+	/**
+	 * @param CallLike $node
+	 * @param Scope $scope
+	 * @param DisallowedCallParam $param
+	 * @return Type|null
+	 */
+	private function getArgType(CallLike $node, Scope $scope, DisallowedCallParam $param): ?Type
 	{
-		$arg = $node->getArgs()[$param - 1] ?? null;
-		return $arg ? $scope->getType($arg->value) : null;
+		foreach ($node->getArgs() as $arg) {
+			if ($arg->name && $arg->name->name === $param->getName()) {
+				$found = $arg;
+				break;
+			}
+		}
+		if (!isset($found)) {
+			$found = $node->getArgs()[$param->getPosition() - 1] ?? null;
+		}
+		return isset($found) ? $scope->getType($found->value) : null;
 	}
 
 
@@ -126,7 +165,8 @@ class DisallowedHelper
 	public function getDisallowedMessage(?CallLike $node, Scope $scope, string $name, ?string $displayName, array $disallowedCalls, ?string $message = null): array
 	{
 		foreach ($disallowedCalls as $disallowedCall) {
-			if ($this->callMatches($disallowedCall, $name) && !$this->isAllowed($scope, $node, $disallowedCall)) {
+			$callMatches = $name === $disallowedCall->getCall() || fnmatch($disallowedCall->getCall(), $name, FNM_NOESCAPE | FNM_CASEFOLD);
+			if ($callMatches && !$this->isAllowed($scope, $node, $disallowedCall)) {
 				$errorBuilder = RuleErrorBuilder::message(sprintf(
 					$message ?? 'Calling %s is forbidden, %s%s',
 					($displayName && $displayName !== $name) ? "{$name}() (as {$displayName}())" : "{$name}()",
@@ -148,18 +188,9 @@ class DisallowedHelper
 	}
 
 
-	private function callMatches(DisallowedCall $disallowedCall, string $name): bool
-	{
-		if ($name === $disallowedCall->getCall() || fnmatch($disallowedCall->getCall(), $name, FNM_NOESCAPE | FNM_CASEFOLD)) {
-			return true;
-		}
-		return false;
-	}
-
-
 	/**
 	 * @param Name|Expr $class
-	 * @param CallLike $node
+	 * @param MethodCall|StaticCall $node
 	 * @param Scope $scope
 	 * @param DisallowedCall[] $disallowedCalls
 	 * @return RuleError[]

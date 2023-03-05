@@ -73,21 +73,24 @@ final class RexFunctionsDynamicReturnTypeExtension implements DynamicFunctionRet
             return null;
         }
 
-        $defaultArgType = null;
+        $defaultArgType = new ConstantStringType('');
         if (count($args) >= 3) {
             $defaultArgType = $scope->getType($args[2]->value);
         }
 
-        $typeString = $scope->getType($args[1]->value);
-        if ($typeString instanceof ConstantStringType) {
-            $resolvedType = $this->resolveTypeFromString($typeString->getValue());
-
-            if (null !== $resolvedType) {
-                if (null !== $defaultArgType) {
-                    return TypeCombinator::union($resolvedType, $defaultArgType);
+        $typeStrings = $scope->getType($args[1]->value)->getConstantStrings();
+        if (count($typeStrings) > 0) {
+            $results = [];
+            foreach($typeStrings as $typeString) {
+                $resolvedType = $this->resolveTypeFromString($typeString->getValue());
+                if ($resolvedType === null) {
+                    return null;
                 }
-                return $resolvedType;
+
+                $results[] = $resolvedType;
             }
+
+            return TypeCombinator::union($defaultArgType, ...$results);
         }
 
         return null;

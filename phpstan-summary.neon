@@ -1,0 +1,7 @@
+# rexstan auto generated file - do not edit, delete, rename
+
+includes:
+    - phpstan.neon
+    # enable native type coverage for the summary
+    - config/native-type-coverage.neon
+

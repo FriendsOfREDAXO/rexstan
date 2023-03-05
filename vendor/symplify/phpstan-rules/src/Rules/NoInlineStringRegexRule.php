@@ -29,10 +29,12 @@ final class NoInlineStringRegexRule implements Rule
      */
     public const ERROR_MESSAGE = 'Use local named constant instead of inline string for regex to explain meaning by constant name';
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\RegexFuncCallAnalyzer
      */
     private $regexFuncCallAnalyzer;
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\RegexStaticCallAnalyzer
      */
     private $regexStaticCallAnalyzer;

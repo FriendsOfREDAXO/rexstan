@@ -6,13 +6,16 @@ use PhpParser\Node;
 use PhpParser\Node\Expr\PropertyFetch;
 use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
+use PHPStan\Broker\ClassNotFoundException;
+use PHPStan\Reflection\MissingPropertyFromReflectionException;
 use PHPStan\Reflection\ReflectionProvider;
-use PHPStan\Type\TypeUtils;
+use PHPStan\Rules\Rule;
+use function sprintf;
 
 /**
- * @implements \PHPStan\Rules\Rule<PropertyFetch>
+ * @implements Rule<PropertyFetch>
  */
-class AccessDeprecatedPropertyRule implements \PHPStan\Rules\Rule
+class AccessDeprecatedPropertyRule implements Rule
 {
 
 	/** @var ReflectionProvider */
@@ -40,7 +43,7 @@ class AccessDeprecatedPropertyRule implements \PHPStan\Rules\Rule
 
 		$propertyName = $node->name->name;
 		$propertyAccessedOnType = $scope->getType($node->var);
-		$referencedClasses = TypeUtils::getDirectClassNames($propertyAccessedOnType);
+		$referencedClasses = $propertyAccessedOnType->getObjectClassNames();
 
 		foreach ($referencedClasses as $referencedClass) {
 			try {
@@ -64,9 +67,9 @@ class AccessDeprecatedPropertyRule implements \PHPStan\Rules\Rule
 						$description
 					)];
 				}
-			} catch (\PHPStan\Broker\ClassNotFoundException $e) {
+			} catch (ClassNotFoundException $e) {
 				// Other rules will notify if the class is not found
-			} catch (\PHPStan\Reflection\MissingPropertyFromReflectionException $e) {
+			} catch (MissingPropertyFromReflectionException $e) {
 				// Other rules will notify if the property is not found
 			}
 		}

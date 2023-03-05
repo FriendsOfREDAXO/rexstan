@@ -95,3 +95,71 @@ function escapedWildcard(string $s): void
         ');
     assertType('string', $sql->getValue('rex_article.name'));
 }
+
+// see https://github.com/FriendsOfREDAXO/rexstan/issues/323
+function chainedQuery(int $id): void
+{
+    $sql = rex_sql::factory()->setQuery('
+            SELECT  name
+            FROM    ' . rex::getTable('article') . '
+            WHERE   id = ?
+            LIMIT   1
+        ', [$id]);
+
+    assertType('string', $sql->getValue('name'));
+}
+
+function stringUnion(int $id): void
+{
+    $sql = rex_sql::factory()->setQuery('
+            SELECT  name, id
+            FROM    ' . rex::getTable('article') . '
+            WHERE   id = ?
+            LIMIT   1
+        ', [$id]);
+
+    if ($id > 0) {
+        $field = 'name';
+        $tableField = rex::getTable('article') .'.name';
+    } else {
+        $field = 'id';
+        $tableField = rex::getTable('article') .'.id';
+    }
+
+    assertType('int<0, 4294967295>|string', $sql->getValue($field));
+    assertType('int<0, 4294967295>|string', $sql->getValue($tableField));
+}
+
+function unionstring($mixed) {
+    if (rand(0,1) ===1) {
+        $unionS = 'id';
+    } else {
+        $unionS = 'pid';
+    }
+
+    $select = rex_sql::factory();
+    $select->setWhere($select->escapeIdentifier($unionS). ' = ' . $select->escape($mixed));
+    assertType("'`id`'|'`pid`'", $select->escapeIdentifier($unionS));
+    assertType("'rex_id'|'rex_pid'", rex::getTable($unionS));
+}
+
+function maybeUnknownValue(): void
+{
+    if (rand(0,1) ===1) {
+        $val = 'doesNotExist';
+    } else {
+        $val = 'name';
+    }
+
+    $sql = rex_sql::factory();
+    $sql->setQuery('
+            SELECT  name
+            FROM    ' . rex::getTable('article') . '
+            WHERE   id = 1
+            LIMIT   1
+        ');
+
+    assertType('bool|float|int|string|null', $sql->getValue($val));
+    $sql->getDateTimeValue($val);
+    $sql->getArrayValue($val);
+}

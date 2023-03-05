@@ -4,13 +4,10 @@ namespace PHPStan\Rules\PHPUnit;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\ConstFetch;
-use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Expr\StaticCall;
 use PhpParser\NodeAbstract;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use function count;
-use function strtolower;
 
 /**
  * @implements Rule<NodeAbstract>
@@ -29,13 +26,10 @@ class AssertSameNullExpectedRule implements Rule
 			return [];
 		}
 
-		/** @var MethodCall|StaticCall $node */
-		$node = $node;
-
 		if (count($node->getArgs()) < 2) {
 			return [];
 		}
-		if (!$node->name instanceof Node\Identifier || strtolower($node->name->name) !== 'assertsame') {
+		if (!$node->name instanceof Node\Identifier || $node->name->toLowerString() !== 'assertsame') {
 			return [];
 		}
 

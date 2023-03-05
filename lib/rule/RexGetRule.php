@@ -59,23 +59,19 @@ final class RexGetRule implements Rule
         }
 
         $callerType = $scope->resolveTypeByName($methodCall->class);
-        if (!$callerType instanceof TypeWithClassName) {
-            return [];
-        }
-
         $methodReflection = $scope->getMethodReflection($callerType, $methodCall->name->toString());
         if (null === $methodReflection) {
             return [];
         }
 
-        if (!in_array($callerType->getClassname(), $this->classes, true)) {
+        if (!in_array($callerType->getClassName(), $this->classes, true)) {
             return [];
         }
 
         $idType = $scope->getType($args[0]->value);
 
         if (rex_media::class === $callerType->getClassName()) {
-            $ids = TypeUtils::getConstantStrings($idType);
+            $ids = $idType->getConstantStrings();
             foreach ($ids as $id) {
                 // don't report errors on magic rex-vars, which get resolved at code generation time.
                 if (0 === strpos($id->getValue(), 'REX_')) {
@@ -87,7 +83,7 @@ final class RexGetRule implements Rule
                 if (null === $object) {
                     return [
                         RuleErrorBuilder::message(
-                            sprintf('No %s found with id %s.', $callerType->getClassname(), $idType->describe(VerbosityLevel::precise()))
+                            sprintf('No %s found with id %s.', $callerType->getClassName(), $idType->describe(VerbosityLevel::precise()))
                         )->build(),
                     ];
                 }
@@ -114,7 +110,7 @@ final class RexGetRule implements Rule
             if (null === $object) {
                 return [
                     RuleErrorBuilder::message(
-                        sprintf('No %s found with id %s.', $callerType->getClassname(), $idType->describe(VerbosityLevel::precise()))
+                        sprintf('No %s found with id %s.', $callerType->getClassName(), $idType->describe(VerbosityLevel::precise()))
                     )->build(),
                 ];
             }

@@ -8,6 +8,10 @@ $baseDir = dirname($vendorDir);
 return array(
     'staabm\\PHPStanDba\\' => array($vendorDir . '/staabm/phpstan-dba/src'),
     'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
+    'TomasVotruba\\UnusedPublic\\' => array($vendorDir . '/tomasvotruba/unused-public/src'),
+    'TomasVotruba\\TypeCoverage\\' => array($vendorDir . '/tomasvotruba/type-coverage/src'),
+    'TomasVotruba\\CognitiveComplexity\\' => array($vendorDir . '/tomasvotruba/cognitive-complexity/src'),
+    'TheCodingMachine\\Safe\\PHPStan\\' => array($vendorDir . '/thecodingmachine/phpstan-safe-rule/src'),
     'Symplify\\PHPStanRules\\' => array($vendorDir . '/symplify/phpstan-rules/src', $vendorDir . '/symplify/phpstan-rules/packages'),
     'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Spaze\\PHPStan\\Rules\\Disallowed\\' => array($vendorDir . '/spaze/phpstan-disallowed-calls/src'),

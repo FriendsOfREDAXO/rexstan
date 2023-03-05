@@ -29,6 +29,7 @@ final class NoArrayAccessOnObjectRule implements Rule
      */
     private const ALLOWED_CLASSES = ['SplFixedArray', 'SimpleXMLElement'];
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\Matcher\ArrayStringAndFnMatcher
      */
     private $arrayStringAndFnMatcher;

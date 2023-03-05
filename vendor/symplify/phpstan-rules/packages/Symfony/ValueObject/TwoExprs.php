@@ -9,10 +9,12 @@ use PhpParser\Node\Expr;
 final class TwoExprs
 {
     /**
+     * @readonly
      * @var \PhpParser\Node\Expr
      */
     private $firstExpr;
     /**
+     * @readonly
      * @var \PhpParser\Node\Expr
      */
     private $secondExpr;

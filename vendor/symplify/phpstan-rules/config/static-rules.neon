@@ -1,9 +1,8 @@
 rules:
-    - Symplify\PHPStanRules\Rules\NoProtectedElementInFinalClassRule
+    - Symplify\PHPStanRules\Rules\NoProtectedClassElementRule
 
     - Symplify\PHPStanRules\Rules\Spotter\IfElseToMatchSpotterRule
     - Symplify\PHPStanRules\Rules\Missing\CheckSprintfMatchingTypesRule
-    - Symplify\PHPStanRules\Rules\Explicit\ValueObjectOverArrayShapeRule
     - Symplify\PHPStanRules\Rules\ForbiddenExtendOfNonAbstractClassRule
 
     # domain
@@ -13,7 +12,6 @@ rules:
     - Symplify\PHPStanRules\Rules\Enum\RequireUniqueEnumConstantRule
     - Symplify\PHPStanRules\Rules\ForbiddenParamTypeRemovalRule
     - Symplify\PHPStanRules\Rules\NoNestedFuncCallRule
-    - Symplify\PHPStanRules\Rules\RequireStringRegexMatchKeyRule
     - Symplify\PHPStanRules\Rules\PreventParentMethodVisibilityOverrideRule
 
     # paths
@@ -30,20 +28,15 @@ rules:
 
     # explicit naming
     - Symplify\PHPStanRules\Rules\NoDefaultExceptionRule
-    - Symplify\PHPStanRules\Rules\NoDynamicPropertyOnStaticCallRule
     - Symplify\PHPStanRules\Rules\NoParentMethodCallOnNoOverrideProcessRule
-    - Symplify\PHPStanRules\Rules\PreferredRawDataInTestDataProviderRule
     - Symplify\PHPStanRules\Rules\RequireThisOnParentMethodCallRule
     - Symplify\PHPStanRules\Rules\RequireThisCallOnLocalMethodRule
     - Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule
-    - Symplify\PHPStanRules\Rules\ForbiddenProtectedPropertyRule
-    - Symplify\PHPStanRules\Rules\NoMethodTagInClassDocblockRule
 
     # comlexity
     - Symplify\PHPStanRules\Rules\Complexity\ForbiddenSameNamedNewInstanceRule
 
     - Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule
-    - Symplify\PHPStanRules\Rules\Complexity\ForbiddenComplexForeachIfExprRule
     - Symplify\PHPStanRules\Rules\ForbiddenThisArgumentRule
     - Symplify\PHPStanRules\Rules\ForbiddenSpreadOperatorRule
     - Symplify\PHPStanRules\Rules\ForbiddenAnonymousClassRule

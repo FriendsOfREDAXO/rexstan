@@ -1,6 +1,6 @@
 <?php
 
-use rexstan\RexStan;
+use rexstan\RexCmd;
 use rexstan\RexStanUserConfig;
 
 $addon = rex_addon::get('rexstan');
@@ -10,14 +10,14 @@ if (isset($REX['PATH_PROVIDER'])) {
     return;
 }
 
-require_once __DIR__ .'/lib/RexStan.php';
-$cliPhpVersion = RexStan::execCmd(RexStan::phpExecutable().' -r "echo PHP_VERSION_ID;"', $stderrOutput, $exitCode);
-if (is_numeric($cliPhpVersion)) {
+require_once __DIR__ .'/lib/RexCmd.php';
+$cliPhpVersion = RexCmd::getCliPhpVersion();
+if ($cliPhpVersion !== null) {
     if ($cliPhpVersion < 70300) {
         if (DIRECTORY_SEPARATOR === '\\') {
-            $cliPhpPath = RexStan::execCmd('where php', $stderrOutput, $exitCode);
+            $cliPhpPath = RexCmd::execCmd('where php', $stderrOutput, $exitCode);
         } else {
-            $cliPhpPath = RexStan::execCmd('which php', $stderrOutput, $exitCode);
+            $cliPhpPath = RexCmd::execCmd('which php', $stderrOutput, $exitCode);
         }
 
         $addon->setProperty('installmsg', 'PHP CLI version '.$cliPhpVersion.' on path "'. $cliPhpPath .'" is too old. Please upgrade to PHP 7.3+.');
@@ -52,17 +52,33 @@ if (!is_file($userConfigPath)) {
 
     RexStanUserConfig::save(0, $paths, [], 70300);
 }
+if (rex_version::compare(rex::getVersion(), '5.15.0-dev', '>=')) {
+    $configFileContent = '# rexstan auto generated file - do not edit, delete, rename'. PHP_EOL . PHP_EOL .
+        'includes:'. PHP_EOL .
+        '    - ' . $addon->getPath('default-config.neon') . PHP_EOL .
+        '    - ' . $addon->getPath('config/_from-r5_15.neon') . PHP_EOL .
+        '    - ' . $userConfigPath. PHP_EOL;
+} else {
+    $configFileContent = '# rexstan auto generated file - do not edit, delete, rename'. PHP_EOL . PHP_EOL .
+        'includes:'. PHP_EOL .
+        '    - ' . $addon->getPath('default-config.neon') . PHP_EOL .
+        '    - ' . $addon->getPath('config/_up-to-r5_14.neon') . PHP_EOL .
+        '    - ' . $userConfigPath. PHP_EOL;
+}
 
-$configFileContent = '# rexstan auto generated file - do not edit, delete, rename'. PHP_EOL . PHP_EOL .
-    'includes:'. PHP_EOL .
-    '    - ' . $addon->getPath('default-config.neon') . PHP_EOL .
-    '    - ' . $userConfigPath. PHP_EOL;
+rex_dir::create($addon->getCachePath());
+$configFileContent .= PHP_EOL .'parameters:'. PHP_EOL .
+'    tmpDir: '.$addon->getCachePath() . PHP_EOL;
+
 $configPath = __DIR__.'/phpstan.neon';
 if (false === rex_file::put($configPath, $configFileContent)) {
     $addon->setProperty('installmsg', sprintf('Unable to write rexstan config "%s"', $configPath));
 }
 
 // make sure the binaries are executable
-foreach (glob(__DIR__.'/vendor/bin/*', GLOB_NOSORT) as $binaryPath) {
-    @chmod($binaryPath, 0775);
+$binaries = glob(__DIR__.'/vendor/bin/*', GLOB_NOSORT);
+if ($binaries !== false) {
+    foreach ($binaries as $binaryPath) {
+        @chmod($binaryPath, 0775);
+    }
 }

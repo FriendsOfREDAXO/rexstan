@@ -2,9 +2,14 @@
 
 /** @var rex_addon $this */
 
+use rexstan\RexResultsRenderer;
 use rexstan\RexStan;
 use rexstan\RexStanTip;
 use rexstan\RexStanUserConfig;
+
+if (rex_get('regenerate-baseline', 'bool')) {
+    RexStan::generateAnalysisBaseline();
+}
 
 $phpstanResult = RexStan::runFromWeb();
 $settingsUrl = rex_url::backendPage('rexstan/settings');
@@ -13,7 +18,13 @@ if (is_string($phpstanResult)) {
     // we moved settings files into config/.
     if (false !== stripos($phpstanResult, "neon' is missing or is not readable.")) {
         echo rex_view::warning(
-            "Das Einstellungsformat hat sich geändert. Bitte die <a href='". $settingsUrl ."'>Einstellungen öffnen</a> und erneut abspeichern. <br/><br/>".nl2br($phpstanResult)
+            "Das Einstellungsformat hat sich geändert. Bitte die <a href='".$settingsUrl."'>Einstellungen öffnen</a> und erneut abspeichern. <br/><br/>".nl2br(
+                $phpstanResult
+            )
+        );
+    } elseif (false !== stripos($phpstanResult, "polyfill-php8") && false !== stripos($phpstanResult, "does not exist")) {
+        echo rex_view::warning(
+            "Der REDAXO Core wurde aktualisiert. Bitte das rexstan AddOn re-installieren. <br/><br/>".nl2br($phpstanResult)
         );
     } else {
         echo rex_view::error(
@@ -87,79 +98,27 @@ if (
         echo rex_view::success('Gratulation, es wurden keine Fehler in Level '. $level .' gefunden.');
 
         if (9 === $level) {
-            echo '<script>
-                var duration = 10 * 1000;
-                var animationEnd = Date.now() + duration;
-                var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
-                function randomInRange(min, max) {
-                  return Math.random() * (max - min) + min;
-                }
-
-                var interval = setInterval(function() {
-                  var timeLeft = animationEnd - Date.now();
-
-                  if (timeLeft <= 0) {
-                    return clearInterval(interval);
-                  }
-
-                  var particleCount = 50 * (timeLeft / duration);
-                  // since particles fall down, start a bit higher than random
-                  confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
-                  confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
-                }, 250);
-                </script>
-            ';
+            echo RexResultsRenderer::getLevel9Jseffect();
         } else {
             echo '<p>In den <a href="'. rex_url::backendPage('rexstan/settings') .'">Einstellungen</a>, solltest du jetzt das nächste Level anvisieren.</p>';
         }
         return;
     }
 
-    echo rex_view::warning('Level-<strong>'.RexStanUserConfig::getLevel().'</strong>-Analyse: <strong>'. $totalErrors .'</strong> Probleme gefunden in <strong>'. count($phpstanResult['files']) .'</strong> Dateien');
+    $baselineButton = '';
+    if (RexStanUserConfig::isBaselineEnabled()) {
+        $baselineButton .= ' <a href="'. rex_url::backendPage('rexstan/analysis', ['regenerate-baseline' => 1]) .'" class="btn btn-danger">Alle Probleme ignorieren</a>';
+    }
 
-    $basePath = rex_path::src('addons/');
-    $section = new rex_fragment();
-    $section->setVar('sectionAttributes', ['class' => 'rexstan'], false);
+    echo rex_view::warning('Level-<strong>'.RexStanUserConfig::getLevel().'</strong>-Analyse: <strong>'. $totalErrors .'</strong> Probleme gefunden in <strong>'. count($phpstanResult['files']) .'</strong> Dateien.'. $baselineButton);
 
     foreach ($phpstanResult['files'] as $file => $fileResult) {
-        $shortFile = str_replace($basePath, '', $file);
         $linkFile = preg_replace('/\s\(in context.*?$/', '', $file);
-        $title = '<i class="rexstan-open fa fa-folder-o"></i>'.
-                 '<i class="rexstan-closed fa fa-folder-open-o"></i> '.
-                 '<span class="text-muted">'.rex_escape(dirname($shortFile)).DIRECTORY_SEPARATOR.'</span>'
-                 .rex_escape(basename($shortFile)).
-                 ' <span class="badge">'.$fileResult['errors'].'</span>';
-
-        $section->setVar('title', $title, false);
-        $section->setVar('collapse', true);
-        // $section->setVar('collapsed', 15 < $totalErrors && 1 < count($phpstanResult['files']));
-        $content = '<ul class="list-group">';
-        foreach ($fileResult['messages'] as $message) {
-            $content .= '<li class="list-group-item rexstan-message">';
-            $content .= '<span class="rexstan-linenumber">' .sprintf('%5d', $message['line']).':</span>';
-            $error = rex_escape($message['message']);
-            $url = rex_editor::factory()->getUrl($linkFile, $message['line']);
-            if ($url) {
-                $error = '<a href="'. $url .'">'. rex_escape($message['message']) .'</a>';
-            }
-
-            $phpstanTip = null;
-            if (array_key_exists('tip', $message)) {
-                $phpstanTip = $message['tip'];
-            }
-
-            $rexstanTip = RexStanTip::renderTip($message['message'], $phpstanTip);
-            if (null !== $rexstanTip) {
-                $error .= '<br /><span class="rexstan-tip" title="Tipp">💡 '. $rexstanTip .'</span>';
-            }
-
-            $content .= $error;
-            $content .= '</li>';
+        if ($linkFile === null) {
+            throw new \PHPStan\ShouldNotHappenException();
         }
-        $content .= '</ul>';
 
-        $section->setVar('content', $content, false);
-        echo $section->parse('core/page/section.php');
+        echo RexResultsRenderer::renderFileBlock($linkFile, $fileResult['messages']);
     }
 }
+

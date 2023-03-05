@@ -6,20 +6,26 @@ namespace staabm\PHPStanDba\QueryReflection;
 
 use PHPStan\Type\Type;
 
+/**
+ * @api
+ */
 final class Parameter
 {
     /**
      * @var non-empty-string|null
      */
     public $name;
+
     /**
      * @var Type
      */
     public $type;
+
     /**
      * @var ?string
      */
     public $simulatedValue;
+
     /**
      * @var bool
      */
@@ -38,8 +44,8 @@ final class Parameter
             return;
         }
 
-        if (!str_starts_with($name, ':')) {
-            $name = ':'.$name;
+        if (! str_starts_with($name, ':')) {
+            $name = ':' . $name;
         }
 
         $this->name = $name;

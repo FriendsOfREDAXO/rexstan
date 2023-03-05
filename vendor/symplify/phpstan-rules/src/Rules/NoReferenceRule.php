@@ -29,6 +29,7 @@ final class NoReferenceRule extends AbstractSymplifyRule
      */
     public const ERROR_MESSAGE = 'Use explicit return value over magic &reference';
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\ParentClassMethodNodeResolver
      */
     private $parentClassMethodNodeResolver;

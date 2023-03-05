@@ -28,6 +28,7 @@ final class NoEmptyClassRule implements Rule
      */
     public const ERROR_MESSAGE = 'There should be no empty class';
     /**
+     * @readonly
      * @var \PHPStan\Reflection\ReflectionProvider
      */
     private $reflectionProvider;

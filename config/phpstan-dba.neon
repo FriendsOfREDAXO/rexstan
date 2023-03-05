@@ -2,7 +2,7 @@ services:
     -
         class: staabm\PHPStanDba\Ast\PreviousConnectingVisitor
         tags:
-        	- phpstan.parser.richParserNodeVisitor
+            - phpstan.parser.richParserNodeVisitor
 
     # redaxos setQuery etc. APIs support both, prepared and unprepared statements..
     # therefore we need to register them twice, to also cover cases which don't pass parameters.
@@ -37,6 +37,19 @@ services:
         class: rexstan\RexSqlSetQueryTypeSpecifyingExtension
         tags:
             - phpstan.typeSpecifier.methodTypeSpecifyingExtension
+    -
+        class: rexstan\RexSqlSetQueryDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
+        class: rexstan\RexSqlSetTableTypeSpecifyingExtension
+        tags:
+            - phpstan.typeSpecifier.methodTypeSpecifyingExtension
+    -
+        class: rexstan\RexSqlSetTableDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
 
     -
         class: rexstan\RexSqlGetValueDynamicReturnTypeExtension
@@ -57,6 +70,14 @@ services:
             - phpstan.rules.rule
     -
         class: rexstan\RexSqlGetValueRule
+        tags:
+            - phpstan.rules.rule
+    -
+        class: rexstan\RexSqlSetValueRule
+        tags:
+            - phpstan.rules.rule
+    -
+        class: rexstan\RexSqlSetTableRule
         tags:
             - phpstan.rules.rule
     -

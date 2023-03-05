@@ -23,16 +23,19 @@ class DisallowedCall implements Disallowed
 	/** @var string[] */
 	private $allowInCalls;
 
-	/** @var array<int, DisallowedCallParam> */
+	/** @var string[] */
+	private $allowExceptInCalls;
+
+	/** @var array<int|string, DisallowedCallParam> */
 	private $allowParamsInAllowed;
 
-	/** @var array<int, DisallowedCallParam> */
+	/** @var array<int|string, DisallowedCallParam> */
 	private $allowParamsAnywhere;
 
-	/** @var array<int, DisallowedCallParam> */
+	/** @var array<int|string, DisallowedCallParam> */
 	private $allowExceptParamsInAllowed;
 
-	/** @var array<int, DisallowedCallParam> */
+	/** @var array<int|string, DisallowedCallParam> */
 	private $allowExceptParams;
 
 	/** @var string|null */
@@ -48,10 +51,11 @@ class DisallowedCall implements Disallowed
 	 * @param string[] $allowIn
 	 * @param string[] $allowExceptIn
 	 * @param string[] $allowInCalls
-	 * @param array<int, DisallowedCallParam> $allowParamsInAllowed
-	 * @param array<int, DisallowedCallParam> $allowParamsAnywhere
-	 * @param array<int, DisallowedCallParam> $allowExceptParamsInAllowed
-	 * @param array<int, DisallowedCallParam> $allowExceptParams
+	 * @param string[] $allowExceptInCalls
+	 * @param array<int|string, DisallowedCallParam> $allowParamsInAllowed
+	 * @param array<int|string, DisallowedCallParam> $allowParamsAnywhere
+	 * @param array<int|string, DisallowedCallParam> $allowExceptParamsInAllowed
+	 * @param array<int|string, DisallowedCallParam> $allowExceptParams
 	 * @param string|null $errorIdentifier
 	 * @param string|null $errorTip
 	 */
@@ -61,6 +65,7 @@ class DisallowedCall implements Disallowed
 		array $allowIn,
 		array $allowExceptIn,
 		array $allowInCalls,
+		array $allowExceptInCalls,
 		array $allowParamsInAllowed,
 		array $allowParamsAnywhere,
 		array $allowExceptParamsInAllowed,
@@ -73,6 +78,7 @@ class DisallowedCall implements Disallowed
 		$this->allowIn = $allowIn;
 		$this->allowExceptIn = $allowExceptIn;
 		$this->allowInCalls = $allowInCalls;
+		$this->allowExceptInCalls = $allowExceptInCalls;
 		$this->allowParamsInAllowed = $allowParamsInAllowed;
 		$this->allowParamsAnywhere = $allowParamsAnywhere;
 		$this->allowExceptParamsInAllowed = $allowExceptParamsInAllowed;
@@ -118,7 +124,16 @@ class DisallowedCall implements Disallowed
 
 
 	/**
-	 * @return array<int, DisallowedCallParam>
+	 * @return string[]
+	 */
+	public function getAllowExceptInCalls(): array
+	{
+		return $this->allowExceptInCalls;
+	}
+
+
+	/**
+	 * @return array<int|string, DisallowedCallParam>
 	 */
 	public function getAllowParamsInAllowed(): array
 	{
@@ -127,7 +142,7 @@ class DisallowedCall implements Disallowed
 
 
 	/**
-	 * @return array<int, DisallowedCallParam>
+	 * @return array<int|string, DisallowedCallParam>
 	 */
 	public function getAllowParamsAnywhere(): array
 	{
@@ -136,7 +151,7 @@ class DisallowedCall implements Disallowed
 
 
 	/**
-	 * @return array<int, DisallowedCallParam>
+	 * @return array<int|string, DisallowedCallParam>
 	 */
 	public function getAllowExceptParamsInAllowed(): array
 	{
@@ -145,7 +160,7 @@ class DisallowedCall implements Disallowed
 
 
 	/**
-	 * @return array<int, DisallowedCallParam>
+	 * @return array<int|string, DisallowedCallParam>
 	 */
 	public function getAllowExceptParams(): array
 	{

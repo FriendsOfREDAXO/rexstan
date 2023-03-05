@@ -3,7 +3,7 @@
 use rexstan\RexStan;
 use staabm\PHPStanBaselineAnalysis\ResultPrinter;
 
-$result = RexStan::analyzeBaseline();
+$result = RexStan::analyzeSummaryBaseline();
 $settingsUrl = rex_url::backendPage('rexstan/settings');
 
 if (null === $result) {
@@ -17,8 +17,8 @@ if (null === $result) {
 <table class="table table-striped table-hover" style="width: auto;">
     <tbody>
         <tr>
-            <th class="info">Fehlerklasse</th>
-            <td>Errors</td>
+            <th class="info" style="width: 200px">Fehlerklasse</th>
+            <td>Overall-Errors</td>
             <td>Cognitive-Complexity</td>
             <td>Deprecations</td>
             <td>Invalide PHPDocs</td>
@@ -36,4 +36,22 @@ if (null === $result) {
         </tr>
     </tbody>
 </table>
+
+<table class="table table-striped table-hover" style="width: auto;">
+    <tbody>
+    <tr>
+        <th class="info" style="width: 200px">Native Type Coverage</th>
+        <td>Class Property Types</td>
+        <td>Parameter Types</td>
+        <td>Return Types</td>
+    </tr>
+    <tr>
+        <th class="info">Fortschritt</th>
+        <td><?= $result[ResultPrinter::KEY_PROPERTY_TYPE_COVERAGE] ?> %</td>
+        <td><?= $result[ResultPrinter::KEY_PARAM_TYPE_COVERAGE] ?> %</td>
+        <td><?= $result[ResultPrinter::KEY_RETURN_TYPE_COVERAGE] ?> %</td>
+    </tr>
+    </tbody>
+</table>
+
 <p>Die Zusammenfassung ist abhängig von den in den <a href="<?= $settingsUrl ?>">Einstellungen</a> definierten PHPStan-Extensions</p>

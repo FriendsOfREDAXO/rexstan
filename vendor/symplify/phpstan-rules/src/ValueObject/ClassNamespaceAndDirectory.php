@@ -7,14 +7,17 @@ namespace Symplify\PHPStanRules\ValueObject;
 final class ClassNamespaceAndDirectory
 {
     /**
+     * @readonly
      * @var string
      */
     private $namespace;
     /**
+     * @readonly
      * @var string
      */
     private $directory;
     /**
+     * @readonly
      * @var string
      */
     private $namespaceBeforeClass;

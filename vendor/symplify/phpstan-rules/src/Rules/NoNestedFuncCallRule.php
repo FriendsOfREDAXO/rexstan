@@ -41,9 +41,12 @@ final class NoNestedFuncCallRule implements Rule
         'is_file',
         'file_exists',
         'in_array',
+        'str_contains',
         'str_starts_with',
+        'str_ends_with',
     ];
     /**
+     * @readonly
      * @var \PhpParser\NodeFinder
      */
     private $nodeFinder;

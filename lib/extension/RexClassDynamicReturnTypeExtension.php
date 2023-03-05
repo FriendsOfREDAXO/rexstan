@@ -10,6 +10,7 @@ use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\DynamicStaticMethodReturnTypeExtension;
 use PHPStan\Type\Type;
+use PHPStan\Type\TypeCombinator;
 use rex;
 use rex_sql;
 use function count;
@@ -24,7 +25,7 @@ final class RexClassDynamicReturnTypeExtension implements DynamicStaticMethodRet
 
     public function isStaticMethodSupported(MethodReflection $methodReflection): bool
     {
-        return in_array(strtolower($methodReflection->getName()), ['gettable', 'gettableprefix', 'escapeidentifier'], true);
+        return in_array(strtolower($methodReflection->getName()), ['gettable'], true);
     }
 
     public function getTypeFromStaticMethodCall(MethodReflection $methodReflection, StaticCall $methodCall, Scope $scope): ?Type
@@ -36,19 +37,16 @@ final class RexClassDynamicReturnTypeExtension implements DynamicStaticMethodRet
             return null;
         }
 
-        if ('escapeidentifier' === $name) {
-            $identifierName = $scope->getType($args[0]->value);
-            if ($identifierName instanceof ConstantStringType) {
-                // 1:1 copied rex_sql::escapeIdentifier()
-                $escapedIdentifier = '`' . str_replace('`', '``', $identifierName->getValue()) . '`';
-                return new ConstantStringType($escapedIdentifier);
-            }
-        }
-
         if ('gettable' === $name) {
-            $tableName = $scope->getType($args[0]->value);
-            if ($tableName instanceof ConstantStringType) {
-                return new ConstantStringType('rex_'. $tableName->getValue());
+            $tableNames = $scope->getType($args[0]->value)->getConstantStrings();
+
+            $result = [];
+            foreach ($tableNames as $tableName) {
+                $result[] = new ConstantStringType('rex_'. $tableName->getValue());
+            }
+
+            if (count($result) > 0) {
+                return TypeCombinator::union(...$result);
             }
         }
 

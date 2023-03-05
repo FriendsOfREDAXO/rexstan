@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\NodeFinder;
 
 use PhpParser\Node;
+use PhpParser\Node\Expr;
 use PhpParser\NodeFinder;
 
 /**
@@ -13,6 +14,7 @@ use PhpParser\NodeFinder;
 final class TypeAwareNodeFinder
 {
     /**
+     * @readonly
      * @var \PhpParser\NodeFinder
      */
     private $nodeFinder;
@@ -36,12 +38,11 @@ final class TypeAwareNodeFinder
     /**
      * @template TNode as Node
      *
-     * @param mixed[]|\PhpParser\Node $nodes
      * @param class-string<TNode> $type
      * @return TNode[]
      */
-    public function findInstanceOf($nodes, string $type): array
+    public function findInstanceOf(Expr $expr, string $type): array
     {
-        return $this->nodeFinder->findInstanceOf($nodes, $type);
+        return $this->nodeFinder->findInstanceOf($expr, $type);
     }
 }

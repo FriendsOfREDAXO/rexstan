@@ -10,7 +10,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\ShouldNotHappenException;
-use PHPStan\Type\MixedType;
 use staabm\PHPStanDba\QueryReflection\QueryReflection;
 use staabm\PHPStanDba\UnresolvableQueryException;
 
@@ -41,7 +40,7 @@ final class SyntaxErrorInQueryMethodRule implements Rule
 
     public function processNode(Node $node, Scope $scope): array
     {
-        if (!$node->name instanceof Node\Identifier) {
+        if (! $node->name instanceof Node\Identifier) {
             return [];
         }
 
@@ -54,7 +53,7 @@ final class SyntaxErrorInQueryMethodRule implements Rule
         $unsupportedMethod = true;
         foreach ($this->classMethods as $classMethod) {
             sscanf($classMethod, '%[^::]::%[^#]#%i', $className, $methodName, $queryArgPosition);
-            if (!\is_string($className) || !\is_string($methodName) || !\is_int($queryArgPosition)) {
+            if (! \is_string($className) || ! \is_string($methodName) || ! \is_int($queryArgPosition)) {
                 throw new ShouldNotHappenException('Invalid classMethod definition');
             }
 
@@ -75,17 +74,19 @@ final class SyntaxErrorInQueryMethodRule implements Rule
 
         $args = $node->getArgs();
 
-        if (!\array_key_exists($queryArgPosition, $args)) {
+        if (! \array_key_exists($queryArgPosition, $args)) {
             return [];
         }
 
-        if ($scope->getType($args[$queryArgPosition]->value) instanceof MixedType) {
+        $queryExpr = $args[$queryArgPosition]->value;
+        $queryReflection = new QueryReflection();
+
+        if ($queryReflection->isResolvable($queryExpr, $scope)->no()) {
             return [];
         }
 
         try {
-            $queryReflection = new QueryReflection();
-            $queryStrings = $queryReflection->resolveQueryStrings($args[$queryArgPosition]->value, $scope);
+            $queryStrings = $queryReflection->resolveQueryStrings($queryExpr, $scope);
             foreach ($queryStrings as $queryString) {
                 $queryError = $queryReflection->validateQueryString($queryString);
                 if (null !== $queryError) {
@@ -96,7 +97,7 @@ final class SyntaxErrorInQueryMethodRule implements Rule
             }
         } catch (UnresolvableQueryException $exception) {
             return [
-                RuleErrorBuilder::message($exception->asRuleMessage())->tip(UnresolvableQueryException::RULE_TIP)->line($node->getLine())->build(),
+                RuleErrorBuilder::message($exception->asRuleMessage())->tip($exception::getTip())->line($node->getLine())->build(),
             ];
         }
 

@@ -13,6 +13,7 @@ use PhpParser\NodeFinder;
 final class ArrayKeyFinder
 {
     /**
+     * @readonly
      * @var \PhpParser\NodeFinder
      */
     private $nodeFinder;

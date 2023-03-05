@@ -14,7 +14,6 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\ShouldNotHappenException;
-use PHPStan\Type\MixedType;
 use PHPStan\Type\ObjectType;
 use staabm\PHPStanDba\QueryReflection\PlaceholderValidation;
 use staabm\PHPStanDba\QueryReflection\QueryReflection;
@@ -48,13 +47,13 @@ final class SyntaxErrorInPreparedStatementMethodRule implements Rule
     public function processNode(Node $callLike, Scope $scope): array
     {
         if ($callLike instanceof MethodCall) {
-            if (!$callLike->name instanceof Node\Identifier) {
+            if (! $callLike->name instanceof Node\Identifier) {
                 return [];
             }
 
             $methodReflection = $scope->getMethodReflection($scope->getType($callLike->var), $callLike->name->toString());
         } elseif ($callLike instanceof New_) {
-            if (!$callLike->class instanceof FullyQualified) {
+            if (! $callLike->class instanceof FullyQualified) {
                 return [];
             }
             $methodReflection = $scope->getMethodReflection(new ObjectType($callLike->class->toCodeString()), '__construct');
@@ -69,7 +68,7 @@ final class SyntaxErrorInPreparedStatementMethodRule implements Rule
         $unsupportedMethod = true;
         foreach ($this->classMethods as $classMethod) {
             sscanf($classMethod, '%[^::]::%s', $className, $methodName);
-            if (!\is_string($className) || !\is_string($methodName)) {
+            if (! \is_string($className) || ! \is_string($methodName)) {
                 throw new ShouldNotHappenException('Invalid classMethod definition');
             }
 
@@ -101,12 +100,11 @@ final class SyntaxErrorInPreparedStatementMethodRule implements Rule
         }
 
         $queryExpr = $args[0]->value;
+        $queryReflection = new QueryReflection();
 
-        if ($scope->getType($queryExpr) instanceof MixedType) {
+        if ($queryReflection->isResolvable($queryExpr, $scope)->no()) {
             return [];
         }
-
-        $queryReflection = new QueryReflection();
 
         $parameters = null;
         if (\count($args) > 1) {
@@ -115,7 +113,7 @@ final class SyntaxErrorInPreparedStatementMethodRule implements Rule
                 $parameters = $queryReflection->resolveParameters($parameterTypes) ?? [];
             } catch (UnresolvableQueryException $exception) {
                 return [
-                    RuleErrorBuilder::message($exception->asRuleMessage())->tip(UnresolvableQueryException::RULE_TIP)->line($callLike->getLine())->build(),
+                    RuleErrorBuilder::message($exception->asRuleMessage())->tip($exception::getTip())->line($callLike->getLine())->build(),
                 ];
             }
         }
@@ -152,7 +150,7 @@ final class SyntaxErrorInPreparedStatementMethodRule implements Rule
             return $ruleErrors;
         } catch (UnresolvableQueryException $exception) {
             return [
-                RuleErrorBuilder::message($exception->asRuleMessage())->tip(UnresolvableQueryException::RULE_TIP)->line($callLike->getLine())->build(),
+                RuleErrorBuilder::message($exception->asRuleMessage())->tip($exception::getTip())->line($callLike->getLine())->build(),
             ];
         }
     }

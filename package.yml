@@ -1,17 +1,18 @@
 package: rexstan
-version: '1.0.59'
+version: '1.0.92'
 author: Friends Of REDAXO
 supportpage: https://github.com/FriendsOfREDAXO/rexstan
 
 page:
     title: translate:name
     perm: admin
-    icon: rex-icon fa-user-secret
+    icon: rexstan-navigation-icon
     popup: true
     linkAttr: { target: _rexstan }
     subpages:
         settings: { title: translate:settings }
         analysis: { title: translate:analysis }
+        lint-analysis: { title: translate:lint_analysis }
         summary: { title: translate:summary }
         readme: { title: translate:readme, subPath: README.md }
         faq: { title: translate:faq, subPath: FAQ.md, icon: rex-icon fa-book }
@@ -21,7 +22,7 @@ console_commands:
 
 requires:
     php:
-        version: '>=7.3, <8.3'
+        version: '>=7.4, <8.3'
     redaxo: '^5.2'
 
 installer_ignore:

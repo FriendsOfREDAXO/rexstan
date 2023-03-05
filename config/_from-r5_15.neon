@@ -1,0 +1,4 @@
+# config settings required starting with redaxo 5.15.+
+
+parameters:
+    phpVersion: 80100 # PHP 8.1

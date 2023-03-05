@@ -12,6 +12,11 @@ use RuntimeException;
 final class RexStanUserConfig
 {
     /**
+     * Cache key to invalidate the summary signature in case of default-config.neon changes.
+     */
+    private const DEFAULT_SETTINGS_VERSION = 'v2-type-coverage-only-in-summary';
+
+    /**
      * @param list<string> $paths
      * @param list<string> $includes
      *
@@ -37,6 +42,20 @@ final class RexStanUserConfig
         $prefix = "# rexstan auto generated file - do not edit, rename or remove\n\n";
 
         rex_file::put(self::getUserConfigPath(), $prefix . rex_string::yamlEncode($file, 3));
+    }
+
+    public static function isBaselineEnabled(): bool
+    {
+        $includes = self::getConfig()['includes'];
+        $baselineFile = RexStanSettings::getAnalysisBaselinePath();
+
+        foreach($includes as $include) {
+            if ($include === $baselineFile) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static function getLevel(): int
@@ -66,7 +85,7 @@ final class RexStanUserConfig
         if (!$md5) {
             throw new \PHPStan\ShouldNotHappenException();
         }
-        return $md5;
+        return self::DEFAULT_SETTINGS_VERSION.'-'.$md5;
     }
 
     /**

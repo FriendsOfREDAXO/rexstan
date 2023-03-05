@@ -12,14 +12,22 @@ use staabm\PHPStanDba\QueryReflection\QueryReflection;
 final class QueryPlanAnalyzerMysql
 {
     /**
+     * @api
+     *
      * @deprecated use QueryPlanAnalyzer::DEFAULT_UNINDEXED_READS_THRESHOLD instead
      */
     public const DEFAULT_UNINDEXED_READS_THRESHOLD = QueryPlanAnalyzer::DEFAULT_UNINDEXED_READS_THRESHOLD;
+
     /**
+     * @api
+     *
      * @deprecated use QueryPlanAnalyzer::TABLES_WITHOUT_DATA instead
      */
     public const TABLES_WITHOUT_DATA = QueryPlanAnalyzer::TABLES_WITHOUT_DATA;
+
     /**
+     * @api
+     *
      * @deprecated use QueryPlanAnalyzer::DEFAULT_SMALL_TABLE_THRESHOLD instead
      */
     public const DEFAULT_SMALL_TABLE_THRESHOLD = QueryPlanAnalyzer::DEFAULT_SMALL_TABLE_THRESHOLD;
@@ -42,17 +50,29 @@ final class QueryPlanAnalyzerMysql
      */
     public function analyze(string $query): QueryPlanResult
     {
-        $simulatedQuery = 'EXPLAIN '.$query;
+        $simulatedQuery = 'EXPLAIN ' . $query;
 
         if ($this->connection instanceof PDO) {
-            $stmt = $this->connection->query($simulatedQuery);
+            $this->connection->beginTransaction();
 
-            // @phpstan-ignore-next-line
-            return $this->buildResult($simulatedQuery, $stmt);
+            try {
+                $stmt = $this->connection->query($simulatedQuery);
+
+                // @phpstan-ignore-next-line
+                return $this->buildResult($simulatedQuery, $stmt);
+            } finally {
+                $this->connection->rollBack();
+            }
         } else {
-            $result = $this->connection->query($simulatedQuery);
-            if ($result instanceof \mysqli_result) {
-                return $this->buildResult($simulatedQuery, $result);
+            $this->connection->begin_transaction(\MYSQLI_TRANS_START_READ_ONLY);
+
+            try {
+                $result = $this->connection->query($simulatedQuery);
+                if ($result instanceof \mysqli_result) {
+                    return $this->buildResult($simulatedQuery, $result);
+                }
+            } finally {
+                $this->connection->rollback();
             }
         }
 

@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace staabm\PHPStanDba\Ast;
 
-use function array_pop;
 use PhpParser\Node;
 use PhpParser\NodeVisitorAbstract;
+use function array_pop;
 
 final class PreviousConnectingVisitor extends NodeVisitorAbstract
 {
     public const ATTRIBUTE_PARENT = 'dba-parent';
+
     public const ATTRIBUTE_PREVIOUS = 'dba-previous';
 
     /**
-     * @var Node[]
+     * @var list<Node>
      */
     private $stack = [];
 
@@ -33,7 +34,7 @@ final class PreviousConnectingVisitor extends NodeVisitorAbstract
 
     public function enterNode(Node $node)
     {
-        if (!empty($this->stack)) {
+        if ([] !== $this->stack) {
             $node->setAttribute(self::ATTRIBUTE_PARENT, $this->stack[\count($this->stack) - 1]);
         }
 

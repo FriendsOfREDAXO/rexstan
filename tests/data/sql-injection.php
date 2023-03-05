@@ -76,7 +76,7 @@ class DeepConcatError
 function safeArray($_id, string $langID)
 {
     $select = rex_sql::factory();
-    $select->setTable('article');
+    $select->setTable('rex_article');
     $select->setWhere(['id' => $_id, 'clang_id' => $langID]);
 }
 
@@ -88,7 +88,7 @@ function safeArray($_id, string $langID)
 function safeScalars($mixed, string $s, $numericS, int $i, float $f, bool $b, array $arr, $intArr)
 {
     $select = rex_sql::factory();
-    $select->setTable('article');
+    $select->setTable('rex_article');
     $select->setWhere('id = ' . $select->escape($s));
     $select->setWhere('id = ' . $select->escape($mixed));
     $select->setWhere($select->escapeIdentifier($s). ' = ' . $select->escape($mixed));
@@ -160,4 +160,20 @@ class Good
         $sql = rex_sql::factory();
         $sql->setQuery($this->query);
     }
+}
+
+function bug238()
+{
+    global $META_TAG_DESCRIPTOR;
+    $sql = rex_sql::factory();
+    $sql->setDebug(false);
+    $META_TAG_DESCRIPTOR = [];
+    $META_TAG_DESCRIPTOR['1'] = [
+        'regex' => "/\/inserat\/\?.*id=[0-9]+.*/",
+        'title' => static function (rex_sql $sql) {
+            $lady = $sql->getArray(
+            "SELECT name,ort,kategorie,handy,strasse FROM rex_inserate WHERE id={$_GET['id']}"
+        )[0];
+        },
+    ];
 }

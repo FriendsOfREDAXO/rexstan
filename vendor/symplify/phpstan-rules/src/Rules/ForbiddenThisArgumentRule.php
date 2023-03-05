@@ -39,6 +39,7 @@ final class ForbiddenThisArgumentRule implements Rule
         'Symplify\PackageBuilder\Reflection\PrivatesCaller',
     ];
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\TypeAnalyzer\ContainsTypeAnalyser
      */
     private $containsTypeAnalyser;

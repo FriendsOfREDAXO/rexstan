@@ -7,7 +7,7 @@ use staabm\PHPStanDba\QueryReflection\RuntimeConfiguration;
 unset($REX);
 $REX['REDAXO'] = false;
 
-if (is_dir(__DIR__.'/../../../vendor/')) {
+if (is_dir(__DIR__.'/../../../var/')) {
     // yakamara directoy layout
     $REX['HTDOCS_PATH'] = realpath(__DIR__.'/../../../');
     require __DIR__ . '/../../../src/path_provider.php';
@@ -38,6 +38,7 @@ $config = new RuntimeConfiguration();
 // $config->debugMode(true);
 // $config->stringifyTypes(true);
 // $config->analyzeQueryPlans(true);
+$config->utilizeSqlAst(true);
 
 QueryReflection::setupReflector(
     new PdoMysqlQueryReflector($pdo),

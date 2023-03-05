@@ -4,17 +4,25 @@ declare(strict_types=1);
 
 namespace staabm\PHPStanDba\QueryReflection;
 
+use Composer\InstalledVersions;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\BinaryOp\Concat;
 use PhpParser\Node\Scalar\Encapsed;
 use PhpParser\Node\Scalar\EncapsedStringPart;
 use PHPStan\Analyser\Scope;
 use PHPStan\ShouldNotHappenException;
+use PHPStan\TrinaryLogic;
+use PHPStan\Type\Accessory\AccessoryNumericStringType;
 use PHPStan\Type\Constant\ConstantArrayType;
+use PHPStan\Type\Constant\ConstantArrayTypeBuilder;
 use PHPStan\Type\Constant\ConstantIntegerType;
 use PHPStan\Type\Constant\ConstantStringType;
+use PHPStan\Type\FloatType;
+use PHPStan\Type\IntegerType;
+use PHPStan\Type\IntersectionType;
+use PHPStan\Type\StringType;
 use PHPStan\Type\Type;
-use PHPStan\Type\TypeUtils;
+use PHPStan\Type\TypeCombinator;
 use PHPStan\Type\UnionType;
 use staabm\PHPStanDba\Analyzer\QueryPlanAnalyzerMysql;
 use staabm\PHPStanDba\Analyzer\QueryPlanQueryResolver;
@@ -23,26 +31,44 @@ use staabm\PHPStanDba\Ast\ExpressionFinder;
 use staabm\PHPStanDba\DbaException;
 use staabm\PHPStanDba\Error;
 use staabm\PHPStanDba\PhpDoc\PhpDocUtil;
+use staabm\PHPStanDba\SchemaReflection\SchemaReflection;
+use staabm\PHPStanDba\SqlAst\ParserInference;
 use staabm\PHPStanDba\UnresolvableQueryException;
 
 final class QueryReflection
 {
     private const UNNAMED_PATTERN = '\?';
+
     // see https://github.com/php/php-src/blob/01b3fc03c30c6cb85038250bb5640be3a09c6a32/ext/pdo/pdo_sql_parser.re#L48
     private const NAMED_PATTERN = ':[a-zA-Z0-9_]+';
 
-    private const REGEX_UNNAMED_PLACEHOLDER = '{(["\'])([^"\']*\1)|('.self::UNNAMED_PATTERN.')}';
-    private const REGEX_NAMED_PLACEHOLDER = '{(["\'])([^"\']*\1)|('.self::NAMED_PATTERN.')}';
+    private const REGEX_UNNAMED_PLACEHOLDER = '{(["\'])([^"\']*\1)|(' . self::UNNAMED_PATTERN . ')}';
+
+    private const REGEX_NAMED_PLACEHOLDER = '{(["\'])([^"\']*\1)|(' . self::NAMED_PATTERN . ')}';
 
     /**
      * @var QueryReflector|null
      */
     private static $reflector;
+
     /**
      * @var RuntimeConfiguration|null
      */
     private static $runtimeConfiguration;
 
+    /**
+     * @var SchemaReflection
+     */
+    private $schemaReflection;
+
+    public function __construct(?DbaApi $dbaApi = null)
+    {
+        self::reflector()->setupDbaApi($dbaApi);
+    }
+
+    /**
+     * @api
+     */
     public static function setupReflector(QueryReflector $reflector, RuntimeConfiguration $runtimeConfiguration): void
     {
         self::$reflector = $reflector;
@@ -51,8 +77,24 @@ final class QueryReflection
 
     public function validateQueryString(string $queryString): ?Error
     {
-        if ('SELECT' !== $this->getQueryType($queryString)) {
-            return null;
+        $queryType = self::getQueryType($queryString);
+
+        if (self::getRuntimeConfiguration()->isAnalyzingWriteQueries()) {
+            if (\in_array($queryType, [
+                'INSERT',
+                'DELETE',
+                'UPDATE',
+                'REPLACE',
+            ], true)) {
+                // turn write queries into explain, so we don't need to execute a query which might modify data
+                $queryString = 'EXPLAIN ' . $queryString;
+            } elseif ('SELECT' !== $queryType) {
+                return null;
+            }
+        } else {
+            if ('SELECT' !== $queryType) {
+                return null;
+            }
         }
 
         // this method cannot validate queries which contain placeholders.
@@ -68,11 +110,101 @@ final class QueryReflection
      */
     public function getResultType(string $queryString, int $fetchType): ?Type
     {
-        if ('SELECT' !== $this->getQueryType($queryString)) {
+        if ('SELECT' !== self::getQueryType($queryString)) {
             return null;
         }
 
-        return self::reflector()->getResultType($queryString, $fetchType);
+        $resultType = self::reflector()->getResultType($queryString, $fetchType);
+
+        if (null !== $resultType) {
+            if (! $resultType instanceof ConstantArrayType) {
+                throw new ShouldNotHappenException();
+            }
+
+            if (
+                self::getRuntimeConfiguration()->isUtilizingSqlAst()
+            ) {
+                if (! InstalledVersions::isInstalled('sqlftw/sqlftw')) {
+                    throw new \Exception('sqlftw/sqlftw is required to utilize the sql ast. Please install it via composer.');
+                }
+                $parserInference = new ParserInference($this->getSchemaReflection());
+                $resultType = $parserInference->narrowResultType($queryString, $resultType);
+            }
+
+            if (self::getRuntimeConfiguration()->isStringifyTypes()) {
+                return $this->stringifyResult($resultType);
+            }
+        }
+
+        return $resultType;
+    }
+
+    private function stringifyResult(Type $type): Type
+    {
+        if (! $type instanceof ConstantArrayType) {
+            return $type;
+        }
+
+        $builder = ConstantArrayTypeBuilder::createEmpty();
+
+        $keyTypes = $type->getKeyTypes();
+        foreach ($type->getValueTypes() as $i => $valueType) {
+            $builder->setOffsetValueType($keyTypes[$i], $this->stringifyType($valueType));
+        }
+
+        return $builder->getArray();
+    }
+
+    private function stringifyType(Type $type): Type
+    {
+        $numberType = new UnionType([new IntegerType(), new FloatType()]);
+
+        if ($numberType->isSuperTypeOf($type)->yes()) {
+            $stringified = new IntersectionType([
+                new StringType(),
+                new AccessoryNumericStringType(),
+            ]);
+
+            if (TypeCombinator::containsNull($type)) {
+                return TypeCombinator::addNull($stringified);
+            }
+
+            return $stringified;
+        }
+
+        return $type;
+    }
+
+    public function getSchemaReflection(): SchemaReflection
+    {
+        if (null === $this->schemaReflection) {
+            $this->schemaReflection = new SchemaReflection(function ($queryString) {
+                return self::reflector()->getResultType($queryString, QueryReflector::FETCH_TYPE_ASSOC);
+            });
+        }
+
+        return $this->schemaReflection;
+    }
+
+    /**
+     * Determine if a query will be resolvable.
+     *
+     * - If yes, the query is a literal string.
+     * - If no, the query is a non-literal string or mixed type.
+     * - If maybe, the query is neither of the two.
+     *
+     * We will typically skip processing of queries that return no, which are
+     * likely part of a software abstraction layer that we know nothing about.
+     */
+    public function isResolvable(Expr $queryExpr, Scope $scope): TrinaryLogic
+    {
+        $type = $scope->getType($queryExpr);
+        if ($type->isLiteralString()->yes()) {
+            return TrinaryLogic::createYes();
+        }
+        $isStringOrMixed = $type->isSuperTypeOf(new StringType());
+
+        return $isStringOrMixed->negate();
     }
 
     /**
@@ -90,7 +222,7 @@ final class QueryReflection
                 return null;
             }
 
-            foreach (TypeUtils::getConstantStrings($type) as $constantString) {
+            foreach ($type->getConstantStrings() as $constantString) {
                 $queryString = $constantString->getValue();
                 $queryString = $this->replaceParameters($queryString, $parameters);
                 yield $this->normalizeQueryString($queryString);
@@ -106,6 +238,8 @@ final class QueryReflection
     }
 
     /**
+     * @api
+     *
      * @deprecated use resolvePreparedQueryStrings() instead
      *
      * @throws UnresolvableQueryException
@@ -135,8 +269,9 @@ final class QueryReflection
     {
         $type = $scope->getType($queryExpr);
 
-        if ($type instanceof UnionType) {
-            foreach (TypeUtils::getConstantStrings($type) as $constantString) {
+        $constantStrings = $type->getConstantStrings();
+        if (count($constantStrings) > 0) {
+            foreach ($constantStrings as $constantString) {
                 yield QuerySimulation::stripComments($this->normalizeQueryString($constantString->getValue()));
             }
 
@@ -145,7 +280,13 @@ final class QueryReflection
 
         $queryString = $this->resolveQueryExpr($queryExpr, $scope);
         if (null !== $queryString) {
-            yield QuerySimulation::stripComments($this->normalizeQueryString($queryString));
+            $normalizedQuery = QuerySimulation::stripComments($this->normalizeQueryString($queryString));
+
+            // query simulation might lead in a invalid query, skip those
+            $error = $this->validateQueryString($normalizedQuery);
+            if ($error === null) {
+                yield $normalizedQuery;
+            }
         }
     }
 
@@ -202,13 +343,13 @@ final class QueryReflection
         }
 
         if ($queryExpr instanceof Expr\CallLike) {
-            if ('sql' === PhpDocUtil::matchTaintEscape($queryExpr, $scope)) {
-                return '1';
-            }
-
             $placeholder = PhpDocUtil::matchInferencePlaceholder($queryExpr, $scope);
             if (null !== $placeholder) {
                 return $placeholder;
+            }
+
+            if ('sql' === PhpDocUtil::matchTaintEscape($queryExpr, $scope)) {
+                return '1';
             }
         }
 
@@ -223,7 +364,7 @@ final class QueryReflection
                 return null;
             }
 
-            return $leftString.$rightString;
+            return $leftString . $rightString;
         }
 
         if ($queryExpr instanceof Encapsed) {
@@ -252,7 +393,7 @@ final class QueryReflection
     {
         $query = ltrim($query);
 
-        if (preg_match('/^\s*\(?\s*(SELECT|SHOW|UPDATE|INSERT|DELETE|REPLACE|CREATE|CALL|OPTIMIZE)/i', $query, $matches)) {
+        if (1 === preg_match('/^\s*\(?\s*(SELECT|SHOW|UPDATE|INSERT|DELETE|REPLACE|CREATE|CALL|OPTIMIZE)/i', $query, $matches)) {
             return strtoupper($matches[1]);
         }
 
@@ -271,7 +412,7 @@ final class QueryReflection
         $parameters = [];
 
         if ($parameterTypes instanceof UnionType) {
-            foreach (TypeUtils::getConstantArrays($parameterTypes) as $constantArray) {
+            foreach ($parameterTypes->getConstantArrays() as $constantArray) {
                 $parameters = $parameters + $this->resolveConstantArray($constantArray, true);
             }
 
@@ -353,7 +494,7 @@ final class QueryReflection
 
             if (\is_string($value)) {
                 // XXX escaping
-                $value = "'".$value."'";
+                $value = "'" . $value . "'";
             } elseif (null === $value) {
                 $value = 'NULL';
             } else {
@@ -361,7 +502,7 @@ final class QueryReflection
             }
 
             if (\is_string($placeholderKey)) {
-                $queryString = (string) preg_replace('/'.$placeholderKey.'\\b/', $value, $queryString);
+                $queryString = (string) preg_replace('/' . $placeholderKey . '\\b/', $value, $queryString);
             } else {
                 $queryString = $replaceFirst($queryString, '?', $value);
             }
@@ -373,7 +514,7 @@ final class QueryReflection
     private static function reflector(): QueryReflector
     {
         if (null === self::$reflector) {
-            throw new DbaException('Reflector not initialized. Make sure a phpstan bootstrap file is configured which calls '.__CLASS__.'::setupReflector().');
+            throw new DbaException('Reflector not initialized. Make sure a phpstan bootstrap file is configured which calls ' . __CLASS__ . '::setupReflector().');
         }
 
         return self::$reflector;
@@ -382,7 +523,7 @@ final class QueryReflection
     public static function getRuntimeConfiguration(): RuntimeConfiguration
     {
         if (null === self::$runtimeConfiguration) {
-            throw new DbaException('Runtime configuration not initialized. Make sure a phpstan bootstrap file is configured which calls '.__CLASS__.'::setupReflector().');
+            throw new DbaException('Runtime configuration not initialized. Make sure a phpstan bootstrap file is configured which calls ' . __CLASS__ . '::setupReflector().');
         }
 
         return self::$runtimeConfiguration;
@@ -462,7 +603,7 @@ final class QueryReflection
     {
         $reflector = self::reflector();
 
-        if (!$reflector instanceof RecordingReflector) {
+        if (! $reflector instanceof RecordingReflector) {
             throw new DbaException('Query plan analysis is only supported with a recording reflector');
         }
         if ($reflector instanceof PdoPgSqlQueryReflector) {

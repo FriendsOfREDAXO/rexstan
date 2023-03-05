@@ -15,6 +15,7 @@ use Symplify\PHPStanRules\PhpDoc\BarePhpDocParser;
 final class EnumAnalyzer
 {
     /**
+     * @readonly
      * @var \Symplify\PHPStanRules\PhpDoc\BarePhpDocParser
      */
     private $barePhpDocParser;
@@ -38,7 +39,7 @@ final class EnumAnalyzer
             return true;
         }
 
-        if ($classReflection->isSubclassOf(Enum::class)) {
+        if ($classReflection->isSubclassOf('MyCLabs\Enum\Enum')) {
             return true;
         }
 

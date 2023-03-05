@@ -29,6 +29,7 @@ final class PreventDuplicateClassMethodRule implements Rule
      */
     public const ERROR_MESSAGE = 'Content of method "%s()" is duplicated. Use unique content or service instead';
     /**
+     * @readonly
      * @var int
      */
     private $minimumLineCount = 3;
@@ -140,9 +141,9 @@ CODE_SAMPLE
 
         foreach ($classMethodsContentByFile as $fileName => $classMethodContents) {
             foreach ($classMethodContents as [$methodName, $methodLine, $methodContents]) {
-                $methodContentsHash = md5($methodContents);
+                $methodContentsHash = md5((string) $methodContents);
 
-                $methodLineCount = substr_count($methodContents, "\n");
+                $methodLineCount = substr_count((string) $methodContents, "\n");
 
                 $methodsNamesAndFilesByMethodContents[$methodContentsHash][] = new ClassMethodMetadata($methodName, $methodLineCount, $fileName, $methodLine);
             }

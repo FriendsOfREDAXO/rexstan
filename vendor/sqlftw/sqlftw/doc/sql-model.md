@@ -1,0 +1,20 @@
+
+- *SqlSerializable* - serializable snippet of SQL code
+    - *Statement* - command or statement used in stored routines
+        - *Command* - command that can be run independently (outside stored routine)
+            - [SQL commands](sql-commands.md)
+        - *Ddl\Compound\CompoundStatementItem**
+            - [Compound statements](sql-compound-statements.md)
+    - *Expression\ExpressionNode*
+        - [Expression nodes](sql-expression-nodes.md)
+    - **Charset**
+    - **Collation**
+    - **ColumnName**
+    - **Keyword**
+    - **Order**
+    - **QualifiedName**
+    - **Scope**
+    - **SqlEnum**
+    - **SqlMode**
+    - **SystemVariable**
+    - **UserName**

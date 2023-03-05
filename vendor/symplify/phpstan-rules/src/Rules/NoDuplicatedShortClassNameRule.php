@@ -44,6 +44,7 @@ final class NoDuplicatedShortClassNameRule implements Rule
      */
     private $declaredClassesByShortName = [];
     /**
+     * @readonly
      * @var int
      */
     private $toleratedNestingLevel;

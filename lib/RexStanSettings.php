@@ -18,10 +18,10 @@ final class RexStanSettings
         'Bleeding-Edge' => 'vendor/phpstan/phpstan/conf/bleedingEdge.neon',
         'Strict-Mode' => 'vendor/phpstan/phpstan-strict-rules/rules.neon',
         'Deprecation Warnings' => 'vendor/phpstan/phpstan-deprecation-rules/rules.neon',
-        'PHPUnit' => 'vendor/phpstan/phpstan-phpunit/rules.neon',
+        'PHPUnit' => 'config/phpstan-phpunit.neon',
         'phpstan-dba' => 'config/phpstan-dba.neon',
         'cognitive complexity' => 'config/cognitive-complexity.neon',
-        'code complexity' => 'config/code-complexity.neon',
+        'report mixed' => 'config/code-complexity.neon',
         'dead code' => 'config/dead-code.neon',
     ];
 
@@ -67,9 +67,16 @@ final class RexStanSettings
         foreach (rex_addon::getAvailableAddons() as $availableAddon) {
             $scanTargets[$availableAddon->getPath()] = $availableAddon->getName();
 
-            if ('developer' === $availableAddon->getName() && class_exists(rex_developer_manager::class)) {
-                $scanTargets[rex_developer_manager::getBasePath() .'/modules/'] = 'developer: modules';
-                $scanTargets[rex_developer_manager::getBasePath() .'/templates/'] = 'developer: templates';
+            if ('developer' === $availableAddon->getName()) {
+                $modulesDir = DeveloperAddonIntegration::getModulesDir();
+                if ($modulesDir !== null) {
+                    $scanTargets[$modulesDir] = 'developer: modules';
+                }
+
+                $templatesDir = DeveloperAddonIntegration::getTemplatesDir();
+                if ($templatesDir !== null) {
+                    $scanTargets[$templatesDir] = 'developer: templates';
+                }
             }
         }
 
@@ -89,10 +96,22 @@ final class RexStanSettings
             }
         }
 
+        $baselineFile = RexStanSettings::getAnalysisBaselinePath();
+        $url = \rex_editor::factory()->getUrl($baselineFile, 0);
+
+        $baselineButton = '';
+        if ($url) {
+            $baselineButton .= '<a href="'. $url .'">Baseline im Editor &ouml;ffnen</a> - ';
+        }
+
         $form = rex_config_form::factory('rexstan');
         $field = $form->addInputField('number', 'level', null, ['class' => 'form-control', 'min' => 0, 'max' => 9]);
         $field->setLabel('Level');
-        $field->setNotice('0 is the loosest and 9 is the strictest - <a href="https://phpstan.org/user-guide/rule-levels">see PHPStan Rule Levels</a>');
+        $field->setNotice('von 0 einfach, bis 9 sehr strikt - <a href="https://phpstan.org/user-guide/rule-levels">PHPStan Rule Levels</a>');
+
+        $field = $form->addCheckboxField('baseline');
+        $field->addOption('Baseline verwenden', 1);
+        $field->setNotice($baselineButton .'Weiterlesen: <a href="https://phpstan.org/user-guide/baseline">Baseline Erklärung</a>');
 
         $field = $form->addSelectField('addons', null, ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'required' => 'required']); // die Klasse selectpicker aktiviert den Selectpicker von Bootstrap
         $field->setAttribute('multiple', 'multiple');
@@ -115,5 +134,17 @@ final class RexStanSettings
         $select->addOptions($phpVersions);
 
         return $form;
+    }
+
+    static public function getAnalysisBaselinePath(): string {
+        $addon = rex_addon::get('rexstan');
+        $dataDir = $addon->getDataPath();
+        $filePath = $dataDir .'analysis-baseline.neon';
+
+        if (!is_file($filePath)) {
+            \rex_file::put($filePath, '');
+        }
+
+        return $filePath;
     }
 }

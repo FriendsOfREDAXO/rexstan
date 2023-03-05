@@ -1,0 +1,9 @@
+includes:
+    - ../vendor/tomasvotruba/type-coverage/config/extension.neon
+
+parameters:
+    type_coverage:
+        return_type: 99
+        param_type: 99
+        property_type: 99
+        print_suggestions: false

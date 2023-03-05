@@ -25,6 +25,7 @@ use PHPStan\Reflection\ReflectionProvider;
 final class NewAndSetterCallsCollector implements Collector
 {
     /**
+     * @readonly
      * @var \PHPStan\Reflection\ReflectionProvider
      */
     private $reflectionProvider;

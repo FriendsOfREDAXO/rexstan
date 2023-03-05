@@ -10,37 +10,19 @@ use RuntimeException;
 use staabm\PHPStanBaselineAnalysis\ResultPrinter;
 use function array_key_exists;
 use function dirname;
-use function is_resource;
 
 final class RexStan
 {
-    public static function phpExecutable(): string
-    {
-        if ('Darwin' === PHP_OS_FAMILY) {
-            $executable = 'php';
-            $customConfig = '/Library/Application Support/appsolute/MAMP PRO/conf/php'.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION.'.ini';
-            if (is_file($customConfig)) {
-                $executable .= ' -c "'.$customConfig.'"';
-            }
-
-            $mampPhp = '/Applications/MAMP/bin/php/php'.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION.'/bin/';
-            if (is_executable($mampPhp.'php')) {
-                return 'PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:'.$mampPhp.'" '.$executable;
-            }
-        }
-        return 'php';
-    }
-
     /**
      * @return string
      */
     public static function runFromCli()
     {
         $phpstanBinary = self::phpstanBinPath();
-        $configPath = self::phpstanConfigPath();
+        $configPath = self::phpstanConfigPath(__DIR__.'/../phpstan.neon');
 
         $cmd = $phpstanBinary .' analyse -c '. $configPath;
-        $output = self::execCmd($cmd, $stderrOutput, $exitCode);
+        $output = RexCmd::execCmd($cmd, $stderrOutput, $exitCode);
 
         return $output;
     }
@@ -51,12 +33,12 @@ final class RexStan
     public static function runFromWeb()
     {
         $phpstanBinary = self::phpstanBinPath();
-        $configPath = self::phpstanConfigPath();
+        $configPath = self::phpstanConfigPath(__DIR__.'/../phpstan.neon');
 
         $cmd = $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress';
-        $output = self::execCmd($cmd, $stderrOutput, $exitCode);
+        $output = RexCmd::execCmd($cmd, $stderrOutput, $exitCode);
 
-        if ('{' === $output[0]) {
+        if ('' !== $output && '{' === $output[0]) {
             // return the analysis result as an array
             return json_decode($output, true);
         }
@@ -70,14 +52,31 @@ final class RexStan
     }
 
     /**
+     * @return void
+     */
+    public static function generateAnalysisBaseline() {
+        $phpstanBinary = self::phpstanBinPath();
+        $configPath = self::phpstanConfigPath(__DIR__.'/../phpstan.neon');
+        $analysisBaselinePath = RexStanSettings::getAnalysisBaselinePath();
+
+        $addon = rex_addon::get('rexstan');
+        $dataDir = $addon->getDataPath();
+
+        RexCmd::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline '. $analysisBaselinePath .' --allow-empty-baseline', $stderrOutput, $exitCode);
+        if (0 !== $exitCode) {
+            throw new Exception('Unable to generate analysis baseline:'. $stderrOutput);
+        }
+    }
+
+    /**
      * @return array<ResultPrinter::KEY_*, int>|null
      */
-    public static function analyzeBaseline()
+    public static function analyzeSummaryBaseline()
     {
         $phpstanBinary = self::phpstanBinPath();
         $analyzeBinary = self::phpstanBaselineAnalyzeBinPath();
         $graphBinary = self::phpstanBaselineGraphBinPath();
-        $configPath = self::phpstanConfigPath();
+        $configPath = self::phpstanConfigPath(__DIR__.'/../phpstan-summary.neon');
 
         $addon = rex_addon::get('rexstan');
         $dataDir = $addon->getDataPath();
@@ -88,16 +87,16 @@ final class RexStan
         $currentTime = time();
         $currentTimeSlot = $currentTime - ($currentTime % (15 * 60));
 
-        $summaryPath = $dataDir.'/'.$configSignature.'/'. $currentTimeSlot .'-summary.json';
-        $baselineGlob = $dataDir.'/'.$configSignature.'/*-summary.json';
-        $htmlGraphPath = $dataDir.'/baseline-graph.html';
+        $summaryPath = $dataDir.$configSignature.DIRECTORY_SEPARATOR. $currentTimeSlot .'-summary.json';
+        $baselineGlob = $dataDir.$configSignature.DIRECTORY_SEPARATOR.'*-summary.json';
+        $htmlGraphPath = $dataDir.'baseline-graph.html';
 
-        self::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline', $stderrOutput, $exitCode);
+        RexCmd::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline --allow-empty-baseline', $stderrOutput, $exitCode);
         if (0 !== $exitCode) {
             throw new Exception('Unable to generate baseline:'. $stderrOutput);
         }
 
-        $output = self::execCmd('cd '.$dataDir.' && '. $analyzeBinary .' *phpstan-baseline.neon --json', $stderrOutput, $exitCode);
+        $output = RexCmd::execCmd('cd '.$dataDir.' && '. $analyzeBinary .' *phpstan-baseline.neon --json', $stderrOutput, $exitCode);
         if (0 !== $exitCode) {
             throw new Exception('Unable to analyze baseline: '.$stderrOutput);
         }
@@ -106,7 +105,7 @@ final class RexStan
             rex_dir::create(dirname($summaryPath));
             rex_file::put($summaryPath, $output);
 
-            $htmlOutput = self::execCmd('cd '.$dataDir.' && '. $graphBinary ." '". $baselineGlob ."'", $stderrOutput, $exitCode);
+            $htmlOutput = RexCmd::execCmd('cd '.$dataDir.' && '. $graphBinary ." '". $baselineGlob ."'", $stderrOutput, $exitCode);
             if (0 !== $exitCode) {
                 throw new Exception('Unable to graph baseline: '.$stderrOutput);
             }
@@ -139,56 +138,7 @@ final class RexStan
         $phpstanBinary = self::phpstanBinPath();
 
         $cmd = $phpstanBinary .' clear-result-cache';
-        self::execCmd($cmd, $stderrOutput, $exitCode);
-    }
-
-    /**
-     * @param string $stderrOutput
-     * @param int $exitCode
-     * @param-out string $stderrOutput
-     * @param-out int $exitCode
-     *
-     * @return string
-     */
-    public static function execCmd(string $cmd, &$stderrOutput, &$exitCode)
-    {
-        $descriptorspec = [
-            0 => ['pipe', 'r'],  // stdin
-            1 => ['pipe', 'w'],  // stdout
-            2 => ['pipe', 'w'],   // stderr
-        ];
-
-        $stderrOutput = '';
-        $output = '';
-
-        $process = proc_open($cmd, $descriptorspec, $pipes);
-        if (is_resource($process)) {
-            fclose($pipes[0]);
-
-            $output = stream_get_contents($pipes[1]);
-            fclose($pipes[1]);
-
-            $stderrOutput = stream_get_contents($pipes[2]);
-            fclose($pipes[2]);
-
-            $status = proc_get_status($process);
-            if (false === $status) {
-                throw new Exception('Unable to get process status');
-            }
-            while ($status['running']) {
-                // sleep half a second
-                usleep(500000);
-                $status = proc_get_status($process);
-                if (false === $status) {
-                    throw new Exception('Unable to get process status');
-                }
-            }
-            $exitCode = $status['exitcode'];
-
-            proc_close($process);
-        }
-
-        return false === $output ? '' : $output;
+        RexCmd::execCmd($cmd, $stderrOutput, $exitCode);
     }
 
     private static function phpstanBinPath(): string
@@ -196,7 +146,7 @@ final class RexStan
         if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
             $path = realpath(__DIR__.'/../vendor/bin/phpstan.bat');
         } else {
-            $path = self::phpExecutable().' '.realpath(__DIR__.'/../vendor/bin/phpstan');
+            $path = RexCmd::phpExecutable().' '.realpath(__DIR__.'/../vendor/bin/phpstan');
         }
 
         if (false === $path) {
@@ -211,7 +161,7 @@ final class RexStan
         if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
             $path = realpath(__DIR__.'/../vendor/bin/phpstan-baseline-analyze.bat');
         } else {
-            $path = self::phpExecutable().' '.realpath(__DIR__.'/../vendor/bin/phpstan-baseline-analyze');
+            $path = RexCmd::phpExecutable().' '.realpath(__DIR__.'/../vendor/bin/phpstan-baseline-analyze');
         }
 
         if (false === $path) {
@@ -226,7 +176,7 @@ final class RexStan
         if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
             $path = realpath(__DIR__.'/../vendor/bin/phpstan-baseline-graph.bat');
         } else {
-            $path = self::phpExecutable().' '.realpath(__DIR__.'/../vendor/bin/phpstan-baseline-graph');
+            $path = RexCmd::phpExecutable().' '.realpath(__DIR__.'/../vendor/bin/phpstan-baseline-graph');
         }
 
         if (false === $path) {
@@ -236,12 +186,12 @@ final class RexStan
         return $path;
     }
 
-    private static function phpstanConfigPath(): string
+    private static function phpstanConfigPath(string $pathToFile): string
     {
-        $path = realpath(__DIR__.'/../phpstan.neon');
+        $path = realpath($pathToFile);
 
         if (false === $path) {
-            throw new RuntimeException(sprintf('phpstan config "%s" not found. This file is usually created while AddOn setup. Try re-install of rexstan.', $path));
+            throw new RuntimeException(sprintf('phpstan config "%s" not found. This file is usually created while AddOn setup. Try re-install of rexstan.', $pathToFile));
         }
 
         return $path;

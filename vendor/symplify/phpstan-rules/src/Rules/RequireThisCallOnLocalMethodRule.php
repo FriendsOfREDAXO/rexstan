@@ -31,6 +31,7 @@ final class RequireThisCallOnLocalMethodRule implements Rule
      */
     public const ERROR_MESSAGE = 'Use "$this-><method>()" instead of "self::<method>()" to call local method';
     /**
+     * @readonly
      * @var \PhpParser\NodeFinder
      */
     private $nodeFinder;

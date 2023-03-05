@@ -32,10 +32,6 @@ final class PlaceholderValidation
      */
     private function checkErrors(string $queryString, array $parameters): iterable
     {
-        if ('SELECT' !== QueryReflection::getQueryType($queryString)) {
-            return;
-        }
-
         $queryReflection = new QueryReflection();
         if ($queryReflection->containsNamedPlaceholders($queryString, $parameters)) {
             yield from $this->validateNamedPlaceholders($queryString, $parameters);
@@ -76,7 +72,7 @@ final class PlaceholderValidation
             if (0 === $parameterCount) {
                 $parameterActual = 'but no values are given';
             } elseif ($minParameterCount !== $parameterCount) {
-                $parameterActual = sprintf('but %s values are given', $minParameterCount.'-'.$parameterCount);
+                $parameterActual = sprintf('but %s values are given', $minParameterCount . '-' . $parameterCount);
             } else {
                 $parameterActual = sprintf('but %s value is given', $parameterCount);
                 if ($parameterCount > 1) {
@@ -84,7 +80,7 @@ final class PlaceholderValidation
                 }
             }
 
-            yield $placeholderExpectation.', '.$parameterActual.'.';
+            yield $placeholderExpectation . ', ' . $parameterActual . '.';
         }
     }
 
@@ -99,7 +95,7 @@ final class PlaceholderValidation
         $namedPlaceholders = $queryReflection->extractNamedPlaceholders($queryString);
 
         foreach ($namedPlaceholders as $namedPlaceholder) {
-            if (!\array_key_exists($namedPlaceholder, $parameters)) {
+            if (! \array_key_exists($namedPlaceholder, $parameters)) {
                 yield sprintf('Query expects placeholder %s, but it is missing from values given.', $namedPlaceholder);
             }
         }
@@ -111,7 +107,7 @@ final class PlaceholderValidation
             if ($parameter->isOptional) {
                 continue;
             }
-            if (!\in_array($placeholderKey, $namedPlaceholders, true)) {
+            if (! \in_array($placeholderKey, $namedPlaceholders, true)) {
                 yield sprintf('Value %s is given, but the query does not contain this placeholder.', $placeholderKey);
             }
         }

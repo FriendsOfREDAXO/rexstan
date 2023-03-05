@@ -10,10 +10,12 @@ use PhpParser\Node\Stmt;
 final class IfAndCondExpr
 {
     /**
+     * @readonly
      * @var \PhpParser\Node\Stmt
      */
     private $stmt;
     /**
+     * @readonly
      * @var \PhpParser\Node\Expr|null
      */
     private $condExpr;
