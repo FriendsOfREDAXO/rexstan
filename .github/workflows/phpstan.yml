@@ -28,8 +28,8 @@ jobs:
 
       - uses: "ramsey/composer-install@v2"
         with:
-          composer-options: "--prefer-dist --no-progress --no-suggest --ignore-platform-req=php"
+          composer-options: "--prefer-dist --no-progress --no-suggest"
 
-      - run: composer require redaxo/source
+      - run: composer require redaxo/source --ignore-platform-req=php
 
       - run: composer phpstan
