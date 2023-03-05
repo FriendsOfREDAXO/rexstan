@@ -29,27 +29,6 @@ final class RexModuleOutputVarsCollector implements Collector
             return null;
         }
 
-        // requires redaxo 5.15+
-        if (!method_exists(rex_var::class, 'varsIterator')) {
-            return null;
-        }
-
-        $it = rex_var::varsIterator(\Safe\file_get_contents($scope->getFile()));
-
-        $vars = [];
-        foreach ($it as $var) {
-            $class = get_class($var);
-
-            if (false === $class) {
-                continue;
-            }
-
-            $vars[] = [
-                $class,
-                (int) $var->getArg('id', 0, true),
-            ];
-        }
-
-        return $vars;
+        return RexModuleVarsReflection::matchOutputVars(\Safe\file_get_contents($scope->getFile()));
     }
 }

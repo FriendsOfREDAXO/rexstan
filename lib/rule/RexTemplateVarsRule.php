@@ -28,28 +28,27 @@ final class RexTemplateVarsRule implements Rule
 
         $errors = [];
         foreach ($allTemplateVars as $templateFile => $templateValues) {
-            foreach ($templateValues[0] as [$varClass, $id, $key]) {
-                if (rex_var_template::class === $varClass) {
-                
-                    if (0 !== $id) {
-                        if (!rex_template::exists($id)) {
-                            $errors[] = RuleErrorBuilder::message(sprintf(
-                                'Template "%s" includes invalid template by ID "%s"',
-                                str_replace(RexTemplateVarsCollector::FILE_SUFFIX, '', basename($templateFile)),
-                                $varClass.'['.$id.']',
-                            ))->file($templateFile)->build();
-                        }
-                    }
+            foreach ($templateValues[0] as [$varName, $args]) {
+                if (array_key_exists('id', $args)) {
+                    $id = (int) $args['id'];
 
-                    if ('' !== $key) {
-                        $template = rex_template::forKey($key);
-                        if (null === $template) {
-                            $errors[] = RuleErrorBuilder::message(sprintf(
-                                'Template "%s" includes invalid template by key "%s"',
-                                str_replace(RexTemplateVarsCollector::FILE_SUFFIX, '', basename($templateFile)),
-                                $varClass.'['.$key.']',
-                            ))->file($templateFile)->build();
-                        }
+                    if (!rex_template::exists($id)) {
+                        $errors[] = RuleErrorBuilder::message(sprintf(
+                            'Template "%s" includes invalid template by ID "%s"',
+                            str_replace(RexTemplateVarsCollector::FILE_SUFFIX, '', basename($templateFile)),
+                            $varName.'['.$id.']',
+                        ))->file($templateFile)->build();
+                    }
+                } elseif (array_key_exists('key', $args)) {
+                    $key = (string) $args['key'];
+
+                    $template = rex_template::forKey($key);
+                    if (null === $template) {
+                        $errors[] = RuleErrorBuilder::message(sprintf(
+                            'Template "%s" includes invalid template by key "%s"',
+                            str_replace(RexTemplateVarsCollector::FILE_SUFFIX, '', basename($templateFile)),
+                            $varName.'['.$key.']',
+                        ))->file($templateFile)->build();
                     }
                 }
             }

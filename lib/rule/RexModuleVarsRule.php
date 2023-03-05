@@ -16,6 +16,13 @@ use function array_key_exists;
  */
 final class RexModuleVarsRule implements Rule
 {
+    /**
+     * @var array<string, string>
+     */
+    private $inOutMap = [
+        'REX_INPUT_VALUE' => 'REX_VALUE',
+    ];
+
     public function getNodeType(): string
     {
         return CollectedDataNode::class;
@@ -35,13 +42,20 @@ final class RexModuleVarsRule implements Rule
             }
 
             $outputValues = $allOutputValues[$outputFile];
-            foreach ($inputValues[0] as [$varClass, $id]) {
-                if (!$this->arrayContainsVar($outputValues[0], $varClass, $id)) {
-                    $errors[] = RuleErrorBuilder::message(sprintf(
-                        'Module "%s" contains input value "%s" which is not used in module output.',
-                        str_replace(RexModuleInputVarsCollector::FILE_SUFFIX, '', basename($inputFile)),
-                        $varClass.'['.$id.']',
-                    ))->file($inputFile)->build();
+            foreach ($inputValues[0] as [$varName, $args]) {
+                if (!array_key_exists('id', $args)) {
+                    continue;
+                }
+                $id = (int) $args['id'];
+
+                if (!$this->arrayContainsVar($outputValues[0], $varName, $id)) {
+                    $errors[] = RuleErrorBuilder::message(
+                        sprintf(
+                            'Module "%s" contains input value "%s" which is not used in module output.',
+                            str_replace(RexModuleInputVarsCollector::FILE_SUFFIX, '', basename($inputFile)),
+                            $varName.'['.$id.']',
+                        )
+                    )->file($inputFile)->build();
                 }
             }
         }
@@ -54,12 +68,17 @@ final class RexModuleVarsRule implements Rule
             }
 
             $inputValues = $allInputValues[$inputFile];
-            foreach ($outputValues[0] as [$varClass, $id]) {
-                if (!$this->arrayContainsVar($inputValues[0], $varClass, $id)) {
+            foreach ($outputValues[0] as [$varName, $args]) {
+                if (!array_key_exists('id', $args)) {
+                    continue;
+                }
+                $id = (int) $args['id'];
+
+                if (!$this->arrayContainsVar($inputValues[0], $varName, $id)) {
                     $errors[] = RuleErrorBuilder::message(sprintf(
                         'Module "%s" contains ouput value "%s" which is not used in module input.',
                         str_replace(RexModuleInputVarsCollector::FILE_SUFFIX, '', basename($inputFile)),
-                        $varClass.'['.$id.']',
+                        $varName.'['.$id.']',
                     ))->file($inputFile)->build();
                 }
             }
@@ -70,13 +89,22 @@ final class RexModuleVarsRule implements Rule
 
     /**
      * @param list<array{class-string, int}>  $values
-     * @param class-string $varClass
+     * @param string $varName
      * @return bool
      */
-    private function arrayContainsVar(array $values, string $varClass, int $id)
+    private function arrayContainsVar(array $values, string $varName, int $id)
     {
-        foreach ($values as [$_varClass, $_id]) {
-            if ($_varClass === $varClass && $_id === $id) {
+        if (array_key_exists($varName, $this->inOutMap)) {
+            $varName = $this->inOutMap[$varName];
+        }
+
+        foreach ($values as [$_varName, $args]) {
+            if (!array_key_exists('id', $args)) {
+                continue;
+            }
+            $_id = (int) $args['id'];
+
+            if ($_varName === $varName && $_id === $id) {
                 return true;
             }
         }

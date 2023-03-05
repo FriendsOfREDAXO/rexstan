@@ -12,7 +12,7 @@ use rex_var;
 use function get_class;
 
 /**
- * @implements Collector<FileNode, array<int, array{class-string, int, string}>>
+ * @implements Collector<FileNode, array<int, array{string, array<string, scalar>}>>
  */
 final class RexTemplateVarsCollector implements Collector
 {
@@ -29,28 +29,6 @@ final class RexTemplateVarsCollector implements Collector
             return null;
         }
 
-        // requires redaxo 5.15+
-        if (!method_exists(rex_var::class, 'varsIterator')) {
-            return null;
-        }
-
-        $it = rex_var::varsIterator(\Safe\file_get_contents($scope->getFile()));
-
-        $vars = [];
-        foreach ($it as $var) {
-            $class = get_class($var);
-
-            if (false === $class) {
-                continue;
-            }
-
-            $vars[] = [
-                $class,
-                (int) $var->getArg('id', 0, true),
-                (string) $var->getArg('key'),
-            ];
-        }
-
-        return $vars;
+        return RexTemplateVarsReflection::matchVars(\Safe\file_get_contents($scope->getFile()));
     }
 }
