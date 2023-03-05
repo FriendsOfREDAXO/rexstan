@@ -28,7 +28,7 @@ jobs:
 
       - uses: "ramsey/composer-install@v2"
         with:
-          composer-options: "--prefer-dist --no-progress --no-suggest"
+          composer-options: "--prefer-dist --no-progress --no-suggest --ignore-platform-req=php"
 
       - run: composer require redaxo/source
 
