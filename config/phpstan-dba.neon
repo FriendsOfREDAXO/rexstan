@@ -29,6 +29,11 @@ services:
                 - 'rex_sql::getQueryType#0'
 
     -
+        class: rexstan\RexSqlFactoryDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicStaticMethodReturnTypeExtension
+
+    -
         class: rexstan\RexSqlDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
@@ -48,6 +53,15 @@ services:
             - phpstan.typeSpecifier.methodTypeSpecifyingExtension
     -
         class: rexstan\RexSqlSetTableDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
+        class: rexstan\RexSqlSelectTypeSpecifyingExtension
+        tags:
+            - phpstan.typeSpecifier.methodTypeSpecifyingExtension
+    -
+        class: rexstan\RexSqlSelectDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
 

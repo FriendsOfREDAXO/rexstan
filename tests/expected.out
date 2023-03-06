@@ -52,7 +52,6 @@
 /tests/data/sql-set-value.php:14:Value 'doesNotExist' does not exist in table selected via setTable().
 /tests/data/sql-set-value.php:22:Value 'doesNotExist' does not exist in table selected via setTable().
 /tests/data/sql-set-value.php:24:setArrayValue() expects a database column which can store string values.
-/tests/data/sql-set-value.php:38:Value 'doesNotExist' does not exist in table selected via setTable().
 /tests/data/sql-set-value.php:48:Value 'doesNotExist' does not exist in table selected via setTable().
 /tests/data/sql-set-value.php:49:Value 'doesNotExist' does not exist in table selected via setTable().
 /tests/data/superglobals.php:6:Using $_SESSION is forbidden, use rex_request::session(), rex_request::setSession() or rex_session(), rex_set_session() instead for proper per instance scoping.

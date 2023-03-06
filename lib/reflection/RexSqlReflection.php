@@ -73,6 +73,28 @@ final class RexSqlReflection
 
     public static function getResultTypeFromStatementType(Type $statementType): ?Type
     {
+        if ($statementType instanceof RexSqlObjectType) {
+            if($statementType->getTableName() === null) {
+                return null;
+            }
+
+            $colExpr = '*';
+            if ($statementType->getSelectExpression() !== null) {
+                $colExpr = $statementType->getSelectExpression();
+            }
+
+            $queryReflection = new QueryReflection();
+            $resultType = $queryReflection->getResultType(
+                'SELECT '. $colExpr .' FROM '.$statementType->getTableName(),
+                QueryReflector::FETCH_TYPE_ASSOC
+            );
+            if (null !== $resultType) {
+                return $resultType;
+            }
+
+            return null;
+        }
+
         if (!$statementType instanceof GenericObjectType) {
             return null;
         }
@@ -119,7 +141,7 @@ final class RexSqlReflection
             $resultType = $queryReflection->getResultType($queryString, $fetchType);
 
             if (null !== $resultType) {
-                $genericObjects[] = new GenericObjectType(rex_sql::class, [$resultType]);
+                $genericObjects[] = new RexSqlGenericType($resultType);
             }
         }
 
