@@ -69,7 +69,11 @@ final class RexResultsRenderer {
                 throw new ShouldNotHappenException();
             }
             $content .= '<li class="list-group-item rexstan-message">';
-            $content .= '<span class="rexstan-linenumber">' .sprintf('%5d', $message['line']).':</span>';
+            if ($message['line'] < 0) {
+                $content .= '<span class="rexstan-linenumber"></span>';
+            } else {
+                $content .= '<span class="rexstan-linenumber">' .sprintf('%5d', $message['line']).':</span>';
+            }
             $error = rex_escape($message['message']);
             $url = rex_editor::factory()->getUrl($file, $message['line']);
             if ($url) {
