@@ -21,7 +21,7 @@ use staabm\PHPStanDba\QueryReflection\QueryReflector;
 use staabm\PHPStanDba\UnresolvableQueryException;
 use function count;
 
-final class RexSqlSetTableDynamicReturnTypeExtension implements DynamicMethodReturnTypeExtension
+final class RexSqlSelectDynamicReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
     public function getClass(): string
     {
@@ -30,13 +30,13 @@ final class RexSqlSetTableDynamicReturnTypeExtension implements DynamicMethodRet
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
     {
-        return 'settable' === strtolower($methodReflection->getName());
+        return 'select' === strtolower($methodReflection->getName());
     }
 
     public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope) : ?Type
     {
         try {
-            return RexSqlSetTableTypeSpecifyingExtension::inferStatementType($methodCall, $scope);
+            return RexSqlSelectTypeSpecifyingExtension::inferStatementType($methodCall, $scope);
         } catch (UnresolvableQueryException $e) {
             return null;
         }

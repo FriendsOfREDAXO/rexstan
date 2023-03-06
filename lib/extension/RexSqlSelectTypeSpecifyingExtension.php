@@ -20,7 +20,7 @@ use staabm\PHPStanDba\QueryReflection\QueryReflector;
 use staabm\PHPStanDba\UnresolvableQueryException;
 use function count;
 
-final class RexSqlSetTableTypeSpecifyingExtension implements MethodTypeSpecifyingExtension, TypeSpecifierAwareExtension
+final class RexSqlSelectTypeSpecifyingExtension implements MethodTypeSpecifyingExtension, TypeSpecifierAwareExtension
 {
     /**
      * @var TypeSpecifier
@@ -34,7 +34,7 @@ final class RexSqlSetTableTypeSpecifyingExtension implements MethodTypeSpecifyin
 
     public function isMethodSupported(MethodReflection $methodReflection, MethodCall $node, TypeSpecifierContext $context): bool
     {
-        return 'settable' === strtolower($methodReflection->getName());
+        return 'select' === strtolower($methodReflection->getName());
     }
 
     public function setTypeSpecifier(TypeSpecifier $typeSpecifier): void
@@ -71,8 +71,8 @@ final class RexSqlSetTableTypeSpecifyingExtension implements MethodTypeSpecifyin
             return null;
         }
 
-        $tableNameType = $scope->getType($args[0]->value);
-        if (count($tableNameType->getConstantStrings()) !== 1) {
+        $selectExprType = $scope->getType($args[0]->value);
+        if (count($selectExprType->getConstantStrings()) !== 1) {
             return null;
         }
 
@@ -81,7 +81,7 @@ final class RexSqlSetTableTypeSpecifyingExtension implements MethodTypeSpecifyin
             return null;
         }
 
-        $calledOnType->setTableName($tableNameType->getConstantStrings()[0]->getValue());
+        $calledOnType->setSelectExpression($selectExprType->getConstantStrings()[0]->getValue());
         return $calledOnType;
     }
 }
