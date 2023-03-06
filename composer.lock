@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b2b4814810fe7bbf49d922b5a898cf9",
+    "content-hash": "08681f31775ed5ce0d32008db5f59e92",
     "packages": [
         {
             "name": "composer/semver",
@@ -934,16 +934,16 @@
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
-            "version": "0.9.3",
+            "version": "0.9.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-baseline-analysis.git",
-                "reference": "af97c0ff4e851f4605acd7f35056308b27aeb25f"
+                "reference": "0e24f434e2cab24ff13efb0fb58a7be6248e76bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/af97c0ff4e851f4605acd7f35056308b27aeb25f",
-                "reference": "af97c0ff4e851f4605acd7f35056308b27aeb25f",
+                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/0e24f434e2cab24ff13efb0fb58a7be6248e76bb",
+                "reference": "0e24f434e2cab24ff13efb0fb58a7be6248e76bb",
                 "shasum": ""
             },
             "require": {
@@ -955,12 +955,12 @@
             "require-dev": {
                 "phpstan/extension-installer": "^1.2",
                 "phpstan/phpstan": "^1.9",
-                "phpunit/phpunit": "^9.5",
+                "phpunit/phpunit": "^9.6",
                 "symfony/var-dumper": "^5.3",
                 "thecodingmachine/phpstan-safe-rule": "^1.2",
-                "tomasvotruba/cognitive-complexity": "^0.1.0",
-                "tomasvotruba/type-coverage": "^0.0.4",
-                "tomasvotruba/unused-public": "^0.0.26"
+                "tomasvotruba/cognitive-complexity": "^0.0.5",
+                "tomasvotruba/type-coverage": "^0.0.10",
+                "tomasvotruba/unused-public": "^0.1.7"
             },
             "bin": [
                 "bin/phpstan-baseline-analyze",
@@ -977,9 +977,17 @@
             "license": [
                 "MIT"
             ],
+            "keywords": [
+                "Database Access Layer",
+                "PHPStan",
+                "code quality",
+                "dev",
+                "phpstan-extension",
+                "static analysis"
+            ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-baseline-analysis/issues",
-                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.9.3"
+                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.9.4"
             },
             "funding": [
                 {
@@ -987,7 +995,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-12-23T15:17:39+00:00"
+            "time": "2023-03-06T08:35:19+00:00"
         },
         {
             "name": "staabm/phpstan-dba",
