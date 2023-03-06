@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "08681f31775ed5ce0d32008db5f59e92",
+    "content-hash": "0a6c730d35157c80dfb72bacc7284723",
     "packages": [
         {
             "name": "composer/semver",
@@ -934,16 +934,16 @@
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
-            "version": "0.9.4",
+            "version": "0.9.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-baseline-analysis.git",
-                "reference": "0e24f434e2cab24ff13efb0fb58a7be6248e76bb"
+                "reference": "3d2c549bf8c176a41462c1d5f7b44a7842ee1900"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/0e24f434e2cab24ff13efb0fb58a7be6248e76bb",
-                "reference": "0e24f434e2cab24ff13efb0fb58a7be6248e76bb",
+                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/3d2c549bf8c176a41462c1d5f7b44a7842ee1900",
+                "reference": "3d2c549bf8c176a41462c1d5f7b44a7842ee1900",
                 "shasum": ""
             },
             "require": {
@@ -987,7 +987,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-baseline-analysis/issues",
-                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.9.4"
+                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.9.5"
             },
             "funding": [
                 {
@@ -995,7 +995,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-06T08:35:19+00:00"
+            "time": "2023-03-06T08:45:57+00:00"
         },
         {
             "name": "staabm/phpstan-dba",
