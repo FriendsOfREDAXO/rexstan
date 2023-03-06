@@ -11,10 +11,9 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\ShouldNotHappenException;
-use PHPStan\Type\Constant\ConstantStringType;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedCall;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedCallFactory;
-use Spaze\PHPStan\Rules\Disallowed\DisallowedHelper;
+use Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedRuleErrors;
 
 /**
  * Reports on creating objects (calling constructors).
@@ -26,24 +25,24 @@ class NewCalls implements Rule
 {
 	private const CONSTRUCT = '::__construct';
 
-	/** @var DisallowedHelper */
-	private $disallowedHelper;
+	/** @var DisallowedRuleErrors */
+	private $disallowedRuleErrors;
 
 	/** @var DisallowedCall[] */
 	private $disallowedCalls;
 
 
 	/**
-	 * @param DisallowedHelper $disallowedHelper
+	 * @param DisallowedRuleErrors $disallowedRuleErrors
 	 * @param DisallowedCallFactory $disallowedCallFactory
 	 * @param array $forbiddenCalls
 	 * @phpstan-param ForbiddenCallsConfig $forbiddenCalls
 	 * @noinspection PhpUndefinedClassInspection ForbiddenCallsConfig is a type alias defined in PHPStan config
 	 * @throws ShouldNotHappenException
 	 */
-	public function __construct(DisallowedHelper $disallowedHelper, DisallowedCallFactory $disallowedCallFactory, array $forbiddenCalls)
+	public function __construct(DisallowedRuleErrors $disallowedRuleErrors, DisallowedCallFactory $disallowedCallFactory, array $forbiddenCalls)
 	{
-		$this->disallowedHelper = $disallowedHelper;
+		$this->disallowedRuleErrors = $disallowedRuleErrors;
 		$this->disallowedCalls = $disallowedCallFactory->createFromConfig($forbiddenCalls);
 	}
 
@@ -58,42 +57,43 @@ class NewCalls implements Rule
 	 * @param New_ $node
 	 * @param Scope $scope
 	 * @return RuleError[]
+	 * @throws ShouldNotHappenException
 	 */
 	public function processNode(Node $node, Scope $scope): array
 	{
+		$classNames = $names = $errors = [];
 		if ($node->class instanceof Name) {
-			$className = $node->class;
+			$classNames[] = $node->class;
 		} elseif ($node->class instanceof Expr) {
 			$type = $scope->getType($node->class);
-			if ($type instanceof ConstantStringType) {
-				$className = new Name($type->getValue());
+			foreach ($type->getConstantStrings() as $constantString) {
+				$classNames[] = new Name($constantString->getValue());
 			}
 		}
-		if (!isset($className)) {
+		if ($classNames === []) {
 			return [];
 		}
 
-		$type = $scope->resolveTypeByName($className);
-		$names = [
-			$type->getClassName(),
-		];
-		$reflection = $type->getClassReflection();
-		if ($reflection) {
-			foreach ($reflection->getParents() as $parent) {
-				$names[] = $parent->getName();
+		foreach ($classNames as $className) {
+			$type = $scope->resolveTypeByName($className);
+			$names[] = $type->getClassName();
+			$reflection = $type->getClassReflection();
+			if ($reflection) {
+				foreach ($reflection->getParents() as $parent) {
+					$names[] = $parent->getName();
+				}
+				foreach ($reflection->getInterfaces() as $interface) {
+					$names[] = $interface->getName();
+				}
 			}
-			foreach ($reflection->getInterfaces() as $interface) {
-				$names[] = $interface->getName();
-			}
-		}
 
-		$errors = [];
-		foreach ($names as $name) {
-			$name .= self::CONSTRUCT;
-			$errors = array_merge(
-				$errors,
-				$this->disallowedHelper->getDisallowedMessage($node, $scope, $name, $type->getClassName() . self::CONSTRUCT, $this->disallowedCalls)
-			);
+			foreach ($names as $name) {
+				$name .= self::CONSTRUCT;
+				$errors = array_merge(
+					$errors,
+					$this->disallowedRuleErrors->get($node, $scope, $name, $type->getClassName() . self::CONSTRUCT, $this->disallowedCalls)
+				);
+			}
 		}
 
 		return $errors;

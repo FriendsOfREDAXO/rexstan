@@ -12,11 +12,11 @@ use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\ShouldNotHappenException;
 use PHPStan\Type\Constant\ConstantStringType;
-use PHPStan\Type\TypeWithClassName;
 use PHPStan\Type\VerbosityLevel;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedConstant;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedConstantFactory;
-use Spaze\PHPStan\Rules\Disallowed\DisallowedHelper;
+use Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedConstantRuleErrors;
+use Spaze\PHPStan\Rules\Disallowed\Type\TypeResolver;
 
 /**
  * Reports on class constant usage.
@@ -27,22 +27,31 @@ use Spaze\PHPStan\Rules\Disallowed\DisallowedHelper;
 class ClassConstantUsages implements Rule
 {
 
-	/** @var DisallowedHelper */
-	private $disallowedHelper;
+	/** @var DisallowedConstantRuleErrors */
+	private $disallowedConstantRuleErrors;
+
+	/** @var TypeResolver */
+	private $typeResolver;
 
 	/** @var DisallowedConstant[] */
 	private $disallowedConstants;
 
 
 	/**
-	 * @param DisallowedHelper $disallowedHelper
+	 * @param DisallowedConstantRuleErrors $disallowedConstantRuleErrors
 	 * @param DisallowedConstantFactory $disallowedConstantFactory
+	 * @param TypeResolver $typeResolver
 	 * @param array<array{class?:string, constant?:string, message?:string, allowIn?:string[]}> $disallowedConstants
 	 * @throws ShouldNotHappenException
 	 */
-	public function __construct(DisallowedHelper $disallowedHelper, DisallowedConstantFactory $disallowedConstantFactory, array $disallowedConstants)
-	{
-		$this->disallowedHelper = $disallowedHelper;
+	public function __construct(
+		DisallowedConstantRuleErrors $disallowedConstantRuleErrors,
+		DisallowedConstantFactory $disallowedConstantFactory,
+		TypeResolver $typeResolver,
+		array $disallowedConstants
+	) {
+		$this->disallowedConstantRuleErrors = $disallowedConstantRuleErrors;
+		$this->typeResolver = $typeResolver;
 		$this->disallowedConstants = $disallowedConstantFactory->createFromConfig($disallowedConstants);
 	}
 
@@ -54,7 +63,7 @@ class ClassConstantUsages implements Rule
 
 
 	/**
-	 * @param ClassConstFetch $node
+	 * @param Node $node
 	 * @param Scope $scope
 	 * @return RuleError[]
 	 * @throws ShouldNotHappenException
@@ -68,15 +77,20 @@ class ClassConstantUsages implements Rule
 			throw new ShouldNotHappenException(sprintf('$node->name should be %s but is %s', Identifier::class, get_class($node->name)));
 		}
 		$constant = (string)$node->name;
-		$usedOnType = $this->disallowedHelper->resolveType($node->class, $scope);
+		$usedOnType = $this->typeResolver->getType($node->class, $scope);
 
 		if (strtolower($constant) === 'class') {
 			return [];
 		}
 
-		$displayName = ($usedOnType instanceof TypeWithClassName ? $this->getFullyQualified($usedOnType->getClassName(), $constant) : null);
-		if ($usedOnType instanceof ConstantStringType) {
-			$className = ltrim($usedOnType->getValue(), '\\');
+		$displayName = $usedOnType->getObjectClassNames() ? $this->getFullyQualified($usedOnType->getObjectClassNames(), $constant) : null;
+		if ($usedOnType->getConstantStrings()) {
+			$classNames = array_map(
+				function (ConstantStringType $constantString): string {
+					return ltrim($constantString->getValue(), '\\');
+				},
+				$usedOnType->getConstantStrings()
+			);
 		} else {
 			if ($usedOnType->hasConstant($constant)->no()) {
 				return [
@@ -87,18 +101,22 @@ class ClassConstantUsages implements Rule
 					))->build(),
 				];
 			} else {
-				$className = $usedOnType->getConstant($constant)->getDeclaringClass()->getDisplayName();
+				$classNames = [$usedOnType->getConstant($constant)->getDeclaringClass()->getDisplayName()];
 			}
 		}
-		$constant = $this->getFullyQualified($className, $constant);
-
-		return $this->disallowedHelper->getDisallowedConstantMessage($constant, $scope, $displayName, $this->disallowedConstants);
+		return $this->disallowedConstantRuleErrors->get($this->getFullyQualified($classNames, $constant), $scope, $displayName, $this->disallowedConstants);
 	}
 
 
-	private function getFullyQualified(string $class, string $constant): string
+	/**
+	 * @param non-empty-list<string> $classNames
+	 * @param string $constant
+	 * @return string
+	 */
+	private function getFullyQualified(array $classNames, string $constant): string
 	{
-		return "{$class}::{$constant}";
+		$className = count($classNames) === 1 ? $classNames[0] : '{' . implode(',', $classNames) . '}';
+		return $className . '::' . $constant;
 	}
 
 }
