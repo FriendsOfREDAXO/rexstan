@@ -45,7 +45,7 @@ final class RexSqlObjectType extends ObjectType {
 
     public function equals(Type $type): bool
     {
-        if ($type instanceof parent) {
+        if ($type instanceof self) {
             return $this->getSelectExpression() === $type->getSelectExpression()
                 && $this->getTableName() === $type->getTableName();
         }
@@ -55,7 +55,7 @@ final class RexSqlObjectType extends ObjectType {
 
     public function isSuperTypeOf(Type $type): TrinaryLogic
     {
-        if ($type instanceof parent) {
+        if ($type instanceof self) {
             return TrinaryLogic::createFromBoolean(
                 $this->getSelectExpression() === $type->getSelectExpression()
                 && $this->getTableName() === $type->getTableName()
