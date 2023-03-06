@@ -20,7 +20,7 @@ use rex_sql;
 use function count;
 use function in_array;
 
-final class RexSqlDynamicReturnTypeExtension implements DynamicMethodReturnTypeExtension
+final class RexSqlEscapeDynamicReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
     public function getClass(): string
     {

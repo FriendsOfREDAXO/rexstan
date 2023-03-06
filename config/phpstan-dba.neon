@@ -34,7 +34,7 @@ services:
             - phpstan.broker.dynamicStaticMethodReturnTypeExtension
 
     -
-        class: rexstan\RexSqlDynamicReturnTypeExtension
+        class: rexstan\RexSqlEscapeDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
 

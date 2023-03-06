@@ -1429,7 +1429,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'rexstan\\RexModuleVarsReflection' => __DIR__ . '/../..' . '/lib/reflection/RexModuleVarsReflection.php',
         'rexstan\\RexModuleVarsRule' => __DIR__ . '/../..' . '/lib/rule/RexModuleVarsRule.php',
         'rexstan\\RexResultsRenderer' => __DIR__ . '/../..' . '/lib/RexResultsRenderer.php',
-        'rexstan\\RexSqlDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexSqlDynamicReturnTypeExtension.php',
+        'rexstan\\RexSqlEscapeDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexSqlEscapeDynamicReturnTypeExtension.php',
         'rexstan\\RexSqlFactoryDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexSqlFactoryDynamicReturnTypeExtension.php',
         'rexstan\\RexSqlGenericType' => __DIR__ . '/../..' . '/lib/type/RexSqlGenericType.php',
         'rexstan\\RexSqlGetArrayDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexSqlGetArrayDynamicReturnTypeExtension.php',
