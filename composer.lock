@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0a6c730d35157c80dfb72bacc7284723",
+    "content-hash": "1b812f449b52b23148dc5ddb0071e15d",
     "packages": [
         {
             "name": "composer/semver",
@@ -823,21 +823,21 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v2.11.6",
+            "version": "v2.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "c8063f6c8a747180b2d3c48d2e1494a2a8188df1"
+                "reference": "d32b50dfa7959a0fdc9dd67a463883df212fc199"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/c8063f6c8a747180b2d3c48d2e1494a2a8188df1",
-                "reference": "c8063f6c8a747180b2d3c48d2e1494a2a8188df1",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/d32b50dfa7959a0fdc9dd67a463883df212fc199",
+                "reference": "d32b50dfa7959a0fdc9dd67a463883df212fc199",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2 || ^8.0",
-                "phpstan/phpstan": "^1.0"
+                "phpstan/phpstan": "^1.10"
             },
             "require-dev": {
                 "nette/neon": "^3.2",
@@ -877,9 +877,9 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.11.6"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.12.0"
             },
-            "time": "2023-02-06T16:25:46+00:00"
+            "time": "2023-03-05T17:14:49+00:00"
         },
         {
             "name": "sqlftw/sqlftw",
