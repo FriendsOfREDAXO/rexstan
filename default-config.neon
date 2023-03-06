@@ -32,6 +32,9 @@ parameters:
             message: '#^Variable \$this might not be defined\.#'
             path: '*/fragments/*'
 
+        -
+            message: '#^Switch condition type \(''REX_VALUE\[.*\]''\) does not match case condition .* \(string\)\.$#'
+
     # autoload core symbols which are not autoloadable
     scanDirectories:
         - ../../core/functions/
