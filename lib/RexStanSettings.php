@@ -2,11 +2,13 @@
 
 namespace rexstan;
 
+use rex;
 use rex_addon;
 use rex_config;
 use rex_config_form;
 use rex_developer_manager;
 use rex_path;
+use rex_version;
 
 final class RexStanSettings
 {
@@ -40,11 +42,19 @@ final class RexStanSettings
     /**
      * @var array<int, string>
      */
-    private static $phpVersionList = [
-        70333 => '7.3.x [Mindestanforderung für REDAXO]',
+    private static $phpVersionListUpTp5_14 = [
+        70333 => '7.3.x [Mindestanforderung für REDAXO bis 5.14]',
         70430 => '7.4.x',
         80022 => '8.0.x',
         80109 => '8.1.x',
+        80200 => '8.2.x',
+    ];
+
+    /**
+     * @var array<int, string>
+     */
+    private static $phpVersionListFrom5_15 = [
+        80109 => '8.1.x [Mindestanforderung für REDAXO ab 5.15]',
         80200 => '8.2.x',
     ];
 
@@ -84,7 +94,11 @@ final class RexStanSettings
         $cliVersion = (int) shell_exec('php -r \'echo PHP_VERSION_ID;\'');
         $cliVersion = (int) ($cliVersion / 100);
 
-        $phpVersions = self::$phpVersionList;
+        if (rex_version::compare(rex::getVersion(), '5.15.0-dev', '>=')) {
+            $phpVersions = self::$phpVersionListFrom5_15;
+        } else {
+            $phpVersions = self::$phpVersionListUpTp5_14;
+        }
         foreach ($phpVersions as $key => &$label) {
             $key = (int) ($key / 100);
 
