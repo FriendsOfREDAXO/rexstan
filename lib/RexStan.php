@@ -14,15 +14,25 @@ use function dirname;
 final class RexStan
 {
     /**
+     * @param string|null $path
+     * @param int|'max' $level
+     * @param-out string $errorOutput
+     * @param-out int $exitCode
      * @return string
      */
-    public static function runFromCli()
+    public static function runFromCli($path, $level, &$errorOutput, &$exitCode)
     {
         $phpstanBinary = self::phpstanBinPath();
         $configPath = self::phpstanConfigPath(__DIR__.'/../phpstan.neon');
 
-        $cmd = $phpstanBinary .' analyse -c '. $configPath;
-        $output = RexCmd::execCmd($cmd, $stderrOutput, $exitCode);
+        $cmd = $phpstanBinary .' analyse --no-progress -c '. $configPath;
+        if ($path !== null) {
+            $cmd .= ' '. escapeshellarg($path);
+        }
+        $cmd .= ' --level '. $level;
+        var_dump($cmd);
+
+        $output = RexCmd::execCmd($cmd, $errorOutput, $exitCode);
 
         return $output;
     }
