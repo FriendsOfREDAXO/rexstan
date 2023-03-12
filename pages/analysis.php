@@ -5,6 +5,7 @@
 use rexstan\RexResultsRenderer;
 use rexstan\RexStan;
 use rexstan\RexStanTip;
+use rexstan\RexStanSettings;
 use rexstan\RexStanUserConfig;
 
 if (rex_get('regenerate-baseline', 'bool')) {
@@ -102,6 +103,7 @@ if (
         } else {
             echo '<p>In den <a href="'. rex_url::backendPage('rexstan/settings') .'">Einstellungen</a>, solltest du jetzt das nächste Level anvisieren.</p>';
         }
+        echo RexStanSettings::outputSettings();
         return;
     }
 
