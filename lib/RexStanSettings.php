@@ -15,7 +15,7 @@ final class RexStanSettings
     /**
      * @var array<string, string>
      */
-    private static $phpstanExtensions = [
+    public static $phpstanExtensions = [
         'REDAXO SuperGlobals' => 'config/rex-superglobals.neon',
         'Bleeding-Edge' => 'vendor/phpstan/phpstan/conf/bleedingEdge.neon',
         'Strict-Mode' => 'vendor/phpstan/phpstan-strict-rules/rules.neon',
@@ -161,4 +161,47 @@ final class RexStanSettings
 
         return $filePath;
     }
+
+
+    /**
+     * @return string
+     */
+    public static function outputSettings()
+    {
+        $sapiVersion = (int) (PHP_VERSION_ID / 100);
+        $cliVersion = (int) shell_exec('php -r \'echo PHP_VERSION_ID;\'');
+        $cliVersion = (int) ($cliVersion / 100);
+
+        if (rex_version::compare(rex::getVersion(), '5.15.0-dev', '>=')) {
+            $phpVersions = self::$phpVersionListFrom5_15;
+        } else {
+            $phpVersions = self::$phpVersionListUpTp5_14;
+        }
+
+        $phpVersion = $phpVersions[RexStanUserConfig::getPhpVersion()];
+
+        if ((int) (RexStanUserConfig::getPhpVersion() / 100)  === $sapiVersion) {
+            $phpVersion .= ' [aktuelle Webserver-Version (WEB-SAPI)]';
+        }
+        if ((int) (RexStanUserConfig::getPhpVersion() / 100) === $cliVersion) {
+            $phpVersion .= ' [aktuelle Konsolen-Version (CLI-SAPI)]';
+        }
+        $output = '';
+
+        $output = '<table class="table table-striped table-hover">';
+        $output .= '<tbody>';
+
+        $output .=  '<tr><td>Level</td><td>' . RexStanUserConfig::getLevel() . '</td></tr>';
+        $output .=  '<tr><td>AddOns</td><td>' . RexStanUserConfig::getAddOns() . '</td></tr>';
+        $output .=  '<tr><td>Extensions</td><td>' . RexStanUserConfig::getExtensions() . '</td></tr>';
+        $output .=  '<tr><td>PHP-Version</td><td>' . $phpVersion . '</td></tr>';
+
+        $output .= '</tbody>';
+        $output .= '</table>';
+
+        return $output;
+    }
+
+
+
 }
