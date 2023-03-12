@@ -77,6 +77,14 @@ final class RexStanUserConfig
     }
 
     /**
+     * @return list<string>
+     */
+    public static function getIncludes(): array
+    {
+        return self::getConfig()['includes'] ?? [];
+    }
+
+    /**
      * @return non-empty-string
      */
     public static function getSignature(): string
@@ -118,40 +126,4 @@ final class RexStanUserConfig
         return rex_addon::get('rexstan')->getDataPath('user-config.neon');
     }
 
-    public static function getAddOns(): string
-    {
-        $scanTargets = [];
-        foreach (self::getPaths() as $scanpath) {
-            foreach (rex_addon::getAvailableAddons() as $availableAddon) {
-                if (pathinfo($scanpath)['basename'] === $availableAddon->getName()) {
-                    $scanTargets[] = $availableAddon->getName();
-                    break;
-                }
-                if (isset(pathinfo($scanpath)['dirname']) && pathinfo(pathinfo($scanpath)['dirname'])['basename'] === 'developer') {
-                    if (pathinfo($scanpath)['basename'] === 'modules' || pathinfo($scanpath)['basename'] === 'templates') {
-                        $scanTargets[] = 'developer:' . pathinfo($scanpath)['basename'];
-                        break;
-                    }
-                }
-            }
-        }
-        $addons = implode(', ', $scanTargets);
-        return $addons;
-    }
-
-    public static function getExtensions(): string
-    {
-        $extensions = [];
-        $config_extensions = self::getConfig()['includes'] ?? [];
-        foreach ((array) $config_extensions as $extpath) {
-            foreach (RexStanSettings::$phpstanExtensions as $label => $path) {
-                if (pathinfo($extpath)['basename'] === pathinfo($path)['basename']) {
-                    $extensions[] = $label;
-                    break;
-                }
-            }
-        }
-        $extensions = implode(', ', $extensions);
-        return $extensions;
-    }
 }

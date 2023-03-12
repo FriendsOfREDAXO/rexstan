@@ -15,7 +15,7 @@ final class RexStanSettings
     /**
      * @var array<string, string>
      */
-    public static $phpstanExtensions = [
+    private static $phpstanExtensions = [
         'REDAXO SuperGlobals' => 'config/rex-superglobals.neon',
         'Bleeding-Edge' => 'vendor/phpstan/phpstan/conf/bleedingEdge.neon',
         'Strict-Mode' => 'vendor/phpstan/phpstan-strict-rules/rules.neon',
@@ -186,14 +186,13 @@ final class RexStanSettings
         if ((int) (RexStanUserConfig::getPhpVersion() / 100) === $cliVersion) {
             $phpVersion .= ' [aktuelle Konsolen-Version (CLI-SAPI)]';
         }
-        $output = '';
 
         $output = '<table class="table table-striped table-hover">';
         $output .= '<tbody>';
 
         $output .=  '<tr><td>Level</td><td>' . RexStanUserConfig::getLevel() . '</td></tr>';
-        $output .=  '<tr><td>AddOns</td><td>' . RexStanUserConfig::getAddOns() . '</td></tr>';
-        $output .=  '<tr><td>Extensions</td><td>' . RexStanUserConfig::getExtensions() . '</td></tr>';
+        $output .=  '<tr><td>AddOns</td><td>' . self::getAddOns() . '</td></tr>';
+        $output .=  '<tr><td>Extensions</td><td>' . self::getExtensions() . '</td></tr>';
         $output .=  '<tr><td>PHP-Version</td><td>' . $phpVersion . '</td></tr>';
 
         $output .= '</tbody>';
@@ -202,6 +201,40 @@ final class RexStanSettings
         return $output;
     }
 
+    private static function getAddOns(): string
+    {
+        $scanTargets = [];
+        foreach (RexStanUserConfig::getPaths() as $scanpath) {
+            foreach (rex_addon::getAvailableAddons() as $availableAddon) {
+                if (pathinfo($scanpath)['basename'] === $availableAddon->getName()) {
+                    $scanTargets[] = $availableAddon->getName();
+                    break;
+                }
+                if (isset(pathinfo($scanpath)['dirname']) && pathinfo(pathinfo($scanpath)['dirname'])['basename'] === 'developer') {
+                    if (pathinfo($scanpath)['basename'] === 'modules' || pathinfo($scanpath)['basename'] === 'templates') {
+                        $scanTargets[] = 'developer:' . pathinfo($scanpath)['basename'];
+                        break;
+                    }
+                }
+            }
+        }
+        $addons = implode(', ', $scanTargets);
+        return $addons;
+    }
 
+    private static function getExtensions(): string
+    {
+        $extensions = [];
+        $config_extensions = RexStanUserConfig::getIncludes();
+        foreach ((array) $config_extensions as $extpath) {
+            foreach (self::$phpstanExtensions as $label => $path) {
+                if (pathinfo($extpath)['basename'] === pathinfo($path)['basename']) {
+                    $extensions[] = $label;
+                    break;
+                }
+            }
+        }
+        return implode(', ', $extensions);
+    }
 
 }
