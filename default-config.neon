@@ -17,7 +17,8 @@ parameters:
     disallowedMethodCalls:
         -
             method: 'rex_sql::beginTransaction()'
-            message: 'handling transctions manually is error prone. Prefer using rex_sql::transactional() instead.'
+            message: 'handling transactions manually is error prone.'
+            errorTip: 'Prefer using rex_sql::transactional() instead.'
 
     ignoreErrors:
         # ignore errors when analyzing rex modules/templates, caused by rex-vars
