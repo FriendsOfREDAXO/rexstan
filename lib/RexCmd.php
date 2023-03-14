@@ -43,18 +43,10 @@ final class RexCmd {
             fclose($pipes[2]);
 
             $status = proc_get_status($process);
-            // @phpstan-ignore-next-line
-            if (false === $status) {
-                throw new Exception('Unable to get process status');
-            }
             while ($status['running']) {
                 // sleep half a second
                 usleep(500000);
                 $status = proc_get_status($process);
-                // @phpstan-ignore-next-line
-                if (false === $status) {
-                    throw new Exception('Unable to get process status');
-                }
             }
             $exitCode = $status['exitcode'];
 
