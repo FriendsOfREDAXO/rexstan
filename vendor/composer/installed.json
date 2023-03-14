@@ -1513,17 +1513,17 @@
         },
         {
             "name": "tomasvotruba/type-coverage",
-            "version": "0.0.10.72",
-            "version_normalized": "0.0.10.72",
+            "version": "0.1.0.72",
+            "version_normalized": "0.1.0.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/type-coverage.git",
-                "reference": "e284bbbb7c4e58f79a75616cb8443a87415ddb3e"
+                "reference": "a758f18c028c8625976f6458914f61cd021cfdb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/e284bbbb7c4e58f79a75616cb8443a87415ddb3e",
-                "reference": "e284bbbb7c4e58f79a75616cb8443a87415ddb3e",
+                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/a758f18c028c8625976f6458914f61cd021cfdb0",
+                "reference": "a758f18c028c8625976f6458914f61cd021cfdb0",
                 "shasum": ""
             },
             "require": {
@@ -1531,7 +1531,7 @@
                 "php": "^7.2 || 8.0.*",
                 "phpstan/phpstan": "^1.9.3"
             },
-            "time": "2023-02-27T10:24:57+00:00",
+            "time": "2023-03-12T10:30:01+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1551,9 +1551,13 @@
                 "MIT"
             ],
             "description": "Measure type coverage of your project",
+            "keywords": [
+                "phpstan-extension",
+                "static analysis"
+            ],
             "support": {
                 "issues": "https://github.com/TomasVotruba/type-coverage/issues",
-                "source": "https://github.com/TomasVotruba/type-coverage/tree/0.0.10.72"
+                "source": "https://github.com/TomasVotruba/type-coverage/tree/0.1.0.72"
             },
             "funding": [
                 {
