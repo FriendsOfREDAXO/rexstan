@@ -89,7 +89,7 @@ final class RexStanUserConfig
      */
     public static function getSignature(): string
     {
-        $md5 = \Safe\md5_file(self::getUserConfigPath());
+        $md5 = md5_file(self::getUserConfigPath());
         return self::DEFAULT_SETTINGS_VERSION.'-'.$md5;
     }
 
