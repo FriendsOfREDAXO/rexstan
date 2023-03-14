@@ -8,8 +8,8 @@ use rexstan\RexResultsRenderer;
 
 $errors = RexLint::runFromWeb();
 if (count($errors) > 0) {
-    foreach ($errors as $file => $errors) {
-        echo RexResultsRenderer::renderFileBlock($file, $errors);
+    foreach ($errors as $file => $perFileErrors) {
+        echo RexResultsRenderer::renderFileBlock($file, $perFileErrors);
     }
 } else {
     echo rex_view::success('Gratulation, es wurden keine Syntax Fehler gefunden.');

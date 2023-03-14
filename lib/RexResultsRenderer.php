@@ -36,7 +36,7 @@ final class RexResultsRenderer {
     }
 
     /**
-     * @param list<array{message: string, line: string, tip?: string}>  $messages
+     * @param list<array{message: string, line: int, tip?: string}>  $messages
      */
     static public function renderFileBlock(string $file, array $messages): string
     {
@@ -60,7 +60,7 @@ final class RexResultsRenderer {
     }
 
     /**
-     * @param list<array{message: string, line: string, tip?: string}>  $messages
+     * @param list<array{message: string, line: int, tip?: string}>  $messages
      */
     static private function renderFileErrors(string $file, array $messages): string {
         $content = '<ul class="list-group">';
