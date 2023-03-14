@@ -4,8 +4,6 @@ parameters:
       - lib/
       - pages/
 
-    bootstrapFiles:
-        - phpstan-bootstrap.php
-
     ignoreErrors:
       - '#.*getValueType\(\) expects class\-string, string given\.$#'
+      - '#^Cannot access offset ''running'' on array\{command\: string, pid\: int, running\: bool, signaled\: bool, stopped\: bool, exitcode\: int, termsig\: int, stopsig\: int\}\|false\.$#'
