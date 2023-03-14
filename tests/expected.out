@@ -63,3 +63,4 @@
 /tests/data/superglobals.php:12:Using $_ENV is forbidden, use rex_request::env() or rex_env() instead.
 /tests/data/superglobals.php:13:Using $_FILES is forbidden, use rex_request::files() or rex_files() instead.
 /tests/data/superglobals.php:15:Calling setcookie() is forbidden, use rex_response::sendCookie() or rex_response::clearCookie() instead.
+/tests/data/transactional.php:11:Calling rex_sql::beginTransaction() is forbidden, handling transctions manually is error prone.
