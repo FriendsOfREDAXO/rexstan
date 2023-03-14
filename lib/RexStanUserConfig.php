@@ -89,11 +89,7 @@ final class RexStanUserConfig
      */
     public static function getSignature(): string
     {
-        $md5 = md5_file(self::getUserConfigPath());
-        // @phpstan-ignore-next-line
-        if (!$md5) {
-            throw new \PHPStan\ShouldNotHappenException();
-        }
+        $md5 = \Safe\md5_file(self::getUserConfigPath());
         return self::DEFAULT_SETTINGS_VERSION.'-'.$md5;
     }
 
