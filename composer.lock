@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd769515f330d7bd9c257de5908d4de1",
+    "content-hash": "a470256248bbb304c4d2d4a253772344",
     "packages": [
         {
             "name": "composer/semver",
@@ -1410,16 +1410,16 @@
         },
         {
             "name": "tomasvotruba/cognitive-complexity",
-            "version": "0.0.5.72",
+            "version": "0.1.1.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/cognitive-complexity.git",
-                "reference": "b7ce4c001279dba61c91a7967d860a083524ca21"
+                "reference": "49426441b6f2e8b47139c0053a0792c405e14a49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/cognitive-complexity/zipball/b7ce4c001279dba61c91a7967d860a083524ca21",
-                "reference": "b7ce4c001279dba61c91a7967d860a083524ca21",
+                "url": "https://api.github.com/repos/TomasVotruba/cognitive-complexity/zipball/49426441b6f2e8b47139c0053a0792c405e14a49",
+                "reference": "49426441b6f2e8b47139c0053a0792c405e14a49",
                 "shasum": ""
             },
             "require": {
@@ -1447,9 +1447,19 @@
             "description": "PHPStan rules to measure cognitive complexity of your classes and methods",
             "support": {
                 "issues": "https://github.com/TomasVotruba/cognitive-complexity/issues",
-                "source": "https://github.com/TomasVotruba/cognitive-complexity/tree/0.0.5.72"
+                "source": "https://github.com/TomasVotruba/cognitive-complexity/tree/0.1.1.72"
             },
-            "time": "2022-12-29T13:35:37+00:00"
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/rectorphp",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/tomasvotruba",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-03-12T10:19:02+00:00"
         },
         {
             "name": "tomasvotruba/type-coverage",
