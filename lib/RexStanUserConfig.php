@@ -30,6 +30,11 @@ final class RexStanUserConfig
             if (is_dir($functionsPath)) {
                 $scanDirectories[] = $functionsPath;
             }
+
+            $vendorsPath = $package->getPath('vendor/');
+            if (is_dir($vendorsPath)) {
+                $scanDirectories[] = $vendorsPath;
+            }
         }
 
         $file = [];
