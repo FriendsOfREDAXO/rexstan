@@ -14,6 +14,11 @@ parameters:
     # don't report not found ignores
     reportUnmatchedIgnoredErrors: false
 
+    disallowedMethodCalls:
+        -
+            method: 'rex_sql::beginTransaction()'
+            message: 'handling transctions manually is error prone. Prefer using rex_sql::transactional() instead.'
+
     ignoreErrors:
         # ignore errors when analyzing rex modules/templates, caused by rex-vars
         -
