@@ -1221,6 +1221,7 @@ return array(
     'rexstan\\RexArticleGetValueDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexArticleGetValueDynamicReturnTypeExtension.php',
     'rexstan\\RexArticleSliceGetValueDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexArticleSliceGetValueDynamicReturnTypeExtension.php',
     'rexstan\\RexCategoryGetValueDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexCategoryGetValueDynamicReturnTypeExtension.php',
+    'rexstan\\RexClangDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexClangDynamicReturnTypeExtension.php',
     'rexstan\\RexClassDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexClassDynamicReturnTypeExtension.php',
     'rexstan\\RexCmd' => $baseDir . '/lib/RexCmd.php',
     'rexstan\\RexFunctionsDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexFunctionsDynamicReturnTypeExtension.php',
