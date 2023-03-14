@@ -33,6 +33,11 @@ final class DoctrineKeyValueStyleRule implements Rule
     private $classMethods;
 
     /**
+     * @var QueryReflection
+     */
+    private $queryReflection;
+
+    /**
      * @param list<string> $classMethods
      */
     public function __construct(array $classMethods)
@@ -106,12 +111,14 @@ final class DoctrineKeyValueStyleRule implements Rule
         $tableType = $scope->getType($tableExpr);
         if (! $tableType instanceof ConstantStringType) {
             return [
-                RuleErrorBuilder::message('Argument #0 expects a literal string, got ' . $tableType->describe(VerbosityLevel::precise()))->line($callLike->getLine())->build(),
+                RuleErrorBuilder::message('Argument #0 expects a constant string, got ' . $tableType->describe(VerbosityLevel::precise()))->line($callLike->getLine())->build(),
             ];
         }
 
-        $queryReflection = new QueryReflection();
-        $schemaReflection = $queryReflection->getSchemaReflection();
+        if ($this->queryReflection === null) {
+            $this->queryReflection = new QueryReflection();
+        }
+        $schemaReflection = $this->queryReflection->getSchemaReflection();
 
         // Table name may be escaped with backticks
         $argTableName = trim($tableType->getValue(), '`');
