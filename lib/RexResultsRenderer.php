@@ -76,7 +76,7 @@ final class RexResultsRenderer {
             }
             $error = rex_escape($message['message']);
             $url = rex_editor::factory()->getUrl($file, $message['line']);
-            if ($url) {
+            if ($url !== null) {
                 $error = '<a href="'. $url .'">'. rex_escape($message['message']) .'</a>';
             }
 

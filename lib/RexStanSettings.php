@@ -114,7 +114,7 @@ final class RexStanSettings
         $url = \rex_editor::factory()->getUrl($baselineFile, 0);
 
         $baselineButton = '';
-        if ($url) {
+        if ($url !== null) {
             $baselineButton .= '<a href="'. $url .'">Baseline im Editor &ouml;ffnen</a> - ';
         }
 
