@@ -33,22 +33,7 @@ if (!is_file($userConfigPath)) {
     $paths = [];
 
     $projectAddon = rex_addon::get('project');
-    if ($projectAddon->getPath()) {
-        $paths[] = $projectAddon->getPath();
-    } else {
-        $availableAddons = rex_addon::getAvailableAddons();
-        foreach ($availableAddons as $availableAddon) {
-            if ($availableAddon->isSystemPackage()) {
-                continue;
-            }
-
-            if ('rexstan' == $availableAddon->getName()) {
-                continue;
-            }
-
-            $paths[] = $availableAddon->getPath();
-        }
-    }
+    $paths[] = $projectAddon->getPath();
 
     RexStanUserConfig::save(0, $paths, [], 70300);
 }
