@@ -34,7 +34,8 @@
         "phpstan": "phpstan analyze -c phpstan.dev.neon",
         "tests": "php tests/run.php",
         "post-update-cmd": [
-            "find vendor -name doc -type d -type d -delete"
+            "find vendor -name doc -type d -type d -delete",
+            "find vendor -name tests -type d -type d -delete"
         ]
     }
 }
