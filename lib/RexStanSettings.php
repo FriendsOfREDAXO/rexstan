@@ -65,7 +65,7 @@ final class RexStanSettings
     {
         $extensions = [];
         foreach (self::$phpstanExtensions as $label => $path) {
-            $extensions[rex_path::addon('rexstan', $path)] = $label;
+            $extensions[self::relativePath(rex_path::addon('rexstan', $path))] = $label;
         }
 
         $extensionLinks = [];
@@ -75,17 +75,17 @@ final class RexStanSettings
 
         $scanTargets = [];
         foreach (rex_addon::getAvailableAddons() as $availableAddon) {
-            $scanTargets[$availableAddon->getPath()] = $availableAddon->getName();
+            $scanTargets[self::relativePath($availableAddon->getPath())] = $availableAddon->getName();
 
             if ('developer' === $availableAddon->getName()) {
                 $modulesDir = DeveloperAddonIntegration::getModulesDir();
                 if ($modulesDir !== null) {
-                    $scanTargets[$modulesDir] = 'developer: modules';
+                    $scanTargets[self::relativePath($modulesDir)] = 'developer: modules';
                 }
 
                 $templatesDir = DeveloperAddonIntegration::getTemplatesDir();
                 if ($templatesDir !== null) {
-                    $scanTargets[$templatesDir] = 'developer: templates';
+                    $scanTargets[self::relativePath($templatesDir)] = 'developer: templates';
                 }
             }
         }
@@ -195,6 +195,14 @@ final class RexStanSettings
         $output .= '</table>';
 
         return $output;
+    }
+
+    public static function relativePath(string $path, ?string $base = null): string
+    {
+        $relativeAddonPath = rex_path::relative($base ?? rex_path::addonData('rexstan'));
+        $prefix = str_repeat('..' . DIRECTORY_SEPARATOR, substr_count($relativeAddonPath, DIRECTORY_SEPARATOR));
+
+        return $prefix . rex_path::relative($path);
     }
 
     private static function getAddOns(): string

@@ -33,7 +33,7 @@ if (rex_post($form_name . '_save', 'bool', false)) {
     }
 
     if ($analysisBaseline !== null) {
-        $includes[] = RexStanSettings::getAnalysisBaselinePath();
+        $includes[] = basename(RexStanSettings::getAnalysisBaselinePath());
     }
 
     RexStanUserConfig::save($level, $paths, $includes, $phpversion);

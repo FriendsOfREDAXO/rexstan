@@ -1,6 +1,7 @@
 <?php
 
 use rexstan\RexCmd;
+use rexstan\RexStanSettings;
 use rexstan\RexStanUserConfig;
 
 $addon = rex_addon::get('rexstan');
@@ -33,27 +34,27 @@ if (!is_file($userConfigPath)) {
     $paths = [];
 
     $projectAddon = rex_addon::get('project');
-    $paths[] = $projectAddon->getPath();
+    $paths[] = RexStanSettings::relativePath($projectAddon->getPath());
 
     RexStanUserConfig::save(0, $paths, [], 70300);
 }
 if (rex_version::compare(rex::getVersion(), '5.15.0-dev', '>=')) {
     $configFileContent = '# rexstan auto generated file - do not edit, delete, rename'. PHP_EOL . PHP_EOL .
         'includes:'. PHP_EOL .
-        '    - ' . $addon->getPath('default-config.neon') . PHP_EOL .
-        '    - ' . $addon->getPath('config/_from-r5_15.neon') . PHP_EOL .
-        '    - ' . $userConfigPath. PHP_EOL;
+        '    - default-config.neon' . PHP_EOL .
+        '    - config/_from-r5_15.neon' . PHP_EOL .
+        '    - ' . RexStanSettings::relativePath($userConfigPath, $addon->getPath()). PHP_EOL;
 } else {
     $configFileContent = '# rexstan auto generated file - do not edit, delete, rename'. PHP_EOL . PHP_EOL .
         'includes:'. PHP_EOL .
-        '    - ' . $addon->getPath('default-config.neon') . PHP_EOL .
-        '    - ' . $addon->getPath('config/_up-to-r5_14.neon') . PHP_EOL .
-        '    - ' . $userConfigPath. PHP_EOL;
+        '    - default-config.neon' . PHP_EOL .
+        '    - config/_up-to-r5_14.neon' . PHP_EOL .
+        '    - ' . RexStanSettings::relativePath($userConfigPath, $addon->getPath()). PHP_EOL;
 }
 
 rex_dir::create($addon->getCachePath());
 $configFileContent .= PHP_EOL .'parameters:'. PHP_EOL .
-'    tmpDir: '.$addon->getCachePath() . PHP_EOL;
+'    tmpDir: '.RexStanSettings::relativePath($addon->getCachePath(), $addon->getPath()) . PHP_EOL;
 
 $configPath = __DIR__.'/phpstan.neon';
 if (false === rex_file::put($configPath, $configFileContent)) {
