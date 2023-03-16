@@ -1234,6 +1234,7 @@ return array(
     'rexstan\\RexModuleOutputVarsCollector' => $baseDir . '/lib/collector/RexModuleOutputVarsCollector.php',
     'rexstan\\RexModuleVarsReflection' => $baseDir . '/lib/reflection/RexModuleVarsReflection.php',
     'rexstan\\RexModuleVarsRule' => $baseDir . '/lib/rule/RexModuleVarsRule.php',
+    'rexstan\\RexPhpVersion' => $baseDir . '/lib/RexPhpVersion.php',
     'rexstan\\RexResultsRenderer' => $baseDir . '/lib/RexResultsRenderer.php',
     'rexstan\\RexSqlEscapeDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexSqlEscapeDynamicReturnTypeExtension.php',
     'rexstan\\RexSqlFactoryDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexSqlFactoryDynamicReturnTypeExtension.php',

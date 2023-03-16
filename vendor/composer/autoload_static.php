@@ -1429,6 +1429,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'rexstan\\RexModuleOutputVarsCollector' => __DIR__ . '/../..' . '/lib/collector/RexModuleOutputVarsCollector.php',
         'rexstan\\RexModuleVarsReflection' => __DIR__ . '/../..' . '/lib/reflection/RexModuleVarsReflection.php',
         'rexstan\\RexModuleVarsRule' => __DIR__ . '/../..' . '/lib/rule/RexModuleVarsRule.php',
+        'rexstan\\RexPhpVersion' => __DIR__ . '/../..' . '/lib/RexPhpVersion.php',
         'rexstan\\RexResultsRenderer' => __DIR__ . '/../..' . '/lib/RexResultsRenderer.php',
         'rexstan\\RexSqlEscapeDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexSqlEscapeDynamicReturnTypeExtension.php',
         'rexstan\\RexSqlFactoryDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexSqlFactoryDynamicReturnTypeExtension.php',

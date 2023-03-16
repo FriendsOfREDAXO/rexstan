@@ -90,9 +90,8 @@ final class RexStanSettings
             }
         }
 
-        $sapiVersion = (int) (PHP_VERSION_ID / 100);
-        $cliVersion = (int) shell_exec('php -r \'echo PHP_VERSION_ID;\'');
-        $cliVersion = (int) ($cliVersion / 100);
+        $sapiVersion = PHP_VERSION_ID;
+        $cliVersion = RexPhpVersion::getCliVersion();
 
         if (rex_version::compare(rex::getVersion(), '5.15.0-dev', '>=')) {
             $phpVersions = self::$phpVersionListFrom5_15;
@@ -100,12 +99,10 @@ final class RexStanSettings
             $phpVersions = self::$phpVersionListUpTp5_14;
         }
         foreach ($phpVersions as $key => &$label) {
-            $key = (int) ($key / 100);
-
-            if ($key === $sapiVersion) {
+            if (RexPhpVersion::isEqualMajorMinor($key, $sapiVersion)) {
                 $label .= ' [aktuelle Webserver-Version (WEB-SAPI)]';
             }
-            if ($key === $cliVersion) {
+            if (RexPhpVersion::isEqualMajorMinor($key, $cliVersion)) {
                 $label .= ' [aktuelle Konsolen-Version (CLI-SAPI)]';
             }
         }
@@ -168,9 +165,8 @@ final class RexStanSettings
      */
     public static function outputSettings()
     {
-        $sapiVersion = (int) (PHP_VERSION_ID / 100);
-        $cliVersion = (int) shell_exec('php -r \'echo PHP_VERSION_ID;\'');
-        $cliVersion = (int) ($cliVersion / 100);
+        $sapiVersion = PHP_VERSION_ID;
+        $cliVersion = RexPhpVersion::getCliVersion();
 
         if (rex_version::compare(rex::getVersion(), '5.15.0-dev', '>=')) {
             $phpVersions = self::$phpVersionListFrom5_15;
@@ -180,10 +176,10 @@ final class RexStanSettings
 
         $phpVersion = $phpVersions[RexStanUserConfig::getPhpVersion()];
 
-        if ((int) (RexStanUserConfig::getPhpVersion() / 100)  === $sapiVersion) {
+        if (RexPhpVersion::isEqualMajorMinor(RexStanUserConfig::getPhpVersion(), $sapiVersion)) {
             $phpVersion .= ' [aktuelle Webserver-Version (WEB-SAPI)]';
         }
-        if ((int) (RexStanUserConfig::getPhpVersion() / 100) === $cliVersion) {
+        if (RexPhpVersion::isEqualMajorMinor(RexStanUserConfig::getPhpVersion(), $cliVersion)) {
             $phpVersion .= ' [aktuelle Konsolen-Version (CLI-SAPI)]';
         }
 
