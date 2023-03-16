@@ -11,6 +11,16 @@ final class RexPhpVersion {
     }
 
     static public function getCliVersion(): int {
-        return shell_exec('php -r \'echo PHP_VERSION_ID;\'');
+        $output = RexCmd::execCmd('php -r \'echo PHP_VERSION_ID;\'', $stderrOutput, $exitCode);
+
+        if ($exitCode !== 0) {
+            throw new \RuntimeException('Could not get PHP version from CLI: ' . $stderrOutput);
+        }
+
+        if (!is_numeric($output)) {
+            throw new \RuntimeException('Unexpected output: ' . $output);
+        }
+
+        return (int) $output;
     }
 }
