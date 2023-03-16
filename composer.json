@@ -40,8 +40,10 @@
             "find vendor -name build -type d -exec rm -r {} +",
             "mkdir -p vendor/sqlftw/sqlftw/tests",
             "mkdir -p vendor/sqlftw/sqlftw/build",
-            "mkdir -p vendor/sqlftw/sqlftw/build",
-            "mkdir -p vendor/dogma/dogma/tests"
+            "mkdir -p vendor/dogma/dogma/tests",
+            "touch vendor/sqlftw/sqlftw/tests/.gitkeep",
+            "touch vendor/sqlftw/sqlftw/build/.gitkeep",
+            "touch vendor/dogma/dogma/tests/.gitkeep"
         ]
     }
 }
