@@ -8,7 +8,7 @@ use rexstan\RexStanTip;
 use rexstan\RexStanSettings;
 use rexstan\RexStanUserConfig;
 
-if (rex_get('regenerate-baseline', 'bool')) {
+if (rex_get('regenerate-baseline', 'bool', false)) {
     RexStan::generateAnalysisBaseline();
 }
 

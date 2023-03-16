@@ -14,7 +14,7 @@ $fragment->setVar('body', $form->get(), false);
 echo $fragment->parse('core/page/section.php');
 
 $form_name = $form->getName();
-if (rex_post($form_name . '_save')) {
+if (rex_post($form_name . '_save', 'bool', false)) {
     $postData = rex_post($form_name);
     $level = (int) $postData['level'];
     $addonPaths = $postData['addons'] ?? [];
