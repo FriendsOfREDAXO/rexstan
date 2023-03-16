@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "707bb9e93ce9332cbbfabd4ffb5b1992",
+    "content-hash": "5851d364dca292269e288623b2bcfe89",
     "packages": [
         {
             "name": "composer/semver",
@@ -999,16 +999,16 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.2.66",
+            "version": "0.2.67",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "364de7ed33044e471447bf792015f643fcb6e5ef"
+                "reference": "bb2b8457f8a892f9ee59bc0fd1bdc285564c2292"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/364de7ed33044e471447bf792015f643fcb6e5ef",
-                "reference": "364de7ed33044e471447bf792015f643fcb6e5ef",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/bb2b8457f8a892f9ee59bc0fd1bdc285564c2292",
+                "reference": "bb2b8457f8a892f9ee59bc0fd1bdc285564c2292",
                 "shasum": ""
             },
             "require": {
@@ -1062,9 +1062,9 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.66"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.67"
             },
-            "time": "2023-03-14T20:40:28+00:00"
+            "time": "2023-03-16T09:36:32+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
