@@ -113,7 +113,7 @@ if (
     }
 
     $baselineButton = '';
-    if (RexStanUserConfig::isBaselineEnabled()) {
+    if (RexStanUserConfig::isBaselineEnabled() && !$regenerateBaseline) {
         $baselineButton .= ' <a href="'. rex_url::backendPage('rexstan/analysis', ['regenerate-baseline' => 1]) .'" class="btn btn-danger">Alle Probleme ignorieren</a>';
     }
 
