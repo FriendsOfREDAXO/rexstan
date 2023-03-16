@@ -34,7 +34,7 @@
         "phpstan": "phpstan analyze -c phpstan.dev.neon",
         "tests": "php tests/run.php",
         "post-update-cmd": [
-            "rm vendor/**doc**/*"
+            "find vendor -name doc -type d -exec rm -r {} \\;"
         ]
     }
 }
