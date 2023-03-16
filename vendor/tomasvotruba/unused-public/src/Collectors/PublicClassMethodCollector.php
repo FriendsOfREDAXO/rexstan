@@ -9,6 +9,7 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
 use PHPStan\Collectors\Collector;
 use PHPStan\Reflection\ClassReflection;
+use PHPStan\Reflection\ExtendedMethodReflection;
 use TomasVotruba\UnusedPublic\ApiDocStmtAnalyzer;
 use TomasVotruba\UnusedPublic\Configuration;
 use TomasVotruba\UnusedPublic\PublicClassMethodMatcher;
@@ -78,9 +79,7 @@ final class PublicClassMethodCollector implements Collector
             return null;
         }
 
-        // skip test methods
-        $classMethodName = $node->name->toString();
-        if (strncmp($classMethodName, 'test', strlen('test')) === 0) {
+        if ($this->isTestMethod($node, $scope)) {
             return null;
         }
 
@@ -126,5 +125,29 @@ final class PublicClassMethodCollector implements Collector
         }
 
         return [$classReflection->getName(), $methodName, $node->getLine()];
+    }
+
+    private function isTestMethod(ClassMethod $classMethod, Scope $scope): bool
+    {
+        $classMethodName = $classMethod->name->toString();
+        if (strncmp($classMethodName, 'test', strlen('test')) === 0) {
+            return true;
+        }
+
+        $classReflection = $scope->getClassReflection();
+        if (! $classReflection instanceof ClassReflection) {
+            return false;
+        }
+
+        $extendedMethodReflection = $classReflection->getMethod($classMethodName, $scope);
+        if (! $extendedMethodReflection instanceof ExtendedMethodReflection) {
+            return false;
+        }
+
+        if ($extendedMethodReflection->getDocComment() === null) {
+            return false;
+        }
+
+        return strpos($extendedMethodReflection->getDocComment(), '@test') !== false;
     }
 }
