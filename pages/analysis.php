@@ -109,7 +109,7 @@ if (
     }
 
     if ($regenerateBaseline && $totalErrors > 0) {
-        echo rex_view::error('Nicht alle Fehler konnten ignoririert werden. <b>Empfehlung:</b> Die verbliebenen kritischen Fehler analysieren und beheben.');
+        echo rex_view::error('Nicht alle Fehler konnten ignoriert werden. <b>Empfehlung:</b> Die verbliebenen kritischen Fehler analysieren und beheben.');
     }
 
     $baselineButton = '';
