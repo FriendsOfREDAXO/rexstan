@@ -11,7 +11,7 @@ final class RexPhpVersion {
     }
 
     static public function getCliVersion(): int {
-        $output = RexCmd::execCmd('php -r \'echo PHP_VERSION_ID;\'', $stderrOutput, $exitCode);
+        $output = RexCmd::execCmd('php -r "echo PHP_VERSION_ID;"', $stderrOutput, $exitCode);
 
         if ($exitCode !== 0) {
             throw new \RuntimeException('Could not get PHP version from CLI: ' . $stderrOutput);
