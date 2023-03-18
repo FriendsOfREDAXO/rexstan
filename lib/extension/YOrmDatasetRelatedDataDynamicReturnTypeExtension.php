@@ -20,6 +20,7 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
 {
     public function getClass(): string
     {
+        // @phpstan-ignore-next-line
         return rex_yform_manager_dataset::class;
     }
 
