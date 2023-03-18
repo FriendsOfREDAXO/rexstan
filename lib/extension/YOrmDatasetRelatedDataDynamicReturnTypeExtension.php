@@ -63,8 +63,6 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
         $classReflections = $datasetObject->getObjectClassReflections();
         $method = strtolower($methodReflection->getName());
 
-        require_once __DIR__.'/../../test2.php';
-
         /** @var list<ObjectType> $results */
         $results = [];
         foreach($classReflections as $classReflection) {
