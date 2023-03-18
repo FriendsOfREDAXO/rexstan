@@ -63,6 +63,8 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
         $classReflections = $datasetObject->getObjectClassReflections();
         $method = strtolower($methodReflection->getName());
 
+        require_once __DIR__.'/../../test2.php';
+
         /** @var list<ObjectType> $results */
         $results = [];
         foreach($classReflections as $classReflection) {
@@ -70,6 +72,7 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
                 continue;
             }
 
+            // @phpstan-ignore-next-line
             $datasetObject = call_user_func([$classReflection->getName(), 'create']);
             if (!$datasetObject instanceof rex_yform_manager_dataset) {
                 throw new \RuntimeException('expecting dataset object');
