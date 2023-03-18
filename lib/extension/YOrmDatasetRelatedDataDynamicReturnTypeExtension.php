@@ -12,8 +12,9 @@ use PHPStan\Type\Generic\GenericObjectType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
-use rex_plugin;
+use rex_yform_manager_collection;
 use rex_yform_manager_dataset;
+use rex_yform_manager_query;
 use function count;
 use function in_array;
 
