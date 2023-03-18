@@ -253,7 +253,7 @@ final class RexStanSettings
         foreach (['addons', 'extensions'] as $key) {
             $config = rex_config::get('rexstan', $key);
 
-            if (!str_contains($config, $absolutePath)) {
+            if (stripos($config, $absolutePath) === false) {
                 continue;
             }
 
