@@ -115,7 +115,7 @@ final class RexStanSettings
             $baselineButton .= '<a href="'. $url .'">Baseline im Editor &ouml;ffnen</a> - ';
         }
 
-        self::fixPaths();
+        self::fixAbsoluteToRelativePaths();
 
         $form = rex_config_form::factory('rexstan');
         $field = $form->addInputField('number', 'level', null, ['class' => 'form-control', 'min' => 0, 'max' => 9]);
@@ -243,7 +243,10 @@ final class RexStanSettings
         return implode(', ', $extensions);
     }
 
-    private static function fixPaths(): void
+    /**
+     * Migrate settings which were stored with absolute paths in the past to relative ones.
+     */
+    private static function fixAbsoluteToRelativePaths(): void
     {
         $absolutePath = rex_path::base();
 
