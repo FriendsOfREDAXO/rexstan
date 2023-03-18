@@ -129,3 +129,4 @@ services:
         class: rexstan\YOrmDatasetRelatedDataDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
+
