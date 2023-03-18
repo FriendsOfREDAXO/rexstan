@@ -82,7 +82,8 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
                 }
                 $modelClass = rex_yform_manager_dataset::getModelClass($relation['table']);
                 if ($modelClass === null) {
-                    throw new \RuntimeException('Unable to map table to model: '.$relation['table']);
+                    // not every table has a model class
+                    continue;
                 }
 
                 $modelObjectType = new ObjectType($modelClass);
