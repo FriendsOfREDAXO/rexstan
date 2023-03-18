@@ -115,6 +115,8 @@ final class RexStanSettings
             $baselineButton .= '<a href="'. $url .'">Baseline im Editor &ouml;ffnen</a> - ';
         }
 
+        self::fixPaths();
+
         $form = rex_config_form::factory('rexstan');
         $field = $form->addInputField('number', 'level', null, ['class' => 'form-control', 'min' => 0, 'max' => 9]);
         $field->setLabel('Level');
@@ -241,4 +243,23 @@ final class RexStanSettings
         return implode(', ', $extensions);
     }
 
+    private static function fixPaths(): void
+    {
+        $absolutePath = rex_path::base();
+
+        foreach (['addons', 'extensions'] as $key) {
+            $config = rex_config::get('rexstan', $key);
+
+            if (!str_contains($config, $absolutePath)) {
+                continue;
+            }
+
+            $config = explode('|', trim($config, '|'));
+            foreach ($config as $i => $path) {
+                $config[$i] = self::relativePath($path);
+            }
+
+            rex_config::set('rexstan', $key, '|'.implode('|', $config).'|');
+        }
+    }
 }
