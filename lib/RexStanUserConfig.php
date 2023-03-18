@@ -28,12 +28,12 @@ final class RexStanUserConfig
         foreach (rex_package::getAvailablePackages() as $package) {
             $functionsPath = $package->getPath('functions/');
             if (is_dir($functionsPath)) {
-                $scanDirectories[] = $functionsPath;
+                $scanDirectories[] = RexStanSettings::relativePath($functionsPath);
             }
 
             $vendorsPath = $package->getPath('vendor/');
             if (is_dir($vendorsPath)) {
-                $scanDirectories[] = $vendorsPath;
+                $scanDirectories[] = RexStanSettings::relativePath($vendorsPath);
             }
         }
 
