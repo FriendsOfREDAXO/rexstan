@@ -70,11 +70,6 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
                 continue;
             }
 
-            // enforce autoloading
-            if (!class_exists($classReflection->getName())) {
-                continue;
-            }
-
             $datasetObject = call_user_func([$classReflection->getName(), 'create']);
             if (!$datasetObject instanceof rex_yform_manager_dataset) {
                 throw new \RuntimeException('expecting dataset object');
