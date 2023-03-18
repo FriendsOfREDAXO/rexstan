@@ -45,7 +45,11 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
             return null;
         }
 
-        if (!class_exists(rex_yform_manager_dataset::class)) {
+        if (
+            !class_exists(rex_yform_manager_dataset::class)
+            || !class_exists(rex_yform_manager_collection::class)
+            || !class_exists(rex_yform_manager_query::class)
+        ) {
             return null;
         }
 
