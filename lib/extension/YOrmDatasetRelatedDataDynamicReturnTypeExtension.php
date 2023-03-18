@@ -8,6 +8,7 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
+use PHPStan\Type\Generic\GenericObjectType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
@@ -63,27 +64,28 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
             if (!is_a($objectClassName, rex_yform_manager_dataset::class, true)) {
                 continue;
             }
+            /** @var rex_yform_manager_dataset $datasetObject */
             $datasetObject = call_user_func([$objectClassName, 'create']);
 
             foreach($constantStrings as $constantString) {
+                $relation = $datasetObject->getTable()->getRelation($constantString->getValue());
+                if ($relation === null) {
+                    throw new \RuntimeException('Unknown relation: '.$constantString->getValue());
+                }
+                $modelClass = rex_yform_manager_dataset::getModelClass($relation['table']);
+                if ($modelClass === null) {
+                    throw new \RuntimeException('Unable to map table to model: '.$relation['table']);
+                }
+
                 if ($method === 'getrelateddataset') {
-                    $relatedObject = $datasetObject->getRelatedDataset($constantString->getValue());
+                    $results[] = new ObjectType($modelClass);
                 } elseif ($method === 'getrelatedcollection') {
-                    $relatedObject = $datasetObject->getRelatedDataset($constantString->getValue());
+                    $results[] = new GenericObjectType(rex_yform_manager_collection::class, [$modelClass]);
                 } elseif ($method !== 'getrelatedquery') {
-                    $relatedObject = $datasetObject->getRelatedQuery($constantString->getValue());
+                    $results[] = new GenericObjectType(rex_yform_manager_query::class, [$modelClass]);
                 } else {
                     throw new \RuntimeException('Unknown method: '.$method);
                 }
-                
-                if ($relatedObject === null) {
-                    continue;
-                }
-                if (!is_object($relatedObject)) {
-                    throw new \RuntimeException('Expecting object, got '. gettype($relatedObject));
-                }
-
-                $results[] = new ObjectType(get_class($relatedObject));
             }
         }
 
