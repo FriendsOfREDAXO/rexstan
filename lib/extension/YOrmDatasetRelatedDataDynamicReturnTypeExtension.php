@@ -73,11 +73,10 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
                     $relatedObject = $datasetObject->getRelatedDataset($constantString->getValue());
                 } elseif ($method === 'getrelatedcollection') {
                     $relatedObject = $datasetObject->getRelatedDataset($constantString->getValue());
-                } else {
-                    if ($method !== 'getrelatedquery') {
-                        throw new \RuntimeException('Unknown method: '.$method);
-                    }
+                } elseif ($method !== 'getrelatedquery') {
                     $relatedObject = $datasetObject->getRelatedQuery($constantString->getValue());
+                } else {
+                    throw new \RuntimeException('Unknown method: '.$method);
                 }
 
                 $results[] = new ObjectType(get_class($relatedObject));
