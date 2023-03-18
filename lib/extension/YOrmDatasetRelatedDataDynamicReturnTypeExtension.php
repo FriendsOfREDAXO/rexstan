@@ -60,16 +60,22 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
         }
 
         $datasetObject = $scope->getType($methodCall->var);
-        $objectClassNames = $datasetObject->getObjectClassNames();
+        $classReflections = $datasetObject->getObjectClassReflections();
         $method = strtolower($methodReflection->getName());
 
         /** @var list<ObjectType> $results */
         $results = [];
-        foreach($objectClassNames as $objectClassName) {
-            if (!is_a($objectClassName, rex_yform_manager_dataset::class, true)) {
+        foreach($classReflections as $classReflection) {
+            if (!$classReflection->isSubclassOf(rex_yform_manager_dataset::class)) {
                 continue;
             }
-            $datasetObject = call_user_func([$objectClassName, 'create']);
+
+            // enforce autoloading
+            if (!class_exists($classReflection->getName())) {
+                continue;
+            }
+
+            $datasetObject = call_user_func([$classReflection->getName(), 'create']);
             if (!$datasetObject instanceof rex_yform_manager_dataset) {
                 throw new \RuntimeException('expecting dataset object');
             }
@@ -84,12 +90,13 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
                     throw new \RuntimeException('Unable to map table to model: '.$relation['table']);
                 }
 
+                $modelObjectType = new ObjectType($modelClass);
                 if ($method === 'getrelateddataset') {
-                    $results[] = new ObjectType($modelClass);
+                    $results[] = $modelObjectType;
                 } elseif ($method === 'getrelatedcollection') {
-                    $results[] = new GenericObjectType(rex_yform_manager_collection::class, [$modelClass]);
+                    $results[] = new GenericObjectType(rex_yform_manager_collection::class, [$modelObjectType]);
                 } elseif ($method !== 'getrelatedquery') {
-                    $results[] = new GenericObjectType(rex_yform_manager_query::class, [$modelClass]);
+                    $results[] = new GenericObjectType(rex_yform_manager_query::class, [$modelObjectType]);
                 } else {
                     throw new \RuntimeException('Unknown method: '.$method);
                 }
