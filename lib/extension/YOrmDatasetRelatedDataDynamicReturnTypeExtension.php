@@ -76,7 +76,7 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
                     throw new \RuntimeException('Unknown method: '.$method);
                 }
                 if (!is_object($relatedObject)) {
-                    throw new \RuntimeException('Expecting object, got '.get_debug_type($relatedObject));
+                    throw new \RuntimeException('Expecting object, got '. gettype($relatedObject));
                 }
 
                 $results[] = new ObjectType(get_class($relatedObject));
