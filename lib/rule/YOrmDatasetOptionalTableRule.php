@@ -27,10 +27,10 @@ final class YOrmDatasetOptionalTableRule implements Rule
         'get' => 1,
         'require' => 1,
         'getraw' => 1,
-        'getall' => 1,
-        'query' => 1,
-        'queryone' => 3,
-        'querycollection' => 3
+        'getall' => 0,
+        'query' => 0,
+        'queryone' => 2,
+        'querycollection' => 2
     ];
 
     /** @var ReflectionProvider */
@@ -52,6 +52,9 @@ final class YOrmDatasetOptionalTableRule implements Rule
             return [];
         }
         if (!$node->name instanceof Node\Identifier) {
+            return [];
+        }
+        if (!class_exists(rex_yform_manager_dataset::class)) {
             return [];
         }
 
