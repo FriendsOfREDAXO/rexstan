@@ -20,6 +20,8 @@ $REX['BACKEND_FOLDER'] = 'redaxo';
 $REX['LOAD_PAGE'] = false;
 
 require __DIR__.'/../../core/boot.php';
+// boot addons to make rexstan aware of e.g. class registrations at boot time
+include_once rex_path::core('packages.php');
 
 // phpstan-dba bootstrapping
 
