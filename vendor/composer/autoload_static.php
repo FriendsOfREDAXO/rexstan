@@ -1436,6 +1436,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'rexstan\\RexTemplateVarsReflection' => __DIR__ . '/../..' . '/lib/reflection/RexTemplateVarsReflection.php',
         'rexstan\\RexTemplateVarsRule' => __DIR__ . '/../..' . '/lib/rule/RexTemplateVarsRule.php',
         'rexstan\\RexUserGetValueDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexUserGetValueDynamicReturnTypeExtension.php',
+        'rexstan\\YOrmDatasetOptionalTableRule' => __DIR__ . '/../..' . '/lib/rule/YOrmDatasetOptionalTableRule.php',
         'rexstan\\YOrmDatasetRelatedDataDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/YOrmDatasetRelatedDataDynamicReturnTypeExtension.php',
         'rexstan\\rexstan_command' => __DIR__ . '/../..' . '/lib/command.php',
         'staabm\\PHPStanBaselineAnalysis\\AnalyzeApplication' => __DIR__ . '/..' . '/staabm/phpstan-baseline-analysis/lib/AnalyzeApplication.php',
