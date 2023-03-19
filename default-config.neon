@@ -91,3 +91,7 @@ services:
         tags:
             - phpstan.rules.rule
 
+    -
+        class: rexstan\YOrmDatasetOptionalTableRule
+        tags:
+            - phpstan.rules.rule
