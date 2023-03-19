@@ -100,6 +100,10 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
             }
         }
 
+        if ($results === []) {
+            return null;
+        }
+
         return TypeCombinator::union(...$results);
 
     }
