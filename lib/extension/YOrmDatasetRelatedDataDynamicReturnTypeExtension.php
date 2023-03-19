@@ -79,7 +79,8 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
             foreach($constantStrings as $constantString) {
                 $relation = $datasetObject->getTable()->getRelation($constantString->getValue());
                 if ($relation === null) {
-                    throw new \RuntimeException('Unknown relation: '.$constantString->getValue());
+                    // unknown relation
+                    continue;
                 }
                 $modelClass = rex_yform_manager_dataset::getModelClass($relation['table']);
                 if ($modelClass === null) {
