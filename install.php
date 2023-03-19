@@ -31,7 +31,7 @@ if ($cliPhpVersion !== null) {
 
 // code is called from update.php and the previous addon-version
 // might not yet have the method defined.
-if (method_exists([RexStanSettings::class, 'relativePath']))
+if (method_exists(RexStanSettings::class, 'relativePath'))
 {
     $userConfigPath = $addon->getDataPath('user-config.neon');
     if (!is_file($userConfigPath)) {
