@@ -5,7 +5,7 @@ use staabm\PHPStanDba\QueryReflection\QueryReflection;
 use staabm\PHPStanDba\QueryReflection\RuntimeConfiguration;
 
 unset($REX);
-$REX['REDAXO'] = false;
+$REX['REDAXO'] = true;
 
 if (is_dir(__DIR__.'/../../../var/')) {
     // yakamara directoy layout
@@ -20,6 +20,8 @@ $REX['BACKEND_FOLDER'] = 'redaxo';
 $REX['LOAD_PAGE'] = false;
 
 require __DIR__.'/../../core/boot.php';
+// boot addons to make rexstan aware of e.g. class registrations at boot time
+include_once rex_path::core('packages.php');
 
 // phpstan-dba bootstrapping
 
