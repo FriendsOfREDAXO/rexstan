@@ -8,6 +8,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
 {
     public static $files = array (
         '9b38cf48e83f5d8f60375221cd213eee' => __DIR__ . '/..' . '/phpstan/phpstan/bootstrap.php',
+        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '51fcf4e06c07cc00c920b44bcd900e7a' => __DIR__ . '/..' . '/thecodingmachine/safe/deprecated/apc.php',
         '47f619d9197b36cf5ab70738d7743fe2' => __DIR__ . '/..' . '/thecodingmachine/safe/deprecated/libevent.php',
         'ea6bb8a12ef9b68f6ada99058e530760' => __DIR__ . '/..' . '/thecodingmachine/safe/deprecated/mssql.php',
@@ -97,7 +98,6 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         '4af1dca6db8c527c6eed27bff85ff0e5' => __DIR__ . '/..' . '/thecodingmachine/safe/generated/yaz.php',
         'fe43ca06499ac37bc2dedd823af71eb5' => __DIR__ . '/..' . '/thecodingmachine/safe/generated/zip.php',
         '356736db98a6834f0a886b8d509b0ecd' => __DIR__ . '/..' . '/thecodingmachine/safe/generated/zlib.php',
-        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -114,7 +114,6 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
             'TomasVotruba\\UnusedPublic\\' => 26,
             'TomasVotruba\\TypeCoverage\\' => 26,
             'TomasVotruba\\CognitiveComplexity\\' => 33,
-            'TheCodingMachine\\Safe\\PHPStan\\' => 30,
         ),
         'S' => 
         array (
@@ -155,10 +154,6 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'TomasVotruba\\CognitiveComplexity\\' => 
         array (
             0 => __DIR__ . '/..' . '/tomasvotruba/cognitive-complexity/src',
-        ),
-        'TheCodingMachine\\Safe\\PHPStan\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/thecodingmachine/phpstan-safe-rule/src',
         ),
         'Symplify\\PHPStanRules\\' => 
         array (
