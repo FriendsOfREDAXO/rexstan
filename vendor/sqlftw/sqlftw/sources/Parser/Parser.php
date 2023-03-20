@@ -54,6 +54,8 @@ class Parser
 
     private ParserFactory $factory;
 
+    private Generator $tokenListGenerator;
+
     public function __construct(Session $session, ?Lexer $lexer = null)
     {
         $resolver = new ExpressionResolver($session);
@@ -67,7 +69,7 @@ class Parser
         // always executed rules (errors not as obvious as syntax error, but preventing command execution anyway)
         $this->analyzer = new SimpleAnalyzer($context, [
             new SystemVariablesTypeRule(),
-            new CharsetAndCollationCompatibilityRule(),
+            //new CharsetAndCollationCompatibilityRule(),
         ]);
     }
 
@@ -82,14 +84,34 @@ class Parser
     }
 
     /**
+     * @internal to be used by RoutineBodyParser only
+     */
+    public function getNextTokenList(): ?TokenList
+    {
+        $this->tokenListGenerator->next();
+        if (!$this->tokenListGenerator->valid()) {
+            return null;
+        }
+
+        /** @var TokenList $tokenList */
+        $tokenList = $this->tokenListGenerator->current();
+
+        return $tokenList;
+    }
+
+    /**
      * @return Generator<int, array{Command&Statement, TokenList}>
      */
     public function parse(string $sql, bool $prepared = false): Generator
     {
-        $tokenLists = $this->lexer->tokenizeLists($sql);
+        $this->tokenListGenerator = $this->lexer->tokenizeLists($sql);
+        $first = true;
 
-        /** @var TokenList $tokenList */
-        foreach ($tokenLists as $tokenList) {
+        // next() cannot be called after current(), because lexing depends on result of parsing current()
+        while (($first || $this->tokenListGenerator->next() === null) && $this->tokenListGenerator->valid()) { // @phpstan-ignore-line comparing void and null
+            $first = false;
+            /** @var TokenList $tokenList */
+            $tokenList = $this->tokenListGenerator->current();
             if ($prepared) {
                 $tokenList->startPrepared();
             }

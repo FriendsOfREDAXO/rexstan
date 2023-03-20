@@ -57,7 +57,7 @@ Basic usage:
 
 use ...
 
-$platform = new Platform(Platform::MYSQL, '8.0'); // version defaults to x.x.99 when no patch number is given
+$platform = Platform::get(Platform::MYSQL, '8.0'); // version defaults to x.x.99 when no patch number is given
 $session = new Session($platform);
 $parser = new Parser($session);
 

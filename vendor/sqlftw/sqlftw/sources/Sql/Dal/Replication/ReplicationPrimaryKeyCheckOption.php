@@ -18,5 +18,6 @@ class ReplicationPrimaryKeyCheckOption extends SqlEnum
     public const STREAM = Keyword::STREAM;
     public const ON = Keyword::ON;
     public const OFF = Keyword::OFF;
+    public const GENERATE = Keyword::GENERATE;
 
 }

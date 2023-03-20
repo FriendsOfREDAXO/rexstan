@@ -1,6 +1,6 @@
 <?php return array (
   'schemaVersion' => 'v11-phpstan1_9_3-update',
-  'schemaHash' => '978ac93a0dacd29d0a93b7827aa3319c',
+  'schemaHash' => 'f8243f08e312cc01a89e4e0e639e78ef',
   'records' => 
   array (
     'SELECT

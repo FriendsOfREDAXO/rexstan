@@ -27,6 +27,8 @@ class SelectExpression implements SqlSerializable
     /** @var WindowSpecification|string|null */
     private $window;
 
+    private ?string $rawExpression;
+
     /**
      * @param RootNode|Asterisk $expression
      * @param WindowSpecification|string|null $window
@@ -34,11 +36,13 @@ class SelectExpression implements SqlSerializable
     public function __construct(
         ArgumentNode $expression,
         ?string $alias = null,
-        $window = null
+        $window = null,
+        ?string $rawExpression = null
     ) {
         $this->expression = $expression;
         $this->alias = $alias;
         $this->window = $window;
+        $this->rawExpression = $rawExpression;
     }
 
     /**
@@ -47,6 +51,11 @@ class SelectExpression implements SqlSerializable
     public function getExpression(): ArgumentNode
     {
         return $this->expression;
+    }
+
+    public function getRawExpression(): ?string
+    {
+        return $this->rawExpression;
     }
 
     public function getAlias(): ?string

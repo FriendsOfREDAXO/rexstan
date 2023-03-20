@@ -672,7 +672,7 @@ class ExpressionParser
         if ($tokenList->hasSymbol('(')) {
             // function()
             return $this->parseFunctionCall($tokenList, $token->value);
-        } elseif (BuiltInFunction::validateValue($token->value) && BuiltInFunction::isBareName($token->value)) {
+        } elseif (BuiltInFunction::isValidValue($token->value) && BuiltInFunction::isBareName($token->value)) {
             // function without parentheses
             return new FunctionCall(new BuiltInFunction($token->value));
         }

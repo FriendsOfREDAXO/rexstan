@@ -55,17 +55,17 @@ class Session
 
     public function __construct(
         Platform $platform,
-        ?string $delimiter = null,
-        ?Charset $charset = null,
-        ?SqlMode $mode = null,
         int $clientSideExtensions = 0
     ) {
         $this->platform = $platform;
         $this->extensions = $clientSideExtensions;
 
-        $this->reset($delimiter, $charset, $mode);
+        $this->reset();
     }
 
+    /**
+     * Clears internal state (variables) and resets delimiter, charset and mode to defaults
+     */
     public function reset(?string $delimiter = null, ?Charset $charset = null, ?SqlMode $mode = null): void
     {
         $this->userVariables = [];
