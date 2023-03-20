@@ -251,11 +251,6 @@ class Platform
         }
     }
 
-    public function userDelimiter(): bool
-    {
-        return $this->name === self::MYSQL || $this->name === self::MARIA;
-    }
-
     public function getDefaultMode(): SqlMode
     {
         if ($this->name === self::MYSQL || $this->name === self::MARIA) {

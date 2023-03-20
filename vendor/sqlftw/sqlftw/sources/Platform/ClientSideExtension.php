@@ -30,16 +30,19 @@ namespace SqlFtw\Platform;
 class ClientSideExtension
 {
 
+    // "DELIMITER ;;" (mysql client syntax to tell him how to chop input into batches before sending it to server)
+    public const ALLOW_DELIMITER_DEFINITION = 1;
+
     // "UPDATE tbl1 SET a = ? WHERE b = ?" (Doctrine, Laravel, NDB, Dibi)
-    public const ALLOW_QUESTION_MARK_PLACEHOLDERS_OUTSIDE_PREPARED_STATEMENTS = 1;
+    public const ALLOW_QUESTION_MARK_PLACEHOLDERS_OUTSIDE_PREPARED_STATEMENTS = 2;
 
     // "UPDATE tbl1 SET a = ?1 WHERE b = ?2" (Doctrine)
-    public const ALLOW_NUMBERED_QUESTION_MARK_PLACEHOLDERS = 2;
+    public const ALLOW_NUMBERED_QUESTION_MARK_PLACEHOLDERS = 4;
 
     // "UPDATE tbl2 SET a = :value1 WHERE b = :value2" (Doctrine, Laravel)
-    public const ALLOW_NAMED_DOUBLE_COLON_PLACEHOLDERS = 4;
+    public const ALLOW_NAMED_DOUBLE_COLON_PLACEHOLDERS = 8;
 
     // "UPDATE [tbl2] SET [a] = 1 WHERE [b] = 2" (Doctrine, Dibi)
-    //public const CONVERT_SQUARE_BRACKET_IDENTIFIERS = 8;
+    //public const CONVERT_SQUARE_BRACKET_IDENTIFIERS = 16;
 
 }

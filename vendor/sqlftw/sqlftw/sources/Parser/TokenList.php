@@ -12,6 +12,7 @@ namespace SqlFtw\Parser;
 use Dogma\Language\Encoding;
 use Dogma\Str;
 use InvalidArgumentException;
+use LogicException;
 use SqlFtw\Parser\TokenType as T;
 use SqlFtw\Platform\Platform;
 use SqlFtw\Session\Session;
@@ -41,6 +42,7 @@ use SqlFtw\Sql\Routine\RoutineType;
 use SqlFtw\Sql\SqlEnum;
 use SqlFtw\Sql\SubqueryType;
 use SqlFtw\Sql\UserName;
+use function array_merge;
 use function array_pop;
 use function array_slice;
 use function array_values;
@@ -360,6 +362,45 @@ class TokenList
         }
     }
 
+    public function extractRawExpression(int $start): string
+    {
+        if ($this->autoSkip === 0) {
+            throw new LogicException('Raw expression could be incomplete, when whitespace and comments parsing is disabled.');
+        }
+
+        $end = $this->position - 1;
+        $beginning = true;
+        $position = $start;
+        $tokens = [];
+        while ($position <= $end && isset($this->tokens[$position])) {
+            $token = $this->tokens[$position];
+            $position++;
+            // remove leading whitespace and comments
+            if ($beginning && ($token->type & $this->autoSkip) !== 0) {
+                continue;
+            }
+            $tokens[] = $token;
+            $beginning = false;
+        }
+
+        // remove trailing whitespace and comments
+        for ($i = count($tokens) - 1; $i >= 0; $i--) {
+            if (($tokens[$i]->type & $this->autoSkip) !== 0) {
+                unset($tokens[$i]);
+            } else {
+                break;
+            }
+        }
+
+        $expression = '';
+        /** @var Token $token */
+        foreach ($tokens as $token) {
+            $expression .= $token->original ?? $token->value;
+        }
+
+        return $expression;
+    }
+
     // contents --------------------------------------------------------------------------------------------------------
 
     /**
@@ -381,6 +422,11 @@ class TokenList
         $value = $token->original ?? $token->value;
 
         return $token->position + strlen($value);
+    }
+
+    public function append(self $tokenList): void
+    {
+        $this->tokens = array_merge($this->tokens, $tokenList->tokens);
     }
 
     public function slice(int $startOffset, int $endOffset): self

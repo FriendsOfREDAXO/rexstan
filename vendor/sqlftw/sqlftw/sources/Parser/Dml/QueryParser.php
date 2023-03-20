@@ -464,11 +464,14 @@ class QueryParser
 
         $what = [];
         do {
+            $start = $tokenList->getPosition();
             if ($tokenList->hasOperator(Operator::MULTIPLY)) {
                 $expression = new Asterisk();
             } else {
                 $expression = $this->expressionParser->parseAssignExpression($tokenList);
             }
+            $rawExpression = $tokenList->extractRawExpression($start);
+
             $window = null;
             if ($tokenList->hasKeyword(Keyword::OVER)) {
                 if ($tokenList->hasSymbol('(')) {
@@ -483,7 +486,7 @@ class QueryParser
                 throw new ParserException('Cannot use alias after *.', $tokenList);
             }
 
-            $what[] = new SelectExpression($expression, $alias, $window);
+            $what[] = new SelectExpression($expression, $alias, $window, $rawExpression);
         } while ($tokenList->hasSymbol(','));
 
         $into = null;

@@ -173,6 +173,7 @@ class MysqlVariable extends SqlEnum
     public const ERROR_COUNT = 'error_count';
     public const EVENT_SCHEDULER = 'event_scheduler';
     public const EXPIRE_LOGS_DAYS = 'expire_logs_days';
+    public const EXPLAIN_FORMAT = 'explain_format';
     public const EXPLICIT_DEFAULTS_FOR_TIMESTAMP = 'explicit_defaults_for_timestamp';
     public const EXTERNAL_USER = 'external_user';
     public const FLUSH = 'flush';
@@ -1236,6 +1237,7 @@ class MysqlVariable extends SqlEnum
         self::EQ_RANGE_INDEX_DIVE_LIMIT                 => [null,       true,  T::UNSIGNED, 200,        F::SET_VAR | F::CLAMP, 0, I::UINT32_MAX],
         self::ERROR_COUNT                               => [S::SESSION, false, T::UNSIGNED, 0,          F::NONE, 0, MAX],
         self::EVENT_SCHEDULER                           => [S::GLOBAL,  true,  T::ENUM,     'ON',       F::NONE, ['ON', 'OFF', 'DISABLED']], // DISABLED only with PERSIST_ONLY
+        self::EXPLAIN_FORMAT                            => [null,       true,  T::ENUM,     'TRADITIONAL', F::NONE, ['TRADITIONAL', 'JSON', 'TREE', 'DEFAULT']],
         self::EXPLICIT_DEFAULTS_FOR_TIMESTAMP           => [null,       true,  T::BOOL,     true],
         self::EXTERNAL_USER                             => [S::SESSION, false, T::CHAR,     null],
         self::FLUSH                                     => [S::GLOBAL,  true,  T::BOOL,     false],

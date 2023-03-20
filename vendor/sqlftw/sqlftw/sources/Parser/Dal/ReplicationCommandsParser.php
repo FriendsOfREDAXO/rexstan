@@ -207,7 +207,7 @@ class ReplicationCommandsParser
      *   | SOURCE_PORT = port_num
      *   | PRIVILEGE_CHECKS_USER = {NULL | 'account'}
      *   | REQUIRE_ROW_FORMAT = {0|1}
-     *   | REQUIRE_TABLE_PRIMARY_KEY_CHECK = {STREAM | ON | OFF}
+     *   | REQUIRE_TABLE_PRIMARY_KEY_CHECK = {STREAM | ON | OFF | GENERATE}
      *   | ASSIGN_GTIDS_TO_ANONYMOUS_TRANSACTIONS = {OFF | LOCAL | uuid}
      *   | SOURCE_LOG_FILE = 'source_log_name'
      *   | SOURCE_LOG_POS = source_log_pos

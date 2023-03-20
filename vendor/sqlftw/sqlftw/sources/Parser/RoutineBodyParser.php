@@ -341,6 +341,13 @@ class RoutineBodyParser
         do {
             $statements[] = $this->parseStatement($tokenList);
 
+            if ($tokenList->isFinished()) {
+                $nextTokenList = $this->parser->getNextTokenList();
+                if ($nextTokenList !== null) {
+                    $tokenList->append($nextTokenList);
+                }
+            }
+
             // termination condition
             if ($tokenList->hasAnyKeyword(Keyword::END, Keyword::UNTIL, Keyword::WHEN, Keyword::ELSE, Keyword::ELSEIF)) {
                 $tokenList->rewind(-1);

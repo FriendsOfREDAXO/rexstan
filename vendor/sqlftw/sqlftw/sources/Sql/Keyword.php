@@ -87,6 +87,7 @@ class Keyword extends SqlEnum
     public const BREADTH = 'BREADTH';
     public const BTREE = 'BTREE';
     public const BUCKETS = 'BUCKETS';
+    public const BULK = 'BULK';
     public const BY = 'BY';
     public const BYTE = 'BYTE';
     public const C = 'C';
@@ -365,6 +366,7 @@ class Keyword extends SqlEnum
     public const FUSION = 'FUSION';
     public const G = 'G';
     public const GENERAL = 'GENERAL';
+    public const GENERATE = 'GENERATE';
     public const GENERATED = 'GENERATED';
     public const GEOMCOLLECTION = 'GEOMCOLLECTION';
     public const GEOMETRY = 'GEOMETRY';
@@ -1107,6 +1109,7 @@ class Keyword extends SqlEnum
     public const UPDATE = 'UPDATE';
     public const UPGRADE = 'UPGRADE';
     public const UPPER = 'UPPER';
+    public const URL = 'URL';
     public const USAGE = 'USAGE';
     public const USE = 'USE';
     public const USE_FRM = 'USE_FRM';

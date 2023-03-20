@@ -121,6 +121,7 @@ class MysqlFeatures extends FeaturesList
     public array $features = [
         [Feature::OPTIMIZER_HINTS, self::MIN, self::MAX],
         [Feature::OLD_NULL_LITERAL, self::MIN, 79999],
+        [Feature::UNQUOTED_NAMES_CAN_START_WITH_DOLLAR_SIGN, self::MIN, 80031],
     ];
 
     /** @var list<array{Keyword::*, int, int}> */
@@ -445,6 +446,7 @@ class MysqlFeatures extends FeaturesList
         [Keyword::BOOLEAN, self::MIN, self::MAX],
         [Keyword::BTREE, self::MIN, self::MAX],
         [Keyword::BUCKETS, 80002, self::MAX],
+        [Keyword::BULK, 80032, self::MAX],
         [Keyword::BYTE, self::MIN, self::MAX],
         [Keyword::CACHE, self::MIN, self::MAX],
         [Keyword::CASCADED, 50000, self::MAX],
@@ -554,6 +556,7 @@ class MysqlFeatures extends FeaturesList
         [Keyword::FUNCTION, self::MIN, 80001],
         [Keyword::GENERAL, 50508, self::MAX],
         [Keyword::GENERAL, 50601, self::MAX],
+        [Keyword::GENERATE, 80032, self::MAX],
         [Keyword::GEOMCOLLECTION, 80011, self::MAX],
         [Keyword::GEOMETRY, self::MIN, self::MAX],
         [Keyword::GEOMETRYCOLLECTION, self::MIN, self::MAX],
@@ -922,6 +925,7 @@ class MysqlFeatures extends FeaturesList
         [Keyword::UNREGISTER, 80027, self::MAX],
         [Keyword::UNTIL, self::MIN, self::MAX],
         [Keyword::UPGRADE, 50000, self::MAX],
+        [Keyword::URL, 80032, self::MAX],
         [Keyword::USE_FRM, self::MIN, self::MAX],
         [Keyword::USER, self::MIN, self::MAX],
         [Keyword::USER_RESOURCES, self::MIN, self::MAX],
@@ -1699,6 +1703,7 @@ class MysqlFeatures extends FeaturesList
         [MysqlVariable::EQ_RANGE_INDEX_DIVE_LIMIT, self::MIN, self::MAX],
         [MysqlVariable::ERROR_COUNT, self::MIN, self::MAX],
         [MysqlVariable::EVENT_SCHEDULER, self::MIN, self::MAX],
+        [MysqlVariable::EXPLAIN_FORMAT, 80032, self::MAX],
         [MysqlVariable::EXPLICIT_DEFAULTS_FOR_TIMESTAMP, self::MIN, self::MAX],
         [MysqlVariable::EXTERNAL_USER, self::MIN, self::MAX],
         [MysqlVariable::FLUSH, self::MIN, self::MAX],

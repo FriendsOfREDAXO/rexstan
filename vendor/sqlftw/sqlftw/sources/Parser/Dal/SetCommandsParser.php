@@ -125,9 +125,12 @@ class SetCommandsParser
         $tokenList->expectKeywords(Keyword::RESET, Keyword::PERSIST);
         $ifExists = $tokenList->hasKeywords(Keyword::IF, Keyword::EXISTS);
         if ($ifExists) {
-            $variable = $tokenList->expectName(null);
+            $variable = $tokenList->expectName(null); // todo: type?
         } else {
-            $variable = $tokenList->getName(null);
+            $variable = $tokenList->getName(null); // todo: type?
+        }
+        if ($tokenList->hasSymbol('.')) {
+            $variable .= '.' . $tokenList->expectName(null); // todo: type?
         }
         if ($variable !== null) {
             $variable = new MysqlVariable($variable);
@@ -160,16 +163,19 @@ class SetCommandsParser
 
             if ($lastKeywordScope !== null && $current === true) {
                 // GLOBAL foo
-                $name = $tokenList->expectNonReservedNameOrString();
+                $name = $tokenList->getKeyword(Keyword::DEFAULT);
+                if ($name === null) {
+                    $name = $tokenList->expectNonReservedNameOrString(); // todo: type?
+                }
                 if ($tokenList->hasSymbol('.')) {
-                    $name .= '.' . $tokenList->expectName(null);
+                    $name .= '.' . $tokenList->expectName(null); // todo: type?
                 }
                 $variable = $this->expressionParser->createSystemVariable($tokenList, $name, $lastKeywordScope, true);
             } elseif (($token = $tokenList->get(TokenType::AT_VARIABLE)) !== null) {
                 // @foo, @@foo...
                 $variable = $this->expressionParser->parseAtVariable($tokenList, $token->value, true);
             } else {
-                $name = $tokenList->expectName(null);
+                $name = $tokenList->expectName(null); // todo: type?
                 if ($tokenList->hasSymbol('.')) {
                     $name2 = $tokenList->expectName(EntityType::COLUMN);
                     $fullName = $name . '.' . $name2;

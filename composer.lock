@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5fe40f0ed898a14ff7f5c703a0f39051",
+    "content-hash": "8914b2377e537165184761f1666fab5b",
     "packages": [
         {
             "name": "composer/semver",
@@ -886,16 +886,16 @@
         },
         {
             "name": "sqlftw/sqlftw",
-            "version": "v0.1.7",
+            "version": "v0.1.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SQLFTW/sqlftw.git",
-                "reference": "bcf6f828338aaedd88c11c49aa66fdd2bdb9a89a"
+                "reference": "dec382cbfac01223f3bf13b7f92a30434a1d45bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SQLFTW/sqlftw/zipball/bcf6f828338aaedd88c11c49aa66fdd2bdb9a89a",
-                "reference": "bcf6f828338aaedd88c11c49aa66fdd2bdb9a89a",
+                "url": "https://api.github.com/repos/SQLFTW/sqlftw/zipball/dec382cbfac01223f3bf13b7f92a30434a1d45bc",
+                "reference": "dec382cbfac01223f3bf13b7f92a30434a1d45bc",
                 "shasum": ""
             },
             "require": {
@@ -904,6 +904,7 @@
             },
             "require-dev": {
                 "amphp/parallel-functions": "1.1.0",
+                "dogma/dogma-debug": "0.1",
                 "dogma/dogma-dev": "0.1.29",
                 "phpstan/phpstan": "1.9.15",
                 "phpstan/phpstan-strict-rules": "^1.0",
@@ -912,9 +913,7 @@
             "type": "library",
             "autoload": {
                 "classmap": [
-                    "sources",
-                    "tests",
-                    "build"
+                    "sources"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -931,9 +930,9 @@
             "homepage": "https://github.com/sqlftw/sqlftw",
             "support": {
                 "issues": "https://github.com/SQLFTW/sqlftw/issues",
-                "source": "https://github.com/SQLFTW/sqlftw/tree/v0.1.7"
+                "source": "https://github.com/SQLFTW/sqlftw/tree/v0.1.10"
             },
-            "time": "2023-02-20T14:36:19+00:00"
+            "time": "2023-03-17T11:18:17+00:00"
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
@@ -1002,16 +1001,16 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.2.67",
+            "version": "0.2.68",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "bb2b8457f8a892f9ee59bc0fd1bdc285564c2292"
+                "reference": "7526446d4b2292073e0656b285551c9e134d0a2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/bb2b8457f8a892f9ee59bc0fd1bdc285564c2292",
-                "reference": "bb2b8457f8a892f9ee59bc0fd1bdc285564c2292",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/7526446d4b2292073e0656b285551c9e134d0a2b",
+                "reference": "7526446d4b2292073e0656b285551c9e134d0a2b",
                 "shasum": ""
             },
             "require": {
@@ -1021,7 +1020,7 @@
                 "phpstan/phpstan": "^1.9.4"
             },
             "conflict": {
-                "sqlftw/sqlftw": "<0.1.6 || >0.1.7"
+                "sqlftw/sqlftw": "<0.1.10"
             },
             "require-dev": {
                 "dibi/dibi": "^4.2",
@@ -1035,7 +1034,7 @@
                 "phpstan/phpstan-strict-rules": "^1.1",
                 "phpunit/phpunit": "^8.5|^9.5",
                 "symplify/easy-coding-standard": "^11.2",
-                "tomasvotruba/unused-public": "^0.1.8",
+                "tomasvotruba/unused-public": "^0.1.9",
                 "vlucas/phpdotenv": "^5.4"
             },
             "type": "phpstan-extension",
@@ -1065,9 +1064,9 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.67"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.68"
             },
-            "time": "2023-03-16T09:36:32+00:00"
+            "time": "2023-03-20T09:00:38+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
