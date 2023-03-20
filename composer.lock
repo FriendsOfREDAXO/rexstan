@@ -154,16 +154,16 @@
         },
         {
             "name": "nette/http",
-            "version": "v3.2.1",
+            "version": "v3.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/http.git",
-                "reference": "0e16cd4f911665679b96bf569318a0dc7f087eda"
+                "reference": "9105c26de3dd47da5e7cf6b4132b5d871f835e25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/http/zipball/0e16cd4f911665679b96bf569318a0dc7f087eda",
-                "reference": "0e16cd4f911665679b96bf569318a0dc7f087eda",
+                "url": "https://api.github.com/repos/nette/http/zipball/9105c26de3dd47da5e7cf6b4132b5d871f835e25",
+                "reference": "9105c26de3dd47da5e7cf6b4132b5d871f835e25",
                 "shasum": ""
             },
             "require": {
@@ -226,9 +226,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/http/issues",
-                "source": "https://github.com/nette/http/tree/v3.2.1"
+                "source": "https://github.com/nette/http/tree/v3.2.2"
             },
-            "time": "2022-12-05T00:03:40+00:00"
+            "time": "2023-03-18T14:55:56+00:00"
         },
         {
             "name": "nette/neon",
