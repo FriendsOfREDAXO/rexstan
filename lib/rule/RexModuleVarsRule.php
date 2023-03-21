@@ -88,7 +88,7 @@ final class RexModuleVarsRule implements Rule
     }
 
     /**
-     * @param list<array{string, array<string, scalar>}>  $values
+     * @param array<int, array{string, array<string, scalar>}>  $values
      * @param string $varName
      * @return bool
      */
