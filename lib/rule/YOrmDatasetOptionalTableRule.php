@@ -22,7 +22,7 @@ final class YOrmDatasetOptionalTableRule implements Rule
      *
      * @var array<string, int>
      */
-    const METHODS_CONFIG = [
+    private const METHODS_CONFIG = [
         'create' => 0,
         'get' => 1,
         'require' => 1,
