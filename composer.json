@@ -28,7 +28,8 @@
             "php": "7.4.30"
         },
         "platform-check": false,
-        "bin-compat": "full"
+        "bin-compat": "full",
+        "optimize-autoloader": true
     },
     "scripts": {
         "phpstan": "phpstan analyze -c phpstan.dev.neon",
