@@ -30,4 +30,4 @@ jobs:
             composer-options: --ansi --prefer-dist
 
       -   name: Lint PHP
-          run: vendor/bin/parallel-lint config/ lib/ pages/ tests/
+          run: vendor/bin/parallel-lint *.php config/ lib/ pages/ tests/
