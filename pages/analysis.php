@@ -113,11 +113,21 @@ if (
     }
 
     $baselineButton = '';
-    if (RexStanUserConfig::isBaselineEnabled() && !$regenerateBaseline) {
-        $baselineButton .= ' <a href="'. rex_url::backendPage('rexstan/analysis', ['regenerate-baseline' => 1]) .'" class="btn btn-danger">Alle Probleme ignorieren</a>';
+    $baselineInfo = '';
+    if (RexStanUserConfig::isBaselineEnabled()) {
+        if (!$regenerateBaseline) {
+            $baselineButton .= ' <a href="'. rex_url::backendPage('rexstan/analysis', ['regenerate-baseline' => 1]) .'" class="btn btn-danger">Alle Probleme ignorieren</a>';
+        }
+
+        $baselineCount = RexStan::getBaselineErrorsCount();
+        if ($baselineCount > 0) {
+            $baselineInfo = '<br/><i>'. $baselineCount .' Probleme wurden mittels Baseline ignoriert</i>';
+        }
     }
 
-    echo rex_view::warning('Level-<strong>'.RexStanUserConfig::getLevel().'</strong>-Analyse: <strong>'. $totalErrors .'</strong> Probleme gefunden in <strong>'. count($phpstanResult['files']) .'</strong> Dateien.'. $baselineButton);
+    echo rex_view::warning(
+        'Level-<strong>'.RexStanUserConfig::getLevel().'</strong>-Analyse: <strong>'. $totalErrors .'</strong> Probleme gefunden in <strong>'. count($phpstanResult['files']) .'</strong> Dateien.'. $baselineButton. $baselineInfo
+    );
 
     foreach ($phpstanResult['files'] as $file => $fileResult) {
         $linkFile = preg_replace('/\s\(in context.*?$/', '', $file);
