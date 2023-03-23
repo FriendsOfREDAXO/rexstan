@@ -61,40 +61,7 @@ if (
 
     if (0 === $totalErrors) {
         $level = RexStanUserConfig::getLevel();
-
-        $emoji = '';
-        switch ($level) {
-            case 0:
-                $emoji = '❤️️';
-                break;
-            case 1:
-                $emoji = '✌️';
-                break;
-            case 2:
-                $emoji = '💪';
-                break;
-            case 3:
-                $emoji = '🧙';
-                break;
-            case 4:
-                $emoji = '🏎️';
-                break;
-            case 5:
-                $emoji = '🚀';
-                break;
-            case 6:
-                $emoji = '🥉';
-                break;
-            case 7:
-                $emoji = '🥈';
-                break;
-            case 8:
-                $emoji = '🥇';
-                break;
-            case 9:
-                $emoji = '🏆';
-                break;
-        }
+        $emoji = RexResultsRenderer::getResultEmoji($level);
 
         echo '<span class="rexstan-achievement">'.$emoji .'</span>';
         echo rex_view::success('Gratulation, es wurden keine Fehler in Level '. $level .' gefunden.');

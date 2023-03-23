@@ -8,6 +8,42 @@ use rex_fragment;
 use rex_path;
 
 final class RexResultsRenderer {
+    static public function getResultEmoji(int $level): string {
+        $emoji = '';
+        switch ($level) {
+            case 0:
+                $emoji = '❤️️';
+                break;
+            case 1:
+                $emoji = '✌️';
+                break;
+            case 2:
+                $emoji = '💪';
+                break;
+            case 3:
+                $emoji = '🧙';
+                break;
+            case 4:
+                $emoji = '🏎️';
+                break;
+            case 5:
+                $emoji = '🚀';
+                break;
+            case 6:
+                $emoji = '🥉';
+                break;
+            case 7:
+                $emoji = '🥈';
+                break;
+            case 8:
+                $emoji = '🥇';
+                break;
+            case 9:
+                $emoji = '🏆';
+                break;
+        }
+        return $emoji;;
+    }
     static public function getLevel9Jseffect(): string {
         return
             '<script>
