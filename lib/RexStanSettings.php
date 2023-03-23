@@ -58,6 +58,8 @@ final class RexStanSettings
         80203 => '8.2.x',
     ];
 
+    public const ANALYSIS_BASELINE_FILE = 'analysis-baseline.neon';
+
     /**
      * @return rex_config_form
      */
@@ -152,7 +154,7 @@ final class RexStanSettings
     static public function getAnalysisBaselinePath(): string {
         $addon = rex_addon::get('rexstan');
         $dataDir = $addon->getDataPath();
-        $filePath = $dataDir .'analysis-baseline.neon';
+        $filePath = $dataDir .self::ANALYSIS_BASELINE_FILE;
 
         if (!is_file($filePath)) {
             \rex_file::put($filePath, '');

@@ -51,11 +51,10 @@ final class RexStanUserConfig
 
     public static function isBaselineEnabled(): bool
     {
-        $includes = self::getConfig()['includes'];
-        $baselineFile = RexStanSettings::getAnalysisBaselinePath();
+        $includes = self::getPhpStanConfig()['includes'];
 
         foreach($includes as $include) {
-            if ($include === $baselineFile) {
+            if (basename($include) === RexStanSettings::ANALYSIS_BASELINE_FILE) {
                 return true;
             }
         }
@@ -65,12 +64,12 @@ final class RexStanUserConfig
 
     public static function getLevel(): int
     {
-        return (int) (self::getConfig()['parameters']['level']);
+        return (int) (self::getPhpStanConfig()['parameters']['level']);
     }
 
     public static function getPhpVersion(): int
     {
-        return (int) (self::getConfig()['parameters']['phpVersion']);
+        return (int) (self::getPhpStanConfig()['parameters']['phpVersion']);
     }
 
     /**
@@ -78,7 +77,7 @@ final class RexStanUserConfig
      */
     public static function getPaths(): array
     {
-        return self::getConfig()['parameters']['paths'] ?? [];
+        return self::getPhpStanConfig()['parameters']['paths'] ?? [];
     }
 
     /**
@@ -86,7 +85,7 @@ final class RexStanUserConfig
      */
     public static function getIncludes(): array
     {
-        return self::getConfig()['includes'] ?? [];
+        return self::getPhpStanConfig()['includes'] ?? [];
     }
 
     /**
@@ -101,7 +100,7 @@ final class RexStanUserConfig
     /**
      * @return array<string, mixed>
      */
-    private static function getConfig(): array
+    private static function getPhpStanConfig(): array
     {
         $neon = self::readUserConfig();
         $userConf = rex_string::yamlDecode($neon);
