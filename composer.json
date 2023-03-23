@@ -39,6 +39,7 @@
             "find vendor -name docs -type d -exec rm -r {} +",
             "find vendor -name tests -type d -exec rm -r {} +",
             "find vendor -name build -type d -exec rm -r {} +",
+            "find vendor -name .github -type d -exec rm -r {} +",
             "mkdir -p vendor/sqlftw/sqlftw/tests",
             "mkdir -p vendor/sqlftw/sqlftw/build",
             "mkdir -p vendor/dogma/dogma/tests",
