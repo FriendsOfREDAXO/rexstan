@@ -214,13 +214,13 @@ final class RexStanSettings
         $scanTargets = [];
         foreach (RexStanUserConfig::getPaths() as $scanpath) {
             foreach (rex_addon::getAvailableAddons() as $availableAddon) {
-                if (pathinfo($scanpath)['basename'] === $availableAddon->getName()) {
+                if (basename($scanpath) === $availableAddon->getName()) {
                     $scanTargets[] = $availableAddon->getName();
                     break;
                 }
-                if (isset(pathinfo($scanpath)['dirname']) && pathinfo(pathinfo($scanpath)['dirname'])['basename'] === 'developer') {
-                    if (pathinfo($scanpath)['basename'] === 'modules' || pathinfo($scanpath)['basename'] === 'templates') {
-                        $scanTargets[] = 'developer:' . pathinfo($scanpath)['basename'];
+                if (basename(dirname($scanpath)) === 'developer') {
+                    if (basename($scanpath) === 'modules' || basename($scanpath) === 'templates') {
+                        $scanTargets[] = 'developer:' . basename($scanpath);
                         break;
                     }
                 }
@@ -236,7 +236,7 @@ final class RexStanSettings
         $config_extensions = RexStanUserConfig::getIncludes();
         foreach ((array) $config_extensions as $extpath) {
             foreach (self::$phpstanExtensions as $label => $path) {
-                if (pathinfo($extpath)['basename'] === pathinfo($path)['basename']) {
+                if (basename($extpath) === basename($path)) {
                     $extensions[] = $label;
                     break;
                 }
