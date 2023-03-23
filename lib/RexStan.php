@@ -141,6 +141,26 @@ final class RexStan
         RexCmd::execCmd($cmd, $stderrOutput, $exitCode);
     }
 
+    public static function getBaselineErrorsCount(): int {
+        $file = RexStanSettings::getAnalysisBaselinePath();
+        $f = fopen($file, 'r');
+
+        if (false === $f) {
+            throw new RuntimeException('Unable to open baseline file');
+        }
+
+        $baselined = 0;
+        // read each line of the file without loading the whole file to memory
+        while ($line = fgets($f)) {
+            if (strpos($line, 'message:') !== false) {
+                ++$baselined;
+            }
+        }
+        fclose($f);
+
+        return $baselined;
+    }
+
     private static function phpstanBinPath(): string
     {
         if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
