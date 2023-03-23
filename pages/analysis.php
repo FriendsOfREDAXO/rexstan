@@ -61,6 +61,7 @@ if (
 
     $baselineButton = '';
     $baselineInfo = '';
+    $baselineCount = 0;
     if (RexStanUserConfig::isBaselineEnabled()) {
         if (!$regenerateBaseline) {
             $baselineButton .= ' <a href="'. rex_url::backendPage('rexstan/analysis', ['regenerate-baseline' => 1]) .'" class="btn btn-danger">Alle Probleme ignorieren</a>';
@@ -77,12 +78,27 @@ if (
         $emoji = RexResultsRenderer::getResultEmoji($level);
 
         echo '<span class="rexstan-achievement">'.$emoji .'</span>';
-        echo rex_view::success('Gratulation, es wurden keine Fehler in Level '. $level .' gefunden.'. $baselineInfo);
+        echo rex_view::success('Gratulation, es wurden keine Fehler in Level '. $level .' gefunden.');
 
         if (9 === $level) {
             echo RexResultsRenderer::getLevel9Jseffect();
         } else {
-            echo '<p>In den <a href="'. rex_url::backendPage('rexstan/settings') .'">Einstellungen</a>, solltest du jetzt das nächste Level anvisieren.</p>';
+            echo '<p>';
+
+            echo 'In den <a href="'. rex_url::backendPage('rexstan/settings') .'">Einstellungen</a>, solltest du jetzt das nächste Level anvisieren.';
+            if (RexStanUserConfig::isBaselineEnabled() && $baselineCount > 0) {
+                $baselineFile = RexStanSettings::getAnalysisBaselinePath();
+                $url = \rex_editor::factory()->getUrl($baselineFile, 0);
+
+                $baselineHint = 'Baseline '. $baselineCount .' Probleme ignoriert werden';
+                if ($url !== null) {
+                    $baselineHint = '<a href="'. $url .'">'. $baselineHint .'</a>';
+                }
+
+                echo '<br />Da mittels '. $baselineHint .', solltest Du alternativ versuchen diese zu reduzieren.';
+            }
+
+            echo '</p>';
         }
         echo RexStanSettings::outputSettings();
         return;
