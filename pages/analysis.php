@@ -59,12 +59,25 @@ if (
 } else {
     $totalErrors = $phpstanResult['totals']['file_errors'];
 
+    $baselineButton = '';
+    $baselineInfo = '';
+    if (RexStanUserConfig::isBaselineEnabled()) {
+        if (!$regenerateBaseline) {
+            $baselineButton .= ' <a href="'. rex_url::backendPage('rexstan/analysis', ['regenerate-baseline' => 1]) .'" class="btn btn-danger">Alle Probleme ignorieren</a>';
+        }
+
+        $baselineCount = RexStan::getBaselineErrorsCount();
+        if ($baselineCount > 0) {
+            $baselineInfo = '<br/><i>'. $baselineCount .' Probleme wurden mittels Baseline ignoriert</i>';
+        }
+    }
+
     if (0 === $totalErrors) {
         $level = RexStanUserConfig::getLevel();
         $emoji = RexResultsRenderer::getResultEmoji($level);
 
         echo '<span class="rexstan-achievement">'.$emoji .'</span>';
-        echo rex_view::success('Gratulation, es wurden keine Fehler in Level '. $level .' gefunden.');
+        echo rex_view::success('Gratulation, es wurden keine Fehler in Level '. $level .' gefunden.'. $baselineInfo);
 
         if (9 === $level) {
             echo RexResultsRenderer::getLevel9Jseffect();
@@ -77,19 +90,6 @@ if (
 
     if ($regenerateBaseline && $totalErrors > 0) {
         echo rex_view::error('Nicht alle Fehler konnten ignoriert werden. <b>Empfehlung:</b> Die verbliebenen kritischen Fehler analysieren und beheben.');
-    }
-
-    $baselineButton = '';
-    $baselineInfo = '';
-    if (RexStanUserConfig::isBaselineEnabled()) {
-        if (!$regenerateBaseline) {
-            $baselineButton .= ' <a href="'. rex_url::backendPage('rexstan/analysis', ['regenerate-baseline' => 1]) .'" class="btn btn-danger">Alle Probleme ignorieren</a>';
-        }
-
-        $baselineCount = RexStan::getBaselineErrorsCount();
-        if ($baselineCount > 0) {
-            $baselineInfo = '<br/><i>'. $baselineCount .' Probleme wurden mittels Baseline ignoriert</i>';
-        }
     }
 
     echo rex_view::warning(
