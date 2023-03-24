@@ -2076,6 +2076,7 @@ return array(
     'rexstan\\RexTemplateVarsReflection' => $baseDir . '/lib/reflection/RexTemplateVarsReflection.php',
     'rexstan\\RexTemplateVarsRule' => $baseDir . '/lib/rule/RexTemplateVarsRule.php',
     'rexstan\\RexUserGetValueDynamicReturnTypeExtension' => $baseDir . '/lib/extension/RexUserGetValueDynamicReturnTypeExtension.php',
+    'rexstan\\YOrmDatasetGetValueDynamicReturnTypeExtension' => $baseDir . '/lib/extension/YOrmDatasetGetValueDynamicReturnTypeExtension.php',
     'rexstan\\YOrmDatasetOptionalTableRule' => $baseDir . '/lib/rule/YOrmDatasetOptionalTableRule.php',
     'rexstan\\YOrmDatasetRelatedDataDynamicReturnTypeExtension' => $baseDir . '/lib/extension/YOrmDatasetRelatedDataDynamicReturnTypeExtension.php',
     'rexstan\\rexstan_command' => $baseDir . '/lib/command.php',
