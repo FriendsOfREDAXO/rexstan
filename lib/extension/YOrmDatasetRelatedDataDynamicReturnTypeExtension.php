@@ -93,7 +93,7 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
                     $results[] = TypeCombinator::addNull($modelObjectType);
                 } elseif ($method === 'getrelatedcollection') {
                     $results[] = new GenericObjectType(rex_yform_manager_collection::class, [$modelObjectType]);
-                } elseif ($method !== 'getrelatedquery') {
+                } elseif ($method === 'getrelatedquery') {
                     $results[] = new GenericObjectType(rex_yform_manager_query::class, [$modelObjectType]);
                 } else {
                     throw new \RuntimeException('Unknown method: '.$method);
