@@ -77,6 +77,10 @@ final class YOrmDatasetGetValueDynamicReturnTypeExtension implements DynamicMeth
                     QueryReflector::FETCH_TYPE_ASSOC
                 );
 
+                if ($datasetType === null) {
+                    continue;
+                }
+
                 if (!$datasetType->hasOffsetValueType($constantString)->yes()) {
                     continue;
                 }
