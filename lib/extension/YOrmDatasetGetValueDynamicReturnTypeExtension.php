@@ -83,6 +83,10 @@ final class YOrmDatasetGetValueDynamicReturnTypeExtension implements DynamicMeth
 
                 $resultType = RexSqlReflection::getResultTypeFromStatementType($statementType);
 
+                if ($resultType === null) {
+                    continue;
+                }
+
                 if (!$resultType->hasOffsetValueType($constantString)->yes()) {
                     continue;
                 }
