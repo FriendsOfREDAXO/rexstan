@@ -16,6 +16,7 @@ use PHPStan\Type\TypeCombinator;
 use rex_yform_manager_collection;
 use rex_yform_manager_dataset;
 use rex_yform_manager_query;
+use staabm\PHPStanDba\QueryReflection\QueryReflector;
 use function count;
 use function in_array;
 
@@ -69,7 +70,12 @@ final class YOrmDatasetGetValueDynamicReturnTypeExtension implements DynamicMeth
             }
 
             foreach($constantStrings as $constantString) {
-                $datasetType = RexSqlReflection::inferStatementType(new String_('SELECT * FROM '. $datasetObject->getTableName()), $scope);
+                $datasetType = RexSqlReflection::inferStatementType(
+                    new String_('SELECT * FROM '. $datasetObject->getTableName()),
+                    null,
+                    $scope,
+                    QueryReflector::FETCH_TYPE_ASSOC
+                );
 
                 if (!$datasetType->hasOffsetValueType($constantString->getValue())->yes()) {
                     continue;
