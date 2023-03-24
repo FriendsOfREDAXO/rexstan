@@ -56,7 +56,6 @@ final class YOrmDatasetGetValueDynamicReturnTypeExtension implements DynamicMeth
         $datasetObject = $scope->getType($methodCall->var);
         $classReflections = $datasetObject->getObjectClassReflections();
 
-        /** @var ObjectType $results */
         $results = [];
         foreach($classReflections as $classReflection) {
             if (!$classReflection->isSubclassOf(rex_yform_manager_dataset::class)) {
