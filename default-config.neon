@@ -26,14 +26,38 @@ parameters:
             message: '#Constant REX_[A-Z_]+ not found\.#'
             path: '*data/addons/developer/*'
         -
+            message: '#Constant REX_[A-Z_]+ not found\.#'
+            path: '*/src/modules/*'
+        -
+            message: '#Constant REX_[A-Z_]+ not found\.#'
+            path: '*/src/templates/*'
+        -
             message: '#.* will always evaluate to (true|false).#'
             path: '*data/addons/developer/*'
+        -
+            message: '#.* will always evaluate to (true|false).#'
+            path: '*/src/modules/*'
+        -
+            message: '#.* will always evaluate to (true|false).#'
+            path: '*/src/templates/*'
         -
             message: '#.* is always (true|false).#'
             path: '*data/addons/developer/*'
         -
+            message: '#.* is always (true|false).#'
+            path: '*/src/modules/*'
+        -
+            message: '#.* is always (true|false).#'
+            path: '*/src/templates/*'
+        -
             message: '#^Variable \$this might not be defined\.#'
             path: '*data/addons/developer/*'
+        -
+            message: '#^Variable \$this might not be defined\.#'
+            path: '*/src/modules/*'
+        -
+            message: '#^Variable \$this might not be defined\.#'
+            path: '*/src/templates/*'
         -
             message: '#^Variable \$this might not be defined\.#'
             path: '*/fragments/*'
