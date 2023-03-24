@@ -22,7 +22,7 @@ final class RexSqlGetValueDynamicReturnTypeExtension implements DynamicMethodRet
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
     {
-        return in_array(strtolower($methodReflection->getName()), ['getvalue'], true);
+        return strtolower($methodReflection->getName()) === 'getvalue';
     }
 
     public function getTypeFromMethodCall(
