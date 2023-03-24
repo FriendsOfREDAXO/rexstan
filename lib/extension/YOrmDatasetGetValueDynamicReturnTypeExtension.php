@@ -84,6 +84,7 @@ final class YOrmDatasetGetValueDynamicReturnTypeExtension implements DynamicMeth
                 if (!$datasetType->hasOffsetValueType($constantString)->yes()) {
                     continue;
                 }
+                
                 $results[] = $datasetType->getOffsetValueType($constantString);
             }
         }
