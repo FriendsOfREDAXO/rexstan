@@ -8,6 +8,7 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\PropertiesClassReflectionExtension;
 use PHPStan\Reflection\PropertyReflection;
 use PHPStan\TrinaryLogic;
+use PHPStan\Type\MixedType;
 use PHPStan\Type\Type;
 use rex_yform_manager_dataset;
 
@@ -38,7 +39,7 @@ final class YOrmDatasetPropertyClassReflectionExtension implements PropertiesCla
              * @var Type
              */
             private $propertyType;
-            
+
             public function __construct(ClassReflection $classReflection, Type $propertyType)
             {
                 $this->classReflection = $classReflection;
@@ -135,6 +136,11 @@ final class YOrmDatasetPropertyClassReflectionExtension implements PropertiesCla
             'SELECT * FROM '. $datasetObject->getTableName(),
             $propertyName
         );
+
+        // treat non-existing properties as mixed, as this might be calculated or virtual field
+        if ($resultType === null) {
+            return new MixedType();
+        }
 
         return $resultType;
     }
