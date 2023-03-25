@@ -28,7 +28,8 @@ final class YOrmDatasetPropertyClassReflectionExtension implements PropertiesCla
             throw new \RuntimeException('expecting property type');
         }
 
-        return new class($classReflection, $propertyType) implements PropertyReflection {
+        return new class($classReflection, $propertyType) implements PropertyReflection
+        {
             /**
              * @var ClassReflection
              */
@@ -37,6 +38,7 @@ final class YOrmDatasetPropertyClassReflectionExtension implements PropertiesCla
              * @var Type
              */
             private $propertyType;
+            
             public function __construct(ClassReflection $classReflection, Type $propertyType)
             {
                 $this->classReflection = $classReflection;
