@@ -105,7 +105,7 @@ final class YOrmDatasetPropertyClassReflectionExtension implements PropertiesCla
 
             public function isInternal(): TrinaryLogic
             {
-                return null;
+                return TrinaryLogic::createNo();
             }
         };
     }
