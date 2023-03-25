@@ -95,7 +95,7 @@ final class YOrmDatasetPropertyClassReflectionExtension implements PropertiesCla
 
             public function isDeprecated(): TrinaryLogic
             {
-                return false;
+                return TrinaryLogic::createNo();
             }
 
             public function getDeprecatedDescription(): ?string
