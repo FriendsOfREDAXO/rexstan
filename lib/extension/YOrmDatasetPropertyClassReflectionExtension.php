@@ -15,10 +15,6 @@ final class YOrmDatasetPropertyClassReflectionExtension implements PropertiesCla
 {
     public function hasProperty(ClassReflection $classReflection, string $propertyName): bool
     {
-        if (!$classReflection->isSubclassOf(rex_yform_manager_dataset::class)) {
-            return false;
-        }
-
         return $this->getPropertyType($classReflection, $propertyName) !== null;
     }
 
