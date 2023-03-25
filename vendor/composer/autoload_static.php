@@ -2273,6 +2273,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'rexstan\\RexUserGetValueDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/RexUserGetValueDynamicReturnTypeExtension.php',
         'rexstan\\YOrmDatasetGetValueDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/YOrmDatasetGetValueDynamicReturnTypeExtension.php',
         'rexstan\\YOrmDatasetOptionalTableRule' => __DIR__ . '/../..' . '/lib/rule/YOrmDatasetOptionalTableRule.php',
+        'rexstan\\YOrmDatasetPropertyClassReflectionExtension' => __DIR__ . '/../..' . '/lib/extension/YOrmDatasetPropertyClassReflectionExtension.php',
         'rexstan\\YOrmDatasetRelatedDataDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/YOrmDatasetRelatedDataDynamicReturnTypeExtension.php',
         'rexstan\\rexstan_command' => __DIR__ . '/../..' . '/lib/command.php',
         'staabm\\PHPStanBaselineAnalysis\\AnalyzeApplication' => __DIR__ . '/..' . '/staabm/phpstan-baseline-analysis/lib/AnalyzeApplication.php',

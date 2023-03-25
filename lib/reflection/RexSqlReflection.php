@@ -111,6 +111,22 @@ final class RexSqlReflection
         return $sqlResultType;
     }
 
+    public static function getResultOffsetValueType(string $queryString, string $name): ?Type
+    {
+        $queryReflection = new QueryReflection();
+        $resultType = $queryReflection->getResultType($queryString, QueryReflector::FETCH_TYPE_ASSOC);
+        if (null === $resultType) {
+            return null;
+        }
+
+        $offsetType = new ConstantStringType($name);
+        if (!$resultType->hasOffsetValueType($offsetType)->yes()) {
+            return null;
+        }
+
+        return $resultType->getOffsetValueType($offsetType);
+    }
+
     /**
      * @param QueryReflector::FETCH_* $fetchType
      * @throws UnresolvableQueryException
