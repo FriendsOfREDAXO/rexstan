@@ -171,10 +171,11 @@ final class RexSqlInjectionRule implements Rule
                 $args = $expr->getArgs();
 
                 $mappedType = $scope->getType($args[0]->value);
-                if ($mappedType->isCallable()->yes()) {
-                    if ($this->isSafeCallable($mappedType, $scope)) {
-                        return null;
-                    }
+                if (!$mappedType->isCallable()->yes()) {
+                    return $expr;
+                }
+                if ($this->isSafeCallable($mappedType, $scope)) {
+                    return null;
                 }
 
                 return $expr;
@@ -216,9 +217,13 @@ final class RexSqlInjectionRule implements Rule
                         }
 
                         $arrayValueType = $scope->getType($args[1]->value);
-                        if ($arrayValueType->isArray()->yes() && $this->isSafeType($arrayValueType->getIterableValueType())) {
+                        if (!$arrayValueType->isArray()->yes()) {
                             return null;
                         }
+                        if (!$this->isSafeType($arrayValueType->getIterableValueType())) {
+                            return null;
+                        }
+                        return null;
                     }
                 }
             }
@@ -290,10 +295,12 @@ final class RexSqlInjectionRule implements Rule
         }
 
         $parameterAcceptors = $callableType->getCallableParametersAcceptors($scope);
-        if (1 === count($parameterAcceptors) && $this->isSafeType($parameterAcceptors[0]->getReturnType())) {
-            return true;
+        if (1 !== count($parameterAcceptors)) {
+            return false;
         }
-
-        return false;
+        if (!$this->isSafeType($parameterAcceptors[0]->getReturnType())) {
+            return false;
+        }
+        return true;
     }
 }
