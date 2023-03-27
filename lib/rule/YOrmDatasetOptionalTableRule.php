@@ -77,11 +77,10 @@ final class YOrmDatasetOptionalTableRule implements Rule
         if ($classReflection->getName() === rex_yform_manager_dataset::class) {
             $isMainClass = true;
         }
-
-        if (
-            (!$isMainClass && !$isSubclass)
-            || ($isMainClass && $isSubclass)
-        ) {
+        if (!$isMainClass && !$isSubclass) {
+            return [];
+        }
+        if ($isMainClass && $isSubclass) {
             return [];
         }
 
@@ -95,15 +94,16 @@ final class YOrmDatasetOptionalTableRule implements Rule
                 rex_yform_manager_dataset::class
             ))->build()];
         }
-
-        if ($isSubclass && isset($givenArgs[$tableArgPos])) {
-            return [RuleErrorBuilder::message(sprintf(
-                'Method "%s" should not be called with $table parameter, when invoked from a class extending %s.',
-                $node->name->name,
-                rex_yform_manager_dataset::class
-            ))->build()];
+        if (!$isSubclass) {
+            return [];
         }
-
-        return [];
+        if (!isset($givenArgs[$tableArgPos])) {
+            return [];
+        }
+        return [RuleErrorBuilder::message(sprintf(
+            'Method "%s" should not be called with $table parameter, when invoked from a class extending %s.',
+            $node->name->name,
+            rex_yform_manager_dataset::class
+        ))->build()];
     }
 }

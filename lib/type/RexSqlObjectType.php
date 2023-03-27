@@ -46,8 +46,10 @@ final class RexSqlObjectType extends ObjectType {
     public function equals(Type $type): bool
     {
         if ($type instanceof self) {
-            return $this->getSelectExpression() === $type->getSelectExpression()
-                && $this->getTableName() === $type->getTableName();
+            if ($this->getSelectExpression() !== $type->getSelectExpression()) {
+                return false;
+            }
+            return $this->getTableName() === $type->getTableName();
         }
 
         return parent::equals($type);

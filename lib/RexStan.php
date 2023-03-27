@@ -44,7 +44,7 @@ final class RexStan
         }
 
         if ('' == $output) {
-            $output = $stderrOutput;
+            return $stderrOutput;
         }
 
         // return the error string as is

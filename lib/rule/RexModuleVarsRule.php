@@ -103,10 +103,13 @@ final class RexModuleVarsRule implements Rule
                 continue;
             }
             $_id = (int) $args['id'];
-
-            if ($_varName === $varName && $_id === $id) {
-                return true;
+            if ($_varName !== $varName) {
+                continue;
             }
+            if ($_id !== $id) {
+                continue;
+            }
+            return true;
         }
         return false;
     }
