@@ -102,7 +102,7 @@ final class RexResultsRenderer {
         $content = '<ul class="list-group">';
         foreach ($messages as $message) {
             if (!is_numeric($message['line'])) {
-                throw new ShouldNotHappenException();
+                //throw new ShouldNotHappenException();
             }
             $content .= '<li class="list-group-item rexstan-message">';
             if ($message['line'] < 0) {

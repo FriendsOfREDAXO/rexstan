@@ -20,7 +20,10 @@ if (rex_post($form_name . '_save', 'bool', false)) {
     $addonPaths = $postData['addons'] ?? [];
     $extensions = $postData['extensions'] ?? [];
     $phpversion = (int) $postData['phpversion'];
-    $analysisBaseline = $postData['baseline'] ?? null;
+
+    $baselineSettings = $postData['baseline'] ?? [];
+    $analysisBaseline = isset($baselineSettings[RexStanSettings::BASELINE_ENABLED]);
+    $reportUnmatchedIgnoredErrors = isset($baselineSettings[RexStanSettings::BASELINE_REPORT_UNMATCHED]);
 
     $paths = [];
     foreach ($addonPaths as $addonPath) {
@@ -32,9 +35,9 @@ if (rex_post($form_name . '_save', 'bool', false)) {
         $includes[] = $extensionPath;
     }
 
-    if ($analysisBaseline !== null) {
+    if ($analysisBaseline) {
         $includes[] = basename(RexStanSettings::getAnalysisBaselinePath());
     }
 
-    RexStanUserConfig::save($level, $paths, $includes, $phpversion);
+    RexStanUserConfig::save($level, $paths, $includes, $phpversion, $reportUnmatchedIgnoredErrors);
 }

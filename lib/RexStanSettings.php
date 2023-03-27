@@ -60,6 +60,9 @@ final class RexStanSettings
 
     public const ANALYSIS_BASELINE_FILE = 'analysis-baseline.neon';
 
+    public const BASELINE_ENABLED = 1;
+    public const BASELINE_REPORT_UNMATCHED = 2;
+
     /**
      * @return rex_config_form
      */
@@ -125,8 +128,9 @@ final class RexStanSettings
         $field->setNotice('von 0 einfach, bis 9 sehr strikt - <a href="https://phpstan.org/user-guide/rule-levels">PHPStan Rule Levels</a>');
 
         $field = $form->addCheckboxField('baseline');
-        $field->addOption('Baseline verwenden', 1);
-        $field->setNotice($baselineButton .'Weiterlesen: <a href="https://phpstan.org/user-guide/baseline">Baseline Erklärung</a>');
+        $field->addOption('Baseline verwenden', self::BASELINE_ENABLED);
+        $field->addOption('Ungenutzte Baseline Probleme melden', self::BASELINE_REPORT_UNMATCHED);
+        $field->setNotice($baselineButton .'Weiterlesen: <a href="https://phpstan.org/user-guide/baseline">Baseline</a>, <a href="https://phpstan.org/user-guide/ignoring-errors#reporting-unused-ignores">reportUnmatchedIgnoredErrors</a>');
 
         $field = $form->addSelectField('addons', null, ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'required' => 'required']); // die Klasse selectpicker aktiviert den Selectpicker von Bootstrap
         $field->setAttribute('multiple', 'multiple');
