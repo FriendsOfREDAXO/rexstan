@@ -136,11 +136,15 @@ final class RexLint
      */
     private static function validateJsonSchema(array $json, string $schemaPath): array {
         $validator = new \JsonSchema\Validator();
-        $validator->validate($json, (object) ['$ref' => 'file://'.$schemaPath]);
+        $validator->validate($json, (object) ['$ref' => 'file://'.$schemaPath], \JsonSchema\Constraints\Constraint::CHECK_MODE_TYPE_CAST);
 
         $errors = [];
         if (!$validator->isValid()) {
             foreach ($validator->getErrors() as $error) {
+                if (strpos($error['message'], 'Failed to match all schemas') !== false) {
+                    continue;
+                }
+                
                 $errors[] = [
                     'line' => 0,
                     'message' => ($error['property'] ? $error['property'].' : ' : '').$error['message']
