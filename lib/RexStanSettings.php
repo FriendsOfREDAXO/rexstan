@@ -234,7 +234,7 @@ final class RexStanSettings
     {
         $extensions = [];
         $config_extensions = RexStanUserConfig::getIncludes();
-        foreach ((array) $config_extensions as $extpath) {
+        foreach ($config_extensions as $extpath) {
             foreach (self::$phpstanExtensions as $label => $path) {
                 if (basename($extpath) === basename($path)) {
                     $extensions[] = $label;

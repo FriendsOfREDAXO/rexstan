@@ -69,8 +69,6 @@ parameters:
     scanDirectories:
         - ../../core/functions/
 
-    treatPhpDocTypesAsCertain: false
-
     bootstrapFiles:
         - phpstan-bootstrap.php
 
