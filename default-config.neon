@@ -1,4 +1,5 @@
-# rexstan default configuration file - do not edit, delete, rename
+# rexstan default configuration file - do not edit, delete, rename.
+# these settings might be overwritten via user-config.neon
 
 includes:
     - vendor/spaze/phpstan-disallowed-calls/extension.neon
@@ -11,9 +12,6 @@ parameters:
     excludePaths:
         - '*/vendor/*'
 
-    # don't report not found ignores
-    reportUnmatchedIgnoredErrors: false
-
     disallowedMethodCalls:
         -
             method: 'rex_sql::beginTransaction()'
@@ -25,45 +23,59 @@ parameters:
         -
             message: '#Constant REX_[A-Z_]+ not found\.#'
             path: '*data/addons/developer/*'
+            reportUnmatched: false
         -
             message: '#Constant REX_[A-Z_]+ not found\.#'
             path: '*/src/modules/*'
+            reportUnmatched: false
         -
             message: '#Constant REX_[A-Z_]+ not found\.#'
             path: '*/src/templates/*'
+            reportUnmatched: false
         -
             message: '#.* will always evaluate to (true|false).#'
             path: '*data/addons/developer/*'
+            reportUnmatched: false
         -
             message: '#.* will always evaluate to (true|false).#'
             path: '*/src/modules/*'
+            reportUnmatched: false
         -
             message: '#.* will always evaluate to (true|false).#'
             path: '*/src/templates/*'
+            reportUnmatched: false
         -
             message: '#.* is always (true|false).#'
             path: '*data/addons/developer/*'
+            reportUnmatched: false
         -
             message: '#.* is always (true|false).#'
             path: '*/src/modules/*'
+            reportUnmatched: false
         -
             message: '#.* is always (true|false).#'
             path: '*/src/templates/*'
+            reportUnmatched: false
         -
             message: '#^Variable \$this might not be defined\.#'
             path: '*data/addons/developer/*'
+            reportUnmatched: false
         -
             message: '#^Variable \$this might not be defined\.#'
             path: '*/src/modules/*'
+            reportUnmatched: false
         -
             message: '#^Variable \$this might not be defined\.#'
             path: '*/src/templates/*'
+            reportUnmatched: false
         -
             message: '#^Variable \$this might not be defined\.#'
             path: '*/fragments/*'
+            reportUnmatched: false
 
         -
             message: '#^Switch condition type \(''REX_VALUE\[.*\]''\) does not match case condition .* \(string\)\.$#'
+            reportUnmatched: false
 
     # autoload core symbols which are not autoloadable
     scanDirectories:

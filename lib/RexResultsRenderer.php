@@ -101,19 +101,26 @@ final class RexResultsRenderer {
     static private function renderFileErrors(string $file, array $messages): string {
         $content = '<ul class="list-group">';
         foreach ($messages as $message) {
-            if (!is_numeric($message['line'])) {
-                throw new ShouldNotHappenException();
-            }
             $content .= '<li class="list-group-item rexstan-message">';
-            if ($message['line'] < 0) {
+            if ($message['line'] <= 0) {
                 $content .= '<span class="rexstan-linenumber"></span>';
             } else {
                 $content .= '<span class="rexstan-linenumber">' .sprintf('%5d', $message['line']).':</span>';
             }
+
             $error = rex_escape($message['message']);
-            $url = rex_editor::factory()->getUrl($file, $message['line']);
-            if ($url !== null) {
-                $error = '<a href="'. $url .'">'. rex_escape($message['message']) .'</a>';
+            if (self::isUnmatchedBaselineError($message['message'])) {
+                $baselineFile = RexStanSettings::getAnalysisBaselinePath();
+                $url = rex_editor::factory()->getUrl($baselineFile, 0);
+
+                if ($url !== null) {
+                    $error = '<a href="'. $url .'">Baseline:</a> '. rex_escape($message['message']);
+                }
+            } else {
+                $url = rex_editor::factory()->getUrl($file, $message['line']);
+                if ($url !== null) {
+                    $error = '<a href="'. $url .'">'. rex_escape($message['message']) .'</a>';
+                }
             }
 
             $phpstanTip = null;
@@ -132,6 +139,10 @@ final class RexResultsRenderer {
         $content .= '</ul>';
 
         return $content;
+    }
+
+    static private function isUnmatchedBaselineError(string $message): bool {
+        return strpos($message, 'was not matched in reported errors.') !== false;
     }
 
 }

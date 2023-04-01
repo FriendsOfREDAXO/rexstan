@@ -22,7 +22,7 @@ final class RexStanUserConfig
      *
      * @return void
      */
-    public static function save(int $level, array $paths, array $includes, int $phpVersion)
+    public static function save(int $level, array $paths, array $includes, int $phpVersion, bool $reportUnmatchedIgnoredErrors = false)
     {
         $scanDirectories = [];
         foreach (rex_package::getAvailablePackages() as $package) {
@@ -43,6 +43,7 @@ final class RexStanUserConfig
         $file['parameters']['paths'] = $paths;
         $file['parameters']['scanDirectories'] = $scanDirectories;
         $file['parameters']['phpVersion'] = $phpVersion;
+        $file['parameters']['reportUnmatchedIgnoredErrors'] = $reportUnmatchedIgnoredErrors;
 
         $prefix = "# rexstan auto generated file - do not edit, rename or remove\n\n";
 
