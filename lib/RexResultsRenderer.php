@@ -101,9 +101,6 @@ final class RexResultsRenderer {
     static private function renderFileErrors(string $file, array $messages): string {
         $content = '<ul class="list-group">';
         foreach ($messages as $message) {
-            if (!is_numeric($message['line'])) {
-                //throw new ShouldNotHappenException();
-            }
             $content .= '<li class="list-group-item rexstan-message">';
             if ($message['line'] < 0) {
                 $content .= '<span class="rexstan-linenumber"></span>';

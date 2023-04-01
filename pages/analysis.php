@@ -43,7 +43,7 @@ if (is_string($phpstanResult)) {
 if (
     !is_array($phpstanResult)
     || !is_array($phpstanResult['files'])
-  //  || (array_key_exists('errors', $phpstanResult) && count($phpstanResult['errors']) > 0)
+    || (array_key_exists('errors', $phpstanResult) && count($phpstanResult['errors']) > 0)
 ) {
     // print general php errors, like out of memory...
     if (count($phpstanResult['errors']) > 0) {
