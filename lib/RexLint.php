@@ -150,10 +150,6 @@ final class RexLint
         $errors = [];
         if (!$validator->isValid()) {
             foreach ($validator->getErrors() as $error) {
-                if (strpos($error['message'], 'Failed to match all schemas') !== false) {
-                    continue;
-                }
-
                 $errors[] = [
                     'line' => 0,
                     'message' => ($error['property'] ? $error['property'].' : ' : '').$error['message']
