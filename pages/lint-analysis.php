@@ -12,7 +12,7 @@ if (count($errors) > 0) {
         echo RexResultsRenderer::renderFileBlock($file, $perFileErrors);
     }
 } else {
-    echo rex_view::success('Gratulation, es wurden keine Syntax Fehler gefunden.');
+    echo rex_view::success('Gratulation, es wurden keine Linting Fehler gefunden.');
 
     echo '<p>Untersuchte Pfade<ul><li>'. implode('</li><li>', RexLint::getPathsToLint()) .'</li></ul></p>';
 }
