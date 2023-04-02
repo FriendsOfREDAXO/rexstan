@@ -10,3 +10,4 @@ parameters:
       - '#^Cannot access offset ''running'' on array\{command\: string, pid\: int, running\: bool, signaled\: bool, stopped\: bool, exitcode\: int, termsig\: int, stopsig\: int\}\|false\.$#'
       # functions get polyfilled by redaxo core
       - '#Function str_contains not found.#'
+      - '#Function str_starts_with not found.#'
