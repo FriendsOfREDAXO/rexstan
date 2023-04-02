@@ -27,7 +27,7 @@ final class RexLint
 
         $jsonErrors = [];
         // package.json schema was bogus in earlier redaxo core versions
-        if (rex_version::compare(rex::getVersion(), '5.15.1-dev', '>=')) {
+        if (rex_version::compare(rex::getVersion(), '5.15.2-dev', '>=')) {
             $jsonErrors = self::validateAddOnsPackageYml();
         }
 
