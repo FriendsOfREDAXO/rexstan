@@ -6,10 +6,10 @@ use Exception;
 use JsonSchema\Constraints\Constraint;
 use PHPStan\ShouldNotHappenException;
 use rex;
-use rex_version;
 use rex_file;
 use rex_package;
 use rex_path;
+use rex_version;
 use RuntimeException;
 
 use function array_key_exists;
@@ -162,10 +162,10 @@ final class RexLint
         $errors = [];
         if (!$validator->isValid()) {
             foreach ($validator->getErrors() as $error) {
-                if (strpos($error['message'], 'Failed to match all schemas') !== false) {
+                if (str_contains($error['message'], 'Failed to match all schemas')) {
                     continue;
                 }
-                if (strpos($error['message'], 'Failed to match at least one schema') !== false) {
+                if (str_contains($error['message'], 'Failed to match at least one schema')) {
                     continue;
                 }
 
