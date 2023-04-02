@@ -2,16 +2,11 @@
 
 namespace rexstan;
 
-use Exception;
 use PHPStan\ShouldNotHappenException;
-use rex_addon;
-use rex_dir;
 use rex_file;
 use rex_path;
 use RuntimeException;
-use staabm\PHPStanBaselineAnalysis\ResultPrinter;
 use function array_key_exists;
-use function dirname;
 
 final class RexLint
 {
@@ -20,8 +15,7 @@ final class RexLint
      */
     public static function runFromWeb()
     {
-        // $lintErrors = self::lintPaths();
-        $lintErrors = [];
+        $lintErrors = self::lintPaths();
         $jsonErrors = self::validateAddOnsPackageYml();
 
         return array_merge($lintErrors, $jsonErrors);;
@@ -150,6 +144,10 @@ final class RexLint
         $errors = [];
         if (!$validator->isValid()) {
             foreach ($validator->getErrors() as $error) {
+                if (strpos($error['message'], 'Failed to match all schemas') !== false) {
+                    continue;
+                }
+
                 $errors[] = [
                     'line' => 0,
                     'message' => ($error['property'] ? $error['property'].' : ' : '').$error['message']
