@@ -15,6 +15,9 @@ use PHPStan\Type\TypeCombinator;
 use rex_yform_manager_collection;
 use rex_yform_manager_dataset;
 use rex_yform_manager_query;
+use RuntimeException;
+
+use function call_user_func;
 use function count;
 use function in_array;
 
@@ -56,7 +59,7 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
 
         $key = $scope->getType($args[0]->value);
         $constantStrings = $key->getConstantStrings();
-        if ($constantStrings === []) {
+        if ([] === $constantStrings) {
             return null;
         }
 
@@ -66,47 +69,46 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
 
         /** @var list<ObjectType> $results */
         $results = [];
-        foreach($classReflections as $classReflection) {
+        foreach ($classReflections as $classReflection) {
             if (!$classReflection->isSubclassOf(rex_yform_manager_dataset::class)) {
                 continue;
             }
 
-            // @phpstan-ignore-next-line
+            /** @phpstan-ignore-next-line */
             $datasetObject = call_user_func([$classReflection->getName(), 'create']);
             if (!$datasetObject instanceof rex_yform_manager_dataset) {
-                throw new \RuntimeException('expecting dataset object');
+                throw new RuntimeException('expecting dataset object');
             }
 
-            foreach($constantStrings as $constantString) {
+            foreach ($constantStrings as $constantString) {
                 $relation = $datasetObject->getTable()->getRelation($constantString->getValue());
-                if ($relation === null) {
+                if (null === $relation) {
                     // unknown relation
                     continue;
                 }
                 $modelClass = rex_yform_manager_dataset::getModelClass($relation['table']);
-                if ($modelClass === null) {
+                if (null === $modelClass) {
                     // not every table has a model class
                     continue;
                 }
 
                 $modelObjectType = new ObjectType($modelClass);
-                if ($method === 'getrelateddataset') {
+                if ('getrelateddataset' === $method) {
                     $results[] = TypeCombinator::addNull($modelObjectType);
-                } elseif ($method === 'getrelatedcollection') {
+                } elseif ('getrelatedcollection' === $method) {
                     $results[] = new GenericObjectType(rex_yform_manager_collection::class, [$modelObjectType]);
-                } elseif ($method === 'getrelatedquery') {
+                } elseif ('getrelatedquery' === $method) {
                     $results[] = new GenericObjectType(rex_yform_manager_query::class, [$modelObjectType]);
                 } else {
-                    throw new \RuntimeException('Unknown method: '.$method);
+                    throw new RuntimeException('Unknown method: '.$method);
                 }
             }
         }
 
-        if ($results === []) {
+        if ([] === $results) {
             return null;
         }
 
         return TypeCombinator::union(...$results);
-
     }
 }

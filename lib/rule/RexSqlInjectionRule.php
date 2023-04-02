@@ -9,13 +9,11 @@ use PhpParser\Node\Expr\BinaryOp\Concat;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\Printer\ExprPrinter;
-use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\ShouldNotHappenException;
 use PHPStan\Type\BooleanType;
 use PHPStan\Type\Constant\ConstantArrayType;
-use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\FloatType;
 use PHPStan\Type\IntegerType;
 use PHPStan\Type\MixedType;
@@ -26,6 +24,7 @@ use rex_i18n;
 use rex_sql;
 use staabm\PHPStanDba\Ast\ExpressionFinder;
 use staabm\PHPStanDba\PhpDoc\PhpDocUtil;
+
 use function array_key_exists;
 use function count;
 use function in_array;
@@ -271,12 +270,12 @@ final class RexSqlInjectionRule implements Rule
             $valueTypes = $callableType->getValueTypes();
 
             if (2 === count($valueTypes)) {
-                list($objectType, $methodType) = $valueTypes;
+                [$objectType, $methodType] = $valueTypes;
 
                 $classReflections = $objectType->getObjectClassReflections();
                 $methodNames = $methodType->getConstantStrings();
-                foreach($classReflections as $classReflection) {
-                    foreach($methodNames as $methodStringType) {
+                foreach ($classReflections as $classReflection) {
+                    foreach ($methodNames as $methodStringType) {
                         $methodReflection = $classReflection->getMethod($methodStringType->getValue(), $scope);
 
                         if ('sql' !== PhpDocUtil::matchTaintEscape($methodReflection, $scope)) {

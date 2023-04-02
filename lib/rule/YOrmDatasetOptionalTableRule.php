@@ -12,6 +12,8 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use rex_yform_manager_dataset;
 
+use function in_array;
+
 /**
  * @implements Rule<StaticCall>
  */
@@ -30,7 +32,7 @@ final class YOrmDatasetOptionalTableRule implements Rule
         'getall' => 0,
         'query' => 0,
         'queryone' => 2,
-        'querycollection' => 2
+        'querycollection' => 2,
     ];
 
     /** @var ReflectionProvider */
@@ -74,7 +76,7 @@ final class YOrmDatasetOptionalTableRule implements Rule
         if ($classReflection->isSubclassOf(rex_yform_manager_dataset::class)) {
             $isSubclass = true;
         }
-        if ($classReflection->getName() === rex_yform_manager_dataset::class) {
+        if (rex_yform_manager_dataset::class === $classReflection->getName()) {
             $isMainClass = true;
         }
         if (!$isMainClass && !$isSubclass) {

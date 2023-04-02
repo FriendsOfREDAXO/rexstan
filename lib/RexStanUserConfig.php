@@ -54,8 +54,8 @@ final class RexStanUserConfig
     {
         $includes = self::getPhpStanConfig()['includes'];
 
-        foreach($includes as $include) {
-            if (basename($include) === RexStanSettings::ANALYSIS_BASELINE_FILE) {
+        foreach ($includes as $include) {
+            if (RexStanSettings::ANALYSIS_BASELINE_FILE === basename($include)) {
                 return true;
             }
         }
@@ -65,12 +65,12 @@ final class RexStanUserConfig
 
     public static function getLevel(): int
     {
-        return (int) (self::getPhpStanConfig()['parameters']['level']);
+        return (int) self::getPhpStanConfig()['parameters']['level'];
     }
 
     public static function getPhpVersion(): int
     {
-        return (int) (self::getPhpStanConfig()['parameters']['phpVersion']);
+        return (int) self::getPhpStanConfig()['parameters']['phpVersion'];
     }
 
     /**
@@ -127,5 +127,4 @@ final class RexStanUserConfig
     {
         return rex_addon::get('rexstan')->getDataPath('user-config.neon');
     }
-
 }

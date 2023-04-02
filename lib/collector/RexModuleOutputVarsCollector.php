@@ -8,8 +8,6 @@ use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Collectors\Collector;
 use PHPStan\Node\FileNode;
-use rex_var;
-use function get_class;
 
 /**
  * @implements Collector<FileNode, array<int, array{string, array<string, scalar>}>>

@@ -8,7 +8,8 @@ use PHPStan\Type\Generic\GenericObjectType;
 use PHPStan\Type\Type;
 use rex_sql;
 
-final class RexSqlGenericType extends GenericObjectType {
+final class RexSqlGenericType extends GenericObjectType
+{
     /**
      * @var ?string
      */
@@ -19,15 +20,18 @@ final class RexSqlGenericType extends GenericObjectType {
      */
     private $selectExpression;
 
-    public function __construct(Type $resultType) {
+    public function __construct(Type $resultType)
+    {
         parent::__construct(rex_sql::class, [$resultType]);
     }
 
-    public function setTableName(string $tableName): void {
+    public function setTableName(string $tableName): void
+    {
         $this->tableName = $tableName;
     }
 
-    public function getTableName(): ?string {
+    public function getTableName(): ?string
+    {
         return $this->tableName;
     }
 

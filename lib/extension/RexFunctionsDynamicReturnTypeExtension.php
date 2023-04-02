@@ -24,6 +24,7 @@ use PHPStan\Type\StringType;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
 use rex_request;
+
 use function count;
 use function in_array;
 
@@ -81,9 +82,9 @@ final class RexFunctionsDynamicReturnTypeExtension implements DynamicFunctionRet
         $typeStrings = $scope->getType($args[1]->value)->getConstantStrings();
         if (count($typeStrings) > 0) {
             $results = [];
-            foreach($typeStrings as $typeString) {
+            foreach ($typeStrings as $typeString) {
                 $resolvedType = $this->resolveTypeFromString($typeString->getValue());
-                if ($resolvedType === null) {
+                if (null === $resolvedType) {
                     return null;
                 }
 
@@ -138,7 +139,7 @@ final class RexFunctionsDynamicReturnTypeExtension implements DynamicFunctionRet
             return new ArrayType(new MixedType(), new MixedType());
         }
 
-        if (preg_match('/^array\[(.+)\]$/', $vartype, $match) === 1) {
+        if (1 === preg_match('/^array\[(.+)\]$/', $vartype, $match)) {
             $valueType = $this->resolveTypeFromString($match[1]);
 
             if (null === $valueType) {

@@ -2,11 +2,18 @@
 
 namespace rexstan;
 
+use Exception;
+use JsonSchema\Constraints\Constraint;
 use PHPStan\ShouldNotHappenException;
 use rex_file;
+use rex_package;
 use rex_path;
 use RuntimeException;
+
 use function array_key_exists;
+use function is_array;
+use function is_int;
+use function is_string;
 
 final class RexLint
 {
@@ -18,23 +25,24 @@ final class RexLint
         $lintErrors = self::lintPaths();
         $jsonErrors = self::validateAddOnsPackageYml();
 
-        return array_merge($lintErrors, $jsonErrors);;
+        return array_merge($lintErrors, $jsonErrors);
     }
 
     /**
      * @return list<string>
      */
-    public static function getPathsToLint(): array {
+    public static function getPathsToLint(): array
+    {
         $pathToLint = [
-            rex_path::src('addons/')
+            rex_path::src('addons/'),
         ];
         $modulesDir = DeveloperAddonIntegration::getModulesDir();
-        if ($modulesDir !== null) {
+        if (null !== $modulesDir) {
             $pathToLint[] = $modulesDir;
         }
 
         $templatesDir = DeveloperAddonIntegration::getTemplatesDir();
-        if ($templatesDir !== null) {
+        if (null !== $templatesDir) {
             $pathToLint[] = $templatesDir;
         }
         return $pathToLint;
@@ -43,7 +51,8 @@ final class RexLint
     /**
      * @return array<string, list<array{line: int, message: string}>>
      */
-    private static function lintPaths():array {
+    private static function lintPaths(): array
+    {
         $binary = self::linterBinPath();
 
         $pathToLint = self::getPathsToLint();
@@ -52,11 +61,11 @@ final class RexLint
 
         $jsonPhpLinterResult = json_decode($output, true);
         if (!is_array($jsonPhpLinterResult)) {
-            throw new \Exception('Unexpected result from parallel-lint: '. $output);
+            throw new Exception('Unexpected result from parallel-lint: '. $output);
         }
 
         if (!array_key_exists('results', $jsonPhpLinterResult)) {
-            throw new \Exception('Unexpected result from parallel-lint: '.$output);
+            throw new Exception('Unexpected result from parallel-lint: '.$output);
         }
 
         $results = $jsonPhpLinterResult['results'];
@@ -65,7 +74,7 @@ final class RexLint
         }
 
         $errorsPerFile = [];
-        foreach($results['errors'] as $error) {
+        foreach ($results['errors'] as $error) {
             if (!is_string($error['file'])) {
                 throw new ShouldNotHappenException();
             }
@@ -109,18 +118,19 @@ final class RexLint
     /**
      * @return array<string, list<array{line: int, message: string}>>
      */
-    private static function validateAddOnsPackageYml():array {
+    private static function validateAddOnsPackageYml(): array
+    {
         $packageSchema = rex_path::core('schemas/package.json');
 
         $errorsPerFile = [];
-        foreach(\rex_package::getAvailablePackages() as $package) {
+        foreach (rex_package::getAvailablePackages() as $package) {
             $packageYml = $package->getPath('package.yml');
             if (!is_file($packageYml)) {
                 continue;
             }
 
             $jsonData = rex_file::getConfig($packageYml);
-            foreach(self::validateJsonSchema($jsonData, $packageSchema) as $error) {
+            foreach (self::validateJsonSchema($jsonData, $packageSchema) as $error) {
                 if (!array_key_exists($packageYml, $errorsPerFile)) {
                     $errorsPerFile[$packageYml] = [];
                 }
@@ -137,20 +147,21 @@ final class RexLint
      *
      * @return list<array{line: int, message: string}>
      */
-    private static function validateJsonSchema(array $json, string $schemaPath): array {
+    private static function validateJsonSchema(array $json, string $schemaPath): array
+    {
         $validator = new \JsonSchema\Validator();
-        $validator->validate($json, (object) ['$ref' => 'file://'.$schemaPath], \JsonSchema\Constraints\Constraint::CHECK_MODE_TYPE_CAST);
+        $validator->validate($json, (object) ['$ref' => 'file://'.$schemaPath], Constraint::CHECK_MODE_TYPE_CAST);
 
         $errors = [];
         if (!$validator->isValid()) {
             foreach ($validator->getErrors() as $error) {
-                if (strpos($error['message'], 'Failed to match all schemas') !== false) {
+                if (false !== strpos($error['message'], 'Failed to match all schemas')) {
                     continue;
                 }
 
                 $errors[] = [
                     'line' => 0,
-                    'message' => ($error['property'] ? $error['property'].' : ' : '').$error['message']
+                    'message' => ($error['property'] ? $error['property'].' : ' : '').$error['message'],
                 ];
             }
         }

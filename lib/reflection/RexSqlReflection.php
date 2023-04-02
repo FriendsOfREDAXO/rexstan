@@ -7,7 +7,6 @@ namespace rexstan;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
-use PHPStan\Type\Constant\ConstantArrayType;
 use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\Generic\GenericObjectType;
 use PHPStan\Type\Type;
@@ -16,6 +15,7 @@ use rex_sql;
 use staabm\PHPStanDba\QueryReflection\QueryReflection;
 use staabm\PHPStanDba\QueryReflection\QueryReflector;
 use staabm\PHPStanDba\UnresolvableQueryException;
+
 use function count;
 
 final class RexSqlReflection
@@ -42,7 +42,7 @@ final class RexSqlReflection
         $valueNameTypes = $scope->getType($args[0]->value)->getConstantStrings();
 
         $results = [];
-        foreach($valueNameTypes as $valueNameType) {
+        foreach ($valueNameTypes as $valueNameType) {
             if ($sqlResultType->hasOffsetValueType($valueNameType)->yes()) {
                 $results[] = $sqlResultType->getOffsetValueType($valueNameType);
                 continue;
@@ -74,12 +74,12 @@ final class RexSqlReflection
     public static function getResultTypeFromStatementType(Type $statementType): ?Type
     {
         if ($statementType instanceof RexSqlObjectType) {
-            if($statementType->getTableName() === null) {
+            if (null === $statementType->getTableName()) {
                 return null;
             }
 
             $colExpr = '*';
-            if ($statementType->getSelectExpression() !== null) {
+            if (null !== $statementType->getSelectExpression()) {
                 $colExpr = $statementType->getSelectExpression();
             }
 

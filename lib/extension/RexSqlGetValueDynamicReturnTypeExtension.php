@@ -10,8 +10,8 @@ use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\Type;
 use rex_sql;
+
 use function count;
-use function in_array;
 
 final class RexSqlGetValueDynamicReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
@@ -22,7 +22,7 @@ final class RexSqlGetValueDynamicReturnTypeExtension implements DynamicMethodRet
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
     {
-        return strtolower($methodReflection->getName()) === 'getvalue';
+        return 'getvalue' === strtolower($methodReflection->getName());
     }
 
     public function getTypeFromMethodCall(

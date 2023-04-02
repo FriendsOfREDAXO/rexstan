@@ -9,14 +9,13 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use PHPStan\Type\TypeUtils;
-use PHPStan\Type\TypeWithClassName;
 use PHPStan\Type\VerbosityLevel;
 use rex_article;
 use rex_article_slice;
 use rex_category;
 use rex_media;
 use rex_user;
+
 use function count;
 use function in_array;
 
@@ -64,7 +63,7 @@ final class RexGetValueRule implements Rule
         $errors = [];
         $callerType = $scope->getType($methodCall->var);
         $classNames = $callerType->getObjectClassNames();
-        foreach($classNames as $className) {
+        foreach ($classNames as $className) {
             if (!in_array($className, $this->classes, true)) {
                 continue;
             }

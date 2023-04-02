@@ -12,7 +12,7 @@ use PHPStan\Type\DynamicStaticMethodReturnTypeExtension;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
 use rex;
-use rex_sql;
+
 use function count;
 use function in_array;
 

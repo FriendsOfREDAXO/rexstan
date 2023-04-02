@@ -9,13 +9,11 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Type\Constant\ConstantIntegerType;
-use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\DynamicStaticMethodReturnTypeExtension;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
-use rex;
 use rex_clang;
-use rex_sql;
+
 use function count;
 use function in_array;
 
@@ -50,7 +48,7 @@ final class RexClangDynamicReturnTypeExtension implements DynamicStaticMethodRet
 
             if ($type instanceof ConstantIntegerType) {
                 $clang = rex_clang::get($type->getValue());
-                if ($clang !== null) {
+                if (null !== $clang) {
                     return TypeCombinator::removeNull($defaultReturn);
                 }
             }

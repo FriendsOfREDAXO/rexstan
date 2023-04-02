@@ -9,9 +9,8 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use PHPStan\Type\Constant\ConstantStringType;
-use PHPStan\Type\VerbosityLevel;
 use staabm\PHPStanDba\QueryReflection\QueryReflection;
+
 use function count;
 use function in_array;
 
@@ -33,7 +32,7 @@ final class RexSqlSetTableRule implements Rule
     public function processNode(Node $methodCall, Scope $scope): array
     {
         $args = $methodCall->getArgs();
-        if (count($args) !== 1) {
+        if (1 !== count($args)) {
             return [];
         }
 
@@ -45,15 +44,15 @@ final class RexSqlSetTableRule implements Rule
             return [];
         }
 
-        if ($this->queryReflection === null) {
+        if (null === $this->queryReflection) {
             $this->queryReflection = new QueryReflection();
         }
         $schemaReflection = $this->queryReflection->getSchemaReflection();
 
         $tableNameType = $scope->getType($args[0]->value);
         $errors = [];
-        foreach($tableNameType->getConstantStrings() as $constantString) {
-            if ($schemaReflection->getTable($constantString->getValue()) === null) {
+        foreach ($tableNameType->getConstantStrings() as $constantString) {
+            if (null === $schemaReflection->getTable($constantString->getValue())) {
                 $errors[] = RuleErrorBuilder::message(
                     sprintf("Table '%s' does not exist.", $constantString->getValue())
                 )->build();

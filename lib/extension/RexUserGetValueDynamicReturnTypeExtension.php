@@ -10,6 +10,7 @@ use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\Type;
 use rex_user;
+
 use function count;
 use function in_array;
 

@@ -21,7 +21,7 @@ final class RexStanTip
         $faqUrl = rex_url::backendPage('rexstan/faq');
 
         foreach (self::FAQ_ANCHORS as $messagePattern => $anchor) {
-            if (preg_match($messagePattern, $message) === 1) {
+            if (1 === preg_match($messagePattern, $message)) {
                 return 'See: <a href="'. $faqUrl .'#'. $anchor .'">FAQ</a>';
             }
         }

@@ -2,13 +2,18 @@
 
 namespace rexstan;
 
-use PHPStan\ShouldNotHappenException;
 use rex_editor;
 use rex_fragment;
 use rex_path;
 
-final class RexResultsRenderer {
-    static public function getResultEmoji(int $level): string {
+use function array_key_exists;
+use function count;
+use function dirname;
+
+final class RexResultsRenderer
+{
+    public static function getResultEmoji(int $level): string
+    {
         $emoji = '';
         switch ($level) {
             case 0:
@@ -42,9 +47,11 @@ final class RexResultsRenderer {
                 $emoji = '🏆';
                 break;
         }
-        return $emoji;;
+        return $emoji;
     }
-    static public function getLevel9Jseffect(): string {
+
+    public static function getLevel9Jseffect(): string
+    {
         return
             '<script>
         var duration = 10 * 1000;
@@ -74,7 +81,7 @@ final class RexResultsRenderer {
     /**
      * @param list<array{message: string, line: int, tip?: string}>  $messages
      */
-    static public function renderFileBlock(string $file, array $messages): string
+    public static function renderFileBlock(string $file, array $messages): string
     {
         $basePath = rex_path::src('addons/');
 
@@ -98,7 +105,8 @@ final class RexResultsRenderer {
     /**
      * @param list<array{message: string, line: int, tip?: string}>  $messages
      */
-    static private function renderFileErrors(string $file, array $messages): string {
+    private static function renderFileErrors(string $file, array $messages): string
+    {
         $content = '<ul class="list-group">';
         foreach ($messages as $message) {
             $content .= '<li class="list-group-item rexstan-message">';
@@ -113,12 +121,12 @@ final class RexResultsRenderer {
                 $baselineFile = RexStanSettings::getAnalysisBaselinePath();
                 $url = rex_editor::factory()->getUrl($baselineFile, 0);
 
-                if ($url !== null) {
+                if (null !== $url) {
                     $error = '<a href="'. $url .'">Baseline:</a> '. rex_escape($message['message']);
                 }
             } else {
                 $url = rex_editor::factory()->getUrl($file, $message['line']);
-                if ($url !== null) {
+                if (null !== $url) {
                     $error = '<a href="'. $url .'">'. rex_escape($message['message']) .'</a>';
                 }
             }
@@ -141,8 +149,8 @@ final class RexResultsRenderer {
         return $content;
     }
 
-    static private function isUnmatchedBaselineError(string $message): bool {
-        return strpos($message, 'was not matched in reported errors.') !== false;
+    private static function isUnmatchedBaselineError(string $message): bool
+    {
+        return false !== strpos($message, 'was not matched in reported errors.');
     }
-
 }

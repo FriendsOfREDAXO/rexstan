@@ -13,7 +13,7 @@ if (isset($REX['PATH_PROVIDER'])) {
 
 require_once __DIR__ .'/lib/RexCmd.php';
 $cliPhpVersion = RexCmd::getCliPhpVersion();
-if ($cliPhpVersion !== null) {
+if (null !== $cliPhpVersion) {
     if ($cliPhpVersion < 70300) {
         if (DIRECTORY_SEPARATOR === '\\') {
             $cliPhpPath = RexCmd::execCmd('where php', $stderrOutput, $exitCode);
@@ -31,8 +31,7 @@ if ($cliPhpVersion !== null) {
 
 // code is called from update.php and the previous addon-version
 // might not yet have the method defined.
-if (method_exists(RexStanSettings::class, 'relativePath'))
-{
+if (method_exists(RexStanSettings::class, 'relativePath')) {
     $userConfigPath = $addon->getDataPath('user-config.neon');
     if (!is_file($userConfigPath)) {
         $paths = [];
@@ -68,7 +67,7 @@ if (method_exists(RexStanSettings::class, 'relativePath'))
 
 // make sure the binaries are executable
 $binaries = glob(__DIR__.'/vendor/bin/*', GLOB_NOSORT);
-if ($binaries !== false) {
+if (false !== $binaries) {
     foreach ($binaries as $binaryPath) {
         @chmod($binaryPath, 0775);
     }

@@ -16,6 +16,7 @@ use PHPStan\Type\Type;
 use rex_sql;
 use staabm\PHPStanDba\QueryReflection\QueryReflector;
 use staabm\PHPStanDba\UnresolvableQueryException;
+
 use function count;
 
 final class RexSqlSetQueryTypeSpecifyingExtension implements MethodTypeSpecifyingExtension, TypeSpecifierAwareExtension

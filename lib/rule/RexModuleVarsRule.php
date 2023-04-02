@@ -9,6 +9,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Node\CollectedDataNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+
 use function array_key_exists;
 
 /**
@@ -89,7 +90,6 @@ final class RexModuleVarsRule implements Rule
 
     /**
      * @param array<int, array{string, array<string, scalar>}>  $values
-     * @param string $varName
      * @return bool
      */
     private function arrayContainsVar(array $values, string $varName, int $id)

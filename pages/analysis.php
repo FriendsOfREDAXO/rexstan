@@ -4,7 +4,6 @@
 
 use rexstan\RexResultsRenderer;
 use rexstan\RexStan;
-use rexstan\RexStanTip;
 use rexstan\RexStanSettings;
 use rexstan\RexStanUserConfig;
 
@@ -24,9 +23,9 @@ if (is_string($phpstanResult)) {
                 $phpstanResult
             )
         );
-    } elseif (false !== stripos($phpstanResult, "polyfill-php8") && false !== stripos($phpstanResult, "does not exist")) {
+    } elseif (false !== stripos($phpstanResult, 'polyfill-php8') && false !== stripos($phpstanResult, 'does not exist')) {
         echo rex_view::warning(
-            "Der REDAXO Core wurde aktualisiert. Bitte das rexstan AddOn re-installieren. <br/><br/>".nl2br($phpstanResult)
+            'Der REDAXO Core wurde aktualisiert. Bitte das rexstan AddOn re-installieren. <br/><br/>'.nl2br($phpstanResult)
         );
     } else {
         echo rex_view::error(
@@ -91,7 +90,7 @@ if (
                 $url = \rex_editor::factory()->getUrl($baselineFile, 0);
 
                 $baselineHint = 'Baseline '. $baselineCount .' Probleme ignoriert werden';
-                if ($url !== null) {
+                if (null !== $url) {
                     $baselineHint = '<a href="'. $url .'">'. $baselineHint .'</a>';
                 }
 
@@ -114,11 +113,10 @@ if (
 
     foreach ($phpstanResult['files'] as $file => $fileResult) {
         $linkFile = preg_replace('/\s\(in context.*?$/', '', $file);
-        if ($linkFile === null) {
+        if (null === $linkFile) {
             throw new \PHPStan\ShouldNotHappenException();
         }
 
         echo RexResultsRenderer::renderFileBlock($linkFile, $fileResult['messages']);
     }
 }
-

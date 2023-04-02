@@ -6,12 +6,19 @@ use rex;
 use rex_addon;
 use rex_config;
 use rex_config_form;
-use rex_developer_manager;
+use rex_editor;
+use rex_file;
 use rex_path;
 use rex_version;
 
+use function dirname;
+
 final class RexStanSettings
 {
+    public const ANALYSIS_BASELINE_FILE = 'analysis-baseline.neon';
+
+    public const BASELINE_ENABLED = 1;
+    public const BASELINE_REPORT_UNMATCHED = 2;
     /**
      * @var array<string, string>
      */
@@ -58,11 +65,6 @@ final class RexStanSettings
         80203 => '8.2.x',
     ];
 
-    public const ANALYSIS_BASELINE_FILE = 'analysis-baseline.neon';
-
-    public const BASELINE_ENABLED = 1;
-    public const BASELINE_REPORT_UNMATCHED = 2;
-
     /**
      * @return rex_config_form
      */
@@ -84,12 +86,12 @@ final class RexStanSettings
 
             if ('developer' === $availableAddon->getName()) {
                 $modulesDir = DeveloperAddonIntegration::getModulesDir();
-                if ($modulesDir !== null) {
+                if (null !== $modulesDir) {
                     $scanTargets[self::relativePath($modulesDir)] = 'developer: modules';
                 }
 
                 $templatesDir = DeveloperAddonIntegration::getTemplatesDir();
-                if ($templatesDir !== null) {
+                if (null !== $templatesDir) {
                     $scanTargets[self::relativePath($templatesDir)] = 'developer: templates';
                 }
             }
@@ -112,11 +114,11 @@ final class RexStanSettings
             }
         }
 
-        $baselineFile = RexStanSettings::getAnalysisBaselinePath();
-        $url = \rex_editor::factory()->getUrl($baselineFile, 0);
+        $baselineFile = self::getAnalysisBaselinePath();
+        $url = rex_editor::factory()->getUrl($baselineFile, 0);
 
         $baselineButton = '';
-        if ($url !== null) {
+        if (null !== $url) {
             $baselineButton .= '<a href="'. $url .'">Baseline im Editor &ouml;ffnen</a> - ';
         }
 
@@ -155,18 +157,18 @@ final class RexStanSettings
         return $form;
     }
 
-    static public function getAnalysisBaselinePath(): string {
+    public static function getAnalysisBaselinePath(): string
+    {
         $addon = rex_addon::get('rexstan');
         $dataDir = $addon->getDataPath();
         $filePath = $dataDir .self::ANALYSIS_BASELINE_FILE;
 
         if (!is_file($filePath)) {
-            \rex_file::put($filePath, '');
+            rex_file::put($filePath, '');
         }
 
         return $filePath;
     }
-
 
     /**
      * @return string
@@ -194,10 +196,10 @@ final class RexStanSettings
         $output = '<table class="table table-striped table-hover">';
         $output .= '<tbody>';
 
-        $output .=  '<tr><td>Level</td><td>' . RexStanUserConfig::getLevel() . '</td></tr>';
-        $output .=  '<tr><td>AddOns</td><td>' . self::getAddOns() . '</td></tr>';
-        $output .=  '<tr><td>Extensions</td><td>' . self::getExtensions() . '</td></tr>';
-        $output .=  '<tr><td>PHP-Version</td><td>' . $phpVersion . '</td></tr>';
+        $output .= '<tr><td>Level</td><td>' . RexStanUserConfig::getLevel() . '</td></tr>';
+        $output .= '<tr><td>AddOns</td><td>' . self::getAddOns() . '</td></tr>';
+        $output .= '<tr><td>Extensions</td><td>' . self::getExtensions() . '</td></tr>';
+        $output .= '<tr><td>PHP-Version</td><td>' . $phpVersion . '</td></tr>';
 
         $output .= '</tbody>';
         $output .= '</table>';
@@ -222,8 +224,8 @@ final class RexStanSettings
                     $scanTargets[] = $availableAddon->getName();
                     break;
                 }
-                if (basename(dirname($scanpath)) === 'developer') {
-                    if (basename($scanpath) === 'modules' || basename($scanpath) === 'templates') {
+                if ('developer' === basename(dirname($scanpath))) {
+                    if ('modules' === basename($scanpath) || 'templates' === basename($scanpath)) {
                         $scanTargets[] = 'developer:' . basename($scanpath);
                         break;
                     }
@@ -258,10 +260,10 @@ final class RexStanSettings
 
         foreach (['addons', 'extensions'] as $key) {
             $config = rex_config::get('rexstan', $key);
-            if ($config === null) {
+            if (null === $config) {
                 continue;
             }
-            if (stripos($config, $absolutePath) === false) {
+            if (false === stripos($config, $absolutePath)) {
                 continue;
             }
 

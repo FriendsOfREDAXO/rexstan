@@ -8,6 +8,7 @@ use rex_dir;
 use rex_file;
 use RuntimeException;
 use staabm\PHPStanBaselineAnalysis\ResultPrinter;
+
 use function array_key_exists;
 use function dirname;
 
@@ -54,7 +55,8 @@ final class RexStan
     /**
      * @return void
      */
-    public static function generateAnalysisBaseline() {
+    public static function generateAnalysisBaseline()
+    {
         $phpstanBinary = self::phpstanBinPath();
         $configPath = self::phpstanConfigPath(__DIR__.'/../phpstan.neon');
         $analysisBaselinePath = RexStanSettings::getAnalysisBaselinePath();
@@ -141,7 +143,8 @@ final class RexStan
         RexCmd::execCmd($cmd, $stderrOutput, $exitCode);
     }
 
-    public static function getBaselineErrorsCount(): int {
+    public static function getBaselineErrorsCount(): int
+    {
         $file = RexStanSettings::getAnalysisBaselinePath();
         $f = fopen($file, 'r');
 
@@ -152,7 +155,7 @@ final class RexStan
         $baselined = 0;
         // read each line of the file without loading the whole file to memory
         while ($line = fgets($f)) {
-            if (strpos($line, 'message:') !== false) {
+            if (false !== strpos($line, 'message:')) {
                 ++$baselined;
             }
         }

@@ -11,12 +11,12 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\ShouldNotHappenException;
 use PHPStan\Type\TypeUtils;
-use PHPStan\Type\TypeWithClassName;
 use PHPStan\Type\VerbosityLevel;
 use rex_article;
 use rex_category;
 use rex_media;
 use rex_user;
+
 use function count;
 use function in_array;
 

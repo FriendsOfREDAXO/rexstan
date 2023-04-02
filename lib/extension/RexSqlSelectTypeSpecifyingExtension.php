@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace rexstan;
 
 use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Analyser\SpecifiedTypes;
 use PHPStan\Analyser\TypeSpecifier;
@@ -14,10 +13,9 @@ use PHPStan\Analyser\TypeSpecifierContext;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\MethodTypeSpecifyingExtension;
 use PHPStan\Type\Type;
-use PHPStan\Type\TypeCombinator;
 use rex_sql;
-use staabm\PHPStanDba\QueryReflection\QueryReflector;
 use staabm\PHPStanDba\UnresolvableQueryException;
+
 use function count;
 
 final class RexSqlSelectTypeSpecifyingExtension implements MethodTypeSpecifyingExtension, TypeSpecifierAwareExtension
@@ -72,7 +70,7 @@ final class RexSqlSelectTypeSpecifyingExtension implements MethodTypeSpecifyingE
         }
 
         $selectExprType = $scope->getType($args[0]->value);
-        if (count($selectExprType->getConstantStrings()) !== 1) {
+        if (1 !== count($selectExprType->getConstantStrings())) {
             return null;
         }
 

@@ -10,7 +10,8 @@ use PHPStan\Node\CollectedDataNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use rex_template;
-use rex_var_template;
+
+use function array_key_exists;
 
 /**
  * @implements Rule<CollectedDataNode>

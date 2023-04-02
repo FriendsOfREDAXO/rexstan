@@ -10,13 +10,13 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\ArrayType;
 use PHPStan\Type\Constant\ConstantIntegerType;
-use PHPStan\Type\ConstantScalarType;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\IntegerType;
 use PHPStan\Type\Type;
 use rex_sql;
 use staabm\PHPStanDba\QueryReflection\QueryReflector;
 use staabm\PHPStanDba\UnresolvableQueryException;
+
 use function count;
 use function in_array;
 
@@ -56,7 +56,7 @@ final class RexSqlGetArrayDynamicReturnTypeExtension implements DynamicMethodRet
         if (count($args) >= 3) {
             $scalars = $scope->getType($args[2]->value)->getConstantScalarTypes();
 
-            foreach($scalars as $fetchType) {
+            foreach ($scalars as $fetchType) {
                 if (PDO::FETCH_NUM === $fetchType->getValue()) {
                     $fetch = QueryReflector::FETCH_TYPE_NUMERIC;
                 }
