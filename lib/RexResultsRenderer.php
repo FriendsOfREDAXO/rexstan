@@ -103,7 +103,7 @@ final class RexResultsRenderer
     }
 
     /**
-     * @param list<array{message: string, line: int, tip?: string}>  $messages
+     * @param list<array{message: string, line: int, tip?: string, identifier?: string}>  $messages
      */
     private static function renderFileErrors(string $file, array $messages): string
     {
@@ -116,37 +116,47 @@ final class RexResultsRenderer
                 $content .= '<span class="rexstan-linenumber">' .sprintf('%5d', $message['line']).':</span>';
             }
 
-            $error = rex_escape($message['message']);
-            if (self::isUnmatchedBaselineError($message['message'])) {
-                $baselineFile = RexStanSettings::getAnalysisBaselinePath();
-                $url = rex_editor::factory()->getUrl($baselineFile, 0);
-
-                if ($url !== null) {
-                    $error = '<a href="'. $url .'">Baseline:</a> '. rex_escape($message['message']);
-                }
-            } else {
-                $url = rex_editor::factory()->getUrl($file, $message['line']);
-                if ($url !== null) {
-                    $error = '<a href="'. $url .'">'. rex_escape($message['message']) .'</a>';
-                }
-            }
-
-            $phpstanTip = null;
-            if (array_key_exists('tip', $message)) {
-                $phpstanTip = $message['tip'];
-            }
-
-            $rexstanTip = RexStanTip::renderTip($message['message'], $phpstanTip);
-            if ($rexstanTip !== null) {
-                $error .= '<br /><span class="rexstan-tip" title="Tipp">💡 '. $rexstanTip .'</span>';
-            }
-
-            $content .= $error;
+            $content .= self::renderErrorMessage($file, $message);
             $content .= '</li>';
         }
         $content .= '</ul>';
 
         return $content;
+    }
+
+    /**
+     * @param array{message: string, line: int, tip?: string, identifier?: string}  $message
+     */
+    private static function renderErrorMessage(string $file, array $message): string {
+        $error = rex_escape($message['message']);
+        if (self::isUnmatchedBaselineError($message['message'])) {
+            $baselineFile = RexStanSettings::getAnalysisBaselinePath();
+            $url = rex_editor::factory()->getUrl($baselineFile, 0);
+
+            if ($url !== null) {
+                $error = '<a href="'. $url .'">Baseline:</a> '. rex_escape($message['message']);
+            }
+        } else {
+            $url = rex_editor::factory()->getUrl($file, $message['line']);
+            if ($url !== null) {
+                $error = '<a href="'. $url .'">'. rex_escape($message['message']) .'</a>';
+            }
+        }
+
+        if (array_key_exists('identifier', $message)) {
+            $error .= '<br /><span title="error identifier"> 🏷️ '. rex_escape($message['identifier']) .'</span>';
+        }
+
+        $phpstanTip = null;
+        if (array_key_exists('tip', $message)) {
+            $phpstanTip = $message['tip'];
+        }
+
+        $rexstanTip = RexStanTip::renderTip($message['message'], $phpstanTip);
+        if ($rexstanTip !== null) {
+            $error .= '<br /><span class="rexstan-tip" title="Tipp">💡 '. $rexstanTip .'</span>';
+        }
+        return $error;
     }
 
     private static function isUnmatchedBaselineError(string $message): bool
