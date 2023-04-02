@@ -127,7 +127,8 @@ final class RexResultsRenderer
     /**
      * @param array{message: string, line: int, tip?: string, identifier?: string}  $message
      */
-    private static function renderErrorMessage(string $file, array $message): string {
+    private static function renderErrorMessage(string $file, array $message): string
+    {
         $error = rex_escape($message['message']);
         if (self::isUnmatchedBaselineError($message['message'])) {
             $baselineFile = RexStanSettings::getAnalysisBaselinePath();
@@ -161,6 +162,6 @@ final class RexResultsRenderer
 
     private static function isUnmatchedBaselineError(string $message): bool
     {
-        return strpos($message, 'was not matched in reported errors.') !== false;
+        return str_contains($message, 'was not matched in reported errors.');
     }
 }

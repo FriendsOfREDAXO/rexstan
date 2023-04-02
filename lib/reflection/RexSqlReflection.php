@@ -49,7 +49,7 @@ final class RexSqlReflection
             }
 
             // support table.field and db.table.field notation
-            if (strpos($valueNameType->getValue(), '.') !== false) {
+            if (str_contains($valueNameType->getValue(), '.')) {
                 $parts = explode('.', $valueNameType->getValue());
                 $lastKey = array_key_last($parts);
                 $fieldName = $parts[$lastKey];

@@ -155,7 +155,7 @@ final class RexStan
         $baselined = 0;
         // read each line of the file without loading the whole file to memory
         while ($line = fgets($f)) {
-            if (strpos($line, 'message:') !== false) {
+            if (str_contains($line, 'message:')) {
                 ++$baselined;
             }
         }

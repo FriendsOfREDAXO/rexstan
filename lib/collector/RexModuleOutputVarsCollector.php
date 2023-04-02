@@ -23,7 +23,7 @@ final class RexModuleOutputVarsCollector implements Collector
 
     public function processNode(Node $node, Scope $scope)
     {
-        if (strpos($scope->getFile(), self::FILE_SUFFIX) === false) {
+        if (!str_contains($scope->getFile(), self::FILE_SUFFIX)) {
             return null;
         }
 
