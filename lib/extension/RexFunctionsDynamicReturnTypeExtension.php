@@ -84,7 +84,7 @@ final class RexFunctionsDynamicReturnTypeExtension implements DynamicFunctionRet
             $results = [];
             foreach ($typeStrings as $typeString) {
                 $resolvedType = $this->resolveTypeFromString($typeString->getValue());
-                if (null === $resolvedType) {
+                if ($resolvedType === null) {
                     return null;
                 }
 
@@ -139,10 +139,10 @@ final class RexFunctionsDynamicReturnTypeExtension implements DynamicFunctionRet
             return new ArrayType(new MixedType(), new MixedType());
         }
 
-        if (1 === preg_match('/^array\[(.+)\]$/', $vartype, $match)) {
+        if (preg_match('/^array\[(.+)\]$/', $vartype, $match) === 1) {
             $valueType = $this->resolveTypeFromString($match[1]);
 
-            if (null === $valueType) {
+            if ($valueType === null) {
                 throw new ShouldNotHappenException();
             }
 

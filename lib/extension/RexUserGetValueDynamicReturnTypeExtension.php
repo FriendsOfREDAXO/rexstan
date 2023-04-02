@@ -32,7 +32,7 @@ final class RexUserGetValueDynamicReturnTypeExtension implements DynamicMethodRe
         Scope $scope
     ): ?Type {
         $args = $methodCall->getArgs();
-        if (1 < count($args)) {
+        if (count($args) > 1) {
             return null;
         }
 

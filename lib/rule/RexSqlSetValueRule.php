@@ -40,13 +40,13 @@ final class RexSqlSetValueRule implements Rule
             return [];
         }
 
-        if (null === RexSqlReflection::getSqlResultType($methodCall, $scope)) {
+        if (RexSqlReflection::getSqlResultType($methodCall, $scope) === null) {
             return [];
         }
 
         $offsetValueType = RexSqlReflection::getOffsetValueType($methodCall, $scope);
-        if (null !== $offsetValueType) {
-            if ('setarrayvalue' === strtolower($methodCall->name->toString()) && !$offsetValueType->accepts(new StringType(), false)->yes()) {
+        if ($offsetValueType !== null) {
+            if (strtolower($methodCall->name->toString()) === 'setarrayvalue' && !$offsetValueType->accepts(new StringType(), false)->yes()) {
                 return [
                     RuleErrorBuilder::message(
                         'setArrayValue() expects a database column which can store string values.'
@@ -60,7 +60,7 @@ final class RexSqlSetValueRule implements Rule
         $valueNameType = $scope->getType($args[0]->value);
         $strings = $valueNameType->getConstantStrings();
 
-        if (1 === count($strings)) {
+        if (count($strings) === 1) {
             return [
                 RuleErrorBuilder::message(
                     sprintf('Value %s does not exist in table selected via setTable().', $valueNameType->describe(VerbosityLevel::precise()))

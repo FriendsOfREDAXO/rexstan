@@ -16,12 +16,12 @@ final class RexTemplateVarsReflection
      */
     public static function matchVars(string $template): array
     {
-        if (false !== preg_match_all('{(?P<var>REX_TEMPLATE)\[(?P<args>[^\]]+)\]}', $template, $matches)) {
+        if (preg_match_all('{(?P<var>REX_TEMPLATE)\[(?P<args>[^\]]+)\]}', $template, $matches) !== false) {
             $result = [];
             for ($i = 0, $len = count($matches['var']); $i < $len; ++$i) {
                 $args = rex_string::split($matches['args'][$i]);
 
-                if (1 === count($args) && array_key_exists(0, $args)) {
+                if (count($args) === 1 && array_key_exists(0, $args)) {
                     $args = ['id' => $args[0]]; // default arg is "id"
                 }
 

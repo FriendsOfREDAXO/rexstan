@@ -26,7 +26,7 @@ final class YOrmDatasetGetValueDynamicReturnTypeExtension implements DynamicMeth
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
     {
-        return 'getvalue' === strtolower($methodReflection->getName());
+        return strtolower($methodReflection->getName()) === 'getvalue';
     }
 
     public function getTypeFromMethodCall(
@@ -35,7 +35,7 @@ final class YOrmDatasetGetValueDynamicReturnTypeExtension implements DynamicMeth
         Scope $scope
     ): ?Type {
         $args = $methodCall->getArgs();
-        if (1 < count($args)) {
+        if (count($args) > 1) {
             return null;
         }
 
@@ -45,7 +45,7 @@ final class YOrmDatasetGetValueDynamicReturnTypeExtension implements DynamicMeth
 
         $key = $scope->getType($args[0]->value);
         $constantStrings = $key->getConstantStrings();
-        if ([] === $constantStrings) {
+        if ($constantStrings === []) {
             return null;
         }
 
@@ -70,7 +70,7 @@ final class YOrmDatasetGetValueDynamicReturnTypeExtension implements DynamicMeth
                     $constantString->getValue(),
                 );
 
-                if (null === $resultType) {
+                if ($resultType === null) {
                     continue;
                 }
 
@@ -78,7 +78,7 @@ final class YOrmDatasetGetValueDynamicReturnTypeExtension implements DynamicMeth
             }
         }
 
-        if ([] === $results) {
+        if ($results === []) {
             return null;
         }
 

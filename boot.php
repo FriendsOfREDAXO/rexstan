@@ -16,7 +16,7 @@ if (rex::isBackend() && is_object(rex::getUser())) {
     });
 
     rex_view::addCssFile($addon->getAssetsUrl('rexstan.css'));
-    if ('rexstan' === rex_be_controller::getCurrentPagePart(1)) {
+    if (rex_be_controller::getCurrentPagePart(1) === 'rexstan') {
         rex_view::addJsFile($addon->getAssetsUrl('confetti.min.js'));
     }
 }

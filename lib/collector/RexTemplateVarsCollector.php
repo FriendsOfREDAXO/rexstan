@@ -23,7 +23,7 @@ final class RexTemplateVarsCollector implements Collector
 
     public function processNode(Node $node, Scope $scope)
     {
-        if (false === strpos($scope->getFile(), self::FILE_SUFFIX)) {
+        if (strpos($scope->getFile(), self::FILE_SUFFIX) === false) {
             return null;
         }
 

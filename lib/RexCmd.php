@@ -54,7 +54,7 @@ final class RexCmd
             proc_close($process);
         }
 
-        return false === $output ? '' : $output;
+        return $output === false ? '' : $output;
     }
 
     public static function phpExecutable(): string
@@ -99,7 +99,7 @@ final class RexCmd
     {
         $cliPhpVersion = self::execCmd(self::phpExecutable().' -r "echo phpversion();"', $stderrOutput, $exitCode);
 
-        if (0 === $exitCode) {
+        if ($exitCode === 0) {
             return $cliPhpVersion;
         }
 

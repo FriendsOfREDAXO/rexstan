@@ -37,12 +37,12 @@ final class RexLint
             rex_path::src('addons/'),
         ];
         $modulesDir = DeveloperAddonIntegration::getModulesDir();
-        if (null !== $modulesDir) {
+        if ($modulesDir !== null) {
             $pathToLint[] = $modulesDir;
         }
 
         $templatesDir = DeveloperAddonIntegration::getTemplatesDir();
-        if (null !== $templatesDir) {
+        if ($templatesDir !== null) {
             $pathToLint[] = $templatesDir;
         }
         return $pathToLint;
@@ -102,13 +102,13 @@ final class RexLint
 
     private static function linterBinPath(): string
     {
-        if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             $path = realpath(__DIR__.'/../vendor/bin/parallel-lint.bat');
         } else {
             $path = RexCmd::phpExecutable().' '.realpath(__DIR__.'/../vendor/bin/parallel-lint');
         }
 
-        if (false === $path) {
+        if ($path === false) {
             throw new RuntimeException('parallel-lint binary not found');
         }
 
@@ -155,7 +155,7 @@ final class RexLint
         $errors = [];
         if (!$validator->isValid()) {
             foreach ($validator->getErrors() as $error) {
-                if (false !== strpos($error['message'], 'Failed to match all schemas')) {
+                if (strpos($error['message'], 'Failed to match all schemas') !== false) {
                     continue;
                 }
 

@@ -19,7 +19,7 @@ final class YOrmDatasetPropertyClassReflectionExtension implements PropertiesCla
 {
     public function hasProperty(ClassReflection $classReflection, string $propertyName): bool
     {
-        return null !== $this->getPropertyType($classReflection, $propertyName);
+        return $this->getPropertyType($classReflection, $propertyName) !== null;
     }
 
     public function getProperty(
@@ -27,7 +27,7 @@ final class YOrmDatasetPropertyClassReflectionExtension implements PropertiesCla
         string $propertyName
     ): PropertyReflection {
         $propertyType = $this->getPropertyType($classReflection, $propertyName);
-        if (null === $propertyType) {
+        if ($propertyType === null) {
             throw new RuntimeException('expecting property type');
         }
 
@@ -138,7 +138,7 @@ final class YOrmDatasetPropertyClassReflectionExtension implements PropertiesCla
         );
 
         // treat non-existing properties as mixed, as this might be calculated or virtual field
-        if (null === $resultType) {
+        if ($resultType === null) {
             return new MixedType();
         }
 

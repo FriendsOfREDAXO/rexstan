@@ -55,7 +55,7 @@ final class RexStanUserConfig
         $includes = self::getPhpStanConfig()['includes'];
 
         foreach ($includes as $include) {
-            if (RexStanSettings::ANALYSIS_BASELINE_FILE === basename($include)) {
+            if (basename($include) === RexStanSettings::ANALYSIS_BASELINE_FILE) {
                 return true;
             }
         }
@@ -116,7 +116,7 @@ final class RexStanUserConfig
     {
         $neon = rex_file::get(self::getUserConfigPath());
 
-        if (null === $neon) {
+        if ($neon === null) {
             throw new RuntimeException('Unable to read userconfig');
         }
 

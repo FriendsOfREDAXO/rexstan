@@ -22,7 +22,7 @@ final class RexSqlGetValueDynamicReturnTypeExtension implements DynamicMethodRet
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
     {
-        return 'getvalue' === strtolower($methodReflection->getName());
+        return strtolower($methodReflection->getName()) === 'getvalue';
     }
 
     public function getTypeFromMethodCall(
@@ -31,12 +31,12 @@ final class RexSqlGetValueDynamicReturnTypeExtension implements DynamicMethodRet
         Scope $scope
     ): ?Type {
         $args = $methodCall->getArgs();
-        if (1 < count($args)) {
+        if (count($args) > 1) {
             return null;
         }
 
         $offsetValueType = RexSqlReflection::getOffsetValueType($methodCall, $scope);
-        if (null !== $offsetValueType) {
+        if ($offsetValueType !== null) {
             return $offsetValueType;
         }
 

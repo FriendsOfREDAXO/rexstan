@@ -33,11 +33,11 @@ final class RexClangDynamicReturnTypeExtension implements DynamicStaticMethodRet
     {
         $name = strtolower($methodReflection->getName());
 
-        if ('getstartid' === $name) {
+        if ($name === 'getstartid') {
             return new ConstantIntegerType(rex_clang::getStartId());
         }
 
-        if ('get' === $name) {
+        if ($name === 'get') {
             $args = $methodCall->getArgs();
             if (count($args) < 1) {
                 return null;
@@ -48,7 +48,7 @@ final class RexClangDynamicReturnTypeExtension implements DynamicStaticMethodRet
 
             if ($type instanceof ConstantIntegerType) {
                 $clang = rex_clang::get($type->getValue());
-                if (null !== $clang) {
+                if ($clang !== null) {
                     return TypeCombinator::removeNull($defaultReturn);
                 }
             }

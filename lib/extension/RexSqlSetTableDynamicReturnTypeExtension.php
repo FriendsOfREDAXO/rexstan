@@ -21,7 +21,7 @@ final class RexSqlSetTableDynamicReturnTypeExtension implements DynamicMethodRet
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
     {
-        return 'settable' === strtolower($methodReflection->getName());
+        return strtolower($methodReflection->getName()) === 'settable';
     }
 
     public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): ?Type

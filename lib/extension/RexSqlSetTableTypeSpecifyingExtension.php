@@ -32,7 +32,7 @@ final class RexSqlSetTableTypeSpecifyingExtension implements MethodTypeSpecifyin
 
     public function isMethodSupported(MethodReflection $methodReflection, MethodCall $node, TypeSpecifierContext $context): bool
     {
-        return 'settable' === strtolower($methodReflection->getName());
+        return strtolower($methodReflection->getName()) === 'settable';
     }
 
     public function setTypeSpecifier(TypeSpecifier $typeSpecifier): void
@@ -51,7 +51,7 @@ final class RexSqlSetTableTypeSpecifyingExtension implements MethodTypeSpecifyin
             return new SpecifiedTypes();
         }
 
-        if (null !== $inferedType) {
+        if ($inferedType !== null) {
             return $this->typeSpecifier->create($methodCall->var, $inferedType, TypeSpecifierContext::createTruthy(), true);
         }
 
@@ -65,12 +65,12 @@ final class RexSqlSetTableTypeSpecifyingExtension implements MethodTypeSpecifyin
     {
         $args = $methodCall->getArgs();
 
-        if (1 !== count($args)) {
+        if (count($args) !== 1) {
             return null;
         }
 
         $tableNameType = $scope->getType($args[0]->value);
-        if (1 !== count($tableNameType->getConstantStrings())) {
+        if (count($tableNameType->getConstantStrings()) !== 1) {
             return null;
         }
 

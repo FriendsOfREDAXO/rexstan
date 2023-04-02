@@ -16,12 +16,12 @@ final class RexModuleVarsReflection
      */
     public static function matchInputVars(string $input): array
     {
-        if (false !== preg_match_all('{(?P<var>REX_INPUT_VALUE|REX_VALUE|REX_LINK|REX_LINKLIST|REX_MEDIA|REX_MEDIALIST)\[(?P<args>[^\]]+)\]}', $input, $matches)) {
+        if (preg_match_all('{(?P<var>REX_INPUT_VALUE|REX_VALUE|REX_LINK|REX_LINKLIST|REX_MEDIA|REX_MEDIALIST)\[(?P<args>[^\]]+)\]}', $input, $matches) !== false) {
             $result = [];
             for ($i = 0, $len = count($matches['var']); $i < $len; ++$i) {
                 $args = rex_string::split($matches['args'][$i]);
 
-                if (1 === count($args) && array_key_exists(0, $args)) {
+                if (count($args) === 1 && array_key_exists(0, $args)) {
                     $args = ['id' => $args[0]]; // default arg is "id"
                 }
 
@@ -42,12 +42,12 @@ final class RexModuleVarsReflection
      */
     public static function matchOutputVars(string $output): array
     {
-        if (false !== preg_match_all('{(?P<var>REX_VALUE|REX_LINK|REX_LINKLIST|REX_MEDIA|REX_MEDIALIST)\[(?P<args>[^\]]+)\]}', $output, $matches)) {
+        if (preg_match_all('{(?P<var>REX_VALUE|REX_LINK|REX_LINKLIST|REX_MEDIA|REX_MEDIALIST)\[(?P<args>[^\]]+)\]}', $output, $matches) !== false) {
             $result = [];
             for ($i = 0, $len = count($matches['var']); $i < $len; ++$i) {
                 $args = rex_string::split($matches['args'][$i]);
 
-                if (1 === count($args) && array_key_exists(0, $args)) {
+                if (count($args) === 1 && array_key_exists(0, $args)) {
                     $args = ['id' => $args[0]]; // default arg is "id"
                 }
 

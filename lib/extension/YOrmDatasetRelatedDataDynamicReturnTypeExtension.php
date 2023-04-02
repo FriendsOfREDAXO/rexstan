@@ -44,7 +44,7 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
         Scope $scope
     ): ?Type {
         $args = $methodCall->getArgs();
-        if (1 < count($args)) {
+        if (count($args) > 1) {
             return null;
         }
         if (!class_exists(rex_yform_manager_dataset::class)) {
@@ -59,7 +59,7 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
 
         $key = $scope->getType($args[0]->value);
         $constantStrings = $key->getConstantStrings();
-        if ([] === $constantStrings) {
+        if ($constantStrings === []) {
             return null;
         }
 
@@ -82,22 +82,22 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
 
             foreach ($constantStrings as $constantString) {
                 $relation = $datasetObject->getTable()->getRelation($constantString->getValue());
-                if (null === $relation) {
+                if ($relation === null) {
                     // unknown relation
                     continue;
                 }
                 $modelClass = rex_yform_manager_dataset::getModelClass($relation['table']);
-                if (null === $modelClass) {
+                if ($modelClass === null) {
                     // not every table has a model class
                     continue;
                 }
 
                 $modelObjectType = new ObjectType($modelClass);
-                if ('getrelateddataset' === $method) {
+                if ($method === 'getrelateddataset') {
                     $results[] = TypeCombinator::addNull($modelObjectType);
-                } elseif ('getrelatedcollection' === $method) {
+                } elseif ($method === 'getrelatedcollection') {
                     $results[] = new GenericObjectType(rex_yform_manager_collection::class, [$modelObjectType]);
-                } elseif ('getrelatedquery' === $method) {
+                } elseif ($method === 'getrelatedquery') {
                     $results[] = new GenericObjectType(rex_yform_manager_query::class, [$modelObjectType]);
                 } else {
                     throw new RuntimeException('Unknown method: '.$method);
@@ -105,7 +105,7 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
             }
         }
 
-        if ([] === $results) {
+        if ($results === []) {
             return null;
         }
 

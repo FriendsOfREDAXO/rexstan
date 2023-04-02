@@ -38,12 +38,12 @@ final class RexSqlEscapeDynamicReturnTypeExtension implements DynamicMethodRetur
         Scope $scope
     ): ?Type {
         $args = $methodCall->getArgs();
-        if (0 === count($args)) {
+        if (count($args) === 0) {
             return null;
         }
 
         $name = strtolower($methodReflection->getName());
-        if ('escapeidentifier' === $name) {
+        if ($name === 'escapeidentifier') {
             $identifierNames = $scope->getType($args[0]->value)->getConstantStrings();
 
             $result = [];

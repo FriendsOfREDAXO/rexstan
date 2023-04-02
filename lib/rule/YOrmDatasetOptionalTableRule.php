@@ -76,7 +76,7 @@ final class YOrmDatasetOptionalTableRule implements Rule
         if ($classReflection->isSubclassOf(rex_yform_manager_dataset::class)) {
             $isSubclass = true;
         }
-        if (rex_yform_manager_dataset::class === $classReflection->getName()) {
+        if ($classReflection->getName() === rex_yform_manager_dataset::class) {
             $isMainClass = true;
         }
         if (!$isMainClass && !$isSubclass) {

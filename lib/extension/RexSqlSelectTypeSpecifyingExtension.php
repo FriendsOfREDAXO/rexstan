@@ -32,7 +32,7 @@ final class RexSqlSelectTypeSpecifyingExtension implements MethodTypeSpecifyingE
 
     public function isMethodSupported(MethodReflection $methodReflection, MethodCall $node, TypeSpecifierContext $context): bool
     {
-        return 'select' === strtolower($methodReflection->getName());
+        return strtolower($methodReflection->getName()) === 'select';
     }
 
     public function setTypeSpecifier(TypeSpecifier $typeSpecifier): void
@@ -51,7 +51,7 @@ final class RexSqlSelectTypeSpecifyingExtension implements MethodTypeSpecifyingE
             return new SpecifiedTypes();
         }
 
-        if (null !== $inferedType) {
+        if ($inferedType !== null) {
             return $this->typeSpecifier->create($methodCall->var, $inferedType, TypeSpecifierContext::createTruthy(), true);
         }
 
@@ -65,12 +65,12 @@ final class RexSqlSelectTypeSpecifyingExtension implements MethodTypeSpecifyingE
     {
         $args = $methodCall->getArgs();
 
-        if (1 !== count($args)) {
+        if (count($args) !== 1) {
             return null;
         }
 
         $selectExprType = $scope->getType($args[0]->value);
-        if (1 !== count($selectExprType->getConstantStrings())) {
+        if (count($selectExprType->getConstantStrings()) !== 1) {
             return null;
         }
 

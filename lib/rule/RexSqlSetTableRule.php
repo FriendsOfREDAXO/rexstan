@@ -32,7 +32,7 @@ final class RexSqlSetTableRule implements Rule
     public function processNode(Node $methodCall, Scope $scope): array
     {
         $args = $methodCall->getArgs();
-        if (1 !== count($args)) {
+        if (count($args) !== 1) {
             return [];
         }
 
@@ -44,7 +44,7 @@ final class RexSqlSetTableRule implements Rule
             return [];
         }
 
-        if (null === $this->queryReflection) {
+        if ($this->queryReflection === null) {
             $this->queryReflection = new QueryReflection();
         }
         $schemaReflection = $this->queryReflection->getSchemaReflection();
@@ -52,7 +52,7 @@ final class RexSqlSetTableRule implements Rule
         $tableNameType = $scope->getType($args[0]->value);
         $errors = [];
         foreach ($tableNameType->getConstantStrings() as $constantString) {
-            if (null === $schemaReflection->getTable($constantString->getValue())) {
+            if ($schemaReflection->getTable($constantString->getValue()) === null) {
                 $errors[] = RuleErrorBuilder::message(
                     sprintf("Table '%s' does not exist.", $constantString->getValue())
                 )->build();

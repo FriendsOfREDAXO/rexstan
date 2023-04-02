@@ -56,7 +56,7 @@ final class RexGetValueRule implements Rule
         }
 
         $methodReflection = $scope->getMethodReflection($scope->getType($methodCall->var), $methodCall->name->toString());
-        if (null === $methodReflection) {
+        if ($methodReflection === null) {
             return [];
         }
 
@@ -70,12 +70,12 @@ final class RexGetValueRule implements Rule
 
             $nameType = $scope->getType($args[0]->value);
             $names = $nameType->getConstantStrings();
-            if (0 === count($names)) {
+            if (count($names) === 0) {
                 return [];
             }
 
             $valueReflection = new RexGetValueReflection();
-            if (null !== $valueReflection->getValueType($nameType, $className)) {
+            if ($valueReflection->getValueType($nameType, $className) !== null) {
                 return [];
             }
 

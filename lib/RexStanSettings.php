@@ -84,14 +84,14 @@ final class RexStanSettings
         foreach (rex_addon::getAvailableAddons() as $availableAddon) {
             $scanTargets[self::relativePath($availableAddon->getPath())] = $availableAddon->getName();
 
-            if ('developer' === $availableAddon->getName()) {
+            if ($availableAddon->getName() === 'developer') {
                 $modulesDir = DeveloperAddonIntegration::getModulesDir();
-                if (null !== $modulesDir) {
+                if ($modulesDir !== null) {
                     $scanTargets[self::relativePath($modulesDir)] = 'developer: modules';
                 }
 
                 $templatesDir = DeveloperAddonIntegration::getTemplatesDir();
-                if (null !== $templatesDir) {
+                if ($templatesDir !== null) {
                     $scanTargets[self::relativePath($templatesDir)] = 'developer: templates';
                 }
             }
@@ -118,7 +118,7 @@ final class RexStanSettings
         $url = rex_editor::factory()->getUrl($baselineFile, 0);
 
         $baselineButton = '';
-        if (null !== $url) {
+        if ($url !== null) {
             $baselineButton .= '<a href="'. $url .'">Baseline im Editor &ouml;ffnen</a> - ';
         }
 
@@ -224,8 +224,8 @@ final class RexStanSettings
                     $scanTargets[] = $availableAddon->getName();
                     break;
                 }
-                if ('developer' === basename(dirname($scanpath))) {
-                    if ('modules' === basename($scanpath) || 'templates' === basename($scanpath)) {
+                if (basename(dirname($scanpath)) === 'developer') {
+                    if (basename($scanpath) === 'modules' || basename($scanpath) === 'templates') {
                         $scanTargets[] = 'developer:' . basename($scanpath);
                         break;
                     }
@@ -260,10 +260,10 @@ final class RexStanSettings
 
         foreach (['addons', 'extensions'] as $key) {
             $config = rex_config::get('rexstan', $key);
-            if (null === $config) {
+            if ($config === null) {
                 continue;
             }
-            if (false === stripos($config, $absolutePath)) {
+            if (stripos($config, $absolutePath) === false) {
                 continue;
             }
 

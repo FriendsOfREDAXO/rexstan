@@ -39,19 +39,19 @@ final class RexSqlGetValueRule implements Rule
             return [];
         }
 
-        if (null === RexSqlReflection::getSqlResultType($methodCall, $scope)) {
+        if (RexSqlReflection::getSqlResultType($methodCall, $scope) === null) {
             return [];
         }
 
         $offsetValueType = RexSqlReflection::getOffsetValueType($methodCall, $scope);
-        if (null !== $offsetValueType) {
+        if ($offsetValueType !== null) {
             return [];
         }
 
         $valueNameType = $scope->getType($args[0]->value);
         $strings = $valueNameType->getConstantStrings();
 
-        if (1 === count($strings)) {
+        if (count($strings) === 1) {
             return [
                 RuleErrorBuilder::message(
                     sprintf('Value %s was not selected in the used sql-query.', $valueNameType->describe(VerbosityLevel::precise()))

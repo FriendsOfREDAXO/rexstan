@@ -21,7 +21,7 @@ final class RexSqlSelectDynamicReturnTypeExtension implements DynamicMethodRetur
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
     {
-        return 'select' === strtolower($methodReflection->getName());
+        return strtolower($methodReflection->getName()) === 'select';
     }
 
     public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): ?Type

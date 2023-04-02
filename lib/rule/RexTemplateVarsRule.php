@@ -49,7 +49,7 @@ final class RexTemplateVarsRule implements Rule
                     $key = (string) $args['key'];
 
                     $template = rex_template::forKey($key);
-                    if (null === $template) {
+                    if ($template === null) {
                         $errors[] = RuleErrorBuilder::message(sprintf(
                             'Template "%s" includes invalid template by key "%s"',
                             str_replace(RexTemplateVarsCollector::FILE_SUFFIX, '', basename($templateFile)),

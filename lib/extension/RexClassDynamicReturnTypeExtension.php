@@ -37,7 +37,7 @@ final class RexClassDynamicReturnTypeExtension implements DynamicStaticMethodRet
             return null;
         }
 
-        if ('gettable' === $name) {
+        if ($name === 'gettable') {
             $tableNames = $scope->getType($args[0]->value)->getConstantStrings();
 
             $result = [];

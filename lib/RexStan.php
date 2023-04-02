@@ -39,12 +39,12 @@ final class RexStan
         $cmd = $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress';
         $output = RexCmd::execCmd($cmd, $stderrOutput, $exitCode);
 
-        if ('' !== $output && '{' === $output[0]) {
+        if ($output !== '' && $output[0] === '{') {
             // return the analysis result as an array
             return json_decode($output, true);
         }
 
-        if ('' == $output) {
+        if ($output == '') {
             return $stderrOutput;
         }
 
@@ -65,7 +65,7 @@ final class RexStan
         $dataDir = $addon->getDataPath();
 
         RexCmd::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline '. $analysisBaselinePath .' --allow-empty-baseline', $stderrOutput, $exitCode);
-        if (0 !== $exitCode) {
+        if ($exitCode !== 0) {
             throw new Exception('Unable to generate analysis baseline:'. $stderrOutput);
         }
     }
@@ -94,12 +94,12 @@ final class RexStan
         $htmlGraphPath = $dataDir.'baseline-graph.html';
 
         RexCmd::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline --allow-empty-baseline', $stderrOutput, $exitCode);
-        if (0 !== $exitCode) {
+        if ($exitCode !== 0) {
             throw new Exception('Unable to generate baseline:'. $stderrOutput);
         }
 
         $output = RexCmd::execCmd('cd '.$dataDir.' && '. $analyzeBinary .' *phpstan-baseline.neon --json', $stderrOutput, $exitCode);
-        if (0 !== $exitCode) {
+        if ($exitCode !== 0) {
             throw new Exception('Unable to analyze baseline: '.$stderrOutput);
         }
 
@@ -108,14 +108,14 @@ final class RexStan
             rex_file::put($summaryPath, $output);
 
             $htmlOutput = RexCmd::execCmd('cd '.$dataDir.' && '. $graphBinary ." '". $baselineGlob ."'", $stderrOutput, $exitCode);
-            if (0 !== $exitCode) {
+            if ($exitCode !== 0) {
                 throw new Exception('Unable to graph baseline: '.$stderrOutput);
             }
             rex_file::put($htmlGraphPath, $htmlOutput);
         }
 
         // returns a json array
-        if ('[' === $output[0]) {
+        if ($output[0] === '[') {
             // return the analysis result as an array
             $array = json_decode($output, true);
 
@@ -148,14 +148,14 @@ final class RexStan
         $file = RexStanSettings::getAnalysisBaselinePath();
         $f = fopen($file, 'r');
 
-        if (false === $f) {
+        if ($f === false) {
             throw new RuntimeException('Unable to open baseline file');
         }
 
         $baselined = 0;
         // read each line of the file without loading the whole file to memory
         while ($line = fgets($f)) {
-            if (false !== strpos($line, 'message:')) {
+            if (strpos($line, 'message:') !== false) {
                 ++$baselined;
             }
         }
@@ -166,13 +166,13 @@ final class RexStan
 
     private static function phpstanBinPath(): string
     {
-        if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             $path = realpath(__DIR__.'/../vendor/bin/phpstan.bat');
         } else {
             $path = RexCmd::phpExecutable().' '.realpath(__DIR__.'/../vendor/bin/phpstan');
         }
 
-        if (false === $path) {
+        if ($path === false) {
             throw new RuntimeException('phpstan binary not found');
         }
 
@@ -181,13 +181,13 @@ final class RexStan
 
     private static function phpstanBaselineAnalyzeBinPath(): string
     {
-        if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             $path = realpath(__DIR__.'/../vendor/bin/phpstan-baseline-analyze.bat');
         } else {
             $path = RexCmd::phpExecutable().' '.realpath(__DIR__.'/../vendor/bin/phpstan-baseline-analyze');
         }
 
-        if (false === $path) {
+        if ($path === false) {
             throw new RuntimeException('phpstan-baseline-analyze binary not found');
         }
 
@@ -196,13 +196,13 @@ final class RexStan
 
     private static function phpstanBaselineGraphBinPath(): string
     {
-        if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             $path = realpath(__DIR__.'/../vendor/bin/phpstan-baseline-graph.bat');
         } else {
             $path = RexCmd::phpExecutable().' '.realpath(__DIR__.'/../vendor/bin/phpstan-baseline-graph');
         }
 
-        if (false === $path) {
+        if ($path === false) {
             throw new RuntimeException('phpstan-baseline-graph binary not found');
         }
 
@@ -213,7 +213,7 @@ final class RexStan
     {
         $path = realpath($pathToFile);
 
-        if (false === $path) {
+        if ($path === false) {
             throw new RuntimeException(sprintf('phpstan config "%s" not found. This file is usually created while AddOn setup. Try re-install of rexstan.', $pathToFile));
         }
 

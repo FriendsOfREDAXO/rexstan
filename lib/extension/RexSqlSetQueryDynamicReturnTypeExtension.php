@@ -24,7 +24,7 @@ final class RexSqlSetQueryDynamicReturnTypeExtension implements DynamicMethodRet
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
     {
-        return 'setquery' === strtolower($methodReflection->getName());
+        return strtolower($methodReflection->getName()) === 'setquery';
     }
 
     public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): ?Type
@@ -43,11 +43,11 @@ final class RexSqlSetQueryDynamicReturnTypeExtension implements DynamicMethodRet
     {
         $args = $methodCall->getArgs();
 
-        if (0 === count($args)) {
+        if (count($args) === 0) {
             return null;
         }
 
-        if (1 === count($args)) {
+        if (count($args) === 1) {
             $queryExpr = $args[0]->value;
             $parameterTypes = null;
         } else {

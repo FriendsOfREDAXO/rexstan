@@ -17,13 +17,13 @@ $settingsUrl = rex_url::backendPage('rexstan/settings');
 
 if (is_string($phpstanResult)) {
     // we moved settings files into config/.
-    if (false !== stripos($phpstanResult, "neon' is missing or is not readable.")) {
+    if (stripos($phpstanResult, "neon' is missing or is not readable.") !== false) {
         echo rex_view::warning(
             "Das Einstellungsformat hat sich geändert. Bitte die <a href='".$settingsUrl."'>Einstellungen öffnen</a> und erneut abspeichern. <br/><br/>".nl2br(
                 $phpstanResult
             )
         );
-    } elseif (false !== stripos($phpstanResult, 'polyfill-php8') && false !== stripos($phpstanResult, 'does not exist')) {
+    } elseif (stripos($phpstanResult, 'polyfill-php8') !== false && stripos($phpstanResult, 'does not exist') !== false) {
         echo rex_view::warning(
             'Der REDAXO Core wurde aktualisiert. Bitte das rexstan AddOn re-installieren. <br/><br/>'.nl2br($phpstanResult)
         );
@@ -72,14 +72,14 @@ if (
         }
     }
 
-    if (0 === $totalErrors) {
+    if ($totalErrors === 0) {
         $level = RexStanUserConfig::getLevel();
         $emoji = RexResultsRenderer::getResultEmoji($level);
 
         echo '<span class="rexstan-achievement">'.$emoji .'</span>';
         echo rex_view::success('Gratulation, es wurden keine Fehler in Level '. $level .' gefunden.');
 
-        if (9 === $level) {
+        if ($level === 9) {
             echo RexResultsRenderer::getLevel9Jseffect();
         } else {
             echo '<p>';
@@ -90,7 +90,7 @@ if (
                 $url = \rex_editor::factory()->getUrl($baselineFile, 0);
 
                 $baselineHint = 'Baseline '. $baselineCount .' Probleme ignoriert werden';
-                if (null !== $url) {
+                if ($url !== null) {
                     $baselineHint = '<a href="'. $url .'">'. $baselineHint .'</a>';
                 }
 
@@ -113,7 +113,7 @@ if (
 
     foreach ($phpstanResult['files'] as $file => $fileResult) {
         $linkFile = preg_replace('/\s\(in context.*?$/', '', $file);
-        if (null === $linkFile) {
+        if ($linkFile === null) {
             throw new \PHPStan\ShouldNotHappenException();
         }
 

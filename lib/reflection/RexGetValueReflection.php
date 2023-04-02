@@ -27,7 +27,7 @@ final class RexGetValueReflection
         string $class
     ): ?Type {
         $names = $name->getConstantStrings();
-        if (0 === count($names)) {
+        if (count($names) === 0) {
             return null;
         }
 
@@ -56,7 +56,7 @@ final class RexGetValueReflection
         $queryReflection = new QueryReflection();
         $resultType = $queryReflection->getResultType($query, QueryReflector::FETCH_TYPE_ASSOC);
 
-        if (null === $resultType) {
+        if ($resultType === null) {
             return null;
         }
 
@@ -67,11 +67,11 @@ final class RexGetValueReflection
             }
         }
 
-        if (0 === count($valueTypes)) {
+        if (count($valueTypes) === 0) {
             return null;
         }
 
-        if (1 === count($valueTypes)) {
+        if (count($valueTypes) === 1) {
             return $valueTypes[0];
         }
 

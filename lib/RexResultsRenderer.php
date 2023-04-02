@@ -121,12 +121,12 @@ final class RexResultsRenderer
                 $baselineFile = RexStanSettings::getAnalysisBaselinePath();
                 $url = rex_editor::factory()->getUrl($baselineFile, 0);
 
-                if (null !== $url) {
+                if ($url !== null) {
                     $error = '<a href="'. $url .'">Baseline:</a> '. rex_escape($message['message']);
                 }
             } else {
                 $url = rex_editor::factory()->getUrl($file, $message['line']);
-                if (null !== $url) {
+                if ($url !== null) {
                     $error = '<a href="'. $url .'">'. rex_escape($message['message']) .'</a>';
                 }
             }
@@ -137,7 +137,7 @@ final class RexResultsRenderer
             }
 
             $rexstanTip = RexStanTip::renderTip($message['message'], $phpstanTip);
-            if (null !== $rexstanTip) {
+            if ($rexstanTip !== null) {
                 $error .= '<br /><span class="rexstan-tip" title="Tipp">💡 '. $rexstanTip .'</span>';
             }
 
@@ -151,6 +151,6 @@ final class RexResultsRenderer
 
     private static function isUnmatchedBaselineError(string $message): bool
     {
-        return false !== strpos($message, 'was not matched in reported errors.');
+        return strpos($message, 'was not matched in reported errors.') !== false;
     }
 }
