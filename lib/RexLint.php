@@ -6,6 +6,7 @@ use Exception;
 use JsonSchema\Constraints\Constraint;
 use PHPStan\ShouldNotHappenException;
 use rex;
+use rex_version;
 use rex_file;
 use rex_package;
 use rex_path;
