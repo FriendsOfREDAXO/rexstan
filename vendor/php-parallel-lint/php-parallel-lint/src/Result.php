@@ -1,11 +1,15 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
 
+namespace PHP_Parallel_Lint\PhpParallelLint;
+
+use JsonSerializable;
+use PHP_Parallel_Lint\PhpParallelLint\Errors\ParallelLintError;
+use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
 use ReturnTypeWillChange;
 
-class Result implements \JsonSerializable
+class Result implements JsonSerializable
 {
-    /** @var Error[] */
+    /** @var ParallelLintError[] */
     private $errors;
 
     /** @var array */
@@ -18,7 +22,7 @@ class Result implements \JsonSerializable
     private $testTime;
 
     /**
-     * @param Error[] $errors
+     * @param ParallelLintError[] $errors
      * @param array $checkedFiles
      * @param array $skippedFiles
      * @param float $testTime
@@ -32,7 +36,7 @@ class Result implements \JsonSerializable
     }
 
     /**
-     * @return Error[]
+     * @return ParallelLintError[]
      */
     public function getErrors()
     {
@@ -157,7 +161,7 @@ class Result implements \JsonSerializable
      * which is a value of any type other than a resource.
      */
     #[ReturnTypeWillChange]
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         return array(
             'checkedFiles' => $this->getCheckedFiles(),
@@ -166,6 +170,4 @@ class Result implements \JsonSerializable
             'errors' => $this->getErrors(),
         );
     }
-
-
 }

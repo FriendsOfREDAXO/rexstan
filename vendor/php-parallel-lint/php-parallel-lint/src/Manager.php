@@ -1,25 +1,42 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
 
-use JakubOnderka\PhpParallelLint\Contracts\SyntaxErrorCallback;
-use JakubOnderka\PhpParallelLint\Process\GitBlameProcess;
-use JakubOnderka\PhpParallelLint\Process\PhpExecutable;
-use ReturnTypeWillChange;
+namespace PHP_Parallel_Lint\PhpParallelLint;
+
+use FilesystemIterator;
+use PHP_Parallel_Lint\PhpParallelLint\Contracts\SyntaxErrorCallback;
+use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\CallbackNotImplementedException;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\ClassNotFoundException;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\ParallelLintException;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\PathNotFoundException;
+use PHP_Parallel_Lint\PhpParallelLint\Iterators\FilteredRecursiveDirectoryIterator;
+use PHP_Parallel_Lint\PhpParallelLint\Iterators\RecursiveDirectoryFilterIterator;
+use PHP_Parallel_Lint\PhpParallelLint\Outputs\CheckstyleOutput;
+use PHP_Parallel_Lint\PhpParallelLint\Outputs\GitLabOutput;
+use PHP_Parallel_Lint\PhpParallelLint\Outputs\JsonOutput;
+use PHP_Parallel_Lint\PhpParallelLint\Outputs\OutputInterface;
+use PHP_Parallel_Lint\PhpParallelLint\Outputs\TextOutput;
+use PHP_Parallel_Lint\PhpParallelLint\Outputs\TextOutputColored;
+use PHP_Parallel_Lint\PhpParallelLint\Process\GitBlameProcess;
+use PHP_Parallel_Lint\PhpParallelLint\Process\PhpExecutable;
+use PHP_Parallel_Lint\PhpParallelLint\Writers\ConsoleWriter;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use RegexIterator;
 
 class Manager
 {
-    /** @var Output */
+    /** @var OutputInterface */
     protected $output;
 
     /**
      * @param null|Settings $settings
      * @return Result
-     * @throws Exception
-     * @throws \Exception
+     * @throws ParallelLintException
      */
     public function run(Settings $settings = null)
     {
-        $settings = $settings ?: new Settings;
+        $settings = $settings ?: new Settings();
         $output = $this->output ?: $this->getDefaultOutput($settings);
 
         $phpExecutable = PhpExecutable::getPhpExecutable($settings->phpExecutable);
@@ -31,7 +48,7 @@ class Manager
         $files = $this->getFilesFromPaths($settings->paths, $settings->extensions, $settings->excluded);
 
         if (empty($files)) {
-            throw new Exception('No file found to check.');
+            throw new ParallelLintException('No file found to check.');
         }
 
         $output->setTotalFileCount(count($files));
@@ -45,9 +62,9 @@ class Manager
         $parallelLint->setProcessCallback(function ($status, $file) use ($output) {
             if ($status === ParallelLint::STATUS_OK) {
                 $output->ok();
-            } else if ($status === ParallelLint::STATUS_SKIP) {
+            } elseif ($status === ParallelLint::STATUS_SKIP) {
                 $output->skip();
-            } else if ($status === ParallelLint::STATUS_ERROR) {
+            } elseif ($status === ParallelLint::STATUS_ERROR) {
                 $output->error();
             } else {
                 $output->fail();
@@ -66,20 +83,20 @@ class Manager
     }
 
     /**
-     * @param Output $output
+     * @param OutputInterface $output
      */
-    public function setOutput(Output $output)
+    public function setOutput(OutputInterface $output)
     {
         $this->output = $output;
     }
 
     /**
      * @param Settings $settings
-     * @return Output
+     * @return OutputInterface
      */
     protected function getDefaultOutput(Settings $settings)
     {
-        $writer = new ConsoleWriter;
+        $writer = new ConsoleWriter();
         switch ($settings->format) {
             case Settings::FORMAT_JSON:
                 return new JsonOutput($writer);
@@ -103,7 +120,7 @@ class Manager
     /**
      * @param Result $result
      * @param Settings $settings
-     * @throws Exception
+     * @throws ParallelLintException
      */
     protected function gitBlame(Result $result, Settings $settings)
     {
@@ -117,7 +134,7 @@ class Manager
                 $process->waitForFinish();
 
                 if ($process->isSuccess()) {
-                    $blame = new Blame;
+                    $blame = new Blame();
                     $blame->name = $process->getAuthor();
                     $blame->email = $process->getAuthorEmail();
                     $blame->datetime = $process->getAuthorTime();
@@ -135,7 +152,7 @@ class Manager
      * @param array $extensions
      * @param array $excluded
      * @return array
-     * @throws NotExistsPathException
+     * @throws PathNotFoundException
      */
     protected function getFilesFromPaths(array $paths, array $extensions, array $excluded = array())
     {
@@ -146,25 +163,25 @@ class Manager
         foreach ($paths as $path) {
             if (is_file($path)) {
                 $files[] = $path;
-            } else if (is_dir($path)) {
-                $iterator = new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS);
+            } elseif (is_dir($path)) {
+                $iterator = new FilteredRecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS, $excluded);
                 if (!empty($excluded)) {
                     $iterator = new RecursiveDirectoryFilterIterator($iterator, $excluded);
                 }
-                $iterator = new \RecursiveIteratorIterator(
+                $iterator = new RecursiveIteratorIterator(
                     $iterator,
-                    \RecursiveIteratorIterator::LEAVES_ONLY,
-                    \RecursiveIteratorIterator::CATCH_GET_CHILD
+                    RecursiveIteratorIterator::LEAVES_ONLY,
+                    RecursiveIteratorIterator::CATCH_GET_CHILD
                 );
 
-                $iterator = new \RegexIterator($iterator, $regex);
+                $iterator = new RegexIterator($iterator, $regex);
 
                 /** @var \SplFileInfo[] $iterator */
                 foreach ($iterator as $directoryFile) {
                     $files[] = (string) $directoryFile;
                 }
             } else {
-                throw new NotExistsPathException($path);
+                throw new PathNotFoundException($path);
             }
         }
 
@@ -181,113 +198,22 @@ class Manager
 
         $fullFilePath = realpath($settings->syntaxErrorCallbackFile);
         if ($fullFilePath === false) {
-            throw new NotExistsPathException($settings->syntaxErrorCallbackFile);
+            throw new PathNotFoundException($settings->syntaxErrorCallbackFile);
         }
 
         require_once $fullFilePath;
 
         $expectedClassName = basename($fullFilePath, '.php');
         if (!class_exists($expectedClassName)) {
-            throw new NotExistsClassException($expectedClassName, $settings->syntaxErrorCallbackFile);
+            throw new ClassNotFoundException($expectedClassName, $settings->syntaxErrorCallbackFile);
         }
 
-        $callbackInstance = new $expectedClassName;
+        $callbackInstance = new $expectedClassName();
 
         if (!($callbackInstance instanceof SyntaxErrorCallback)) {
-            throw new NotImplementCallbackException($expectedClassName);
+            throw new CallbackNotImplementedException($expectedClassName);
         }
 
         return $callbackInstance;
-    }
-}
-
-class RecursiveDirectoryFilterIterator extends \RecursiveFilterIterator
-{
-    /** @var \RecursiveDirectoryIterator */
-    private $iterator;
-
-    /** @var array */
-    private $excluded = array();
-
-    /**
-     * @param \RecursiveDirectoryIterator $iterator
-     * @param array $excluded
-     */
-    public function __construct(\RecursiveDirectoryIterator $iterator, array $excluded)
-    {
-        parent::__construct($iterator);
-        $this->iterator = $iterator;
-        $this->excluded = array_map(array($this, 'getPathname'), $excluded);
-    }
-
-    /**
-     * (PHP 5 &gt;= 5.1.0)<br/>
-     * Check whether the current element of the iterator is acceptable
-     *
-     * @link http://php.net/manual/en/filteriterator.accept.php
-     * @return bool true if the current element is acceptable, otherwise false.
-     */
-    #[ReturnTypeWillChange]
-    public function accept()
-    {
-        $current = $this->current()->getPathname();
-        $current = $this->normalizeDirectorySeparator($current);
-
-        if ('.' . DIRECTORY_SEPARATOR !== $current[0] . $current[1]) {
-            $current = '.' . DIRECTORY_SEPARATOR . $current;
-        }
-
-        return !in_array($current, $this->excluded);
-    }
-
-    /**
-     * (PHP 5 &gt;= 5.1.0)<br/>
-     * Check whether the inner iterator's current element has children
-     *
-     * @link http://php.net/manual/en/recursivefilteriterator.haschildren.php
-     * @return bool true if the inner iterator has children, otherwise false
-     */
-    #[ReturnTypeWillChange]
-    public function hasChildren()
-    {
-        return $this->iterator->hasChildren();
-    }
-
-    /**
-     * (PHP 5 &gt;= 5.1.0)<br/>
-     * Return the inner iterator's children contained in a RecursiveFilterIterator
-     *
-     * @link http://php.net/manual/en/recursivefilteriterator.getchildren.php
-     * @return \RecursiveFilterIterator containing the inner iterator's children.
-     */
-    #[ReturnTypeWillChange]
-    public function getChildren()
-    {
-        return new self($this->iterator->getChildren(), $this->excluded);
-    }
-
-    /**
-     * @param string $file
-     * @return string
-     */
-    private function getPathname($file)
-    {
-        $file = $this->normalizeDirectorySeparator($file);
-
-        if ('.' . DIRECTORY_SEPARATOR !== $file[0] . $file[1]) {
-            $file = '.' . DIRECTORY_SEPARATOR . $file;
-        }
-
-        $directoryFile = new \SplFileInfo($file);
-        return $directoryFile->getPathname();
-    }
-
-    /**
-     * @param string $file
-     * @return string
-     */
-    private function normalizeDirectorySeparator($file)
-    {
-        return str_replace(array('\\', '/'), DIRECTORY_SEPARATOR, $file);
     }
 }

@@ -1,10 +1,13 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
+
+namespace PHP_Parallel_Lint\PhpParallelLint;
 
 use JakubOnderka\PhpConsoleColor\ConsoleColor as OldConsoleColor;
 use JakubOnderka\PhpConsoleHighlighter\Highlighter as OldHighlighter;
 use PHP_Parallel_Lint\PhpConsoleColor\ConsoleColor;
 use PHP_Parallel_Lint\PhpConsoleHighlighter\Highlighter;
+use PHP_Parallel_Lint\PhpParallelLint\Errors\ParallelLintError;
+use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
 
 class ErrorFormatter
 {
@@ -25,10 +28,10 @@ class ErrorFormatter
     }
 
     /**
-     * @param Error $error
+     * @param ParallelLintError $error
      * @return string
      */
-    public function format(Error $error)
+    public function format(ParallelLintError $error)
     {
         if ($error instanceof SyntaxError) {
             return $this->formatSyntaxErrorMessage($error);
@@ -60,6 +63,7 @@ class ErrorFormatter
                 } else {
                     $string .= $this->getCodeSnippet($error->getFilePath(), $onLine);
                 }
+                $string = rtrim($string) . PHP_EOL;
             }
         }
 
@@ -120,7 +124,7 @@ class ErrorFormatter
             $colors = new ConsoleColor();
             $colors->setForceStyle($this->forceColors);
             $highlighter = new Highlighter($colors);
-        } else if (
+        } elseif (
             class_exists('\JakubOnderka\PhpConsoleHighlighter\Highlighter')
             && class_exists('\JakubOnderka\PhpConsoleColor\ConsoleColor')
         ) {

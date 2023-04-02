@@ -1,112 +1,13 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
 
-use ReturnTypeWillChange;
+namespace PHP_Parallel_Lint\PhpParallelLint\Errors;
 
-class Error implements \JsonSerializable
+use PHP_Parallel_Lint\PhpParallelLint\Blame;
+
+class SyntaxError extends ParallelLintError
 {
-    /** @var string */
-    protected $filePath;
+    const IN_ON_REGEX = '~ in %s on line [0-9]+$~';
 
-    /** @var string */
-    protected $message;
-
-    /**
-     * @param string $filePath
-     * @param string $message
-     */
-    public function __construct($filePath, $message)
-    {
-        $this->filePath = $filePath;
-        $this->message = rtrim($message);
-    }
-
-    /**
-     * @return string
-     */
-    public function getMessage()
-    {
-        return $this->message;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFilePath()
-    {
-        return $this->filePath;
-    }
-
-    /**
-     * @return string
-     */
-    public function getShortFilePath()
-    {
-        $cwd = getcwd();
-
-        if ($cwd === '/') {
-            // For root directory in unix, do not modify path
-            return $this->filePath;
-        }
-
-        return preg_replace('/' . preg_quote($cwd, '/') . '/', '', $this->filePath, 1);
-    }
-
-    /**
-     * (PHP 5 &gt;= 5.4.0)<br/>
-     * Specify data which should be serialized to JSON
-     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
-     * @return mixed data which can be serialized by <b>json_encode</b>,
-     * which is a value of any type other than a resource.
-     */
-    #[ReturnTypeWillChange]
-    public function jsonSerialize()
-    {
-        return array(
-            'type' => 'error',
-            'file' => $this->getFilePath(),
-            'message' => $this->getMessage(),
-        );
-    }
-}
-
-class Blame implements \JsonSerializable
-{
-    public $name;
-
-    public $email;
-
-    /** @var \DateTime */
-    public $datetime;
-
-    public $commitHash;
-
-    public $summary;
-
-    /**
-     * (PHP 5 &gt;= 5.4.0)<br/>
-     * Specify data which should be serialized to JSON
-     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
-     * @return mixed data which can be serialized by <b>json_encode</b>,
-     * which is a value of any type other than a resource.
-     */
-    #[ReturnTypeWillChange]
-    function jsonSerialize()
-    {
-        return array(
-            'name' => $this->name,
-            'email' => $this->email,
-            'datetime' => $this->datetime,
-            'commitHash' => $this->commitHash,
-            'summary' => $this->summary,
-        );
-    }
-
-
-}
-
-class SyntaxError extends Error
-{
     /** @var Blame */
     private $blame;
 
@@ -117,9 +18,8 @@ class SyntaxError extends Error
     {
         preg_match('~on line ([0-9]+)$~', $this->message, $matches);
 
-        if ($matches && isset($matches[1])) {
-            $onLine = (int) $matches[1];
-            return $onLine;
+        if (isset($matches[1])) {
+            return (int) $matches[1];
         }
 
         return null;
@@ -131,8 +31,22 @@ class SyntaxError extends Error
      */
     public function getNormalizedMessage($translateTokens = false)
     {
-        $message = preg_replace('~^(Parse|Fatal) error: (syntax error, )?~', '', $this->message);
-        $message = preg_replace('~ in ' . preg_quote(basename($this->filePath)) . ' on line [0-9]+$~', '', $message);
+        $message  = preg_replace('~^(?:Parse|Fatal) error: (?:syntax error, )?~', '', $this->message);
+        $baseName = basename($this->filePath);
+        $regex    = sprintf(self::IN_ON_REGEX, preg_quote($baseName, '~'));
+        $message  = preg_replace($regex, '', $message, -1, $count);
+
+        if ($count === 0 && strpos($baseName, '\\') !== false) {
+            $baseName = ltrim(strrchr($this->filePath, '\\'), '\\');
+            $regex    = sprintf(self::IN_ON_REGEX, preg_quote($baseName, '~'));
+            $message  = preg_replace($regex, '', $message, -1, $count);
+        }
+
+        if ($count === 0) {
+            $regex   = sprintf(self::IN_ON_REGEX, preg_quote($this->filePath, '~'));
+            $message = preg_replace($regex, '', $message);
+        }
+
         $message = ucfirst($message);
 
         if ($translateTokens) {
@@ -194,7 +108,7 @@ class SyntaxError extends Error
             'T_ECHO' => 'echo'
         );
 
-        return preg_replace_callback('~T_([A-Z_]*)~', function ($matches) use ($translateTokens) {
+        return preg_replace_callback('~(?<!\()T_([A-Z_]*)(?!\))~', function ($matches) use ($translateTokens) {
             list($tokenName) = $matches;
             if (isset($translateTokens[$tokenName])) {
                 $operator = $translateTokens[$tokenName];

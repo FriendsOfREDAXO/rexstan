@@ -1,10 +1,14 @@
 <?php
-namespace JakubOnderka\PhpParallelLint;
 
-use JakubOnderka\PhpParallelLint\Contracts\SyntaxErrorCallback;
-use JakubOnderka\PhpParallelLint\Process\LintProcess;
-use JakubOnderka\PhpParallelLint\Process\PhpExecutable;
-use JakubOnderka\PhpParallelLint\Process\SkipLintProcess;
+namespace PHP_Parallel_Lint\PhpParallelLint;
+
+use Exception;
+use PHP_Parallel_Lint\PhpParallelLint\Contracts\SyntaxErrorCallback;
+use PHP_Parallel_Lint\PhpParallelLint\Errors\ParallelLintError;
+use PHP_Parallel_Lint\PhpParallelLint\Errors\SyntaxError;
+use PHP_Parallel_Lint\PhpParallelLint\Process\LintProcess;
+use PHP_Parallel_Lint\PhpParallelLint\Process\PhpExecutable;
+use PHP_Parallel_Lint\PhpParallelLint\Process\SkipLintProcess;
 
 class ParallelLint
 {
@@ -43,7 +47,7 @@ class ParallelLint
     /**
      * @param array $files
      * @return Result
-     * @throws \Exception
+     * @throws Exception
      */
     public function lint(array $files)
     {
@@ -54,12 +58,13 @@ class ParallelLint
         $processCallback = is_callable($this->processCallback) ? $this->processCallback : function () {
         };
 
+        $errors = $running = $waiting = array();
+        $skippedFiles = $checkedFiles = array();
+
         /**
          * @var LintProcess[] $running
          * @var LintProcess[] $waiting
          */
-        $errors = $running = $waiting = array();
-        $skippedFiles = $checkedFiles = array();
 
         while ($files || $running) {
             for ($i = count($running); $files && $i < $this->parallelJobs; $i++) {
@@ -90,22 +95,21 @@ class ParallelLint
                     if ($skipStatus === null) {
                         $waiting[$file] = $process;
 
-                    } else if ($skipStatus === true) {
+                    } elseif ($skipStatus === true) {
                         $skippedFiles[] = $file;
                         $processCallback(self::STATUS_SKIP, $file);
 
-                    } else if ($process->containsError()) {
+                    } elseif ($process->containsError()) {
                         $checkedFiles[] = $file;
                         $errors[] = $this->triggerSyntaxErrorCallback(new SyntaxError($file, $process->getSyntaxError()));
                         $processCallback(self::STATUS_ERROR, $file);
 
-                    } else if ($process->isSuccess()) {
+                    } elseif ($process->isSuccess()) {
                         $checkedFiles[] = $file;
                         $processCallback(self::STATUS_OK, $file);
 
-
                     } else {
-                        $errors[] = new Error($file, $process->getOutput());
+                        $errors[] = new ParallelLintError($file, $process->getOutput());
                         $processCallback(self::STATUS_FAIL, $file);
                     }
                 }
@@ -117,29 +121,29 @@ class ParallelLint
 
             if ($skipLintProcess->isFail()) {
                 $message = "Error in skip-linting.php process\nError output: {$skipLintProcess->getErrorOutput()}";
-                throw new \Exception($message);
+                throw new Exception($message);
             }
 
             foreach ($waiting as $file => $process) {
                 $skipStatus = $skipLintProcess->isSkipped($file);
                 if ($skipStatus === null) {
-                    throw new \Exception("File $file has empty skip status. Please contact the author of PHP Parallel Lint.");
+                    throw new Exception("File $file has empty skip status. Please contact the author of PHP Parallel Lint.");
 
-                } else if ($skipStatus === true) {
+                } elseif ($skipStatus === true) {
                     $skippedFiles[] = $file;
                     $processCallback(self::STATUS_SKIP, $file);
 
-                } else if ($process->isSuccess()) {
+                } elseif ($process->isSuccess()) {
                     $checkedFiles[] = $file;
                     $processCallback(self::STATUS_OK, $file);
 
-                } else if ($process->containsError()) {
+                } elseif ($process->containsError()) {
                     $checkedFiles[] = $file;
                     $errors[] = $this->triggerSyntaxErrorCallback(new SyntaxError($file, $process->getSyntaxError()));
                     $processCallback(self::STATUS_ERROR, $file);
 
                 } else {
-                    $errors[] = new Error($file, $process->getOutput());
+                    $errors[] = new ParallelLintError($file, $process->getOutput());
                     $processCallback(self::STATUS_FAIL, $file);
                 }
             }
@@ -254,7 +258,7 @@ class ParallelLint
     }
 
     /**
-     * @param $showDeprecated
+     * @param bool $showDeprecated
      * @return ParallelLint
      */
     public function setShowDeprecated($showDeprecated)

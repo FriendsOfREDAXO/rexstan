@@ -1,7 +1,11 @@
 <?php
-namespace JakubOnderka\PhpParallelLint\Process;
 
-use JakubOnderka\PhpParallelLint\RunTimeException;
+namespace PHP_Parallel_Lint\PhpParallelLint\Process;
+
+use DateInterval;
+use DateTime;
+use DateTimeZone;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\RuntimeException;
 
 class GitBlameProcess extends Process
 {
@@ -9,7 +13,7 @@ class GitBlameProcess extends Process
      * @param string $gitExecutable
      * @param string $file
      * @param int $line
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function __construct($gitExecutable, $file, $line)
     {
@@ -19,7 +23,7 @@ class GitBlameProcess extends Process
 
     /**
      * @return bool
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function isSuccess()
     {
@@ -28,12 +32,12 @@ class GitBlameProcess extends Process
 
     /**
      * @return string
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function getAuthor()
     {
         if (!$this->isSuccess()) {
-            throw new RunTimeException("Author can only be retrieved for successful process output.");
+            throw new RuntimeException("Author can only be retrieved for successful process output.");
         }
 
         $output = $this->getOutput();
@@ -43,12 +47,12 @@ class GitBlameProcess extends Process
 
     /**
      * @return string
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function getAuthorEmail()
     {
         if (!$this->isSuccess()) {
-            throw new RunTimeException("Author e-mail can only be retrieved for successful process output.");
+            throw new RuntimeException("Author e-mail can only be retrieved for successful process output.");
         }
 
         $output = $this->getOutput();
@@ -57,13 +61,13 @@ class GitBlameProcess extends Process
     }
 
     /**
-     * @return \DateTime
-     * @throws RunTimeException
+     * @return DateTime
+     * @throws RuntimeException
      */
     public function getAuthorTime()
     {
         if (!$this->isSuccess()) {
-            throw new RunTimeException("Author time can only be retrieved for successful process output.");
+            throw new RuntimeException("Author time can only be retrieved for successful process output.");
         }
 
         $output = $this->getOutput();
@@ -79,12 +83,12 @@ class GitBlameProcess extends Process
 
     /**
      * @return string
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function getCommitHash()
     {
         if (!$this->isSuccess()) {
-            throw new RunTimeException("Commit hash can only be retrieved for successful process output.");
+            throw new RuntimeException("Commit hash can only be retrieved for successful process output.");
         }
 
         return substr($this->getOutput(), 0, strpos($this->getOutput(), ' '));
@@ -92,12 +96,12 @@ class GitBlameProcess extends Process
 
     /**
      * @return string
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function getSummary()
     {
         if (!$this->isSuccess()) {
-            throw new RunTimeException("Commit summary can only be retrieved for successful process output.");
+            throw new RuntimeException("Commit summary can only be retrieved for successful process output.");
         }
 
         $output = $this->getOutput();
@@ -108,7 +112,7 @@ class GitBlameProcess extends Process
     /**
      * @param string $gitExecutable
      * @return bool
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public static function gitExists($gitExecutable)
     {
@@ -122,19 +126,19 @@ class GitBlameProcess extends Process
      *
      * @param int $time
      * @param string $zone
-     * @return \DateTime
+     * @return DateTime
      * @throws \Exception
      */
     protected function getDateTime($time, $zone)
     {
-        $utcTimeZone = new \DateTimeZone('UTC');
-        $datetime = \DateTime::createFromFormat('U', $time, $utcTimeZone);
+        $utcTimeZone = new DateTimeZone('UTC');
+        $datetime = DateTime::createFromFormat('U', $time, $utcTimeZone);
 
         $way = substr($zone, 0, 1);
         $hours = (int) substr($zone, 1, 2);
         $minutes = (int) substr($zone, 3, 2);
 
-        $interval = new \DateInterval("PT{$hours}H{$minutes}M");
+        $interval = new DateInterval("PT{$hours}H{$minutes}M");
 
         if ($way === '+') {
             $datetime->add($interval);
@@ -142,6 +146,6 @@ class GitBlameProcess extends Process
             $datetime->sub($interval);
         }
 
-        return new \DateTime($datetime->format('Y-m-d\TH:i:s') . $zone, $utcTimeZone);
+        return new DateTime($datetime->format('Y-m-d\TH:i:s') . $zone, $utcTimeZone);
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "191bc5cef77cc34c016a507d48391bab",
+    "content-hash": "0da6f09198f0acce722e4968ee5b3a73",
     "packages": [
         {
             "name": "composer/semver",
@@ -512,16 +512,16 @@
         },
         {
             "name": "php-parallel-lint/php-parallel-lint",
-            "version": "v1.3.2",
+            "version": "dev-filtered-iterator",
             "source": {
                 "type": "git",
-                "url": "https://github.com/php-parallel-lint/PHP-Parallel-Lint.git",
-                "reference": "6483c9832e71973ed29cf71bd6b3f4fde438a9de"
+                "url": "https://github.com/staabm/PHP-Parallel-Lint.git",
+                "reference": "e33701a16be3250f801e9fb558f4e8c2761ef0cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-parallel-lint/PHP-Parallel-Lint/zipball/6483c9832e71973ed29cf71bd6b3f4fde438a9de",
-                "reference": "6483c9832e71973ed29cf71bd6b3f4fde438a9de",
+                "url": "https://api.github.com/repos/staabm/PHP-Parallel-Lint/zipball/e33701a16be3250f801e9fb558f4e8c2761ef0cf",
+                "reference": "e33701a16be3250f801e9fb558f4e8c2761ef0cf",
                 "shasum": ""
             },
             "require": {
@@ -533,9 +533,9 @@
                 "jakub-onderka/php-parallel-lint": "*"
             },
             "require-dev": {
-                "nette/tester": "^1.3 || ^2.0",
+                "php-parallel-lint/php-code-style": "^2.0",
                 "php-parallel-lint/php-console-highlighter": "0.* || ^1.0",
-                "squizlabs/php_codesniffer": "^3.6"
+                "phpunit/phpunit": "^4.8.36 || ^5.7.21 || ^6.0 || ^7.0 || ^8.0 || ^9.0"
             },
             "suggest": {
                 "php-parallel-lint/php-console-highlighter": "Highlight syntax in code snippet"
@@ -545,11 +545,23 @@
             ],
             "type": "library",
             "autoload": {
-                "classmap": [
-                    "./src/"
+                "psr-4": {
+                    "PHP_Parallel_Lint\\PhpParallelLint\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "PHP_Parallel_Lint\\PhpParallelLint\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "@php ./vendor/phpunit/phpunit/phpunit --no-coverage"
+                ],
+                "coverage": [
+                    "@php ./vendor/phpunit/phpunit/phpunit"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-2-Clause"
             ],
@@ -562,10 +574,9 @@
             "description": "This tool check syntax of PHP files about 20x faster than serial check.",
             "homepage": "https://github.com/php-parallel-lint/PHP-Parallel-Lint",
             "support": {
-                "issues": "https://github.com/php-parallel-lint/PHP-Parallel-Lint/issues",
-                "source": "https://github.com/php-parallel-lint/PHP-Parallel-Lint/tree/v1.3.2"
+                "source": "https://github.com/staabm/PHP-Parallel-Lint/tree/filtered-iterator"
             },
-            "time": "2022-02-21T12:50:22+00:00"
+            "time": "2023-02-25T22:13:15+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",
@@ -1710,7 +1721,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "php-parallel-lint/php-parallel-lint": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

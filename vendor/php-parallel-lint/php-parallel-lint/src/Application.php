@@ -1,6 +1,10 @@
 <?php
 
-namespace JakubOnderka\PhpParallelLint;
+namespace PHP_Parallel_Lint\PhpParallelLint;
+
+use Exception;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\InvalidArgumentException;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\ParallelLintException;
 
 class Application
 {
@@ -41,7 +45,7 @@ class Application
                 $this->showUsage();
                 return self::FAILED;
             }
-            $manager = new Manager;
+            $manager = new Manager();
             $result = $manager->run($settings);
             if ($settings->ignoreFails) {
                 return $result->hasSyntaxError() ? self::WITH_ERRORS : self::SUCCESS;
@@ -54,7 +58,7 @@ class Application
             $this->showOptions();
             return self::FAILED;
 
-        } catch (Exception $e) {
+        } catch (ParallelLintException $e) {
             if (isset($settings) && $settings->format === Settings::FORMAT_JSON) {
                 echo json_encode($e);
             } else {
@@ -62,7 +66,7 @@ class Application
             }
             return self::FAILED;
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             echo $e->getMessage(), PHP_EOL;
             return self::FAILED;
         }
@@ -109,7 +113,7 @@ HELP;
      */
     private function showVersion()
     {
-        echo 'PHP Parallel Lint version ' . self::VERSION.PHP_EOL;
+        echo 'PHP Parallel Lint version ', self::VERSION, PHP_EOL;
     }
 
     /**

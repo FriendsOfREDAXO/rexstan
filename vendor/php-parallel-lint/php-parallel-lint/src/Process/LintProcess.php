@@ -1,7 +1,10 @@
 <?php
-namespace JakubOnderka\PhpParallelLint\Process;
 
-use JakubOnderka\PhpParallelLint\RunTimeException;
+namespace PHP_Parallel_Lint\PhpParallelLint\Process;
+
+use InvalidArgumentException;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\ParallelLintException;
+use PHP_Parallel_Lint\PhpParallelLint\Exceptions\RuntimeException;
 
 class LintProcess extends PhpProcess
 {
@@ -20,12 +23,12 @@ class LintProcess extends PhpProcess
      * @param bool $aspTags
      * @param bool $shortTag
      * @param bool $deprecated
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function __construct(PhpExecutable $phpExecutable, $fileToCheck, $aspTags = false, $shortTag = false, $deprecated = false)
     {
         if (empty($fileToCheck)) {
-            throw new \InvalidArgumentException("File to check must be set.");
+            throw new InvalidArgumentException("File to check must be set.");
         }
 
         $parameters = array(
@@ -43,7 +46,7 @@ class LintProcess extends PhpProcess
 
     /**
      * @return bool
-     * @throws
+     * @throws ParallelLintException
      */
     public function containsError()
     {
@@ -54,7 +57,7 @@ class LintProcess extends PhpProcess
 
     /**
      * @return string
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function getSyntaxError()
     {
@@ -80,7 +83,7 @@ class LintProcess extends PhpProcess
                 }
             }
 
-            throw new RunTimeException("The output '{$this->getOutput()}' does not contain Parse or Syntax errors");
+            throw new RuntimeException("The output '{$this->getOutput()}' does not contain Parse or Syntax errors");
         }
 
         return false;
@@ -88,7 +91,7 @@ class LintProcess extends PhpProcess
 
     /**
      * @return bool
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function isFail()
     {
@@ -97,7 +100,7 @@ class LintProcess extends PhpProcess
 
     /**
      * @return bool
-     * @throws RunTimeException
+     * @throws RuntimeException
      */
     public function isSuccess()
     {
