@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '063457c65c16e4d7e26f55b834b5a97d6eb4d927',
+        'reference' => '2b07557ef7e9e22de88fa9de2dd94543786b52b7',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '063457c65c16e4d7e26f55b834b5a97d6eb4d927',
+            'reference' => '2b07557ef7e9e22de88fa9de2dd94543786b52b7',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -48,6 +48,15 @@
             'replaced' => array(
                 0 => '*',
             ),
+        ),
+        'justinrainbow/json-schema' => array(
+            'pretty_version' => '5.2.12',
+            'version' => '5.2.12.0',
+            'reference' => 'ad87d5a5ca981228e0e205c2bc7dfb8e24559b60',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../justinrainbow/json-schema',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'nette/http' => array(
             'pretty_version' => 'v3.2.2',
