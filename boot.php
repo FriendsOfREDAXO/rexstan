@@ -5,7 +5,7 @@ use rexstan\RexStan;
 $addon = rex_addon::get('rexstan');
 
 if (rex::isBackend() && is_object(rex::getUser())) {
-    rex_extension::register('OUTPUT_FILTER', function(\rex_extension_point $ep) use ($addon) {
+    rex_extension::register('OUTPUT_FILTER', static function (rex_extension_point $ep) use ($addon) {
         $svg = \rex_file::get($addon->getAssetsPath('rexstan_dino.svg'));
 
         $ep->setSubject(str_replace(
@@ -16,7 +16,7 @@ if (rex::isBackend() && is_object(rex::getUser())) {
     });
 
     rex_view::addCssFile($addon->getAssetsUrl('rexstan.css'));
-    if ('rexstan' === rex_be_controller::getCurrentPagePart(1)) {
+    if (rex_be_controller::getCurrentPagePart(1) === 'rexstan') {
         rex_view::addJsFile($addon->getAssetsUrl('confetti.min.js'));
     }
 }

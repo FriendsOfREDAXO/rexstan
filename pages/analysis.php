@@ -4,7 +4,6 @@
 
 use rexstan\RexResultsRenderer;
 use rexstan\RexStan;
-use rexstan\RexStanTip;
 use rexstan\RexStanSettings;
 use rexstan\RexStanUserConfig;
 
@@ -18,15 +17,15 @@ $settingsUrl = rex_url::backendPage('rexstan/settings');
 
 if (is_string($phpstanResult)) {
     // we moved settings files into config/.
-    if (false !== stripos($phpstanResult, "neon' is missing or is not readable.")) {
+    if (stripos($phpstanResult, "neon' is missing or is not readable.") !== false) {
         echo rex_view::warning(
             "Das Einstellungsformat hat sich geändert. Bitte die <a href='".$settingsUrl."'>Einstellungen öffnen</a> und erneut abspeichern. <br/><br/>".nl2br(
                 $phpstanResult
             )
         );
-    } elseif (false !== stripos($phpstanResult, "polyfill-php8") && false !== stripos($phpstanResult, "does not exist")) {
+    } elseif (stripos($phpstanResult, 'polyfill-php8') !== false && stripos($phpstanResult, 'does not exist') !== false) {
         echo rex_view::warning(
-            "Der REDAXO Core wurde aktualisiert. Bitte das rexstan AddOn re-installieren. <br/><br/>".nl2br($phpstanResult)
+            'Der REDAXO Core wurde aktualisiert. Bitte das rexstan AddOn re-installieren. <br/><br/>'.nl2br($phpstanResult)
         );
     } else {
         echo rex_view::error(
@@ -73,14 +72,14 @@ if (
         }
     }
 
-    if (0 === $totalErrors) {
+    if ($totalErrors === 0) {
         $level = RexStanUserConfig::getLevel();
         $emoji = RexResultsRenderer::getResultEmoji($level);
 
         echo '<span class="rexstan-achievement">'.$emoji .'</span>';
         echo rex_view::success('Gratulation, es wurden keine Fehler in Level '. $level .' gefunden.');
 
-        if (9 === $level) {
+        if ($level === 9) {
             echo RexResultsRenderer::getLevel9Jseffect();
         } else {
             echo '<p>';
@@ -121,4 +120,3 @@ if (
         echo RexResultsRenderer::renderFileBlock($linkFile, $fileResult['messages']);
     }
 }
-

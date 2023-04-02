@@ -9,13 +9,11 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Type\Constant\ConstantIntegerType;
-use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\DynamicStaticMethodReturnTypeExtension;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
-use rex;
 use rex_clang;
-use rex_sql;
+
 use function count;
 use function in_array;
 
@@ -35,11 +33,11 @@ final class RexClangDynamicReturnTypeExtension implements DynamicStaticMethodRet
     {
         $name = strtolower($methodReflection->getName());
 
-        if ('getstartid' === $name) {
+        if ($name === 'getstartid') {
             return new ConstantIntegerType(rex_clang::getStartId());
         }
 
-        if ('get' === $name) {
+        if ($name === 'get') {
             $args = $methodCall->getArgs();
             if (count($args) < 1) {
                 return null;

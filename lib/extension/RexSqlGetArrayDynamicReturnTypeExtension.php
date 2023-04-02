@@ -10,13 +10,13 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\ArrayType;
 use PHPStan\Type\Constant\ConstantIntegerType;
-use PHPStan\Type\ConstantScalarType;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\IntegerType;
 use PHPStan\Type\Type;
 use rex_sql;
 use staabm\PHPStanDba\QueryReflection\QueryReflector;
 use staabm\PHPStanDba\UnresolvableQueryException;
+
 use function count;
 use function in_array;
 
@@ -39,11 +39,11 @@ final class RexSqlGetArrayDynamicReturnTypeExtension implements DynamicMethodRet
     ): ?Type {
         $args = $methodCall->getArgs();
 
-        if (0 === count($args)) {
+        if (count($args) === 0) {
             return null;
         }
 
-        if (1 === count($args)) {
+        if (count($args) === 1) {
             $queryExpr = $args[0]->value;
             $parameterTypes = null;
         } else {
@@ -56,11 +56,11 @@ final class RexSqlGetArrayDynamicReturnTypeExtension implements DynamicMethodRet
         if (count($args) >= 3) {
             $scalars = $scope->getType($args[2]->value)->getConstantScalarTypes();
 
-            foreach($scalars as $fetchType) {
-                if (PDO::FETCH_NUM === $fetchType->getValue()) {
+            foreach ($scalars as $fetchType) {
+                if ($fetchType->getValue() === PDO::FETCH_NUM) {
                     $fetch = QueryReflector::FETCH_TYPE_NUMERIC;
                 }
-                if (PDO::FETCH_KEY_PAIR === $fetchType->getValue()) {
+                if ($fetchType->getValue() === PDO::FETCH_KEY_PAIR) {
                     $isFetchKeyPair = true;
                     $fetch = QueryReflector::FETCH_TYPE_NUMERIC;
                 }
@@ -73,12 +73,12 @@ final class RexSqlGetArrayDynamicReturnTypeExtension implements DynamicMethodRet
             return null;
         }
 
-        if (null === $statementType) {
+        if ($statementType === null) {
             return null;
         }
 
         $resultType = RexSqlReflection::getResultTypeFromStatementType($statementType);
-        if (null === $resultType) {
+        if ($resultType === null) {
             return null;
         }
 

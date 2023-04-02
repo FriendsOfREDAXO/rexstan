@@ -10,6 +10,7 @@ use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\Type;
 use rex_category;
+
 use function count;
 use function in_array;
 
@@ -31,7 +32,7 @@ final class RexCategoryGetValueDynamicReturnTypeExtension implements DynamicMeth
         Scope $scope
     ): ?Type {
         $args = $methodCall->getArgs();
-        if (1 < count($args)) {
+        if (count($args) > 1) {
             return null;
         }
 

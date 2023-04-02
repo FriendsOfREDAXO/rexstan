@@ -12,7 +12,7 @@ use PHPStan\Type\DynamicStaticMethodReturnTypeExtension;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
 use rex;
-use rex_sql;
+
 use function count;
 use function in_array;
 
@@ -37,7 +37,7 @@ final class RexClassDynamicReturnTypeExtension implements DynamicStaticMethodRet
             return null;
         }
 
-        if ('gettable' === $name) {
+        if ($name === 'gettable') {
             $tableNames = $scope->getType($args[0]->value)->getConstantStrings();
 
             $result = [];

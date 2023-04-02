@@ -16,6 +16,7 @@ use PHPStan\Type\Type;
 use rex_sql;
 use staabm\PHPStanDba\QueryReflection\QueryReflector;
 use staabm\PHPStanDba\UnresolvableQueryException;
+
 use function count;
 
 final class RexSqlSetQueryTypeSpecifyingExtension implements MethodTypeSpecifyingExtension, TypeSpecifierAwareExtension
@@ -32,7 +33,7 @@ final class RexSqlSetQueryTypeSpecifyingExtension implements MethodTypeSpecifyin
 
     public function isMethodSupported(MethodReflection $methodReflection, MethodCall $node, TypeSpecifierContext $context): bool
     {
-        return 'setquery' === strtolower($methodReflection->getName());
+        return strtolower($methodReflection->getName()) === 'setquery';
     }
 
     public function setTypeSpecifier(TypeSpecifier $typeSpecifier): void
@@ -51,7 +52,7 @@ final class RexSqlSetQueryTypeSpecifyingExtension implements MethodTypeSpecifyin
             return new SpecifiedTypes();
         }
 
-        if (null !== $inferedType) {
+        if ($inferedType !== null) {
             return $this->typeSpecifier->create($methodCall->var, $inferedType, TypeSpecifierContext::createTruthy(), true);
         }
 
@@ -65,11 +66,11 @@ final class RexSqlSetQueryTypeSpecifyingExtension implements MethodTypeSpecifyin
     {
         $args = $methodCall->getArgs();
 
-        if (0 === count($args)) {
+        if (count($args) === 0) {
             return null;
         }
 
-        if (1 === count($args)) {
+        if (count($args) === 1) {
             $queryExpr = $args[0]->value;
             $parameterTypes = null;
         } else {

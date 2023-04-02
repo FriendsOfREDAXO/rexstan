@@ -9,9 +9,8 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use PHPStan\Type\Constant\ConstantStringType;
-use PHPStan\Type\VerbosityLevel;
 use staabm\PHPStanDba\QueryReflection\QueryReflection;
+
 use function count;
 use function in_array;
 
@@ -52,7 +51,7 @@ final class RexSqlSetTableRule implements Rule
 
         $tableNameType = $scope->getType($args[0]->value);
         $errors = [];
-        foreach($tableNameType->getConstantStrings() as $constantString) {
+        foreach ($tableNameType->getConstantStrings() as $constantString) {
             if ($schemaReflection->getTable($constantString->getValue()) === null) {
                 $errors[] = RuleErrorBuilder::message(
                     sprintf("Table '%s' does not exist.", $constantString->getValue())

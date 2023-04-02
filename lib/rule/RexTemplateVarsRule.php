@@ -10,7 +10,8 @@ use PHPStan\Node\CollectedDataNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use rex_template;
-use rex_var_template;
+
+use function array_key_exists;
 
 /**
  * @implements Rule<CollectedDataNode>
@@ -48,7 +49,7 @@ final class RexTemplateVarsRule implements Rule
                     $key = (string) $args['key'];
 
                     $template = rex_template::forKey($key);
-                    if (null === $template) {
+                    if ($template === null) {
                         $errors[] = RuleErrorBuilder::message(sprintf(
                             'Template "%s" includes invalid template by key "%s"',
                             str_replace(RexTemplateVarsCollector::FILE_SUFFIX, '', basename($templateFile)),

@@ -9,9 +9,9 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\StringType;
 use PHPStan\Type\VerbosityLevel;
+
 use function count;
 use function in_array;
 
@@ -40,16 +40,16 @@ final class RexSqlSetValueRule implements Rule
             return [];
         }
 
-        if (null === RexSqlReflection::getSqlResultType($methodCall, $scope)) {
+        if (RexSqlReflection::getSqlResultType($methodCall, $scope) === null) {
             return [];
         }
 
         $offsetValueType = RexSqlReflection::getOffsetValueType($methodCall, $scope);
-        if (null !== $offsetValueType) {
+        if ($offsetValueType !== null) {
             if (strtolower($methodCall->name->toString()) === 'setarrayvalue' && !$offsetValueType->accepts(new StringType(), false)->yes()) {
                 return [
                     RuleErrorBuilder::message(
-                        sprintf("setArrayValue() expects a database column which can store string values.")
+                        'setArrayValue() expects a database column which can store string values.'
                     )->build(),
                 ];
             }
@@ -63,14 +63,14 @@ final class RexSqlSetValueRule implements Rule
         if (count($strings) === 1) {
             return [
                 RuleErrorBuilder::message(
-                    sprintf("Value %s does not exist in table selected via setTable().", $valueNameType->describe(VerbosityLevel::precise()))
+                    sprintf('Value %s does not exist in table selected via setTable().', $valueNameType->describe(VerbosityLevel::precise()))
                 )->build(),
             ];
         }
 
         return [
             RuleErrorBuilder::message(
-                sprintf("All or one of the values %s was not selected in the used sql-query.", $valueNameType->describe(VerbosityLevel::precise()))
+                sprintf('All or one of the values %s was not selected in the used sql-query.', $valueNameType->describe(VerbosityLevel::precise()))
             )->build(),
         ];
     }

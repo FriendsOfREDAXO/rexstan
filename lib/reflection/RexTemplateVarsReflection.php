@@ -6,13 +6,17 @@ namespace rexstan;
 
 use rex_string;
 
-final class RexTemplateVarsReflection {
+use function array_key_exists;
+use function count;
+
+final class RexTemplateVarsReflection
+{
     /**
-     * @param string $template
      * @return list<array{string, array<string, scalar>}>
      */
-    static public function matchVars(string $template): array {
-        if(preg_match_all('{(?P<var>REX_TEMPLATE)\[(?P<args>[^\]]+)\]}', $template, $matches) !== false) {
+    public static function matchVars(string $template): array
+    {
+        if (preg_match_all('{(?P<var>REX_TEMPLATE)\[(?P<args>[^\]]+)\]}', $template, $matches) !== false) {
             $result = [];
             for ($i = 0, $len = count($matches['var']); $i < $len; ++$i) {
                 $args = rex_string::split($matches['args'][$i]);
@@ -32,5 +36,4 @@ final class RexTemplateVarsReflection {
 
         return [];
     }
-
 }

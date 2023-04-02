@@ -31,8 +31,7 @@ if ($cliPhpVersion !== null) {
 
 // code is called from update.php and the previous addon-version
 // might not yet have the method defined.
-if (method_exists(RexStanSettings::class, 'relativePath'))
-{
+if (method_exists(RexStanSettings::class, 'relativePath')) {
     $userConfigPath = $addon->getDataPath('user-config.neon');
     if (!is_file($userConfigPath)) {
         $paths = [];
@@ -61,7 +60,7 @@ if (method_exists(RexStanSettings::class, 'relativePath'))
         '    tmpDir: '.RexStanSettings::relativePath($addon->getCachePath(), $addon->getPath()) . PHP_EOL;
 
     $configPath = __DIR__.'/phpstan.neon';
-    if (false === rex_file::put($configPath, $configFileContent)) {
+    if (rex_file::put($configPath, $configFileContent) === false) {
         $addon->setProperty('installmsg', sprintf('Unable to write rexstan config "%s"', $configPath));
     }
 }

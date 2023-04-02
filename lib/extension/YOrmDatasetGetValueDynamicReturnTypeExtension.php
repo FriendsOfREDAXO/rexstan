@@ -5,20 +5,16 @@ declare(strict_types=1);
 namespace rexstan;
 
 use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
-use PHPStan\Type\Generic\GenericObjectType;
-use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
-use rex_yform_manager_collection;
 use rex_yform_manager_dataset;
-use rex_yform_manager_query;
-use staabm\PHPStanDba\QueryReflection\QueryReflector;
+use RuntimeException;
+
+use function call_user_func;
 use function count;
-use function in_array;
 
 final class YOrmDatasetGetValueDynamicReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
@@ -30,7 +26,7 @@ final class YOrmDatasetGetValueDynamicReturnTypeExtension implements DynamicMeth
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
     {
-        return strtolower($methodReflection->getName())  === 'getvalue';
+        return strtolower($methodReflection->getName()) === 'getvalue';
     }
 
     public function getTypeFromMethodCall(
@@ -39,7 +35,7 @@ final class YOrmDatasetGetValueDynamicReturnTypeExtension implements DynamicMeth
         Scope $scope
     ): ?Type {
         $args = $methodCall->getArgs();
-        if (1 < count($args)) {
+        if (count($args) > 1) {
             return null;
         }
 
@@ -57,18 +53,18 @@ final class YOrmDatasetGetValueDynamicReturnTypeExtension implements DynamicMeth
         $classReflections = $datasetObject->getObjectClassReflections();
 
         $results = [];
-        foreach($classReflections as $classReflection) {
+        foreach ($classReflections as $classReflection) {
             if (!$classReflection->isSubclassOf(rex_yform_manager_dataset::class)) {
                 continue;
             }
 
-            // @phpstan-ignore-next-line
+            /** @phpstan-ignore-next-line */
             $datasetObject = call_user_func([$classReflection->getName(), 'create']);
             if (!$datasetObject instanceof rex_yform_manager_dataset) {
-                throw new \RuntimeException('expecting dataset object');
+                throw new RuntimeException('expecting dataset object');
             }
 
-            foreach($constantStrings as $constantString) {
+            foreach ($constantStrings as $constantString) {
                 $resultType = RexSqlReflection::getResultOffsetValueType(
                     'SELECT * FROM '. $datasetObject->getTableName(),
                     $constantString->getValue(),
@@ -87,6 +83,5 @@ final class YOrmDatasetGetValueDynamicReturnTypeExtension implements DynamicMeth
         }
 
         return TypeCombinator::union(...$results);
-
     }
 }

@@ -9,8 +9,8 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\VerbosityLevel;
+
 use function count;
 use function in_array;
 
@@ -39,12 +39,12 @@ final class RexSqlGetValueRule implements Rule
             return [];
         }
 
-        if (null === RexSqlReflection::getSqlResultType($methodCall, $scope)) {
+        if (RexSqlReflection::getSqlResultType($methodCall, $scope) === null) {
             return [];
         }
 
         $offsetValueType = RexSqlReflection::getOffsetValueType($methodCall, $scope);
-        if (null !== $offsetValueType) {
+        if ($offsetValueType !== null) {
             return [];
         }
 
@@ -54,14 +54,14 @@ final class RexSqlGetValueRule implements Rule
         if (count($strings) === 1) {
             return [
                 RuleErrorBuilder::message(
-                    sprintf("Value %s was not selected in the used sql-query.", $valueNameType->describe(VerbosityLevel::precise()))
+                    sprintf('Value %s was not selected in the used sql-query.', $valueNameType->describe(VerbosityLevel::precise()))
                 )->build(),
             ];
         }
 
         return [
             RuleErrorBuilder::message(
-                sprintf("All or one of the values %s was not selected in the used sql-query.", $valueNameType->describe(VerbosityLevel::precise()))
+                sprintf('All or one of the values %s was not selected in the used sql-query.', $valueNameType->describe(VerbosityLevel::precise()))
             )->build(),
         ];
     }

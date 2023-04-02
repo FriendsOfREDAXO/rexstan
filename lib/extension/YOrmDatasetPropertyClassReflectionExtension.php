@@ -11,6 +11,9 @@ use PHPStan\TrinaryLogic;
 use PHPStan\Type\MixedType;
 use PHPStan\Type\Type;
 use rex_yform_manager_dataset;
+use RuntimeException;
+
+use function call_user_func;
 
 final class YOrmDatasetPropertyClassReflectionExtension implements PropertiesClassReflectionExtension
 {
@@ -22,15 +25,13 @@ final class YOrmDatasetPropertyClassReflectionExtension implements PropertiesCla
     public function getProperty(
         ClassReflection $classReflection,
         string $propertyName
-    ): PropertyReflection
-    {
+    ): PropertyReflection {
         $propertyType = $this->getPropertyType($classReflection, $propertyName);
         if ($propertyType === null) {
-            throw new \RuntimeException('expecting property type');
+            throw new RuntimeException('expecting property type');
         }
 
-        return new class($classReflection, $propertyType) implements PropertyReflection
-        {
+        return new class($classReflection, $propertyType) implements PropertyReflection {
             /**
              * @var ClassReflection
              */
@@ -116,8 +117,7 @@ final class YOrmDatasetPropertyClassReflectionExtension implements PropertiesCla
     private function getPropertyType(
         ClassReflection $classReflection,
         string $propertyName
-    ): ?Type
-    {
+    ): ?Type {
         if (!class_exists(rex_yform_manager_dataset::class)) {
             return null;
         }
@@ -126,10 +126,10 @@ final class YOrmDatasetPropertyClassReflectionExtension implements PropertiesCla
             return null;
         }
 
-        // @phpstan-ignore-next-line
+        /** @phpstan-ignore-next-line */
         $datasetObject = call_user_func([$classReflection->getName(), 'create']);
         if (!$datasetObject instanceof rex_yform_manager_dataset) {
-            throw new \RuntimeException('expecting dataset object');
+            throw new RuntimeException('expecting dataset object');
         }
 
         $resultType = RexSqlReflection::getResultOffsetValueType(

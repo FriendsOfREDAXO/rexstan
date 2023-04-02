@@ -8,8 +8,6 @@ use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Collectors\Collector;
 use PHPStan\Node\FileNode;
-use rex_var;
-use function get_class;
 
 /**
  * @implements Collector<FileNode, array<int, array{string, array<string, scalar>}>>
@@ -25,7 +23,7 @@ final class RexModuleOutputVarsCollector implements Collector
 
     public function processNode(Node $node, Scope $scope)
     {
-        if (false === strpos($scope->getFile(), self::FILE_SUFFIX)) {
+        if (strpos($scope->getFile(), self::FILE_SUFFIX) === false) {
             return null;
         }
 

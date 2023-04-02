@@ -7,7 +7,6 @@ namespace rexstan;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
-use PHPStan\Type\Constant\ConstantArrayType;
 use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\Generic\GenericObjectType;
 use PHPStan\Type\Type;
@@ -16,6 +15,7 @@ use rex_sql;
 use staabm\PHPStanDba\QueryReflection\QueryReflection;
 use staabm\PHPStanDba\QueryReflection\QueryReflector;
 use staabm\PHPStanDba\UnresolvableQueryException;
+
 use function count;
 
 final class RexSqlReflection
@@ -35,21 +35,21 @@ final class RexSqlReflection
         }
 
         $sqlResultType = self::getSqlResultType($methodCall, $scope);
-        if (null === $sqlResultType) {
+        if ($sqlResultType === null) {
             return null;
         }
 
         $valueNameTypes = $scope->getType($args[0]->value)->getConstantStrings();
 
         $results = [];
-        foreach($valueNameTypes as $valueNameType) {
+        foreach ($valueNameTypes as $valueNameType) {
             if ($sqlResultType->hasOffsetValueType($valueNameType)->yes()) {
                 $results[] = $sqlResultType->getOffsetValueType($valueNameType);
                 continue;
             }
 
             // support table.field and db.table.field notation
-            if (false !== strpos($valueNameType->getValue(), '.')) {
+            if (strpos($valueNameType->getValue(), '.') !== false) {
                 $parts = explode('.', $valueNameType->getValue());
                 $lastKey = array_key_last($parts);
                 $fieldName = $parts[$lastKey];
@@ -74,7 +74,7 @@ final class RexSqlReflection
     public static function getResultTypeFromStatementType(Type $statementType): ?Type
     {
         if ($statementType instanceof RexSqlObjectType) {
-            if($statementType->getTableName() === null) {
+            if ($statementType->getTableName() === null) {
                 return null;
             }
 
@@ -88,7 +88,7 @@ final class RexSqlReflection
                 'SELECT '. $colExpr .' FROM '.$statementType->getTableName(),
                 QueryReflector::FETCH_TYPE_ASSOC
             );
-            if (null !== $resultType) {
+            if ($resultType !== null) {
                 return $resultType;
             }
 
@@ -99,7 +99,7 @@ final class RexSqlReflection
             return null;
         }
 
-        if (rex_sql::class !== $statementType->getClassName()) {
+        if ($statementType->getClassName() !== rex_sql::class) {
             return null;
         }
 
@@ -115,7 +115,7 @@ final class RexSqlReflection
     {
         $queryReflection = new QueryReflection();
         $resultType = $queryReflection->getResultType($queryString, QueryReflector::FETCH_TYPE_ASSOC);
-        if (null === $resultType) {
+        if ($resultType === null) {
             return null;
         }
 
@@ -133,7 +133,7 @@ final class RexSqlReflection
      */
     public static function inferStatementType(Expr $queryExpr, ?Type $parameterTypes, Scope $scope, int $fetchType): ?Type
     {
-        if (null === $parameterTypes) {
+        if ($parameterTypes === null) {
             $queryReflection = new QueryReflection();
             $queryStrings = $queryReflection->resolveQueryStrings($queryExpr, $scope);
         } else {
@@ -156,7 +156,7 @@ final class RexSqlReflection
         foreach ($queryStrings as $queryString) {
             $resultType = $queryReflection->getResultType($queryString, $fetchType);
 
-            if (null !== $resultType) {
+            if ($resultType !== null) {
                 $genericObjects[] = new RexSqlGenericType($resultType);
             }
         }
@@ -164,7 +164,7 @@ final class RexSqlReflection
         if (count($genericObjects) > 1) {
             return TypeCombinator::union(...$genericObjects);
         }
-        if (1 === count($genericObjects)) {
+        if (count($genericObjects) === 1) {
             return $genericObjects[0];
         }
 

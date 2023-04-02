@@ -11,12 +11,12 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\ShouldNotHappenException;
 use PHPStan\Type\TypeUtils;
-use PHPStan\Type\TypeWithClassName;
 use PHPStan\Type\VerbosityLevel;
 use rex_article;
 use rex_category;
 use rex_media;
 use rex_user;
+
 use function count;
 use function in_array;
 
@@ -60,7 +60,7 @@ final class RexGetRule implements Rule
 
         $callerType = $scope->resolveTypeByName($methodCall->class);
         $methodReflection = $scope->getMethodReflection($callerType, $methodCall->name->toString());
-        if (null === $methodReflection) {
+        if ($methodReflection === null) {
             return [];
         }
 
@@ -70,17 +70,17 @@ final class RexGetRule implements Rule
 
         $idType = $scope->getType($args[0]->value);
 
-        if (rex_media::class === $callerType->getClassName()) {
+        if ($callerType->getClassName() === rex_media::class) {
             $ids = $idType->getConstantStrings();
             foreach ($ids as $id) {
                 // don't report errors on magic rex-vars, which get resolved at code generation time.
-                if (0 === strpos($id->getValue(), 'REX_')) {
+                if (strpos($id->getValue(), 'REX_') === 0) {
                     continue;
                 }
 
                 $object = rex_media::get($id->getValue());
 
-                if (null === $object) {
+                if ($object === null) {
                     return [
                         RuleErrorBuilder::message(
                             sprintf('No %s found with id %s.', $callerType->getClassName(), $idType->describe(VerbosityLevel::precise()))
@@ -107,7 +107,7 @@ final class RexGetRule implements Rule
                 default: throw new ShouldNotHappenException();
             }
 
-            if (null === $object) {
+            if ($object === null) {
                 return [
                     RuleErrorBuilder::message(
                         sprintf('No %s found with id %s.', $callerType->getClassName(), $idType->describe(VerbosityLevel::precise()))

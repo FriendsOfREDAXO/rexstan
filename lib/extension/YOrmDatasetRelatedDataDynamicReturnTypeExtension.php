@@ -15,6 +15,9 @@ use PHPStan\Type\TypeCombinator;
 use rex_yform_manager_collection;
 use rex_yform_manager_dataset;
 use rex_yform_manager_query;
+use RuntimeException;
+
+use function call_user_func;
 use function count;
 use function in_array;
 
@@ -41,7 +44,7 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
         Scope $scope
     ): ?Type {
         $args = $methodCall->getArgs();
-        if (1 < count($args)) {
+        if (count($args) > 1) {
             return null;
         }
         if (!class_exists(rex_yform_manager_dataset::class)) {
@@ -66,18 +69,18 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
 
         /** @var list<ObjectType> $results */
         $results = [];
-        foreach($classReflections as $classReflection) {
+        foreach ($classReflections as $classReflection) {
             if (!$classReflection->isSubclassOf(rex_yform_manager_dataset::class)) {
                 continue;
             }
 
-            // @phpstan-ignore-next-line
+            /** @phpstan-ignore-next-line */
             $datasetObject = call_user_func([$classReflection->getName(), 'create']);
             if (!$datasetObject instanceof rex_yform_manager_dataset) {
-                throw new \RuntimeException('expecting dataset object');
+                throw new RuntimeException('expecting dataset object');
             }
 
-            foreach($constantStrings as $constantString) {
+            foreach ($constantStrings as $constantString) {
                 $relation = $datasetObject->getTable()->getRelation($constantString->getValue());
                 if ($relation === null) {
                     // unknown relation
@@ -97,7 +100,7 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
                 } elseif ($method === 'getrelatedquery') {
                     $results[] = new GenericObjectType(rex_yform_manager_query::class, [$modelObjectType]);
                 } else {
-                    throw new \RuntimeException('Unknown method: '.$method);
+                    throw new RuntimeException('Unknown method: '.$method);
                 }
             }
         }
@@ -107,6 +110,5 @@ final class YOrmDatasetRelatedDataDynamicReturnTypeExtension implements DynamicM
         }
 
         return TypeCombinator::union(...$results);
-
     }
 }

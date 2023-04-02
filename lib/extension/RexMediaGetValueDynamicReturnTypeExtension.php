@@ -10,6 +10,7 @@ use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\Type;
 use rex_media;
+
 use function count;
 use function in_array;
 
@@ -31,7 +32,7 @@ final class RexMediaGetValueDynamicReturnTypeExtension implements DynamicMethodR
         Scope $scope
     ): ?Type {
         $args = $methodCall->getArgs();
-        if (1 < count($args)) {
+        if (count($args) > 1) {
             return null;
         }
 

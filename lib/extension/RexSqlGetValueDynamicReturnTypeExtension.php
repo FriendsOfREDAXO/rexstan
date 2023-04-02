@@ -10,8 +10,8 @@ use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\Type;
 use rex_sql;
+
 use function count;
-use function in_array;
 
 final class RexSqlGetValueDynamicReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
@@ -31,12 +31,12 @@ final class RexSqlGetValueDynamicReturnTypeExtension implements DynamicMethodRet
         Scope $scope
     ): ?Type {
         $args = $methodCall->getArgs();
-        if (1 < count($args)) {
+        if (count($args) > 1) {
             return null;
         }
 
         $offsetValueType = RexSqlReflection::getOffsetValueType($methodCall, $scope);
-        if (null !== $offsetValueType) {
+        if ($offsetValueType !== null) {
             return $offsetValueType;
         }
 

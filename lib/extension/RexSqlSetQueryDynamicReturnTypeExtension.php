@@ -6,17 +6,13 @@ namespace rexstan;
 
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
-use PHPStan\Analyser\SpecifiedTypes;
-use PHPStan\Analyser\TypeSpecifier;
-use PHPStan\Analyser\TypeSpecifierAwareExtension;
-use PHPStan\Analyser\TypeSpecifierContext;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
-use PHPStan\Type\MethodTypeSpecifyingExtension;
 use PHPStan\Type\Type;
 use rex_sql;
 use staabm\PHPStanDba\QueryReflection\QueryReflector;
 use staabm\PHPStanDba\UnresolvableQueryException;
+
 use function count;
 
 final class RexSqlSetQueryDynamicReturnTypeExtension implements DynamicMethodReturnTypeExtension
@@ -28,10 +24,10 @@ final class RexSqlSetQueryDynamicReturnTypeExtension implements DynamicMethodRet
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
     {
-        return 'setquery' === strtolower($methodReflection->getName());
+        return strtolower($methodReflection->getName()) === 'setquery';
     }
 
-    public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope) : ?Type
+    public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): ?Type
     {
         try {
             return $this->inferStatementType($methodCall, $scope);
@@ -47,11 +43,11 @@ final class RexSqlSetQueryDynamicReturnTypeExtension implements DynamicMethodRet
     {
         $args = $methodCall->getArgs();
 
-        if (0 === count($args)) {
+        if (count($args) === 0) {
             return null;
         }
 
-        if (1 === count($args)) {
+        if (count($args) === 1) {
             $queryExpr = $args[0]->value;
             $parameterTypes = null;
         } else {

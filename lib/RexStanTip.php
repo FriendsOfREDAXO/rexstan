@@ -26,7 +26,7 @@ final class RexStanTip
             }
         }
 
-        if (null !== $tip) {
+        if ($tip !== null) {
             return self::escapeButPreserveUris($tip);
         }
 

@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace rexstan;
 
 use PHPStan\ShouldNotHappenException;
-use PHPStan\Type\Constant\ConstantArrayType;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
-use PHPStan\Type\TypeUtils;
 use rex_article;
 use rex_article_slice;
 use rex_category;
@@ -16,6 +14,7 @@ use rex_media;
 use rex_user;
 use staabm\PHPStanDba\QueryReflection\QueryReflection;
 use staabm\PHPStanDba\QueryReflection\QueryReflector;
+
 use function count;
 
 final class RexGetValueReflection
@@ -28,7 +27,7 @@ final class RexGetValueReflection
         string $class
     ): ?Type {
         $names = $name->getConstantStrings();
-        if (0 === count($names)) {
+        if (count($names) === 0) {
             return null;
         }
 
@@ -68,11 +67,11 @@ final class RexGetValueReflection
             }
         }
 
-        if (0 === count($valueTypes)) {
+        if (count($valueTypes) === 0) {
             return null;
         }
 
-        if (1 === count($valueTypes)) {
+        if (count($valueTypes) === 1) {
             return $valueTypes[0];
         }
 

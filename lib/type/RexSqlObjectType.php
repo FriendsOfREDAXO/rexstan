@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace rexstan;
 
 use PHPStan\TrinaryLogic;
-use PHPStan\Type\Generic\GenericObjectType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 use rex_sql;
 
-final class RexSqlObjectType extends ObjectType {
+final class RexSqlObjectType extends ObjectType
+{
     /**
      * @var ?string
      */
@@ -21,15 +21,18 @@ final class RexSqlObjectType extends ObjectType {
      */
     private $selectExpression;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct(rex_sql::class);
     }
 
-    public function setTableName(string $tableName): void {
+    public function setTableName(string $tableName): void
+    {
         $this->tableName = $tableName;
     }
 
-    public function getTableName(): ?string {
+    public function getTableName(): ?string
+    {
         return $this->tableName;
     }
 

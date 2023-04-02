@@ -9,13 +9,11 @@ use PhpParser\Node\Expr\BinaryOp\Concat;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\Printer\ExprPrinter;
-use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\ShouldNotHappenException;
 use PHPStan\Type\BooleanType;
 use PHPStan\Type\Constant\ConstantArrayType;
-use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\FloatType;
 use PHPStan\Type\IntegerType;
 use PHPStan\Type\MixedType;
@@ -26,6 +24,7 @@ use rex_i18n;
 use rex_sql;
 use staabm\PHPStanDba\Ast\ExpressionFinder;
 use staabm\PHPStanDba\PhpDoc\PhpDocUtil;
+
 use function array_key_exists;
 use function count;
 use function in_array;
@@ -87,7 +86,7 @@ final class RexSqlInjectionRule implements Rule
             return [];
         }
 
-        if (rex_sql::class !== $callerType->getClassName()) {
+        if ($callerType->getClassName() !== rex_sql::class) {
             return [];
         }
 
@@ -102,13 +101,13 @@ final class RexSqlInjectionRule implements Rule
         if ($sqlExpression instanceof Node\Expr\Variable) {
             $finder = new ExpressionFinder();
             $queryStringExpression = $finder->findAssignmentExpression($sqlExpression);
-            if (null !== $queryStringExpression) {
+            if ($queryStringExpression !== null) {
                 $sqlExpression = $queryStringExpression;
             }
         }
 
         $rawValue = $this->findInsecureSqlExpr($sqlExpression, $scope);
-        if (null !== $rawValue) {
+        if ($rawValue !== null) {
             $description = $this->exprPrinter->printExpr($rawValue);
 
             return [
@@ -124,11 +123,11 @@ final class RexSqlInjectionRule implements Rule
 
     private function findInsecureSqlExpr(Node\Expr $expr, Scope $scope, bool $resolveVariables = true): ?Node\Expr
     {
-        if (true === $resolveVariables && $expr instanceof Node\Expr\Variable) {
+        if ($resolveVariables === true && $expr instanceof Node\Expr\Variable) {
             $finder = new ExpressionFinder();
             $assignExpr = $finder->findAssignmentExpression($expr);
 
-            if (null !== $assignExpr) {
+            if ($assignExpr !== null) {
                 return $this->findInsecureSqlExpr($assignExpr, $scope);
             }
 
@@ -140,12 +139,12 @@ final class RexSqlInjectionRule implements Rule
             $right = $expr->right;
 
             $leftInsecure = $this->findInsecureSqlExpr($left, $scope);
-            if (null !== $leftInsecure) {
+            if ($leftInsecure !== null) {
                 return $leftInsecure;
             }
 
             $rightInsecure = $this->findInsecureSqlExpr($right, $scope);
-            if (null !== $rightInsecure) {
+            if ($rightInsecure !== null) {
                 return $rightInsecure;
             }
 
@@ -155,7 +154,7 @@ final class RexSqlInjectionRule implements Rule
         if ($expr instanceof Node\Scalar\Encapsed) {
             foreach ($expr->parts as $part) {
                 $insecurePart = $this->findInsecureSqlExpr($part, $scope);
-                if (null !== $insecurePart) {
+                if ($insecurePart !== null) {
                     return $insecurePart;
                 }
             }
@@ -189,7 +188,7 @@ final class RexSqlInjectionRule implements Rule
 
         if ($exprType->isString()->yes()) {
             if ($expr instanceof Node\Expr\CallLike) {
-                if ('sql' === PhpDocUtil::matchTaintEscape($expr, $scope)) {
+                if (PhpDocUtil::matchTaintEscape($expr, $scope) === 'sql') {
                     return null;
                 }
             }
@@ -197,11 +196,11 @@ final class RexSqlInjectionRule implements Rule
             if ($expr instanceof Node\Expr\StaticCall && $expr->class instanceof Node\Name && $expr->name instanceof Node\Identifier) {
                 // lets assume rex::getTable() and rex::getTablePrefix() return untainted values.
                 // these methods are used in nearly every query and would otherwise create a lot of false positives.
-                if (rex::class === $expr->class->toString() && in_array($expr->name->toLowerString(), ['gettableprefix', 'gettable'], true)) {
+                if ($expr->class->toString() === rex::class && in_array($expr->name->toLowerString(), ['gettableprefix', 'gettable'], true)) {
                     return null;
                 }
                 // translations could still lead to syntax errors, but since the input is not end-user controlled, we ignore it.
-                if (rex_i18n::class === $expr->class->toString() && 'msg' === $expr->name->toLowerString()) {
+                if ($expr->class->toString() === rex_i18n::class && $expr->name->toLowerString() === 'msg') {
                     return null;
                 }
             }
@@ -270,16 +269,16 @@ final class RexSqlInjectionRule implements Rule
         if ($callableType instanceof ConstantArrayType) {
             $valueTypes = $callableType->getValueTypes();
 
-            if (2 === count($valueTypes)) {
-                list($objectType, $methodType) = $valueTypes;
+            if (count($valueTypes) === 2) {
+                [$objectType, $methodType] = $valueTypes;
 
                 $classReflections = $objectType->getObjectClassReflections();
                 $methodNames = $methodType->getConstantStrings();
-                foreach($classReflections as $classReflection) {
-                    foreach($methodNames as $methodStringType) {
+                foreach ($classReflections as $classReflection) {
+                    foreach ($methodNames as $methodStringType) {
                         $methodReflection = $classReflection->getMethod($methodStringType->getValue(), $scope);
 
-                        if ('sql' !== PhpDocUtil::matchTaintEscape($methodReflection, $scope)) {
+                        if (PhpDocUtil::matchTaintEscape($methodReflection, $scope) !== 'sql') {
                             return false;
                         }
                     }
@@ -290,7 +289,7 @@ final class RexSqlInjectionRule implements Rule
         }
 
         $parameterAcceptors = $callableType->getCallableParametersAcceptors($scope);
-        if (1 === count($parameterAcceptors) && $this->isSafeType($parameterAcceptors[0]->getReturnType())) {
+        if (count($parameterAcceptors) === 1 && $this->isSafeType($parameterAcceptors[0]->getReturnType())) {
             return true;
         }
 

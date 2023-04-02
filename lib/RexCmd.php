@@ -8,7 +8,8 @@ use function function_exists;
 use function is_resource;
 use function proc_open;
 
-final class RexCmd {
+final class RexCmd
+{
     /**
      * @param string $stderrOutput
      * @param int $exitCode
@@ -53,7 +54,7 @@ final class RexCmd {
             proc_close($process);
         }
 
-        return false === $output ? '' : $output;
+        return $output === false ? '' : $output;
     }
 
     public static function phpExecutable(): string
@@ -83,7 +84,8 @@ final class RexCmd {
     /**
      * @return null|numeric-string
      */
-    public static function getCliPhpVersion(): ?string {
+    public static function getCliPhpVersion(): ?string
+    {
         $cliPhpVersion = self::execCmd(self::phpExecutable().' -r "echo PHP_VERSION_ID;"', $stderrOutput, $exitCode);
 
         if (is_numeric($cliPhpVersion)) {
@@ -93,10 +95,8 @@ final class RexCmd {
         return null;
     }
 
-    /**
-     * @return null|string
-     */
-    public static function getFormattedCliPhpVersion(): ?string {
+    public static function getFormattedCliPhpVersion(): ?string
+    {
         $cliPhpVersion = self::execCmd(self::phpExecutable().' -r "echo phpversion();"', $stderrOutput, $exitCode);
 
         if ($exitCode === 0) {

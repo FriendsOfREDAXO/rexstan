@@ -6,13 +6,17 @@ namespace rexstan;
 
 use rex_string;
 
-final class RexModuleVarsReflection {
+use function array_key_exists;
+use function count;
+
+final class RexModuleVarsReflection
+{
     /**
-     * @param string $input
      * @return list<array{string, array<string, scalar>}>
      */
-    static public function matchInputVars(string $input): array {
-        if(preg_match_all('{(?P<var>REX_INPUT_VALUE|REX_VALUE|REX_LINK|REX_LINKLIST|REX_MEDIA|REX_MEDIALIST)\[(?P<args>[^\]]+)\]}', $input, $matches) !== false) {
+    public static function matchInputVars(string $input): array
+    {
+        if (preg_match_all('{(?P<var>REX_INPUT_VALUE|REX_VALUE|REX_LINK|REX_LINKLIST|REX_MEDIA|REX_MEDIALIST)\[(?P<args>[^\]]+)\]}', $input, $matches) !== false) {
             $result = [];
             for ($i = 0, $len = count($matches['var']); $i < $len; ++$i) {
                 $args = rex_string::split($matches['args'][$i]);
@@ -34,11 +38,11 @@ final class RexModuleVarsReflection {
     }
 
     /**
-     * @param string $output
      * @return list<array{string, array<string, scalar>}>
      */
-    static public function matchOutputVars(string $output): array {
-        if(preg_match_all('{(?P<var>REX_VALUE|REX_LINK|REX_LINKLIST|REX_MEDIA|REX_MEDIALIST)\[(?P<args>[^\]]+)\]}', $output, $matches) !== false) {
+    public static function matchOutputVars(string $output): array
+    {
+        if (preg_match_all('{(?P<var>REX_VALUE|REX_LINK|REX_LINKLIST|REX_MEDIA|REX_MEDIALIST)\[(?P<args>[^\]]+)\]}', $output, $matches) !== false) {
             $result = [];
             for ($i = 0, $len = count($matches['var']); $i < $len; ++$i) {
                 $args = rex_string::split($matches['args'][$i]);
@@ -58,5 +62,4 @@ final class RexModuleVarsReflection {
 
         return [];
     }
-
 }
