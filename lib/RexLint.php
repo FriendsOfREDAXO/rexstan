@@ -5,6 +5,7 @@ namespace rexstan;
 use Exception;
 use JsonSchema\Constraints\Constraint;
 use PHPStan\ShouldNotHappenException;
+use rex;
 use rex_file;
 use rex_package;
 use rex_path;
@@ -23,7 +24,12 @@ final class RexLint
     public static function runFromWeb()
     {
         $lintErrors = self::lintPaths();
-        $jsonErrors = self::validateAddOnsPackageYml();
+
+        $jsonErrors = [];
+        // package.json schema was bogus in earlier redaxo core versions
+        if (rex_version::compare(rex::getVersion(), '5.15.1-dev', '>=')) {
+            $jsonErrors = self::validateAddOnsPackageYml();
+        }
 
         return array_merge($lintErrors, $jsonErrors);
     }
@@ -156,6 +162,9 @@ final class RexLint
         if (!$validator->isValid()) {
             foreach ($validator->getErrors() as $error) {
                 if (strpos($error['message'], 'Failed to match all schemas') !== false) {
+                    continue;
+                }
+                if (strpos($error['message'], 'Failed to match at least one schema') !== false) {
                     continue;
                 }
 
