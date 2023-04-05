@@ -2414,6 +2414,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'staabm\\PHPStanDba\\SqlAst\\IfReturnTypeExtension' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/SqlAst/IfReturnTypeExtension.php',
         'staabm\\PHPStanDba\\SqlAst\\InstrReturnTypeExtension' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/SqlAst/InstrReturnTypeExtension.php',
         'staabm\\PHPStanDba\\SqlAst\\IsNullReturnTypeExtension' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/SqlAst/IsNullReturnTypeExtension.php',
+        'staabm\\PHPStanDba\\SqlAst\\MinMaxReturnTypeExtension' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/SqlAst/MinMaxReturnTypeExtension.php',
         'staabm\\PHPStanDba\\SqlAst\\ParserInference' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/SqlAst/ParserInference.php',
         'staabm\\PHPStanDba\\SqlAst\\PositiveIntReturnTypeExtension' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/SqlAst/PositiveIntReturnTypeExtension.php',
         'staabm\\PHPStanDba\\SqlAst\\QueryFunctionReturnTypeExtension' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/SqlAst/QueryFunctionReturnTypeExtension.php',

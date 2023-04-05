@@ -1116,17 +1116,17 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.2.70",
-            "version_normalized": "0.2.70.0",
+            "version": "0.2.71",
+            "version_normalized": "0.2.71.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "de7afb4e9e7370cd6d8ade89ae17fda5450b7ee4"
+                "reference": "5d759ac7c57fba21d31284937709ba923f4f8b51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/de7afb4e9e7370cd6d8ade89ae17fda5450b7ee4",
-                "reference": "de7afb4e9e7370cd6d8ade89ae17fda5450b7ee4",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/5d759ac7c57fba21d31284937709ba923f4f8b51",
+                "reference": "5d759ac7c57fba21d31284937709ba923f4f8b51",
                 "shasum": ""
             },
             "require": {
@@ -1153,7 +1153,7 @@
                 "tomasvotruba/unused-public": "^0.1.9",
                 "vlucas/phpdotenv": "^5.4"
             },
-            "time": "2023-03-27T21:27:47+00:00",
+            "time": "2023-04-05T07:46:15+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1182,7 +1182,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.70"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.71"
             },
             "install-path": "../staabm/phpstan-dba"
         },
