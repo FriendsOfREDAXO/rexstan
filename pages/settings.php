@@ -41,3 +41,5 @@ if (rex_post($form_name . '_save', 'bool', false)) {
 
     RexStanUserConfig::save($level, $paths, $includes, $phpversion, $reportUnmatchedIgnoredErrors);
 }
+
+echo rex_view::info('This AddOn is created by Markus Staab in his free time. <a href="https://github.com/sponsors/staabm">Support rexstan with your sponsoring 💕</a>');
