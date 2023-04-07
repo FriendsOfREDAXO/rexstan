@@ -215,6 +215,17 @@ final class RexStanSettings
         return $prefix . rex_path::relative($path);
     }
 
+    public static function absolutePath(string $relativePath): ?string {
+        $absPath = realpath(rex_path::addonData('rexstan'). $relativePath);
+
+        if ($absPath === false) {
+            return null;
+            throw new RuntimeException('Could not resolve path: '. $scanpath);
+        }
+
+        return $absPath;
+    }
+
     private static function getAddOns(): string
     {
         $scanTargets = [];

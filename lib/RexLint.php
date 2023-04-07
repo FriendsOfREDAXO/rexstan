@@ -43,9 +43,9 @@ final class RexLint
         $pathToLint = [];
 
         foreach (RexStanUserConfig::getPaths() as $scanpath) {
-            $absPath = realpath(__DIR__.'/../'. $scanpath);
+            $absPath = RexStanSettings::absolutePath($scanpath);
 
-            if ($absPath === false) {
+            if ($absPath === null) {
                 throw new RuntimeException('Could not resolve path: '. $scanpath);
             }
 
