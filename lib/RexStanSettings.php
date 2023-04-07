@@ -220,7 +220,6 @@ final class RexStanSettings
 
         if ($absPath === false) {
             return null;
-            throw new RuntimeException('Could not resolve path: '. $scanpath);
         }
 
         return $absPath;
