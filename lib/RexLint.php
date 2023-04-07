@@ -43,22 +43,6 @@ final class RexLint
         $pathToLint = [];
 
         foreach (RexStanUserConfig::getPaths() as $scanpath) {
-            $addOnName = basename($scanpath);
-
-            if ($addOnName === 'developer') {
-                $modulesDir = DeveloperAddonIntegration::getModulesDir();
-                if ($modulesDir !== null) {
-                    $pathToLint[] = $modulesDir;
-                }
-
-                $templatesDir = DeveloperAddonIntegration::getTemplatesDir();
-                if ($templatesDir !== null) {
-                    $pathToLint[] = $templatesDir;
-                }
-
-                continue;
-            }
-
             $pathToLint[] = realpath(__DIR__.'/../'. $scanpath);
         }
 
