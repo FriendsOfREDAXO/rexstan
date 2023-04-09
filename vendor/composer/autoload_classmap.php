@@ -726,6 +726,7 @@ return array(
     'PHPStan\\Type\\Symfony\\SerializerDynamicReturnTypeExtension' => $vendorDir . '/phpstan/phpstan-symfony/src/Type/Symfony/SerializerDynamicReturnTypeExtension.php',
     'PHPStan\\Type\\Symfony\\ServiceDynamicReturnTypeExtension' => $vendorDir . '/phpstan/phpstan-symfony/src/Type/Symfony/ServiceDynamicReturnTypeExtension.php',
     'PHPStan\\Type\\Symfony\\ServiceTypeSpecifyingExtension' => $vendorDir . '/phpstan/phpstan-symfony/src/Type/Symfony/ServiceTypeSpecifyingExtension.php',
+    'PHP_Parallel_Lint\\PhpParallelLint\\FilteredRecursiveDirectoryIterator' => $vendorDir . '/php-parallel-lint/php-parallel-lint/src/FilteredRecursiveDirectoryIterator.php',
     'PhpParser\\Builder' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Builder.php',
     'PhpParser\\BuilderFactory' => $vendorDir . '/nikic/php-parser/lib/PhpParser/BuilderFactory.php',
     'PhpParser\\BuilderHelpers' => $vendorDir . '/nikic/php-parser/lib/PhpParser/BuilderHelpers.php',
