@@ -11,9 +11,15 @@ page:
     linkAttr: { target: _rexstan }
     subpages:
         settings: { title: translate:settings }
-        analysis: { title: translate:analysis }
-        lint-analysis: { title: translate:lint_analysis }
-        summary: { title: translate:summary }
+        analysis:
+            title: translate:analysis
+            itemClass: 'use-loader'
+        lint-analysis:
+            title: translate:lint_analysis
+            itemClass: 'use-loader'
+        summary:
+            title: translate:summary
+            itemClass: 'use-loader'
         readme: { title: translate:readme, subPath: README.md }
         faq: { title: translate:faq, subPath: FAQ.md, icon: rex-icon fa-book }
 
