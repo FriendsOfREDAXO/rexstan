@@ -13,8 +13,6 @@ if (count($errors) > 0) {
     }
 } else {
     echo rex_view::success('Gratulation, es wurden keine Linting Fehler gefunden.');
-
-    echo '<p>Untersuchte Pfade<ul><li>'. implode('</li><li>', RexLint::getPathsToLint()) .'</li></ul></p>';
 }
 
 $cliVersion = RexCmd::getFormattedCliPhpVersion();
