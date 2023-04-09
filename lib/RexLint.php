@@ -40,18 +40,18 @@ final class RexLint
      */
     public static function getPathsToLint(): array
     {
-        $pathToLint = [
-            rex_path::src('addons/'),
-        ];
-        $modulesDir = DeveloperAddonIntegration::getModulesDir();
-        if ($modulesDir !== null) {
-            $pathToLint[] = $modulesDir;
+        $pathToLint = [];
+
+        foreach (RexStanUserConfig::getPaths() as $scanpath) {
+            $absPath = RexStanSettings::absolutePath($scanpath);
+
+            if ($absPath === null) {
+                throw new RuntimeException('Could not resolve path: '. $scanpath);
+            }
+
+            $pathToLint[] = $absPath;
         }
 
-        $templatesDir = DeveloperAddonIntegration::getTemplatesDir();
-        if ($templatesDir !== null) {
-            $pathToLint[] = $templatesDir;
-        }
         return $pathToLint;
     }
 
