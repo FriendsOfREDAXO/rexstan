@@ -929,6 +929,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'PHPStan\\Type\\Symfony\\SerializerDynamicReturnTypeExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Type/Symfony/SerializerDynamicReturnTypeExtension.php',
         'PHPStan\\Type\\Symfony\\ServiceDynamicReturnTypeExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Type/Symfony/ServiceDynamicReturnTypeExtension.php',
         'PHPStan\\Type\\Symfony\\ServiceTypeSpecifyingExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Type/Symfony/ServiceTypeSpecifyingExtension.php',
+        'PHP_Parallel_Lint\\PhpParallelLint\\FilteredRecursiveDirectoryIterator' => __DIR__ . '/..' . '/php-parallel-lint/php-parallel-lint/src/FilteredRecursiveDirectoryIterator.php',
         'PhpParser\\Builder' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/Builder.php',
         'PhpParser\\BuilderFactory' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/BuilderFactory.php',
         'PhpParser\\BuilderHelpers' => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser/BuilderHelpers.php',

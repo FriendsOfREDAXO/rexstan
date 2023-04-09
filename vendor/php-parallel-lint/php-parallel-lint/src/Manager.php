@@ -4,6 +4,7 @@ namespace JakubOnderka\PhpParallelLint;
 use JakubOnderka\PhpParallelLint\Contracts\SyntaxErrorCallback;
 use JakubOnderka\PhpParallelLint\Process\GitBlameProcess;
 use JakubOnderka\PhpParallelLint\Process\PhpExecutable;
+use PHP_Parallel_Lint\PhpParallelLint\FilteredRecursiveDirectoryIterator;
 use ReturnTypeWillChange;
 
 class Manager
@@ -149,7 +150,7 @@ class Manager
             } else if (is_dir($path)) {
                 $iterator = new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS);
                 if (!empty($excluded)) {
-                    $iterator = new RecursiveDirectoryFilterIterator($iterator, $excluded);
+                    $iterator = new FilteredRecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS, $excluded);
                 }
                 $iterator = new \RecursiveIteratorIterator(
                     $iterator,
