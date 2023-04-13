@@ -635,17 +635,17 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.11",
-            "version_normalized": "1.10.11.0",
+            "version": "1.10.13",
+            "version_normalized": "1.10.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "8aa62e6ea8b58ffb650e02940e55a788cbc3fe21"
+                "reference": "f07bf8c6980b81bf9e49d44bd0caf2e737614a70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/8aa62e6ea8b58ffb650e02940e55a788cbc3fe21",
-                "reference": "8aa62e6ea8b58ffb650e02940e55a788cbc3fe21",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/f07bf8c6980b81bf9e49d44bd0caf2e737614a70",
+                "reference": "f07bf8c6980b81bf9e49d44bd0caf2e737614a70",
                 "shasum": ""
             },
             "require": {
@@ -654,7 +654,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2023-04-04T19:17:42+00:00",
+            "time": "2023-04-12T19:29:52+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -1116,17 +1116,17 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.2.71",
-            "version_normalized": "0.2.71.0",
+            "version": "0.2.72",
+            "version_normalized": "0.2.72.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "5d759ac7c57fba21d31284937709ba923f4f8b51"
+                "reference": "e01951cc63a2fe32301aa0f11ce74872e3918108"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/5d759ac7c57fba21d31284937709ba923f4f8b51",
-                "reference": "5d759ac7c57fba21d31284937709ba923f4f8b51",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/e01951cc63a2fe32301aa0f11ce74872e3918108",
+                "reference": "e01951cc63a2fe32301aa0f11ce74872e3918108",
                 "shasum": ""
             },
             "require": {
@@ -1153,7 +1153,7 @@
                 "tomasvotruba/unused-public": "^0.1.9",
                 "vlucas/phpdotenv": "^5.4"
             },
-            "time": "2023-04-05T07:46:15+00:00",
+            "time": "2023-04-13T08:57:55+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1182,7 +1182,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.71"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.72"
             },
             "install-path": "../staabm/phpstan-dba"
         },
