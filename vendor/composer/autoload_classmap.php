@@ -2215,6 +2215,7 @@ return array(
     'staabm\\PHPStanDba\\SqlAst\\InstrReturnTypeExtension' => $vendorDir . '/staabm/phpstan-dba/src/SqlAst/InstrReturnTypeExtension.php',
     'staabm\\PHPStanDba\\SqlAst\\IsNullReturnTypeExtension' => $vendorDir . '/staabm/phpstan-dba/src/SqlAst/IsNullReturnTypeExtension.php',
     'staabm\\PHPStanDba\\SqlAst\\MinMaxReturnTypeExtension' => $vendorDir . '/staabm/phpstan-dba/src/SqlAst/MinMaxReturnTypeExtension.php',
+    'staabm\\PHPStanDba\\SqlAst\\NullIfReturnTypeExtension' => $vendorDir . '/staabm/phpstan-dba/src/SqlAst/NullIfReturnTypeExtension.php',
     'staabm\\PHPStanDba\\SqlAst\\ParserInference' => $vendorDir . '/staabm/phpstan-dba/src/SqlAst/ParserInference.php',
     'staabm\\PHPStanDba\\SqlAst\\PositiveIntReturnTypeExtension' => $vendorDir . '/staabm/phpstan-dba/src/SqlAst/PositiveIntReturnTypeExtension.php',
     'staabm\\PHPStanDba\\SqlAst\\QueryFunctionReturnTypeExtension' => $vendorDir . '/staabm/phpstan-dba/src/SqlAst/QueryFunctionReturnTypeExtension.php',
