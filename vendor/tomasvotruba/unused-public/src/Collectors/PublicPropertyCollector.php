@@ -81,15 +81,41 @@ final class PublicPropertyCollector implements Collector
             }
 
             foreach ($property->props as $propertyProperty) {
-                $publicPropertyNames[] = [
-                    $classReflection->getName(),
-                    $propertyProperty->name->toString(),
-                    $node->getLine(),
-                ];
+                $propertyName = $propertyProperty->name->toString();
+
+                if ($this->shouldSkipProperty($classReflection, $propertyName, $scope)) {
+                    continue;
+                }
+
+                $publicPropertyNames[] = [$classReflection->getName(), $propertyName, $node->getLine()];
             }
         }
 
         return $publicPropertyNames;
+    }
+
+    private function shouldSkipProperty(ClassReflection $classReflection, string $propertyName, Scope $scope): bool
+    {
+        if (! $classReflection->hasProperty($propertyName)) {
+            return false;
+        }
+
+        $propertyReflection = $classReflection->getProperty($propertyName, $scope);
+        // don't inherit doc from a private property
+        if ($propertyReflection->isPrivate()) {
+            return false;
+        }
+
+        $doc = $propertyReflection->getDocComment();
+        if ($doc !== null && $this->apiDocStmtAnalyzer->isApiDocComment($doc)) {
+            return true;
+        }
+
+        $parentClassReflection = $classReflection->getParentClass();
+        if ($parentClassReflection === null) {
+            return false;
+        }
+        return $this->shouldSkipProperty($parentClassReflection, $propertyName, $scope);
     }
 
     private function shouldSkipClass(ClassReflection $classReflection, Class_ $class): bool

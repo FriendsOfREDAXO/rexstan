@@ -2053,6 +2053,7 @@ return array(
     'TomasVotruba\\UnusedPublic\\ClassMethodCallReferenceResolver' => $vendorDir . '/tomasvotruba/unused-public/src/ClassMethodCallReferenceResolver.php',
     'TomasVotruba\\UnusedPublic\\CollectorMapper\\MethodCallCollectorMapper' => $vendorDir . '/tomasvotruba/unused-public/src/CollectorMapper/MethodCallCollectorMapper.php',
     'TomasVotruba\\UnusedPublic\\Collectors\\AttributeCallableCollector' => $vendorDir . '/tomasvotruba/unused-public/src/Collectors/AttributeCallableCollector.php',
+    'TomasVotruba\\UnusedPublic\\Collectors\\CallUserFuncCollector' => $vendorDir . '/tomasvotruba/unused-public/src/Collectors/CallUserFuncCollector.php',
     'TomasVotruba\\UnusedPublic\\Collectors\\ClassConstFetchCollector' => $vendorDir . '/tomasvotruba/unused-public/src/Collectors/ClassConstFetchCollector.php',
     'TomasVotruba\\UnusedPublic\\Collectors\\MethodCallCollector' => $vendorDir . '/tomasvotruba/unused-public/src/Collectors/MethodCallCollector.php',
     'TomasVotruba\\UnusedPublic\\Collectors\\PublicClassLikeConstCollector' => $vendorDir . '/tomasvotruba/unused-public/src/Collectors/PublicClassLikeConstCollector.php',

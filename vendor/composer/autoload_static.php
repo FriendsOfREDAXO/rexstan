@@ -2256,6 +2256,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'TomasVotruba\\UnusedPublic\\ClassMethodCallReferenceResolver' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/ClassMethodCallReferenceResolver.php',
         'TomasVotruba\\UnusedPublic\\CollectorMapper\\MethodCallCollectorMapper' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/CollectorMapper/MethodCallCollectorMapper.php',
         'TomasVotruba\\UnusedPublic\\Collectors\\AttributeCallableCollector' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Collectors/AttributeCallableCollector.php',
+        'TomasVotruba\\UnusedPublic\\Collectors\\CallUserFuncCollector' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Collectors/CallUserFuncCollector.php',
         'TomasVotruba\\UnusedPublic\\Collectors\\ClassConstFetchCollector' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Collectors/ClassConstFetchCollector.php',
         'TomasVotruba\\UnusedPublic\\Collectors\\MethodCallCollector' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Collectors/MethodCallCollector.php',
         'TomasVotruba\\UnusedPublic\\Collectors\\PublicClassLikeConstCollector' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Collectors/PublicClassLikeConstCollector.php',

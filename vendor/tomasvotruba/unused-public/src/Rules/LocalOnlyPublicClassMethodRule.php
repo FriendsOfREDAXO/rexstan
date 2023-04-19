@@ -12,6 +12,7 @@ use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use TomasVotruba\UnusedPublic\CollectorMapper\MethodCallCollectorMapper;
 use TomasVotruba\UnusedPublic\Collectors\AttributeCallableCollector;
+use TomasVotruba\UnusedPublic\Collectors\CallUserFuncCollector;
 use TomasVotruba\UnusedPublic\Collectors\MethodCallCollector;
 use TomasVotruba\UnusedPublic\Collectors\PublicClassMethodCollector;
 use TomasVotruba\UnusedPublic\Collectors\StaticMethodCallCollector;
@@ -19,7 +20,6 @@ use TomasVotruba\UnusedPublic\Configuration;
 use TomasVotruba\UnusedPublic\Enum\RuleTips;
 use TomasVotruba\UnusedPublic\Templates\TemplateMethodCallsProvider;
 use TomasVotruba\UnusedPublic\Templates\UsedMethodAnalyzer;
-use TomasVotruba\UnusedPublic\ValueObject\LocalAndExternalMethodCallReferences;
 
 /**
  * @see \TomasVotruba\UnusedPublic\Tests\Rules\LocalOnlyPublicClassMethodRule\LocalOnlyPublicClassMethodRuleTest
@@ -87,10 +87,24 @@ final class LocalOnlyPublicClassMethodRule implements Rule
         $localAndExternalMethodCallReferences = $this->methodCallCollectorMapper->mapToLocalAndExternal(
             $node->get(MethodCallCollector::class),
             $node->get(StaticMethodCallCollector::class),
-            $node->get(AttributeCallableCollector::class)
+            $node->get(AttributeCallableCollector::class),
+            $node->get(CallUserFuncCollector::class)
         );
 
         $publicClassMethodCollector = $node->get(PublicClassMethodCollector::class);
+        // php method calls are case-insensitive
+        $lowerExternalRefs = array_map(
+            function (string $item): string {
+                return strtolower($item);
+            },
+            $localAndExternalMethodCallReferences->getExternalMethodCallReferences()
+        );
+        $lowerLocalRefs = array_map(
+            function (string $item): string {
+                return strtolower($item);
+            },
+            $localAndExternalMethodCallReferences->getLocalMethodCallReferences()
+        );
 
         $ruleErrors = [];
 
@@ -99,7 +113,8 @@ final class LocalOnlyPublicClassMethodRule implements Rule
                 if (! $this->isUsedOnlyLocally(
                     $className,
                     $methodName,
-                    $localAndExternalMethodCallReferences,
+                    $lowerExternalRefs,
+                    $lowerLocalRefs,
                     $twigMethodNames
                 )) {
                     continue;
@@ -120,32 +135,27 @@ final class LocalOnlyPublicClassMethodRule implements Rule
     }
 
     /**
+     * @param string[] $lowerExternalRefs
+     * @param string[] $lowerLocalRefs
      * @param string[] $twigMethodNames
      */
     private function isUsedOnlyLocally(
         string $className,
         string $methodName,
-        LocalAndExternalMethodCallReferences $localAndExternalMethodCallReferences,
+        array $lowerExternalRefs,
+        array $lowerLocalRefs,
         array $twigMethodNames
     ): bool {
         if ($this->usedMethodAnalyzer->isUsedInTwig($methodName, $twigMethodNames)) {
             return true;
         }
 
-        $publicMethodReference = $className . '::' . $methodName;
+        $publicMethodReference = strtolower($className . '::' . $methodName);
 
-        if (in_array(
-            $publicMethodReference,
-            $localAndExternalMethodCallReferences->getExternalMethodCallReferences(),
-            true
-        )) {
+        if (in_array($publicMethodReference, $lowerExternalRefs, true)) {
             return false;
         }
 
-        return in_array(
-            $publicMethodReference,
-            $localAndExternalMethodCallReferences->getLocalMethodCallReferences(),
-            true
-        );
+        return in_array($publicMethodReference, $lowerLocalRefs, true);
     }
 }
