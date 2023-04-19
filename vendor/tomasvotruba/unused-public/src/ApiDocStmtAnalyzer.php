@@ -25,6 +25,11 @@ final class ApiDocStmtAnalyzer
             return false;
         }
 
-        return strpos($docComment->getText(), '@api') !== false;
+        return $this->isApiDocComment($docComment->getText());
+    }
+
+    public function isApiDocComment(string $docComment): bool
+    {
+        return strpos($docComment, '@api') !== false;
     }
 }

@@ -12,6 +12,7 @@ use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use TomasVotruba\UnusedPublic\CollectorMapper\MethodCallCollectorMapper;
 use TomasVotruba\UnusedPublic\Collectors\AttributeCallableCollector;
+use TomasVotruba\UnusedPublic\Collectors\CallUserFuncCollector;
 use TomasVotruba\UnusedPublic\Collectors\MethodCallCollector;
 use TomasVotruba\UnusedPublic\Collectors\PublicClassMethodCollector;
 use TomasVotruba\UnusedPublic\Collectors\StaticMethodCallCollector;
@@ -87,10 +88,18 @@ final class UnusedPublicClassMethodRule implements Rule
         $completeMethodCallReferences = $this->methodCallCollectorMapper->mapToMethodCallReferences(
             $node->get(MethodCallCollector::class),
             $node->get(StaticMethodCallCollector::class),
-            $node->get(AttributeCallableCollector::class)
+            $node->get(AttributeCallableCollector::class),
+            $node->get(CallUserFuncCollector::class)
         );
 
         $publicClassMethodCollector = $node->get(PublicClassMethodCollector::class);
+        // php method calls are case-insensitive
+        $lowerCompleteMethodCallReferences = array_map(
+            function (string $item): string {
+                return strtolower($item);
+            },
+            $completeMethodCallReferences
+        );
 
         $ruleErrors = [];
 
@@ -99,7 +108,7 @@ final class UnusedPublicClassMethodRule implements Rule
                 if ($this->isUsedClassMethod(
                     $className,
                     $methodName,
-                    $completeMethodCallReferences,
+                    $lowerCompleteMethodCallReferences,
                     $twigMethodNames,
                     $bladeMethodNames
                 )) {
@@ -121,14 +130,14 @@ final class UnusedPublicClassMethodRule implements Rule
     }
 
     /**
-     * @param string[] $completeMethodCallReferences
+     * @param string[] $lowerCompleteMethodCallReferences
      * @param string[] $twigMethodNames
      * @param string[] $bladeMethodNames
      */
     private function isUsedClassMethod(
         string $className,
         string $methodName,
-        array $completeMethodCallReferences,
+        array $lowerCompleteMethodCallReferences,
         array $twigMethodNames,
         array $bladeMethodNames
     ): bool {
@@ -141,6 +150,6 @@ final class UnusedPublicClassMethodRule implements Rule
         }
 
         $methodReference = $className . '::' . $methodName;
-        return in_array($methodReference, $completeMethodCallReferences, true);
+        return in_array(strtolower($methodReference), $lowerCompleteMethodCallReferences, true);
     }
 }

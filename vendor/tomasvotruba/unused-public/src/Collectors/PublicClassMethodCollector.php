@@ -10,6 +10,8 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Collectors\Collector;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ExtendedMethodReflection;
+use PHPStan\Reflection\Php\PhpMethodReflection;
+use PHPStan\Reflection\ResolvedMethodReflection;
 use TomasVotruba\UnusedPublic\ApiDocStmtAnalyzer;
 use TomasVotruba\UnusedPublic\Configuration;
 use TomasVotruba\UnusedPublic\PublicClassMethodMatcher;
@@ -83,6 +85,10 @@ final class PublicClassMethodCollector implements Collector
             return null;
         }
 
+        if ($this->isTraitMethod($node, $scope)) {
+            return null;
+        }
+
         $classReflection = $scope->getClassReflection();
 
         // skip
@@ -149,5 +155,20 @@ final class PublicClassMethodCollector implements Collector
         }
 
         return strpos($extendedMethodReflection->getDocComment(), '@test') !== false;
+    }
+
+    private function isTraitMethod(ClassMethod $classMethod, Scope $scope): bool
+    {
+        $classReflection = $scope->getClassReflection();
+        if (! $classReflection instanceof ClassReflection) {
+            return false;
+        }
+
+        $extendedMethodReflection = $classReflection->getMethod($classMethod->name->toString(), $scope);
+        if ($extendedMethodReflection instanceof PhpMethodReflection || $extendedMethodReflection instanceof ResolvedMethodReflection) {
+            return $extendedMethodReflection->getDeclaringTrait() !== null;
+        }
+
+        return false;
     }
 }
