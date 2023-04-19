@@ -15,9 +15,13 @@ class TypeParser
 	/** @var ConstExprParser|null */
 	private $constExprParser;
 
-	public function __construct(?ConstExprParser $constExprParser = null)
+	/** @var bool */
+	private $quoteAwareConstExprString;
+
+	public function __construct(?ConstExprParser $constExprParser = null, bool $quoteAwareConstExprString = false)
 	{
 		$this->constExprParser = $constExprParser;
+		$this->quoteAwareConstExprString = $quoteAwareConstExprString;
 	}
 
 	/** @phpstan-impure */
@@ -571,11 +575,20 @@ class TypeParser
 			$tokens->next();
 
 		} elseif ($tokens->isCurrentTokenType(Lexer::TOKEN_SINGLE_QUOTED_STRING)) {
-			$key = new Ast\ConstExpr\ConstExprStringNode(trim($tokens->currentTokenValue(), "'"));
+			if ($this->quoteAwareConstExprString) {
+				$key = new Ast\ConstExpr\QuoteAwareConstExprStringNode(StringUnescaper::unescapeString($tokens->currentTokenValue()), Ast\ConstExpr\QuoteAwareConstExprStringNode::SINGLE_QUOTED);
+			} else {
+				$key = new Ast\ConstExpr\ConstExprStringNode(trim($tokens->currentTokenValue(), "'"));
+			}
 			$tokens->next();
 
 		} elseif ($tokens->isCurrentTokenType(Lexer::TOKEN_DOUBLE_QUOTED_STRING)) {
-			$key = new Ast\ConstExpr\ConstExprStringNode(trim($tokens->currentTokenValue(), '"'));
+			if ($this->quoteAwareConstExprString) {
+				$key = new Ast\ConstExpr\QuoteAwareConstExprStringNode(StringUnescaper::unescapeString($tokens->currentTokenValue()), Ast\ConstExpr\QuoteAwareConstExprStringNode::DOUBLE_QUOTED);
+			} else {
+				$key = new Ast\ConstExpr\ConstExprStringNode(trim($tokens->currentTokenValue(), '"'));
+			}
+
 			$tokens->next();
 
 		} else {
@@ -631,11 +644,19 @@ class TypeParser
 	private function parseObjectShapeKey(TokenIterator $tokens)
 	{
 		if ($tokens->isCurrentTokenType(Lexer::TOKEN_SINGLE_QUOTED_STRING)) {
-			$key = new Ast\ConstExpr\ConstExprStringNode(trim($tokens->currentTokenValue(), "'"));
+			if ($this->quoteAwareConstExprString) {
+				$key = new Ast\ConstExpr\QuoteAwareConstExprStringNode(StringUnescaper::unescapeString($tokens->currentTokenValue()), Ast\ConstExpr\QuoteAwareConstExprStringNode::SINGLE_QUOTED);
+			} else {
+				$key = new Ast\ConstExpr\ConstExprStringNode(trim($tokens->currentTokenValue(), "'"));
+			}
 			$tokens->next();
 
 		} elseif ($tokens->isCurrentTokenType(Lexer::TOKEN_DOUBLE_QUOTED_STRING)) {
-			$key = new Ast\ConstExpr\ConstExprStringNode(trim($tokens->currentTokenValue(), '"'));
+			if ($this->quoteAwareConstExprString) {
+				$key = new Ast\ConstExpr\QuoteAwareConstExprStringNode(StringUnescaper::unescapeString($tokens->currentTokenValue()), Ast\ConstExpr\QuoteAwareConstExprStringNode::DOUBLE_QUOTED);
+			} else {
+				$key = new Ast\ConstExpr\ConstExprStringNode(trim($tokens->currentTokenValue(), '"'));
+			}
 			$tokens->next();
 
 		} else {
