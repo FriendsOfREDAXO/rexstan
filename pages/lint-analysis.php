@@ -5,6 +5,7 @@
 use rexstan\RexCmd;
 use rexstan\RexLint;
 use rexstan\RexResultsRenderer;
+use rexstan\RexStanSettings;
 
 $errors = RexLint::runFromWeb();
 if (count($errors) > 0) {
@@ -17,3 +18,5 @@ if (count($errors) > 0) {
 
 $cliVersion = RexCmd::getFormattedCliPhpVersion();
 echo rex_view::warning('Verwendete CLI PHP Version: '. $cliVersion);
+
+echo RexStanSettings::outputSettings();
