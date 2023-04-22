@@ -1,6 +1,7 @@
 <?php
 
 use rexstan\RexStan;
+use rexstan\RexStanSettings;
 use staabm\PHPStanBaselineAnalysis\ResultPrinter;
 
 $result = RexStan::analyzeSummaryBaseline();
@@ -55,3 +56,5 @@ if ($result === null) {
 </table>
 
 <p>Die Zusammenfassung ist abhängig von den in den <a href="<?= $settingsUrl ?>">Einstellungen</a> definierten PHPStan-Extensions</p>
+
+<?= RexStanSettings::outputSettings() ?>
