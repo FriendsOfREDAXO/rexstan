@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6b2d36e7bc9b517cdabf65e8b050db27",
+    "content-hash": "a62dd4d4517553c16c4ee5df2a8f4d76",
     "packages": [
         {
             "name": "composer/semver",
@@ -896,16 +896,16 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v2.12.1",
+            "version": "v2.14.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "d598c896bcc05f77e8b270f5a249910680686e65"
+                "reference": "b991392c0904fdb3320c978e812da872c768e518"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/d598c896bcc05f77e8b270f5a249910680686e65",
-                "reference": "d598c896bcc05f77e8b270f5a249910680686e65",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/b991392c0904fdb3320c978e812da872c768e518",
+                "reference": "b991392c0904fdb3320c978e812da872c768e518",
                 "shasum": ""
             },
             "require": {
@@ -917,8 +917,8 @@
                 "nikic/php-parser": "^4.13",
                 "php-parallel-lint/php-console-highlighter": "^1.0",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
-                "phpunit/phpunit": "^7.0 || ^9.4.2",
-                "spaze/coding-standard": "^1.3"
+                "phpunit/phpunit": "^8.5 || ^10.1",
+                "spaze/coding-standard": "^1.6"
             },
             "type": "phpstan-extension",
             "extra": {
@@ -950,9 +950,15 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.12.1"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.14.1"
             },
-            "time": "2023-03-20T20:29:04+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/spaze",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-04-26T01:51:29+00:00"
         },
         {
             "name": "sqlftw/sqlftw",
