@@ -27,24 +27,26 @@
 	"require-dev": {
 		"nette/neon": "^3.2",
 		"nikic/php-parser": "^4.13",
-		"phpunit/phpunit": "^7.0 || ^9.4.2",
+		"phpunit/phpunit": "^8.5 || ^10.1",
 		"php-parallel-lint/php-parallel-lint": "^1.2",
 		"php-parallel-lint/php-console-highlighter": "^1.0",
-		"spaze/coding-standard": "^1.3"
+		"spaze/coding-standard": "^1.6"
 	},
 	"autoload": {
 		"psr-4": {"Spaze\\PHPStan\\Rules\\Disallowed\\": "src"}
 	},
 	"scripts": {
 		"lint": "vendor/bin/parallel-lint --colors src/ tests/",
-		"lint-7.x": "vendor/bin/parallel-lint --colors src/ tests/ --exclude tests/libs/TypesEverywhere.php --exclude tests/src/disallowed/functionCallsNamedParams.php --exclude tests/src/disallowed-allow/functionCallsNamedParams.php",
+		"lint-7.x": "vendor/bin/parallel-lint --colors src/ tests/ --exclude tests/libs/TypesEverywhere.php --exclude tests/src/disallowed/functionCallsNamedParams.php --exclude tests/src/disallowed-allow/functionCallsNamedParams.php --exclude tests/src/disallowed/attributeUsages.php --exclude tests/src/disallowed-allow/attributeUsages.php",
 		"lint-8.0": "vendor/bin/parallel-lint --colors src/ tests/ --exclude tests/libs/TypesEverywhere.php",
+		"lint-neon": "vendor/bin/neon-lint .",
 		"phpcs": "vendor/bin/phpcs src/ tests/",
 		"cs-fix": "vendor/bin/phpcbf src/ tests/",
 		"phpstan": "vendor/bin/phpstan --ansi analyse --configuration phpstan.neon",
 		"phpunit": "vendor/bin/phpunit --colors=always",
 		"test": [
 			"@lint",
+			"@lint-neon",
 			"@phpcs",
 			"@phpstan",
 			"@phpunit"
