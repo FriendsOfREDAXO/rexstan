@@ -29,7 +29,7 @@ final class NoProtectedClassElementRule implements Rule
     /**
      * @var string
      */
-    public const ERROR_MESSAGE = 'Instead of protected element in use private element or contract method';
+    public const ERROR_MESSAGE = 'Instead of protected element, use private element or contract method';
     /**
      * @readonly
      * @var \Symplify\PHPStanRules\ParentGuard\ParentClassMethodGuard

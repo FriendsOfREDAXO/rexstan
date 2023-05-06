@@ -11,9 +11,11 @@ use PhpParser\Node\Name\FullyQualified;
 use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
+use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
+use PHPStan\Type\Generic\TemplateType;
 use PHPStan\Type\IntersectionType;
 use PHPStan\Type\MixedType;
 use PHPStan\Type\ObjectType;
@@ -152,8 +154,11 @@ CODE_SAMPLE
             }
 
             $argType = $scope->getType($arg->value);
-
             if ($argType instanceof MixedType) {
+                continue;
+            }
+
+            if ($argType instanceof TemplateType) {
                 continue;
             }
 
@@ -190,6 +195,11 @@ CODE_SAMPLE
         $objectType = new ObjectType($type->toString());
 
         if ($objectType->equals($argType)) {
+            return null;
+        }
+
+        $classReflection = $objectType->getClassReflection();
+        if ($classReflection instanceof ClassReflection && $classReflection->isAbstract()) {
             return null;
         }
 

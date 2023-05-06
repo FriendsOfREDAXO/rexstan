@@ -9,9 +9,9 @@
 
 namespace SqlFtw\Sql\Dml\Insert;
 
-use SqlFtw\Sql\Ddl\DdlCommand;
+use SqlFtw\Sql\Dml\DmlCommand;
 
-interface InsertCommand extends DdlCommand
+interface InsertCommand extends DmlCommand
 {
 
 }

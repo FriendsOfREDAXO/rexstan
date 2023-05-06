@@ -111,6 +111,6 @@ CODE_SAMPLE
             return true;
         }
 
-        return count($methodCall->args) <= 1;
+        return count($methodCall->getArgs()) <= 1;
     }
 }

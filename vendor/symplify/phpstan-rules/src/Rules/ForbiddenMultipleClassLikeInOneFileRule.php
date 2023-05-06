@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules;
 
 use PhpParser\Node;
+use PhpParser\Node\Identifier;
 use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\NodeFinder;
 use PHPStan\Analyser\Scope;
@@ -53,7 +54,7 @@ final class ForbiddenMultipleClassLikeInOneFileRule implements Rule
 
         $findclassLikes = [];
         foreach ($classLikes as $classLike) {
-            if ($classLike->name === null) {
+            if (! $classLike->name instanceof Identifier) {
                 continue;
             }
 

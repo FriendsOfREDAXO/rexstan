@@ -586,54 +586,6 @@
             "install-path": "../php-parallel-lint/php-parallel-lint"
         },
         {
-            "name": "phpstan/phpdoc-parser",
-            "version": "1.19.1",
-            "version_normalized": "1.19.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "f545fc30978190a056832aa7ed995e36a66267f3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/f545fc30978190a056832aa7ed995e36a66267f3",
-                "reference": "f545fc30978190a056832aa7ed995e36a66267f3",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2 || ^8.0"
-            },
-            "require-dev": {
-                "php-parallel-lint/php-parallel-lint": "^1.2",
-                "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^1.5",
-                "phpstan/phpstan-phpunit": "^1.1",
-                "phpstan/phpstan-strict-rules": "^1.0",
-                "phpunit/phpunit": "^9.5",
-                "symfony/process": "^5.2"
-            },
-            "time": "2023-04-18T11:30:56+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "PHPStan\\PhpDocParser\\": [
-                        "src/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "PHPDoc parser with support for nullable, intersection and generic types",
-            "support": {
-                "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.19.1"
-            },
-            "install-path": "../phpstan/phpdoc-parser"
-        },
-        {
             "name": "phpstan/phpstan",
             "version": "1.10.14",
             "version_normalized": "1.10.14.0",
@@ -995,17 +947,17 @@
         },
         {
             "name": "sqlftw/sqlftw",
-            "version": "v0.1.10",
-            "version_normalized": "0.1.10.0",
+            "version": "v0.1.11",
+            "version_normalized": "0.1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SQLFTW/sqlftw.git",
-                "reference": "dec382cbfac01223f3bf13b7f92a30434a1d45bc"
+                "reference": "e36c0b177934b2aba6cccb2d5221990792893e00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SQLFTW/sqlftw/zipball/dec382cbfac01223f3bf13b7f92a30434a1d45bc",
-                "reference": "dec382cbfac01223f3bf13b7f92a30434a1d45bc",
+                "url": "https://api.github.com/repos/SQLFTW/sqlftw/zipball/e36c0b177934b2aba6cccb2d5221990792893e00",
+                "reference": "e36c0b177934b2aba6cccb2d5221990792893e00",
                 "shasum": ""
             },
             "require": {
@@ -1020,7 +972,7 @@
                 "phpstan/phpstan-strict-rules": "^1.0",
                 "rector/rector": "0.14.8"
             },
-            "time": "2023-03-17T11:18:17+00:00",
+            "time": "2023-05-03T13:50:04+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1042,7 +994,7 @@
             "homepage": "https://github.com/sqlftw/sqlftw",
             "support": {
                 "issues": "https://github.com/SQLFTW/sqlftw/issues",
-                "source": "https://github.com/SQLFTW/sqlftw/tree/v0.1.10"
+                "source": "https://github.com/SQLFTW/sqlftw/tree/v0.1.11"
             },
             "install-path": "../sqlftw/sqlftw"
         },
@@ -1274,28 +1226,27 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "11.2.5.72",
-            "version_normalized": "11.2.5.72",
+            "version": "11.3.5.72",
+            "version_normalized": "11.3.5.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "28c78a269fe2138f383bf1d2b9deebd70eff1215"
+                "reference": "40f6d2a260cff143916cc6504c2289f6b8a7c5db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/28c78a269fe2138f383bf1d2b9deebd70eff1215",
-                "reference": "28c78a269fe2138f383bf1d2b9deebd70eff1215",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/40f6d2a260cff143916cc6504c2289f6b8a7c5db",
+                "reference": "40f6d2a260cff143916cc6504c2289f6b8a7c5db",
                 "shasum": ""
             },
             "require": {
-                "nette/utils": "^3.2",
+                "nette/utils": "^3.2 || ^4.0",
                 "nikic/php-parser": "^4.15.2",
                 "php": "^7.2|^8.0",
-                "phpstan/phpdoc-parser": "^1.15.0",
                 "phpstan/phpstan": "^1.9.11",
                 "webmozart/assert": "^1.10"
             },
-            "time": "2023-03-28T21:02:20+00:00",
+            "time": "2023-05-05T12:05:47+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "branch-alias": {
@@ -1324,7 +1275,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/11.2.5.72"
+                "source": "https://github.com/symplify/phpstan-rules/tree/11.3.5.72"
             },
             "funding": [
                 {
