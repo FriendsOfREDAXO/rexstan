@@ -81,6 +81,11 @@ final class GraphTemplate
                     'type' => 'bar',
                     'data' => []
                 ];
+                $splines[$baselinePath][9] = [
+                    'label' => ResultPrinter::KEY_UNUSED_SYMBOLS,
+                    'borderColor' => 'lightyellow',
+                    'data' => []
+                ];
             }
 
             $dataByDates[$baselinePath][$analyzerResult->referenceDate->getTimestamp()] = [
@@ -93,6 +98,7 @@ final class GraphTemplate
                 $analyzerResult->propertyTypeCoverage,
                 $analyzerResult->paramTypeCoverage,
                 $analyzerResult->returnTypeCoverage,
+                $analyzerResult->unusedSymbols,
             ];
         }
 
