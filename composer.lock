@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9739a30f04707e6171ee996cf6c1e9d5",
+    "content-hash": "a83bb79cff58773c49660294db1efc2d",
     "packages": [
         {
             "name": "composer/semver",
@@ -566,51 +566,6 @@
                 "source": "https://github.com/php-parallel-lint/PHP-Parallel-Lint/tree/v1.3.2"
             },
             "time": "2022-02-21T12:50:22+00:00"
-        },
-        {
-            "name": "phpstan/phpdoc-parser",
-            "version": "1.19.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "f545fc30978190a056832aa7ed995e36a66267f3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/f545fc30978190a056832aa7ed995e36a66267f3",
-                "reference": "f545fc30978190a056832aa7ed995e36a66267f3",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2 || ^8.0"
-            },
-            "require-dev": {
-                "php-parallel-lint/php-parallel-lint": "^1.2",
-                "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^1.5",
-                "phpstan/phpstan-phpunit": "^1.1",
-                "phpstan/phpstan-strict-rules": "^1.0",
-                "phpunit/phpunit": "^9.5",
-                "symfony/process": "^5.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "PHPStan\\PhpDocParser\\": [
-                        "src/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "PHPDoc parser with support for nullable, intersection and generic types",
-            "support": {
-                "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.19.1"
-            },
-            "time": "2023-04-18T11:30:56+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -1223,23 +1178,22 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "11.2.5.72",
+            "version": "11.3.5.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "28c78a269fe2138f383bf1d2b9deebd70eff1215"
+                "reference": "40f6d2a260cff143916cc6504c2289f6b8a7c5db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/28c78a269fe2138f383bf1d2b9deebd70eff1215",
-                "reference": "28c78a269fe2138f383bf1d2b9deebd70eff1215",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/40f6d2a260cff143916cc6504c2289f6b8a7c5db",
+                "reference": "40f6d2a260cff143916cc6504c2289f6b8a7c5db",
                 "shasum": ""
             },
             "require": {
-                "nette/utils": "^3.2",
+                "nette/utils": "^3.2 || ^4.0",
                 "nikic/php-parser": "^4.15.2",
                 "php": "^7.2|^8.0",
-                "phpstan/phpdoc-parser": "^1.15.0",
                 "phpstan/phpstan": "^1.9.11",
                 "webmozart/assert": "^1.10"
             },
@@ -1270,7 +1224,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/11.2.5.72"
+                "source": "https://github.com/symplify/phpstan-rules/tree/11.3.5.72"
             },
             "funding": [
                 {
@@ -1282,7 +1236,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-28T21:02:20+00:00"
+            "time": "2023-05-05T12:05:47+00:00"
         },
         {
             "name": "thecodingmachine/phpstan-safe-rule",
