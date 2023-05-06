@@ -21,6 +21,7 @@ if ($result === null) {
             <td>Overall-Errors</td>
             <td>Cognitive-Complexity</td>
             <td>Deprecations</td>
+            <td>Unused Elements</td>
             <td>Invalide PHPDocs</td>
             <td>Unknown-Types</td>
             <td>Anonymous-Variables</td>
@@ -30,6 +31,7 @@ if ($result === null) {
             <td><?= $result[ResultPrinter::KEY_OVERALL_ERRORS] ?></td>
             <td><?= $result[ResultPrinter::KEY_CLASSES_COMPLEXITY] ?></td>
             <td><?= $result[ResultPrinter::KEY_DEPRECATIONS] ?></td>
+            <td><?= $result[ResultPrinter::KEY_UNUSED_SYMBOLS] ?></td>
             <td><?= $result[ResultPrinter::KEY_INVALID_PHPDOCS] ?></td>
             <td><?= $result[ResultPrinter::KEY_UNKNOWN_TYPES] ?></td>
             <td><?= $result[ResultPrinter::KEY_ANONYMOUS_VARIABLES] ?></td>
