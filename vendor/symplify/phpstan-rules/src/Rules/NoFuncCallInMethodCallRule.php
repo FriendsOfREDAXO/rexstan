@@ -10,6 +10,7 @@ use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
+use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
@@ -46,22 +47,17 @@ final class NoFuncCallInMethodCallRule implements Rule
     {
         $messages = [];
 
-        foreach ($node->args as $arg) {
-            if (! $arg instanceof Arg) {
-                continue;
-            }
-
+        foreach ($node->getArgs() as $arg) {
             if (! $arg->value instanceof FuncCall) {
                 continue;
             }
 
             $funcCallName = $this->resolveFuncCallName($arg);
-
-            if (strpos($funcCallName, '\\') !== false) {
+            if ($this->shouldSkipFuncCallName($funcCallName)) {
                 continue;
             }
 
-            if (in_array($funcCallName, self::ALLOWED_FUNC_CALL_NAMES, true)) {
+            if ($this->isSprintfInConsoleOutput($funcCallName, $scope, $node)) {
                 continue;
             }
 
@@ -112,5 +108,40 @@ CODE_SAMPLE
         }
 
         return (string) $funcCall->name;
+    }
+
+    private function shouldSkipFuncCallName(string $funcCallName): bool
+    {
+        if (strpos($funcCallName, '\\') !== false) {
+            return true;
+        }
+
+        return in_array($funcCallName, self::ALLOWED_FUNC_CALL_NAMES, true);
+    }
+
+    private function isSprintfInConsoleOutput(string $funcCallName, Scope $scope, MethodCall $methodCall): bool
+    {
+        if ($funcCallName !== 'sprintf') {
+            return false;
+        }
+
+        $callerType = $scope->getType($methodCall->var);
+
+        foreach ($callerType->getObjectClassReflections() as $objectClassReflection) {
+            /** @var ClassReflection $objectClassReflection */
+            if ($objectClassReflection->getName() === 'Symfony\Component\Console\Output\OutputInterface') {
+                return true;
+            }
+
+            if ($objectClassReflection->isSubclassOf('Symfony\Component\Console\Output\OutputInterface')) {
+                return true;
+            }
+
+            if ($objectClassReflection->isSubclassOf('Illuminate\Console\Command')) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

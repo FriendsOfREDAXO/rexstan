@@ -9,7 +9,6 @@ use PhpParser\Node\Expr\CallLike;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\MethodCall;
 use PhpParser\Node\Expr\StaticCall;
-use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
@@ -63,7 +62,7 @@ final class ForbiddenThisArgumentRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if (! $node instanceof MethodCall && ! $node instanceof FuncCall && ! $node instanceof StaticCall) {
+        if (! $node instanceof MethodCall && ! $node instanceof StaticCall) {
             return [];
         }
 
@@ -119,14 +118,6 @@ CODE_SAMPLE
     {
         if ($node instanceof MethodCall) {
             return $this->containsTypeAnalyser->containsExprTypes($node->var, $scope, self::ALLOWED_CALLER_CLASSES);
-        }
-
-        if ($node instanceof FuncCall) {
-            if (! $node->name instanceof Name) {
-                return false;
-            }
-
-            return $node->name->toString() === 'method_exists';
         }
 
         return false;
