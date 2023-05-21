@@ -29,19 +29,17 @@ rules:
     # explicit naming
     - Symplify\PHPStanRules\Rules\NoDefaultExceptionRule
     - Symplify\PHPStanRules\Rules\NoParentMethodCallOnNoOverrideProcessRule
-    - Symplify\PHPStanRules\Rules\RequireThisOnParentMethodCallRule
-    - Symplify\PHPStanRules\Rules\RequireThisCallOnLocalMethodRule
     - Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule
 
     # comlexity
     - Symplify\PHPStanRules\Rules\Complexity\ForbiddenSameNamedNewInstanceRule
+    - Symplify\PHPStanRules\Rules\NarrowType\NoReturnFalseInNonBoolClassMethodRule
 
     - Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule
     - Symplify\PHPStanRules\Rules\ForbiddenThisArgumentRule
     - Symplify\PHPStanRules\Rules\ForbiddenSpreadOperatorRule
     - Symplify\PHPStanRules\Rules\ForbiddenAnonymousClassRule
     - Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule
-    - Symplify\PHPStanRules\Symfony\Rules\PreventDoubleSetParameterRule
     - Symplify\PHPStanRules\Rules\NoEmptyClassRule
 
     # naming
