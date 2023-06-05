@@ -6,19 +6,24 @@ namespace Spaze\PHPStan\Rules\Disallowed\RuleErrors;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use Spaze\PHPStan\Rules\Disallowed\AllowedPath;
+use Spaze\PHPStan\Rules\Disallowed\Allowed\AllowedPath;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedNamespace;
+use Spaze\PHPStan\Rules\Disallowed\Identifier\Identifier;
 
 class DisallowedNamespaceRuleErrors
 {
 
 	/** @var AllowedPath */
-	private $isAllowedFileHelper;
+	private $allowedPath;
+
+	/** @var Identifier */
+	private $identifier;
 
 
-	public function __construct(AllowedPath $isAllowedFileHelper)
+	public function __construct(AllowedPath $allowedPath, Identifier $identifier)
 	{
-		$this->isAllowedFileHelper = $isAllowedFileHelper;
+		$this->allowedPath = $allowedPath;
+		$this->identifier = $identifier;
 	}
 
 
@@ -32,11 +37,11 @@ class DisallowedNamespaceRuleErrors
 	public function getDisallowedMessage(string $namespace, string $description, Scope $scope, array $disallowedNamespaces): array
 	{
 		foreach ($disallowedNamespaces as $disallowedNamespace) {
-			if ($this->isAllowedFileHelper->isAllowedPath($scope, $disallowedNamespace)) {
+			if ($this->allowedPath->isAllowedPath($scope, $disallowedNamespace)) {
 				continue;
 			}
 
-			if (!$this->matchesNamespace($disallowedNamespace->getNamespace(), $namespace)) {
+			if (!$this->identifier->matches($disallowedNamespace->getNamespace(), $namespace, $disallowedNamespace->getExcludes())) {
 				continue;
 			}
 
@@ -59,20 +64,6 @@ class DisallowedNamespaceRuleErrors
 		}
 
 		return [];
-	}
-
-
-	private function matchesNamespace(string $pattern, string $value): bool
-	{
-		if ($pattern === $value) {
-			return true;
-		}
-
-		if (fnmatch($pattern, $value, FNM_NOESCAPE | FNM_CASEFOLD)) {
-			return true;
-		}
-
-		return false;
 	}
 
 }

@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace Spaze\PHPStan\Rules\Disallowed;
 
 use PHPStan\ShouldNotHappenException;
+use Spaze\PHPStan\Rules\Disallowed\Allowed\Allowed;
 use Spaze\PHPStan\Rules\Disallowed\Exceptions\UnsupportedParamTypeInConfigException;
 use Spaze\PHPStan\Rules\Disallowed\Formatter\Formatter;
 use Spaze\PHPStan\Rules\Disallowed\Normalizer\Normalizer;
@@ -45,11 +46,17 @@ class DisallowedCallFactory
 			if (!$calls) {
 				throw new ShouldNotHappenException("Either 'method' or 'function' must be set in configuration items");
 			}
+			$excludes = [];
+			foreach ((array)($disallowed['exclude'] ?? []) as $exclude) {
+				$excludes[] = $this->normalizer->normalizeCall($exclude);
+			}
 			$calls = (array)$calls;
 			try {
 				foreach ($calls as $call) {
 					$disallowedCall = new DisallowedCall(
 						$this->normalizer->normalizeCall($call),
+						$excludes,
+						(array)($disallowed['definedIn'] ?? []),
 						$disallowed['message'] ?? null,
 						$this->allowed->getConfig($disallowed),
 						$disallowed['errorIdentifier'] ?? null,
