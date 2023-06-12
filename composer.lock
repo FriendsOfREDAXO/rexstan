@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4926f8820166cc7e4b16afa97bbe46ff",
+    "content-hash": "7559e8ad19e8fd3449c794d0b083cf97",
     "packages": [
         {
             "name": "composer/semver",
@@ -1185,16 +1185,16 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "12.0.2.72",
+            "version": "12.0.3.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "64e528764f511437d71b4c2d539ec343bd130a60"
+                "reference": "b192fada83caaabfcc78ed553c34eead67501a36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/64e528764f511437d71b4c2d539ec343bd130a60",
-                "reference": "64e528764f511437d71b4c2d539ec343bd130a60",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/b192fada83caaabfcc78ed553c34eead67501a36",
+                "reference": "b192fada83caaabfcc78ed553c34eead67501a36",
                 "shasum": ""
             },
             "require": {
@@ -1231,7 +1231,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/12.0.2.72"
+                "source": "https://github.com/symplify/phpstan-rules/tree/12.0.3.72"
             },
             "funding": [
                 {
@@ -1243,7 +1243,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-19T12:16:19+00:00"
+            "time": "2023-06-09T13:53:44+00:00"
         },
         {
             "name": "thecodingmachine/phpstan-safe-rule",
