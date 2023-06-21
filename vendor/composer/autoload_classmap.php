@@ -1987,6 +1987,7 @@ return array(
     'TomasVotruba\\UnusedPublic\\Collectors\\AttributeCallableCollector' => $vendorDir . '/tomasvotruba/unused-public/src/Collectors/AttributeCallableCollector.php',
     'TomasVotruba\\UnusedPublic\\Collectors\\CallUserFuncCollector' => $vendorDir . '/tomasvotruba/unused-public/src/Collectors/CallUserFuncCollector.php',
     'TomasVotruba\\UnusedPublic\\Collectors\\ClassConstFetchCollector' => $vendorDir . '/tomasvotruba/unused-public/src/Collectors/ClassConstFetchCollector.php',
+    'TomasVotruba\\UnusedPublic\\Collectors\\FormTypeClassCollector' => $vendorDir . '/tomasvotruba/unused-public/src/Collectors/FormTypeClassCollector.php',
     'TomasVotruba\\UnusedPublic\\Collectors\\MethodCallCollector' => $vendorDir . '/tomasvotruba/unused-public/src/Collectors/MethodCallCollector.php',
     'TomasVotruba\\UnusedPublic\\Collectors\\PublicClassLikeConstCollector' => $vendorDir . '/tomasvotruba/unused-public/src/Collectors/PublicClassLikeConstCollector.php',
     'TomasVotruba\\UnusedPublic\\Collectors\\PublicClassMethodCollector' => $vendorDir . '/tomasvotruba/unused-public/src/Collectors/PublicClassMethodCollector.php',

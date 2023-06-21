@@ -29,7 +29,7 @@ final class LocalOnlyPublicClassMethodRule implements Rule
     /**
      * @var string
      */
-    public const ERROR_MESSAGE = 'Public method "%s::%s()" is used only locally and should turned protected/private';
+    public const ERROR_MESSAGE = 'Public method "%s::%s()" is used only locally and should be turned protected/private';
 
     /**
      * @readonly
@@ -94,13 +94,13 @@ final class LocalOnlyPublicClassMethodRule implements Rule
         $publicClassMethodCollector = $node->get(PublicClassMethodCollector::class);
         // php method calls are case-insensitive
         $lowerExternalRefs = array_map(
-            function (string $item): string {
+            static function (string $item): string {
                 return strtolower($item);
             },
             $localAndExternalMethodCallReferences->getExternalMethodCallReferences()
         );
         $lowerLocalRefs = array_map(
-            function (string $item): string {
+            static function (string $item): string {
                 return strtolower($item);
             },
             $localAndExternalMethodCallReferences->getLocalMethodCallReferences()

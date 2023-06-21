@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b02673842ddbc16ccdcb9efb750352a9",
+    "content-hash": "dc3ba932fcc662f4ff3acee84b00e37b",
     "packages": [
         {
             "name": "composer/semver",
@@ -1553,22 +1553,22 @@
         },
         {
             "name": "tomasvotruba/unused-public",
-            "version": "0.1.10.72",
+            "version": "0.1.12.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/unused-public.git",
-                "reference": "fc1735d1e891617baa0481df954e50d53ce43311"
+                "reference": "74feba5b5fbaaea6dca0d4a649d9d597938204bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/fc1735d1e891617baa0481df954e50d53ce43311",
-                "reference": "fc1735d1e891617baa0481df954e50d53ce43311",
+                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/74feba5b5fbaaea6dca0d4a649d9d597938204bf",
+                "reference": "74feba5b5fbaaea6dca0d4a649d9d597938204bf",
                 "shasum": ""
             },
             "require": {
                 "nette/utils": "^3.2",
                 "php": "^7.2 || 8.0.*",
-                "phpstan/phpstan": "^1.9.3",
+                "phpstan/phpstan": "^1.10.19",
                 "webmozart/assert": "^1.11"
             },
             "type": "phpstan-extension",
@@ -1595,7 +1595,7 @@
             ],
             "support": {
                 "issues": "https://github.com/TomasVotruba/unused-public/issues",
-                "source": "https://github.com/TomasVotruba/unused-public/tree/0.1.10.72"
+                "source": "https://github.com/TomasVotruba/unused-public/tree/0.1.12.72"
             },
             "funding": [
                 {
@@ -1607,7 +1607,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-16T12:19:16+00:00"
+            "time": "2023-06-19T09:23:27+00:00"
         },
         {
             "name": "webmozart/assert",
