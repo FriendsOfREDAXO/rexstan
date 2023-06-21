@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "083703d011b57910d7b8c015b6b5b84d",
+    "content-hash": "f7a46c0c4036e6e3072b9ec0f104b080",
     "packages": [
         {
             "name": "composer/semver",
@@ -968,16 +968,16 @@
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
-            "version": "0.10.1",
+            "version": "0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-baseline-analysis.git",
-                "reference": "afde491a460f72a2072c3509a7725739642eba37"
+                "reference": "84f64322ef8689510cd12b423b8725442e7ef019"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/afde491a460f72a2072c3509a7725739642eba37",
-                "reference": "afde491a460f72a2072c3509a7725739642eba37",
+                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/84f64322ef8689510cd12b423b8725442e7ef019",
+                "reference": "84f64322ef8689510cd12b423b8725442e7ef019",
                 "shasum": ""
             },
             "require": {
@@ -993,8 +993,8 @@
                 "symfony/var-dumper": "^5.3",
                 "thecodingmachine/phpstan-safe-rule": "^1.2",
                 "tomasvotruba/cognitive-complexity": "^0.1.1",
-                "tomasvotruba/type-coverage": "^0.1.3",
-                "tomasvotruba/unused-public": "^0.1.10"
+                "tomasvotruba/type-coverage": "^0.2.0",
+                "tomasvotruba/unused-public": "^0.1.12"
             },
             "bin": [
                 "bin/phpstan-baseline-analyze",
@@ -1021,7 +1021,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-baseline-analysis/issues",
-                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.10.1"
+                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.11"
             },
             "funding": [
                 {
@@ -1029,7 +1029,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-20T09:58:39+00:00"
+            "time": "2023-06-21T18:47:47+00:00"
         },
         {
             "name": "staabm/phpstan-dba",
