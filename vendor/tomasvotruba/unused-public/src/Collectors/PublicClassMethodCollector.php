@@ -9,7 +9,6 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
 use PHPStan\Collectors\Collector;
 use PHPStan\Reflection\ClassReflection;
-use PHPStan\Reflection\ExtendedMethodReflection;
 use PHPStan\Reflection\Php\PhpMethodReflection;
 use PHPStan\Reflection\ResolvedMethodReflection;
 use TomasVotruba\UnusedPublic\ApiDocStmtAnalyzer;
@@ -146,9 +145,6 @@ final class PublicClassMethodCollector implements Collector
         }
 
         $extendedMethodReflection = $classReflection->getMethod($classMethodName, $scope);
-        if (! $extendedMethodReflection instanceof ExtendedMethodReflection) {
-            return false;
-        }
 
         if ($extendedMethodReflection->getDocComment() === null) {
             return false;
@@ -166,7 +162,7 @@ final class PublicClassMethodCollector implements Collector
 
         $extendedMethodReflection = $classReflection->getMethod($classMethod->name->toString(), $scope);
         if ($extendedMethodReflection instanceof PhpMethodReflection || $extendedMethodReflection instanceof ResolvedMethodReflection) {
-            return $extendedMethodReflection->getDeclaringTrait() !== null;
+            return $extendedMethodReflection->getDeclaringTrait() instanceof ClassReflection;
         }
 
         return false;
