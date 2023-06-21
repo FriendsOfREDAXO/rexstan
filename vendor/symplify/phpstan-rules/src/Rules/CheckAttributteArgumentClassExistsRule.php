@@ -25,14 +25,15 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class CheckAttributteArgumentClassExistsRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Class was not found';
-    /**
      * @readonly
      * @var \PHPStan\Reflection\ReflectionProvider
      */
     private $reflectionProvider;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Class was not found';
+
     public function __construct(ReflectionProvider $reflectionProvider)
     {
         $this->reflectionProvider = $reflectionProvider;

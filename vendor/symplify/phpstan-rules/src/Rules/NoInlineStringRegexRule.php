@@ -24,10 +24,6 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class NoInlineStringRegexRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Use local named constant instead of inline string for regex to explain meaning by constant name';
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\RegexFuncCallAnalyzer
      */
@@ -37,6 +33,10 @@ final class NoInlineStringRegexRule implements Rule
      * @var \Symplify\PHPStanRules\NodeAnalyzer\RegexStaticCallAnalyzer
      */
     private $regexStaticCallAnalyzer;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Use local named constant instead of inline string for regex to explain meaning by constant name';
 
     public function __construct(RegexFuncCallAnalyzer $regexFuncCallAnalyzer, RegexStaticCallAnalyzer $regexStaticCallAnalyzer)
     {

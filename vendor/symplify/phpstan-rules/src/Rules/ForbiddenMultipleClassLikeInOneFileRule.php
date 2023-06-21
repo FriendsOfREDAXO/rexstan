@@ -21,14 +21,14 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class ForbiddenMultipleClassLikeInOneFileRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Multiple class/interface/trait is not allowed in single file';
-    /**
      * @readonly
      * @var \PhpParser\NodeFinder
      */
     private $nodeFinder;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Multiple class/interface/trait is not allowed in single file';
 
     public function __construct(NodeFinder $nodeFinder)
     {

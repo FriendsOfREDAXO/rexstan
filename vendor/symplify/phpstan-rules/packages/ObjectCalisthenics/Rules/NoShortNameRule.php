@@ -27,10 +27,6 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class NoShortNameRule extends AbstractSymplifyRule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Do not name "%s", shorter than %d chars';
-    /**
      * @readonly
      * @var int
      */
@@ -40,6 +36,10 @@ final class NoShortNameRule extends AbstractSymplifyRule
      * @readonly
      */
     private $allowedShortNames = ['i', 'j', 'y', 'z'];
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Do not name "%s", shorter than %d chars';
     /**
      * @param string[] $allowedShortNames
      */

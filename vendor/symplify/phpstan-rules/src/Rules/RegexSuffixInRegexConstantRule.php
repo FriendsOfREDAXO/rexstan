@@ -24,10 +24,6 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class RegexSuffixInRegexConstantRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Name your constant with "_REGEX" suffix, instead of "%s"';
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\RegexFuncCallAnalyzer
      */
@@ -37,6 +33,10 @@ final class RegexSuffixInRegexConstantRule implements Rule
      * @var \Symplify\PHPStanRules\NodeAnalyzer\RegexStaticCallAnalyzer
      */
     private $regexStaticCallAnalyzer;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Name your constant with "_REGEX" suffix, instead of "%s"';
 
     public function __construct(RegexFuncCallAnalyzer $regexFuncCallAnalyzer, RegexStaticCallAnalyzer $regexStaticCallAnalyzer)
     {

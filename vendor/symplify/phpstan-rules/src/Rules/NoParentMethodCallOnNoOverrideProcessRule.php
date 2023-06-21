@@ -23,14 +23,14 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class NoParentMethodCallOnNoOverrideProcessRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Do not call parent method if no override process';
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\Printer\NodeComparator
      */
     private $nodeComparator;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Do not call parent method if no override process';
 
     public function __construct(NodeComparator $nodeComparator)
     {

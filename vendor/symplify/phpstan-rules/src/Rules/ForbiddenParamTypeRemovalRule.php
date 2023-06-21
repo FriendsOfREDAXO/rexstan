@@ -22,14 +22,14 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class ForbiddenParamTypeRemovalRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Removing parent param type is forbidden';
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\Reflection\MethodNodeAnalyser
      */
     private $methodNodeAnalyser;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Removing parent param type is forbidden';
 
     public function __construct(MethodNodeAnalyser $methodNodeAnalyser)
     {

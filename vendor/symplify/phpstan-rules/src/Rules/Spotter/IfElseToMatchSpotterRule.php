@@ -27,10 +27,6 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class IfElseToMatchSpotterRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'If/else construction can be replace with more robust match()';
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\IfElseBranchAnalyzer
      */
@@ -45,6 +41,11 @@ final class IfElseToMatchSpotterRule implements Rule
      * @var \Symplify\PHPStanRules\NodeAnalyzer\CacheIfAnalyzer
      */
     private $cacheIfAnalyzer;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'If/else construction can be replace with more robust match()';
+
     public function __construct(IfElseBranchAnalyzer $ifElseBranchAnalyzer, IfResemblingMatchAnalyzer $ifResemblingMatchAnalyzer, CacheIfAnalyzer $cacheIfAnalyzer)
     {
         $this->ifElseBranchAnalyzer = $ifElseBranchAnalyzer;

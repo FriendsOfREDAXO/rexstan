@@ -28,14 +28,14 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class NoConstructorSymfonyFormObjectRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'This object is used in a Symfony form, that uses magic setters/getters, so it cannot have required constructor';
-    /**
      * @readonly
      * @var \PHPStan\Reflection\ReflectionProvider
      */
     private $reflectionProvider;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'This object is used in a Symfony form, that uses magic setters/getters, so it cannot have required constructor';
 
     public function __construct(ReflectionProvider $reflectionProvider)
     {

@@ -26,6 +26,11 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class NoReturnArrayVariableListRule implements Rule
 {
     /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\ParentClassMethodNodeResolver
+     */
+    private $parentClassMethodNodeResolver;
+    /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Use value object over return of values';
@@ -35,11 +40,7 @@ final class NoReturnArrayVariableListRule implements Rule
      * @see https://regex101.com/r/C5d1zH/1
      */
     private const TESTS_DIRECTORY_REGEX = '#\/Tests\/#i';
-    /**
-     * @readonly
-     * @var \Symplify\PHPStanRules\ParentClassMethodNodeResolver
-     */
-    private $parentClassMethodNodeResolver;
+
     public function __construct(ParentClassMethodNodeResolver $parentClassMethodNodeResolver)
     {
         $this->parentClassMethodNodeResolver = $parentClassMethodNodeResolver;

@@ -17,14 +17,14 @@ use Symplify\PHPStanRules\NodeAnalyzer\FileCheckingFuncCallAnalyzer;
 final class StringOutsideConcatFindingNodeVisitor extends NodeVisitorAbstract
 {
     /**
-     * @var String_[]
-     */
-    private $foundNodes = [];
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\FileCheckingFuncCallAnalyzer
      */
     private $fileCheckingFuncCallAnalyzer;
+    /**
+     * @var String_[]
+     */
+    private $foundNodes = [];
 
     public function __construct(FileCheckingFuncCallAnalyzer $fileCheckingFuncCallAnalyzer)
     {

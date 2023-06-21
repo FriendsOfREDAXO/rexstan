@@ -24,10 +24,6 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class PreferredAttributeOverAnnotationRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Use attribute instead of "%s" annotation';
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\PhpDoc\ClassAnnotationResolver
      */
@@ -37,6 +33,10 @@ final class PreferredAttributeOverAnnotationRule implements Rule
      * @readonly
      */
     private $annotations;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Use attribute instead of "%s" annotation';
 
     /**
      * @param string[] $annotations

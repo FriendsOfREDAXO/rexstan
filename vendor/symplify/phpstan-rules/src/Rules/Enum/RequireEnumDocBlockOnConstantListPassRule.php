@@ -30,6 +30,16 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class RequireEnumDocBlockOnConstantListPassRule implements Rule
 {
     /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Reflection\MethodCallNodeAnalyzer
+     */
+    private $methodCallNodeAnalyzer;
+    /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeAnalyzer\MethodCall\MethodCallClassConstFetchPositionResolver
+     */
+    private $methodCallClassConstFetchPositionResolver;
+    /**
      * @var string
      */
     public const ERROR_MESSAGE = 'On passing a constant, the method should have an enum type. See https://phpstan.org/writing-php-code/phpdoc-types#literals-and-constants';
@@ -44,16 +54,7 @@ final class RequireEnumDocBlockOnConstantListPassRule implements Rule
         AbstractConfigurator::class,
         ParameterBagInterface::class,
     ];
-    /**
-     * @readonly
-     * @var \Symplify\PHPStanRules\Reflection\MethodCallNodeAnalyzer
-     */
-    private $methodCallNodeAnalyzer;
-    /**
-     * @readonly
-     * @var \Symplify\PHPStanRules\NodeAnalyzer\MethodCall\MethodCallClassConstFetchPositionResolver
-     */
-    private $methodCallClassConstFetchPositionResolver;
+
     public function __construct(MethodCallNodeAnalyzer $methodCallNodeAnalyzer, MethodCallClassConstFetchPositionResolver $methodCallClassConstFetchPositionResolver)
     {
         $this->methodCallNodeAnalyzer = $methodCallNodeAnalyzer;

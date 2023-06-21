@@ -25,6 +25,11 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class NoVoidGetterMethodRule implements Rule
 {
     /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder
+     */
+    private $typeAwareNodeFinder;
+    /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Getter method must return something, not void';
@@ -40,11 +45,6 @@ final class NoVoidGetterMethodRule implements Rule
         Throw_::class,
         Node\Stmt\Throw_::class,
     ];
-    /**
-     * @readonly
-     * @var \Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder
-     */
-    private $typeAwareNodeFinder;
 
     public function __construct(TypeAwareNodeFinder $typeAwareNodeFinder)
     {

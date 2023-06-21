@@ -20,14 +20,15 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class NoMixedPropertyFetcherRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Anonymous variables in a "%s->..." property fetch can lead to false dead property. Make sure the variable type is known';
-    /**
      * @readonly
      * @var \PhpParser\PrettyPrinter\Standard
      */
     private $standard;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Anonymous variables in a "%s->..." property fetch can lead to false dead property. Make sure the variable type is known';
+
     public function __construct(Standard $standard)
     {
         $this->standard = $standard;

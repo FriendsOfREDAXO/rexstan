@@ -26,6 +26,11 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class ForbiddenThisArgumentRule implements Rule
 {
     /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\TypeAnalyzer\ContainsTypeAnalyser
+     */
+    private $containsTypeAnalyser;
+    /**
      * @var string
      */
     public const ERROR_MESSAGE = '$this as argument is not allowed. Refactor method to service composition';
@@ -37,11 +42,6 @@ final class ForbiddenThisArgumentRule implements Rule
         // workaround type
         'Symplify\PackageBuilder\Reflection\PrivatesCaller',
     ];
-    /**
-     * @readonly
-     * @var \Symplify\PHPStanRules\TypeAnalyzer\ContainsTypeAnalyser
-     */
-    private $containsTypeAnalyser;
 
     public function __construct(ContainsTypeAnalyser $containsTypeAnalyser)
     {

@@ -23,14 +23,14 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class RequireInvokableControllerRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Use invokable controller with __invoke() method instead of named action method';
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer
      */
     private $symfonyControllerAnalyzer;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Use invokable controller with __invoke() method instead of named action method';
 
     public function __construct(SymfonyControllerAnalyzer $symfonyControllerAnalyzer)
     {

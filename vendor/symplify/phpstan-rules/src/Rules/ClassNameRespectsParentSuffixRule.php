@@ -30,6 +30,11 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class ClassNameRespectsParentSuffixRule implements Rule
 {
     /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Naming\ClassToSuffixResolver
+     */
+    private $classToSuffixResolver;
+    /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Class should have suffix "%s" to respect parent type';
@@ -53,11 +58,7 @@ final class ClassNameRespectsParentSuffixRule implements Rule
      * @var class-string[]
      */
     private $parentClasses = [];
-    /**
-     * @readonly
-     * @var \Symplify\PHPStanRules\Naming\ClassToSuffixResolver
-     */
-    private $classToSuffixResolver;
+
     /**
      * @param class-string[] $parentClasses
      */

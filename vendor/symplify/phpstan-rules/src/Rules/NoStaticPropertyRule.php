@@ -24,6 +24,11 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class NoStaticPropertyRule implements Rule
 {
     /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\TypeAnalyzer\ContainsTypeAnalyser
+     */
+    private $containsTypeAnalyser;
+    /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Do not use static property';
@@ -32,11 +37,6 @@ final class NoStaticPropertyRule implements Rule
      * @var array<class-string>
      */
     private const ALLOWED_TYPES = [ContainerInterface::class, Container::class, KernelInterface::class];
-    /**
-     * @readonly
-     * @var \Symplify\PHPStanRules\TypeAnalyzer\ContainsTypeAnalyser
-     */
-    private $containsTypeAnalyser;
 
     public function __construct(ContainsTypeAnalyser $containsTypeAnalyser)
     {

@@ -29,16 +29,6 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class CheckSprintfMatchingTypesRule implements Rule
 {
     /**
-     * @api
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'sprintf() call mask type at index [%d] expects type "%s", but "%s" given';
-
-    /**
-     * @var string
-     */
-    private const SPECIFIERS = '[bcdeEfFgGosuxX%s]';
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\SprintfSpecifierTypeResolver
      */
@@ -53,6 +43,17 @@ final class CheckSprintfMatchingTypesRule implements Rule
      * @var \Symplify\PHPStanRules\TypeResolver\ArgTypeResolver
      */
     private $argTypeResolver;
+    /**
+     * @api
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'sprintf() call mask type at index [%d] expects type "%s", but "%s" given';
+
+    /**
+     * @var string
+     */
+    private const SPECIFIERS = '[bcdeEfFgGosuxX%s]';
+
     public function __construct(SprintfSpecifierTypeResolver $sprintfSpecifierTypeResolver, MatchingTypeAnalyzer $matchingTypeAnalyzer, ArgTypeResolver $argTypeResolver)
     {
         $this->sprintfSpecifierTypeResolver = $sprintfSpecifierTypeResolver;

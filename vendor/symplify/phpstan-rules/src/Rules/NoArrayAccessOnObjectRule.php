@@ -19,6 +19,11 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class NoArrayAccessOnObjectRule implements Rule
 {
     /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Matcher\ArrayStringAndFnMatcher
+     */
+    private $arrayStringAndFnMatcher;
+    /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Use explicit methods over array access on object';
@@ -27,11 +32,6 @@ final class NoArrayAccessOnObjectRule implements Rule
      * @var array<class-string>
      */
     private const ALLOWED_CLASSES = ['SplFixedArray', 'SimpleXMLElement'];
-    /**
-     * @readonly
-     * @var \Symplify\PHPStanRules\Matcher\ArrayStringAndFnMatcher
-     */
-    private $arrayStringAndFnMatcher;
 
     public function __construct(ArrayStringAndFnMatcher $arrayStringAndFnMatcher)
     {

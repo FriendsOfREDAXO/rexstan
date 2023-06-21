@@ -26,10 +26,6 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class ForbiddenFuncCallRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Function "%s()" cannot be used/left in the code';
-    /**
      * @var string[]|array<(string | int), string>
      * @readonly
      */
@@ -44,6 +40,11 @@ final class ForbiddenFuncCallRule implements Rule
      * @var \Symplify\PHPStanRules\Formatter\RequiredWithMessageFormatter
      */
     private $requiredWithMessageFormatter;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Function "%s()" cannot be used/left in the code';
+
     /**
      * @param string[]|array<string|int, string> $forbiddenFunctions
      */
