@@ -24,6 +24,11 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class NoReturnSetterMethodRule implements Rule
 {
     /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder
+     */
+    private $typeAwareNodeFinder;
+    /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Setter method cannot return anything, only set value';
@@ -33,11 +38,6 @@ final class NoReturnSetterMethodRule implements Rule
      * @see https://regex101.com/r/IIvg8L/1
      */
     private const SETTER_START_REGEX = '#^set[A-Z]#';
-    /**
-     * @readonly
-     * @var \Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder
-     */
-    private $typeAwareNodeFinder;
 
     public function __construct(TypeAwareNodeFinder $typeAwareNodeFinder)
     {

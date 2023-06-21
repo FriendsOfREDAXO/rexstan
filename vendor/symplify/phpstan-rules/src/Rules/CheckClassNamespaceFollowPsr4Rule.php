@@ -22,15 +22,6 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class CheckClassNamespaceFollowPsr4Rule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Class like namespace "%s" does not follow PSR-4 configuration in composer.json';
-
-    /**
-     * @var array<string, string|string[]>
-     */
-    private $autoloadPsr4Paths = [];
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\Composer\Psr4PathValidator
      */
@@ -40,6 +31,15 @@ final class CheckClassNamespaceFollowPsr4Rule implements Rule
      * @var \Symplify\PHPStanRules\Composer\ClassNamespaceMatcher
      */
     private $classNamespaceMatcher;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Class like namespace "%s" does not follow PSR-4 configuration in composer.json';
+
+    /**
+     * @var array<string, string|string[]>
+     */
+    private $autoloadPsr4Paths = [];
 
     public function __construct(
         ComposerAutoloadResolver $composerAutoloadResolver,

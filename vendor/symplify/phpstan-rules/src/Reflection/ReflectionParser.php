@@ -26,6 +26,11 @@ use Throwable;
 final class ReflectionParser
 {
     /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder
+     */
+    private $typeAwareNodeFinder;
+    /**
      * @var array<string, ClassLike>
      */
     private $classesByFilename = [];
@@ -35,11 +40,6 @@ final class ReflectionParser
      * @var \PhpParser\Parser
      */
     private $parser;
-    /**
-     * @readonly
-     * @var \Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder
-     */
-    private $typeAwareNodeFinder;
 
     public function __construct(
         TypeAwareNodeFinder $typeAwareNodeFinder

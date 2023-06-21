@@ -25,14 +25,15 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class NoReferenceRule extends AbstractSymplifyRule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Use explicit return value over magic &reference';
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\ParentClassMethodNodeResolver
      */
     private $parentClassMethodNodeResolver;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Use explicit return value over magic &reference';
+
     public function __construct(ParentClassMethodNodeResolver $parentClassMethodNodeResolver)
     {
         $this->parentClassMethodNodeResolver = $parentClassMethodNodeResolver;

@@ -21,14 +21,15 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class NoMixedMethodCallerRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Anonymous variable in a `%s->...()` method call can lead to false dead methods. Make sure the variable type is known';
-    /**
      * @readonly
      * @var \PhpParser\PrettyPrinter\Standard
      */
     private $printerStandard;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Anonymous variable in a `%s->...()` method call can lead to false dead methods. Make sure the variable type is known';
+
     public function __construct(Standard $printerStandard)
     {
         $this->printerStandard = $printerStandard;

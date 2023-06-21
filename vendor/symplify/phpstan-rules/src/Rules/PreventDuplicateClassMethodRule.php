@@ -25,14 +25,15 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class PreventDuplicateClassMethodRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Content of method "%s()" is duplicated. Use unique content or service instead';
-    /**
      * @readonly
      * @var int
      */
     private $minimumLineCount = 3;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Content of method "%s()" is duplicated. Use unique content or service instead';
+
     public function __construct(int $minimumLineCount = 3)
     {
         $this->minimumLineCount = $minimumLineCount;

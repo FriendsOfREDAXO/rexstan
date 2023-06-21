@@ -35,10 +35,6 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class CheckTypehintCallerTypeRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Parameter %d should use "%s" type as the only type passed to this method';
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\NodeFinder\MethodCallNodeFinder
      */
@@ -48,6 +44,10 @@ final class CheckTypehintCallerTypeRule implements Rule
      * @var \Symplify\PHPStanRules\NodeFinder\ClassMethodNodeFinder
      */
     private $classMethodNodeFinder;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Parameter %d should use "%s" type as the only type passed to this method';
 
     public function __construct(MethodCallNodeFinder $methodCallNodeFinder, ClassMethodNodeFinder $classMethodNodeFinder)
     {

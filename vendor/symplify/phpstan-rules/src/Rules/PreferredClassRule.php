@@ -25,14 +25,14 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class PreferredClassRule extends AbstractSymplifyRule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Instead of "%s" class/interface use "%s"';
-    /**
      * @var string[]
      * @readonly
      */
     private $oldToPreferredClasses;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Instead of "%s" class/interface use "%s"';
     /**
      * @param string[] $oldToPreferredClasses
      */

@@ -21,6 +21,11 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class NoDuplicatedShortClassNameRule implements Rule
 {
     /**
+     * @readonly
+     * @var int
+     */
+    private $toleratedNestingLevel;
+    /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Class with base "%s" name is already used in "%s". Use unique name to make classes easy to recognize';
@@ -43,11 +48,6 @@ final class NoDuplicatedShortClassNameRule implements Rule
      * @var array<string, string[]>
      */
     private $declaredClassesByShortName = [];
-    /**
-     * @readonly
-     * @var int
-     */
-    private $toleratedNestingLevel;
 
     public function __construct(int $toleratedNestingLevel)
     {

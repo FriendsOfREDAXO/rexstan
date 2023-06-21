@@ -21,14 +21,14 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class PreventParentMethodVisibilityOverrideRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Change "%s()" method visibility to "%s" to respect parent method visibility.';
-    /**
      * @readonly
      * @var \PHPStan\Reflection\ReflectionProvider
      */
     private $reflectionProvider;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Change "%s()" method visibility to "%s" to respect parent method visibility.';
 
     public function __construct(ReflectionProvider $reflectionProvider)
     {

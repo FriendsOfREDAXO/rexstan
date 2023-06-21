@@ -11,15 +11,15 @@ use PhpParser\PrettyPrinter\Standard;
 final class DuplicatedClassMethodPrinter
 {
     /**
-     * @var string
-     * @see https://regex101.com/r/cJZZgC/1
-     */
-    private const VARIABLE_REGEX = '#\$\w+[^\s]#';
-    /**
      * @readonly
      * @var \PhpParser\PrettyPrinter\Standard
      */
     private $standard;
+    /**
+     * @var string
+     * @see https://regex101.com/r/cJZZgC/1
+     */
+    private const VARIABLE_REGEX = '#\$\w+[^\s]#';
 
     public function __construct(Standard $standard)
     {

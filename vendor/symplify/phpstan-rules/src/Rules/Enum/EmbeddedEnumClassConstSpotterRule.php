@@ -23,10 +23,6 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class EmbeddedEnumClassConstSpotterRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Constants "%s" should be extract to standalone enum class';
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\ClassAnalyzer
      */
@@ -46,6 +42,10 @@ final class EmbeddedEnumClassConstSpotterRule implements Rule
      * @readonly
      */
     private $parentTypes;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Constants "%s" should be extract to standalone enum class';
 
     /**
      * @param array<class-string> $parentTypes

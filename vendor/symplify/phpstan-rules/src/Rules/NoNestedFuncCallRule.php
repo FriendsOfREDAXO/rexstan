@@ -21,6 +21,11 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class NoNestedFuncCallRule implements Rule
 {
     /**
+     * @readonly
+     * @var \PhpParser\NodeFinder
+     */
+    private $nodeFinder;
+    /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Use separate function calls with readable variable names';
@@ -45,11 +50,6 @@ final class NoNestedFuncCallRule implements Rule
         'str_starts_with',
         'str_ends_with',
     ];
-    /**
-     * @readonly
-     * @var \PhpParser\NodeFinder
-     */
-    private $nodeFinder;
 
     public function __construct(NodeFinder $nodeFinder)
     {

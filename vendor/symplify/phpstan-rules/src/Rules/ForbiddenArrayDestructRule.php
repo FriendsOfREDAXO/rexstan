@@ -27,6 +27,11 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class ForbiddenArrayDestructRule implements Rule
 {
     /**
+     * @readonly
+     * @var \PHPStan\Reflection\ReflectionProvider
+     */
+    private $reflectionProvider;
+    /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Array destruct is not allowed. Use value object to pass data instead';
@@ -36,11 +41,6 @@ final class ForbiddenArrayDestructRule implements Rule
      * @see https://regex101.com/r/dhGhYp/1
      */
     private const VENDOR_DIRECTORY_REGEX = '#/vendor/#';
-    /**
-     * @readonly
-     * @var \PHPStan\Reflection\ReflectionProvider
-     */
-    private $reflectionProvider;
 
     public function __construct(ReflectionProvider $reflectionProvider)
     {

@@ -22,14 +22,15 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class NoPublicPropertyByTypeRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Class cannot have public properties. Use getter/setters instead';
-    /**
      * @var string[]
      * @readonly
      */
     private $classTypes;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Class cannot have public properties. Use getter/setters instead';
+
     /**
      * @param string[] $classTypes
      */

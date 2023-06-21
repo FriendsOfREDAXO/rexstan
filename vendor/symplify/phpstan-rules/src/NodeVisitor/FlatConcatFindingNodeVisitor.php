@@ -13,14 +13,14 @@ use Symplify\PHPStanRules\NodeAnalyzer\FileCheckingFuncCallAnalyzer;
 final class FlatConcatFindingNodeVisitor extends NodeVisitorAbstract
 {
     /**
-     * @var Concat[]
-     */
-    private $foundNodes = [];
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\FileCheckingFuncCallAnalyzer
      */
     private $fileCheckingFuncCallAnalyzer;
+    /**
+     * @var Concat[]
+     */
+    private $foundNodes = [];
 
     public function __construct(FileCheckingFuncCallAnalyzer $fileCheckingFuncCallAnalyzer)
     {

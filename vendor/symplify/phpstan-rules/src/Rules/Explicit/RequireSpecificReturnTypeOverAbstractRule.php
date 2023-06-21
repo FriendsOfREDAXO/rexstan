@@ -26,10 +26,6 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class RequireSpecificReturnTypeOverAbstractRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Provide more specific return type "%s" over abstract one';
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\NodeFinder\ReturnNodeFinder
      */
@@ -39,6 +35,11 @@ final class RequireSpecificReturnTypeOverAbstractRule implements Rule
      * @var \Symplify\PHPStanRules\Reflection\MethodNodeAnalyser
      */
     private $methodNodeAnalyser;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Provide more specific return type "%s" over abstract one';
+
     public function __construct(ReturnNodeFinder $returnNodeFinder, MethodNodeAnalyser $methodNodeAnalyser)
     {
         $this->returnNodeFinder = $returnNodeFinder;

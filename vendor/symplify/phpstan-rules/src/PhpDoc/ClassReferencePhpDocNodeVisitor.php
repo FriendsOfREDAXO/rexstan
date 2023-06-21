@@ -14,14 +14,14 @@ use Symplify\PHPStanRules\PhpDocParser\PhpDocNodeVisitor\AbstractPhpDocNodeVisit
 final class ClassReferencePhpDocNodeVisitor extends AbstractPhpDocNodeVisitor
 {
     /**
-     * @var string|null
-     */
-    private $className;
-    /**
      * @readonly
      * @var \PHPStan\Reflection\ReflectionProvider
      */
     private $reflectionProvider;
+    /**
+     * @var string|null
+     */
+    private $className;
 
     public function __construct(ReflectionProvider $reflectionProvider)
     {

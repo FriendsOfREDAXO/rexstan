@@ -22,6 +22,11 @@ use Webmozart\Assert\Assert;
 final class ForbiddenNodeRule implements Rule
 {
     /**
+     * @readonly
+     * @var \PhpParser\PrettyPrinter\Standard
+     */
+    private $standard;
+    /**
      * @var string
      */
     public const ERROR_MESSAGE = '"%s" is forbidden to use';
@@ -30,11 +35,6 @@ final class ForbiddenNodeRule implements Rule
      * @var array<class-string<Node>>
      */
     private $forbiddenNodes = [];
-    /**
-     * @readonly
-     * @var \PhpParser\PrettyPrinter\Standard
-     */
-    private $standard;
 
     /**
      * @param array<class-string<Node>> $forbiddenNodes

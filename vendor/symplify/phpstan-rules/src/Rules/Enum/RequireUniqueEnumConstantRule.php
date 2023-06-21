@@ -21,14 +21,14 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class RequireUniqueEnumConstantRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Enum constants "%s" are duplicated. Make them unique instead';
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\EnumAnalyzer
      */
     private $enumAnalyzer;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Enum constants "%s" are duplicated. Make them unique instead';
 
     public function __construct(EnumAnalyzer $enumAnalyzer)
     {

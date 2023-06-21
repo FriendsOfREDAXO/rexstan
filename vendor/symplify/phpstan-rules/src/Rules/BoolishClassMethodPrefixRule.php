@@ -26,10 +26,6 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class BoolishClassMethodPrefixRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Method "%s()" returns bool type, so the name should start with is/has/was...';
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\Naming\BoolishNameAnalyser
      */
@@ -44,6 +40,10 @@ final class BoolishClassMethodPrefixRule implements Rule
      * @var \Symplify\PHPStanRules\ParentGuard\ParentClassMethodGuard
      */
     private $parentClassMethodGuard;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Method "%s()" returns bool type, so the name should start with is/has/was...';
 
     public function __construct(BoolishNameAnalyser $boolishNameAnalyser, ReturnNodeFinder $returnNodeFinder, ParentClassMethodGuard $parentClassMethodGuard)
     {

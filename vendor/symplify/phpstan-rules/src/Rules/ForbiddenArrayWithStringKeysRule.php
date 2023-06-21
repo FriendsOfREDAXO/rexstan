@@ -28,16 +28,6 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class ForbiddenArrayWithStringKeysRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Array with keys is not allowed. Use value object to pass data instead';
-
-    /**
-     * @var string
-     * @see https://regex101.com/r/ddj4mB/2
-     */
-    private const TEST_FILE_REGEX = '#(Test|TestCase)\.php$#';
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\ParentGuard\ParentElementResolver\ParentMethodReturnTypeResolver
      */
@@ -47,6 +37,17 @@ final class ForbiddenArrayWithStringKeysRule implements Rule
      * @var \Symplify\PHPStanRules\NodeAnalyzer\ArrayAnalyzer
      */
     private $arrayAnalyzer;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Array with keys is not allowed. Use value object to pass data instead';
+
+    /**
+     * @var string
+     * @see https://regex101.com/r/ddj4mB/2
+     */
+    private const TEST_FILE_REGEX = '#(Test|TestCase)\.php$#';
+
     public function __construct(ParentMethodReturnTypeResolver $parentMethodReturnTypeResolver, ArrayAnalyzer $arrayAnalyzer)
     {
         $this->parentMethodReturnTypeResolver = $parentMethodReturnTypeResolver;

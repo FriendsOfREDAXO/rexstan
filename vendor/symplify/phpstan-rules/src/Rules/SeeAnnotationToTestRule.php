@@ -28,10 +28,6 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class SeeAnnotationToTestRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Class "%s" is missing @see annotation with test case class reference';
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\PhpDoc\PhpDocResolver
      */
@@ -46,6 +42,10 @@ final class SeeAnnotationToTestRule implements Rule
      * @readonly
      */
     private $requiredSeeTypes;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Class "%s" is missing @see annotation with test case class reference';
 
     /**
      * @param string[] $requiredSeeTypes

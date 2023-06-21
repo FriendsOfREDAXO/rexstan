@@ -24,14 +24,14 @@ use Throwable;
 final class NoEmptyClassRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'There should be no empty class';
-    /**
      * @readonly
      * @var \PHPStan\Reflection\ReflectionProvider
      */
     private $reflectionProvider;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'There should be no empty class';
 
     public function __construct(ReflectionProvider $reflectionProvider)
     {

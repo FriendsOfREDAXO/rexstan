@@ -11,14 +11,14 @@ use Symplify\PHPStanRules\NodeAnalyzer\AttributeFinder;
 final class SymfonyControllerAnalyzer
 {
     /**
-     * @var string
-     */
-    private const ROUTE_ATTRIBUTE = 'Symfony\Component\Routing\Annotation\Route';
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\NodeAnalyzer\AttributeFinder
      */
     private $attributeFinder;
+    /**
+     * @var string
+     */
+    private const ROUTE_ATTRIBUTE = 'Symfony\Component\Routing\Annotation\Route';
 
     public function __construct(AttributeFinder $attributeFinder)
     {

@@ -21,6 +21,11 @@ use Symplify\PHPStanRules\Printer\DuplicatedClassMethodPrinter;
 final class ClassMethodContentCollector implements Collector
 {
     /**
+     * @readonly
+     * @var \Symplify\PHPStanRules\Printer\DuplicatedClassMethodPrinter
+     */
+    private $duplicatedClassMethodPrinter;
+    /**
      * @var array<class-string>
      */
     private const EXCLUDED_TYPES = [Kernel::class, Extension::class, TestCase::class];
@@ -29,11 +34,7 @@ final class ClassMethodContentCollector implements Collector
      * @var string[]
      */
     private const EXCLUDED_METHOD_NAMES = ['getNodeType', 'getNodeTypes'];
-    /**
-     * @readonly
-     * @var \Symplify\PHPStanRules\Printer\DuplicatedClassMethodPrinter
-     */
-    private $duplicatedClassMethodPrinter;
+
     public function __construct(DuplicatedClassMethodPrinter $duplicatedClassMethodPrinter)
     {
         $this->duplicatedClassMethodPrinter = $duplicatedClassMethodPrinter;

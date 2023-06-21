@@ -20,6 +20,11 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class ExclusiveNamespaceRule implements Rule
 {
     /**
+     * @var string[]
+     * @readonly
+     */
+    private $namespaceParts;
+    /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Namespace "%s" is only reserved for "%s". Move the class somewhere else';
@@ -35,11 +40,6 @@ final class ExclusiveNamespaceRule implements Rule
      * @var string
      */
     private const EXCLUDED_NAMESPACE_REGEX = '#\\\\(Exception|Contract)\\\\#';
-    /**
-     * @var string[]
-     * @readonly
-     */
-    private $namespaceParts;
 
     /**
      * @param string[] $namespaceParts

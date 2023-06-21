@@ -24,10 +24,6 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class RequireConstantInMethodCallPositionRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Parameter argument on position %d must use constant';
-    /**
      * @readonly
      * @var \Symplify\PHPStanRules\Matcher\PositionMatcher
      */
@@ -37,6 +33,10 @@ final class RequireConstantInMethodCallPositionRule implements Rule
      * @readonly
      */
     private $requiredConstantInMethodCall;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Parameter argument on position %d must use constant';
 
     /**
      * @param array<class-string, array<string, int[]>> $requiredConstantInMethodCall

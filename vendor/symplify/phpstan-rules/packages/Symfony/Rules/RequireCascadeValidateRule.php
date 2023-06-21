@@ -39,10 +39,6 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class RequireCascadeValidateRule implements Rule
 {
     /**
-     * @var string
-     */
-    public const ERROR_MESSAGE = 'Property "$%s" is missing @Valid annotation';
-    /**
      * @readonly
      * @var \PHPStan\Reflection\ReflectionProvider
      */
@@ -57,6 +53,11 @@ final class RequireCascadeValidateRule implements Rule
      * @var \Symplify\PHPStanRules\Symfony\PropertyMetadataResolver
      */
     private $propertyMetadataResolver;
+    /**
+     * @var string
+     */
+    public const ERROR_MESSAGE = 'Property "$%s" is missing @Valid annotation';
+
     public function __construct(ReflectionProvider $reflectionProvider, ArrayKeyFinder $arrayKeyFinder, PropertyMetadataResolver $propertyMetadataResolver)
     {
         $this->reflectionProvider = $reflectionProvider;
