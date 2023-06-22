@@ -8,6 +8,7 @@ use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\CollectedDataNode;
 use PHPStan\Rules\Rule;
+use TomasVotruba\TypeCoverage\CollectorDataNormalizer;
 use TomasVotruba\TypeCoverage\Collectors\ReturnTypeDeclarationCollector;
 use TomasVotruba\TypeCoverage\Configuration;
 use TomasVotruba\TypeCoverage\Formatter\TypeCoverageFormatter;
@@ -36,10 +37,20 @@ final class ReturnTypeCoverageRule implements Rule
      */
     private $configuration;
 
-    public function __construct(TypeCoverageFormatter $typeCoverageFormatter, Configuration $configuration)
-    {
+    /**
+     * @readonly
+     * @var \TomasVotruba\TypeCoverage\CollectorDataNormalizer
+     */
+    private $collectorDataNormalizer;
+
+    public function __construct(
+        TypeCoverageFormatter $typeCoverageFormatter,
+        Configuration $configuration,
+        CollectorDataNormalizer $collectorDataNormalizer
+    ) {
         $this->typeCoverageFormatter = $typeCoverageFormatter;
         $this->configuration = $configuration;
+        $this->collectorDataNormalizer = $collectorDataNormalizer;
     }
 
     /**
@@ -57,35 +68,12 @@ final class ReturnTypeCoverageRule implements Rule
     public function processNode(Node $node, Scope $scope): array
     {
         $returnSeaLevelDataByFilePath = $node->get(ReturnTypeDeclarationCollector::class);
-
-        $typedReturnCount = 0;
-        $returnCount = 0;
-
-        $printedClassMethods = [];
-
-        foreach ($returnSeaLevelDataByFilePath as $returnSeaLevelData) {
-            foreach ($returnSeaLevelData as $nestedReturnSeaLevelData) {
-                $typedReturnCount += $nestedReturnSeaLevelData[0];
-                $returnCount += $nestedReturnSeaLevelData[1];
-
-                if (! $this->configuration->shouldPrintSuggestions()) {
-                    continue;
-                }
-
-                /** @var string $printedClassMethod */
-                $printedClassMethod = $nestedReturnSeaLevelData[2];
-                if ($printedClassMethod !== '') {
-                    $printedClassMethods[] = trim($printedClassMethod);
-                }
-            }
-        }
+        $typeCountAndMissingTypes = $this->collectorDataNormalizer->normalize($returnSeaLevelDataByFilePath);
 
         return $this->typeCoverageFormatter->formatErrors(
             self::ERROR_MESSAGE,
             $this->configuration->getRequiredReturnTypeLevel(),
-            $returnCount,
-            $typedReturnCount,
-            $printedClassMethods
+            $typeCountAndMissingTypes
         );
     }
 }
