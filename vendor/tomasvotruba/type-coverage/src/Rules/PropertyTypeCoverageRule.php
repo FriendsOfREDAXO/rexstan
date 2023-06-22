@@ -8,6 +8,7 @@ use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\CollectedDataNode;
 use PHPStan\Rules\Rule;
+use TomasVotruba\TypeCoverage\CollectorDataNormalizer;
 use TomasVotruba\TypeCoverage\Collectors\PropertyTypeDeclarationCollector;
 use TomasVotruba\TypeCoverage\Configuration;
 use TomasVotruba\TypeCoverage\Formatter\TypeCoverageFormatter;
@@ -36,10 +37,20 @@ final class PropertyTypeCoverageRule implements Rule
      */
     private $configuration;
 
-    public function __construct(TypeCoverageFormatter $typeCoverageFormatter, Configuration $configuration)
-    {
+    /**
+     * @readonly
+     * @var \TomasVotruba\TypeCoverage\CollectorDataNormalizer
+     */
+    private $collectorDataNormalizer;
+
+    public function __construct(
+        TypeCoverageFormatter $typeCoverageFormatter,
+        Configuration $configuration,
+        CollectorDataNormalizer $collectorDataNormalizer
+    ) {
         $this->typeCoverageFormatter = $typeCoverageFormatter;
         $this->configuration = $configuration;
+        $this->collectorDataNormalizer = $collectorDataNormalizer;
     }
 
     /**
@@ -61,35 +72,12 @@ final class PropertyTypeCoverageRule implements Rule
         }
 
         $propertyTypeDeclarationCollector = $node->get(PropertyTypeDeclarationCollector::class);
-
-        $typedPropertyCount = 0;
-        $propertyCount = 0;
-
-        $printedUntypedPropertiesContents = [];
-
-        foreach ($propertyTypeDeclarationCollector as $propertySeaLevelData) {
-            foreach ($propertySeaLevelData as $nestedPropertySeaLevelData) {
-                $typedPropertyCount += $nestedPropertySeaLevelData[0];
-                $propertyCount += $nestedPropertySeaLevelData[1];
-
-                if (! $this->configuration->shouldPrintSuggestions()) {
-                    continue;
-                }
-
-                /** @var string $printedPropertyContent */
-                $printedPropertyContent = $nestedPropertySeaLevelData[2];
-                if ($printedPropertyContent !== '') {
-                    $printedUntypedPropertiesContents[] = trim($printedPropertyContent);
-                }
-            }
-        }
+        $typeCountAndMissingTypes = $this->collectorDataNormalizer->normalize($propertyTypeDeclarationCollector);
 
         return $this->typeCoverageFormatter->formatErrors(
             self::ERROR_MESSAGE,
             $this->configuration->getRequiredPropertyTypeLevel(),
-            $propertyCount,
-            $typedPropertyCount,
-            $printedUntypedPropertiesContents
+            $typeCountAndMissingTypes
         );
     }
 }

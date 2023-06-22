@@ -8,6 +8,7 @@ use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\CollectedDataNode;
 use PHPStan\Rules\Rule;
+use TomasVotruba\TypeCoverage\CollectorDataNormalizer;
 use TomasVotruba\TypeCoverage\Collectors\ParamTypeDeclarationCollector;
 use TomasVotruba\TypeCoverage\Configuration;
 use TomasVotruba\TypeCoverage\Formatter\TypeCoverageFormatter;
@@ -36,10 +37,20 @@ final class ParamTypeCoverageRule implements Rule
      */
     private $configuration;
 
-    public function __construct(TypeCoverageFormatter $typeCoverageFormatter, Configuration $configuration)
-    {
+    /**
+     * @readonly
+     * @var \TomasVotruba\TypeCoverage\CollectorDataNormalizer
+     */
+    private $collectorDataNormalizer;
+
+    public function __construct(
+        TypeCoverageFormatter $typeCoverageFormatter,
+        Configuration $configuration,
+        CollectorDataNormalizer $collectorDataNormalizer
+    ) {
         $this->typeCoverageFormatter = $typeCoverageFormatter;
         $this->configuration = $configuration;
+        $this->collectorDataNormalizer = $collectorDataNormalizer;
     }
 
     /**
@@ -62,34 +73,12 @@ final class ParamTypeCoverageRule implements Rule
 
         $paramTypeDeclarationCollector = $node->get(ParamTypeDeclarationCollector::class);
 
-        $typedParamCount = 0;
-        $paramCount = 0;
-
-        $printedClassMethods = [];
-
-        foreach ($paramTypeDeclarationCollector as $paramSeaLevelData) {
-            foreach ($paramSeaLevelData as $nestedParamSeaLevelData) {
-                $typedParamCount += $nestedParamSeaLevelData[0];
-                $paramCount += $nestedParamSeaLevelData[1];
-
-                if (! $this->configuration->shouldPrintSuggestions()) {
-                    continue;
-                }
-
-                /** @var string $printedClassMethod */
-                $printedClassMethod = $nestedParamSeaLevelData[2];
-                if ($printedClassMethod !== '') {
-                    $printedClassMethods[] = trim($printedClassMethod);
-                }
-            }
-        }
+        $typeCountAndMissingTypes = $this->collectorDataNormalizer->normalize($paramTypeDeclarationCollector);
 
         return $this->typeCoverageFormatter->formatErrors(
             self::ERROR_MESSAGE,
             $this->configuration->getRequiredParamTypeLevel(),
-            $paramCount,
-            $typedParamCount,
-            $printedClassMethods
+            $typeCountAndMissingTypes
         );
     }
 }
