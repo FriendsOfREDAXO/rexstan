@@ -15,9 +15,11 @@ use function dirname;
 final class RexStan
 {
     /**
+     * @param-out int $exitCode
+     *
      * @return string
      */
-    public static function runFromCli()
+    public static function runFromCli(&$exitCode)
     {
         $phpstanBinary = self::phpstanBinPath();
         $configPath = self::phpstanConfigPath(__DIR__.'/../phpstan.neon');

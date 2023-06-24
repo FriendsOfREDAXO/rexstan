@@ -21,8 +21,8 @@ class rexstan_command extends rex_console_command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        echo RexStan::runFromCli();
+        echo RexStan::runFromCli($exitCode);
 
-        return 0;
+        return $exitCode;
     }
 }
