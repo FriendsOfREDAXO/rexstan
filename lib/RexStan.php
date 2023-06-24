@@ -19,7 +19,7 @@ final class RexStan
      *
      * @return string
      */
-    public static function runFromCli(&$exitCode)
+    public static function runFromCli(int &$exitCode)
     {
         $phpstanBinary = self::phpstanBinPath();
         $configPath = self::phpstanConfigPath(__DIR__.'/../phpstan.neon');
