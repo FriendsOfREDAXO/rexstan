@@ -38,7 +38,7 @@ final class RexLint
     /**
      * @return list<string>
      */
-    public static function getPathsToLint(): array
+    private static function getPathsToLint(): array
     {
         $pathToLint = [];
 
