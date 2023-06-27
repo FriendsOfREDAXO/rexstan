@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7108ea01a98346d9839df5d2ca3c78f2",
+    "content-hash": "b247a9b4918bede5bb691a6f57411576",
     "packages": [
         {
             "name": "composer/semver",
@@ -1033,16 +1033,16 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.2.72",
+            "version": "0.2.73",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "e01951cc63a2fe32301aa0f11ce74872e3918108"
+                "reference": "9058bc93324f60b5f9bae27bfdafc9e7fdc3de4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/e01951cc63a2fe32301aa0f11ce74872e3918108",
-                "reference": "e01951cc63a2fe32301aa0f11ce74872e3918108",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/9058bc93324f60b5f9bae27bfdafc9e7fdc3de4e",
+                "reference": "9058bc93324f60b5f9bae27bfdafc9e7fdc3de4e",
                 "shasum": ""
             },
             "require": {
@@ -1066,7 +1066,7 @@
                 "phpstan/phpstan-strict-rules": "^1.1",
                 "phpunit/phpunit": "^8.5|^9.5",
                 "symplify/easy-coding-standard": "^11.3",
-                "tomasvotruba/unused-public": "^0.1.9",
+                "tomasvotruba/unused-public": "^0.1.10",
                 "vlucas/phpdotenv": "^5.4"
             },
             "type": "phpstan-extension",
@@ -1096,9 +1096,9 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.72"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.73"
             },
-            "time": "2023-04-13T08:57:55+00:00"
+            "time": "2023-06-26T10:01:33+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
