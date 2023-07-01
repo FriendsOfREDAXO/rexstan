@@ -1,5 +1,6 @@
 <?php
 
+use staabm\PHPStanDba\QueryReflection\LazyQueryReflector;
 use staabm\PHPStanDba\QueryReflection\PdoMysqlQueryReflector;
 use staabm\PHPStanDba\QueryReflection\QueryReflection;
 use staabm\PHPStanDba\QueryReflection\RuntimeConfiguration;
@@ -24,17 +25,20 @@ require __DIR__.'/../../core/boot.php';
 include_once rex_path::core('packages.php');
 
 // phpstan-dba bootstrapping
+$reflectorFactory = function(): PdoMysqlQueryReflector {
+    $configFile = rex_path::coreData('config.yml');
+    $config = rex_file::getConfig($configFile);
 
-$configFile = rex_path::coreData('config.yml');
-$config = rex_file::getConfig($configFile);
+    $db = ($config['db'][1] ?? []) + ['host' => '', 'login' => '', 'password' => '', 'name' => ''];
 
-$db = ($config['db'][1] ?? []) + ['host' => '', 'login' => '', 'password' => '', 'name' => ''];
+    $pdo = new PDO(
+        sprintf('mysql:dbname=%s;host=%s', $db['name'], $db['host']),
+        $db['login'],
+        $db['password'],
+    );
 
-$pdo = new PDO(
-    sprintf('mysql:dbname=%s;host=%s', $db['name'], $db['host']),
-    $db['login'],
-    $db['password'],
-);
+    return new PdoMysqlQueryReflector($pdo);
+};
 
 $config = new RuntimeConfiguration();
 // $config->debugMode(true);
@@ -43,7 +47,7 @@ $config = new RuntimeConfiguration();
 $config->utilizeSqlAst(true);
 
 QueryReflection::setupReflector(
-    new PdoMysqlQueryReflector($pdo),
+    new LazyQueryReflector($reflectorFactory),
     $config
 );
 
