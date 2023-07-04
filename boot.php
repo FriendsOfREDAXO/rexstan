@@ -6,11 +6,11 @@ $addon = rex_addon::get('rexstan');
 
 if (rex::isBackend() && is_object(rex::getUser())) {
     rex_extension::register('OUTPUT_FILTER', static function (rex_extension_point $ep) use ($addon) {
-        $svg = \rex_file::get($addon->getAssetsPath('rexstan_dino.svg'));
+        $svg = \rex_file::get($addon->getAssetsPath('rexstan-dino.min.svg'));
 
         $ep->setSubject(str_replace(
             '<i class="rexstan-navigation-icon"></i>',
-            '<span class="rexstan-navigation-icon" style="display: inline-block; width: 20px; height: 20px; margin-left: -28px; margin-right: 3px; vertical-align: top;">'.$svg.'</span>',
+            '<i class="rexstan-navigation-icon">'.$svg.'</i>',
             $ep->getSubject()
         ));
     });
