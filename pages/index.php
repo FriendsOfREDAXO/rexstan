@@ -8,7 +8,7 @@ $logoPath = $this->getAssetsUrl('rexstan.svg');
 // https://github.com/redaxo/redaxo/pull/5664
 
 echo '
-<script type="text/javascript">
+<script type="text/javascript" nonce="'.rex_response::getNonce().'">
     document.addEventListener("DOMContentLoaded", function () {
       document.querySelectorAll(".use-loader").forEach(function(el) {
         el.addEventListener("click", function () {
