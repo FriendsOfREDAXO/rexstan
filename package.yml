@@ -29,7 +29,7 @@ console_commands:
 requires:
     php:
         version: '>=7.4, <8.3'
-    redaxo: '^5.2'
+    redaxo: '^5.15'
 
 installer_ignore:
     - phpstan.dev.neon
