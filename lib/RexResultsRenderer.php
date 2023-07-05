@@ -52,8 +52,9 @@ final class RexResultsRenderer
 
     public static function getLevel9Jseffect(): string
     {
+        $nonce = method_exists('\rex_response', 'getNonce') ? ' nonce="'.\rex_response::getNonce().'"' : '';
         return
-            '<script'.\rex_response::getNonce().'>
+            '<script'.$nonce.'>
                 var duration = 10 * 1000;
                 var animationEnd = Date.now() + duration;
                 var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
