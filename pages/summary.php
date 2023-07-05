@@ -12,7 +12,7 @@ if ($result === null) {
 
 ?>
 <div style="width: 80%; background-color: rgb(32, 43, 53)">
-    <?php echo rex_file::get(rex_addon::get('rexstan')->getDataPath().'/baseline-graph.html'); ?>
+    <?php echo str_replace('<script>', '<script nonce="'.rex_response::getNonce().'">', rex_file::get(rex_addon::get('rexstan')->getDataPath().'/baseline-graph.html')); ?>
 </div>
 <table class="table table-striped table-hover" style="width: auto;">
     <tbody>
