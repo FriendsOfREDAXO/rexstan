@@ -75,10 +75,18 @@ $contentCoverage = '
     </table>';
 
 
+$rexstanGraph = '<div class="rexstan-graph">'.rex_file::get(rex_addon::get('rexstan')->getDataPath().'/baseline-graph.html').'</div>';
+
+$nonce = method_exists(rex_response::class, 'getNonce') ? ' nonce="'.rex_response::getNonce().'"' : '';
+$rexstanGraph = str_replace(
+    '<script>',
+    '<script'.$nonce.'>',
+    $rexstanGraph
+);
 
 $fragment = new rex_fragment();
 $fragment->setVar('title', 'Graph');
-$fragment->setVar('content', '<div class="rexstan-graph">'.rex_file::get(rex_addon::get('rexstan')->getDataPath().'/baseline-graph.html').'</div>', false);
+$fragment->setVar('content', $rexstanGraph, false);
 echo $fragment->parse('core/page/section.php');
 
 
