@@ -28,8 +28,8 @@ if ('settings' !== rex_be_controller::getCurrentPagePart(2)) {
     $url = '<small><a href="https://github.com/sponsors/staabm">Support <strong>rexstan</strong> with your sponsoring 💕</a></small>';
     $scripttime = rex::getProperty('timer')->getFormattedDelta(rex_timer::SEC);
 
-    echo '<div style="text-align:center;"><p>';
+    echo '<div class="text-center"><p>';
     echo $url . ' - <small>' . rex_i18n::msg('footer_scripttime', $scripttime) . '</small>';
-    echo ' <small><a href="#top"><i class="rex-icon fa fa-arrow-up"></i></a></small>';
+    echo ' <small><a href="#top"><i class="rex-icon rex-icon-top"></i></a></small>';
     echo '</p></div>';
 }
