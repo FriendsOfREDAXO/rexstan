@@ -30,7 +30,7 @@
 		"phpunit/phpunit": "^8.5 || ^10.1",
 		"php-parallel-lint/php-parallel-lint": "^1.2",
 		"php-parallel-lint/php-console-highlighter": "^1.0",
-		"spaze/coding-standard": "^1.6",
+		"spaze/coding-standard": "^1.7",
 		"symfony/polyfill-php80": "^1.27"
 	},
 	"autoload": {
@@ -38,8 +38,8 @@
 	},
 	"scripts": {
 		"lint": "vendor/bin/parallel-lint --colors src/ tests/",
-		"lint-7.x": "vendor/bin/parallel-lint --colors src/ tests/ --exclude tests/libs/TypesEverywhere.php --exclude tests/src/disallowed/functionCallsNamedParams.php --exclude tests/src/disallowed-allow/functionCallsNamedParams.php --exclude tests/src/disallowed/attributeUsages.php --exclude tests/src/disallowed-allow/attributeUsages.php",
-		"lint-8.0": "vendor/bin/parallel-lint --colors src/ tests/ --exclude tests/libs/TypesEverywhere.php",
+		"lint-7.x": "vendor/bin/parallel-lint --colors src/ tests/ --exclude tests/src/TypesEverywhere.php --exclude tests/src/disallowed/functionCallsNamedParams.php --exclude tests/src/disallowed-allow/functionCallsNamedParams.php --exclude tests/src/disallowed/attributeUsages.php --exclude tests/src/disallowed-allow/attributeUsages.php",
+		"lint-8.0": "vendor/bin/parallel-lint --colors src/ tests/ --exclude tests/src/TypesEverywhere.php",
 		"lint-neon": "vendor/bin/neon-lint .",
 		"phpcs": "vendor/bin/phpcs src/ tests/",
 		"cs-fix": "vendor/bin/phpcbf src/ tests/",
