@@ -14,14 +14,28 @@ final class PublicClassMethodMatcher
      * @var string[]
      */
     private const SKIPPED_TYPES = [
-        'PHPUnit\Framework\TestCase',
         'Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator',
     ];
+
+    /**
+     * @readonly
+     * @var \TomasVotruba\UnusedPublic\ClassTypeDetector
+     */
+    private $classTypeDetector;
+
+    public function __construct(ClassTypeDetector $classTypeDetector)
+    {
+        $this->classTypeDetector = $classTypeDetector;
+    }
 
     public function shouldSkipClassReflection(ClassReflection $classReflection): bool
     {
         // skip interface as required, traits as unable to detect for sure
         if ($classReflection->isInterface() || $classReflection->isTrait()) {
+            return true;
+        }
+
+        if ($this->classTypeDetector->isTestClass($classReflection)) {
             return true;
         }
 

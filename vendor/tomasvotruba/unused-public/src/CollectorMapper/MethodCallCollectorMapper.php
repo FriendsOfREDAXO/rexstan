@@ -11,24 +11,13 @@ use TomasVotruba\UnusedPublic\ValueObject\LocalAndExternalMethodCallReferences;
 final class MethodCallCollectorMapper
 {
     /**
-     * @param array<string, mixed[]> $methodCallReferencesByFile
-     * @param array<string, mixed[]> $staticCallReferencesByFile
-     * @param array<string, mixed[]> $attributeCallReferencesByFile
-     * @param array<string, mixed[]> $callbackReferencesByFile
+     * @param array<array<string, mixed[]>> $nestedReferencesByFiles
      * @return string[]
      */
-    public function mapToMethodCallReferences(
-        array $methodCallReferencesByFile,
-        array $staticCallReferencesByFile,
-        array $attributeCallReferencesByFile,
-        array $callbackReferencesByFile
-    ): array {
-        $methodCallReferences = $this->mergeAndFlatten(
-            $methodCallReferencesByFile,
-            $staticCallReferencesByFile,
-            $attributeCallReferencesByFile,
-            $callbackReferencesByFile
-        );
+    public function mapToMethodCallReferences(array $nestedReferencesByFiles): array
+    {
+        $methodCallReferences = $this->mergeAndFlatten($nestedReferencesByFiles);
+
         // remove ReferenceMaker::LOCAL prefix
         return array_map(static function (string $methodCallReference): string {
             if (strncmp($methodCallReference, ReferenceMarker::LOCAL, strlen(ReferenceMarker::LOCAL)) === 0) {
@@ -40,23 +29,11 @@ final class MethodCallCollectorMapper
     }
 
     /**
-     * @param array<string, mixed[]> $methodCallReferencesByFile
-     * @param array<string, mixed[]> $staticCallReferencesByFile
-     * @param array<string, mixed[]> $attributeCallReferencesByFile
-     * @param array<string, mixed[]> $callbackReferencesByFile
+     * @param array<array<string, mixed[]>> $nestedReferencesByFiles
      */
-    public function mapToLocalAndExternal(
-        array $methodCallReferencesByFile,
-        array $staticCallReferencesByFile,
-        array $attributeCallReferencesByFile,
-        array $callbackReferencesByFile
-    ): LocalAndExternalMethodCallReferences {
-        $methodCallReferences = $this->mergeAndFlatten(
-            $methodCallReferencesByFile,
-            $staticCallReferencesByFile,
-            $attributeCallReferencesByFile,
-            $callbackReferencesByFile
-        );
+    public function mapToLocalAndExternal(array $nestedReferencesByFiles): LocalAndExternalMethodCallReferences
+    {
+        $methodCallReferences = $this->mergeAndFlatten($nestedReferencesByFiles);
 
         $localMethodCallReferences = [];
         $externalMethodCallReferences = [];
@@ -73,23 +50,17 @@ final class MethodCallCollectorMapper
     }
 
     /**
-     * @param array<string, mixed[]> $methodCallReferencesByFile
-     * @param array<string, mixed[]> $staticCallReferencesByFile
-     * @param array<string, mixed[]> $attributeCallReferencesByFile
-     * @param array<string, mixed[]> $callbackReferencesByFile
+     * @param array<array<string, mixed[]>> $nestedReferencesByFiles
      * @return string[]
      */
-    private function mergeAndFlatten(
-        array $methodCallReferencesByFile,
-        array $staticCallReferencesByFile,
-        array $attributeCallReferencesByFile,
-        array $callbackReferencesByFile
-    ): array {
-        return array_merge(
-            Arrays::flatten($methodCallReferencesByFile),
-            Arrays::flatten($staticCallReferencesByFile),
-            Arrays::flatten($attributeCallReferencesByFile),
-            Arrays::flatten($callbackReferencesByFile)
-        );
+    private function mergeAndFlatten(array $nestedReferencesByFiles): array
+    {
+        $flattenReferences = [];
+
+        foreach ($nestedReferencesByFiles as $nestedReferences) {
+            $flattenReferences = array_merge($flattenReferences, Arrays::flatten($nestedReferences));
+        }
+
+        return $flattenReferences;
     }
 }
