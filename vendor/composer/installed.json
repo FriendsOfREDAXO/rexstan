@@ -1007,17 +1007,17 @@
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
-            "version": "0.11.1",
-            "version_normalized": "0.11.1.0",
+            "version": "0.12",
+            "version_normalized": "0.12.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-baseline-analysis.git",
-                "reference": "c7f66e7694fbc055d67e87bfac45c9a3c2a3db41"
+                "reference": "cae8addb8ac0bf831cfd3207ea2f9f2bd18d681a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/c7f66e7694fbc055d67e87bfac45c9a3c2a3db41",
-                "reference": "c7f66e7694fbc055d67e87bfac45c9a3c2a3db41",
+                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/cae8addb8ac0bf831cfd3207ea2f9f2bd18d681a",
+                "reference": "cae8addb8ac0bf831cfd3207ea2f9f2bd18d681a",
                 "shasum": ""
             },
             "require": {
@@ -1034,9 +1034,9 @@
                 "thecodingmachine/phpstan-safe-rule": "^1.2",
                 "tomasvotruba/cognitive-complexity": "^0.1.1",
                 "tomasvotruba/type-coverage": "^0.2.0",
-                "tomasvotruba/unused-public": "^0.1.12"
+                "tomasvotruba/unused-public": "^0.2.0"
             },
-            "time": "2023-06-26T07:59:53+00:00",
+            "time": "2023-07-27T10:20:40+00:00",
             "bin": [
                 "bin/phpstan-baseline-analyze",
                 "bin/phpstan-baseline-trend",
@@ -1063,7 +1063,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-baseline-analysis/issues",
-                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.11.1"
+                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.12"
             },
             "funding": [
                 {
