@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TomasVotruba\UnusedPublic\Collectors;
+namespace TomasVotruba\UnusedPublic\Collectors\Callable_;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr;
@@ -11,6 +11,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Collectors\Collector;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Type\Constant\ConstantArrayType;
+use TomasVotruba\UnusedPublic\ClassTypeDetector;
 use TomasVotruba\UnusedPublic\Configuration;
 
 /**
@@ -24,9 +25,16 @@ final class CallUserFuncCollector implements Collector
      */
     private $configuration;
 
-    public function __construct(Configuration $configuration)
+    /**
+     * @readonly
+     * @var \TomasVotruba\UnusedPublic\ClassTypeDetector
+     */
+    private $classTypeDetector;
+
+    public function __construct(Configuration $configuration, ClassTypeDetector $classTypeDetector)
     {
         $this->configuration = $configuration;
+        $this->classTypeDetector = $classTypeDetector;
     }
 
     public function getNodeType(): string
@@ -44,14 +52,6 @@ final class CallUserFuncCollector implements Collector
             return null;
         }
 
-        // skip calls in tests, as they are not used in production
-        $classReflection = $scope->getClassReflection();
-        if ($classReflection instanceof ClassReflection && $classReflection->isSubclassOf(
-            'PHPUnit\Framework\TestCase'
-        )) {
-            return null;
-        }
-
         // unable to resolve method name
         if ($node->name instanceof Expr) {
             return null;
@@ -63,6 +63,12 @@ final class CallUserFuncCollector implements Collector
 
         $args = $node->getArgs();
         if (count($args) < 1) {
+            return null;
+        }
+
+        $classReflection = $scope->getClassReflection();
+        // skip calls in tests, as they are not used in production
+        if ($classReflection instanceof ClassReflection && $this->classTypeDetector->isTestClass($classReflection)) {
             return null;
         }
 

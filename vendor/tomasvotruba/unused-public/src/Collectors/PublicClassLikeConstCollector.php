@@ -50,12 +50,12 @@ final class PublicClassLikeConstCollector implements Collector
             return [];
         }
 
-        $classReflection = $scope->getClassReflection();
-        if (! $classReflection instanceof ClassReflection) {
+        if (! $node->isPublic()) {
             return null;
         }
 
-        if (! $node->isPublic()) {
+        $classReflection = $scope->getClassReflection();
+        if (! $classReflection instanceof ClassReflection) {
             return null;
         }
 

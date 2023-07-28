@@ -9,10 +9,9 @@ use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
 use PHPStan\Collectors\Collector;
 use PHPStan\Reflection\ClassReflection;
-use PHPStan\Reflection\Php\PhpMethodReflection;
-use PHPStan\Reflection\ResolvedMethodReflection;
 use TomasVotruba\UnusedPublic\ApiDocStmtAnalyzer;
 use TomasVotruba\UnusedPublic\Configuration;
+use TomasVotruba\UnusedPublic\MethodTypeDetector;
 use TomasVotruba\UnusedPublic\PublicClassMethodMatcher;
 
 /**
@@ -51,6 +50,12 @@ final class PublicClassMethodCollector implements Collector
 
     /**
      * @readonly
+     * @var \TomasVotruba\UnusedPublic\MethodTypeDetector
+     */
+    private $methodTypeDetector;
+
+    /**
+     * @readonly
      * @var \TomasVotruba\UnusedPublic\Configuration
      */
     private $configuration;
@@ -58,10 +63,12 @@ final class PublicClassMethodCollector implements Collector
     public function __construct(
         ApiDocStmtAnalyzer $apiDocStmtAnalyzer,
         PublicClassMethodMatcher $publicClassMethodMatcher,
+        MethodTypeDetector $methodTypeDetector,
         Configuration $configuration
     ) {
         $this->apiDocStmtAnalyzer = $apiDocStmtAnalyzer;
         $this->publicClassMethodMatcher = $publicClassMethodMatcher;
+        $this->methodTypeDetector = $methodTypeDetector;
         $this->configuration = $configuration;
     }
 
@@ -80,42 +87,36 @@ final class PublicClassMethodCollector implements Collector
             return null;
         }
 
-        if ($this->isTestMethod($node, $scope)) {
-            return null;
-        }
-
-        if ($this->isTraitMethod($node, $scope)) {
-            return null;
-        }
-
         $classReflection = $scope->getClassReflection();
+        if (! $classReflection instanceof ClassReflection) {
+            return null;
+        }
 
-        // skip
-        if ($classReflection instanceof ClassReflection) {
-            // skip acceptance tests, codeception
-            if (substr_compare($classReflection->getName(), 'Cest', -strlen('Cest')) === 0) {
-                return null;
-            }
+        // skip acceptance tests, codeception
+        if (substr_compare($classReflection->getName(), 'Cest', -strlen('Cest')) === 0) {
+            return null;
+        }
 
-            foreach (self::SKIPPED_TYPES as $skippedType) {
-                if ($classReflection->isSubclassOf($skippedType)) {
-                    return null;
-                }
-            }
+        if ($this->methodTypeDetector->isTestMethod($node, $scope)) {
+            return null;
+        }
+
+        if ($this->methodTypeDetector->isTraitMethod($node, $scope)) {
+            return null;
         }
 
         if ($this->publicClassMethodMatcher->shouldSkipClassMethod($node)) {
             return null;
         }
 
-        // only if the class has no parents/implementers, to avoid class method required by contracts
-        $classReflection = $scope->getClassReflection();
-        if (! $classReflection instanceof ClassReflection) {
+        if ($this->apiDocStmtAnalyzer->isApiDoc($node, $classReflection)) {
             return null;
         }
 
-        if ($this->apiDocStmtAnalyzer->isApiDoc($node, $classReflection)) {
-            return null;
+        foreach (self::SKIPPED_TYPES as $skippedType) {
+            if ($classReflection->isSubclassOf($skippedType)) {
+                return null;
+            }
         }
 
         if ($this->publicClassMethodMatcher->shouldSkipClassReflection($classReflection)) {
@@ -130,41 +131,5 @@ final class PublicClassMethodCollector implements Collector
         }
 
         return [$classReflection->getName(), $methodName, $node->getLine()];
-    }
-
-    private function isTestMethod(ClassMethod $classMethod, Scope $scope): bool
-    {
-        $classMethodName = $classMethod->name->toString();
-        if (strncmp($classMethodName, 'test', strlen('test')) === 0) {
-            return true;
-        }
-
-        $classReflection = $scope->getClassReflection();
-        if (! $classReflection instanceof ClassReflection) {
-            return false;
-        }
-
-        $extendedMethodReflection = $classReflection->getMethod($classMethodName, $scope);
-
-        if ($extendedMethodReflection->getDocComment() === null) {
-            return false;
-        }
-
-        return strpos($extendedMethodReflection->getDocComment(), '@test') !== false;
-    }
-
-    private function isTraitMethod(ClassMethod $classMethod, Scope $scope): bool
-    {
-        $classReflection = $scope->getClassReflection();
-        if (! $classReflection instanceof ClassReflection) {
-            return false;
-        }
-
-        $extendedMethodReflection = $classReflection->getMethod($classMethod->name->toString(), $scope);
-        if ($extendedMethodReflection instanceof PhpMethodReflection || $extendedMethodReflection instanceof ResolvedMethodReflection) {
-            return $extendedMethodReflection->getDeclaringTrait() instanceof ClassReflection;
-        }
-
-        return false;
     }
 }
