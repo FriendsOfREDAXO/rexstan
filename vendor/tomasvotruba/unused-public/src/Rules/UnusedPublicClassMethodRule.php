@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TomasVotruba\UnusedPublic\Rules;
 
-use Nette\Utils\Arrays;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\CollectedDataNode;
@@ -12,16 +11,19 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use TomasVotruba\UnusedPublic\CollectorMapper\MethodCallCollectorMapper;
-use TomasVotruba\UnusedPublic\Collectors\AttributeCallableCollector;
-use TomasVotruba\UnusedPublic\Collectors\CallUserFuncCollector;
+use TomasVotruba\UnusedPublic\Collectors\Callable_\AttributeCallableCollector;
+use TomasVotruba\UnusedPublic\Collectors\Callable_\CallUserFuncCollector;
 use TomasVotruba\UnusedPublic\Collectors\FormTypeClassCollector;
-use TomasVotruba\UnusedPublic\Collectors\MethodCallCollector;
+use TomasVotruba\UnusedPublic\Collectors\MethodCall\MethodCallableCollector;
+use TomasVotruba\UnusedPublic\Collectors\MethodCall\MethodCallCollector;
 use TomasVotruba\UnusedPublic\Collectors\PublicClassMethodCollector;
-use TomasVotruba\UnusedPublic\Collectors\StaticMethodCallCollector;
+use TomasVotruba\UnusedPublic\Collectors\StaticCall\StaticMethodCallableCollector;
+use TomasVotruba\UnusedPublic\Collectors\StaticCall\StaticMethodCallCollector;
 use TomasVotruba\UnusedPublic\Configuration;
 use TomasVotruba\UnusedPublic\Enum\RuleTips;
 use TomasVotruba\UnusedPublic\Templates\TemplateMethodCallsProvider;
 use TomasVotruba\UnusedPublic\Templates\UsedMethodAnalyzer;
+use TomasVotruba\UnusedPublic\Utils\Arrays;
 
 /**
  * @see \TomasVotruba\UnusedPublic\Tests\Rules\UnusedPublicClassMethodRule\UnusedPublicClassMethodRuleTest
@@ -30,6 +32,8 @@ final class UnusedPublicClassMethodRule implements Rule
 {
     /**
      * @var string
+     *
+     * @api
      */
     public const ERROR_MESSAGE = 'Public method "%s::%s()" is never used';
 
@@ -87,12 +91,14 @@ final class UnusedPublicClassMethodRule implements Rule
         $twigMethodNames = $this->templateMethodCallsProvider->provideTwigMethodCalls();
         $bladeMethodNames = $this->templateMethodCallsProvider->provideBladeMethodCalls();
 
-        $completeMethodCallReferences = $this->methodCallCollectorMapper->mapToMethodCallReferences(
+        $completeMethodCallReferences = $this->methodCallCollectorMapper->mapToMethodCallReferences([
             $node->get(MethodCallCollector::class),
+            $node->get(MethodCallableCollector::class),
             $node->get(StaticMethodCallCollector::class),
+            $node->get(StaticMethodCallableCollector::class),
             $node->get(AttributeCallableCollector::class),
-            $node->get(CallUserFuncCollector::class)
-        );
+            $node->get(CallUserFuncCollector::class),
+        ]);
 
         $formTypeClasses = Arrays::flatten($node->get(FormTypeClassCollector::class));
 

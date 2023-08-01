@@ -39,13 +39,20 @@ if (is_string($phpstanResult)) {
     return;
 }
 
+$hasPhpstanErrors =
+    is_array($phpstanResult)
+    && array_key_exists('errors', $phpstanResult)
+    && is_array($phpstanResult['errors'])
+    && $phpstanResult['errors'] !== []
+;
+
 if (
     !is_array($phpstanResult)
     || !is_array($phpstanResult['files'])
-    || (array_key_exists('errors', $phpstanResult) && count($phpstanResult['errors']) > 0)
+    || $hasPhpstanErrors
 ) {
     // print general php errors, like out of memory...
-    if (count($phpstanResult['errors']) > 0) {
+    if ($hasPhpstanErrors) {
         $msg = '<h4>PHPSTAN: Laufzeit-Fehler</h4><ul>';
         foreach ($phpstanResult['errors'] as $error) {
             $msg .= '<li>'.nl2br($error).'<br /></li>';

@@ -49,3 +49,7 @@ div.page-header h1 span.rexstan-logo img {
     width: 20px;
     height: 20px;
 }
+
+.rexstan-graph {
+    margin-bottom: -30px;
+}

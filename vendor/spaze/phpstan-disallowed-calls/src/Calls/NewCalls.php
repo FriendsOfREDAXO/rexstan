@@ -28,7 +28,7 @@ class NewCalls implements Rule
 	/** @var DisallowedCallsRuleErrors */
 	private $disallowedCallsRuleErrors;
 
-	/** @var DisallowedCall[] */
+	/** @var list<DisallowedCall> */
 	private $disallowedCalls;
 
 
@@ -56,7 +56,7 @@ class NewCalls implements Rule
 	/**
 	 * @param New_ $node
 	 * @param Scope $scope
-	 * @return RuleError[]
+	 * @return list<RuleError>
 	 * @throws ShouldNotHappenException
 	 */
 	public function processNode(Node $node, Scope $scope): array
@@ -88,10 +88,12 @@ class NewCalls implements Rule
 			}
 
 			foreach ($names as $name) {
+				$classRef = $type->getClassReflection();
+				$definedIn = $classRef ? $classRef->getFileName() : null;
 				$name .= self::CONSTRUCT;
 				$errors = array_merge(
 					$errors,
-					$this->disallowedCallsRuleErrors->get($node, $scope, $name, $type->getClassName() . self::CONSTRUCT, null, $this->disallowedCalls)
+					$this->disallowedCallsRuleErrors->get($node, $scope, $name, $type->getClassName() . self::CONSTRUCT, $definedIn, $this->disallowedCalls)
 				);
 			}
 		}
