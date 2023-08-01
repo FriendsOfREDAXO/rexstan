@@ -379,21 +379,21 @@
         },
         {
             "name": "nette/utils",
-            "version": "v3.2.9",
-            "version_normalized": "3.2.9.0",
+            "version": "v3.2.10",
+            "version_normalized": "3.2.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/utils.git",
-                "reference": "c91bac3470c34b2ecd5400f6e6fdf0b64a836a5c"
+                "reference": "a4175c62652f2300c8017fb7e640f9ccb11648d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/utils/zipball/c91bac3470c34b2ecd5400f6e6fdf0b64a836a5c",
-                "reference": "c91bac3470c34b2ecd5400f6e6fdf0b64a836a5c",
+                "url": "https://api.github.com/repos/nette/utils/zipball/a4175c62652f2300c8017fb7e640f9ccb11648d2",
+                "reference": "a4175c62652f2300c8017fb7e640f9ccb11648d2",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.2 <8.3"
+                "php": ">=7.2 <8.4"
             },
             "conflict": {
                 "nette/di": "<3.0.6"
@@ -413,7 +413,7 @@
                 "ext-tokenizer": "to use Nette\\Utils\\Reflection::getUseStatements()",
                 "ext-xml": "to use Strings::length() etc. when mbstring is not available"
             },
-            "time": "2023-01-18T03:26:20+00:00",
+            "time": "2023-07-30T15:38:18+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -462,7 +462,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/utils/issues",
-                "source": "https://github.com/nette/utils/tree/v3.2.9"
+                "source": "https://github.com/nette/utils/tree/v3.2.10"
             },
             "install-path": "../nette/utils"
         },
@@ -1075,17 +1075,17 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.2.74",
-            "version_normalized": "0.2.74.0",
+            "version": "0.2.75",
+            "version_normalized": "0.2.75.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "1bd0de3d457e3a49218e9eb3182ceefcd6b1b4b9"
+                "reference": "812b436d601c007e07cba93985a4bc87eccf6be0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/1bd0de3d457e3a49218e9eb3182ceefcd6b1b4b9",
-                "reference": "1bd0de3d457e3a49218e9eb3182ceefcd6b1b4b9",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/812b436d601c007e07cba93985a4bc87eccf6be0",
+                "reference": "812b436d601c007e07cba93985a4bc87eccf6be0",
                 "shasum": ""
             },
             "require": {
@@ -1108,11 +1108,11 @@
                 "phpstan/phpstan-phpunit": "^1.0",
                 "phpstan/phpstan-strict-rules": "^1.1",
                 "phpunit/phpunit": "^8.5|^9.5",
-                "symplify/easy-coding-standard": "^11.3",
-                "tomasvotruba/unused-public": "^0.1.10",
+                "symplify/easy-coding-standard": "^11.4",
+                "tomasvotruba/unused-public": "^0.2.0",
                 "vlucas/phpdotenv": "^5.4"
             },
-            "time": "2023-06-27T13:58:51+00:00",
+            "time": "2023-07-30T09:15:23+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1141,7 +1141,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.74"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.75"
             },
             "install-path": "../staabm/phpstan-dba"
         },
