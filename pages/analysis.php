@@ -40,7 +40,8 @@ if (is_string($phpstanResult)) {
 }
 
 $hasPhpstanErrors =
-    array_key_exists('errors', $phpstanResult)
+    is_array($phpstanResult)
+    && array_key_exists('errors', $phpstanResult)
     && is_array($phpstanResult['errors'])
     && $phpstanResult['errors'] !== []
 ;
