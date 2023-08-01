@@ -2212,6 +2212,8 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'TomasVotruba\\UnusedPublic\\Templates\\TemplateMethodCallsProvider' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Templates/TemplateMethodCallsProvider.php',
         'TomasVotruba\\UnusedPublic\\Templates\\TemplateRegexFinder' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Templates/TemplateRegexFinder.php',
         'TomasVotruba\\UnusedPublic\\Templates\\UsedMethodAnalyzer' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Templates/UsedMethodAnalyzer.php',
+        'TomasVotruba\\UnusedPublic\\Utils\\Arrays' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Utils/Arrays.php',
+        'TomasVotruba\\UnusedPublic\\Utils\\Strings' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Utils/Strings.php',
         'TomasVotruba\\UnusedPublic\\ValueObject\\LocalAndExternalMethodCallReferences' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/ValueObject/LocalAndExternalMethodCallReferences.php',
         'TomasVotruba\\UnusedPublic\\ValueObject\\MethodCallReference' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/ValueObject/MethodCallReference.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',

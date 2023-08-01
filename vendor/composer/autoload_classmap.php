@@ -2014,6 +2014,8 @@ return array(
     'TomasVotruba\\UnusedPublic\\Templates\\TemplateMethodCallsProvider' => $vendorDir . '/tomasvotruba/unused-public/src/Templates/TemplateMethodCallsProvider.php',
     'TomasVotruba\\UnusedPublic\\Templates\\TemplateRegexFinder' => $vendorDir . '/tomasvotruba/unused-public/src/Templates/TemplateRegexFinder.php',
     'TomasVotruba\\UnusedPublic\\Templates\\UsedMethodAnalyzer' => $vendorDir . '/tomasvotruba/unused-public/src/Templates/UsedMethodAnalyzer.php',
+    'TomasVotruba\\UnusedPublic\\Utils\\Arrays' => $vendorDir . '/tomasvotruba/unused-public/src/Utils/Arrays.php',
+    'TomasVotruba\\UnusedPublic\\Utils\\Strings' => $vendorDir . '/tomasvotruba/unused-public/src/Utils/Strings.php',
     'TomasVotruba\\UnusedPublic\\ValueObject\\LocalAndExternalMethodCallReferences' => $vendorDir . '/tomasvotruba/unused-public/src/ValueObject/LocalAndExternalMethodCallReferences.php',
     'TomasVotruba\\UnusedPublic\\ValueObject\\MethodCallReference' => $vendorDir . '/tomasvotruba/unused-public/src/ValueObject/MethodCallReference.php',
     'UnhandledMatchError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',

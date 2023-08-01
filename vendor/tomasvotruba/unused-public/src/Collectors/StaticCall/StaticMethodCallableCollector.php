@@ -10,6 +10,8 @@ use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
 use PHPStan\Collectors\Collector;
 use PHPStan\Node\StaticMethodCallableNode;
+use PHPStan\Reflection\ClassReflection;
+use TomasVotruba\UnusedPublic\ClassTypeDetector;
 use TomasVotruba\UnusedPublic\Configuration;
 
 /**
@@ -23,9 +25,16 @@ final class StaticMethodCallableCollector implements Collector
      */
     private $configuration;
 
-    public function __construct(Configuration $configuration)
+    /**
+     * @readonly
+     * @var \TomasVotruba\UnusedPublic\ClassTypeDetector
+     */
+    private $classTypeDetector;
+
+    public function __construct(Configuration $configuration, ClassTypeDetector $classTypeDetector)
     {
         $this->configuration = $configuration;
+        $this->classTypeDetector = $classTypeDetector;
     }
 
     public function getNodeType(): string
@@ -48,6 +57,13 @@ final class StaticMethodCallableCollector implements Collector
         }
 
         if (! $node->getClass() instanceof Name) {
+            return null;
+        }
+
+        // skip calls in tests, as they are not used in production
+        $classReflection = $scope->getClassReflection();
+        if ($classReflection instanceof ClassReflection
+            && $this->classTypeDetector->isTestClass($classReflection)) {
             return null;
         }
 
