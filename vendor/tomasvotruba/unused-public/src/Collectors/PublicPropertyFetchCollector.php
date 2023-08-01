@@ -10,7 +10,9 @@ use PhpParser\Node\Expr\Variable;
 use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Collectors\Collector;
+use PHPStan\Reflection\ClassReflection;
 use PHPStan\Type\TypeWithClassName;
+use TomasVotruba\UnusedPublic\ClassTypeDetector;
 use TomasVotruba\UnusedPublic\Configuration;
 
 /**
@@ -24,9 +26,16 @@ final class PublicPropertyFetchCollector implements Collector
      */
     private $configuration;
 
-    public function __construct(Configuration $configuration)
+    /**
+     * @readonly
+     * @var \TomasVotruba\UnusedPublic\ClassTypeDetector
+     */
+    private $classTypeDetector;
+
+    public function __construct(Configuration $configuration, ClassTypeDetector $classTypeDetector)
     {
         $this->configuration = $configuration;
+        $this->classTypeDetector = $classTypeDetector;
     }
 
     /**
@@ -58,6 +67,11 @@ final class PublicPropertyFetchCollector implements Collector
 
         $propertyFetcherType = $scope->getType($node->var);
         if (! $propertyFetcherType instanceof TypeWithClassName) {
+            return null;
+        }
+
+        $classReflection = $scope->getClassReflection();
+        if ($classReflection instanceof ClassReflection && $this->classTypeDetector->isTestClass($classReflection)) {
             return null;
         }
 

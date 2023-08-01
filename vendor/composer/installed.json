@@ -1616,26 +1616,25 @@
         },
         {
             "name": "tomasvotruba/unused-public",
-            "version": "0.2.0.72",
-            "version_normalized": "0.2.0.72",
+            "version": "0.3.1.72",
+            "version_normalized": "0.3.1.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/unused-public.git",
-                "reference": "f7698171b1cd89d5bec827b4df96ae1b785cb5d9"
+                "reference": "ff92735261e9a21c0d438c82c83b33d7e1857f85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/f7698171b1cd89d5bec827b4df96ae1b785cb5d9",
-                "reference": "f7698171b1cd89d5bec827b4df96ae1b785cb5d9",
+                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/ff92735261e9a21c0d438c82c83b33d7e1857f85",
+                "reference": "ff92735261e9a21c0d438c82c83b33d7e1857f85",
                 "shasum": ""
             },
             "require": {
-                "nette/utils": "^3.2",
-                "php": "^7.2 || 8.0.*",
+                "php": "^7.2 || ^8.0",
                 "phpstan/phpstan": "^1.10.19",
                 "webmozart/assert": "^1.11"
             },
-            "time": "2023-07-25T15:45:17+00:00",
+            "time": "2023-07-31T15:22:27+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1661,7 +1660,7 @@
             ],
             "support": {
                 "issues": "https://github.com/TomasVotruba/unused-public/issues",
-                "source": "https://github.com/TomasVotruba/unused-public/tree/0.2.0.72"
+                "source": "https://github.com/TomasVotruba/unused-public/tree/0.3.1.72"
             },
             "funding": [
                 {
