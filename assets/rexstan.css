@@ -36,6 +36,20 @@ div.page-header h1 span.rexstan-logo img {
   z-index: 5;
 }
 
+.rexstan-navigation-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: -28px;
+    margin-right: 3px;
+    vertical-align: top;
+}
+.rexstan-navigation-icon svg {
+    fill: currentColor;
+    width: 20px;
+    height: 20px;
+}
+
 .rexstan-graph {
     margin-bottom: -30px;
 }
