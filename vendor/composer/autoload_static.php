@@ -188,10 +188,10 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         ),
         'PHPStan\\' => 
         array (
-            0 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
-            1 => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src',
-            2 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
-            3 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
+            0 => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src',
+            1 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
+            2 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
+            3 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
         ),
         'JsonSchema\\' => 
         array (
@@ -724,6 +724,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'Nette\\Utils\\Type' => __DIR__ . '/..' . '/nette/utils/src/Utils/Type.php',
         'Nette\\Utils\\UnknownImageFileException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Utils\\Validators' => __DIR__ . '/..' . '/nette/utils/src/Utils/Validators.php',
+        'PHPStan\\DependencyInjection\\LazyDeprecatedScopeResolverProvider' => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src/DependencyInjection/LazyDeprecatedScopeResolverProvider.php',
         'PHPStan\\PhpDoc\\PHPUnit\\MockObjectTypeNodeResolverExtension' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/PhpDoc/PHPUnit/MockObjectTypeNodeResolverExtension.php',
         'PHPStan\\Rules\\BooleansInConditions\\BooleanInBooleanAndRule' => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src/Rules/BooleansInConditions/BooleanInBooleanAndRule.php',
         'PHPStan\\Rules\\BooleansInConditions\\BooleanInBooleanNotRule' => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src/Rules/BooleansInConditions/BooleanInBooleanNotRule.php',
@@ -739,8 +740,10 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'PHPStan\\Rules\\Deprecations\\CallToDeprecatedFunctionRule' => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src/Rules/Deprecations/CallToDeprecatedFunctionRule.php',
         'PHPStan\\Rules\\Deprecations\\CallToDeprecatedMethodRule' => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src/Rules/Deprecations/CallToDeprecatedMethodRule.php',
         'PHPStan\\Rules\\Deprecations\\CallToDeprecatedStaticMethodRule' => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src/Rules/Deprecations/CallToDeprecatedStaticMethodRule.php',
+        'PHPStan\\Rules\\Deprecations\\DefaultDeprecatedScopeResolver' => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src/Rules/Deprecations/DefaultDeprecatedScopeResolver.php',
         'PHPStan\\Rules\\Deprecations\\DeprecatedClassHelper' => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src/Rules/Deprecations/DeprecatedClassHelper.php',
         'PHPStan\\Rules\\Deprecations\\DeprecatedScopeHelper' => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src/Rules/Deprecations/DeprecatedScopeHelper.php',
+        'PHPStan\\Rules\\Deprecations\\DeprecatedScopeResolver' => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src/Rules/Deprecations/DeprecatedScopeResolver.php',
         'PHPStan\\Rules\\Deprecations\\FetchingClassConstOfDeprecatedClassRule' => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src/Rules/Deprecations/FetchingClassConstOfDeprecatedClassRule.php',
         'PHPStan\\Rules\\Deprecations\\FetchingDeprecatedConstRule' => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src/Rules/Deprecations/FetchingDeprecatedConstRule.php',
         'PHPStan\\Rules\\Deprecations\\ImplementationOfDeprecatedInterfaceRule' => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src/Rules/Deprecations/ImplementationOfDeprecatedInterfaceRule.php',
