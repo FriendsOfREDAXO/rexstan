@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f3fbca9b03300a46fc76d65b3d8434d5",
+    "content-hash": "f87b71565797a4f30a91dea4b8126055",
     "packages": [
         {
             "name": "composer/semver",
@@ -1553,16 +1553,16 @@
         },
         {
             "name": "tomasvotruba/unused-public",
-            "version": "0.3.1.72",
+            "version": "0.3.2.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/unused-public.git",
-                "reference": "ff92735261e9a21c0d438c82c83b33d7e1857f85"
+                "reference": "f737246d90ed837d1816ee1c5e1447e414b65e1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/ff92735261e9a21c0d438c82c83b33d7e1857f85",
-                "reference": "ff92735261e9a21c0d438c82c83b33d7e1857f85",
+                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/f737246d90ed837d1816ee1c5e1447e414b65e1e",
+                "reference": "f737246d90ed837d1816ee1c5e1447e414b65e1e",
                 "shasum": ""
             },
             "require": {
@@ -1594,7 +1594,7 @@
             ],
             "support": {
                 "issues": "https://github.com/TomasVotruba/unused-public/issues",
-                "source": "https://github.com/TomasVotruba/unused-public/tree/0.3.1.72"
+                "source": "https://github.com/TomasVotruba/unused-public/tree/0.3.2.72"
             },
             "funding": [
                 {
@@ -1606,7 +1606,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-31T15:22:27+00:00"
+            "time": "2023-08-04T13:10:19+00:00"
         },
         {
             "name": "webmozart/assert",
