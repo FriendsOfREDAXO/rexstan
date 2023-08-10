@@ -48,12 +48,12 @@ If you use rexstan with [docker-redaxo](https://github.com/FriendsOfREDAXO/docke
 
 If you encounter problems with memory consumption, the PHP memory limit should be increased. 
 
-Set the PHP Memory limit in php.ini to: `memory_limit = 256M` or more
+Set the PHP Memory limit in php.ini to: `memory_limit = 1024M` or more
 
 **For REDAXO Docker Image**
 
 Open the Docker console and set the new memory limit with : 
-`printf 'memory_limit = 256M\n' >> /usr/local/etc/php/conf.d/uploads.ini \`
+`printf 'memory_limit = 1024M\n' >> /usr/local/etc/php/conf.d/uploads.ini \`
 
 Restart the container
 
