@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "499a1a786912bcc8ccaa8ff9de79c01e",
+    "content-hash": "0dc2adb722a8dc32f4439b40e1c28b4d",
     "packages": [
         {
             "name": "composer/semver",
@@ -456,16 +456,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.16.0",
+            "version": "v4.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "19526a33fb561ef417e822e85f08a00db4059c17"
+                "reference": "a6303e50c90c355c7eeee2c4a8b27fe8dc8fef1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/19526a33fb561ef417e822e85f08a00db4059c17",
-                "reference": "19526a33fb561ef417e822e85f08a00db4059c17",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/a6303e50c90c355c7eeee2c4a8b27fe8dc8fef1d",
+                "reference": "a6303e50c90c355c7eeee2c4a8b27fe8dc8fef1d",
                 "shasum": ""
             },
             "require": {
@@ -506,9 +506,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.16.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.17.1"
             },
-            "time": "2023-06-25T14:52:30+00:00"
+            "time": "2023-08-13T19:53:39+00:00"
         },
         {
             "name": "php-parallel-lint/php-parallel-lint",
@@ -1185,16 +1185,16 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "12.1.2.72",
+            "version": "12.1.4.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "dabf33930d686a708710fc6d40d1aab6378a12d7"
+                "reference": "cba5fb869342c2b2831b4ec8df408d023a635c6c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/dabf33930d686a708710fc6d40d1aab6378a12d7",
-                "reference": "dabf33930d686a708710fc6d40d1aab6378a12d7",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/cba5fb869342c2b2831b4ec8df408d023a635c6c",
+                "reference": "cba5fb869342c2b2831b4ec8df408d023a635c6c",
                 "shasum": ""
             },
             "require": {
@@ -1231,7 +1231,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/12.1.2.72"
+                "source": "https://github.com/symplify/phpstan-rules/tree/12.1.4.72"
             },
             "funding": [
                 {
@@ -1243,7 +1243,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-08-07T23:11:30+00:00"
+            "time": "2023-08-17T09:58:31+00:00"
         },
         {
             "name": "thecodingmachine/phpstan-safe-rule",
