@@ -135,9 +135,3 @@ services:
         class: Symplify\PHPStanRules\Rules\CheckTypehintCallerTypeRule
         tags:
             - phpstan.rules.rule
-
-    -
-        class: Symplify\PHPStanRules\Rules\Missing\CheckSprintfMatchingTypesRule
-        tags:
-            - phpstan.rules.rule
-
