@@ -34,12 +34,15 @@ final class StringOutsideConcatFindingNodeVisitor extends NodeVisitorAbstract
     /**
      * @param Node[] $nodes
      */
-    public function beforeTraverse(array $nodes)
+    public function beforeTraverse(array $nodes): ?array
     {
         $this->foundNodes = [];
         return null;
     }
 
+    /**
+     * @return int|\PhpParser\Node|null
+     */
     public function enterNode(Node $node)
     {
         if ($this->fileCheckingFuncCallAnalyzer->isFileExistCheck($node)) {

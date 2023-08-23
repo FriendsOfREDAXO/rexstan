@@ -1,17 +1,12 @@
 rules:
     - Symplify\PHPStanRules\Rules\NoProtectedClassElementRule
-
-    - Symplify\PHPStanRules\Rules\Spotter\IfElseToMatchSpotterRule
-    - Symplify\PHPStanRules\Rules\Missing\CheckSprintfMatchingTypesRule
     - Symplify\PHPStanRules\Rules\ForbiddenExtendOfNonAbstractClassRule
 
     # domain
     - Symplify\PHPStanRules\Rules\Domain\RequireExceptionNamespaceRule
     - Symplify\PHPStanRules\Rules\Domain\RequireAttributeNamespaceRule
-    - Symplify\PHPStanRules\Rules\CheckAttributteArgumentClassExistsRule
     - Symplify\PHPStanRules\Rules\Enum\RequireUniqueEnumConstantRule
     - Symplify\PHPStanRules\Rules\ForbiddenParamTypeRemovalRule
-    - Symplify\PHPStanRules\Rules\NoNestedFuncCallRule
     - Symplify\PHPStanRules\Rules\PreventParentMethodVisibilityOverrideRule
 
     # paths
@@ -27,7 +22,6 @@ rules:
     - Symplify\PHPStanRules\Rules\NoIssetOnObjectRule
 
     # explicit naming
-    - Symplify\PHPStanRules\Rules\NoDefaultExceptionRule
     - Symplify\PHPStanRules\Rules\NoParentMethodCallOnNoOverrideProcessRule
     - Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule
 
@@ -36,9 +30,6 @@ rules:
     - Symplify\PHPStanRules\Rules\NarrowType\NoReturnFalseInNonBoolClassMethodRule
 
     - Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule
-    - Symplify\PHPStanRules\Rules\ForbiddenThisArgumentRule
-    - Symplify\PHPStanRules\Rules\ForbiddenSpreadOperatorRule
-    - Symplify\PHPStanRules\Rules\ForbiddenAnonymousClassRule
     - Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule
     - Symplify\PHPStanRules\Rules\NoEmptyClassRule
 
