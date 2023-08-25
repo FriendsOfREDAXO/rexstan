@@ -587,17 +587,17 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.30",
-            "version_normalized": "1.10.30.0",
+            "version": "1.10.32",
+            "version_normalized": "1.10.32.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "2910afdd3fe33e5afd71c09f3fb0d0845b48c410"
+                "reference": "c47e47d3ab03137c0e121e77c4d2cb58672f6d44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/2910afdd3fe33e5afd71c09f3fb0d0845b48c410",
-                "reference": "2910afdd3fe33e5afd71c09f3fb0d0845b48c410",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/c47e47d3ab03137c0e121e77c4d2cb58672f6d44",
+                "reference": "c47e47d3ab03137c0e121e77c4d2cb58672f6d44",
                 "shasum": ""
             },
             "require": {
@@ -606,7 +606,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2023-08-22T13:48:25+00:00",
+            "time": "2023-08-24T21:54:50+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -1233,17 +1233,17 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "12.2.5.72",
-            "version_normalized": "12.2.5.72",
+            "version": "12.2.7.72",
+            "version_normalized": "12.2.7.72",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "b1e936fc6787e276aa3e48280090a91864136175"
+                "reference": "14afda766739b0d334fb6929ac1c618b9cd963c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/b1e936fc6787e276aa3e48280090a91864136175",
-                "reference": "b1e936fc6787e276aa3e48280090a91864136175",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/14afda766739b0d334fb6929ac1c618b9cd963c2",
+                "reference": "14afda766739b0d334fb6929ac1c618b9cd963c2",
                 "shasum": ""
             },
             "require": {
@@ -1253,7 +1253,7 @@
                 "phpstan/phpstan": "^1.9.11",
                 "webmozart/assert": "^1.10"
             },
-            "time": "2023-08-22T14:14:16+00:00",
+            "time": "2023-08-23T09:57:29+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "branch-alias": {
@@ -1282,7 +1282,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/12.2.5.72"
+                "source": "https://github.com/symplify/phpstan-rules/tree/12.2.7.72"
             },
             "funding": [
                 {
