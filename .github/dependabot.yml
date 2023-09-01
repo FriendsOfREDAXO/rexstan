@@ -1,5 +1,5 @@
 # Dependabot config reference
-# https://help.github.com/en/github/administering-a-repository/configuration-options-for-dependency-updates
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 
 version: 2
 updates:
@@ -9,6 +9,7 @@ updates:
         schedule:
             interval: daily
         open-pull-requests-limit: 15
+        vendor: true
 
         groups:
           production-dependencies:
