@@ -10,9 +10,3 @@ updates:
             interval: daily
         open-pull-requests-limit: 15
         vendor: true
-
-        groups:
-          production-dependencies:
-            dependency-type: "production"
-          development-dependencies:
-            dependency-type: "development"
