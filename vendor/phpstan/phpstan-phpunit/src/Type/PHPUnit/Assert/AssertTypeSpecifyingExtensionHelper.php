@@ -13,7 +13,9 @@ use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\Instanceof_;
 use PhpParser\Node\Name;
+use PhpParser\Node\Param;
 use PhpParser\Node\Scalar\LNumber;
+use PhpParser\Node\Stmt;
 use PHPStan\Analyser\Scope;
 use PHPStan\Analyser\SpecifiedTypes;
 use PHPStan\Analyser\TypeSpecifier;
@@ -262,11 +264,57 @@ class AssertTypeSpecifyingExtensionHelper
 						]
 					);
 				},
-				'ArrayHasKey' => static function (Scope $scope, Arg $key, Arg $array): FuncCall {
-					return new FuncCall(new Name('array_key_exists'), [$key, $array]);
+				'ArrayHasKey' => static function (Scope $scope, Arg $key, Arg $array): Expr {
+					return new Expr\BinaryOp\BooleanOr(
+						new Expr\BinaryOp\BooleanAnd(
+							new Expr\Instanceof_($array->value, new Name('ArrayAccess')),
+							new Expr\MethodCall($array->value, 'offsetExists', [$key])
+						),
+						new FuncCall(new Name('array_key_exists'), [$key, $array])
+					);
 				},
 				'ObjectHasAttribute' => static function (Scope $scope, Arg $property, Arg $object): FuncCall {
 					return new FuncCall(new Name('property_exists'), [$object, $property]);
+				},
+				'ObjectHasProperty' => static function (Scope $scope, Arg $property, Arg $object): FuncCall {
+					return new FuncCall(new Name('property_exists'), [$object, $property]);
+				},
+				'Contains' => static function (Scope $scope, Arg $needle, Arg $haystack): Expr {
+					return new Expr\BinaryOp\BooleanOr(
+						new Expr\Instanceof_($haystack->value, new Name('Traversable')),
+						new FuncCall(new Name('in_array'), [$needle, $haystack, new Arg(new ConstFetch(new Name('true')))])
+					);
+				},
+				'ContainsEquals' => static function (Scope $scope, Arg $needle, Arg $haystack): Expr {
+					return new Expr\BinaryOp\BooleanOr(
+						new Expr\Instanceof_($haystack->value, new Name('Traversable')),
+						new Expr\BinaryOp\BooleanAnd(
+							new Expr\BooleanNot(new Expr\Empty_($haystack->value)),
+							new FuncCall(new Name('in_array'), [$needle, $haystack, new Arg(new ConstFetch(new Name('false')))])
+						)
+					);
+				},
+				'ContainsOnlyInstancesOf' => static function (Scope $scope, Arg $className, Arg $haystack): Expr {
+					return new Expr\BinaryOp\BooleanOr(
+						new Expr\Instanceof_($haystack->value, new Name('Traversable')),
+						new Identical(
+							$haystack->value,
+							new FuncCall(new Name('array_filter'), [
+								$haystack,
+								new Arg(new Expr\Closure([
+									'static' => true,
+									'params' => [
+										new Param(new Expr\Variable('_')),
+									],
+									'stmts' => [
+										new Stmt\Return_(
+											new FuncCall(new Name('is_a'), [new Arg(new Expr\Variable('_')), $className])
+										),
+									],
+								])),
+							])
+						)
+					);
 				},
 			];
 		}
