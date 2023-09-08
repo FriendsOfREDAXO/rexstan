@@ -9,7 +9,7 @@
         "staabm/phpstan-dba": "0.2.75",
         "spaze/phpstan-disallowed-calls": "2.16.0",
         "symplify/phpstan-rules": "12.2.7.72",
-        "staabm/phpstan-baseline-analysis": "0.12",
+        "staabm/phpstan-baseline-analysis": "0.12.2",
         "tomasvotruba/unused-public": "0.3.2.72",
         "tomasvotruba/type-coverage": "0.2.0",
         "tomasvotruba/cognitive-complexity": "0.1.1.72",
