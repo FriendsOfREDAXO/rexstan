@@ -13,6 +13,12 @@ final class TypeCountAndMissingTypes
     private $totalCount;
 
     /**
+     * @readonly
+     * @var int
+     */
+    private $missingCount;
+
+    /**
      * @var array<string, int[]>
      * @readonly
      */
@@ -21,15 +27,21 @@ final class TypeCountAndMissingTypes
     /**
      * @param array<string, int[]> $missingTypeLinesByFilePath
      */
-    public function __construct(int $totalCount, array $missingTypeLinesByFilePath)
+    public function __construct(int $totalCount, int $missingCount, array $missingTypeLinesByFilePath)
     {
         $this->totalCount = $totalCount;
+        $this->missingCount = $missingCount;
         $this->missingTypeLinesByFilePath = $missingTypeLinesByFilePath;
     }
 
     public function getTotalCount(): int
     {
         return $this->totalCount;
+    }
+
+    public function getFilledCount(): int
+    {
+        return $this->totalCount - $this->missingCount;
     }
 
     /**
@@ -40,9 +52,9 @@ final class TypeCountAndMissingTypes
         return $this->missingTypeLinesByFilePath;
     }
 
-    public function getCoveragePercentage(): int
+    public function getCoveragePercentage(): float
     {
-        return (int) (100 * ($this->getTypedCount() / $this->totalCount));
+        return 100 * ($this->getTypedCount() / $this->totalCount);
     }
 
     private function getTypedCount(): int
