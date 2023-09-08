@@ -47,6 +47,10 @@ $contentErrors = '
                 <th scope="row">Anonymous-Variables</th>
                 <td data-title="Anonymous-Variables">'.$result[ResultPrinter::KEY_ANONYMOUS_VARIABLES].'</td>
             </tr>
+            <tr>
+                <th scope="row">Unused symbols</th>
+                <td data-title="Anonymous-Variables">'.$result[ResultPrinter::KEY_UNUSED_SYMBOLS].'</td>
+            </tr>
         </tbody>
     </table>';
 
