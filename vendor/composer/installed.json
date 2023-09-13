@@ -1500,25 +1500,24 @@
         },
         {
             "name": "tomasvotruba/cognitive-complexity",
-            "version": "0.1.1.72",
-            "version_normalized": "0.1.1.72",
+            "version": "0.2.2",
+            "version_normalized": "0.2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/cognitive-complexity.git",
-                "reference": "49426441b6f2e8b47139c0053a0792c405e14a49"
+                "reference": "d3b18c444104004d78b4a5c25816dadf854e686a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/cognitive-complexity/zipball/49426441b6f2e8b47139c0053a0792c405e14a49",
-                "reference": "49426441b6f2e8b47139c0053a0792c405e14a49",
+                "url": "https://api.github.com/repos/TomasVotruba/cognitive-complexity/zipball/d3b18c444104004d78b4a5c25816dadf854e686a",
+                "reference": "d3b18c444104004d78b4a5c25816dadf854e686a",
                 "shasum": ""
             },
             "require": {
-                "nette/utils": "^3.2",
-                "php": "^7.2 || 8.0.*",
-                "phpstan/phpstan": "^1.9.3"
+                "php": "^7.2 || ^8.0",
+                "phpstan/phpstan": "^1.10"
             },
-            "time": "2023-03-12T10:19:02+00:00",
+            "time": "2023-09-08T09:56:00+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1540,7 +1539,7 @@
             "description": "PHPStan rules to measure cognitive complexity of your classes and methods",
             "support": {
                 "issues": "https://github.com/TomasVotruba/cognitive-complexity/issues",
-                "source": "https://github.com/TomasVotruba/cognitive-complexity/tree/0.1.1.72"
+                "source": "https://github.com/TomasVotruba/cognitive-complexity/tree/0.2.2"
             },
             "funding": [
                 {

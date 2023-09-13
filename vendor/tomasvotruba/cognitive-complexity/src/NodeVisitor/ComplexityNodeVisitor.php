@@ -23,10 +23,8 @@ final class ComplexityNodeVisitor extends NodeVisitorAbstract
      */
     private $complexityAffectingNodeFinder;
 
-    public function __construct(
-        CognitiveComplexityDataCollector $cognitiveComplexityDataCollector,
-        ComplexityAffectingNodeFinder $complexityAffectingNodeFinder
-    ) {
+    public function __construct(CognitiveComplexityDataCollector $cognitiveComplexityDataCollector, ComplexityAffectingNodeFinder $complexityAffectingNodeFinder)
+    {
         $this->cognitiveComplexityDataCollector = $cognitiveComplexityDataCollector;
         $this->complexityAffectingNodeFinder = $complexityAffectingNodeFinder;
     }

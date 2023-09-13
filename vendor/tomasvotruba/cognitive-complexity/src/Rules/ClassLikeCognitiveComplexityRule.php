@@ -18,6 +18,7 @@ use TomasVotruba\CognitiveComplexity\Configuration;
 final class ClassLikeCognitiveComplexityRule implements Rule
 {
     /**
+     * @api used in tests
      * @var string
      */
     public const ERROR_MESSAGE = 'Class cognitive complexity is %d, keep it under %d';
@@ -34,10 +35,8 @@ final class ClassLikeCognitiveComplexityRule implements Rule
      */
     private $configuration;
 
-    public function __construct(
-        AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer,
-        Configuration $configuration
-    ) {
+    public function __construct(AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer, Configuration $configuration)
+    {
         $this->astCognitiveComplexityAnalyzer = $astCognitiveComplexityAnalyzer;
         $this->configuration = $configuration;
     }
