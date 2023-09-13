@@ -59,12 +59,8 @@ final class LocalOnlyPublicClassMethodRule implements Rule
      */
     private $methodCallCollectorMapper;
 
-    public function __construct(
-        Configuration $configuration,
-        UsedMethodAnalyzer $usedMethodAnalyzer,
-        TemplateMethodCallsProvider $templateMethodCallsProvider,
-        MethodCallCollectorMapper $methodCallCollectorMapper
-    ) {
+    public function __construct(Configuration $configuration, UsedMethodAnalyzer $usedMethodAnalyzer, TemplateMethodCallsProvider $templateMethodCallsProvider, MethodCallCollectorMapper $methodCallCollectorMapper)
+    {
         $this->configuration = $configuration;
         $this->usedMethodAnalyzer = $usedMethodAnalyzer;
         $this->templateMethodCallsProvider = $templateMethodCallsProvider;

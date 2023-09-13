@@ -60,12 +60,8 @@ final class PublicClassMethodCollector implements Collector
      */
     private $configuration;
 
-    public function __construct(
-        ApiDocStmtAnalyzer $apiDocStmtAnalyzer,
-        PublicClassMethodMatcher $publicClassMethodMatcher,
-        MethodTypeDetector $methodTypeDetector,
-        Configuration $configuration
-    ) {
+    public function __construct(ApiDocStmtAnalyzer $apiDocStmtAnalyzer, PublicClassMethodMatcher $publicClassMethodMatcher, MethodTypeDetector $methodTypeDetector, Configuration $configuration)
+    {
         $this->apiDocStmtAnalyzer = $apiDocStmtAnalyzer;
         $this->publicClassMethodMatcher = $publicClassMethodMatcher;
         $this->methodTypeDetector = $methodTypeDetector;
@@ -92,16 +88,7 @@ final class PublicClassMethodCollector implements Collector
             return null;
         }
 
-        // skip acceptance tests, codeception
-        if (substr_compare($classReflection->getName(), 'Cest', -strlen('Cest')) === 0) {
-            return null;
-        }
-
-        if ($this->methodTypeDetector->isTestMethod($node, $scope)) {
-            return null;
-        }
-
-        if ($this->methodTypeDetector->isTraitMethod($node, $scope)) {
+        if ($this->shouldSkip($classReflection, $node, $scope)) {
             return null;
         }
 
@@ -131,5 +118,19 @@ final class PublicClassMethodCollector implements Collector
         }
 
         return [$classReflection->getName(), $methodName, $node->getLine()];
+    }
+
+    private function shouldSkip(ClassReflection $classReflection, ClassMethod $classMethod, Scope $scope): bool
+    {
+        // skip acceptance tests, codeception
+        if (substr_compare($classReflection->getName(), 'Cest', -strlen('Cest')) === 0) {
+            return true;
+        }
+
+        if ($this->methodTypeDetector->isTestMethod($classMethod, $scope)) {
+            return true;
+        }
+
+        return $this->methodTypeDetector->isTraitMethod($classMethod, $scope);
     }
 }

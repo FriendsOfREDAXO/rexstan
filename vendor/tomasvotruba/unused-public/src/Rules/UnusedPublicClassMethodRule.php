@@ -61,12 +61,8 @@ final class UnusedPublicClassMethodRule implements Rule
      */
     private $methodCallCollectorMapper;
 
-    public function __construct(
-        Configuration $configuration,
-        TemplateMethodCallsProvider $templateMethodCallsProvider,
-        UsedMethodAnalyzer $usedMethodAnalyzer,
-        MethodCallCollectorMapper $methodCallCollectorMapper
-    ) {
+    public function __construct(Configuration $configuration, TemplateMethodCallsProvider $templateMethodCallsProvider, UsedMethodAnalyzer $usedMethodAnalyzer, MethodCallCollectorMapper $methodCallCollectorMapper)
+    {
         $this->configuration = $configuration;
         $this->templateMethodCallsProvider = $templateMethodCallsProvider;
         $this->usedMethodAnalyzer = $usedMethodAnalyzer;
