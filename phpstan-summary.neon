@@ -5,3 +5,5 @@ includes:
     # enable native type coverage for the summary
     - config/native-type-coverage.neon
 
+parameters:
+    resultCachePath: %tmpDir%/resultCache-summary.php
