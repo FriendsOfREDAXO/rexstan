@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "82c7bc41d3540cd78bfe3c7990695cb9",
+    "content-hash": "ba691fec8462c4fe0945ff3b197fe398",
     "packages": [
         {
             "name": "composer/semver",
@@ -968,16 +968,16 @@
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
-            "version": "0.12.2",
+            "version": "0.12.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-baseline-analysis.git",
-                "reference": "8b93efc9d5fd58176d06cf1bd23b08acdebc5c79"
+                "reference": "298015cb020837b862592c153a467f3aadbdd434"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/8b93efc9d5fd58176d06cf1bd23b08acdebc5c79",
-                "reference": "8b93efc9d5fd58176d06cf1bd23b08acdebc5c79",
+                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/298015cb020837b862592c153a467f3aadbdd434",
+                "reference": "298015cb020837b862592c153a467f3aadbdd434",
                 "shasum": ""
             },
             "require": {
@@ -1021,7 +1021,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-baseline-analysis/issues",
-                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.12.2"
+                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.12.3"
             },
             "funding": [
                 {
@@ -1029,7 +1029,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-05T08:01:24+00:00"
+            "time": "2023-09-14T12:13:50+00:00"
         },
         {
             "name": "staabm/phpstan-dba",
@@ -1679,5 +1679,5 @@
     "platform-overrides": {
         "php": "7.4.30"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
