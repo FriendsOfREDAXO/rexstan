@@ -587,17 +587,17 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.34",
-            "version_normalized": "1.10.34.0",
+            "version": "1.10.35",
+            "version_normalized": "1.10.35.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "7f806b6f1403e6914c778140e2ba07c293cb4901"
+                "reference": "e730e5facb75ffe09dfb229795e8c01a459f26c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7f806b6f1403e6914c778140e2ba07c293cb4901",
-                "reference": "7f806b6f1403e6914c778140e2ba07c293cb4901",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e730e5facb75ffe09dfb229795e8c01a459f26c3",
+                "reference": "e730e5facb75ffe09dfb229795e8c01a459f26c3",
                 "shasum": ""
             },
             "require": {
@@ -606,7 +606,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2023-09-13T09:49:47+00:00",
+            "time": "2023-09-19T15:27:56+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -1007,17 +1007,17 @@
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
-            "version": "0.12.2",
-            "version_normalized": "0.12.2.0",
+            "version": "0.12.3",
+            "version_normalized": "0.12.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-baseline-analysis.git",
-                "reference": "8b93efc9d5fd58176d06cf1bd23b08acdebc5c79"
+                "reference": "298015cb020837b862592c153a467f3aadbdd434"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/8b93efc9d5fd58176d06cf1bd23b08acdebc5c79",
-                "reference": "8b93efc9d5fd58176d06cf1bd23b08acdebc5c79",
+                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/298015cb020837b862592c153a467f3aadbdd434",
+                "reference": "298015cb020837b862592c153a467f3aadbdd434",
                 "shasum": ""
             },
             "require": {
@@ -1036,7 +1036,7 @@
                 "tomasvotruba/type-coverage": "^0.2.0",
                 "tomasvotruba/unused-public": "^0.3.2"
             },
-            "time": "2023-09-05T08:01:24+00:00",
+            "time": "2023-09-14T12:13:50+00:00",
             "bin": [
                 "bin/phpstan-baseline-analyze",
                 "bin/phpstan-baseline-trend",
@@ -1063,7 +1063,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-baseline-analysis/issues",
-                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.12.2"
+                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.12.3"
             },
             "funding": [
                 {
