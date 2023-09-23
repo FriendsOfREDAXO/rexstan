@@ -17,18 +17,22 @@ final class RexStan
     /**
      * @param int $exitCode
      * @param-out int $exitCode
+     * @param-out string  $errorOutput
      *
      * @return string
      */
-    public static function runFromCli(&$exitCode)
+    public static function runFromCli(&$exitCode, ?string $path, int $level, &$errorOutput)
     {
         $phpstanBinary = self::phpstanBinPath();
         $configPath = self::phpstanConfigPath(__DIR__.'/../phpstan.neon');
 
-        $cmd = $phpstanBinary .' analyse -c '. $configPath;
-        $output = RexCmd::execCmd($cmd, $stderrOutput, $exitCode);
+        $cmd = $phpstanBinary .' analyse --no-progress -c '. $configPath;
+        if ($path !== null) {
+            $cmd .= ' '. escapeshellarg($path);
+        }
+        $cmd .= ' --level '. $level;
 
-        return $output;
+        return RexCmd::execCmd($cmd, $errorOutput, $exitCode);
     }
 
     /**
