@@ -25,7 +25,8 @@ final class RexSqlReflection
         $objectType = $scope->getType($methodCall->var);
 
         if (
-            in_array(strtolower($methodCall->name->toString()), ['setvalue', 'setarrayvalue'], true)
+            $methodCall->name instanceof Node\Identifier
+            && in_array(strtolower($methodCall->name->toString()), ['setvalue', 'setarrayvalue'], true)
             && $objectType instanceof RexSqlObjectType
         ) {
             // don't take $sql->select() expression into account on $sql->setValue()
