@@ -6,6 +6,7 @@ namespace rexstan;
 
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\Generic\GenericObjectType;
@@ -23,6 +24,16 @@ final class RexSqlReflection
     public static function getSqlResultType(MethodCall $methodCall, Scope $scope): ?Type
     {
         $objectType = $scope->getType($methodCall->var);
+
+        if (
+            $methodCall->name instanceof Identifier
+            && in_array(strtolower($methodCall->name->toString()), ['setvalue', 'setarrayvalue'], true)
+            && $objectType instanceof RexSqlObjectType
+        ) {
+            // don't take $sql->select() expression into account on $sql->setValue()
+            // as this is likely used with e.g. $sql->update() which does not require a previously selected value
+            $objectType->setSelectExpression('*');
+        }
 
         return self::getResultTypeFromStatementType($objectType);
     }
