@@ -28,7 +28,7 @@ class rexstan_command extends rex_console_command
         $io = $this->getStyle($input, $output);
 
         $path = null;
-        $level = 0;
+        $level = null;
         if ($input->hasArgument('path')) {
             $analyzePath = getcwd() .'/../'. $input->getArgument('path');
             $path = realpath($analyzePath);
