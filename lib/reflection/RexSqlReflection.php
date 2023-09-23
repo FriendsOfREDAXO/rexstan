@@ -24,6 +24,15 @@ final class RexSqlReflection
     {
         $objectType = $scope->getType($methodCall->var);
 
+        if (
+            in_array(strtolower($methodCall->name->toString()), ['setvalue', 'setarrayvalue'], true)
+            && $objectType instanceof RexSqlObjectType
+        ) {
+            // don't take $sql->select() expression into account on $sql->setValue()
+            // as this is likely used with e.g. $sql->update() which does not require a previously selected value
+            $objectType->setSelectExpression('*');
+        }
+
         return self::getResultTypeFromStatementType($objectType);
     }
 
