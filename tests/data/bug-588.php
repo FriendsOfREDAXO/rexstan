@@ -5,7 +5,7 @@ namespace Bug588;
 use rex_sql;
 use rex;
 
-function setValue(int $id): void
+function doFoo(): void
 {
     $sql = rex_sql::factory();
     $sql->setTable(rex::getTable('article'));
@@ -16,11 +16,23 @@ function setValue(int $id): void
     }
 }
 
-function setValue2(int $id): void
+function doFoo2(): void
 {
     $sql = rex_sql::factory();
     $sql->setTable(rex::getTable('article'));
     $sql->select();
+
+    $data = [];
+    foreach ($sql->getFieldnames() as $key) {
+        $data[$key] = $sql->getValue($key);
+    }
+}
+
+function doFoo3(): void
+{
+    $sql = rex_sql::factory();
+    $sql->setTable(rex::getTable('article'));
+    $sql->select('*');
 
     $data = [];
     foreach ($sql->getFieldnames() as $key) {
