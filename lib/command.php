@@ -18,8 +18,8 @@ class rexstan_command extends rex_console_command
         $this
             ->setName('rexstan:analyze')
             ->setDescription('Run static code analysis')
-            ->addArgument('path', InputArgument::OPTIONAL, 'Path to analyze')
-            ->addOption('level', 'l', InputOption::VALUE_REQUIRED, 'Rule level')
+            ->addArgument('path', InputArgument::OPTIONAL, 'File or directoy path to analyze')
+            ->addOption('level', 'l', InputOption::VALUE_REQUIRED, 'Rule level (0-9)')
         ;
     }
 
