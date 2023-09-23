@@ -51,6 +51,7 @@ class rexstan_command extends rex_console_command
             $io->write($result);
         }
 
+        // pass PHPStan exit code 1:1
         return $exitCode;
     }
 }
