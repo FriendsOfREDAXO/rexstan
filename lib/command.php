@@ -29,7 +29,7 @@ class rexstan_command extends rex_console_command
 
         $path = null;
         $level = null;
-        if ($input->hasArgument('path')) {
+        if ($input->getArgument('path') !== null) {
             $analyzePath = getcwd() .'/../'. $input->getArgument('path');
             $path = realpath($analyzePath);
 
