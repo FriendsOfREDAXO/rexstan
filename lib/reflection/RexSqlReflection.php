@@ -6,6 +6,7 @@ namespace rexstan;
 
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\Generic\GenericObjectType;
@@ -25,7 +26,7 @@ final class RexSqlReflection
         $objectType = $scope->getType($methodCall->var);
 
         if (
-            $methodCall->name instanceof Node\Identifier
+            $methodCall->name instanceof Identifier
             && in_array(strtolower($methodCall->name->toString()), ['setvalue', 'setarrayvalue'], true)
             && $objectType instanceof RexSqlObjectType
         ) {
