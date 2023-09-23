@@ -51,6 +51,10 @@ final class RexSqlGetValueRule implements Rule
         $valueNameType = $scope->getType($args[0]->value);
         $strings = $valueNameType->getConstantStrings();
 
+        if (count($strings) === 0) {
+            return [];
+        }
+
         if (count($strings) === 1) {
             return [
                 RuleErrorBuilder::message(
