@@ -10,8 +10,12 @@ parameters:
     level: 5
 
     excludePaths:
-        - '*/vendor/*'
-        - '*/node_modules/*'
+        analyse:
+            - '*/addons/*/vendor/*'
+            - '*/core/vendor/*'
+            - '../../../../vendor/*'
+        analyseAndScan:
+            - '*/node_modules/*'
 
     disallowedMethodCalls:
         -
