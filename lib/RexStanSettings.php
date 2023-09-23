@@ -98,7 +98,7 @@ final class RexStanSettings
         }
 
         $sapiVersion = PHP_VERSION_ID;
-        $cliVersion = RexPhpVersion::getCliVersion();
+        $cliVersion = RexCmd::getCliPhpVersion();
 
         if (rex_version::compare(rex::getVersion(), '5.15.0-dev', '>=')) {
             $phpVersions = self::$phpVersionListFrom5_15;
@@ -176,7 +176,7 @@ final class RexStanSettings
     public static function outputSettings()
     {
         $sapiVersion = PHP_VERSION_ID;
-        $cliVersion = RexPhpVersion::getCliVersion();
+        $cliVersion = RexCmd::getCliPhpVersion();
 
         if (rex_version::compare(rex::getVersion(), '5.15.0-dev', '>=')) {
             $phpVersions = self::$phpVersionListFrom5_15;

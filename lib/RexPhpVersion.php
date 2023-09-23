@@ -13,14 +13,4 @@ final class RexPhpVersion
 
         return $v1 === $v2;
     }
-
-    public static function getCliVersion(): int
-    {
-        $version = RexCmd::getCliPhpVersion();
-        if (null === $version) {
-            throw new RuntimeException('Could not get PHP version from CLI');
-        }
-
-        return (int) $version;
-    }
 }
