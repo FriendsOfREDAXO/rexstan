@@ -26,6 +26,7 @@ class rexstan_command extends rex_console_command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = $this->getStyle($input, $output);
+        $stdErr = $output instanceof ConsoleOutputInterface ? $output->getErrorOutput() : $output;
 
         $path = null;
         $level = null;
@@ -49,6 +50,10 @@ class rexstan_command extends rex_console_command
 
         if ($result !== '') {
             $io->write($result);
+        }
+
+        if ($errorOutput !== '') {
+            $stdErr->write($errorOutput);
         }
 
         // pass PHPStan exit code 1:1
