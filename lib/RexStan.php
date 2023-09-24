@@ -34,6 +34,8 @@ final class RexStan
             $cmd .= ' --level '. $level;
         }
 
+        $cmd .= ' 2>&1';
+
         return RexCmd::execCmd($cmd, $errorOutput, $exitCode);
     }
 
