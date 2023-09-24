@@ -2,11 +2,12 @@
 
 namespace rexstan;
 
-use RuntimeException;
-
 final class RexPhpVersion
 {
-    public static function isEqualMajorMinor(int $version1, int $version2): bool
+    /**
+     * @param int|numeric-string $version2
+     */
+    public static function isEqualMajorMinor(int $version1, $version2): bool
     {
         $v1 = (int) ($version1 / 100);
         $v2 = (int) ($version2 / 100);
