@@ -2,6 +2,7 @@
 
 namespace rexstan;
 
+use RuntimeException;
 use rex;
 use rex_addon;
 use rex_config;
