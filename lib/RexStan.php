@@ -21,7 +21,7 @@ final class RexStan
      *
      * @return string
      */
-    public static function runFromCli(&$exitCode, ?string $path, ?int $level, ?string &$errorOutput)
+    public static function runFromCli(&$exitCode, ?string $path, string $arguments, ?string &$errorOutput)
     {
         $phpstanBinary = self::phpstanBinPath();
         $configPath = self::phpstanConfigPath(__DIR__.'/../phpstan.neon');
@@ -30,9 +30,7 @@ final class RexStan
         if ($path !== null) {
             $cmd .= ' '. escapeshellarg($path);
         }
-        if ($level !== null) {
-            $cmd .= ' --level '. $level;
-        }
+        $cmd .= $arguments;
 
         $cmd .= ' 2>&1';
 

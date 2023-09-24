@@ -21,6 +21,9 @@ class rexstan_command extends rex_console_command
             ->setDescription('Run static code analysis')
             ->addArgument('path', InputArgument::OPTIONAL, 'File or directoy path to analyze')
             ->addOption('level', 'l', InputOption::VALUE_REQUIRED, 'Rule level (0-9)')
+            ->addOption('generate-baseline', null, InputOption::VALUE_NONE, 'Generate PHPStan baseline')
+            ->addOption('debug', null, InputOption::VALUE_NONE, 'Enable PHPStan debug')
+            ->addOption('xdebug', null, InputOption::VALUE_NONE, 'Enable PHPStan Xdebug')
         ;
     }
 
@@ -30,7 +33,6 @@ class rexstan_command extends rex_console_command
         $stdErr = $output instanceof ConsoleOutputInterface ? $output->getErrorOutput() : $output;
 
         $path = null;
-        $level = null;
         if ($input->getArgument('path') !== null) {
             $analyzePath = getcwd() .'/../'. $input->getArgument('path');
             $path = realpath($analyzePath);
@@ -40,14 +42,34 @@ class rexstan_command extends rex_console_command
             }
         }
 
-        if ($input->hasOption('level')) {
+        $arguments = '';
+        if ($input->getOption('level') !== null) {
             $level = $input->getOption('level');
-            if ($level !== null && !preg_match('/^[0-9]$/', $level)) {
+            if (!preg_match('/^[0-9]$/', $level)) {
                 throw new \Exception('Invalid level: '. $level);
             }
+            $arguments .= ' --level='.$level;
         }
 
-        $result = RexStan::runFromCli($exitCode, $path, $level, $errorOutput);
+        if ($input->getOption('generate-baseline') !== false) {
+            $arguments .= ' --generate-baseline';
+        }
+        if ($input->getOption('debug') !== false) {
+            $arguments .= ' --debug';
+        }
+        if ($input->getOption('xdebug') !== false) {
+            $arguments .= ' --xdebug';
+        }
+
+        if ($output->isDebug()) {
+            $arguments .= ' -vvv';
+        } elseif ($output->isVeryVerbose()) {
+            $arguments .= ' -vv';
+        } elseif ($output->isVerbose()) {
+            $arguments .= ' -v';
+        }
+
+        $result = RexStan::runFromCli($exitCode, $path, $arguments, $errorOutput);
 
         if ($result !== '') {
             $io->write($result);
