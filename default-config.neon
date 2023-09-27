@@ -22,6 +22,22 @@ parameters:
     ignoreErrors:
         # ignore errors when analyzing rex modules/templates, caused by rex-vars
         -
+            message: '#does not handle remaining value:.+REX_[A-Z_]+.*#'
+            path: '*data/addons/developer/*'
+            reportUnmatched: false
+        -
+            message: '#does not handle remaining value:.+REX_[A-Z_]+.*#'
+            path: '*/theme/*'
+            reportUnmatched: false
+        -
+            message: '#does not handle remaining value:.+REX_[A-Z_]+.*#'
+            path: '*/src/templates/*'
+            reportUnmatched: false
+        -
+            message: '#does not handle remaining value:.+REX_[A-Z_]+.*#'
+            path: '*/src/modules/*'
+            reportUnmatched: false
+        -
             message: '#.+REX_[A-Z_]+.*results in an error\.#'
             path: '*data/addons/developer/*'
             reportUnmatched: false
