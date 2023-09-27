@@ -22,7 +22,7 @@ parameters:
     ignoreErrors:
         # ignore errors when analyzing rex modules/templates, caused by rex-vars
         -
-            message: '#REX_[A-Z_]+.*results in an error\.#'
+            message: '#.+REX_[A-Z_]+.*results in an error\.#'
             path: '*data/addons/developer/*'
             reportUnmatched: false
         -
