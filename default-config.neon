@@ -26,15 +26,15 @@ parameters:
             path: '*data/addons/developer/*'
             reportUnmatched: false
         -
-            message: '#REX_[A-Z_]+.*results in an error\.#'
+            message: '#.+REX_[A-Z_]+.*results in an error\.#'
             path: '*/theme/*'
             reportUnmatched: false
         -
-            message: '#REX_[A-Z_]+.*results in an error\.#'
+            message: '#.+REX_[A-Z_]+.*results in an error\.#'
             path: '*/src/templates/*'
             reportUnmatched: false
         -
-            message: '#REX_[A-Z_]+.*results in an error\.#'
+            message: '#.+REX_[A-Z_]+.*results in an error\.#'
             path: '*/src/modules/*'
             reportUnmatched: false
         -
