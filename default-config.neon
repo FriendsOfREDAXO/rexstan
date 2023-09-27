@@ -22,16 +22,36 @@ parameters:
     ignoreErrors:
         # ignore errors when analyzing rex modules/templates, caused by rex-vars
         -
+            message: '#REX_[A-Z_]+.*results in an error\.#'
+            path: '*data/addons/developer/*'
+            reportUnmatched: false
+        -
+            message: '#REX_[A-Z_]+.*results in an error\.#'
+            path: '*/theme/*'
+            reportUnmatched: false
+        -
+            message: '#REX_[A-Z_]+.*results in an error\.#'
+            path: '*/src/templates/*'
+            reportUnmatched: false
+        -
+            message: '#REX_[A-Z_]+.*results in an error\.#'
+            path: '*/src/modules/*'
+            reportUnmatched: false
+        -
             message: '#Constant REX_[A-Z_]+ not found\.#'
             path: '*data/addons/developer/*'
             reportUnmatched: false
         -
             message: '#Constant REX_[A-Z_]+ not found\.#'
-            path: '*/src/modules/*'
+            path: '*/theme/*'
             reportUnmatched: false
         -
             message: '#Constant REX_[A-Z_]+ not found\.#'
             path: '*/src/templates/*'
+            reportUnmatched: false
+        -
+            message: '#Constant REX_[A-Z_]+ not found\.#'
+            path: '*/src/modules/*'
             reportUnmatched: false
         -
             message: '#.* will always evaluate to (true|false).#'
@@ -39,35 +59,47 @@ parameters:
             reportUnmatched: false
         -
             message: '#.* will always evaluate to (true|false).#'
-            path: '*/src/modules/*'
+            path: '*/theme/*'
             reportUnmatched: false
         -
             message: '#.* will always evaluate to (true|false).#'
             path: '*/src/templates/*'
             reportUnmatched: false
         -
+            message: '#.* will always evaluate to (true|false).#'
+            path: '*/src/modules/*'
+            reportUnmatched: false
+        -
             message: '#.* is always (true|false).#'
             path: '*data/addons/developer/*'
             reportUnmatched: false
         -
             message: '#.* is always (true|false).#'
-            path: '*/src/modules/*'
+            path: '*/theme/*'
             reportUnmatched: false
         -
             message: '#.* is always (true|false).#'
             path: '*/src/templates/*'
             reportUnmatched: false
         -
+            message: '#.* is always (true|false).#'
+            path: '*/src/modules/*'
+            reportUnmatched: false
+        -
             message: '#^Variable \$this might not be defined\.#'
             path: '*data/addons/developer/*'
             reportUnmatched: false
         -
             message: '#^Variable \$this might not be defined\.#'
-            path: '*/src/modules/*'
+            path: '*/theme/*'
             reportUnmatched: false
         -
             message: '#^Variable \$this might not be defined\.#'
             path: '*/src/templates/*'
+            reportUnmatched: false
+        -
+            message: '#^Variable \$this might not be defined\.#'
+            path: '*/src/modules/*'
             reportUnmatched: false
         -
             message: '#^Variable \$this might not be defined\.#'
