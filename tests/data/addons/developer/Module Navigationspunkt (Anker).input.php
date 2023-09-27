@@ -31,3 +31,10 @@ REX_LINKLIST[id=5 widget=1]
     REX_MEDIA[id="9" widget="9"]
 </div>
 </div>
+<?php
+$x = 'REX_VALUE[1]';
+var_dump(5 * $x);
+var_dump(5 / $x);
+var_dump(5 + $x);
+var_dump(5 - $x);
+?>
