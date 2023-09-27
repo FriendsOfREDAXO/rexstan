@@ -37,4 +37,8 @@ var_dump(5 * $x);
 var_dump(5 / $x);
 var_dump(5 + $x);
 var_dump(5 - $x);
+var_dump($x . $x);
+
+$x = ['REX_VALUE[1]', 'REX_VALUE[2]'];
+$x + [];
 ?>
