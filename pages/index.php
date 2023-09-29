@@ -24,7 +24,7 @@ echo rex_view::title('<span class="rexstan-logo"><img src="'.$logoPath.'" width=
 
 rex_be_controller::includeCurrentPageSubPath();
 
-if ('settings' !== rex_be_controller::getCurrentPagePart(2)) {
+if (rex_be_controller::getCurrentPagePart(2) !== 'settings') {
     $url = '<small><a href="https://github.com/sponsors/staabm">Support <strong>rexstan</strong> with your sponsoring 💕</a></small>';
     $scripttime = rex::getProperty('timer')->getFormattedDelta(rex_timer::SEC);
 

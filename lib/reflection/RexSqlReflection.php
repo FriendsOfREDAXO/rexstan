@@ -18,6 +18,7 @@ use staabm\PHPStanDba\QueryReflection\QueryReflector;
 use staabm\PHPStanDba\UnresolvableQueryException;
 
 use function count;
+use function in_array;
 
 final class RexSqlReflection
 {

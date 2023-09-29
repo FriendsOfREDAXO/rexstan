@@ -78,7 +78,6 @@ $contentCoverage = '
         </tbody>
     </table>';
 
-
 $rexstanGraph = '<div class="rexstan-graph">'.rex_file::get(rex_addon::get('rexstan')->getDataPath().'/baseline-graph.html').'</div>';
 
 $nonce = method_exists(rex_response::class, 'getNonce') ? ' nonce="'.rex_response::getNonce().'"' : '';
@@ -93,7 +92,6 @@ $fragment->setVar('title', 'Graph');
 $fragment->setVar('content', $rexstanGraph, false);
 echo $fragment->parse('core/page/section.php');
 
-
 $echo = [];
 
 $fragment = new rex_fragment();
@@ -106,10 +104,8 @@ $fragment->setVar('title', 'Coverage');
 $fragment->setVar('content', $contentCoverage, false);
 $echo[] = $fragment->parse('core/page/section.php');
 
-
 $fragment = new rex_fragment();
 $fragment->setVar('content', $echo, false);
 echo $fragment->parse('core/page/grid.php');
 
 echo rex_view::info('<p>Die Zusammenfassung ist abhängig von den in den <a href="'.$settingsUrl.'>">Einstellungen</a> definierten PHPStan-Extensions</p>');
-

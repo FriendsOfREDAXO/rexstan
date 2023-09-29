@@ -5,6 +5,7 @@ namespace rexstan;
 use rex_editor;
 use rex_fragment;
 use rex_path;
+use rex_response;
 
 use function array_key_exists;
 use function count;
@@ -52,7 +53,7 @@ final class RexResultsRenderer
 
     public static function getLevel9Jseffect(): string
     {
-        $nonce = method_exists(\rex_response::class, 'getNonce') ? ' nonce="'.\rex_response::getNonce().'"' : '';
+        $nonce = method_exists(rex_response::class, 'getNonce') ? ' nonce="'.rex_response::getNonce().'"' : '';
         return
             '<script'.$nonce.'>
                 var duration = 10 * 1000;
