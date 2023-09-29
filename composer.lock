@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "566c679fc60ea7ce07f7ca5507ff167c",
+    "content-hash": "d4296442de27f8569fa2cf11989e853f",
     "packages": [
         {
             "name": "composer/semver",
@@ -154,16 +154,16 @@
         },
         {
             "name": "justinrainbow/json-schema",
-            "version": "5.2.12",
+            "version": "v5.2.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/justinrainbow/json-schema.git",
-                "reference": "ad87d5a5ca981228e0e205c2bc7dfb8e24559b60"
+                "reference": "fbbe7e5d79f618997bc3332a6f49246036c45793"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/ad87d5a5ca981228e0e205c2bc7dfb8e24559b60",
-                "reference": "ad87d5a5ca981228e0e205c2bc7dfb8e24559b60",
+                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/fbbe7e5d79f618997bc3332a6f49246036c45793",
+                "reference": "fbbe7e5d79f618997bc3332a6f49246036c45793",
                 "shasum": ""
             },
             "require": {
@@ -218,9 +218,9 @@
             ],
             "support": {
                 "issues": "https://github.com/justinrainbow/json-schema/issues",
-                "source": "https://github.com/justinrainbow/json-schema/tree/5.2.12"
+                "source": "https://github.com/justinrainbow/json-schema/tree/v5.2.13"
             },
-            "time": "2022-04-13T08:02:27+00:00"
+            "time": "2023-09-26T02:20:38+00:00"
         },
         {
             "name": "nette/http",
@@ -1033,16 +1033,16 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.2.75",
+            "version": "0.2.78",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "812b436d601c007e07cba93985a4bc87eccf6be0"
+                "reference": "ccabc0c7fa8586f29c9ee0a1707612877860a81f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/812b436d601c007e07cba93985a4bc87eccf6be0",
-                "reference": "812b436d601c007e07cba93985a4bc87eccf6be0",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/ccabc0c7fa8586f29c9ee0a1707612877860a81f",
+                "reference": "ccabc0c7fa8586f29c9ee0a1707612877860a81f",
                 "shasum": ""
             },
             "require": {
@@ -1066,7 +1066,7 @@
                 "phpstan/phpstan-strict-rules": "^1.1",
                 "phpunit/phpunit": "^8.5|^9.5",
                 "symplify/easy-coding-standard": "^11.4",
-                "tomasvotruba/unused-public": "^0.2.0",
+                "tomasvotruba/unused-public": "^0.3",
                 "vlucas/phpdotenv": "^5.4"
             },
             "type": "phpstan-extension",
@@ -1096,9 +1096,9 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.75"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.78"
             },
-            "time": "2023-07-30T09:15:23+00:00"
+            "time": "2023-09-29T11:35:18+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
