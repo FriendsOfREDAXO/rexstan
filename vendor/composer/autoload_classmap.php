@@ -1892,6 +1892,7 @@ return array(
     'Symplify\\PHPStanRules\\Rules\\NoStaticPropertyRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/NoStaticPropertyRule.php',
     'Symplify\\PHPStanRules\\Rules\\NoVoidGetterMethodRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/NoVoidGetterMethodRule.php',
     'Symplify\\PHPStanRules\\Rules\\PHPUnit\\NoRightPHPUnitAssertScalarRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/PHPUnit/NoRightPHPUnitAssertScalarRule.php',
+    'Symplify\\PHPStanRules\\Rules\\PHPUnit\\NoTestMocksRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/PHPUnit/NoTestMocksRule.php',
     'Symplify\\PHPStanRules\\Rules\\PreferredAttributeOverAnnotationRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/PreferredAttributeOverAnnotationRule.php',
     'Symplify\\PHPStanRules\\Rules\\PreferredClassRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/PreferredClassRule.php',
     'Symplify\\PHPStanRules\\Rules\\PreventParentMethodVisibilityOverrideRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/PreventParentMethodVisibilityOverrideRule.php',

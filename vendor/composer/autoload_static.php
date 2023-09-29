@@ -2090,6 +2090,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'Symplify\\PHPStanRules\\Rules\\NoStaticPropertyRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/NoStaticPropertyRule.php',
         'Symplify\\PHPStanRules\\Rules\\NoVoidGetterMethodRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/NoVoidGetterMethodRule.php',
         'Symplify\\PHPStanRules\\Rules\\PHPUnit\\NoRightPHPUnitAssertScalarRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/PHPUnit/NoRightPHPUnitAssertScalarRule.php',
+        'Symplify\\PHPStanRules\\Rules\\PHPUnit\\NoTestMocksRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/PHPUnit/NoTestMocksRule.php',
         'Symplify\\PHPStanRules\\Rules\\PreferredAttributeOverAnnotationRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/PreferredAttributeOverAnnotationRule.php',
         'Symplify\\PHPStanRules\\Rules\\PreferredClassRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/PreferredClassRule.php',
         'Symplify\\PHPStanRules\\Rules\\PreventParentMethodVisibilityOverrideRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/PreventParentMethodVisibilityOverrideRule.php',
