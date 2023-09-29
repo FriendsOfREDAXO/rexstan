@@ -25,7 +25,7 @@ require __DIR__.'/../../core/boot.php';
 include_once rex_path::core('packages.php');
 
 // phpstan-dba bootstrapping
-$reflectorFactory = function(): PdoMysqlQueryReflector {
+$reflectorFactory = static function (): PdoMysqlQueryReflector {
     $configFile = rex_path::coreData('config.yml');
     $config = rex_file::getConfig($configFile);
 

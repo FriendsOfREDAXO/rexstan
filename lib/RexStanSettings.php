@@ -2,7 +2,6 @@
 
 namespace rexstan;
 
-use RuntimeException;
 use rex;
 use rex_addon;
 use rex_config;
@@ -11,6 +10,7 @@ use rex_editor;
 use rex_file;
 use rex_path;
 use rex_version;
+use RuntimeException;
 
 use function dirname;
 
@@ -214,7 +214,7 @@ final class RexStanSettings
         return $output;
     }
 
-    public static function relativePath(string $path, ?string $base = null): string
+    public static function relativePath(string $path, string $base = null): string
     {
         $relativeAddonPath = rex_path::relative($base ?? rex_path::addonData('rexstan'));
         $prefix = str_repeat('..' . DIRECTORY_SEPARATOR, substr_count($relativeAddonPath, DIRECTORY_SEPARATOR));
@@ -222,7 +222,8 @@ final class RexStanSettings
         return $prefix . rex_path::relative($path);
     }
 
-    public static function absolutePath(string $relativePath): ?string {
+    public static function absolutePath(string $relativePath): ?string
+    {
         $absPath = realpath(rex_path::addonData('rexstan'). $relativePath);
 
         if ($absPath === false) {

@@ -2,6 +2,7 @@
 
 namespace rexstan;
 
+use Exception;
 use rex_console_command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -38,7 +39,7 @@ class rexstan_command extends rex_console_command
             $path = realpath($analyzePath);
 
             if ($path === false) {
-                throw new \Exception('Invalid path: '. $input->getArgument('path'));
+                throw new Exception('Invalid path: '. $input->getArgument('path'));
             }
         }
 
@@ -46,7 +47,7 @@ class rexstan_command extends rex_console_command
         if ($input->getOption('level') !== null) {
             $level = $input->getOption('level');
             if (!preg_match('/^[0-9]$/', $level)) {
-                throw new \Exception('Invalid level: '. $level);
+                throw new Exception('Invalid level: '. $level);
             }
             $arguments .= ' --level='.$level;
         }
