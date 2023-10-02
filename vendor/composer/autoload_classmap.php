@@ -622,6 +622,7 @@ return array(
     'PHPStan\\Symfony\\ParameterMap' => $vendorDir . '/phpstan/phpstan-symfony/src/Symfony/ParameterMap.php',
     'PHPStan\\Symfony\\ParameterMapFactory' => $vendorDir . '/phpstan/phpstan-symfony/src/Symfony/ParameterMapFactory.php',
     'PHPStan\\Symfony\\PasswordAuthenticatedUserStubFilesExtension' => $vendorDir . '/phpstan/phpstan-symfony/src/Symfony/PasswordAuthenticatedUserStubFilesExtension.php',
+    'PHPStan\\Symfony\\RequiredAutowiringExtension' => $vendorDir . '/phpstan/phpstan-symfony/src/Symfony/RequiredAutowiringExtension.php',
     'PHPStan\\Symfony\\Service' => $vendorDir . '/phpstan/phpstan-symfony/src/Symfony/Service.php',
     'PHPStan\\Symfony\\ServiceDefinition' => $vendorDir . '/phpstan/phpstan-symfony/src/Symfony/ServiceDefinition.php',
     'PHPStan\\Symfony\\ServiceMap' => $vendorDir . '/phpstan/phpstan-symfony/src/Symfony/ServiceMap.php',

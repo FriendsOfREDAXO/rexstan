@@ -820,6 +820,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'PHPStan\\Symfony\\ParameterMap' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/ParameterMap.php',
         'PHPStan\\Symfony\\ParameterMapFactory' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/ParameterMapFactory.php',
         'PHPStan\\Symfony\\PasswordAuthenticatedUserStubFilesExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/PasswordAuthenticatedUserStubFilesExtension.php',
+        'PHPStan\\Symfony\\RequiredAutowiringExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/RequiredAutowiringExtension.php',
         'PHPStan\\Symfony\\Service' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/Service.php',
         'PHPStan\\Symfony\\ServiceDefinition' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/ServiceDefinition.php',
         'PHPStan\\Symfony\\ServiceMap' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/ServiceMap.php',
