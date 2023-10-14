@@ -17,7 +17,7 @@ return array(
     'Spaze\\PHPStan\\Rules\\Disallowed\\' => array($vendorDir . '/spaze/phpstan-disallowed-calls/src'),
     'Safe\\' => array($vendorDir . '/thecodingmachine/safe/lib', $vendorDir . '/thecodingmachine/safe/deprecated', $vendorDir . '/thecodingmachine/safe/generated'),
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
-    'PHPStan\\' => array($vendorDir . '/phpstan/phpstan-deprecation-rules/src', $vendorDir . '/phpstan/phpstan-strict-rules/src', $vendorDir . '/phpstan/phpstan-symfony/src', $vendorDir . '/phpstan/phpstan-phpunit/src'),
+    'PHPStan\\' => array($vendorDir . '/phpstan/phpstan-deprecation-rules/src', $vendorDir . '/phpstan/phpstan-phpunit/src', $vendorDir . '/phpstan/phpstan-strict-rules/src', $vendorDir . '/phpstan/phpstan-symfony/src'),
     'JsonSchema\\' => array($vendorDir . '/justinrainbow/json-schema/src/JsonSchema'),
     'Composer\\Semver\\' => array($vendorDir . '/composer/semver/src'),
 );
