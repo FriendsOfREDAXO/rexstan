@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8cd0d85c7bc79536f52cd43d2f5c9632",
+    "content-hash": "9d23b3936dd54c8c0338bf0bf46ade98",
     "packages": [
         {
             "name": "composer/semver",
@@ -1186,43 +1186,36 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "12.3.1",
+            "version": "12.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "254bbdbe43c05c6b0588f5143ad925e9f071777b"
+                "reference": "54def05dea85612c8c7729933ba5457dbd3eed64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/254bbdbe43c05c6b0588f5143ad925e9f071777b",
-                "reference": "254bbdbe43c05c6b0588f5143ad925e9f071777b",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/54def05dea85612c8c7729933ba5457dbd3eed64",
+                "reference": "54def05dea85612c8c7729933ba5457dbd3eed64",
                 "shasum": ""
             },
             "require": {
                 "nette/utils": "^3.2 || ^4.0",
-                "nikic/php-parser": "^4.15.2",
+                "nikic/php-parser": "^4.17.1",
                 "php": "^7.2|^8.0",
-                "phpstan/phpstan": "^1.9.11",
-                "webmozart/assert": "^1.10"
+                "phpstan/phpstan": "^1.10.30",
+                "webmozart/assert": "^1.11"
             },
             "type": "phpstan-extension",
             "extra": {
-                "branch-alias": {
-                    "dev-main": "11.1-dev"
-                },
                 "phpstan": {
                     "includes": [
-                        "config/services/services.neon",
-                        "config/packages/symfony/services.neon"
+                        "config/services/services.neon"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Symplify\\PHPStanRules\\": [
-                        "src",
-                        "packages"
-                    ]
+                    "Symplify\\PHPStanRules\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1232,7 +1225,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/12.3.1"
+                "source": "https://github.com/symplify/phpstan-rules/tree/12.4.3"
             },
             "funding": [
                 {
@@ -1244,7 +1237,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-29T08:20:51+00:00"
+            "time": "2023-10-19T08:45:51+00:00"
         },
         {
             "name": "thecodingmachine/phpstan-safe-rule",
@@ -1680,5 +1673,5 @@
     "platform-overrides": {
         "php": "7.4.30"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
