@@ -60,7 +60,7 @@ class HexadecimalLiteral implements BoolValue, StringValue, UintValue
         return (int) hexdec($this->value);
     }
 
-    public function asBool(): ?bool
+    public function asBool(): bool
     {
         return ((int) hexdec($this->value)) !== 0;
     }

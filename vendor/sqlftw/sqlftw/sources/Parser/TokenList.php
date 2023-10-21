@@ -1619,7 +1619,7 @@ class TokenList
             if ($charset === null) {
                 $charset = $this->expectName(null);
             }
-            if (!Charset::validateValue($charset)) {
+            if (!Charset::isValidValue($charset)) {
                 $values = array_values(Charset::getAllowedValues());
 
                 throw InvalidTokenException::tokens(T::STRING | T::NAME, 0, $values, $this->tokens[$this->position - 1], $this);
@@ -1649,7 +1649,7 @@ class TokenList
                 return null;
             }
 
-            if (!Collation::validateValue($value)) {
+            if (!Collation::isValidValue($value)) {
                 $this->position = $position;
 
                 return null;

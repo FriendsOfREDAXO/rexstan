@@ -20,7 +20,7 @@ abstract class SqlEnum extends StringEnum
     /** @var array<class-string, array<string, string>> */
     private static array $lowerValues = [];
 
-    public static function validateValue(string &$value): bool
+    protected static function validateValue(string &$value): bool
     {
         $class = static::class;
 

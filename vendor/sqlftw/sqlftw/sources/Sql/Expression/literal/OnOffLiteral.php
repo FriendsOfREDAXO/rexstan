@@ -29,7 +29,7 @@ class OnOffLiteral implements BoolValue, KeywordLiteral
         return $this->value ? 'ON' : 'OFF';
     }
 
-    public function asBool(): ?bool
+    public function asBool(): bool
     {
         return $this->value;
     }

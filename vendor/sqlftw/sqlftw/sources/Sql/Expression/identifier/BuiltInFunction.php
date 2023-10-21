@@ -464,6 +464,18 @@ class BuiltInFunction extends SqlEnum implements FunctionIdentifier
     public const PS_CURRENT_THREAD_ID = 'PS_CURRENT_THREAD_ID';
     public const PS_THREAD_ID = 'PS_THREAD_ID';
 
+    // audit log (https://dev.mysql.com/doc/refman/8.0/en/audit-log-reference.html)
+    public const AUDIT_LOG_ENCRYPTION_PASSWORD_GET = 'audit_log_encryption_password_get';
+    public const AUDIT_LOG_ENCRYPTION_PASSWORD_SET = 'audit_log_encryption_password_set';
+    public const AUDIT_LOG_FILTER_FLUSH = 'audit_log_filter_flush';
+    public const AUDIT_LOG_FILTER_REMOVE_FILTER = 'audit_log_filter_remove_filter';
+    public const AUDIT_LOG_FILTER_REMOVE_USER = 'audit_log_filter_remove_user';
+    public const AUDIT_LOG_FILTER_SET_FILTER = 'audit_log_filter_set_filter';
+    public const AUDIT_LOG_FILTER_SET_USER = 'audit_log_filter_set_user';
+    public const AUDIT_LOG_READ = 'audit_log_read';
+    public const AUDIT_LOG_READ_BOOKMARK = 'audit_log_read_bookmark';
+    public const AUDIT_LOG_ROTATE = 'audit_log_rotate';
+
     // misc
     //public const PROCEDURE_ANALYSE = 'PROCEDURE ANALYSE'; // removed in 8.0; looks more like a construct than a function
     public const BIN_TO_UUID = 'BIN_TO_UUID';

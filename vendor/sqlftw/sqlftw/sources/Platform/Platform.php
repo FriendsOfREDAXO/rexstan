@@ -309,6 +309,8 @@ class Platform
 
     public function isReserved(string $word): bool
     {
+        $word = strtoupper($word);
+
         return in_array($word, $this->getReserved(), true);
     }
 
@@ -328,6 +330,8 @@ class Platform
 
     public function isKeyword(string $word, int $version): bool
     {
+        $word = strtoupper($word);
+
         return in_array($word, $this->getReserved(), true) || in_array($word, $this->getNonReserved(), true);
     }
 

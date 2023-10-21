@@ -157,7 +157,7 @@ class Charset extends SqlEnum implements ArgumentNode, ArgumentValue
         self::UTF8MB4 => Collation::UTF8MB4_GENERAL_0900_AI_CI,
     ];
 
-    public static function validateValue(string &$value): bool
+    protected static function validateValue(string &$value): bool
     {
         $value = strtolower($value);
 

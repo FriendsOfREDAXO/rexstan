@@ -90,17 +90,17 @@ class CastingTypeChecker
                     return is_bool($value);
                 case Charset::class:
                     return $value instanceof Charset
-                        || (is_string($value) && Charset::validateValue($value))
+                        || (is_string($value) && Charset::isValidValue($value))
                         || (is_int($value) && $value > 0)
                         || $value === true; // true -> 1
                 case Collation::class:
                     return $value instanceof Collation
-                        || (is_string($value) && Collation::validateValue($value))
+                        || (is_string($value) && Collation::isValidValue($value))
                         || (is_int($value) && $value > 0)
                         || $value === true; // true -> 1
                 case StorageEngine::class:
                     return $value instanceof StorageEngine
-                        || (is_string($value) && StorageEngine::validateValue($value))
+                        || (is_string($value) && StorageEngine::isValidValue($value))
                         || (is_int($value) && $value > 0)
                         || $value === true; // true -> 1
                 case SqlMode::class:

@@ -35,7 +35,7 @@ class ChangeMasterToCommand extends Statement implements ReplicationCommand
     public function __construct(array $options, ?string $channel = null)
     {
         foreach ($options as $option => $value) {
-            if (!SlaveOption::validateValue($option)) {
+            if (!SlaveOption::isValidValue($option)) {
                 throw new InvalidDefinitionException("Unknown option '$option' for CHANGE MASTER TO.");
             }
             TypeChecker::check($value, SlaveOption::getTypes()[$option], $option);

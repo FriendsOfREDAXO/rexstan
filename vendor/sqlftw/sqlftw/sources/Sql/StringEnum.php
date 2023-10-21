@@ -108,7 +108,7 @@ abstract class StringEnum implements SqlSerializable
     /**
      * Normalizes and validates given value
      */
-    public static function validateValue(string &$value): bool
+    protected static function validateValue(string &$value): bool
     {
         $class = static::class;
         if (!isset(self::$availableValues[$class])) {

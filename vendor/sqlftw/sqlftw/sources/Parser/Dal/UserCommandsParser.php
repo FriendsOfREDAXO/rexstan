@@ -752,7 +752,7 @@ class UserCommandsParser
                 $name = $tokenList->getNonReservedNameOrString();
                 if ($name !== null) {
                     // dynamic (names)
-                    if (DynamicUserPrivilege::validateValue($name)) {
+                    if (DynamicUserPrivilege::isValidValue($name)) {
                         $type = new DynamicUserPrivilege($name);
                     } elseif ($ifExists) {
                         $type = new UnknownDynamicUserPrivilege($name);

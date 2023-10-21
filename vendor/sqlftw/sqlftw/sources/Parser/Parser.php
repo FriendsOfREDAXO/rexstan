@@ -54,7 +54,7 @@ class Parser
 
     private ParserFactory $factory;
 
-    private Generator $tokenListGenerator;
+    private Generator $tokenListGenerator; // @phpstan-ignore-line "uninitialized property" may only fail in @internal getNextTokenList()
 
     public function __construct(Session $session, ?Lexer $lexer = null)
     {

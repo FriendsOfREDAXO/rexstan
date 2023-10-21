@@ -85,7 +85,7 @@ class ParserFactory
         $this->session = $session;
 
         $queryParserProxy = function (): QueryParser {
-            return $this->queryParser;
+            return $this->queryParser; // @phpstan-ignore-line "uninitialized property" that's why there is a proxy
         };
         $this->expressionParser = new ExpressionParser($queryParserProxy);
         $this->optimizerHintParser = new OptimizerHintParser($this->expressionParser);

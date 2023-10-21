@@ -135,7 +135,12 @@ class StorageEngine implements SqlSerializable
         return $this->value === $normalized;
     }
 
-    public static function validateValue(string &$value): bool
+    public static function isValidValue(string $value): bool
+    {
+        return self::validateValue($value);
+    }
+
+    protected static function validateValue(string &$value): bool
     {
         $normalized = self::$map[strtolower($value)] ?? null;
 

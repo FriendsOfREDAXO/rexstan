@@ -179,7 +179,7 @@ class SetCommandsParser
                 if ($tokenList->hasSymbol('.')) {
                     $name2 = $tokenList->expectName(EntityType::COLUMN);
                     $fullName = $name . '.' . $name2;
-                    if (MysqlVariable::validateValue($fullName)) {
+                    if (MysqlVariable::isValidValue($fullName)) {
                         // plugin system variable without explicit scope
                         $scope = $lastKeywordScope ?? new Scope(Scope::SESSION);
                         $variable = $this->expressionParser->createSystemVariable($tokenList, $fullName, $scope, true);
@@ -187,7 +187,7 @@ class SetCommandsParser
                         // NEW.foo etc.
                         $variable = new QualifiedName($name2, $name);
                     }
-                } elseif (!$session->isLocalVariable($name) && MysqlVariable::validateValue($name)) {
+                } elseif (!$session->isLocalVariable($name) && MysqlVariable::isValidValue($name)) {
                     // system variable without explicit scope
                     $scope = $lastKeywordScope ?? new Scope(Scope::SESSION);
                     $variable = $this->expressionParser->createSystemVariable($tokenList, $name, $scope, true);

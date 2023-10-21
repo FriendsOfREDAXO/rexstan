@@ -38,6 +38,29 @@ class MysqlVariable extends SqlEnum
     public const ADMIN_SSL_KEY = 'admin_ssl_key';
     public const ADMIN_TLS_VERSION = 'admin_tls_version';
 
+    public const AUDIT_LOG_BUFFER_SIZE = 'audit_log_buffer_size';
+    public const AUDIT_LOG_COMPRESSION = 'audit_log_compression';
+    public const AUDIT_LOG_CONNECTION_POLICY = 'audit_log_connection_policy';
+    public const AUDIT_LOG_CURRENT_SESSION = 'audit_log_current_session';
+    public const AUDIT_LOG_DATABASE = 'audit_log_database';
+    public const AUDIT_LOG_DISABLE = 'audit_log_disable';
+    public const AUDIT_LOG_ENCRYPTION = 'audit_log_encryption';
+    public const AUDIT_LOG_EXCLUDE_ACCOUNTS = 'audit_log_exclude_accounts';
+    public const AUDIT_LOG_FILE = 'audit_log_file';
+    public const AUDIT_LOG_FILTER_ID = 'audit_log_filter_id';
+    public const AUDIT_LOG_FLUSH = 'audit_log_flush';
+    public const AUDIT_LOG_FORMAT = 'audit_log_format';
+    public const AUDIT_LOG_FORMAT_UNIX_TIMESTAMP = 'audit_log_format_unix_timestamp';
+    public const AUDIT_LOG_INCLUDE_ACCOUNTS = 'audit_log_include_accounts';
+    public const AUDIT_LOG_MAX_SIZE = 'audit_log_max_size';
+    public const AUDIT_LOG_PASSWORD_HISTORY_KEEP_DAYS = 'audit_log_password_history_keep_days';
+    public const AUDIT_LOG_POLICY = 'audit_log_policy';
+    public const AUDIT_LOG_PRUNE_SECONDS = 'audit_log_prune_seconds';
+    public const AUDIT_LOG_READ_BUFFER_SIZE = 'audit_log_read_buffer_size';
+    public const AUDIT_LOG_ROTATE_ON_SIZE = 'audit_log_rotate_on_size';
+    public const AUDIT_LOG_STATEMENT_POLICY = 'audit_log_statement_policy';
+    public const AUDIT_LOG_STRATEGY = 'audit_log_strategy';
+
     public const AUTHENTICATION_POLICY = 'authentication_policy';
     public const AUTHENTICATION_WINDOWS_LOG_LEVEL = 'authentication_windows_log_level';
     public const AUTHENTICATION_WINDOWS_USE_PRINCIPAL_NAME = 'authentication_windows_use_principal_name';
@@ -60,7 +83,7 @@ class MysqlVariable extends SqlEnum
     public const BINLOG_ERROR_ACTION = 'binlog_error_action';
     public const BINLOG_EXPIRE_LOGS_AUTO_PURGE = 'binlog_expire_logs_auto_purge';
     public const BINLOG_EXPIRE_LOGS_SECONDS = 'binlog_expire_logs_seconds';
-    public const BINLOG_FORMAT = 'binlog_format';
+    public const BINLOG_FORMAT = 'binlog_format'; // deprecated since 8.0.34
     public const BINLOG_GROUP_COMMIT_SYNC_DELAY = 'binlog_group_commit_sync_delay';
     public const BINLOG_GROUP_COMMIT_SYNC_NO_DELAY_COUNT = 'binlog_group_commit_sync_no_delay_count';
     public const BINLOG_GTID_SIMPLE_RECOVERY = 'binlog_gtid_simple_recovery';
@@ -233,7 +256,7 @@ class MysqlVariable extends SqlEnum
     public const GROUP_REPLICATION_MESSAGE_CACHE_SIZE = 'group_replication_message_cache_size';
     public const GROUP_REPLICATION_PAXOS_SINGLE_LEADER = 'group_replication_paxos_single_leader';
     public const GROUP_REPLICATION_POLL_SPIN_LOOPS = 'group_replication_poll_spin_loops';
-    public const GROUP_REPLICATION_RECOVERY_COMPLETE_AT = 'group_replication_recovery_complete_at';
+    public const GROUP_REPLICATION_RECOVERY_COMPLETE_AT = 'group_replication_recovery_complete_at'; // deprecated since 8.0.34
     public const GROUP_REPLICATION_RECOVERY_COMPRESSION_ALGORITHMS = 'group_replication_recovery_compression_algorithms';
     public const GROUP_REPLICATION_RECOVERY_GET_PUBLIC_KEY = 'group_replication_recovery_get_public_key';
     public const GROUP_REPLICATION_RECOVERY_PUBLIC_KEY_PATH = 'group_replication_recovery_public_key_path';
@@ -1046,7 +1069,7 @@ class MysqlVariable extends SqlEnum
     public const SYNC_FRM = 'sync_frm'; // removed in 8.0
     public const SYNC_MASTER_INFO = 'sync_master_info';
     public const SYNC_RELAY_LOG = 'sync_relay_log';
-    public const SYNC_RELAY_LOG_INFO = 'sync_relay_log_info';
+    public const SYNC_RELAY_LOG_INFO = 'sync_relay_log_info'; // deprecated since 8.0.34
     public const SYNC_SOURCE_INFO = 'sync_source_info';
 
     public const SYSTEM_TIME_ZONE = 'system_time_zone';
@@ -1125,6 +1148,7 @@ class MysqlVariable extends SqlEnum
     public const SYSEVENTLOG__TAG = 'syseventlog.tag';
     public const SYSEVENTLOG__FACILITY = 'syseventlog.facility';
     public const SYSEVENTLOG__INCLUDE_PID = 'syseventlog.include_pid';
+    public const VALIDATE_PASSWORD__CHANGED_CHARACTERS_PERCENTAGE = 'validate_password.changed_characters_percentage';
     public const VALIDATE_PASSWORD__CHECK_USER_NAME = 'validate_password.check_user_name';
     public const VALIDATE_PASSWORD__DICTIONARY_FILE = 'validate_password.dictionary_file';
     public const VALIDATE_PASSWORD__LENGTH = 'validate_password.length';
@@ -1503,6 +1527,28 @@ class MysqlVariable extends SqlEnum
         self::XA_DETACH_ON_PREPARE                      => [null,       true,  T::BOOL,     true],
 
         // https://dev.mysql.com/doc/refman/8.0/en/audit-log-reference.html
+        self::AUDIT_LOG_BUFFER_SIZE                     => [S::GLOBAL,  false, T::UNSIGNED, 1048576,    F::NONE, 4096, MAX, 4096],
+        self::AUDIT_LOG_COMPRESSION                     => [S::GLOBAL,  false, T::ENUM,     'NONE',     F::NONE, ['NONE', 'GZIP']],
+        self::AUDIT_LOG_CONNECTION_POLICY               => [S::GLOBAL,  false, T::ENUM,     'ALL',      F::NONE, ['ALL', 'ERRORS', 'NONE']],
+        self::AUDIT_LOG_CURRENT_SESSION                 => [null,       false, T::BOOL,     true],
+        self::AUDIT_LOG_DATABASE                        => [S::GLOBAL,  false, T::CHAR,     'mysql'], // since 8.0.33
+        self::AUDIT_LOG_DISABLE                         => [S::GLOBAL,  true,  T::BOOL,     false], // since 8.0.28
+        self::AUDIT_LOG_ENCRYPTION                      => [S::GLOBAL,  false, T::ENUM,     'NONE',     F::NONE, ['NONE', 'AES']],
+        self::AUDIT_LOG_EXCLUDE_ACCOUNTS                => [S::GLOBAL,  true,  T::CHAR,     null],
+        self::AUDIT_LOG_FILE                            => [S::GLOBAL,  false, T::CHAR,     'audit.log'],
+        self::AUDIT_LOG_FILTER_ID                       => [null,       false, T::UNSIGNED, 1,          F::NONE, 0, I::UINT32_MAX],
+        self::AUDIT_LOG_FLUSH                           => [S::GLOBAL,  true,  T::BOOL,     false],
+        self::AUDIT_LOG_FORMAT                          => [S::GLOBAL,  false, T::ENUM,     'NEW',      F::NONE, ['OLD', 'NEW', 'JSON']],
+        self::AUDIT_LOG_FORMAT_UNIX_TIMESTAMP           => [S::GLOBAL,  true,  T::BOOL,     false], // since 8.0.26
+        self::AUDIT_LOG_INCLUDE_ACCOUNTS                => [S::GLOBAL,  true,  T::CHAR,     null],
+        self::AUDIT_LOG_MAX_SIZE                        => [S::GLOBAL,  true,  T::UNSIGNED, 0,          F::NONE, 0, MAX], // since 8.0.26
+        self::AUDIT_LOG_PASSWORD_HISTORY_KEEP_DAYS      => [S::GLOBAL,  true,  T::UNSIGNED, 0,          F::NONE, 0, I::UINT32_MAX], // since 8.0.17
+        self::AUDIT_LOG_POLICY                          => [S::GLOBAL,  false, T::ENUM,     'ALL',      F::NONE, ['ALL', 'LOGINS', 'QUERIES', 'NONE']],
+        self::AUDIT_LOG_PRUNE_SECONDS                   => [S::GLOBAL,  true,  T::UNSIGNED, 0,          F::NONE, 0, MAX], // since 8.0.24
+        self::AUDIT_LOG_READ_BUFFER_SIZE                => [S::GLOBAL,  true,  T::UNSIGNED, 32768,      F::NONE, 32768, 4194304],
+        self::AUDIT_LOG_ROTATE_ON_SIZE                  => [S::GLOBAL,  true,  T::UNSIGNED, 0,          F::NONE, 0, MAX, 4096],
+        self::AUDIT_LOG_STATEMENT_POLICY                => [S::GLOBAL,  true,  T::ENUM,     'ALL',      F::NONE, ['ALL', 'ERRORS', 'NONE']],
+        self::AUDIT_LOG_STRATEGY                        => [S::GLOBAL,  false, T::ENUM,     'ASYNCHRONOUS', F::NONE, ['ASYNCHRONOUS', 'PERFORMANCE', 'SEMISYNCHRONOUS', 'SYNCHRONOUS']],
 
         // https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html
         self::BINLOG_CACHE_SIZE                         => [S::GLOBAL,  true,  T::UNSIGNED, 32768,      F::CLAMP, 4096, MAX, 4096],
@@ -2117,6 +2163,7 @@ class MysqlVariable extends SqlEnum
         self::VALIDATE_PASSWORD__NUMBER_COUNT       => [S::GLOBAL,  true,  T::UNSIGNED, 1, F::NONE, 0, MAX],
         self::VALIDATE_PASSWORD__POLICY             => [S::GLOBAL,  true,  T::UNSIGNED, 1, F::NONE, 0, 2],
         self::VALIDATE_PASSWORD__SPECIAL_CHAR_COUNT => [S::GLOBAL,  true,  T::UNSIGNED, 1, F::NONE, 0, MAX],
+        self::VALIDATE_PASSWORD__CHANGED_CHARACTERS_PERCENTAGE => [S::GLOBAL,  true,  T::UNSIGNED, 0, F::NONE, 0, 100], // since 8.0.34
         self::VALIDATE_PASSWORD_CHECK_USER_NAME     => [S::GLOBAL,  true,  T::BOOL,     true],
         self::VALIDATE_PASSWORD_DICTIONARY_FILE     => [S::GLOBAL,  true,  T::CHAR,     null, F::NULLABLE], // file
         self::VALIDATE_PASSWORD_LENGTH              => [S::GLOBAL,  true,  T::UNSIGNED, 8, F::CLAMP, 0, MAX],
@@ -2161,6 +2208,16 @@ class MysqlVariable extends SqlEnum
         self::MYSQLX_ZSTD_MAX_CLIENT_COMPRESSION_LEVEL      => [S::GLOBAL,  true,  T::SIGNED,   11,         F::NON_ZERO, -131072, 22],
         //                                                      0:scope, 1:dynamic, 2:type, 3:default, [4:flags, [5:values]|[5:min, 6:max, [7:increment]]]
     ];
+
+    public static function normalizeValue(string $value): string
+    {
+        $valid = self::validateValue($value);
+        if (!$valid) {
+            throw new InvalidDefinitionException("'{$value}' is not a valid name of system variable.");
+        }
+
+        return $value;
+    }
 
     public static function getScope(string $variable): ?string
     {
