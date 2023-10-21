@@ -25,7 +25,7 @@ class AnalyzerResult
 
     private ?Statement $statement = null;
 
-    private ?SqlMode $mode;
+    private ?SqlMode $mode = null;
 
     private int $severity;
 

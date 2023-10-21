@@ -60,7 +60,7 @@ class BinaryLiteral implements BoolValue, UintValue, StringValue
         return (int) bindec($this->value);
     }
 
-    public function asBool(): ?bool
+    public function asBool(): bool
     {
         return ((int) bindec($this->value)) !== 0;
     }

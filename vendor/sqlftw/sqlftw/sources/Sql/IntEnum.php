@@ -108,7 +108,7 @@ abstract class IntEnum implements SqlSerializable
     /**
      * Normalizes and validates given value
      */
-    public static function validateValue(int &$value): bool
+    protected static function validateValue(int &$value): bool
     {
         $class = static::class;
         if (!isset(self::$availableValues[$class])) {

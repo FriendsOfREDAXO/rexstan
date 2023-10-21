@@ -36,7 +36,7 @@
         "b": "@build:init",
         "c": "@check:all",
         "cf": "@check:fast",
-        "r": "@build:rector",
+        "re": "@build:rector",
         "t": "@tests:run",
         "tm": "@tests:mysql",
         "tms": "@tests:mysql-s",
@@ -73,7 +73,8 @@
             "@lint:php-all",
             "@phpcs:src",
             "@phpcs:tests",
-            "@spell:check"
+            "@spell:check",
+            "@tests:mysql-s"
         ],
 
         "tests:run": "php vendor/nette/tester/src/tester -C --colors 1 tests/Parser tests/Resolver",

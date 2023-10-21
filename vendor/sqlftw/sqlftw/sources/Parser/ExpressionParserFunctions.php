@@ -55,8 +55,9 @@ trait ExpressionParserFunctions
 
     public function parseFunctionCall(TokenList $tokenList, string $name1, ?string $name2 = null): FunctionCall
     {
-        if ($name2 === null && BuiltInFunction::validateValue($name1)) {
+        if ($name2 === null && BuiltInFunction::isValidValue($name1)) {
             $function = new BuiltInFunction($name1);
+            $name1 = $function->getValue();
         } elseif ($name2 !== null) {
             $tokenList->validateName(EntityType::SCHEMA, $name1);
             $tokenList->validateName(EntityType::ROUTINE, $name2);

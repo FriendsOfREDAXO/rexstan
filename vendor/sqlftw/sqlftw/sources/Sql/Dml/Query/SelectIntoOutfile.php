@@ -13,7 +13,7 @@ use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Charset;
 use SqlFtw\Sql\Dml\FileFormat;
 
-class SelectIntoOutfile extends SelectInto
+class SelectIntoOutfile implements SelectInto
 {
 
     private string $fileName;
@@ -21,6 +21,9 @@ class SelectIntoOutfile extends SelectInto
     private ?Charset $charset;
 
     private ?FileFormat $format;
+
+    /** @var self::POSITION_* */
+    protected int $position;
 
     /**
      * @param SelectInto::POSITION_* $position
@@ -46,6 +49,14 @@ class SelectIntoOutfile extends SelectInto
     public function getFormat(): ?FileFormat
     {
         return $this->format;
+    }
+
+    /**
+     * @return self::POSITION_*
+     */
+    public function getPosition(): int
+    {
+        return $this->position;
     }
 
     public function serialize(Formatter $formatter): string

@@ -24,7 +24,7 @@ class IndexType extends SqlEnum
     public const FULLTEXT = Keyword::FULLTEXT . ' ' . Keyword::INDEX; // or KEY
     public const SPATIAL = Keyword::SPATIAL . ' ' . Keyword::INDEX; // or KEY
 
-    public static function validateValue(string &$value): bool
+    protected static function validateValue(string &$value): bool
     {
         // normalize KEY vs INDEX
         $value = strtoupper($value);

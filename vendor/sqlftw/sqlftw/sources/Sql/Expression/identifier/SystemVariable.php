@@ -28,7 +28,7 @@ class SystemVariable implements Identifier
 
     public function __construct(string $name, ?Scope $scope = null)
     {
-        if (!MysqlVariable::validateValue($name)) {
+        if (!MysqlVariable::isValidValue($name)) {
             throw new InvalidDefinitionException("Invalid system variable name '$name'.");
         }
 

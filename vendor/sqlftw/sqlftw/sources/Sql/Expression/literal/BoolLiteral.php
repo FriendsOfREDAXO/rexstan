@@ -29,7 +29,7 @@ class BoolLiteral implements BoolValue, KeywordLiteral
         return $this->value ? 'TRUE' : 'FALSE';
     }
 
-    public function asBool(): ?bool
+    public function asBool(): bool
     {
         return $this->value;
     }

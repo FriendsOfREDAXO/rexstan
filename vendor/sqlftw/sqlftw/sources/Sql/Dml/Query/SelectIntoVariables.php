@@ -13,11 +13,14 @@ use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\SimpleName;
 use SqlFtw\Sql\Expression\UserVariable;
 
-class SelectIntoVariables extends SelectInto
+class SelectIntoVariables implements SelectInto
 {
 
     /** @var non-empty-list<UserVariable|SimpleName> */
     private array $variables;
+
+    /** @var self::POSITION_* */
+    protected int $position;
 
     /**
      * @param non-empty-list<UserVariable|SimpleName> $variables
@@ -35,6 +38,14 @@ class SelectIntoVariables extends SelectInto
     public function getVariables(): array
     {
         return $this->variables;
+    }
+
+    /**
+     * @return self::POSITION_*
+     */
+    public function getPosition(): int
+    {
+        return $this->position;
     }
 
     public function serialize(Formatter $formatter): string

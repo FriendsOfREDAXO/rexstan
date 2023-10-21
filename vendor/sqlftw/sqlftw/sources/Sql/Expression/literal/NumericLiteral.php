@@ -32,7 +32,7 @@ class NumericLiteral implements NumericValue
     /**
      * @return int|float
      */
-    public function asNumber()
+    public function asNumber() // @phpstan-ignore-line "never returns int" because of descendants
     {
         return (float) $this->value;
     }

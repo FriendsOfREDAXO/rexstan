@@ -955,17 +955,17 @@
         },
         {
             "name": "sqlftw/sqlftw",
-            "version": "v0.1.11",
-            "version_normalized": "0.1.11.0",
+            "version": "v0.1.12",
+            "version_normalized": "0.1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SQLFTW/sqlftw.git",
-                "reference": "e36c0b177934b2aba6cccb2d5221990792893e00"
+                "reference": "2f11f61280e94cb540c12c60b5b5906d64a18102"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SQLFTW/sqlftw/zipball/e36c0b177934b2aba6cccb2d5221990792893e00",
-                "reference": "e36c0b177934b2aba6cccb2d5221990792893e00",
+                "url": "https://api.github.com/repos/SQLFTW/sqlftw/zipball/2f11f61280e94cb540c12c60b5b5906d64a18102",
+                "reference": "2f11f61280e94cb540c12c60b5b5906d64a18102",
                 "shasum": ""
             },
             "require": {
@@ -980,7 +980,7 @@
                 "phpstan/phpstan-strict-rules": "^1.0",
                 "rector/rector": "0.14.8"
             },
-            "time": "2023-05-03T13:50:04+00:00",
+            "time": "2023-10-19T15:49:48+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1002,7 +1002,7 @@
             "homepage": "https://github.com/sqlftw/sqlftw",
             "support": {
                 "issues": "https://github.com/SQLFTW/sqlftw/issues",
-                "source": "https://github.com/SQLFTW/sqlftw/tree/v0.1.11"
+                "source": "https://github.com/SQLFTW/sqlftw/tree/v0.1.12"
             },
             "install-path": "../sqlftw/sqlftw"
         },

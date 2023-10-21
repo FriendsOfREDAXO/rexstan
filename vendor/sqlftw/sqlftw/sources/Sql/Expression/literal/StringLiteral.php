@@ -67,7 +67,7 @@ class StringLiteral implements StringValue, BoolValue
         return implode('', $this->parts);
     }
 
-    public function asBool(): ?bool
+    public function asBool(): bool
     {
         return implode('', $this->parts) !== '';
     }
