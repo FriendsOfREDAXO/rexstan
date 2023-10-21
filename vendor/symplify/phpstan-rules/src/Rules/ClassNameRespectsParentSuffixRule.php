@@ -54,7 +54,7 @@ final class ClassNameRespectsParentSuffixRule implements Rule
     ];
 
     /**
-     * @var class-string[]
+     * @var string[]
      */
     private $parentClasses = [];
 
