@@ -3,18 +3,15 @@ services:
 
     - Symplify\PHPStanRules\NodeTraverser\SimpleCallableNodeTraverser
     - Symplify\PHPStanRules\PhpDocParser\PhpDocNodeTraverser
-    - Symplify\PHPStanRules\PhpDocParser\SimplePhpDocParser
     - Symplify\PHPStanRules\Reflection\ReflectionParser
     - Symplify\PHPStanRules\Matcher\ArrayStringAndFnMatcher
     - Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder
     - Symplify\PHPStanRules\PhpDoc\SeePhpDocTagNodesFinder
-    - Symplify\PHPStanRules\TypeAnalyzer\ContainsTypeAnalyser
     - Symplify\PHPStanRules\Composer\ClassNamespaceMatcher
     - Symplify\PHPStanRules\Composer\ComposerAutoloadResolver
     - Symplify\PHPStanRules\Composer\Psr4PathValidator
     - Symplify\PHPStanRules\Formatter\RequiredWithMessageFormatter
     - Symplify\PHPStanRules\Location\DirectoryChecker
-    - Symplify\PHPStanRules\Matcher\PositionMatcher
     - Symplify\PHPStanRules\Naming\BoolishNameAnalyser
     - Symplify\PHPStanRules\Naming\ClassToSuffixResolver
     - Symplify\PHPStanRules\NodeAnalyzer\AttributeFinder
@@ -30,9 +27,6 @@ services:
     - Symplify\PHPStanRules\ParentGuard\ParentElementResolver\ParentMethodResolver
     - Symplify\PHPStanRules\PhpDoc\ApiDocStmtAnalyzer
     - Symplify\PHPStanRules\PhpDoc\BarePhpDocParser
-    - Symplify\PHPStanRules\PhpDoc\ClassAnnotationResolver
-    - Symplify\PHPStanRules\PhpDoc\ClassReferencePhpDocNodeVisitor
-    - Symplify\PHPStanRules\PhpDoc\PhpDocNodeTraverser\ClassReferencePhpDocNodeTraverser
     - Symplify\PHPStanRules\PhpDoc\PhpDocResolver
     - Symplify\PHPStanRules\Printer\NodeComparator
     - Symplify\PHPStanRules\Reflection\MethodCallNodeAnalyzer
@@ -41,8 +35,3 @@ services:
     - Symplify\PHPStanRules\Matcher\Collector\PublicClassMethodMatcher
     - Symplify\PHPStanRules\Matcher\ClassMethodCallReferenceResolver
     - Symplify\PHPStanRules\Printer\CollectorMetadataPrinter
-
-    -
-        class: Symplify\PHPStanRules\NodeVisitor\AssignedToPropertyNodeVisitor
-        tags:
-            - phpstan.parser.richParserNodeVisitor

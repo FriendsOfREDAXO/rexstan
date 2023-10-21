@@ -23,19 +23,9 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 final class RequireInvokableControllerRule implements Rule
 {
     /**
-     * @readonly
-     * @var \Symplify\PHPStanRules\Symfony\NodeAnalyzer\SymfonyControllerAnalyzer
-     */
-    private $symfonyControllerAnalyzer;
-    /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Use invokable controller with __invoke() method instead of named action method';
-
-    public function __construct(SymfonyControllerAnalyzer $symfonyControllerAnalyzer)
-    {
-        $this->symfonyControllerAnalyzer = $symfonyControllerAnalyzer;
-    }
 
     /**
      * @return class-string<Node>
@@ -63,7 +53,7 @@ final class RequireInvokableControllerRule implements Rule
 
         $classLike = $node->getOriginalNode();
         foreach ($classLike->getMethods() as $classMethod) {
-            if (! $this->symfonyControllerAnalyzer->isControllerActionMethod($classMethod)) {
+            if (! SymfonyControllerAnalyzer::isControllerActionMethod($classMethod)) {
                 continue;
             }
 
