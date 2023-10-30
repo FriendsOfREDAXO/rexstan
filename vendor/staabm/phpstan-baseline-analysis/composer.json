@@ -1,7 +1,7 @@
 {
     "name": "staabm/phpstan-baseline-analysis",
     "license": "MIT",
-    "keywords": ["dev", "phpstan", "phpstan-extension", "static analysis", "database access layer", "code quality"],
+    "keywords": ["dev", "phpstan", "phpstan-extension", "static analysis", "baseline analysis"],
     "autoload": {
         "classmap": ["lib/"]
     },
@@ -24,7 +24,7 @@
         "thecodingmachine/phpstan-safe-rule": "^1.2",
         "tomasvotruba/cognitive-complexity": "^0.1.1",
         "tomasvotruba/type-coverage": "^0.2.0",
-        "tomasvotruba/unused-public": "^0.3.2"
+        "tomasvotruba/unused-public": "^0.3.5"
     },
     "config": {
         "optimize-autoloader": true,
@@ -40,6 +40,7 @@
     },
     "bin": [
         "bin/phpstan-baseline-analyze",
+        "bin/phpstan-baseline-filter",
         "bin/phpstan-baseline-trend",
         "bin/phpstan-baseline-graph"
     ]
