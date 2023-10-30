@@ -1008,17 +1008,17 @@
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
-            "version": "0.12.3",
-            "version_normalized": "0.12.3.0",
+            "version": "0.12.4",
+            "version_normalized": "0.12.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-baseline-analysis.git",
-                "reference": "298015cb020837b862592c153a467f3aadbdd434"
+                "reference": "1e8ea32a10e1a50c3fd21396201495a1ae1a5d1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/298015cb020837b862592c153a467f3aadbdd434",
-                "reference": "298015cb020837b862592c153a467f3aadbdd434",
+                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/1e8ea32a10e1a50c3fd21396201495a1ae1a5d1d",
+                "reference": "1e8ea32a10e1a50c3fd21396201495a1ae1a5d1d",
                 "shasum": ""
             },
             "require": {
@@ -1035,11 +1035,12 @@
                 "thecodingmachine/phpstan-safe-rule": "^1.2",
                 "tomasvotruba/cognitive-complexity": "^0.1.1",
                 "tomasvotruba/type-coverage": "^0.2.0",
-                "tomasvotruba/unused-public": "^0.3.2"
+                "tomasvotruba/unused-public": "^0.3.5"
             },
-            "time": "2023-09-14T12:13:50+00:00",
+            "time": "2023-10-30T09:30:02+00:00",
             "bin": [
                 "bin/phpstan-baseline-analyze",
+                "bin/phpstan-baseline-filter",
                 "bin/phpstan-baseline-trend",
                 "bin/phpstan-baseline-graph"
             ],
@@ -1055,16 +1056,15 @@
                 "MIT"
             ],
             "keywords": [
-                "Database Access Layer",
                 "PHPStan",
-                "code quality",
+                "baseline analysis",
                 "dev",
                 "phpstan-extension",
                 "static analysis"
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-baseline-analysis/issues",
-                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.12.3"
+                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.12.4"
             },
             "funding": [
                 {
