@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "59d70837f1fca5c581437da5425f1a8d",
+    "content-hash": "74cc6519561bdfa5fd543de0c58574d5",
     "packages": [
         {
             "name": "composer/semver",
@@ -852,16 +852,16 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v2.16.0",
+            "version": "v2.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "c7a80cc9747e6307bfa6f5ea88ed3f9b1804790c"
+                "reference": "1500f90ff6a705009731cc14e50d4faf2d202bf3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/c7a80cc9747e6307bfa6f5ea88ed3f9b1804790c",
-                "reference": "c7a80cc9747e6307bfa6f5ea88ed3f9b1804790c",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/1500f90ff6a705009731cc14e50d4faf2d202bf3",
+                "reference": "1500f90ff6a705009731cc14e50d4faf2d202bf3",
                 "shasum": ""
             },
             "require": {
@@ -907,7 +907,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.16.0"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.16.1"
             },
             "funding": [
                 {
@@ -915,7 +915,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-26T11:37:27+00:00"
+            "time": "2023-10-28T15:29:27+00:00"
         },
         {
             "name": "sqlftw/sqlftw",
@@ -1673,5 +1673,5 @@
     "platform-overrides": {
         "php": "7.4.30"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
