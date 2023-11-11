@@ -227,22 +227,22 @@
         },
         {
             "name": "nette/http",
-            "version": "v3.2.2",
-            "version_normalized": "3.2.2.0",
+            "version": "v3.2.3",
+            "version_normalized": "3.2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/http.git",
-                "reference": "9105c26de3dd47da5e7cf6b4132b5d871f835e25"
+                "reference": "54d79711ff3a8dfd86201e3bdbdd6972177ea20b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/http/zipball/9105c26de3dd47da5e7cf6b4132b5d871f835e25",
-                "reference": "9105c26de3dd47da5e7cf6b4132b5d871f835e25",
+                "url": "https://api.github.com/repos/nette/http/zipball/54d79711ff3a8dfd86201e3bdbdd6972177ea20b",
+                "reference": "54d79711ff3a8dfd86201e3bdbdd6972177ea20b",
                 "shasum": ""
             },
             "require": {
                 "nette/utils": "^3.2.1 || ~4.0.0",
-                "php": ">=7.2 <8.3"
+                "php": "7.2 - 8.3"
             },
             "conflict": {
                 "nette/di": "<3.0.3",
@@ -258,7 +258,7 @@
             "suggest": {
                 "ext-fileinfo": "to detect type of uploaded files"
             },
-            "time": "2023-03-18T14:55:56+00:00",
+            "time": "2023-11-02T02:43:54+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -302,7 +302,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/http/issues",
-                "source": "https://github.com/nette/http/tree/v3.2.2"
+                "source": "https://github.com/nette/http/tree/v3.2.3"
             },
             "install-path": "../nette/http"
         },
@@ -587,17 +587,17 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.40",
-            "version_normalized": "1.10.40.0",
+            "version": "1.10.41",
+            "version_normalized": "1.10.41.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "93c84b5bf7669920d823631e39904d69b9c7dc5d"
+                "reference": "c6174523c2a69231df55bdc65b61655e72876d76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/93c84b5bf7669920d823631e39904d69b9c7dc5d",
-                "reference": "93c84b5bf7669920d823631e39904d69b9c7dc5d",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/c6174523c2a69231df55bdc65b61655e72876d76",
+                "reference": "c6174523c2a69231df55bdc65b61655e72876d76",
                 "shasum": ""
             },
             "require": {
@@ -606,7 +606,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2023-10-30T14:48:31+00:00",
+            "time": "2023-11-05T12:57:57+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -955,17 +955,17 @@
         },
         {
             "name": "sqlftw/sqlftw",
-            "version": "v0.1.12",
-            "version_normalized": "0.1.12.0",
+            "version": "v0.1.13",
+            "version_normalized": "0.1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SQLFTW/sqlftw.git",
-                "reference": "2f11f61280e94cb540c12c60b5b5906d64a18102"
+                "reference": "3c423710fe7882565e77d2afc1f28aac7acb0305"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SQLFTW/sqlftw/zipball/2f11f61280e94cb540c12c60b5b5906d64a18102",
-                "reference": "2f11f61280e94cb540c12c60b5b5906d64a18102",
+                "url": "https://api.github.com/repos/SQLFTW/sqlftw/zipball/3c423710fe7882565e77d2afc1f28aac7acb0305",
+                "reference": "3c423710fe7882565e77d2afc1f28aac7acb0305",
                 "shasum": ""
             },
             "require": {
@@ -980,7 +980,7 @@
                 "phpstan/phpstan-strict-rules": "^1.0",
                 "rector/rector": "0.14.8"
             },
-            "time": "2023-10-19T15:49:48+00:00",
+            "time": "2023-10-31T15:29:04+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1002,7 +1002,7 @@
             "homepage": "https://github.com/sqlftw/sqlftw",
             "support": {
                 "issues": "https://github.com/SQLFTW/sqlftw/issues",
-                "source": "https://github.com/SQLFTW/sqlftw/tree/v0.1.12"
+                "source": "https://github.com/SQLFTW/sqlftw/tree/v0.1.13"
             },
             "install-path": "../sqlftw/sqlftw"
         },

@@ -253,6 +253,34 @@ class Collation extends SqlEnum
     public const UTF8_UNICODE_CI = 'utf8_unicode_ci';
     public const UTF8_VIETNAMESE_CI = 'utf8_vietnamese_ci';
 
+    public const UTF8MB3_BIN = 'utf8mb3_bin';
+    public const UTF8MB3_CROATIAN_CI = 'utf8mb3_croatian_ci';
+    public const UTF8MB3_CZECH_CI = 'utf8mb3_czech_ci';
+    public const UTF8MB3_DANISH_CI = 'utf8mb3_danish_ci';
+    public const UTF8MB3_ESPERANTO_CI = 'utf8mb3_esperanto_ci';
+    public const UTF8MB3_ESTONIAN_CI = 'utf8mb3_estonian_ci';
+    public const UTF8MB3_GENERAL_CI = 'utf8mb3_general_ci';
+    public const UTF8MB3_GENERAL_MYSQL500_CI = 'utf8mb3_general_mysql500_ci';
+    public const UTF8MB3_GERMAN2_CI = 'utf8mb3_german2_ci';
+    public const UTF8MB3_HUNGARIAN_CI = 'utf8mb3_hungarian_ci';
+    public const UTF8MB3_ICELANDIC_CI = 'utf8mb3_icelandic_ci';
+    public const UTF8MB3_LATVIAN_CI = 'utf8mb3_latvian_ci';
+    public const UTF8MB3_LITHUANIAN_CI = 'utf8mb3_lithuanian_ci';
+    public const UTF8MB3_PERSIAN_CI = 'utf8mb3_persian_ci';
+    public const UTF8MB3_POLISH_CI = 'utf8mb3_polish_ci';
+    public const UTF8MB3_ROMAN_CI = 'utf8mb3_roman_ci';
+    public const UTF8MB3_ROMANIAN_CI = 'utf8mb3_romanian_ci';
+    public const UTF8MB3_SINHALA_CI = 'utf8mb3_sinhala_ci';
+    public const UTF8MB3_SLOVAK_CI = 'utf8mb3_slovak_ci';
+    public const UTF8MB3_SLOVENIAN_CI = 'utf8mb3_slovenian_ci';
+    public const UTF8MB3_SPANISH2_CI = 'utf8mb3_spanish2_ci';
+    public const UTF8MB3_SPANISH_CI = 'utf8mb3_spanish_ci';
+    public const UTF8MB3_SWEDISH_CI = 'utf8mb3_swedish_ci';
+    public const UTF8MB3_TURKISH_CI = 'utf8mb3_turkish_ci';
+    public const UTF8MB3_UNICODE_520_CI = 'utf8mb3_unicode_520_ci';
+    public const UTF8MB3_UNICODE_CI = 'utf8mb3_unicode_ci';
+    public const UTF8MB3_VIETNAMESE_CI = 'utf8mb3_vietnamese_ci';
+
     public const UTF8MB4_BIN = 'utf8mb4_bin';
     public const UTF8MB4_CROATIAN_CI = 'utf8mb4_croatian_ci';
     public const UTF8MB4_CZECH_CI = 'utf8mb4_czech_ci';
@@ -349,7 +377,6 @@ class Collation extends SqlEnum
     public const UTF8MB4_GENERAL_0900_BIN = 'utf8mb4_0900_bin';
 
     // from tests. ids not known
-    public const UTF8MB3_BIN = 'utf8mb3_bin';
     public const UTF8_PHONE_CI = 'utf8_phone_ci';
     public const UTF8_TOLOWER_CI = 'utf8_tolower_ci';
     public const UTF8_BENGALI_STANDARD_CI = 'utf8_bengali_standard_ci';
