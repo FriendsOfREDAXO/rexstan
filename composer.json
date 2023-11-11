@@ -15,7 +15,7 @@
         "tomasvotruba/cognitive-complexity": "0.2.2",
         "thecodingmachine/safe": "1.3.3",
         "thecodingmachine/phpstan-safe-rule": "1.2",
-        "sqlftw/sqlftw": "0.1.12",
+        "sqlftw/sqlftw": "0.1.13",
         "php-parallel-lint/php-parallel-lint": "^1.3",
         "justinrainbow/json-schema": "^5.2"
     },
