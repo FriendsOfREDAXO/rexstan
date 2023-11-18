@@ -54,16 +54,18 @@ final class RexStanSettings
         70333 => '7.3.x [Mindestanforderung für REDAXO bis 5.14]',
         70433 => '7.4.x',
         80028 => '8.0.x',
-        80115 => '8.1.x',
-        80203 => '8.2.x',
+        80125 => '8.1.x',
+        80212 => '8.2.x',
+        80300 => '8.3.x',
     ];
 
     /**
      * @var array<int, string>
      */
     private static $phpVersionListFrom5_15 = [
-        80115 => '8.1.x [Mindestanforderung für REDAXO ab 5.15]',
-        80203 => '8.2.x',
+        80125 => '8.1.x [Mindestanforderung für REDAXO ab 5.15]',
+        80212 => '8.2.x',
+        80300 => '8.3.x',
     ];
 
     /**
