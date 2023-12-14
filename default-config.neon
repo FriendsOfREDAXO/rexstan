@@ -3,6 +3,7 @@
 
 includes:
     - vendor/spaze/phpstan-disallowed-calls/extension.neon
+    - vendor/staabm/phpstan-todo-by/extension.neon
     # required for dead-code.neon, code-complexity.neon, native-type-coverage.neon
     - vendor/symplify/phpstan-rules/config/services/services.neon
 

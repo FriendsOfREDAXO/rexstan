@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'staabm\\PHPStanTodoBy\\' => array($vendorDir . '/staabm/phpstan-todo-by/src'),
     'staabm\\PHPStanDba\\' => array($vendorDir . '/staabm/phpstan-dba/src'),
     'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
     'TomasVotruba\\UnusedPublic\\' => array($vendorDir . '/tomasvotruba/unused-public/src'),
