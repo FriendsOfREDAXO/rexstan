@@ -1103,20 +1103,20 @@
         },
         {
             "name": "staabm/phpstan-todo-by",
-            "version": "0.1",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-todo-by.git",
-                "reference": "a1b9d67e3ae8ee9d6e9f5f021b33d29802cb4a76"
+                "reference": "da51d05c15eb7ca4e6864c9720975d5fa18bdfc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/a1b9d67e3ae8ee9d6e9f5f021b33d29802cb4a76",
-                "reference": "a1b9d67e3ae8ee9d6e9f5f021b33d29802cb4a76",
+                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/da51d05c15eb7ca4e6864c9720975d5fa18bdfc8",
+                "reference": "da51d05c15eb7ca4e6864c9720975d5fa18bdfc8",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.0"
+                "php": "^7.4 || ^8.0"
             },
             "require-dev": {
                 "phpstan/phpstan": "^1.10",
@@ -1138,7 +1138,7 @@
             "notification-url": "https://packagist.org/downloads/",
             "support": {
                 "issues": "https://github.com/staabm/phpstan-todo-by/issues",
-                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1"
+                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.1"
             },
             "funding": [
                 {
@@ -1146,7 +1146,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-14T19:57:02+00:00"
+            "time": "2023-12-14T20:13:02+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
