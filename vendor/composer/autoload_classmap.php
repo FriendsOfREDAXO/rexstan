@@ -2120,4 +2120,5 @@ return array(
     'staabm\\PHPStanDba\\UnresolvableQueryException' => $vendorDir . '/staabm/phpstan-dba/src/UnresolvableQueryException.php',
     'staabm\\PHPStanDba\\UnresolvableQueryMixedTypeException' => $vendorDir . '/staabm/phpstan-dba/src/UnresolvableQueryMixedTypeException.php',
     'staabm\\PHPStanDba\\UnresolvableQueryStringTypeException' => $vendorDir . '/staabm/phpstan-dba/src/UnresolvableQueryStringTypeException.php',
+    'staabm\\PHPStanTodoBy\\TodoByRule' => $vendorDir . '/staabm/phpstan-todo-by/src/TodoByRule.php',
 );

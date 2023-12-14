@@ -103,6 +103,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
     public static $prefixLengthsPsr4 = array (
         's' => 
         array (
+            'staabm\\PHPStanTodoBy\\' => 21,
             'staabm\\PHPStanDba\\' => 18,
         ),
         'W' => 
@@ -139,6 +140,10 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
     );
 
     public static $prefixDirsPsr4 = array (
+        'staabm\\PHPStanTodoBy\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src',
+        ),
         'staabm\\PHPStanDba\\' => 
         array (
             0 => __DIR__ . '/..' . '/staabm/phpstan-dba/src',
@@ -2317,6 +2322,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'staabm\\PHPStanDba\\UnresolvableQueryException' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/UnresolvableQueryException.php',
         'staabm\\PHPStanDba\\UnresolvableQueryMixedTypeException' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/UnresolvableQueryMixedTypeException.php',
         'staabm\\PHPStanDba\\UnresolvableQueryStringTypeException' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/UnresolvableQueryStringTypeException.php',
+        'staabm\\PHPStanTodoBy\\TodoByRule' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/TodoByRule.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

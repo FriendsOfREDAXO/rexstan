@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b025f4092a568bb320aa98561a9570d0",
+    "content-hash": "680018f7f3261117b03d66956132ddef",
     "packages": [
         {
             "name": "composer/semver",
@@ -1100,6 +1100,53 @@
                 "source": "https://github.com/staabm/phpstan-dba/tree/0.2.79"
             },
             "time": "2023-10-12T07:23:58+00:00"
+        },
+        {
+            "name": "staabm/phpstan-todo-by",
+            "version": "0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/staabm/phpstan-todo-by.git",
+                "reference": "a1b9d67e3ae8ee9d6e9f5f021b33d29802cb4a76"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/a1b9d67e3ae8ee9d6e9f5f021b33d29802cb4a76",
+                "reference": "a1b9d67e3ae8ee9d6e9f5f021b33d29802cb4a76",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^9 || ^10.5"
+            },
+            "type": "library",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "staabm\\PHPStanTodoBy\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "support": {
+                "issues": "https://github.com/staabm/phpstan-todo-by/issues",
+                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/staabm",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-12-14T19:57:02+00:00"
         },
         {
             "name": "symfony/polyfill-php80",

@@ -1147,6 +1147,56 @@
             "install-path": "../staabm/phpstan-dba"
         },
         {
+            "name": "staabm/phpstan-todo-by",
+            "version": "0.1",
+            "version_normalized": "0.1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/staabm/phpstan-todo-by.git",
+                "reference": "a1b9d67e3ae8ee9d6e9f5f021b33d29802cb4a76"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/a1b9d67e3ae8ee9d6e9f5f021b33d29802cb4a76",
+                "reference": "a1b9d67e3ae8ee9d6e9f5f021b33d29802cb4a76",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^9 || ^10.5"
+            },
+            "time": "2023-12-14T19:57:02+00:00",
+            "type": "library",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "staabm\\PHPStanTodoBy\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "support": {
+                "issues": "https://github.com/staabm/phpstan-todo-by/issues",
+                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/staabm",
+                    "type": "github"
+                }
+            ],
+            "install-path": "../staabm/phpstan-todo-by"
+        },
+        {
             "name": "symfony/polyfill-php80",
             "version": "v1.28.0",
             "version_normalized": "1.28.0.0",
