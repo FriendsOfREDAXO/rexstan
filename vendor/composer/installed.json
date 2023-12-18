@@ -1148,17 +1148,17 @@
         },
         {
             "name": "staabm/phpstan-todo-by",
-            "version": "0.1.1",
-            "version_normalized": "0.1.1.0",
+            "version": "0.1.6",
+            "version_normalized": "0.1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-todo-by.git",
-                "reference": "da51d05c15eb7ca4e6864c9720975d5fa18bdfc8"
+                "reference": "5cabd210d1dba767b4bfb8ea7aefc061925efe9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/da51d05c15eb7ca4e6864c9720975d5fa18bdfc8",
-                "reference": "da51d05c15eb7ca4e6864c9720975d5fa18bdfc8",
+                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/5cabd210d1dba767b4bfb8ea7aefc061925efe9b",
+                "reference": "5cabd210d1dba767b4bfb8ea7aefc061925efe9b",
                 "shasum": ""
             },
             "require": {
@@ -1168,8 +1168,8 @@
                 "phpstan/phpstan": "^1.10",
                 "phpunit/phpunit": "^9 || ^10.5"
             },
-            "time": "2023-12-14T20:13:02+00:00",
-            "type": "library",
+            "time": "2023-12-17T16:25:36+00:00",
+            "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
                     "includes": [
@@ -1184,9 +1184,18 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "keywords": [
+                "PHPStan",
+                "dev",
+                "phpstan-extension",
+                "static analysis"
+            ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-todo-by/issues",
-                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.1"
+                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.6"
             },
             "funding": [
                 {
