@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a6bbe36fae5f0de9ce32a10b68f7f389",
+    "content-hash": "ff261cbf3951389740eeafd9a2ad9624",
     "packages": [
         {
             "name": "composer/semver",
@@ -1103,16 +1103,16 @@
         },
         {
             "name": "staabm/phpstan-todo-by",
-            "version": "0.1.1",
+            "version": "0.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-todo-by.git",
-                "reference": "da51d05c15eb7ca4e6864c9720975d5fa18bdfc8"
+                "reference": "5cabd210d1dba767b4bfb8ea7aefc061925efe9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/da51d05c15eb7ca4e6864c9720975d5fa18bdfc8",
-                "reference": "da51d05c15eb7ca4e6864c9720975d5fa18bdfc8",
+                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/5cabd210d1dba767b4bfb8ea7aefc061925efe9b",
+                "reference": "5cabd210d1dba767b4bfb8ea7aefc061925efe9b",
                 "shasum": ""
             },
             "require": {
@@ -1122,7 +1122,7 @@
                 "phpstan/phpstan": "^1.10",
                 "phpunit/phpunit": "^9 || ^10.5"
             },
-            "type": "library",
+            "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
                     "includes": [
@@ -1136,9 +1136,18 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "keywords": [
+                "PHPStan",
+                "dev",
+                "phpstan-extension",
+                "static analysis"
+            ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-todo-by/issues",
-                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.1"
+                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.6"
             },
             "funding": [
                 {
@@ -1146,7 +1155,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-14T20:13:02+00:00"
+            "time": "2023-12-17T16:25:36+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
