@@ -8,6 +8,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
 {
     public static $files = array (
         '9b38cf48e83f5d8f60375221cd213eee' => __DIR__ . '/..' . '/phpstan/phpstan/bootstrap.php',
+        'a4ecaeafb8cfb009ad0e052c90355e98' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/functions.php',
         '51fcf4e06c07cc00c920b44bcd900e7a' => __DIR__ . '/..' . '/thecodingmachine/safe/deprecated/apc.php',
         '47f619d9197b36cf5ab70738d7743fe2' => __DIR__ . '/..' . '/thecodingmachine/safe/deprecated/libevent.php',
         'ea6bb8a12ef9b68f6ada99058e530760' => __DIR__ . '/..' . '/thecodingmachine/safe/deprecated/mssql.php',
@@ -110,6 +111,10 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         array (
             'Webmozart\\Assert\\' => 17,
         ),
+        'V' => 
+        array (
+            'Version\\' => 8,
+        ),
         'T' => 
         array (
             'TomasVotruba\\UnusedPublic\\' => 26,
@@ -137,6 +142,10 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         array (
             'Composer\\Semver\\' => 16,
         ),
+        'A' => 
+        array (
+            'Assert\\' => 7,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -151,6 +160,10 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'Version\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nikolaposa/version/src',
         ),
         'TomasVotruba\\UnusedPublic\\' => 
         array (
@@ -205,9 +218,20 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         array (
             0 => __DIR__ . '/..' . '/composer/semver/src',
         ),
+        'Assert\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/beberlei/assert/lib/Assert',
+        ),
     );
 
     public static $classMap = array (
+        'Assert\\Assert' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/Assert.php',
+        'Assert\\Assertion' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/Assertion.php',
+        'Assert\\AssertionChain' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/AssertionChain.php',
+        'Assert\\AssertionFailedException' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/AssertionFailedException.php',
+        'Assert\\InvalidArgumentException' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/InvalidArgumentException.php',
+        'Assert\\LazyAssertion' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/LazyAssertion.php',
+        'Assert\\LazyAssertionException' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/LazyAssertionException.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Composer\\Semver\\Comparator' => __DIR__ . '/..' . '/composer/semver/src/Comparator.php',
@@ -2159,6 +2183,27 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'TomasVotruba\\UnusedPublic\\ValueObject\\MethodCallReference' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/ValueObject/MethodCallReference.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
+        'Version\\Assert\\VersionAssert' => __DIR__ . '/..' . '/nikolaposa/version/src/Assert/VersionAssert.php',
+        'Version\\Assert\\VersionAssertion' => __DIR__ . '/..' . '/nikolaposa/version/src/Assert/VersionAssertion.php',
+        'Version\\Comparison\\Comparator' => __DIR__ . '/..' . '/nikolaposa/version/src/Comparison/Comparator.php',
+        'Version\\Comparison\\Constraint\\CompositeConstraint' => __DIR__ . '/..' . '/nikolaposa/version/src/Comparison/Constraint/CompositeConstraint.php',
+        'Version\\Comparison\\Constraint\\Constraint' => __DIR__ . '/..' . '/nikolaposa/version/src/Comparison/Constraint/Constraint.php',
+        'Version\\Comparison\\Constraint\\OperationConstraint' => __DIR__ . '/..' . '/nikolaposa/version/src/Comparison/Constraint/OperationConstraint.php',
+        'Version\\Comparison\\Constraint\\OperationConstraintParser' => __DIR__ . '/..' . '/nikolaposa/version/src/Comparison/Constraint/OperationConstraintParser.php',
+        'Version\\Comparison\\Exception\\InvalidCompositeConstraint' => __DIR__ . '/..' . '/nikolaposa/version/src/Comparison/Exception/InvalidCompositeConstraint.php',
+        'Version\\Comparison\\Exception\\InvalidConstraintString' => __DIR__ . '/..' . '/nikolaposa/version/src/Comparison/Exception/InvalidConstraintString.php',
+        'Version\\Comparison\\Exception\\InvalidOperationConstraint' => __DIR__ . '/..' . '/nikolaposa/version/src/Comparison/Exception/InvalidOperationConstraint.php',
+        'Version\\Comparison\\Exception\\VersionComparisonException' => __DIR__ . '/..' . '/nikolaposa/version/src/Comparison/Exception/VersionComparisonException.php',
+        'Version\\Comparison\\SemverComparator' => __DIR__ . '/..' . '/nikolaposa/version/src/Comparison/SemverComparator.php',
+        'Version\\Exception\\CollectionIsEmpty' => __DIR__ . '/..' . '/nikolaposa/version/src/Exception/CollectionIsEmpty.php',
+        'Version\\Exception\\InvalidVersion' => __DIR__ . '/..' . '/nikolaposa/version/src/Exception/InvalidVersion.php',
+        'Version\\Exception\\InvalidVersionString' => __DIR__ . '/..' . '/nikolaposa/version/src/Exception/InvalidVersionString.php',
+        'Version\\Exception\\VersionException' => __DIR__ . '/..' . '/nikolaposa/version/src/Exception/VersionException.php',
+        'Version\\Extension\\Build' => __DIR__ . '/..' . '/nikolaposa/version/src/Extension/Build.php',
+        'Version\\Extension\\Extension' => __DIR__ . '/..' . '/nikolaposa/version/src/Extension/Extension.php',
+        'Version\\Extension\\PreRelease' => __DIR__ . '/..' . '/nikolaposa/version/src/Extension/PreRelease.php',
+        'Version\\Version' => __DIR__ . '/..' . '/nikolaposa/version/src/Version.php',
+        'Version\\VersionCollection' => __DIR__ . '/..' . '/nikolaposa/version/src/VersionCollection.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'Webmozart\\Assert\\InvalidArgumentException' => __DIR__ . '/..' . '/webmozart/assert/src/InvalidArgumentException.php',
         'Webmozart\\Assert\\Mixin' => __DIR__ . '/..' . '/webmozart/assert/src/Mixin.php',
@@ -2322,7 +2367,11 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'staabm\\PHPStanDba\\UnresolvableQueryException' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/UnresolvableQueryException.php',
         'staabm\\PHPStanDba\\UnresolvableQueryMixedTypeException' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/UnresolvableQueryMixedTypeException.php',
         'staabm\\PHPStanDba\\UnresolvableQueryStringTypeException' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/UnresolvableQueryStringTypeException.php',
-        'staabm\\PHPStanTodoBy\\TodoByRule' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/TodoByRule.php',
+        'staabm\\PHPStanTodoBy\\GitTagFetcher' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/GitTagFetcher.php',
+        'staabm\\PHPStanTodoBy\\ReferenceVersionFinder' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/ReferenceVersionFinder.php',
+        'staabm\\PHPStanTodoBy\\TagFetcher' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/TagFetcher.php',
+        'staabm\\PHPStanTodoBy\\TodoByDateRule' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/TodoByDateRule.php',
+        'staabm\\PHPStanTodoBy\\TodoByVersionRule' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/TodoByVersionRule.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

@@ -1,6 +1,76 @@
 {
     "packages": [
         {
+            "name": "beberlei/assert",
+            "version": "v3.3.2",
+            "version_normalized": "3.3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/beberlei/assert.git",
+                "reference": "cb70015c04be1baee6f5f5c953703347c0ac1655"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/beberlei/assert/zipball/cb70015c04be1baee6f5f5c953703347c0ac1655",
+                "reference": "cb70015c04be1baee6f5f5c953703347c0ac1655",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ctype": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-simplexml": "*",
+                "php": "^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "*",
+                "phpstan/phpstan": "*",
+                "phpunit/phpunit": ">=6.0.0",
+                "yoast/phpunit-polyfills": "^0.1.0"
+            },
+            "suggest": {
+                "ext-intl": "Needed to allow Assertion::count(), Assertion::isCountable(), Assertion::minCount(), and Assertion::maxCount() to operate on ResourceBundles"
+            },
+            "time": "2021-12-16T21:41:27+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "lib/Assert/functions.php"
+                ],
+                "psr-4": {
+                    "Assert\\": "lib/Assert"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Richard Quadling",
+                    "email": "rquadling@gmail.com",
+                    "role": "Collaborator"
+                }
+            ],
+            "description": "Thin assertion library for input validation in business models.",
+            "keywords": [
+                "assert",
+                "assertion",
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/beberlei/assert/issues",
+                "source": "https://github.com/beberlei/assert/tree/v3.3.2"
+            },
+            "install-path": "../beberlei/assert"
+        },
+        {
             "name": "composer/semver",
             "version": "3.4.0",
             "version_normalized": "3.4.0.0",
@@ -524,6 +594,70 @@
                 "source": "https://github.com/nikic/PHP-Parser/tree/v4.18.0"
             },
             "install-path": "../nikic/php-parser"
+        },
+        {
+            "name": "nikolaposa/version",
+            "version": "4.1.1",
+            "version_normalized": "4.1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nikolaposa/version.git",
+                "reference": "f6bdd64be914940529b843a67335d6386d980cec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nikolaposa/version/zipball/f6bdd64be914940529b843a67335d6386d980cec",
+                "reference": "f6bdd64be914940529b843a67335d6386d980cec",
+                "shasum": ""
+            },
+            "require": {
+                "beberlei/assert": "^3.2",
+                "php": "^7.2 || ^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.17",
+                "phpstan/phpstan": "^0.12.10",
+                "phpstan/phpstan-beberlei-assert": "^0.12.2",
+                "phpstan/phpstan-phpunit": "^0.12.6",
+                "phpunit/phpunit": "^8.0"
+            },
+            "time": "2023-08-04T17:13:40+00:00",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.1.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Version\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nikola Poša",
+                    "email": "posa.nikola@gmail.com",
+                    "homepage": "https://www.nikolaposa.in.rs"
+                }
+            ],
+            "description": "Value Object that represents a SemVer-compliant version number.",
+            "homepage": "https://github.com/nikolaposa/version",
+            "keywords": [
+                "semantic",
+                "semver",
+                "version",
+                "versioning"
+            ],
+            "support": {
+                "issues": "https://github.com/nikolaposa/version/issues",
+                "source": "https://github.com/nikolaposa/version/tree/4.1.1"
+            },
+            "install-path": "../nikolaposa/version"
         },
         {
             "name": "php-parallel-lint/php-parallel-lint",
@@ -1148,27 +1282,30 @@
         },
         {
             "name": "staabm/phpstan-todo-by",
-            "version": "0.1.6",
-            "version_normalized": "0.1.6.0",
+            "version": "0.1.9",
+            "version_normalized": "0.1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-todo-by.git",
-                "reference": "5cabd210d1dba767b4bfb8ea7aefc061925efe9b"
+                "reference": "9285e132fbfcb33bc1c836900fcd4650aeaa8fba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/5cabd210d1dba767b4bfb8ea7aefc061925efe9b",
-                "reference": "5cabd210d1dba767b4bfb8ea7aefc061925efe9b",
+                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/9285e132fbfcb33bc1c836900fcd4650aeaa8fba",
+                "reference": "9285e132fbfcb33bc1c836900fcd4650aeaa8fba",
                 "shasum": ""
             },
             "require": {
+                "composer/semver": "^3.4",
+                "nikolaposa/version": "^4.1",
                 "php": "^7.4 || ^8.0"
             },
             "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.41",
                 "phpstan/phpstan": "^1.10",
                 "phpunit/phpunit": "^9 || ^10.5"
             },
-            "time": "2023-12-17T16:25:36+00:00",
+            "time": "2023-12-19T08:31:54+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1195,7 +1332,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-todo-by/issues",
-                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.6"
+                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.9"
             },
             "funding": [
                 {
