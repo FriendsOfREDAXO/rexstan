@@ -19,7 +19,7 @@ use const PREG_SET_ORDER;
 /**
  * @implements Rule<Node>
  */
-final class TodoByRule implements Rule
+final class TodoByDateRule implements Rule
 {
     private const PATTERN = <<<'REGEXP'
 /
@@ -76,7 +76,10 @@ REGEXP;
              * PREG_OFFSET_CAPTURE: Track where each "todo" comment starts within the whole comment text.
              * PREG_SET_ORDER: Make each value of $matches be structured the same as if from preg_match().
              */
-            if (preg_match_all(self::PATTERN, $text, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER) === FALSE) {
+            if (
+                preg_match_all(self::PATTERN, $text, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER) === false
+                || count($matches) === 0
+            ) {
                 continue;
             }
 
@@ -99,9 +102,9 @@ REGEXP;
                 // Have always present date at the start of the message.
                 // If there is further text, append it.
                 if ($todoText !== '') {
-                    $errorMessage = "Expired on {$date}: {$todoText}";
+                    $errorMessage = "Expired on {$date}: ". rtrim($todoText, '.') .".";
                 } else {
-                    $errorMessage = "Comment expired on {$date}";
+                    $errorMessage = "Comment expired on {$date}.";
                 }
 
                 $wholeMatchStartOffset = $match[0][1];
