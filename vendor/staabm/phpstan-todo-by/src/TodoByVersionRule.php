@@ -3,7 +3,6 @@
 namespace staabm\PHPStanTodoBy;
 
 use Composer\Semver\Comparator;
-use Composer\Semver\VersionParser;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\VirtualNode;
@@ -36,18 +35,29 @@ final class TodoByVersionRule implements Rule
 /ix
 REGEXP;
 
-    private ?string $referenceVersion = null;
     private bool $nonIgnorable;
 
-    private VersionParser $versionParser;
+    private VersionNormalizer $versionNormalizer;
 
     private ReferenceVersionFinder $referenceVersionFinder;
 
-    public function __construct(bool $nonIgnorable, ReferenceVersionFinder $refVersionFinder)
-    {
-        $this->versionParser = new VersionParser();
+    private bool $singleGitRepo;
+
+    /**
+     * @var array<string, string>
+     */
+    private array $referenceVersions = [];
+
+    public function __construct(
+        bool $nonIgnorable,
+        bool $singleGitRepo,
+        ReferenceVersionFinder $refVersionFinder,
+        VersionNormalizer $versionNormalizer
+    ) {
         $this->referenceVersionFinder = $refVersionFinder;
         $this->nonIgnorable = $nonIgnorable;
+        $this->singleGitRepo = $singleGitRepo;
+        $this->versionNormalizer = $versionNormalizer;
     }
 
     public function getNodeType(): string
@@ -86,7 +96,7 @@ REGEXP;
                 continue;
             }
 
-            $referenceVersion = $this->getReferenceVersion();
+            $referenceVersion = $this->getReferenceVersion($scope);
 
             /** @var array<int, array<array{0: string, 1: int}>> $matches */
             foreach ($matches as $match) {
@@ -96,7 +106,7 @@ REGEXP;
 
                 $versionComparator = $this->getVersionComparator($version);
                 $plainVersion = ltrim($version, implode("", self::COMPARATORS));
-                $normalized = $this->versionParser->normalize($plainVersion);
+                $normalized = $this->versionNormalizer->normalize($plainVersion);
 
                 $expired = false;
                 if ($versionComparator === '<') {
@@ -137,13 +147,26 @@ REGEXP;
         return $errors;
     }
 
-    private function getReferenceVersion(): string
+    private function getReferenceVersion(Scope $scope): string
     {
-        if ($this->referenceVersion === null) {
-            // lazy get the version, as it might incur subprocess creation
-            $this->referenceVersion = $this->versionParser->normalize($this->referenceVersionFinder->find());
+        if ($this->singleGitRepo) {
+            // same reference shared by all files
+            $cacheKey = '__todoby__global__';
+            $workingDirectory = null;
+        } else {
+            // reference only shared between files in the same directory
+            // slower but adds support for analyzing codebases with several git clones
+            $cacheKey = $workingDirectory = dirname($scope->getFile());
         }
-        return $this->referenceVersion;
+
+        if (!array_key_exists($cacheKey, $this->referenceVersions)) {
+            // lazy get the version, as it might incur subprocess creation
+            $this->referenceVersions[$cacheKey] = $this->versionNormalizer->normalize(
+                $this->referenceVersionFinder->find($workingDirectory)
+            );
+        }
+
+        return $this->referenceVersions[$cacheKey];
     }
 
     private function getVersionComparator(string $version): ?string

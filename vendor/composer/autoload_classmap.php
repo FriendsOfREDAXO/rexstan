@@ -2153,4 +2153,5 @@ return array(
     'staabm\\PHPStanTodoBy\\TagFetcher' => $vendorDir . '/staabm/phpstan-todo-by/src/TagFetcher.php',
     'staabm\\PHPStanTodoBy\\TodoByDateRule' => $vendorDir . '/staabm/phpstan-todo-by/src/TodoByDateRule.php',
     'staabm\\PHPStanTodoBy\\TodoByVersionRule' => $vendorDir . '/staabm/phpstan-todo-by/src/TodoByVersionRule.php',
+    'staabm\\PHPStanTodoBy\\VersionNormalizer' => $vendorDir . '/staabm/phpstan-todo-by/src/VersionNormalizer.php',
 );

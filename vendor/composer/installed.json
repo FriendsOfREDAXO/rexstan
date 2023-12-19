@@ -1282,17 +1282,17 @@
         },
         {
             "name": "staabm/phpstan-todo-by",
-            "version": "0.1.9",
-            "version_normalized": "0.1.9.0",
+            "version": "0.1.10",
+            "version_normalized": "0.1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-todo-by.git",
-                "reference": "9285e132fbfcb33bc1c836900fcd4650aeaa8fba"
+                "reference": "5450b154dde8a0d6b686b8ff257a894eadb6f857"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/9285e132fbfcb33bc1c836900fcd4650aeaa8fba",
-                "reference": "9285e132fbfcb33bc1c836900fcd4650aeaa8fba",
+                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/5450b154dde8a0d6b686b8ff257a894eadb6f857",
+                "reference": "5450b154dde8a0d6b686b8ff257a894eadb6f857",
                 "shasum": ""
             },
             "require": {
@@ -1305,7 +1305,7 @@
                 "phpstan/phpstan": "^1.10",
                 "phpunit/phpunit": "^9 || ^10.5"
             },
-            "time": "2023-12-19T08:31:54+00:00",
+            "time": "2023-12-19T15:59:24+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1332,7 +1332,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-todo-by/issues",
-                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.9"
+                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.10"
             },
             "funding": [
                 {
