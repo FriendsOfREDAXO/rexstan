@@ -27,7 +27,7 @@ parameters:
         referenceTime: "now+7days"
 
         # "nextMajor", "nextMinor", "nextPatch" or a version string like "1.2.3"
-        referenceVersion: "nextMajor"
+        referenceVersion: "nextMinor"
 
         # whether all files beeing analyzed are contained in the same git repository.
         # If set to false, the git tags are fetched for each directory individually (slower)
