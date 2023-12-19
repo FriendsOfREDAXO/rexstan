@@ -20,6 +20,19 @@ parameters:
             message: 'handling transactions manually is error prone.'
             errorTip: 'Prefer using rex_sql::transactional() instead.'
 
+    todo_by:
+        nonIgnorable: true
+
+        # any strtotime() compatible string
+        referenceTime: "now+7days"
+
+        # "nextMajor", "nextMinor", "nextPatch" or a version string like "1.2.3"
+        referenceVersion: "nextMinor"
+
+        # whether all files beeing analyzed are contained in the same git repository.
+        # If set to false, the git tags are fetched for each directory individually (slower)
+        singleGitRepo: false
+
     ignoreErrors:
         # ignore errors when analyzing rex modules/templates, caused by rex-vars
         -
