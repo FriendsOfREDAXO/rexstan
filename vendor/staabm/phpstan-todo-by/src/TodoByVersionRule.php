@@ -2,6 +2,8 @@
 
 namespace staabm\PHPStanTodoBy;
 
+use Composer\Semver\Comparator;
+use Composer\Semver\VersionParser;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\VirtualNode;
@@ -19,31 +21,32 @@ use const PREG_SET_ORDER;
 /**
  * @implements Rule<Node>
  */
-final class TodoByRule implements Rule
+final class TodoByVersionRule implements Rule
 {
+    private const COMPARATORS = ['<', '>', '='];
+
     private const PATTERN = <<<'REGEXP'
 /
 @?TODO # possible @ prefix
 @?[a-zA-Z0-9_-]*\s* # optional username
 \s*[:-]?\s* # optional colon or hyphen
-(?P<date>\d{4}-\d{2}-\d{2}) # date consisting of YYYY-MM-DD format
+(?P<version>[<>=]+[^\s:\-]+) # version
 \s*[:-]?\s* # optional colon or hyphen
 (?P<comment>.*) # rest of line as comment text
 /ix
 REGEXP;
 
-    private int $now;
+    private ?string $referenceVersion = null;
     private bool $nonIgnorable;
 
-    public function __construct(bool $nonIgnorable, string $referenceTime)
+    private VersionParser $versionParser;
+
+    private ReferenceVersionFinder $referenceVersionFinder;
+
+    public function __construct(bool $nonIgnorable, ReferenceVersionFinder $refVersionFinder)
     {
-        $time =  strtotime($referenceTime);
-
-        if ($time === false) {
-            throw new \RuntimeException('Unable to parse reference time "' . $referenceTime . '"');
-        }
-
-        $this->now = $time;
+        $this->versionParser = new VersionParser();
+        $this->referenceVersionFinder = $refVersionFinder;
         $this->nonIgnorable = $nonIgnorable;
     }
 
@@ -76,32 +79,42 @@ REGEXP;
              * PREG_OFFSET_CAPTURE: Track where each "todo" comment starts within the whole comment text.
              * PREG_SET_ORDER: Make each value of $matches be structured the same as if from preg_match().
              */
-            if (preg_match_all(self::PATTERN, $text, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER) === FALSE) {
+            if (
+                preg_match_all(self::PATTERN, $text, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER) === FALSE
+                || count($matches) === 0
+            ) {
                 continue;
             }
+
+            $referenceVersion = $this->getReferenceVersion();
 
             /** @var array<int, array<array{0: string, 1: int}>> $matches */
             foreach ($matches as $match) {
 
-                $date = $match['date'][0];
+                $version = $match['version'][0];
                 $todoText = trim($match['comment'][0]);
 
-                /**
-                 * strtotime() will parse date-only values with time set to 00:00:00.
-                 * This is fine, because this will count any expiration matching
-                 * the current date as expired, except when ran exactly at 00:00:00.
-                 */
-                if (strtotime($date) > $this->now) {
-                    continue;
+                $versionComparator = $this->getVersionComparator($version);
+                $plainVersion = ltrim($version, implode("", self::COMPARATORS));
+                $normalized = $this->versionParser->normalize($plainVersion);
+
+                $expired = false;
+                if ($versionComparator === '<') {
+                    $expired = Comparator::greaterThanOrEqualTo($referenceVersion, $normalized);
+                } elseif ($versionComparator === '>') {
+                    $expired = Comparator::greaterThan($referenceVersion, $normalized);
                 }
 
+                if (!$expired) {
+                    continue;
+                }
 
                 // Have always present date at the start of the message.
                 // If there is further text, append it.
                 if ($todoText !== '') {
-                    $errorMessage = "Expired on {$date}: {$todoText}";
+                    $errorMessage = "Version requirement {$version} not satisfied: ". rtrim($todoText, '.') .".";
                 } else {
-                    $errorMessage = "Comment expired on {$date}";
+                    $errorMessage = "Version requirement {$version} not satisfied.";
                 }
 
                 $wholeMatchStartOffset = $match[0][1];
@@ -121,5 +134,26 @@ REGEXP;
         }
 
         return $errors;
+    }
+
+    private function getReferenceVersion(): string {
+        if ($this->referenceVersion === null) {
+            // lazy get the version, as it might incur subprocess creation
+            $this->referenceVersion = $this->versionParser->normalize($this->referenceVersionFinder->find());
+        }
+        return $this->referenceVersion;
+    }
+
+    private function getVersionComparator(string $version): ?string {
+        $comparator = null;
+        for($i = 0; $i < strlen($version); $i++) {
+            if (!in_array($version[$i], self::COMPARATORS)) {
+                break;
+            }
+            $comparator .= $version[$i];
+        }
+
+        return $comparator;
+
     }
 }
