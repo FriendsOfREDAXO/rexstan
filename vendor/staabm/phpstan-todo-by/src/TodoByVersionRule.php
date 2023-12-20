@@ -2,20 +2,20 @@
 
 namespace staabm\PHPStanTodoBy;
 
-use Composer\Semver\Comparator;
+use Composer\Semver\VersionParser;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
-use PHPStan\Node\VirtualNode;
 use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleErrorBuilder;
-use PHPStan\ShouldNotHappenException;
-use function preg_match_all;
-use function strtotime;
-use function substr_count;
-use function time;
+use staabm\PHPStanTodoBy\utils\CommentMatcher;
+use staabm\PHPStanTodoBy\utils\ExpiredCommentErrorBuilder;
+use staabm\PHPStanTodoBy\utils\ReferenceVersionFinder;
+use UnexpectedValueException;
+
+use function array_key_exists;
+use function dirname;
+use function in_array;
+use function strlen;
 use function trim;
-use const PREG_OFFSET_CAPTURE;
-use const PREG_SET_ORDER;
 
 /**
  * @implements Rule<Node>
@@ -25,19 +25,16 @@ final class TodoByVersionRule implements Rule
     private const COMPARATORS = ['<', '>', '='];
 
     private const PATTERN = <<<'REGEXP'
-/
-@?TODO # possible @ prefix
-@?[a-zA-Z0-9_-]*\s* # optional username
-\s*[:-]?\s* # optional colon or hyphen
-(?P<version>[<>=]+[^\s:\-]+) # version
-\s*[:-]?\s* # optional colon or hyphen
-(?P<comment>.*) # rest of line as comment text
-/ix
-REGEXP;
-
-    private bool $nonIgnorable;
-
-    private VersionNormalizer $versionNormalizer;
+        {
+            @?TODO # possible @ prefix
+            @?[a-zA-Z0-9_-]*\s* # optional username
+            \s*[:-]?\s* # optional colon or hyphen
+            \s+ # keyword/version separator
+            (?P<version>[<>=]?[0-9]+[^\s:\-]+) # version
+            \s*[:-]?\s* # optional colon or hyphen
+            (?P<comment>.*) # rest of line as comment text
+        }ix
+        REGEXP;
 
     private ReferenceVersionFinder $referenceVersionFinder;
 
@@ -48,16 +45,16 @@ REGEXP;
      */
     private array $referenceVersions = [];
 
+    private ExpiredCommentErrorBuilder $errorBuilder;
+
     public function __construct(
-        bool $nonIgnorable,
         bool $singleGitRepo,
         ReferenceVersionFinder $refVersionFinder,
-        VersionNormalizer $versionNormalizer
+        ExpiredCommentErrorBuilder $errorBuilder
     ) {
         $this->referenceVersionFinder = $refVersionFinder;
-        $this->nonIgnorable = $nonIgnorable;
+        $this->errorBuilder = $errorBuilder;
         $this->singleGitRepo = $singleGitRepo;
-        $this->versionNormalizer = $versionNormalizer;
     }
 
     public function getNodeType(): string
@@ -67,80 +64,56 @@ REGEXP;
 
     public function processNode(Node $node, Scope $scope): array
     {
-        if (
-            $node instanceof VirtualNode
-            || $node instanceof Node\Expr
-        ) {
-            // prevent duplicate errors
-            return [];
-        }
+        $it = CommentMatcher::matchComments($node, self::PATTERN);
 
         $errors = [];
-
-        foreach ($node->getComments() as $comment) {
-
-            $text = $comment->getText();
-
-            /**
-             * PHP doc comments have the entire multi-line comment as the text.
-             * Since this could potentially contain multiple "todo" comments, we need to check all lines.
-             * This works for single line comments as well.
-             *
-             * PREG_OFFSET_CAPTURE: Track where each "todo" comment starts within the whole comment text.
-             * PREG_SET_ORDER: Make each value of $matches be structured the same as if from preg_match().
-             */
-            if (
-                preg_match_all(self::PATTERN, $text, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER) === false
-                || count($matches) === 0
-            ) {
-                continue;
-            }
-
+        $versionParser = new VersionParser();
+        foreach ($it as $comment => $matches) {
             $referenceVersion = $this->getReferenceVersion($scope);
+            $provided = $versionParser->parseConstraints(
+                $referenceVersion
+            );
 
             /** @var array<int, array<array{0: string, 1: int}>> $matches */
             foreach ($matches as $match) {
-
                 $version = $match['version'][0];
                 $todoText = trim($match['comment'][0]);
 
-                $versionComparator = $this->getVersionComparator($version);
-                $plainVersion = ltrim($version, implode("", self::COMPARATORS));
-                $normalized = $this->versionNormalizer->normalize($plainVersion);
-
-                $expired = false;
-                if ($versionComparator === '<') {
-                    $expired = Comparator::greaterThanOrEqualTo($referenceVersion, $normalized);
-                } elseif ($versionComparator === '>') {
-                    $expired = Comparator::greaterThan($referenceVersion, $normalized);
+                // assume a min version constraint, when the comment does not specify a comparator
+                if (null === $this->getVersionComparator($version)) {
+                    $version = '>='. $version;
                 }
 
-                if (!$expired) {
+                try {
+                    $constraint = $versionParser->parseConstraints($version);
+                } catch (UnexpectedValueException $e) {
+                    $errors[] = $this->errorBuilder->buildError(
+                        $comment,
+                        'Invalid version constraint "' . $version . '".',
+                        null,
+                        $match[0][1]
+                    );
+
                     continue;
                 }
 
-                // Have always present date at the start of the message.
+                if (!$provided->matches($constraint)) {
+                    continue;
+                }
+
                 // If there is further text, append it.
-                if ($todoText !== '') {
-                    $errorMessage = "Version requirement {$version} not satisfied: ". rtrim($todoText, '.') .".";
+                if ('' !== $todoText) {
+                    $errorMessage = "Version requirement {$version} satisfied: ". rtrim($todoText, '.') .'.';
                 } else {
-                    $errorMessage = "Version requirement {$version} not satisfied.";
+                    $errorMessage = "Version requirement {$version} satisfied.";
                 }
 
-                $wholeMatchStartOffset = $match[0][1];
-
-                // Count the number of newlines between the start of the whole comment, and the start of the match.
-                $newLines = substr_count($text, "\n", 0, $wholeMatchStartOffset);
-
-                // Set the message line to match the line the comment actually starts on.
-                $messageLine = $comment->getStartLine() + $newLines;
-
-                $errBuilder = RuleErrorBuilder::message($errorMessage)->line($messageLine);
-                if ($this->nonIgnorable) {
-                    $errBuilder->nonIgnorable();
-                }
-                $errBuilder->tip("Calculated reference version is '". $referenceVersion ."'.\n\n   See also:\n https://github.com/staabm/phpstan-todo-by#reference-version");
-                $errors[] = $errBuilder->build();
+                $errors[] = $this->errorBuilder->buildError(
+                    $comment,
+                    $errorMessage,
+                    "Calculated reference version is '". $referenceVersion ."'.\n\n   See also:\n https://github.com/staabm/phpstan-todo-by#reference-version",
+                    $match[0][1]
+                );
             }
         }
 
@@ -160,8 +133,9 @@ REGEXP;
         }
 
         if (!array_key_exists($cacheKey, $this->referenceVersions)) {
+            $versionParser = new VersionParser();
             // lazy get the version, as it might incur subprocess creation
-            $this->referenceVersions[$cacheKey] = $this->versionNormalizer->normalize(
+            $this->referenceVersions[$cacheKey] = $versionParser->normalize(
                 $this->referenceVersionFinder->find($workingDirectory)
             );
         }
@@ -172,7 +146,7 @@ REGEXP;
     private function getVersionComparator(string $version): ?string
     {
         $comparator = null;
-        for($i = 0; $i < strlen($version); $i++) {
+        for ($i = 0; $i < strlen($version); ++$i) {
             if (!in_array($version[$i], self::COMPARATORS)) {
                 break;
             }
@@ -180,6 +154,5 @@ REGEXP;
         }
 
         return $comparator;
-
     }
 }

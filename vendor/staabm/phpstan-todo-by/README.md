@@ -1,6 +1,6 @@
-# phpstan-todo-by: comments with expiration date/version
+# phpstan-todo-by: comments with expiration
 
-PHPStan extension to check for TODO comments with expiration date/version.
+PHPStan extension to check for TODO comments with expiration.
 Inspired by [parker-codes/todo-by](https://github.com/parker-codes/todo_by).
 
 
@@ -14,26 +14,35 @@ function doFoo() {
 
 }
 
-// TODO: <1.0.0 This has to be in the first major release
+// TODO: <1.0.0 This has to be in the first major release of this repo
 function doBar() {
 
 }
 
-```
+// TODO: phpunit/phpunit:5.3 This has to be fixed when updating phpunit to 5.3.x or higher
+function doFooBar() {
 
+}
+
+// TODO: php:>8 drop this polyfill when php 8.x is required
+
+```
 
 ## Supported todo formats
 
-A todo comment can also consist of just a date without any text, like `// @todo 2023-12-14`.
+A todo comment can also consist of just a constraint without any text, like `// @todo 2023-12-14`.
 When a text is given after the date, this text will be picked up for the PHPStan error message.
 
 - the `todo`, `TODO`, `tOdO` keyword is case-insensitive
 - the `todo` keyword can be suffixed or prefixed by a `@` character
 - a username might be included after the `todo@`
 - the comment might be mixed with `:` or `-` characters
-- dateformat is `YYYY-MM-DD`
 - multi line `/* */` and `/** */` comments are supported
-- support for semantic version expiration constraints
+
+The comment can expire by different constraints, examples are:
+- by date with format of `YYYY-MM-DD`
+- by a semantic version constraint matched against the project itself
+- by a semantic version constraint matched against a Composer dependency
 
 see examples of different comment variants which are supported:
 
@@ -44,8 +53,8 @@ see examples of different comment variants which are supported:
 // todo - 2023-12-14 fix it
 // todo 2023-12-14 - fix it
 
-// TODO@lars 2023-12-14 - fix it
-// TODO@lars: 2023-12-14 - fix it
+// TODO@staabm 2023-12-14 - fix it
+// TODO@markus: 2023-12-14 - fix it
 
 /*
  * other text
@@ -56,8 +65,10 @@ see examples of different comment variants which are supported:
 
 // TODO: <1.0.0 This has to be in the first major release
 // TODO >123.4: Must fix this or bump the version
-```
 
+// TODO: phpunit/phpunit:<5 This has to be fixed before updating to phpunit 5.x
+// TODO@markus: phpunit/phpunit:5.3 This has to be fixed when updating phpunit to 5.3.x or higher
+```
 
 ## Configuration
 
@@ -102,6 +113,9 @@ parameters:
 ### Reference version
 
 By default version-todo-comments are checked against `"nextMajor"` version.
+
+_Note: The reference version is not applied to package-version-todo-comments._
+
 This is determined by fetching the latest local available git tag and incrementing the major version number.
 
 This behaviour can be configured with the `referenceVersion` option.
