@@ -2367,12 +2367,14 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'staabm\\PHPStanDba\\UnresolvableQueryException' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/UnresolvableQueryException.php',
         'staabm\\PHPStanDba\\UnresolvableQueryMixedTypeException' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/UnresolvableQueryMixedTypeException.php',
         'staabm\\PHPStanDba\\UnresolvableQueryStringTypeException' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/UnresolvableQueryStringTypeException.php',
-        'staabm\\PHPStanTodoBy\\GitTagFetcher' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/GitTagFetcher.php',
-        'staabm\\PHPStanTodoBy\\ReferenceVersionFinder' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/ReferenceVersionFinder.php',
-        'staabm\\PHPStanTodoBy\\TagFetcher' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/TagFetcher.php',
         'staabm\\PHPStanTodoBy\\TodoByDateRule' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/TodoByDateRule.php',
+        'staabm\\PHPStanTodoBy\\TodoByPackageVersionRule' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/TodoByPackageVersionRule.php',
         'staabm\\PHPStanTodoBy\\TodoByVersionRule' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/TodoByVersionRule.php',
-        'staabm\\PHPStanTodoBy\\VersionNormalizer' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/VersionNormalizer.php',
+        'staabm\\PHPStanTodoBy\\utils\\CommentMatcher' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/CommentMatcher.php',
+        'staabm\\PHPStanTodoBy\\utils\\ExpiredCommentErrorBuilder' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/ExpiredCommentErrorBuilder.php',
+        'staabm\\PHPStanTodoBy\\utils\\GitTagFetcher' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/GitTagFetcher.php',
+        'staabm\\PHPStanTodoBy\\utils\\ReferenceVersionFinder' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/ReferenceVersionFinder.php',
+        'staabm\\PHPStanTodoBy\\utils\\TagFetcher' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/TagFetcher.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

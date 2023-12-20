@@ -1282,20 +1282,21 @@
         },
         {
             "name": "staabm/phpstan-todo-by",
-            "version": "0.1.10",
-            "version_normalized": "0.1.10.0",
+            "version": "0.1.13",
+            "version_normalized": "0.1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-todo-by.git",
-                "reference": "5450b154dde8a0d6b686b8ff257a894eadb6f857"
+                "reference": "565b2643ba7e7871f35cf85f4f813504c5145e8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/5450b154dde8a0d6b686b8ff257a894eadb6f857",
-                "reference": "5450b154dde8a0d6b686b8ff257a894eadb6f857",
+                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/565b2643ba7e7871f35cf85f4f813504c5145e8e",
+                "reference": "565b2643ba7e7871f35cf85f4f813504c5145e8e",
                 "shasum": ""
             },
             "require": {
+                "composer-runtime-api": "^2",
                 "composer/semver": "^3.4",
                 "nikolaposa/version": "^4.1",
                 "php": "^7.4 || ^8.0"
@@ -1303,9 +1304,10 @@
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.41",
                 "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^9 || ^10.5"
+                "phpunit/phpunit": "^9 || ^10.5",
+                "redaxo/php-cs-fixer-config": "^1.0"
             },
-            "time": "2023-12-19T15:59:24+00:00",
+            "time": "2023-12-20T20:13:30+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1332,7 +1334,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-todo-by/issues",
-                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.10"
+                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.13"
             },
             "funding": [
                 {
