@@ -4,7 +4,9 @@ PHPStan extension to check for TODO comments with expiration.
 Inspired by [parker-codes/todo-by](https://github.com/parker-codes/todo_by).
 
 
-## Example:
+## Examples
+
+The main idea is, that comments within the source code will be turned into PHPStan errors when a condition is satisfied, e.g. a date reached, a version met.
 
 ```php
 <?php
@@ -24,9 +26,10 @@ function doFooBar() {
 
 }
 
-// TODO: php:>8 drop this polyfill when php 8.x is required
+// TODO: php:8 drop this polyfill when php 8.x is required
 
 ```
+
 
 ## Supported todo formats
 
@@ -40,9 +43,9 @@ When a text is given after the date, this text will be picked up for the PHPStan
 - multi line `/* */` and `/** */` comments are supported
 
 The comment can expire by different constraints, examples are:
-- by date with format of `YYYY-MM-DD`
-- by a semantic version constraint matched against the project itself
-- by a semantic version constraint matched against a Composer dependency
+- by date with format of `YYYY-MM-DD` matched against the [reference-time](https://github.com/staabm/phpstan-todo-by#reference-time)
+- by a semantic version constraint matched against the projects [reference-version](https://github.com/staabm/phpstan-todo-by#reference-version)
+- by a semantic version constraint matched against a Composer dependency (via `composer.lock`)
 
 see examples of different comment variants which are supported:
 
@@ -113,12 +116,9 @@ parameters:
 ### Reference version
 
 By default version-todo-comments are checked against `"nextMajor"` version.
+It is determined by fetching the latest local available git tag and incrementing the major version number.
 
-_Note: The reference version is not applied to package-version-todo-comments._
-
-This is determined by fetching the latest local available git tag and incrementing the major version number.
-
-This behaviour can be configured with the `referenceVersion` option.
+The behaviour can be configured with the `referenceVersion` option.
 Possible values are `"nextMajor"`, `"nextMinor"`, `"nextPatch"` - which will be computed based on the latest local git tag - or any other version string like `"1.2.3"`.
 
 ```neon
@@ -130,7 +130,12 @@ parameters:
 
 As shown in the "Reference time"-paragraph above, you might even use a env variable instead.
 
-Make sure tags are available within your git clone, e.g. by running `git fetch --tags origin`.
+> [!NOTE]
+> The reference version is not applied to package-version-todo-comments which are matched against `composer.lock` instead.
+
+#### Prerequisite
+
+Make sure tags are available within your git clone, e.g. by running `git fetch --tags origin` - otherwise you are likely running into a 'Could not determine latest git tag' error.
 
 In a GitHub Action this can be done like this:
 
@@ -143,7 +148,7 @@ In a GitHub Action this can be done like this:
 ```
 
 
-### Multiple GIT repository support
+#### Multiple GIT repository support
 
 By default the latest git tag to calculate the reference version is fetched once for all files beeing analyzed.
 
@@ -151,6 +156,7 @@ This behaviour can be configured with the `singleGitRepo` option.
 
 In case you are using git submodules, or the analyzed codebase consists of multiple git repositories,
 set the `singleGitRepo` option to `false` which resolves the reference version for each directory beeing analyzed.
+
 
 
 ## Installation
@@ -174,6 +180,21 @@ includes:
 ```
 
 </details>
+
+## FAQ
+
+### Unexpected '"php" version requirement ">=XXX" satisfied' error
+
+If you get this errors too early, it might be caused by wrong version constraints in your `composer.json` file.
+A `php` version constraint of e.g. `^7.4` means `>=7.4.0 && <= 7.999999.99999`,
+which means comments like `// TODO >7.5` will emit an error.
+
+For the `php` declaration, it is recommended to use a version constraint with a fixed upper bound, e.g. `7.4.*` or `^7 || <8.3`.
+
+### 'Could not determine latest git tag' error
+
+This error is thrown, when no git tags are available within your git clone.
+Fetch git tags, as described in the ["Reference version"-chapter](https://github.com/staabm/phpstan-todo-by#reference-version) above.
 
 ## 💌 Give back some love
 

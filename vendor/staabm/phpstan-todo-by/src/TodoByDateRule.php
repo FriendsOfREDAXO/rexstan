@@ -20,7 +20,7 @@ final class TodoByDateRule implements Rule
     private const PATTERN = <<<'REGEXP'
         {
             @?TODO # possible @ prefix
-            @?[a-zA-Z0-9_-]*\s* # optional username
+            @?[a-zA-Z0-9_-]* # optional username
             \s*[:-]?\s* # optional colon or hyphen
             \s+ # keyword/date separator
             (?P<date>\d{4}-\d{2}-\d{2}) # date consisting of YYYY-MM-DD format
@@ -61,6 +61,19 @@ final class TodoByDateRule implements Rule
             foreach ($matches as $match) {
                 $date = $match['date'][0];
                 $todoText = trim($match['comment'][0]);
+
+                sscanf($date, '%4s-%2s-%2s', $year, $month, $day);
+
+                if (!checkdate((int) $month, (int) $day, (int) $year)) {
+                    $errors[] = $this->errorBuilder->buildError(
+                        $comment,
+                        'Invalid date "'. $date .'". Expected format "YYYY-MM-DD".',
+                        null,
+                        $match[0][1]
+                    );
+
+                    continue;
+                }
 
                 /**
                  * strtotime() will parse date-only values with time set to 00:00:00.
