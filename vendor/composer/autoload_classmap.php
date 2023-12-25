@@ -2154,6 +2154,7 @@ return array(
     'staabm\\PHPStanTodoBy\\utils\\CommentMatcher' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/CommentMatcher.php',
     'staabm\\PHPStanTodoBy\\utils\\ExpiredCommentErrorBuilder' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/ExpiredCommentErrorBuilder.php',
     'staabm\\PHPStanTodoBy\\utils\\GitTagFetcher' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/GitTagFetcher.php',
+    'staabm\\PHPStanTodoBy\\utils\\LatestTagNotFoundException' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/LatestTagNotFoundException.php',
     'staabm\\PHPStanTodoBy\\utils\\ReferenceVersionFinder' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/ReferenceVersionFinder.php',
     'staabm\\PHPStanTodoBy\\utils\\TagFetcher' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/TagFetcher.php',
 );

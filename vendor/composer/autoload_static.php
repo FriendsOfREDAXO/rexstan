@@ -2373,6 +2373,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'staabm\\PHPStanTodoBy\\utils\\CommentMatcher' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/CommentMatcher.php',
         'staabm\\PHPStanTodoBy\\utils\\ExpiredCommentErrorBuilder' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/ExpiredCommentErrorBuilder.php',
         'staabm\\PHPStanTodoBy\\utils\\GitTagFetcher' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/GitTagFetcher.php',
+        'staabm\\PHPStanTodoBy\\utils\\LatestTagNotFoundException' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/LatestTagNotFoundException.php',
         'staabm\\PHPStanTodoBy\\utils\\ReferenceVersionFinder' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/ReferenceVersionFinder.php',
         'staabm\\PHPStanTodoBy\\utils\\TagFetcher' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/TagFetcher.php',
     );
