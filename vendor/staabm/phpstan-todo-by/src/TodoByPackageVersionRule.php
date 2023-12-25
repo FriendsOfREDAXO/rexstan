@@ -10,6 +10,7 @@ use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Internal\ComposerHelper;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleError;
 use staabm\PHPStanTodoBy\utils\CommentMatcher;
 use staabm\PHPStanTodoBy\utils\ExpiredCommentErrorBuilder;
 use UnexpectedValueException;
@@ -28,13 +29,15 @@ final class TodoByPackageVersionRule implements Rule
     private const COMPARATORS = ['<', '>', '='];
 
     // composer package-name pattern from https://getcomposer.org/doc/04-schema.md#name
+    // adjusted because of backtrack limit issues https://github.com/staabm/phpstan-todo-by/issues/44
     private const PATTERN = <<<'REGEXP'
         {
             @?TODO # possible @ prefix
-            @?[a-zA-Z0-9_-]*\s* # optional username
+            @?[a-zA-Z0-9_-]* # optional username
             \s*[:-]?\s* # optional colon or hyphen
-            (?:(?P<package>(php|[a-z0-9]([_.-]?[a-z0-9]+)*/[a-z0-9](([_.]|-{1,2})?[a-z0-9]+)*)):) # "php" or a composer package name, followed by ":"
-            (?P<version>[^\s:\-]+) # version constraint
+            \s+ # keyword/version separator
+            (?:(?P<package>(php|[a-z0-9]([_.-]?[a-z0-9]++)*+/[a-z0-9](([_.]|-{1,2})?[a-z0-9]++)*+)):) # "php" or a composer package name, followed by ":"
+            (?P<version>[<>=]?[^\s:\-]+) # version
             \s*[:-]?\s* # optional colon or hyphen
             (?P<comment>.*) # rest of line as comment text
         }ix
@@ -43,6 +46,11 @@ final class TodoByPackageVersionRule implements Rule
     private ExpiredCommentErrorBuilder $errorBuilder;
 
     private string $workingDirectory;
+
+    /**
+     * @var null|string|RuleError
+     */
+    private $phpPlatformVersion;
 
     public function __construct(
         string $workingDirectory,
@@ -112,36 +120,13 @@ final class TodoByPackageVersionRule implements Rule
      */
     private function satisfiesPhpPlatformPackage(string $package, string $version, Comment $comment, int $wholeMatchStartOffset)
     {
+        $phpPlatformVersion = $this->readPhpPlatformVersion($comment, $wholeMatchStartOffset);
+        if ($phpPlatformVersion instanceof RuleError) {
+            return $phpPlatformVersion;
+        }
+
         $versionParser = new VersionParser();
-
-        /** @phpstan-ignore-next-line missing bc promise */
-        $config = ComposerHelper::getComposerConfig($this->workingDirectory);
-        if (null === $config) {
-            return $this->errorBuilder->buildError(
-                $comment,
-                'Unable to find composer.json in '. $this->workingDirectory,
-                null,
-                $wholeMatchStartOffset
-            );
-        }
-
-        if (
-            !isset($config['require'])
-            || !is_array($config['require'])
-            || !isset($config['require']['php'])
-            || !is_string($config['require']['php'])
-        ) {
-            return $this->errorBuilder->buildError(
-                $comment,
-                'Missing php platform requirement in '. $this->workingDirectory .'/composer.json',
-                null,
-                $wholeMatchStartOffset
-            );
-        }
-
-        $provided = $versionParser->parseConstraints(
-            $config['require']['php']
-        );
+        $provided = $versionParser->parseConstraints($phpPlatformVersion);
 
         try {
             $constraint = $versionParser->parseConstraints($version);
@@ -155,6 +140,50 @@ final class TodoByPackageVersionRule implements Rule
         }
 
         return $provided->matches($constraint);
+    }
+
+    /**
+     * @return RuleError|string
+     */
+    private function readPhpPlatformVersion(Comment $comment, int $wholeMatchStartOffset)
+    {
+        if (null !== $this->phpPlatformVersion) {
+            return $this->phpPlatformVersion;
+        }
+
+        /** @phpstan-ignore-next-line missing bc promise */
+        $config = ComposerHelper::getComposerConfig($this->workingDirectory);
+
+        // fallback to current working directory
+        if (null === $config) {
+            /** @phpstan-ignore-next-line missing bc promise */
+            $config = ComposerHelper::getComposerConfig(getcwd());
+        }
+
+        if (null === $config) {
+            return $this->phpPlatformVersion = $this->errorBuilder->buildError(
+                $comment,
+                'Unable to find composer.json in '. $this->workingDirectory,
+                null,
+                $wholeMatchStartOffset
+            );
+        }
+
+        if (
+            !isset($config['require'])
+            || !is_array($config['require'])
+            || !isset($config['require']['php'])
+            || !is_string($config['require']['php'])
+        ) {
+            return $this->phpPlatformVersion = $this->errorBuilder->buildError(
+                $comment,
+                'Missing php platform requirement in '. $this->workingDirectory .'/composer.json',
+                null,
+                $wholeMatchStartOffset
+            );
+        }
+
+        return $this->phpPlatformVersion = $config['require']['php'];
     }
 
     /**
