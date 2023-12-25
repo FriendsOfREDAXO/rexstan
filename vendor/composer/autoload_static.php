@@ -864,6 +864,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'PHPStan\\Type\\PHPUnit\\MockBuilderDynamicReturnTypeExtension' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/Type/PHPUnit/MockBuilderDynamicReturnTypeExtension.php',
         'PHPStan\\Type\\PHPUnit\\MockObjectDynamicReturnTypeExtension' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/Type/PHPUnit/MockObjectDynamicReturnTypeExtension.php',
         'PHPStan\\Type\\Symfony\\ArgumentTypeSpecifyingExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Type/Symfony/ArgumentTypeSpecifyingExtension.php',
+        'PHPStan\\Type\\Symfony\\CacheInterfaceGetDynamicReturnTypeExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Type/Symfony/CacheInterfaceGetDynamicReturnTypeExtension.php',
         'PHPStan\\Type\\Symfony\\CommandGetHelperDynamicReturnTypeExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Type/Symfony/CommandGetHelperDynamicReturnTypeExtension.php',
         'PHPStan\\Type\\Symfony\\Config\\ArrayNodeDefinitionPrototypeDynamicReturnTypeExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Type/Symfony/Config/ArrayNodeDefinitionPrototypeDynamicReturnTypeExtension.php',
         'PHPStan\\Type\\Symfony\\Config\\PassParentObjectDynamicReturnTypeExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Type/Symfony/Config/PassParentObjectDynamicReturnTypeExtension.php',
