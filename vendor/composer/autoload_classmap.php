@@ -645,6 +645,7 @@ return array(
     'PHPStan\\Type\\PHPUnit\\MockBuilderDynamicReturnTypeExtension' => $vendorDir . '/phpstan/phpstan-phpunit/src/Type/PHPUnit/MockBuilderDynamicReturnTypeExtension.php',
     'PHPStan\\Type\\PHPUnit\\MockObjectDynamicReturnTypeExtension' => $vendorDir . '/phpstan/phpstan-phpunit/src/Type/PHPUnit/MockObjectDynamicReturnTypeExtension.php',
     'PHPStan\\Type\\Symfony\\ArgumentTypeSpecifyingExtension' => $vendorDir . '/phpstan/phpstan-symfony/src/Type/Symfony/ArgumentTypeSpecifyingExtension.php',
+    'PHPStan\\Type\\Symfony\\CacheInterfaceGetDynamicReturnTypeExtension' => $vendorDir . '/phpstan/phpstan-symfony/src/Type/Symfony/CacheInterfaceGetDynamicReturnTypeExtension.php',
     'PHPStan\\Type\\Symfony\\CommandGetHelperDynamicReturnTypeExtension' => $vendorDir . '/phpstan/phpstan-symfony/src/Type/Symfony/CommandGetHelperDynamicReturnTypeExtension.php',
     'PHPStan\\Type\\Symfony\\Config\\ArrayNodeDefinitionPrototypeDynamicReturnTypeExtension' => $vendorDir . '/phpstan/phpstan-symfony/src/Type/Symfony/Config/ArrayNodeDefinitionPrototypeDynamicReturnTypeExtension.php',
     'PHPStan\\Type\\Symfony\\Config\\PassParentObjectDynamicReturnTypeExtension' => $vendorDir . '/phpstan/phpstan-symfony/src/Type/Symfony/Config/PassParentObjectDynamicReturnTypeExtension.php',
