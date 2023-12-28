@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d682a29e4e658f44afef23cce2550f5",
+    "content-hash": "86f66e6214f36865b2297cad59bc01ef",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1231,21 +1231,23 @@
         },
         {
             "name": "staabm/phpstan-todo-by",
-            "version": "0.1.15",
+            "version": "0.1.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-todo-by.git",
-                "reference": "829088bc640d58a61ab630769ea8a0aeb7b0b12a"
+                "reference": "98d37d9dcfbcf1a70bb7a36ecea7c6ca7430c347"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/829088bc640d58a61ab630769ea8a0aeb7b0b12a",
-                "reference": "829088bc640d58a61ab630769ea8a0aeb7b0b12a",
+                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/98d37d9dcfbcf1a70bb7a36ecea7c6ca7430c347",
+                "reference": "98d37d9dcfbcf1a70bb7a36ecea7c6ca7430c347",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2",
                 "composer/semver": "^3.4",
+                "ext-curl": "*",
+                "ext-json": "*",
                 "nikolaposa/version": "^4.1",
                 "php": "^7.4 || ^8.0"
             },
@@ -1282,7 +1284,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-todo-by/issues",
-                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.15"
+                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.16"
             },
             "funding": [
                 {
@@ -1290,7 +1292,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-22T15:39:09+00:00"
+            "time": "2023-12-27T15:47:46+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
