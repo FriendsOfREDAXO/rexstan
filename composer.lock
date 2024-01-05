@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "da44c9e6f4a53cf5e3661d30af3a09fc",
+    "content-hash": "c112e18d7c0e1693b00cc4fc34ccd377",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -980,16 +980,16 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v2.16.1",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "1500f90ff6a705009731cc14e50d4faf2d202bf3"
+                "reference": "69935c9f519cae95e394fbde23ce5f962b2eba2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/1500f90ff6a705009731cc14e50d4faf2d202bf3",
-                "reference": "1500f90ff6a705009731cc14e50d4faf2d202bf3",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/69935c9f519cae95e394fbde23ce5f962b2eba2f",
+                "reference": "69935c9f519cae95e394fbde23ce5f962b2eba2f",
                 "shasum": ""
             },
             "require": {
@@ -1035,7 +1035,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.16.1"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v3.0.0"
             },
             "funding": [
                 {
@@ -1043,7 +1043,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-28T15:29:27+00:00"
+            "time": "2023-12-22T18:15:31+00:00"
         },
         {
             "name": "sqlftw/sqlftw",
