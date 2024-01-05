@@ -2151,6 +2151,7 @@ return array(
     'staabm\\PHPStanDba\\UnresolvableQueryStringTypeException' => $vendorDir . '/staabm/phpstan-dba/src/UnresolvableQueryStringTypeException.php',
     'staabm\\PHPStanTodoBy\\TodoByDateRule' => $vendorDir . '/staabm/phpstan-todo-by/src/TodoByDateRule.php',
     'staabm\\PHPStanTodoBy\\TodoByPackageVersionRule' => $vendorDir . '/staabm/phpstan-todo-by/src/TodoByPackageVersionRule.php',
+    'staabm\\PHPStanTodoBy\\TodoByTicketRule' => $vendorDir . '/staabm/phpstan-todo-by/src/TodoByTicketRule.php',
     'staabm\\PHPStanTodoBy\\TodoByVersionRule' => $vendorDir . '/staabm/phpstan-todo-by/src/TodoByVersionRule.php',
     'staabm\\PHPStanTodoBy\\utils\\CommentMatcher' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/CommentMatcher.php',
     'staabm\\PHPStanTodoBy\\utils\\ExpiredCommentErrorBuilder' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/ExpiredCommentErrorBuilder.php',
@@ -2158,4 +2159,7 @@ return array(
     'staabm\\PHPStanTodoBy\\utils\\LatestTagNotFoundException' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/LatestTagNotFoundException.php',
     'staabm\\PHPStanTodoBy\\utils\\ReferenceVersionFinder' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/ReferenceVersionFinder.php',
     'staabm\\PHPStanTodoBy\\utils\\TagFetcher' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/TagFetcher.php',
+    'staabm\\PHPStanTodoBy\\utils\\TicketStatusFetcher' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/TicketStatusFetcher.php',
+    'staabm\\PHPStanTodoBy\\utils\\jira\\JiraAuthorization' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/jira/JiraAuthorization.php',
+    'staabm\\PHPStanTodoBy\\utils\\jira\\JiraTicketStatusFetcher' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/jira/JiraTicketStatusFetcher.php',
 );

@@ -721,17 +721,17 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.50",
-            "version_normalized": "1.10.50.0",
+            "version": "1.10.51",
+            "version_normalized": "1.10.51.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "06a98513ac72c03e8366b5a0cb00750b487032e4"
+                "reference": "5082fa72dc13944578806ca1196a385818d8b077"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/06a98513ac72c03e8366b5a0cb00750b487032e4",
-                "reference": "06a98513ac72c03e8366b5a0cb00750b487032e4",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/5082fa72dc13944578806ca1196a385818d8b077",
+                "reference": "5082fa72dc13944578806ca1196a385818d8b077",
                 "shasum": ""
             },
             "require": {
@@ -740,7 +740,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2023-12-13T10:59:42+00:00",
+            "time": "2024-01-04T21:16:30+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -1282,32 +1282,34 @@
         },
         {
             "name": "staabm/phpstan-todo-by",
-            "version": "0.1.15",
-            "version_normalized": "0.1.15.0",
+            "version": "0.1.19",
+            "version_normalized": "0.1.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-todo-by.git",
-                "reference": "829088bc640d58a61ab630769ea8a0aeb7b0b12a"
+                "reference": "f0b232f515bd3786316872136300640f57ac0022"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/829088bc640d58a61ab630769ea8a0aeb7b0b12a",
-                "reference": "829088bc640d58a61ab630769ea8a0aeb7b0b12a",
+                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/f0b232f515bd3786316872136300640f57ac0022",
+                "reference": "f0b232f515bd3786316872136300640f57ac0022",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2",
                 "composer/semver": "^3.4",
+                "ext-curl": "*",
+                "ext-json": "*",
                 "nikolaposa/version": "^4.1",
-                "php": "^7.4 || ^8.0"
+                "php": "^7.4 || ^8.0",
+                "phpstan/phpstan": "^1.10"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.41",
-                "phpstan/phpstan": "^1.10",
                 "phpunit/phpunit": "^9 || ^10.5",
                 "redaxo/php-cs-fixer-config": "^1.0"
             },
-            "time": "2023-12-22T15:39:09+00:00",
+            "time": "2024-01-03T17:39:24+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1336,7 +1338,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-todo-by/issues",
-                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.15"
+                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.19"
             },
             "funding": [
                 {
