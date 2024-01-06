@@ -36,7 +36,6 @@ parameters:
         ticket:
             enabled: true
 
-            # one of: jira, github (case-sensitive)
             tracker: github
 
     ignoreErrors:
