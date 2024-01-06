@@ -2373,14 +2373,17 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'staabm\\PHPStanTodoBy\\TodoByTicketRule' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/TodoByTicketRule.php',
         'staabm\\PHPStanTodoBy\\TodoByVersionRule' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/TodoByVersionRule.php',
         'staabm\\PHPStanTodoBy\\utils\\CommentMatcher' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/CommentMatcher.php',
+        'staabm\\PHPStanTodoBy\\utils\\CredentialsHelper' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/CredentialsHelper.php',
         'staabm\\PHPStanTodoBy\\utils\\ExpiredCommentErrorBuilder' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/ExpiredCommentErrorBuilder.php',
         'staabm\\PHPStanTodoBy\\utils\\GitTagFetcher' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/GitTagFetcher.php',
         'staabm\\PHPStanTodoBy\\utils\\LatestTagNotFoundException' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/LatestTagNotFoundException.php',
         'staabm\\PHPStanTodoBy\\utils\\ReferenceVersionFinder' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/ReferenceVersionFinder.php',
         'staabm\\PHPStanTodoBy\\utils\\TagFetcher' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/TagFetcher.php',
-        'staabm\\PHPStanTodoBy\\utils\\TicketStatusFetcher' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/TicketStatusFetcher.php',
-        'staabm\\PHPStanTodoBy\\utils\\jira\\JiraAuthorization' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/jira/JiraAuthorization.php',
-        'staabm\\PHPStanTodoBy\\utils\\jira\\JiraTicketStatusFetcher' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/jira/JiraTicketStatusFetcher.php',
+        'staabm\\PHPStanTodoBy\\utils\\ticket\\GitHubTicketStatusFetcher' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/ticket/GitHubTicketStatusFetcher.php',
+        'staabm\\PHPStanTodoBy\\utils\\ticket\\JiraTicketStatusFetcher' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/ticket/JiraTicketStatusFetcher.php',
+        'staabm\\PHPStanTodoBy\\utils\\ticket\\TicketRuleConfiguration' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/ticket/TicketRuleConfiguration.php',
+        'staabm\\PHPStanTodoBy\\utils\\ticket\\TicketRuleConfigurationFactory' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/ticket/TicketRuleConfigurationFactory.php',
+        'staabm\\PHPStanTodoBy\\utils\\ticket\\TicketStatusFetcher' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/utils/ticket/TicketStatusFetcher.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

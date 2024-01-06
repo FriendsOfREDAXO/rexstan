@@ -1,9 +1,9 @@
 <?php
 
-namespace staabm\PHPStanTodoBy\utils\jira;
+namespace staabm\PHPStanTodoBy\utils\ticket;
 
 use RuntimeException;
-use staabm\PHPStanTodoBy\utils\TicketStatusFetcher;
+use staabm\PHPStanTodoBy\utils\CredentialsHelper;
 
 use function array_key_exists;
 use function is_array;
@@ -14,7 +14,7 @@ final class JiraTicketStatusFetcher implements TicketStatusFetcher
     private const API_VERSION = 2;
 
     private string $host;
-    private string $authorizationHeader;
+    private ?string $authorizationHeader;
 
     /**
      * @var array<string, ?string>
@@ -23,10 +23,10 @@ final class JiraTicketStatusFetcher implements TicketStatusFetcher
 
     public function __construct(string $host, ?string $credentials, ?string $credentialsFilePath)
     {
-        $credentials = JiraAuthorization::getCredentials($credentials, $credentialsFilePath);
+        $credentials = CredentialsHelper::getCredentials($credentials, $credentialsFilePath);
 
         $this->host = $host;
-        $this->authorizationHeader = JiraAuthorization::createAuthorizationHeader($credentials);
+        $this->authorizationHeader = $credentials ? self::createAuthorizationHeader($credentials) : null;
 
         $this->cache = [];
     }
@@ -39,20 +39,29 @@ final class JiraTicketStatusFetcher implements TicketStatusFetcher
 
         $apiVersion = self::API_VERSION;
 
-        $curl = curl_init("{$this->host}/rest/api/$apiVersion/issue/$ticketKey?expand=status");
+        $url = "{$this->host}/rest/api/$apiVersion/issue/$ticketKey?expand=status";
+        $curl = curl_init($url);
         if (!$curl) {
             throw new RuntimeException('Could not initialize cURL connection');
         }
 
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, [
-            "Authorization: $this->authorizationHeader",
-        ]);
+
+        if (null !== $this->authorizationHeader) {
+            curl_setopt($curl, CURLOPT_HTTPHEADER, [
+                "Authorization: $this->authorizationHeader",
+            ]);
+        }
 
         $response = curl_exec($curl);
-        if (!is_string($response) || 200 !== curl_getinfo($curl, CURLINFO_RESPONSE_CODE)) {
-            throw new RuntimeException("Could not fetch ticket's status from Jira");
+
+        if (404 === $responseCode = curl_getinfo($curl, CURLINFO_RESPONSE_CODE)) {
+            return null;
+        }
+
+        if (!is_string($response) || 200 !== $responseCode) {
+            throw new RuntimeException("Could not fetch ticket's status from Jira with url $url");
         }
 
         curl_close($curl);
@@ -60,6 +69,11 @@ final class JiraTicketStatusFetcher implements TicketStatusFetcher
         $data = self::decodeAndValidateResponse($response);
 
         return $this->cache[$ticketKey] = $data['fields']['status']['name'];
+    }
+
+    public static function getKeyPattern(): string
+    {
+        return '[A-Z0-9]+-\d+';
     }
 
     /** @return array{fields: array{status: array{name: string}}} */
@@ -89,6 +103,15 @@ final class JiraTicketStatusFetcher implements TicketStatusFetcher
         }
 
         return $data;
+    }
+
+    private static function createAuthorizationHeader(string $credentials): string
+    {
+        if (str_contains($credentials, ':')) {
+            return 'Basic ' . base64_encode($credentials);
+        }
+
+        return "Bearer $credentials";
     }
 
     /** @return never */

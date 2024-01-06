@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3461a630e511041312abf0439599e66e",
+    "content-hash": "5fac3d80a442cd2e3436aaf97d7202db",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1231,16 +1231,16 @@
         },
         {
             "name": "staabm/phpstan-todo-by",
-            "version": "0.1.19",
+            "version": "0.1.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-todo-by.git",
-                "reference": "f0b232f515bd3786316872136300640f57ac0022"
+                "reference": "93770c16c9a706e556abea47ffc8ec3194e3e1df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/f0b232f515bd3786316872136300640f57ac0022",
-                "reference": "f0b232f515bd3786316872136300640f57ac0022",
+                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/93770c16c9a706e556abea47ffc8ec3194e3e1df",
+                "reference": "93770c16c9a706e556abea47ffc8ec3194e3e1df",
                 "shasum": ""
             },
             "require": {
@@ -1284,7 +1284,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-todo-by/issues",
-                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.19"
+                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.20"
             },
             "funding": [
                 {
@@ -1292,7 +1292,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-03T17:39:24+00:00"
+            "time": "2024-01-06T11:23:17+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
