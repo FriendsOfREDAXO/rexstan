@@ -34,6 +34,18 @@ This might not work on any server, because of security settings.
 
 To optimize the developer experience you should enable REDAXO editor integration.
 
+## Todo Comment expiration
+
+Utilizing [phpstan-todo-by](https://github.com/staabm/phpstan-todo-by) rexstan will support todo comments in your code, with expiration.
+
+Examples:
+
+```php
+// TODO redaxo/redaxo#5860 turns into a phpstan error when the github issue (or pull request) is closed
+// TODO 2021-09-30 turns into a error when todays date is after 2021-09-30
+```
+
+
 ## REDAXO Console
 
 Its possible to run the analysis via the REDAXO console via `php redaxo/bin/console rexstan:analyze` command, which should work in most environments.
