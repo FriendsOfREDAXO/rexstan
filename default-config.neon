@@ -33,6 +33,12 @@ parameters:
         # If set to false, the git tags are fetched for each directory individually (slower)
         singleGitRepo: false
 
+        ticket:
+            enabled: true
+
+            # one of: jira, github (case-sensitive)
+            tracker: github
+
     ignoreErrors:
         # ignore errors when analyzing rex modules/templates, caused by rex-vars
         -
