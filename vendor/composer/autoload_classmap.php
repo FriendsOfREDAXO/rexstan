@@ -2157,6 +2157,7 @@ return array(
     'staabm\\PHPStanTodoBy\\utils\\CredentialsHelper' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/CredentialsHelper.php',
     'staabm\\PHPStanTodoBy\\utils\\ExpiredCommentErrorBuilder' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/ExpiredCommentErrorBuilder.php',
     'staabm\\PHPStanTodoBy\\utils\\GitTagFetcher' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/GitTagFetcher.php',
+    'staabm\\PHPStanTodoBy\\utils\\HttpClient' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/HttpClient.php',
     'staabm\\PHPStanTodoBy\\utils\\LatestTagNotFoundException' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/LatestTagNotFoundException.php',
     'staabm\\PHPStanTodoBy\\utils\\ReferenceVersionFinder' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/ReferenceVersionFinder.php',
     'staabm\\PHPStanTodoBy\\utils\\TagFetcher' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/TagFetcher.php',
@@ -2165,4 +2166,5 @@ return array(
     'staabm\\PHPStanTodoBy\\utils\\ticket\\TicketRuleConfiguration' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/ticket/TicketRuleConfiguration.php',
     'staabm\\PHPStanTodoBy\\utils\\ticket\\TicketRuleConfigurationFactory' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/ticket/TicketRuleConfigurationFactory.php',
     'staabm\\PHPStanTodoBy\\utils\\ticket\\TicketStatusFetcher' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/ticket/TicketStatusFetcher.php',
+    'staabm\\PHPStanTodoBy\\utils\\ticket\\YouTrackTicketStatusFetcher' => $vendorDir . '/staabm/phpstan-todo-by/src/utils/ticket/YouTrackTicketStatusFetcher.php',
 );
