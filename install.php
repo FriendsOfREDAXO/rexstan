@@ -47,11 +47,17 @@ if (method_exists(RexStanSettings::class, 'relativePath')) {
             '    - default-config.neon' . PHP_EOL .
             '    - config/_from-r5_15.neon' . PHP_EOL .
             '    - ' . RexStanSettings::relativePath($userConfigPath, $addon->getPath()). PHP_EOL;
-    } else {
+    } elseif (rex_version::compare(rex::getVersion(), '5.13.0-dev', '>=')) {
         $configFileContent = '# rexstan auto generated file - do not edit, delete, rename'. PHP_EOL . PHP_EOL .
             'includes:'. PHP_EOL .
             '    - default-config.neon' . PHP_EOL .
             '    - config/_up-to-r5_14.neon' . PHP_EOL .
+            '    - ' . RexStanSettings::relativePath($userConfigPath, $addon->getPath()). PHP_EOL;
+    } else {
+        $configFileContent = '# rexstan auto generated file - do not edit, delete, rename'. PHP_EOL . PHP_EOL .
+            'includes:'. PHP_EOL .
+            '    - default-config.neon' . PHP_EOL .
+            '    - config/_up-to-r5_12.neon' . PHP_EOL .
             '    - ' . RexStanSettings::relativePath($userConfigPath, $addon->getPath()). PHP_EOL;
     }
 
