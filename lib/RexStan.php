@@ -50,7 +50,15 @@ final class RexStan
 
         if ($output !== '' && $output[0] === '{') {
             // return the analysis result as an array
-            return json_decode($output, true);
+            $decoded = json_decode($output, true);
+
+            if (json_last_error() != 0) {
+                \rex_logger::factory()->warning("rexstan - invalid json:\n\n". $output);
+
+                throw new Exception('Unable to decode json: '. json_last_error_msg());
+            }
+
+            return $decoded;
         }
 
         if ($output == '') {
