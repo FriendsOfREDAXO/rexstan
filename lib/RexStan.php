@@ -55,7 +55,7 @@ final class RexStan
             if (json_last_error() != 0) {
                 \rex_logger::factory()->warning("rexstan - invalid json:\n\n". $output);
 
-                throw new Exception('Unable to decode json: '. json_last_error_msg());
+                throw new Exception('Unable to decode json: '. json_last_error_msg() ."\n\nSee syslog for details");
             }
 
             return $decoded;
