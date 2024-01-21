@@ -1,0 +1,7 @@
+# config settings required up to redaxo 5.12.*
+
+parameters:
+    scanFiles:
+        - ../../../core/vendor/symfony/polyfill-php80/bootstrap.php
+
+    phpVersion: 70300 # PHP 7.3
