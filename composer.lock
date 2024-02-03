@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c8e7361ef976e39df2342192968bba8c",
+    "content-hash": "9e59bfc3ea9f003b4f50f1f237cca229",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -291,16 +291,16 @@
         },
         {
             "name": "nette/http",
-            "version": "v3.2.3",
+            "version": "v3.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/http.git",
-                "reference": "54d79711ff3a8dfd86201e3bdbdd6972177ea20b"
+                "reference": "d7cc833ee186d5139cde5aab43b39ee7aedd6f22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/http/zipball/54d79711ff3a8dfd86201e3bdbdd6972177ea20b",
-                "reference": "54d79711ff3a8dfd86201e3bdbdd6972177ea20b",
+                "url": "https://api.github.com/repos/nette/http/zipball/d7cc833ee186d5139cde5aab43b39ee7aedd6f22",
+                "reference": "d7cc833ee186d5139cde5aab43b39ee7aedd6f22",
                 "shasum": ""
             },
             "require": {
@@ -319,7 +319,10 @@
                 "tracy/tracy": "^2.8"
             },
             "suggest": {
-                "ext-fileinfo": "to detect type of uploaded files"
+                "ext-fileinfo": "to detect MIME type of uploaded files by Nette\\Http\\FileUpload",
+                "ext-gd": "to use image function in Nette\\Http\\FileUpload",
+                "ext-intl": "to support punycode by Nette\\Http\\Url",
+                "ext-session": "to use Nette\\Http\\Session"
             },
             "type": "library",
             "extra": {
@@ -363,9 +366,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/http/issues",
-                "source": "https://github.com/nette/http/tree/v3.2.3"
+                "source": "https://github.com/nette/http/tree/v3.2.4"
             },
-            "time": "2023-11-02T02:43:54+00:00"
+            "time": "2024-01-30T18:13:43+00:00"
         },
         {
             "name": "nette/neon",
@@ -1231,16 +1234,16 @@
         },
         {
             "name": "staabm/phpstan-todo-by",
-            "version": "0.1.21",
+            "version": "0.1.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-todo-by.git",
-                "reference": "0a3ce2ca5bf0cc5dba0a62fc8790a34d92de4486"
+                "reference": "a197314de3202accae76b63f35681a67ba004b38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/0a3ce2ca5bf0cc5dba0a62fc8790a34d92de4486",
-                "reference": "0a3ce2ca5bf0cc5dba0a62fc8790a34d92de4486",
+                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/a197314de3202accae76b63f35681a67ba004b38",
+                "reference": "a197314de3202accae76b63f35681a67ba004b38",
                 "shasum": ""
             },
             "require": {
@@ -1254,6 +1257,7 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.41",
+                "nikic/php-parser": "^4.0",
                 "phpunit/phpunit": "^9 || ^10.5",
                 "redaxo/php-cs-fixer-config": "^1.0"
             },
@@ -1284,7 +1288,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-todo-by/issues",
-                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.21"
+                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.22"
             },
             "funding": [
                 {
@@ -1292,7 +1296,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-08T20:36:55+00:00"
+            "time": "2024-01-25T15:36:43+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
