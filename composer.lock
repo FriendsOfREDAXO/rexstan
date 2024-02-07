@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9e59bfc3ea9f003b4f50f1f237cca229",
+    "content-hash": "098857ce84bac304bf31de1378bafcdb",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1234,16 +1234,16 @@
         },
         {
             "name": "staabm/phpstan-todo-by",
-            "version": "0.1.22",
+            "version": "0.1.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-todo-by.git",
-                "reference": "a197314de3202accae76b63f35681a67ba004b38"
+                "reference": "02352a34ae7e0ccb3348f3f0e04a562d5b4cb6c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/a197314de3202accae76b63f35681a67ba004b38",
-                "reference": "a197314de3202accae76b63f35681a67ba004b38",
+                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/02352a34ae7e0ccb3348f3f0e04a562d5b4cb6c1",
+                "reference": "02352a34ae7e0ccb3348f3f0e04a562d5b4cb6c1",
                 "shasum": ""
             },
             "require": {
@@ -1288,7 +1288,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-todo-by/issues",
-                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.22"
+                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.23"
             },
             "funding": [
                 {
@@ -1296,20 +1296,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-25T15:36:43+00:00"
+            "time": "2024-02-05T08:51:22+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.28.0",
+            "version": "v1.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "6caa57379c4aec19c0a12a38b59b26487dcfe4b5"
+                "reference": "87b68208d5c1188808dd7839ee1e6c8ec3b02f1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/6caa57379c4aec19c0a12a38b59b26487dcfe4b5",
-                "reference": "6caa57379c4aec19c0a12a38b59b26487dcfe4b5",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/87b68208d5c1188808dd7839ee1e6c8ec3b02f1b",
+                "reference": "87b68208d5c1188808dd7839ee1e6c8ec3b02f1b",
                 "shasum": ""
             },
             "require": {
@@ -1317,9 +1317,6 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-main": "1.28-dev"
-                },
                 "thanks": {
                     "name": "symfony/polyfill",
                     "url": "https://github.com/symfony/polyfill"
@@ -1363,7 +1360,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/v1.28.0"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.29.0"
             },
             "funding": [
                 {
@@ -1379,7 +1376,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-26T09:26:14+00:00"
+            "time": "2024-01-29T20:11:03+00:00"
         },
         {
             "name": "symplify/phpstan-rules",
