@@ -1092,17 +1092,17 @@
         },
         {
             "name": "sqlftw/sqlftw",
-            "version": "v0.1.13",
-            "version_normalized": "0.1.13.0",
+            "version": "v0.1.14",
+            "version_normalized": "0.1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SQLFTW/sqlftw.git",
-                "reference": "3c423710fe7882565e77d2afc1f28aac7acb0305"
+                "reference": "ba4615a4575c3cbc63c9ac06476e92e73cb88e91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SQLFTW/sqlftw/zipball/3c423710fe7882565e77d2afc1f28aac7acb0305",
-                "reference": "3c423710fe7882565e77d2afc1f28aac7acb0305",
+                "url": "https://api.github.com/repos/SQLFTW/sqlftw/zipball/ba4615a4575c3cbc63c9ac06476e92e73cb88e91",
+                "reference": "ba4615a4575c3cbc63c9ac06476e92e73cb88e91",
                 "shasum": ""
             },
             "require": {
@@ -1117,7 +1117,7 @@
                 "phpstan/phpstan-strict-rules": "^1.0",
                 "rector/rector": "0.14.8"
             },
-            "time": "2023-10-31T15:29:04+00:00",
+            "time": "2024-02-08T10:58:26+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1139,7 +1139,7 @@
             "homepage": "https://github.com/sqlftw/sqlftw",
             "support": {
                 "issues": "https://github.com/SQLFTW/sqlftw/issues",
-                "source": "https://github.com/SQLFTW/sqlftw/tree/v0.1.13"
+                "source": "https://github.com/SQLFTW/sqlftw/tree/v0.1.14"
             },
             "install-path": "../sqlftw/sqlftw"
         },
@@ -1285,17 +1285,17 @@
         },
         {
             "name": "staabm/phpstan-todo-by",
-            "version": "0.1.23",
-            "version_normalized": "0.1.23.0",
+            "version": "0.1.25",
+            "version_normalized": "0.1.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-todo-by.git",
-                "reference": "02352a34ae7e0ccb3348f3f0e04a562d5b4cb6c1"
+                "reference": "d79acf78e77683130f176c8f582aebf215562c63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/02352a34ae7e0ccb3348f3f0e04a562d5b4cb6c1",
-                "reference": "02352a34ae7e0ccb3348f3f0e04a562d5b4cb6c1",
+                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/d79acf78e77683130f176c8f582aebf215562c63",
+                "reference": "d79acf78e77683130f176c8f582aebf215562c63",
                 "shasum": ""
             },
             "require": {
@@ -1313,7 +1313,7 @@
                 "phpunit/phpunit": "^9 || ^10.5",
                 "redaxo/php-cs-fixer-config": "^1.0"
             },
-            "time": "2024-02-05T08:51:22+00:00",
+            "time": "2024-02-12T18:37:56+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1342,7 +1342,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-todo-by/issues",
-                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.23"
+                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.25"
             },
             "funding": [
                 {
@@ -1437,17 +1437,17 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "12.4.7",
-            "version_normalized": "12.4.7.0",
+            "version": "12.4.8",
+            "version_normalized": "12.4.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "7ebbcf2883c5e5ee3807c6580f7a9865970e83b7"
+                "reference": "393656aaf9fd09d9dc40d658c57ef222dd1f082d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/7ebbcf2883c5e5ee3807c6580f7a9865970e83b7",
-                "reference": "7ebbcf2883c5e5ee3807c6580f7a9865970e83b7",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/393656aaf9fd09d9dc40d658c57ef222dd1f082d",
+                "reference": "393656aaf9fd09d9dc40d658c57ef222dd1f082d",
                 "shasum": ""
             },
             "require": {
@@ -1457,7 +1457,7 @@
                 "phpstan/phpstan": "^1.10.30",
                 "webmozart/assert": "^1.11"
             },
-            "time": "2024-01-17T11:30:56+00:00",
+            "time": "2024-02-09T21:23:31+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1479,7 +1479,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/12.4.7"
+                "source": "https://github.com/symplify/phpstan-rules/tree/12.4.8"
             },
             "funding": [
                 {

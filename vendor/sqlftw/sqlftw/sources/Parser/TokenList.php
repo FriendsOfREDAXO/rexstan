@@ -55,6 +55,7 @@ use function is_numeric;
 use function is_scalar;
 use function ltrim;
 use function mb_strlen;
+use function min;
 use function preg_match;
 use function rtrim;
 use function strlen;
@@ -303,7 +304,7 @@ class TokenList
         }
 
         // do not reset trailing delimiter on next run
-        $this->position = $n + 1; // @phpstan-ignore-line $n is always defined
+        $this->position = min($n + 1, count($this->tokens)); // @phpstan-ignore-line $n is always defined
 
         return true;
     }

@@ -2380,6 +2380,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'staabm\\PHPStanDba\\UnresolvableQueryStringTypeException' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/UnresolvableQueryStringTypeException.php',
         'staabm\\PHPStanTodoBy\\TodoByDateRule' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/TodoByDateRule.php',
         'staabm\\PHPStanTodoBy\\TodoByPackageVersionRule' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/TodoByPackageVersionRule.php',
+        'staabm\\PHPStanTodoBy\\TodoBySymfonyDeprecationRule' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/TodoBySymfonyDeprecationRule.php',
         'staabm\\PHPStanTodoBy\\TodoByTicketCollector' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/TodoByTicketCollector.php',
         'staabm\\PHPStanTodoBy\\TodoByTicketRule' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/TodoByTicketRule.php',
         'staabm\\PHPStanTodoBy\\TodoByVersionRule' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/TodoByVersionRule.php',
