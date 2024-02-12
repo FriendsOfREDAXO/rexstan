@@ -2161,6 +2161,7 @@ return array(
     'staabm\\PHPStanDba\\UnresolvableQueryStringTypeException' => $vendorDir . '/staabm/phpstan-dba/src/UnresolvableQueryStringTypeException.php',
     'staabm\\PHPStanTodoBy\\TodoByDateRule' => $vendorDir . '/staabm/phpstan-todo-by/src/TodoByDateRule.php',
     'staabm\\PHPStanTodoBy\\TodoByPackageVersionRule' => $vendorDir . '/staabm/phpstan-todo-by/src/TodoByPackageVersionRule.php',
+    'staabm\\PHPStanTodoBy\\TodoBySymfonyDeprecationRule' => $vendorDir . '/staabm/phpstan-todo-by/src/TodoBySymfonyDeprecationRule.php',
     'staabm\\PHPStanTodoBy\\TodoByTicketCollector' => $vendorDir . '/staabm/phpstan-todo-by/src/TodoByTicketCollector.php',
     'staabm\\PHPStanTodoBy\\TodoByTicketRule' => $vendorDir . '/staabm/phpstan-todo-by/src/TodoByTicketRule.php',
     'staabm\\PHPStanTodoBy\\TodoByVersionRule' => $vendorDir . '/staabm/phpstan-todo-by/src/TodoByVersionRule.php',
