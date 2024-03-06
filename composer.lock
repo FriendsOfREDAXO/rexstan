@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d9092b9c9e39219b41b09983dc3876e",
+    "content-hash": "251d295e2d78979be289c40f6722eced",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -523,62 +523,6 @@
                 "source": "https://github.com/nette/utils/tree/v3.2.10"
             },
             "time": "2023-07-30T15:38:18+00:00"
-        },
-        {
-            "name": "nikic/php-parser",
-            "version": "v4.18.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "1bcbb2179f97633e98bbbc87044ee2611c7d7999"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/1bcbb2179f97633e98bbbc87044ee2611c7d7999",
-                "reference": "1bcbb2179f97633e98bbbc87044ee2611c7d7999",
-                "shasum": ""
-            },
-            "require": {
-                "ext-tokenizer": "*",
-                "php": ">=7.0"
-            },
-            "require-dev": {
-                "ircmaxell/php-yacc": "^0.0.7",
-                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0 || ^9.0"
-            },
-            "bin": [
-                "bin/php-parse"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.9-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PhpParser\\": "lib/PhpParser"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nikita Popov"
-                }
-            ],
-            "description": "A PHP parser written in PHP",
-            "keywords": [
-                "parser",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.18.0"
-            },
-            "time": "2023-12-10T21:03:43+00:00"
         },
         {
             "name": "nikolaposa/version",
@@ -1380,21 +1324,20 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "12.4.8",
+            "version": "12.4.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "393656aaf9fd09d9dc40d658c57ef222dd1f082d"
+                "reference": "14b2f776414109648ddc1680a6bab0c0641e4d3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/393656aaf9fd09d9dc40d658c57ef222dd1f082d",
-                "reference": "393656aaf9fd09d9dc40d658c57ef222dd1f082d",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/14b2f776414109648ddc1680a6bab0c0641e4d3a",
+                "reference": "14b2f776414109648ddc1680a6bab0c0641e4d3a",
                 "shasum": ""
             },
             "require": {
-                "nette/utils": "^3.2 || ^4.0",
-                "nikic/php-parser": "^4.17.1",
+                "nette/utils": "^3.2.9 || ^4.0",
                 "php": "^7.2|^8.0",
                 "phpstan/phpstan": "^1.10.30",
                 "webmozart/assert": "^1.11"
@@ -1419,7 +1362,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/12.4.8"
+                "source": "https://github.com/symplify/phpstan-rules/tree/12.4.9"
             },
             "funding": [
                 {
@@ -1431,7 +1374,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-09T21:23:31+00:00"
+            "time": "2024-03-05T15:24:56+00:00"
         },
         {
             "name": "thecodingmachine/phpstan-safe-rule",
