@@ -19,7 +19,7 @@ class IndexType extends SqlEnum
 {
 
     public const PRIMARY = Keyword::PRIMARY . ' ' . Keyword::KEY;
-    public const UNIQUE = Keyword::UNIQUE . ' ' . Keyword::KEY; // or INDEX
+    public const UNIQUE = Keyword::UNIQUE . ' ' . Keyword::INDEX;
     public const INDEX = Keyword::INDEX; // or KEY
     public const FULLTEXT = Keyword::FULLTEXT . ' ' . Keyword::INDEX; // or KEY
     public const SPATIAL = Keyword::SPATIAL . ' ' . Keyword::INDEX; // or KEY
@@ -28,12 +28,12 @@ class IndexType extends SqlEnum
     {
         // normalize KEY vs INDEX
         $value = strtoupper($value);
-        if ($value === Keyword::UNIQUE . ' ' . Keyword::INDEX) {
+        if ($value === Keyword::UNIQUE . ' ' . Keyword::KEY) {
             $value = self::UNIQUE;
         } elseif ($value === Keyword::FULLTEXT . ' ' . Keyword::KEY) {
             $value = self::FULLTEXT;
         } elseif ($value === Keyword::SPATIAL . ' ' . Keyword::KEY) {
-            $value = self::FULLTEXT;
+            $value = self::SPATIAL;
         } elseif ($value === Keyword::KEY) {
             $value = self::INDEX;
         }

@@ -104,7 +104,7 @@ class Parser
      */
     public function parse(string $sql, bool $prepared = false): Generator
     {
-        $this->tokenListGenerator = $this->lexer->tokenizeLists($sql);
+        $this->tokenListGenerator = $this->lexer->tokenize($sql);
         $first = true;
 
         // next() cannot be called after current(), because lexing depends on result of parsing current()

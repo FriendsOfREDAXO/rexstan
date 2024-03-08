@@ -52,13 +52,17 @@ final class MethodCallArgTypesCollector implements Collector
             return null;
         }
 
+        $classMethodReference = $this->createClassMethodReference($classMethodCallReference);
+
+        $stringArgTypesString = $this->collectorMetadataPrinter->printArgTypesAsString($node, $scope);
+        return [$classMethodReference, $stringArgTypesString];
+    }
+
+    private function createClassMethodReference(MethodCallReference $classMethodCallReference): string
+    {
         $className = $classMethodCallReference->getClass();
         $methodName = $classMethodCallReference->getMethod();
 
-        $classMethodReference = $className . '::' . $methodName;
-
-        $stringArgTypesString = $this->collectorMetadataPrinter->printArgTypesAsString($node, $scope);
-
-        return [$classMethodReference, $stringArgTypesString];
+        return $className . '::' . $methodName;
     }
 }
