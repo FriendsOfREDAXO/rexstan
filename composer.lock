@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0292b41563250ac0884dcb6bebabf3bb",
+    "content-hash": "0d13f30cde037bc22884407ba89a901d",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -927,21 +927,21 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v2.16.1",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "1500f90ff6a705009731cc14e50d4faf2d202bf3"
+                "reference": "d0b3d66d53fe581889c6f5927cacc5aed8249c34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/1500f90ff6a705009731cc14e50d4faf2d202bf3",
-                "reference": "1500f90ff6a705009731cc14e50d4faf2d202bf3",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/d0b3d66d53fe581889c6f5927cacc5aed8249c34",
+                "reference": "d0b3d66d53fe581889c6f5927cacc5aed8249c34",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2 || ^8.0",
-                "phpstan/phpstan": "^1.10"
+                "phpstan/phpstan": "^1.10.52"
             },
             "require-dev": {
                 "nette/neon": "^3.2",
@@ -949,8 +949,7 @@
                 "php-parallel-lint/php-console-highlighter": "^1.0",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
                 "phpunit/phpunit": "^8.5 || ^10.1",
-                "spaze/coding-standard": "^1.7",
-                "symfony/polyfill-php80": "^1.27"
+                "spaze/coding-standard": "^1.7"
             },
             "type": "phpstan-extension",
             "extra": {
@@ -982,7 +981,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.16.1"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v3.1.2"
             },
             "funding": [
                 {
@@ -990,7 +989,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-28T15:29:27+00:00"
+            "time": "2024-02-13T18:26:25+00:00"
         },
         {
             "name": "sqlftw/sqlftw",
