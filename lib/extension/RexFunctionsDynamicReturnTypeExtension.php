@@ -78,7 +78,8 @@ final class RexFunctionsDynamicReturnTypeExtension implements DynamicFunctionRet
         $results = [];
         if (count($args) >= 3) {
             $defaultArgType = $scope->getType($args[2]->value);
-            if (!$defaultArgType instanceof ConstantStringType || $defaultArgType->getValue() !== '') {
+            $defaultArgTypeStrings = $defaultArgType->getConstantStrings();
+            if (count($defaultArgTypeStrings) !== 1 || $defaultArgTypeStrings[0]->getValue() !== '') {
                 $results[] = $defaultArgType;
             }
         }
