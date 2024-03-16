@@ -7,6 +7,7 @@ namespace rexstan;
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Expr\StaticCall;
+use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\FunctionReflection;
 use PHPStan\Reflection\MethodReflection;
@@ -74,14 +75,17 @@ final class RexFunctionsDynamicReturnTypeExtension implements DynamicFunctionRet
             return null;
         }
 
-        $defaultArgType = new ConstantStringType('');
+        $results = [];
         if (count($args) >= 3) {
             $defaultArgType = $scope->getType($args[2]->value);
+            $defaultArgTypeStrings = $defaultArgType->getConstantStrings();
+            if (count($defaultArgTypeStrings) !== 1 || $defaultArgTypeStrings[0]->getValue() !== '') {
+                $results[] = $defaultArgType;
+            }
         }
 
         $typeStrings = $scope->getType($args[1]->value)->getConstantStrings();
         if (count($typeStrings) > 0) {
-            $results = [];
             foreach ($typeStrings as $typeString) {
                 $resolvedType = $this->resolveTypeFromString($typeString->getValue());
                 if ($resolvedType === null) {
@@ -91,7 +95,7 @@ final class RexFunctionsDynamicReturnTypeExtension implements DynamicFunctionRet
                 $results[] = $resolvedType;
             }
 
-            return TypeCombinator::union($defaultArgType, ...$results);
+            return TypeCombinator::union(...$results);
         }
 
         return null;
