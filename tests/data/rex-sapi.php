@@ -44,4 +44,5 @@ function doQux()
     assertType('int', rex_get('HTTP_REFERER', 'int', 1));
     assertType('int|null', rex_get('HTTP_REFERER', 'int', null));
     assertType("'foo'|int", rex_get('HTTP_REFERER', 'int', 'foo'));
+    assertType("'foo'|int", rex_get('HTTP_REFERER', 'int', rand(0,1) ? 'foo' : ''));
 }
