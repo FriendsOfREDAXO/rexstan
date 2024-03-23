@@ -20,18 +20,27 @@ final class Configuration
         $this->parameters = $parameters;
     }
 
-    public function getRequiredPropertyTypeLevel(): int
+    /**
+     * @return float|int
+     */
+    public function getRequiredPropertyTypeLevel()
     {
-        return $this->parameters['property_type'];
+        return $this->parameters['property'] ?? $this->parameters['property_type'];
     }
 
-    public function getRequiredParamTypeLevel(): int
+    /**
+     * @return float|int
+     */
+    public function getRequiredParamTypeLevel()
     {
-        return $this->parameters['param_type'];
+        return $this->parameters['param'] ?? $this->parameters['param_type'];
     }
 
-    public function getRequiredReturnTypeLevel(): int
+    /**
+     * @return float|int
+     */
+    public function getRequiredReturnTypeLevel()
     {
-        return $this->parameters['return_type'];
+        return $this->parameters['return'] ?? $this->parameters['return_type'];
     }
 }

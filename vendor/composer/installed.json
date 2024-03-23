@@ -665,17 +665,17 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.62",
-            "version_normalized": "1.10.62.0",
+            "version": "1.10.65",
+            "version_normalized": "1.10.65.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "cd5c8a1660ed3540b211407c77abf4af193a6af9"
+                "reference": "3c657d057a0b7ecae19cb12db446bbc99d8839c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/cd5c8a1660ed3540b211407c77abf4af193a6af9",
-                "reference": "cd5c8a1660ed3540b211407c77abf4af193a6af9",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/3c657d057a0b7ecae19cb12db446bbc99d8839c6",
+                "reference": "3c657d057a0b7ecae19cb12db446bbc99d8839c6",
                 "shasum": ""
             },
             "require": {
@@ -684,7 +684,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2024-03-13T12:27:20+00:00",
+            "time": "2024-03-23T10:30:26+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -888,23 +888,23 @@
         },
         {
             "name": "phpstan/phpstan-symfony",
-            "version": "1.3.8",
-            "version_normalized": "1.3.8.0",
+            "version": "1.3.9",
+            "version_normalized": "1.3.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-symfony.git",
-                "reference": "d8a0bc03a68d95288b6471c37d435647fbdaff1a"
+                "reference": "a32bc86da24495025d7aafd1ba62444d4a364a98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/d8a0bc03a68d95288b6471c37d435647fbdaff1a",
-                "reference": "d8a0bc03a68d95288b6471c37d435647fbdaff1a",
+                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/a32bc86da24495025d7aafd1ba62444d4a364a98",
+                "reference": "a32bc86da24495025d7aafd1ba62444d4a364a98",
                 "shasum": ""
             },
             "require": {
                 "ext-simplexml": "*",
                 "php": "^7.2 || ^8.0",
-                "phpstan/phpstan": "^1.10.36"
+                "phpstan/phpstan": "^1.10.62"
             },
             "conflict": {
                 "symfony/framework-bundle": "<3.0"
@@ -927,7 +927,7 @@
                 "symfony/serializer": "^5.4",
                 "symfony/service-contracts": "^2.2.0"
             },
-            "time": "2024-03-05T16:33:08+00:00",
+            "time": "2024-03-16T16:50:20+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -957,7 +957,7 @@
             "description": "Symfony Framework extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-symfony/issues",
-                "source": "https://github.com/phpstan/phpstan-symfony/tree/1.3.8"
+                "source": "https://github.com/phpstan/phpstan-symfony/tree/1.3.9"
             },
             "install-path": "../phpstan/phpstan-symfony"
         },
@@ -1692,17 +1692,17 @@
         },
         {
             "name": "tomasvotruba/type-coverage",
-            "version": "0.2.1",
-            "version_normalized": "0.2.1.0",
+            "version": "0.2.5",
+            "version_normalized": "0.2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/type-coverage.git",
-                "reference": "a152ac431b2312ec173f3093a628ff988b7ed10f"
+                "reference": "3d463bc8a894d425eab837cb0f49d2c605068740"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/a152ac431b2312ec173f3093a628ff988b7ed10f",
-                "reference": "a152ac431b2312ec173f3093a628ff988b7ed10f",
+                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/3d463bc8a894d425eab837cb0f49d2c605068740",
+                "reference": "3d463bc8a894d425eab837cb0f49d2c605068740",
                 "shasum": ""
             },
             "require": {
@@ -1710,7 +1710,7 @@
                 "php": "^7.2 || ^8.0",
                 "phpstan/phpstan": "^1.9.3"
             },
-            "time": "2023-08-27T10:33:51+00:00",
+            "time": "2024-03-16T10:07:54+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1736,7 +1736,7 @@
             ],
             "support": {
                 "issues": "https://github.com/TomasVotruba/type-coverage/issues",
-                "source": "https://github.com/TomasVotruba/type-coverage/tree/0.2.1"
+                "source": "https://github.com/TomasVotruba/type-coverage/tree/0.2.5"
             },
             "funding": [
                 {
@@ -1752,17 +1752,17 @@
         },
         {
             "name": "tomasvotruba/unused-public",
-            "version": "0.3.5",
-            "version_normalized": "0.3.5.0",
+            "version": "0.3.6",
+            "version_normalized": "0.3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/unused-public.git",
-                "reference": "8b603471fe55d1082aa6201471c6b76146c27cdc"
+                "reference": "995a1425abc319306ff490bda82d88d11375906d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/8b603471fe55d1082aa6201471c6b76146c27cdc",
-                "reference": "8b603471fe55d1082aa6201471c6b76146c27cdc",
+                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/995a1425abc319306ff490bda82d88d11375906d",
+                "reference": "995a1425abc319306ff490bda82d88d11375906d",
                 "shasum": ""
             },
             "require": {
@@ -1770,7 +1770,7 @@
                 "phpstan/phpstan": "^1.10.19",
                 "webmozart/assert": "^1.11"
             },
-            "time": "2023-09-21T20:46:14+00:00",
+            "time": "2024-03-23T10:09:11+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1796,7 +1796,7 @@
             ],
             "support": {
                 "issues": "https://github.com/TomasVotruba/unused-public/issues",
-                "source": "https://github.com/TomasVotruba/unused-public/tree/0.3.5"
+                "source": "https://github.com/TomasVotruba/unused-public/tree/0.3.6"
             },
             "funding": [
                 {
