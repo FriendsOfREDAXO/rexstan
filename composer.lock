@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "98c20516b2d523546a79947b00cdf793",
+    "content-hash": "b95c411acdfc1ba241e4417057942e85",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -587,16 +587,16 @@
         },
         {
             "name": "php-parallel-lint/php-parallel-lint",
-            "version": "v1.3.2",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-parallel-lint/PHP-Parallel-Lint.git",
-                "reference": "6483c9832e71973ed29cf71bd6b3f4fde438a9de"
+                "reference": "6db563514f27e19595a19f45a4bf757b6401194e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-parallel-lint/PHP-Parallel-Lint/zipball/6483c9832e71973ed29cf71bd6b3f4fde438a9de",
-                "reference": "6483c9832e71973ed29cf71bd6b3f4fde438a9de",
+                "url": "https://api.github.com/repos/php-parallel-lint/PHP-Parallel-Lint/zipball/6db563514f27e19595a19f45a4bf757b6401194e",
+                "reference": "6db563514f27e19595a19f45a4bf757b6401194e",
                 "shasum": ""
             },
             "require": {
@@ -634,13 +634,17 @@
                     "email": "ahoj@jakubonderka.cz"
                 }
             ],
-            "description": "This tool check syntax of PHP files about 20x faster than serial check.",
+            "description": "This tool checks the syntax of PHP files about 20x faster than serial check.",
             "homepage": "https://github.com/php-parallel-lint/PHP-Parallel-Lint",
+            "keywords": [
+                "lint",
+                "static analysis"
+            ],
             "support": {
                 "issues": "https://github.com/php-parallel-lint/PHP-Parallel-Lint/issues",
-                "source": "https://github.com/php-parallel-lint/PHP-Parallel-Lint/tree/v1.3.2"
+                "source": "https://github.com/php-parallel-lint/PHP-Parallel-Lint/tree/v1.4.0"
             },
-            "time": "2022-02-21T12:50:22+00:00"
+            "time": "2024-03-27T12:14:49+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -1683,16 +1687,16 @@
         },
         {
             "name": "tomasvotruba/unused-public",
-            "version": "0.3.6",
+            "version": "0.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/unused-public.git",
-                "reference": "995a1425abc319306ff490bda82d88d11375906d"
+                "reference": "354d22c3fb9b062ad79a19cf8724030cb1503b62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/995a1425abc319306ff490bda82d88d11375906d",
-                "reference": "995a1425abc319306ff490bda82d88d11375906d",
+                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/354d22c3fb9b062ad79a19cf8724030cb1503b62",
+                "reference": "354d22c3fb9b062ad79a19cf8724030cb1503b62",
                 "shasum": ""
             },
             "require": {
@@ -1724,7 +1728,7 @@
             ],
             "support": {
                 "issues": "https://github.com/TomasVotruba/unused-public/issues",
-                "source": "https://github.com/TomasVotruba/unused-public/tree/0.3.6"
+                "source": "https://github.com/TomasVotruba/unused-public/tree/0.3.7"
             },
             "funding": [
                 {
@@ -1736,7 +1740,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-23T10:09:11+00:00"
+            "time": "2024-03-27T14:29:04+00:00"
         },
         {
             "name": "webmozart/assert",
