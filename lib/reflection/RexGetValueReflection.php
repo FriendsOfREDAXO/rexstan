@@ -62,9 +62,13 @@ final class RexGetValueReflection
 
         $valueTypes = [];
         foreach ($names as $constantName) {
-            if ($resultType->isConstantArray()->yes() && $resultType->hasOffsetValueType($constantName)->yes()) {
-                $valueTypes[] = $resultType->getOffsetValueType($constantName);
+            if (!$resultType->isConstantArray()->yes()) {
+                continue;
             }
+            if (!$resultType->hasOffsetValueType($constantName)->yes()) {
+                continue;
+            }
+            $valueTypes[] = $resultType->getOffsetValueType($constantName);
         }
 
         if (count($valueTypes) === 0) {
