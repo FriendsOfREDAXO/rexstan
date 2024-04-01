@@ -94,7 +94,7 @@ if (
             echo 'In den <a href="'. rex_url::backendPage('rexstan/settings') .'">Einstellungen</a>, solltest du jetzt das nächste Level anvisieren.';
             if (RexStanUserConfig::isBaselineEnabled() && $baselineCount > 0) {
                 $baselineFile = RexStanSettings::getAnalysisBaselinePath();
-                $url = rex_editor::factory()->getUrl($baselineFile, 0);
+                $url = \rex_editor::factory()->getUrl($baselineFile, 0);
 
                 $baselineHint = 'Baseline '. $baselineCount .' Probleme ignoriert werden';
                 if ($url !== null) {
@@ -121,7 +121,7 @@ if (
     foreach ($phpstanResult['files'] as $file => $fileResult) {
         $linkFile = preg_replace('/\s\(in context.*?$/', '', $file);
         if ($linkFile === null) {
-            throw new PHPStan\ShouldNotHappenException();
+            throw new \PHPStan\ShouldNotHappenException();
         }
 
         echo RexResultsRenderer::renderFileBlock($linkFile, $fileResult['messages']);
