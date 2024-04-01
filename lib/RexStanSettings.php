@@ -216,7 +216,7 @@ final class RexStanSettings
         return $output;
     }
 
-    public static function relativePath(string $path, string $base = null): string
+    public static function relativePath(string $path, ?string $base = null): string
     {
         $relativeAddonPath = rex_path::relative($base ?? rex_path::addonData('rexstan'));
         $prefix = str_repeat('..' . DIRECTORY_SEPARATOR, substr_count($relativeAddonPath, DIRECTORY_SEPARATOR));

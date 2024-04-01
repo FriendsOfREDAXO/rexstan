@@ -7,7 +7,7 @@ $result = RexStan::analyzeSummaryBaseline();
 $settingsUrl = rex_url::backendPage('rexstan/settings');
 
 if ($result === null) {
-    throw new \Exception('Could not analyze baseline');
+    throw new Exception('Could not analyze baseline');
 }
 
 $contentErrors = '

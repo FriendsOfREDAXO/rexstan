@@ -57,7 +57,7 @@ QueryReflection::setupReflector(
 $basePath = rex_path::base();
 if (is_file($basePath . '/vendor/autoload.php')) {
     call_user_func(function () use ($basePath) {
-        $loader = new \Composer\Autoload\ClassLoader();
+        $loader = new Composer\Autoload\ClassLoader();
 
         foreach (require $basePath . '/vendor/composer/autoload_namespaces.php' as $namespace => $path) {
             $loader->set($namespace, $path);

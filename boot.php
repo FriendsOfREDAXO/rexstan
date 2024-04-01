@@ -6,7 +6,7 @@ $addon = rex_addon::get('rexstan');
 
 if (rex::isBackend() && is_object(rex::getUser())) {
     rex_extension::register('OUTPUT_FILTER', static function (rex_extension_point $ep) use ($addon) {
-        $svg = \rex_file::get($addon->getAssetsPath('rexstan-dino.min.svg'));
+        $svg = rex_file::get($addon->getAssetsPath('rexstan-dino.min.svg'));
 
         $ep->setSubject(str_replace(
             '<i class="rexstan-navigation-icon"></i>',
