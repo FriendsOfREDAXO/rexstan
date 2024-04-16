@@ -27,7 +27,26 @@ final class Configuration
 
     public function isUnusedMethodEnabled(): bool
     {
-        return $this->parameters['methods'] ?? false;
+        $methods = $this->parameters['methods'] ?? false;
+        if (! is_bool($methods)) {
+            return false;
+        }
+
+        return $methods;
+    }
+
+    public function isUnusedRelativeMethodEnabled(): bool
+    {
+        $methods = $this->parameters['methods'] ?? false;
+        return is_numeric($methods);
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getMaximumRelativeUnusedPublicMethod()
+    {
+        return $this->parameters['methods'] ?? 0;
     }
 
     public function shouldCollectMethods(): bool
@@ -59,7 +78,7 @@ final class Configuration
      */
     public function getTemplatePaths(): array
     {
-        $templatePaths = $this->parameters['template_paths'] ?? $this->parameters['twig_template_paths'];
+        $templatePaths = $this->parameters['template_paths'];
 
         Assert::allDirectory($templatePaths);
         Assert::allFileExists($templatePaths);
