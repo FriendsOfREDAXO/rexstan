@@ -43,4 +43,12 @@ final class Configuration
     {
         return $this->parameters['return'] ?? $this->parameters['return_type'];
     }
+
+    /**
+     * @return float|int
+     */
+    public function getRequiredDeclareLevel()
+    {
+        return $this->parameters['declare'];
+    }
 }
