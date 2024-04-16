@@ -14,4 +14,15 @@ final class Strings
         preg_match_all($regex, $content, $matches, PREG_SET_ORDER);
         return $matches;
     }
+
+    /**
+     * @param string[] $values
+     * @return string[]
+     */
+    public static function lowercase(array $values): array
+    {
+        return array_map(static function (string $value): string {
+            return strtolower($value);
+        }, $values);
+    }
 }

@@ -10,18 +10,13 @@ use PHPStan\Node\CollectedDataNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use TomasVotruba\UnusedPublic\CollectorMapper\MethodCallCollectorMapper;
-use TomasVotruba\UnusedPublic\Collectors\Callable_\AttributeCallableCollector;
-use TomasVotruba\UnusedPublic\Collectors\Callable_\CallUserFuncCollector;
-use TomasVotruba\UnusedPublic\Collectors\MethodCall\MethodCallableCollector;
-use TomasVotruba\UnusedPublic\Collectors\MethodCall\MethodCallCollector;
 use TomasVotruba\UnusedPublic\Collectors\PublicClassMethodCollector;
-use TomasVotruba\UnusedPublic\Collectors\StaticCall\StaticMethodCallableCollector;
-use TomasVotruba\UnusedPublic\Collectors\StaticCall\StaticMethodCallCollector;
 use TomasVotruba\UnusedPublic\Configuration;
 use TomasVotruba\UnusedPublic\Enum\RuleTips;
+use TomasVotruba\UnusedPublic\NodeCollectorExtractor;
 use TomasVotruba\UnusedPublic\Templates\TemplateMethodCallsProvider;
 use TomasVotruba\UnusedPublic\Templates\UsedMethodAnalyzer;
+use TomasVotruba\UnusedPublic\Utils\Strings;
 
 /**
  * @see \TomasVotruba\UnusedPublic\Tests\Rules\LocalOnlyPublicClassMethodRule\LocalOnlyPublicClassMethodRuleTest
@@ -55,16 +50,16 @@ final class LocalOnlyPublicClassMethodRule implements Rule
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\CollectorMapper\MethodCallCollectorMapper
+     * @var \TomasVotruba\UnusedPublic\NodeCollectorExtractor
      */
-    private $methodCallCollectorMapper;
+    private $nodeCollectorExtractor;
 
-    public function __construct(Configuration $configuration, UsedMethodAnalyzer $usedMethodAnalyzer, TemplateMethodCallsProvider $templateMethodCallsProvider, MethodCallCollectorMapper $methodCallCollectorMapper)
+    public function __construct(Configuration $configuration, UsedMethodAnalyzer $usedMethodAnalyzer, TemplateMethodCallsProvider $templateMethodCallsProvider, NodeCollectorExtractor $nodeCollectorExtractor)
     {
         $this->configuration = $configuration;
         $this->usedMethodAnalyzer = $usedMethodAnalyzer;
         $this->templateMethodCallsProvider = $templateMethodCallsProvider;
-        $this->methodCallCollectorMapper = $methodCallCollectorMapper;
+        $this->nodeCollectorExtractor = $nodeCollectorExtractor;
     }
 
     public function getNodeType(): string
@@ -84,32 +79,22 @@ final class LocalOnlyPublicClassMethodRule implements Rule
 
         $twigMethodNames = $this->templateMethodCallsProvider->provideTwigMethodCalls();
 
-        $localAndExternalMethodCallReferences = $this->methodCallCollectorMapper->mapToLocalAndExternal([
-            $node->get(MethodCallCollector::class),
-            $node->get(MethodCallableCollector::class),
-            $node->get(StaticMethodCallCollector::class),
-            $node->get(StaticMethodCallableCollector::class),
-            $node->get(AttributeCallableCollector::class),
-            $node->get(CallUserFuncCollector::class),
-        ]);
+        $localAndExternalMethodCallReferences = $this->nodeCollectorExtractor->extractLocalAndExternalMethodCallReferences(
+            $node
+        );
 
-        $publicClassMethodCollector = $node->get(PublicClassMethodCollector::class);
         // php method calls are case-insensitive
-        $lowerExternalRefs = array_map(
-            static function (string $item): string {
-                return strtolower($item);
-            },
+        $lowerExternalRefs = Strings::lowercase(
             $localAndExternalMethodCallReferences->getExternalMethodCallReferences()
         );
-        $lowerLocalRefs = array_map(
-            static function (string $item): string {
-                return strtolower($item);
-            },
+
+        $lowerLocalRefs = Strings::lowercase(
             $localAndExternalMethodCallReferences->getLocalMethodCallReferences()
         );
 
         $ruleErrors = [];
 
+        $publicClassMethodCollector = $node->get(PublicClassMethodCollector::class);
         foreach ($publicClassMethodCollector as $filePath => $declarations) {
             foreach ($declarations as [$className, $methodName, $line]) {
                 if (! $this->isUsedOnlyLocally(

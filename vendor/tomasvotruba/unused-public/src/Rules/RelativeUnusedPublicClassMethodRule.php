@@ -4,33 +4,30 @@ declare(strict_types=1);
 
 namespace TomasVotruba\UnusedPublic\Rules;
 
-use Nette\Utils\Arrays;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\CollectedDataNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use TomasVotruba\UnusedPublic\Collectors\FormTypeClassCollector;
 use TomasVotruba\UnusedPublic\Collectors\PublicClassMethodCollector;
 use TomasVotruba\UnusedPublic\Configuration;
-use TomasVotruba\UnusedPublic\Enum\RuleTips;
 use TomasVotruba\UnusedPublic\NodeCollectorExtractor;
 use TomasVotruba\UnusedPublic\Templates\TemplateMethodCallsProvider;
 use TomasVotruba\UnusedPublic\Templates\UsedMethodAnalyzer;
 use TomasVotruba\UnusedPublic\Utils\Strings;
 
 /**
- * @see \TomasVotruba\UnusedPublic\Tests\Rules\UnusedPublicClassMethodRule\UnusedPublicClassMethodRuleTest
+ * @see \TomasVotruba\UnusedPublic\Tests\Rules\RelativeUnusedPublicClassMethodRule\RelativeUnusedPublicClassMethodRuleTest
  */
-final class UnusedPublicClassMethodRule implements Rule
+final class RelativeUnusedPublicClassMethodRule implements Rule
 {
     /**
      * @var string
      *
      * @api
      */
-    public const ERROR_MESSAGE = 'Public method "%s::%s()" is never used';
+    public const ERROR_MESSAGE = 'Found %.1f %% of public methods as unused. Reduce it under %.1f %%';
 
     /**
      * @readonly
@@ -40,15 +37,15 @@ final class UnusedPublicClassMethodRule implements Rule
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\Templates\TemplateMethodCallsProvider
-     */
-    private $templateMethodCallsProvider;
-
-    /**
-     * @readonly
      * @var \TomasVotruba\UnusedPublic\Templates\UsedMethodAnalyzer
      */
     private $usedMethodAnalyzer;
+
+    /**
+     * @readonly
+     * @var \TomasVotruba\UnusedPublic\Templates\TemplateMethodCallsProvider
+     */
+    private $templateMethodCallsProvider;
 
     /**
      * @readonly
@@ -56,11 +53,11 @@ final class UnusedPublicClassMethodRule implements Rule
      */
     private $nodeCollectorExtractor;
 
-    public function __construct(Configuration $configuration, TemplateMethodCallsProvider $templateMethodCallsProvider, UsedMethodAnalyzer $usedMethodAnalyzer, NodeCollectorExtractor $nodeCollectorExtractor)
+    public function __construct(Configuration $configuration, UsedMethodAnalyzer $usedMethodAnalyzer, TemplateMethodCallsProvider $templateMethodCallsProvider, NodeCollectorExtractor $nodeCollectorExtractor)
     {
         $this->configuration = $configuration;
-        $this->templateMethodCallsProvider = $templateMethodCallsProvider;
         $this->usedMethodAnalyzer = $usedMethodAnalyzer;
+        $this->templateMethodCallsProvider = $templateMethodCallsProvider;
         $this->nodeCollectorExtractor = $nodeCollectorExtractor;
     }
 
@@ -75,7 +72,7 @@ final class UnusedPublicClassMethodRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if (! $this->configuration->isUnusedMethodEnabled()) {
+        if (! $this->configuration->isUnusedRelativeMethodEnabled()) {
             return [];
         }
 
@@ -83,19 +80,18 @@ final class UnusedPublicClassMethodRule implements Rule
         $bladeMethodNames = $this->templateMethodCallsProvider->provideBladeMethodCalls();
 
         $completeMethodCallReferences = $this->nodeCollectorExtractor->extractMethodCallReferences($node);
-        $formTypeClasses = Arrays::flatten($node->get(FormTypeClassCollector::class));
 
         // php method calls are case-insensitive
         $lowerCompleteMethodCallReferences = Strings::lowercase($completeMethodCallReferences);
+        $publicMethodCount = 0;
+        $unusedPublicMethodCount = 0;
 
-        $ruleErrors = [];
+        $filePathToLines = [];
 
         $publicClassMethodCollector = $node->get(PublicClassMethodCollector::class);
         foreach ($publicClassMethodCollector as $filePath => $declarations) {
             foreach ($declarations as [$className, $methodName, $line]) {
-                if (in_array($className, $formTypeClasses, true)) {
-                    continue;
-                }
+                ++$publicMethodCount;
 
                 if ($this->isUsedClassMethod(
                     $className,
@@ -107,18 +103,25 @@ final class UnusedPublicClassMethodRule implements Rule
                     continue;
                 }
 
-                /** @var string $methodName */
-                $errorMessage = sprintf(self::ERROR_MESSAGE, $className, $methodName);
-
-                $ruleErrors[] = RuleErrorBuilder::message($errorMessage)
-                    ->file($filePath)
-                    ->line($line)
-                    ->tip(RuleTips::SOLUTION_MESSAGE)
-                    ->build();
+                $filePathToLines[$filePath][] = $line;
+                ++$unusedPublicMethodCount;
             }
         }
 
-        return $ruleErrors;
+        // unable to divide by 0
+        if ($publicMethodCount === 0) {
+            return [];
+        }
+
+        $relativeUnusedPublicMethods = $unusedPublicMethodCount / $publicMethodCount * 100;
+        $maximumRelativeAllowed = $this->configuration->getMaximumRelativeUnusedPublicMethod();
+
+        // is withing limit?
+        if ($relativeUnusedPublicMethods < $maximumRelativeAllowed) {
+            return [];
+        }
+
+        return $this->createRuleErrors($filePathToLines, $relativeUnusedPublicMethods, $maximumRelativeAllowed);
     }
 
     /**
@@ -143,5 +146,28 @@ final class UnusedPublicClassMethodRule implements Rule
 
         $methodReference = $className . '::' . $methodName;
         return in_array(strtolower($methodReference), $lowerCompleteMethodCallReferences, true);
+    }
+
+    /**
+     * @param array<string, int[]> $filePathToLines
+     * @return RuleError[]
+     * @param int|float $maximumLimit
+     */
+    private function createRuleErrors(array $filePathToLines, float $relative, $maximumLimit): array
+    {
+        $ruleErrors = [];
+
+        foreach ($filePathToLines as $filePath => $lines) {
+            foreach ($lines as $line) {
+                $errorMessage = sprintf(self::ERROR_MESSAGE, $relative, $maximumLimit);
+
+                $ruleErrors[] = RuleErrorBuilder::message($errorMessage)
+                    ->file($filePath)
+                    ->line($line)
+                    ->build();
+            }
+        }
+
+        return $ruleErrors;
     }
 }
