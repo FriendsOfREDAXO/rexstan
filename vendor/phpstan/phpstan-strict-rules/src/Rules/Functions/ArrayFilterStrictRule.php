@@ -12,6 +12,7 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Type;
+use PHPStan\Type\UnionType;
 use PHPStan\Type\VerbosityLevel;
 use function count;
 use function sprintf;
@@ -82,6 +83,36 @@ class ArrayFilterStrictRule implements Rule
 		}
 
 		if (count($args) === 1) {
+			$arrayType = $scope->getType($args[0]->value);
+			$itemType = $arrayType->getIterableValueType();
+			if ($itemType instanceof UnionType) {
+				$hasTruthy = false;
+				$hasFalsey = false;
+				foreach ($itemType->getTypes() as $innerType) {
+					$booleanType = $innerType->toBoolean();
+					if ($booleanType->isTrue()->yes()) {
+						$hasTruthy = true;
+						continue;
+					}
+					if ($booleanType->isFalse()->yes()) {
+						$hasFalsey = true;
+						continue;
+					}
+
+					$hasTruthy = false;
+					$hasFalsey = false;
+					break;
+				}
+
+				if ($hasTruthy && $hasFalsey) {
+					return [];
+				}
+			} elseif ($itemType->isBoolean()->yes()) {
+				return [];
+			} elseif ($itemType->isArray()->yes()) {
+				return [];
+			}
+
 			return [RuleErrorBuilder::message('Call to function array_filter() requires parameter #2 to be passed to avoid loose comparison semantics.')->build()];
 		}
 
