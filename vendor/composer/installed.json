@@ -1692,17 +1692,17 @@
         },
         {
             "name": "tomasvotruba/type-coverage",
-            "version": "0.2.7",
-            "version_normalized": "0.2.7.0",
+            "version": "0.2.8",
+            "version_normalized": "0.2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/type-coverage.git",
-                "reference": "b2144df489f8ae95cc4ac750a6cc10459da2b18e"
+                "reference": "ab4f0506f8df8c6418ec877e356c0efd2c50ed6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/b2144df489f8ae95cc4ac750a6cc10459da2b18e",
-                "reference": "b2144df489f8ae95cc4ac750a6cc10459da2b18e",
+                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/ab4f0506f8df8c6418ec877e356c0efd2c50ed6b",
+                "reference": "ab4f0506f8df8c6418ec877e356c0efd2c50ed6b",
                 "shasum": ""
             },
             "require": {
@@ -1710,7 +1710,7 @@
                 "php": "^7.2 || ^8.0",
                 "phpstan/phpstan": "^1.9.3"
             },
-            "time": "2024-04-16T13:08:26+00:00",
+            "time": "2024-04-26T13:56:40+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1736,7 +1736,7 @@
             ],
             "support": {
                 "issues": "https://github.com/TomasVotruba/type-coverage/issues",
-                "source": "https://github.com/TomasVotruba/type-coverage/tree/0.2.7"
+                "source": "https://github.com/TomasVotruba/type-coverage/tree/0.2.8"
             },
             "funding": [
                 {
