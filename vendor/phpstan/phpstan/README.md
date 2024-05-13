@@ -28,13 +28,13 @@ can be checked before you run the actual line.
 &nbsp;&nbsp;&nbsp;
 <a href="https://packagist.com/?utm_source=phpstan&utm_medium=readme&utm_campaign=sponsorlogo"><img src="https://i.imgur.com/B2T63Do.png" alt="Private Packagist" width="283" height="64"></a>
 <br>
-<a href="https://careers.tuigroup.com/jobs/"><img src="https://i.imgur.com/uw5rAlR.png" alt="Musement" width="247" height="49"></a>
+<a href="https://www.cdn77.com/"><img src="https://i.imgur.com/Oo3wA3m.png" alt="CDN77" width="283" height="64"></a>
 &nbsp;&nbsp;&nbsp;
 <a href="https://blackfire.io/docs/introduction?utm_source=phpstan&utm_medium=github_readme&utm_campaign=logo"><img src="https://i.imgur.com/zR8rsqk.png" alt="Blackfire.io" width="254" height="64"></a>
 <br>
 <a href="https://www.iodigital.com/"><img src="https://i.imgur.com/fJlw1n9.png" alt="iO" width="254" height="65"></a>
 &nbsp;&nbsp;&nbsp;
-<a href="https://jobs.ticketswap.com/"><img src="https://i.imgur.com/lhzcutK.png" alt="TicketSwap" width="269" height="64"></a>
+<a href="https://www.fame.fi/"><img src="https://i.imgur.com/SIA40Uv.png" alt="Fame Helsinki" width="283" height="64"></a>
 <br>
 <a href="https://www.startupjobs.cz/startup/shipmonk"><img src="https://i.imgur.com/bAC47za.jpg" alt="ShipMonk" width="290" height="64"></a>
 &nbsp;&nbsp;&nbsp;
@@ -46,7 +46,7 @@ can be checked before you run the actual line.
 <br>
 <a href="https://zol.fr?utm_source=phpstan"><img src="https://i.imgur.com/dzDgd4s.png" alt="ZOL" width="283" height="64"></a>
 &nbsp;&nbsp;&nbsp;
-<a href="https://www.psyonix.com/"><img src="https://i.imgur.com/p8svxQZ.png" alt="Psyonix" width="254" height="65"></a>
+<a href="https://www.edgenext.com/"><img src="https://i.imgur.com/1sNDQF3.png" alt="EdgeNext" width="283" height="64"></a>
 <br>
 <a href="https://www.shopware.com/en/"><img src="https://i.imgur.com/L4X5w9s.png" alt="Shopware" width="284" height="64"></a>
 &nbsp;&nbsp;&nbsp;
@@ -60,7 +60,7 @@ can be checked before you run the actual line.
 &nbsp;&nbsp;&nbsp;
 <a href="https://inviqa.com/"><img src="https://i.imgur.com/G99rj45.png" alt="Inviqa" width="254" height="65"></a>
 <br>
-<a href="https://www.cdn77.com/"><img src="https://i.imgur.com/Oo3wA3m.png" alt="CDN77" width="283" height="64"></a>
+<a href="https://www.getresponse.com/"><img src="https://i.imgur.com/ZEO7Meg.png" alt="GetResponse" width="283" height="64"></a>
 
 
 [**You can now sponsor my open-source work on PHPStan through GitHub Sponsors.**](https://github.com/sponsors/ondrejmirtes)
