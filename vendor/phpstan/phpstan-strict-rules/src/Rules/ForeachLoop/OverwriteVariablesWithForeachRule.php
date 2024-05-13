@@ -6,22 +6,23 @@ use PhpParser\Node;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Stmt\Foreach_;
 use PHPStan\Analyser\Scope;
+use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use function is_string;
 use function sprintf;
 
+/**
+ * @implements Rule<Foreach_>
+ */
 class OverwriteVariablesWithForeachRule implements Rule
 {
 
 	public function getNodeType(): string
 	{
-		return Node\Stmt\Foreach_::class;
+		return Foreach_::class;
 	}
 
-	/**
-	 * @param Foreach_ $node
-	 * @return string[]
-	 */
 	public function processNode(Node $node, Scope $scope): array
 	{
 		$errors = [];
@@ -30,7 +31,9 @@ class OverwriteVariablesWithForeachRule implements Rule
 			&& is_string($node->keyVar->name)
 			&& $scope->hasVariableType($node->keyVar->name)->yes()
 		) {
-			$errors[] = sprintf('Foreach overwrites $%s with its key variable.', $node->keyVar->name);
+			$errors[] = RuleErrorBuilder::message(sprintf('Foreach overwrites $%s with its key variable.', $node->keyVar->name))
+				->identifier('foreach.keyOverwrite')
+				->build();
 		}
 
 		foreach ($this->checkValueVar($scope, $node->valueVar) as $error) {
@@ -41,7 +44,7 @@ class OverwriteVariablesWithForeachRule implements Rule
 	}
 
 	/**
-	 * @return string[]
+	 * @return list<IdentifierRuleError>
 	 */
 	private function checkValueVar(Scope $scope, Expr $expr): array
 	{
@@ -51,7 +54,9 @@ class OverwriteVariablesWithForeachRule implements Rule
 			&& is_string($expr->name)
 			&& $scope->hasVariableType($expr->name)->yes()
 		) {
-			$errors[] = sprintf('Foreach overwrites $%s with its value variable.', $expr->name);
+			$errors[] = RuleErrorBuilder::message(sprintf('Foreach overwrites $%s with its value variable.', $expr->name))
+				->identifier('foreach.valueOverwrite')
+				->build();
 		}
 
 		if (

@@ -10,10 +10,14 @@ use PHPStan\Analyser\Scope;
 use PHPStan\BetterReflection\Reflection\Adapter\ReflectionClass;
 use PHPStan\BetterReflection\Reflection\Adapter\ReflectionEnum;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\ShouldNotHappenException;
 use function property_exists;
 use function sprintf;
 
+/**
+ * @implements Rule<ClassMethod>
+ */
 class RequireParentConstructCallRule implements Rule
 {
 
@@ -22,10 +26,6 @@ class RequireParentConstructCallRule implements Rule
 		return ClassMethod::class;
 	}
 
-	/**
-	 * @param ClassMethod $node
-	 * @return string[]
-	 */
 	public function processNode(Node $node, Scope $scope): array
 	{
 		if (!$scope->isInClass()) {
@@ -50,34 +50,18 @@ class RequireParentConstructCallRule implements Rule
 		}
 
 		if ($this->callsParentConstruct($node)) {
-			if ($classReflection->getParentClass() === false) {
-				return [
-					sprintf(
-						'%s::__construct() calls parent constructor but does not extend any class.',
-						$classReflection->getName()
-					),
-				];
-			}
+			return [];
+		}
 
-			if ($this->getParentConstructorClass($classReflection) === false) {
-				return [
-					sprintf(
-						'%s::__construct() calls parent constructor but parent does not have one.',
-						$classReflection->getName()
-					),
-				];
-			}
-		} else {
-			$parentClass = $this->getParentConstructorClass($classReflection);
-			if ($parentClass !== false) {
-				return [
-					sprintf(
-						'%s::__construct() does not call parent constructor from %s.',
-						$classReflection->getName(),
-						$parentClass->getName()
-					),
-				];
-			}
+		$parentClass = $this->getParentConstructorClass($classReflection);
+		if ($parentClass !== false) {
+			return [
+				RuleErrorBuilder::message(sprintf(
+					'%s::__construct() does not call parent constructor from %s.',
+					$classReflection->getName(),
+					$parentClass->getName()
+				))->identifier('constructor.missingParentCall')->build(),
+			];
 		}
 
 		return [];

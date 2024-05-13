@@ -113,7 +113,11 @@ class ArrayFilterStrictRule implements Rule
 				return [];
 			}
 
-			return [RuleErrorBuilder::message('Call to function array_filter() requires parameter #2 to be passed to avoid loose comparison semantics.')->build()];
+			return [
+				RuleErrorBuilder::message('Call to function array_filter() requires parameter #2 to be passed to avoid loose comparison semantics.')
+					->identifier('arrayFilter.strict')
+					->build(),
+			];
 		}
 
 		$nativeCallbackType = $scope->getNativeType($args[1]->value);
@@ -129,7 +133,7 @@ class ArrayFilterStrictRule implements Rule
 			$errorBuilder = RuleErrorBuilder::message(sprintf(
 				$message,
 				$callbackType->describe(VerbosityLevel::typeOnly())
-			));
+			))->identifier('arrayFilter.strict');
 
 			if (!$this->isCallbackTypeNull($nativeCallbackType) && $this->treatPhpDocTypesAsCertain) {
 				$errorBuilder->tip('Because the type is coming from a PHPDoc, you can turn off this check by setting <fg=cyan>treatPhpDocTypesAsCertain: false</> in your <fg=cyan>%configurationFile%</>.');

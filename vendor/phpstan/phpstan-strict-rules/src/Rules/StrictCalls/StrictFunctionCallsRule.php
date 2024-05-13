@@ -10,11 +10,15 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantBooleanType;
 use function array_key_exists;
 use function sprintf;
 use function strtolower;
 
+/**
+ * @implements Rule<FuncCall>
+ */
 class StrictFunctionCallsRule implements Rule
 {
 
@@ -39,10 +43,6 @@ class StrictFunctionCallsRule implements Rule
 		return FuncCall::class;
 	}
 
-	/**
-	 * @param FuncCall $node
-	 * @return string[] errors
-	 */
 	public function processNode(Node $node, Scope $scope): array
 	{
 		if (!$node->name instanceof Name) {
@@ -70,13 +70,25 @@ class StrictFunctionCallsRule implements Rule
 
 		$argumentPosition = $this->functionArguments[$functionName];
 		if (!array_key_exists($argumentPosition, $node->getArgs())) {
-			return [sprintf('Call to function %s() requires parameter #%d to be set.', $functionName, $argumentPosition + 1)];
+			return [
+				RuleErrorBuilder::message(sprintf(
+					'Call to function %s() requires parameter #%d to be set.',
+					$functionName,
+					$argumentPosition + 1
+				))->identifier('function.strict')->build(),
+			];
 		}
 
 		$argumentType = $scope->getType($node->getArgs()[$argumentPosition]->value);
 		$trueType = new ConstantBooleanType(true);
 		if (!$trueType->isSuperTypeOf($argumentType)->yes()) {
-			return [sprintf('Call to function %s() requires parameter #%d to be true.', $functionName, $argumentPosition + 1)];
+			return [
+				RuleErrorBuilder::message(sprintf(
+					'Call to function %s() requires parameter #%d to be true.',
+					$functionName,
+					$argumentPosition + 1
+				))->identifier('function.strict')->build(),
+			];
 		}
 
 		return [];
