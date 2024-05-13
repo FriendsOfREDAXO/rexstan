@@ -7,12 +7,11 @@
 	],
 	"require": {
 		"php": "^7.2 || ^8.0",
-		"phpstan/phpstan": "^1.10.3"
+		"phpstan/phpstan": "^1.11"
 	},
 	"require-dev": {
 		"php-parallel-lint/php-parallel-lint": "^1.2",
 		"phpstan/phpstan-phpunit": "^1.0",
-		"phpstan/phpstan-php-parser": "^1.1",
 		"phpunit/phpunit": "^9.5"
 	},
 	"config": {

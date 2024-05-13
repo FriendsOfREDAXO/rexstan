@@ -7,7 +7,9 @@ use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\Assign;
 use PhpParser\Node\Stmt\For_;
 use PHPStan\Analyser\Scope;
+use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use function is_string;
 use function sprintf;
 
@@ -22,10 +24,6 @@ class OverwriteVariablesWithForLoopInitRule implements Rule
 		return For_::class;
 	}
 
-	/**
-	 * @param For_ $node
-	 * @return string[]
-	 */
 	public function processNode(Node $node, Scope $scope): array
 	{
 		$errors = [];
@@ -43,7 +41,7 @@ class OverwriteVariablesWithForLoopInitRule implements Rule
 	}
 
 	/**
-	 * @return string[]
+	 * @return list<IdentifierRuleError>
 	 */
 	private function checkValueVar(Scope $scope, Expr $expr): array
 	{
@@ -53,7 +51,9 @@ class OverwriteVariablesWithForLoopInitRule implements Rule
 			&& is_string($expr->name)
 			&& $scope->hasVariableType($expr->name)->yes()
 		) {
-			$errors[] = sprintf('For loop initial assignment overwrites variable $%s.', $expr->name);
+			$errors[] = RuleErrorBuilder::message(sprintf('For loop initial assignment overwrites variable $%s.', $expr->name))
+				->identifier('for.variableOverwrite')
+				->build();
 		}
 
 		if (
