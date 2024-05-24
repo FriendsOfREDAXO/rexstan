@@ -1,5 +1,4 @@
 rules:
-    - Symplify\PHPStanRules\Rules\NoProtectedClassElementRule
     - Symplify\PHPStanRules\Rules\ForbiddenExtendOfNonAbstractClassRule
     - Symplify\PHPStanRules\Rules\Complexity\ForbiddenSameNamedNewInstanceRule
 
@@ -12,12 +11,10 @@ rules:
 
     # paths
     - Symplify\PHPStanRules\Rules\NoMissingDirPathRule
-    - Symplify\PHPStanRules\Rules\NoAbstractMethodRule
     - Symplify\PHPStanRules\Rules\NoReferenceRule
     - Symplify\PHPStanRules\Rules\NoArrayAccessOnObjectRule
 
     - Symplify\PHPStanRules\Rules\NoNullableArrayPropertyRule
-    - Symplify\PHPStanRules\Rules\BoolishClassMethodPrefixRule
 
     # dead-code
     - Symplify\PHPStanRules\Rules\NoIssetOnObjectRule

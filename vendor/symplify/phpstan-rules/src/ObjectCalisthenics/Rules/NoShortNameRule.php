@@ -35,7 +35,7 @@ final class NoShortNameRule extends AbstractSymplifyRule
      * @var string[]
      * @readonly
      */
-    private $allowedShortNames = ['i', 'j', 'y', 'z'];
+    private $allowedShortNames = ['i', 'j', 'y', 'z', 'd', 'dd'];
     /**
      * @var string
      */
@@ -43,7 +43,7 @@ final class NoShortNameRule extends AbstractSymplifyRule
     /**
      * @param string[] $allowedShortNames
      */
-    public function __construct(int $minNameLength, array $allowedShortNames = ['i', 'j', 'y', 'z'])
+    public function __construct(int $minNameLength, array $allowedShortNames = ['i', 'j', 'y', 'z', 'd', 'dd'])
     {
         $this->minNameLength = $minNameLength;
         $this->allowedShortNames = $allowedShortNames;
@@ -133,6 +133,9 @@ CODE_SAMPLE
         if (Strings::length($name) >= $this->minNameLength) {
             return true;
         }
+
+        dump($name);
+        dump(in_array($name, $this->allowedShortNames, true));
 
         return in_array($name, $this->allowedShortNames, true);
     }
