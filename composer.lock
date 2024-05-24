@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f3f755474226ad38b745cfc526d0ff71",
+    "content-hash": "2a282effecc9f22474fa58e225eaddfd",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -224,12 +224,12 @@
             "version": "v5.2.13",
             "source": {
                 "type": "git",
-                "url": "https://github.com/justinrainbow/json-schema.git",
+                "url": "https://github.com/jsonrainbow/json-schema.git",
                 "reference": "fbbe7e5d79f618997bc3332a6f49246036c45793"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/fbbe7e5d79f618997bc3332a6f49246036c45793",
+                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/fbbe7e5d79f618997bc3332a6f49246036c45793",
                 "reference": "fbbe7e5d79f618997bc3332a6f49246036c45793",
                 "shasum": ""
             },
@@ -284,8 +284,8 @@
                 "schema"
             ],
             "support": {
-                "issues": "https://github.com/justinrainbow/json-schema/issues",
-                "source": "https://github.com/justinrainbow/json-schema/tree/v5.2.13"
+                "issues": "https://github.com/jsonrainbow/json-schema/issues",
+                "source": "https://github.com/jsonrainbow/json-schema/tree/v5.2.13"
             },
             "time": "2023-09-26T02:20:38+00:00"
         },
@@ -1329,16 +1329,16 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "12.4.9",
+            "version": "12.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "14b2f776414109648ddc1680a6bab0c0641e4d3a"
+                "reference": "8485673fb551c27fdb443d0d34e95ba4d0b3afbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/14b2f776414109648ddc1680a6bab0c0641e4d3a",
-                "reference": "14b2f776414109648ddc1680a6bab0c0641e4d3a",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/8485673fb551c27fdb443d0d34e95ba4d0b3afbe",
+                "reference": "8485673fb551c27fdb443d0d34e95ba4d0b3afbe",
                 "shasum": ""
             },
             "require": {
@@ -1367,7 +1367,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/12.4.9"
+                "source": "https://github.com/symplify/phpstan-rules/tree/12.6.4"
             },
             "funding": [
                 {
@@ -1379,7 +1379,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-05T15:24:56+00:00"
+            "time": "2024-05-21T09:44:11+00:00"
         },
         {
             "name": "thecodingmachine/phpstan-safe-rule",

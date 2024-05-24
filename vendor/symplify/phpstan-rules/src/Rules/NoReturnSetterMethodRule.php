@@ -58,12 +58,12 @@ final class NoReturnSetterMethodRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        $classReflection = $scope->getClassReflection();
-        if (! $classReflection instanceof ClassReflection) {
+        // possibly some important logic
+        if ($node->attrGroups !== []) {
             return [];
         }
 
-        if (! $classReflection->isClass()) {
+        if (! $this->isInsideClassReflection($scope)) {
             return [];
         }
 
@@ -128,5 +128,15 @@ CODE_SAMPLE
 
         $yield = $this->typeAwareNodeFinder->findFirstInstanceOf($classMethod, Yield_::class);
         return $yield instanceof Yield_;
+    }
+
+    private function isInsideClassReflection(Scope $scope): bool
+    {
+        $classReflection = $scope->getClassReflection();
+        if (! $classReflection instanceof ClassReflection) {
+            return false;
+        }
+
+        return $classReflection->isClass();
     }
 }

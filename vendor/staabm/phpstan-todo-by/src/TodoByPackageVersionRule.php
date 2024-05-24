@@ -35,7 +35,7 @@ final class TodoByPackageVersionRule implements Rule
     // adjusted because of backtrack limit issues https://github.com/staabm/phpstan-todo-by/issues/44
     private const PATTERN = <<<'REGEXP'
         {
-            @?TODO # possible @ prefix
+            @?(?:TODO|FIXME|XXX) # possible @ prefix
             @?[a-zA-Z0-9_-]* # optional username
             \s*[:-]?\s* # optional colon or hyphen
             \s+ # keyword/version separator
@@ -138,7 +138,7 @@ final class TodoByPackageVersionRule implements Rule
     }
 
     /**
-     * @return bool|\PHPStan\Rules\RuleError
+     * @return bool|RuleError
      */
     private function satisfiesPhpPlatformPackage(string $package, string $version, Comment $comment, int $wholeMatchStartOffset)
     {
@@ -166,7 +166,7 @@ final class TodoByPackageVersionRule implements Rule
     }
 
     /**
-     * @return bool|\PHPStan\Rules\RuleError
+     * @return bool|RuleError
      */
     private function satisfiesVirtualPackage(string $package, string $version, Comment $comment, int $wholeMatchStartOffset)
     {
@@ -247,7 +247,7 @@ final class TodoByPackageVersionRule implements Rule
     }
 
     /**
-     * @return bool|\PHPStan\Rules\RuleError
+     * @return bool|RuleError
      */
     private function satisfiesInstalledPackage(string $package, string $version, Comment $comment, int $wholeMatchStartOffset)
     {
