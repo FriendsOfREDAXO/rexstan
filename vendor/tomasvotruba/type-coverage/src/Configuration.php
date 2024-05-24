@@ -51,4 +51,9 @@ final class Configuration
     {
         return $this->parameters['declare'];
     }
+
+    public function showOnlyMeasure(): bool
+    {
+        return $this->parameters['measure'];
+    }
 }
