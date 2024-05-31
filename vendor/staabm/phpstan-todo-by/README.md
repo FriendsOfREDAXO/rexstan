@@ -1,6 +1,6 @@
 # phpstan-todo-by: comments with expiration
 
-PHPStan extension to check for TODO/FIXME/XXX comments with expiration.
+PHPStan extension to check for `TODO/FIXME/XXX` comments with expiration.
 Inspired by [parker-codes/todo-by](https://github.com/parker-codes/todo_by).
 
 
@@ -13,6 +13,9 @@ The main idea is, that comments within the source code will be turned into PHPSt
 
 // TODO: 2023-12-14 This comment turns into a PHPStan error as of 14th december 2023
 function doFoo() { /* ... */ }
+
+// TODO https://github.com/staabm/phpstan-todo-by/issues/91 fix me when this GitHub issue is closed
+class FooClass {}
 
 // TODO: <1.0.0 This has to be in the first major release of this repo
 function doBar() { /* ... */ }
@@ -44,9 +47,9 @@ When a text is given after the date, this text will be picked up for the PHPStan
 - by a full github issue url
 
 There are more builtin constraints, but these **require additional configuration**:
-- by a semantic version constraint matched against the projects [reference-version](https://github.com/staabm/phpstan-todo-by#reference-version)
-- by a semantic version constraint matched against a Composer dependency (via `composer.lock` or [`virtualPackages`](https://github.com/staabm/phpstan-todo-by#virtual-packages) config)
-- by ticket reference, matched against the status of a ticket (e.g. in github.com or JIRA)
+- by a semantic version constraint matched against the projects [reference-version config](https://github.com/staabm/phpstan-todo-by#reference-version)
+- by a semantic version constraint matched against a Composer dependency (via `composer.lock` or [`virtualPackages config`](https://github.com/staabm/phpstan-todo-by#virtual-packages))
+- by ticket reference, matched against the status of a ticket (e.g. in [github.com or JIRA via config](https://github.com/staabm/phpstan-todo-by#issue-tracker-key-support))
 
 see examples of different comment variants which are supported:
 
@@ -77,6 +80,7 @@ see examples of different comment variants which are supported:
 
 // TODO: APP-123 fix it when this Jira ticket is closed
 // TODO: #123 fix it when this GitHub issue is closed
+// TODO: GH-123 fix it when this GitHub issue is closed
 // TODO: some-organization/some-repo#123 change me if this GitHub pull request is closed
 ```
 
@@ -311,6 +315,7 @@ There are multiple ways to reference GitHub issue/PR:
 ##### Only number
 ```php
 // TODO: #123 - fix me
+// TODO: GH-123 - fix me
 ```
 If the `defaultOwner` is set to `acme` and `defaultRepo` is set to `hello-world`, the referenced issue is resolved to `acme/hello-world#123`.
 
