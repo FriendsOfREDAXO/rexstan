@@ -1,6 +1,5 @@
 rules:
     - Symplify\PHPStanRules\Rules\ForbiddenExtendOfNonAbstractClassRule
-    - Symplify\PHPStanRules\Rules\Complexity\ForbiddenSameNamedNewInstanceRule
 
     # domain
     - Symplify\PHPStanRules\Rules\Domain\RequireExceptionNamespaceRule
@@ -23,12 +22,10 @@ rules:
     - Symplify\PHPStanRules\Rules\ForbiddenMultipleClassLikeInOneFileRule
 
     # comlexity
-    - Symplify\PHPStanRules\Rules\Complexity\ForbiddenSameNamedNewInstanceRule
     - Symplify\PHPStanRules\Rules\NarrowType\NoReturnFalseInNonBoolClassMethodRule
 
     - Symplify\PHPStanRules\Rules\Complexity\ForbiddenArrayMethodCallRule
     - Symplify\PHPStanRules\Rules\CheckRequiredInterfaceInContractNamespaceRule
-    - Symplify\PHPStanRules\Rules\NoEmptyClassRule
 
     # naming
     - Symplify\PHPStanRules\Rules\RequireAttributeNameRule
