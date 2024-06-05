@@ -40,6 +40,7 @@
             "find vendor -name tests -type d -exec rm -r {} +",
             "find vendor -name build -type d -exec rm -r {} +",
             "find vendor -name .github -type d -exec rm -r {} +",
+            "rm -f vendor/symplify/phpstan-rules/stubs/Symfony/Component/Console/Command.php",
             "mkdir -p vendor/sqlftw/sqlftw/tests",
             "mkdir -p vendor/sqlftw/sqlftw/build",
             "mkdir -p vendor/dogma/dogma/tests",
