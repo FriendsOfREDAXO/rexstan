@@ -11,7 +11,7 @@
         "spaze/phpstan-disallowed-calls": "2.16.1",
         "sqlftw/sqlftw": "0.1.15",
         "staabm/phpstan-baseline-analysis": "0.12.5",
-        "staabm/phpstan-dba": "0.2.80",
+        "staabm/phpstan-dba": "0.2.81",
         "staabm/phpstan-todo-by": "0.1.27",
         "symplify/phpstan-rules": "12.7.0",
         "thecodingmachine/phpstan-safe-rule": "1.2",
