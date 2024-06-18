@@ -14,11 +14,13 @@ Instead of fixing all PHPStan errors at once, we can start with minimal require 
 
 <br>
 
-What is the type coverage you ask? We have 3 type possible declarations in total here:
+What is the type coverage you ask? We have 4 type possible declarations in total here:
 
 ```php
 final class ConferenceFactory
 {
+    const SPEAKER_TAG = 'speaker';
+
     private $talkFactory;
 
     public function createConference(array $data)
@@ -30,15 +32,20 @@ final class ConferenceFactory
 }
 ```
 
-The param type is defined, but property and return types are missing.
+*Note: Class constant types require PHP 8.3 to run.*
 
-* 1 out of 3 = 33 % coverage
+The param type is defined. But the property, return and constant types are missing.
 
-Our code has only one third quality it could have. Let's get to 100 %!
+* 1 out of 4 = 25 % coverage
+
+Our code quality is only at one-quarter of its potential. Let's get to 100 %!
 
 ```diff
  final class ConferenceFactory
  {
+-    public const SPEAKER_TAG = 'speaker';
++    public const string SPEAKER_TAG = 'speaker';
+
 -    private $talkFactory;
 +    private TalkFactory $talkFactory;
 
@@ -79,7 +86,10 @@ parameters:
         return: 50
         param: 35.5
         property: 70
+        constant: 85
 ```
+
+<br>
 
 ## Measure Strict Declares coverage
 

@@ -28,6 +28,23 @@ final class Configuration
         return $this->parameters['property'] ?? $this->parameters['property_type'];
     }
 
+    public function isConstantTypeCoverageEnabled(): bool
+    {
+        if (PHP_VERSION_ID < 80300) {
+            return false;
+        }
+
+        return $this->getRequiredConstantTypeLevel() > 0;
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getRequiredConstantTypeLevel()
+    {
+        return $this->parameters['constant'] ?? $this->parameters['constant_type'];
+    }
+
     /**
      * @return float|int
      */
