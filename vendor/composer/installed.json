@@ -669,17 +669,17 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.11.5",
-            "version_normalized": "1.11.5.0",
+            "version": "1.11.6",
+            "version_normalized": "1.11.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "490f0ae1c92b082f154681d7849aee776a7c1443"
+                "reference": "6ac78f1165346c83b4a753f7e4186d969c6ad0ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/490f0ae1c92b082f154681d7849aee776a7c1443",
-                "reference": "490f0ae1c92b082f154681d7849aee776a7c1443",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/6ac78f1165346c83b4a753f7e4186d969c6ad0ee",
+                "reference": "6ac78f1165346c83b4a753f7e4186d969c6ad0ee",
                 "shasum": ""
             },
             "require": {
@@ -688,7 +688,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2024-06-17T15:10:54+00:00",
+            "time": "2024-07-01T15:33:06+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -887,17 +887,17 @@
         },
         {
             "name": "phpstan/phpstan-symfony",
-            "version": "1.4.4",
-            "version_normalized": "1.4.4.0",
+            "version": "1.4.5",
+            "version_normalized": "1.4.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-symfony.git",
-                "reference": "bca27f1701fc1a297749e6c2a1e3da4462c1a6af"
+                "reference": "1bd7c339f622dfb5a1a97dcaf1a862734eabfa1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/bca27f1701fc1a297749e6c2a1e3da4462c1a6af",
-                "reference": "bca27f1701fc1a297749e6c2a1e3da4462c1a6af",
+                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/1bd7c339f622dfb5a1a97dcaf1a862734eabfa1d",
+                "reference": "1bd7c339f622dfb5a1a97dcaf1a862734eabfa1d",
                 "shasum": ""
             },
             "require": {
@@ -926,7 +926,7 @@
                 "symfony/serializer": "^5.4",
                 "symfony/service-contracts": "^2.2.0"
             },
-            "time": "2024-06-07T09:43:24+00:00",
+            "time": "2024-06-26T12:19:42+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -956,7 +956,7 @@
             "description": "Symfony Framework extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-symfony/issues",
-                "source": "https://github.com/phpstan/phpstan-symfony/tree/1.4.4"
+                "source": "https://github.com/phpstan/phpstan-symfony/tree/1.4.5"
             },
             "install-path": "../phpstan/phpstan-symfony"
         },
@@ -1300,23 +1300,23 @@
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.29.0",
-            "version_normalized": "1.29.0.0",
+            "version": "v1.30.0",
+            "version_normalized": "1.30.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "87b68208d5c1188808dd7839ee1e6c8ec3b02f1b"
+                "reference": "77fa7995ac1b21ab60769b7323d600a991a90433"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/87b68208d5c1188808dd7839ee1e6c8ec3b02f1b",
-                "reference": "87b68208d5c1188808dd7839ee1e6c8ec3b02f1b",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/77fa7995ac1b21ab60769b7323d600a991a90433",
+                "reference": "77fa7995ac1b21ab60769b7323d600a991a90433",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.1"
             },
-            "time": "2024-01-29T20:11:03+00:00",
+            "time": "2024-05-31T15:07:36+00:00",
             "type": "library",
             "extra": {
                 "thanks": {
@@ -1363,7 +1363,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/v1.29.0"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.30.0"
             },
             "funding": [
                 {
