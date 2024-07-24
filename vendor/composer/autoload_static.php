@@ -849,6 +849,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'PHPStan\\Symfony\\ServiceDefinition' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/ServiceDefinition.php',
         'PHPStan\\Symfony\\ServiceMap' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/ServiceMap.php',
         'PHPStan\\Symfony\\ServiceMapFactory' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/ServiceMapFactory.php',
+        'PHPStan\\Symfony\\SymfonyDiagnoseExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/SymfonyDiagnoseExtension.php',
         'PHPStan\\Symfony\\XmlContainerNotExistsException' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/XmlContainerNotExistsException.php',
         'PHPStan\\Symfony\\XmlParameterMapFactory' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/XmlParameterMapFactory.php',
         'PHPStan\\Symfony\\XmlServiceMapFactory' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/XmlServiceMapFactory.php',
