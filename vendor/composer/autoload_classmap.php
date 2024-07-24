@@ -635,6 +635,7 @@ return array(
     'PHPStan\\Symfony\\ServiceDefinition' => $vendorDir . '/phpstan/phpstan-symfony/src/Symfony/ServiceDefinition.php',
     'PHPStan\\Symfony\\ServiceMap' => $vendorDir . '/phpstan/phpstan-symfony/src/Symfony/ServiceMap.php',
     'PHPStan\\Symfony\\ServiceMapFactory' => $vendorDir . '/phpstan/phpstan-symfony/src/Symfony/ServiceMapFactory.php',
+    'PHPStan\\Symfony\\SymfonyDiagnoseExtension' => $vendorDir . '/phpstan/phpstan-symfony/src/Symfony/SymfonyDiagnoseExtension.php',
     'PHPStan\\Symfony\\XmlContainerNotExistsException' => $vendorDir . '/phpstan/phpstan-symfony/src/Symfony/XmlContainerNotExistsException.php',
     'PHPStan\\Symfony\\XmlParameterMapFactory' => $vendorDir . '/phpstan/phpstan-symfony/src/Symfony/XmlParameterMapFactory.php',
     'PHPStan\\Symfony\\XmlServiceMapFactory' => $vendorDir . '/phpstan/phpstan-symfony/src/Symfony/XmlServiceMapFactory.php',

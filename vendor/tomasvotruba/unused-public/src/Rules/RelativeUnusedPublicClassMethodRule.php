@@ -164,6 +164,7 @@ final class RelativeUnusedPublicClassMethodRule implements Rule
                 $ruleErrors[] = RuleErrorBuilder::message($errorMessage)
                     ->file($filePath)
                     ->line($line)
+                    ->identifier('public.method.unused')
                     ->build();
             }
         }

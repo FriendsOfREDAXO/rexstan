@@ -10,6 +10,8 @@ use PhpParser\Node\Identifier;
 use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
 use PHPStan\Collectors\Collector;
+use PHPStan\Reflection\ClassReflection;
+use TomasVotruba\UnusedPublic\ClassTypeDetector;
 use TomasVotruba\UnusedPublic\Configuration;
 
 /**
@@ -23,9 +25,16 @@ final class PublicStaticPropertyFetchCollector implements Collector
      */
     private $configuration;
 
-    public function __construct(Configuration $configuration)
+    /**
+     * @readonly
+     * @var \TomasVotruba\UnusedPublic\ClassTypeDetector
+     */
+    private $classTypeDetector;
+
+    public function __construct(Configuration $configuration, ClassTypeDetector $classTypeDetector)
     {
         $this->configuration = $configuration;
+        $this->classTypeDetector = $classTypeDetector;
     }
 
     public function getNodeType(): string
@@ -43,22 +52,39 @@ final class PublicStaticPropertyFetchCollector implements Collector
             return null;
         }
 
-        if (! $node->class instanceof Name) {
-            return null;
-        }
-
         if (! $node->name instanceof Identifier) {
             return null;
         }
 
-        if ($node->class->toString() === 'self') {
+        if (
+            $node->class instanceof Name
+            && ($node->class->toString() === 'self' || $node->class->toString() === 'static')
+        ) {
             // self fetch is allowed
             return null;
         }
 
-        $className = $node->class->toString();
-        $propertyName = $node->name->toString();
+        $classReflection = $scope->getClassReflection();
+        if ($classReflection instanceof ClassReflection && $this->classTypeDetector->isTestClass($classReflection)) {
+            return null;
+        }
 
-        return [$className . '::' . $propertyName];
+        if ($node->class instanceof Name) {
+            $classType = $scope->resolveTypeByName($node->class);
+        } else {
+            $classType = $scope->getType($node->class);
+        }
+        $result = [];
+        foreach ($classType->getObjectClassReflections() as $classReflection) {
+            $propertyName = $node->name->toString();
+
+            if (! $classReflection->hasProperty($propertyName)) {
+                continue;
+            }
+            $propertyReflection = $classReflection->getProperty($propertyName, $scope);
+            $result[] = $propertyReflection->getDeclaringClass()->getName() . '::' . $propertyName;
+        }
+
+        return $result;
     }
 }
