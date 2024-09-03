@@ -69,11 +69,10 @@ final class PublicStaticPropertyFetchCollector implements Collector
             return null;
         }
 
-        if ($node->class instanceof Name) {
-            $classType = $scope->resolveTypeByName($node->class);
-        } else {
-            $classType = $scope->getType($node->class);
-        }
+        $classType = $node->class instanceof Name ? $scope->resolveTypeByName($node->class) : $scope->getType(
+            $node->class
+        );
+
         $result = [];
         foreach ($classType->getObjectClassReflections() as $classReflection) {
             $propertyName = $node->name->toString();
@@ -81,6 +80,7 @@ final class PublicStaticPropertyFetchCollector implements Collector
             if (! $classReflection->hasProperty($propertyName)) {
                 continue;
             }
+
             $propertyReflection = $classReflection->getProperty($propertyName, $scope);
             $result[] = $propertyReflection->getDeclaringClass()->getName() . '::' . $propertyName;
         }

@@ -77,6 +77,7 @@ final class PublicPropertyFetchCollector implements Collector
             if (! $classReflection->hasProperty($propertyName)) {
                 continue;
             }
+
             $propertyReflection = $classReflection->getProperty($propertyName, $scope);
             $result[] = $propertyReflection->getDeclaringClass()->getName() . '::' . $propertyName;
         }
