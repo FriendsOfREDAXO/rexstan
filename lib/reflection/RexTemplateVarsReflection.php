@@ -12,9 +12,9 @@ use function count;
 final class RexTemplateVarsReflection
 {
     /**
-     * @return list<array{string, array<string, scalar>}>
+     * @return non-empty-list<array{string, array<string, scalar>}>|null
      */
-    public static function matchVars(string $template): array
+    public static function matchVars(string $template): ?array
     {
         if (preg_match_all('{(?P<var>REX_TEMPLATE)\[(?P<args>[^\]]+)\]}', $template, $matches) !== false) {
             $result = [];
@@ -31,9 +31,11 @@ final class RexTemplateVarsReflection
                 ];
             }
 
-            return $result;
+            if ($result !== []) {
+                return $result;
+            }
         }
 
-        return [];
+        return null;
     }
 }
