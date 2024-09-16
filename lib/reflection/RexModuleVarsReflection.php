@@ -12,9 +12,9 @@ use function count;
 final class RexModuleVarsReflection
 {
     /**
-     * @return list<array{string, array<string, scalar>}>
+     * @return non-empty-list<array{string, array<string, scalar>}>|null
      */
-    public static function matchInputVars(string $input): array
+    public static function matchInputVars(string $input): ?array
     {
         if (preg_match_all('{(?P<var>REX_INPUT_VALUE|REX_VALUE|REX_LINK|REX_LINKLIST|REX_MEDIA|REX_MEDIALIST)\[(?P<args>[^\]]+)\]}', $input, $matches) !== false) {
             $result = [];
@@ -31,16 +31,18 @@ final class RexModuleVarsReflection
                 ];
             }
 
-            return $result;
+            if ($result !== []) {
+                return $result;
+            }
         }
 
-        return [];
+        return null;
     }
 
     /**
-     * @return list<array{string, array<string, scalar>}>
+     * @return non-empty-list<array{string, array<string, scalar>}>|null
      */
-    public static function matchOutputVars(string $output): array
+    public static function matchOutputVars(string $output): ?array
     {
         if (preg_match_all('{(?P<var>REX_VALUE|REX_LINK|REX_LINKLIST|REX_MEDIA|REX_MEDIALIST)\[(?P<args>[^\]]+)\]}', $output, $matches) !== false) {
             $result = [];
@@ -57,9 +59,11 @@ final class RexModuleVarsReflection
                 ];
             }
 
-            return $result;
+            if ($result !== []) {
+                return $result;
+            }
         }
 
-        return [];
+        return null;
     }
 }
