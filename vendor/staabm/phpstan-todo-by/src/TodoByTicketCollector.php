@@ -5,7 +5,6 @@ namespace staabm\PHPStanTodoBy;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Collectors\Collector;
-use RuntimeException;
 use staabm\PHPStanTodoBy\utils\CommentMatcher;
 use staabm\PHPStanTodoBy\utils\ticket\TicketRuleConfiguration;
 
@@ -38,7 +37,7 @@ final class TodoByTicketCollector implements Collector
             $line = $comment->getLine();
 
             $text = $comment->getText();
-            $startLine =$comment->getStartLine();
+            $startLine = $comment->getStartLine();
 
             /** @var array<int, array<array{0: string, 1: int}>> $matches */
             foreach ($matches as $match) {
@@ -56,7 +55,12 @@ final class TodoByTicketCollector implements Collector
             }
         }
 
-        return $tickets;
+        // don't return empty array so we don't pollute the result cache
+        // see https://github.com/phpstan/phpstan/discussions/11701#discussioncomment-10660711
+        if ([] !== $tickets) {
+            return $tickets;
+        }
+        return null;
     }
 
     private function createPattern(): string
