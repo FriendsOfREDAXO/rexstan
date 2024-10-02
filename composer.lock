@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ccbdbc19d52f21b732565c197a07182",
+    "content-hash": "359e153af4970e8c825c4d84076b1919",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1683,16 +1683,16 @@
         },
         {
             "name": "tomasvotruba/unused-public",
-            "version": "0.4.0",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/unused-public.git",
-                "reference": "9a0ba0f902de88304fa0787fe18e7e19764ecf61"
+                "reference": "8c8a94c3abd60d76ccace897c5dabab35953e5ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/9a0ba0f902de88304fa0787fe18e7e19764ecf61",
-                "reference": "9a0ba0f902de88304fa0787fe18e7e19764ecf61",
+                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/8c8a94c3abd60d76ccace897c5dabab35953e5ca",
+                "reference": "8c8a94c3abd60d76ccace897c5dabab35953e5ca",
                 "shasum": ""
             },
             "require": {
@@ -1724,7 +1724,7 @@
             ],
             "support": {
                 "issues": "https://github.com/TomasVotruba/unused-public/issues",
-                "source": "https://github.com/TomasVotruba/unused-public/tree/0.4.0"
+                "source": "https://github.com/TomasVotruba/unused-public/tree/1.0.0"
             },
             "funding": [
                 {
@@ -1736,7 +1736,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-16T07:27:55+00:00"
+            "time": "2024-10-01T15:42:57+00:00"
         },
         {
             "name": "webmozart/assert",
