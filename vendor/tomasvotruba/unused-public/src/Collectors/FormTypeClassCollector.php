@@ -14,7 +14,7 @@ use TomasVotruba\UnusedPublic\Configuration;
 
 /**
  * Match Symfony data_class element in forms types, as those use magic setters/getters
- * @implements Collector<ArrayItem, array<string>|null>
+ * @implements Collector<ArrayItem, non-empty-array<string>|null>
  */
 final class FormTypeClassCollector implements Collector
 {
@@ -36,7 +36,7 @@ final class FormTypeClassCollector implements Collector
 
     /**
      * @param ArrayItem $node
-     * @return string[]|null
+     * @return non-empty-array<string>|null
      */
     public function processNode(Node $node, Scope $scope): ?array
     {
