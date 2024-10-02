@@ -882,17 +882,17 @@
         },
         {
             "name": "phpstan/phpstan-symfony",
-            "version": "1.4.9",
-            "version_normalized": "1.4.9.0",
+            "version": "1.4.10",
+            "version_normalized": "1.4.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-symfony.git",
-                "reference": "51ab2438fb2695467cf96b58d2f8f28d4dd1e3e9"
+                "reference": "f7d5782044bedf93aeb3f38e09c91148ee90e5a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/51ab2438fb2695467cf96b58d2f8f28d4dd1e3e9",
-                "reference": "51ab2438fb2695467cf96b58d2f8f28d4dd1e3e9",
+                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/f7d5782044bedf93aeb3f38e09c91148ee90e5a1",
+                "reference": "f7d5782044bedf93aeb3f38e09c91148ee90e5a1",
                 "shasum": ""
             },
             "require": {
@@ -921,7 +921,7 @@
                 "symfony/serializer": "^5.4",
                 "symfony/service-contracts": "^2.2.0"
             },
-            "time": "2024-09-05T16:15:09+00:00",
+            "time": "2024-09-26T18:14:50+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -951,7 +951,7 @@
             "description": "Symfony Framework extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-symfony/issues",
-                "source": "https://github.com/phpstan/phpstan-symfony/tree/1.4.9"
+                "source": "https://github.com/phpstan/phpstan-symfony/tree/1.4.10"
             },
             "install-path": "../phpstan/phpstan-symfony"
         },
@@ -1692,17 +1692,17 @@
         },
         {
             "name": "tomasvotruba/type-coverage",
-            "version": "0.3.1",
-            "version_normalized": "0.3.1.0",
+            "version": "1.0.0",
+            "version_normalized": "1.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/type-coverage.git",
-                "reference": "dd47f9506346d12b741b0ca6f98f9d748ca982d5"
+                "reference": "01498b5cef67fa433e2f9f38b696d0ecd5131dca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/dd47f9506346d12b741b0ca6f98f9d748ca982d5",
-                "reference": "dd47f9506346d12b741b0ca6f98f9d748ca982d5",
+                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/01498b5cef67fa433e2f9f38b696d0ecd5131dca",
+                "reference": "01498b5cef67fa433e2f9f38b696d0ecd5131dca",
                 "shasum": ""
             },
             "require": {
@@ -1710,7 +1710,7 @@
                 "php": "^7.2 || ^8.0",
                 "phpstan/phpstan": "^1.9.3"
             },
-            "time": "2024-06-14T15:11:04+00:00",
+            "time": "2024-10-01T15:41:12+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1736,7 +1736,7 @@
             ],
             "support": {
                 "issues": "https://github.com/TomasVotruba/type-coverage/issues",
-                "source": "https://github.com/TomasVotruba/type-coverage/tree/0.3.1"
+                "source": "https://github.com/TomasVotruba/type-coverage/tree/1.0.0"
             },
             "funding": [
                 {
