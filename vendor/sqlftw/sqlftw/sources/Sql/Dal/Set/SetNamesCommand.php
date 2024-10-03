@@ -15,9 +15,9 @@ use SqlFtw\Sql\Charset;
 use SqlFtw\Sql\Collation;
 use SqlFtw\Sql\Expression\DefaultLiteral;
 use SqlFtw\Sql\SqlSerializable;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class SetNamesCommand extends Statement implements SetCommand
+class SetNamesCommand extends StatementImpl implements SetCommand
 {
 
     /** @var Charset|DefaultLiteral */

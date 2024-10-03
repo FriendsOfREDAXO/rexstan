@@ -13,10 +13,10 @@ use LogicException;
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\RootNode;
 use SqlFtw\Sql\InvalidDefinitionException;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 use SqlFtw\Util\TypeChecker;
 
-class GetDiagnosticsCommand extends Statement implements ErrorHandlingCommand
+class GetDiagnosticsCommand extends StatementImpl implements ErrorHandlingCommand
 {
 
     private ?DiagnosticsArea $area;

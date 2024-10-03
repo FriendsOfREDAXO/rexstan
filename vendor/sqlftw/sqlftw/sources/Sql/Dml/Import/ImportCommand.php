@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Dml\Import;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Dml\DmlCommand;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class ImportCommand extends Statement implements DmlCommand
+class ImportCommand extends StatementImpl implements DmlCommand
 {
 
     /** @var non-empty-list<string> */

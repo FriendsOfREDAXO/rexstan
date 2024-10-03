@@ -10,10 +10,9 @@
 namespace SqlFtw\Sql\Routine;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\SqlSerializable;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class LeaveStatement extends Statement implements SqlSerializable
+class LeaveStatement extends StatementImpl
 {
 
     private string $label;

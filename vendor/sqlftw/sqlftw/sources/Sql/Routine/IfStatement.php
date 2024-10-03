@@ -13,9 +13,10 @@ use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\RootNode;
 use SqlFtw\Sql\InvalidDefinitionException;
 use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 use function count;
 
-class IfStatement extends Statement
+class IfStatement extends StatementImpl
 {
 
     /** @var non-empty-list<RootNode> */

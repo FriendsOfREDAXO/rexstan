@@ -12,14 +12,14 @@ namespace SqlFtw\Sql\Ddl\Tablespace;
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Keyword;
 use SqlFtw\Sql\SqlSerializable;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 use function is_bool;
 use function is_int;
 
 /**
  * @phpstan-import-type TablespaceOptionValue from TablespaceOption
  */
-class AlterTablespaceCommand extends Statement implements TablespaceCommand
+class AlterTablespaceCommand extends StatementImpl implements TablespaceCommand
 {
 
     private string $tablespace;

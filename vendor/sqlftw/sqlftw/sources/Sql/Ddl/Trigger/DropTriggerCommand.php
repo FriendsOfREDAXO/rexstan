@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Ddl\Trigger;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class DropTriggerCommand extends Statement implements TriggerCommand
+class DropTriggerCommand extends StatementImpl implements TriggerCommand
 {
 
     private ObjectIdentifier $trigger;

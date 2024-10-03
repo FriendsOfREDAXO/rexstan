@@ -144,7 +144,7 @@ class FeaturesSqlite38 //extends FeaturesList
     public const NON_RESERVED_WORDS = [];
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getReservedWords(): array
     {
@@ -152,7 +152,7 @@ class FeaturesSqlite38 //extends FeaturesList
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getNonReservedWords(): array
     {
@@ -160,7 +160,7 @@ class FeaturesSqlite38 //extends FeaturesList
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getOperators(): array
     {
@@ -169,7 +169,7 @@ class FeaturesSqlite38 //extends FeaturesList
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getTypes(): array
     {
@@ -178,7 +178,7 @@ class FeaturesSqlite38 //extends FeaturesList
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getTypeAliases(): array
     {
@@ -187,7 +187,7 @@ class FeaturesSqlite38 //extends FeaturesList
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getBuiltInFunctions(): array
     {
@@ -196,7 +196,7 @@ class FeaturesSqlite38 //extends FeaturesList
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getSystemVariables(): array
     {

@@ -733,6 +733,7 @@ class MysqlVariable extends SqlEnum
     public const NDB_LOG_TRANSACTION_ID = 'ndb_log_transaction_id';
     public const NDB_LOG_TRANSACTION_COMPRESSION = 'ndb_log_transaction_compression';
     public const NDB_LOG_TRANSACTION_COMPRESSION_LEVEL_ZSTD = 'ndb_log_transaction_compression_level_zstd';
+    public const NDB_LOG_TRANSACTION_DEPENDENCY = 'ndb_log_transaction_dependency';
     public const NDB_LOG_UPDATE_AS_WRITE = 'ndb_log_update_as_write';
     public const NDB_LOG_UPDATE_MINIMAL = 'ndb_log_update_minimal';
     public const NDB_LOG_UPDATED_ONLY = 'ndb_log_updated_only';

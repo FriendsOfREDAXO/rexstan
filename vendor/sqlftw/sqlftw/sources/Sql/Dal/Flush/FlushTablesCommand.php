@@ -12,9 +12,9 @@ namespace SqlFtw\Sql\Dal\Flush;
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Dal\DalCommand;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class FlushTablesCommand extends Statement implements DalCommand
+class FlushTablesCommand extends StatementImpl implements DalCommand
 {
 
     /** @var non-empty-list<ObjectIdentifier>|null */

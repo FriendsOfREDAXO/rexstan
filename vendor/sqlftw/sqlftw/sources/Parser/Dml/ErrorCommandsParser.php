@@ -21,6 +21,7 @@ use SqlFtw\Sql\Dml\Error\ResignalCommand;
 use SqlFtw\Sql\Dml\Error\SignalCommand;
 use SqlFtw\Sql\Dml\Error\SqlStateCategory;
 use SqlFtw\Sql\Dml\Error\StatementInformationItem;
+use SqlFtw\Sql\EntityType;
 use SqlFtw\Sql\Expression\Identifier;
 use SqlFtw\Sql\Expression\IntLiteral;
 use SqlFtw\Sql\Expression\NullLiteral;
@@ -131,7 +132,7 @@ class ErrorCommandsParser
 
             return $variable;
         } else {
-            $name = $tokenList->expectName(null);
+            $name = $tokenList->expectName(EntityType::LOCAL_VARIABLE);
             if ($tokenList->inRoutine() !== null) {
                 // local variable
                 return new SimpleName($name);
@@ -194,7 +195,7 @@ class ErrorCommandsParser
                 throw new ParserException('Only non-success SQL states are allowed.', $tokenList);
             }
         } else {
-            $condition = $tokenList->getNonReservedName(null);
+            $condition = $tokenList->getNonReservedName(EntityType::CONDITION);
         }
         $items = [];
         if ($tokenList->hasKeyword(Keyword::SET)) {

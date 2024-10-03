@@ -14,8 +14,9 @@ use SqlFtw\Sql\Ddl\UserExpression;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
 use SqlFtw\Sql\Expression\QualifiedName;
 use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class CreateTriggerCommand extends Statement implements TriggerCommand
+class CreateTriggerCommand extends StatementImpl implements TriggerCommand
 {
 
     private ObjectIdentifier $trigger;

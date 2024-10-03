@@ -12,6 +12,7 @@
 
 namespace SqlFtw\Resolver\Functions;
 
+use SqlFtw\Platform\Platform;
 use SqlFtw\Resolver\Cast;
 use SqlFtw\Session\Session;
 
@@ -37,12 +38,15 @@ class Functions
     use FunctionsSys; // todo
     use FunctionsXml; // todo
 
+    private Platform $platform;
+
     private Session $session;
 
     private Cast $cast;
 
-    public function __construct(Session $session, Cast $cast)
+    public function __construct(Platform $platform, Session $session, Cast $cast)
     {
+        $this->platform = $platform;
         $this->session = $session;
         $this->cast = $cast;
     }

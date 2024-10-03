@@ -12,9 +12,9 @@ namespace SqlFtw\Sql\Dml\Utility;
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Command;
 use SqlFtw\Sql\Dml\DmlCommand;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class ExplainStatementCommand extends Statement implements DmlCommand
+class ExplainStatementCommand extends StatementImpl implements DmlCommand
 {
 
     private Command $statement;

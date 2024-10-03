@@ -12,6 +12,7 @@ namespace SqlFtw\Parser\Dal;
 use SqlFtw\Parser\TokenList;
 use SqlFtw\Sql\Dal\Plugin\InstallPluginCommand;
 use SqlFtw\Sql\Dal\Plugin\UninstallPluginCommand;
+use SqlFtw\Sql\EntityType;
 use SqlFtw\Sql\Keyword;
 
 class PluginCommandsParser
@@ -23,7 +24,7 @@ class PluginCommandsParser
     public function parseInstallPlugin(TokenList $tokenList): InstallPluginCommand
     {
         $tokenList->expectKeywords(Keyword::INSTALL, Keyword::PLUGIN);
-        $pluginName = $tokenList->expectName(null);
+        $pluginName = $tokenList->expectName(EntityType::PLUGIN);
         $tokenList->expectKeyword(Keyword::SONAME);
         $libName = $tokenList->expectString();
 
@@ -36,7 +37,7 @@ class PluginCommandsParser
     public function parseUninstallPlugin(TokenList $tokenList): UninstallPluginCommand
     {
         $tokenList->expectKeywords(Keyword::UNINSTALL, Keyword::PLUGIN);
-        $pluginName = $tokenList->expectName(null);
+        $pluginName = $tokenList->expectName(EntityType::PLUGIN);
 
         return new UninstallPluginCommand($pluginName);
     }

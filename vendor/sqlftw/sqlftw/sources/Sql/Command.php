@@ -9,7 +9,7 @@
 
 namespace SqlFtw\Sql;
 
-interface Command extends SqlSerializable
+interface Command extends Statement
 {
 
 }

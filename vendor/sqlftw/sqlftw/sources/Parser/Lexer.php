@@ -23,11 +23,11 @@ use SqlFtw\Sql\SqlMode;
 use function array_flip;
 use function array_keys;
 use function array_merge;
-use function array_pop;
 use function array_values;
 use function ctype_alnum;
 use function ctype_alpha;
 use function ctype_digit;
+use function end;
 use function implode;
 use function in_array;
 use function ltrim;
@@ -86,6 +86,8 @@ class Lexer
     /** @var array<string, int> */
     private static array $operatorSymbolsKey;
 
+    private ParserConfig $config;
+
     private Session $session;
 
     private Platform $platform;
@@ -109,11 +111,8 @@ class Lexer
     /** @var list<string> */
     private array $escapeValues;
 
-    public function __construct(
-        Session $session,
-        bool $withComments = true,
-        bool $withWhitespace = false
-    ) {
+    public function __construct(ParserConfig $config, Session $session)
+    {
         if (self::$numbersKey === []) {
             self::$numbersKey = array_flip(self::NUMBERS); // @phpstan-ignore-line
             self::$hexadecKey = array_flip(array_merge(self::NUMBERS, ['A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'F', 'f']));
@@ -122,10 +121,11 @@ class Lexer
             self::$operatorSymbolsKey = array_flip(self::OPERATOR_SYMBOLS);
         }
 
+        $this->config = $config;
         $this->session = $session;
-        $this->platform = $session->getPlatform();
-        $this->withComments = $withComments;
-        $this->withWhitespace = $withWhitespace;
+        $this->platform = $config->getPlatform();
+        $this->withComments = $config->tokenizeComments();
+        $this->withWhitespace = $config->tokenizeWhitespace();
 
         $this->reservedKey = array_flip($this->platform->getReserved());
         $this->keywordsKey = array_flip($this->platform->getNonReserved());
@@ -143,11 +143,10 @@ class Lexer
         // this allows TokenList to not have to call doAutoSkip() million times when there are no skippable tokens produced
         $autoSkip = ($this->withWhitespace ? T::WHITESPACE : 0) | ($this->withComments ? T::COMMENT : 0);
 
-        $platform = $this->session->getPlatform();
-        $extensions = $this->session->getClientSideExtensions();
-        $parseOldNullLiteral = $platform->hasFeature(Feature::OLD_NULL_LITERAL);
-        $parseOptimizerHints = $platform->hasFeature(Feature::OPTIMIZER_HINTS);
-        $allowDelimiterDefinition = ($this->session->getClientSideExtensions() & ClientSideExtension::ALLOW_DELIMITER_DEFINITION) !== 0;
+        $extensions = $this->config->getClientSideExtensions();
+        $parseOldNullLiteral = $this->platform->hasFeature(Feature::OLD_NULL_LITERAL);
+        $parseOptimizerHints = $this->platform->hasFeature(Feature::OPTIMIZER_HINTS);
+        $allowDelimiterDefinition = ($extensions & ClientSideExtension::ALLOW_DELIMITER_DEFINITION) !== 0;
 
         // last significant token parsed (comments and whitespace are skipped here)
         $previous = new Token(TokenType::END, 0, 0, '');
@@ -1002,7 +1001,7 @@ class Lexer
                             $invalid = true;
                             break;
                         }
-                        if ($this->session->getPlatform()->isReserved(strtoupper($del))) {
+                        if ($this->platform->isReserved(strtoupper($del))) {
                             $exception = new LexerException('Delimiter can not be a reserved word', $position, $string);
 
                             $tokens[] = $previous = new Token(T::DELIMITER_DEFINITION | T::INVALID, $start, $row, $del, null, $exception);
@@ -1027,7 +1026,7 @@ class Lexer
                     if ($yieldDelimiter) {
                         $tokens[] = new Token(T::DELIMITER, $start, $row, $delimiter);
                         goto yield_token_list;
-                    } elseif ($previous->type & T::DELIMITER_DEFINITION) {
+                    } elseif (($previous->type & T::DELIMITER_DEFINITION) !== 0) {
                         goto yield_token_list;
                     }
                     break;
@@ -1071,7 +1070,7 @@ class Lexer
                 $invalid = true;
             }
 
-            yield new TokenList($tokens, $this->session, $autoSkip, $invalid);
+            yield new TokenList($tokens, $this->config->getPlatform(), $this->session, $autoSkip, $invalid);
 
             $tokens = [];
             $invalid = false;

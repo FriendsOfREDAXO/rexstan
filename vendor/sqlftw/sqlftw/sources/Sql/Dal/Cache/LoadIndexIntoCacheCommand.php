@@ -10,12 +10,12 @@
 namespace SqlFtw\Sql\Dal\Cache;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
 /**
  * MySQL MyISAM tables only
  */
-class LoadIndexIntoCacheCommand extends Statement implements CacheCommand
+class LoadIndexIntoCacheCommand extends StatementImpl implements CacheCommand
 {
 
     /** @var non-empty-list<TableIndexList> */

@@ -12,9 +12,9 @@ namespace SqlFtw\Sql\Ddl\LogfileGroup;
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Ddl\Table\Option\StorageEngine;
 use SqlFtw\Sql\Expression\SizeLiteral;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class CreateLogfileGroupCommand extends Statement implements LogfileGroupCommand
+class CreateLogfileGroupCommand extends StatementImpl implements LogfileGroupCommand
 {
 
     private string $logFileGroup;

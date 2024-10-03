@@ -10,9 +10,9 @@
 namespace SqlFtw\Sql\Dal\Show;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class ShowProcessListCommand extends Statement implements ShowCommand
+class ShowProcessListCommand extends StatementImpl implements ShowCommand
 {
 
     private bool $full;

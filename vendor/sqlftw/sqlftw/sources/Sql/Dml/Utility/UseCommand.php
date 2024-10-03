@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Dml\Utility;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Dml\DmlCommand;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class UseCommand extends Statement implements DmlCommand
+class UseCommand extends StatementImpl implements DmlCommand
 {
 
     private string $schema;

@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Dml\Error;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\RootNode;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class ResignalCommand extends Statement implements ErrorHandlingCommand
+class ResignalCommand extends StatementImpl implements ErrorHandlingCommand
 {
 
     /** @var SqlState|string|null */

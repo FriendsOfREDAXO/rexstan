@@ -14,9 +14,9 @@ use SqlFtw\Sql\Dml\DmlCommand;
 use SqlFtw\Sql\Dml\OptimizerHint\OptimizerHint;
 use SqlFtw\Sql\Expression\ColumnIdentifier;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-abstract class InsertOrReplaceCommand extends Statement implements DmlCommand
+abstract class InsertOrReplaceCommand extends StatementImpl implements DmlCommand
 {
 
     protected ObjectIdentifier $table;

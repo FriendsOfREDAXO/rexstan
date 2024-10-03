@@ -79,6 +79,8 @@
 
         "tests:run": "php vendor/nette/tester/src/tester -C --colors 1 tests/Parser tests/Resolver",
         "tests:all": [
+            "php84 vendor/nette/tester/src/tester -C --colors 1 tests/Parser tests/Resolver",
+            "php83 vendor/nette/tester/src/tester -C --colors 1 tests/Parser tests/Resolver",
             "php82 vendor/nette/tester/src/tester -C --colors 1 tests/Parser tests/Resolver",
             "php81 vendor/nette/tester/src/tester -C --colors 1 tests/Parser tests/Resolver",
             "php80 vendor/nette/tester/src/tester -C --colors 1 tests/Parser tests/Resolver",
@@ -90,6 +92,8 @@
 
         "phpstan:run": "php vendor/phpstan/phpstan/phpstan analyse -c build/phpstan/phpstan.neon --memory-limit=512M",
         "phpstan:all": [
+            "php84 vendor/phpstan/phpstan/phpstan analyse -c build/phpstan/phpstan.neon --memory-limit=512M",
+            "php83 vendor/phpstan/phpstan/phpstan analyse -c build/phpstan/phpstan.neon --memory-limit=512M",
             "php82 vendor/phpstan/phpstan/phpstan analyse -c build/phpstan/phpstan.neon --memory-limit=512M",
             "php81 vendor/phpstan/phpstan/phpstan analyse -c build/phpstan/phpstan.neon --memory-limit=512M",
             "php80 vendor/phpstan/phpstan/phpstan analyse -c build/phpstan/phpstan.neon --memory-limit=512M",
@@ -108,6 +112,8 @@
 
         "lint:php": "php vendor/php-parallel-lint/php-parallel-lint/parallel-lint sources tests",
         "lint:php-all": [
+            "php84 vendor/php-parallel-lint/php-parallel-lint/parallel-lint sources tests",
+            "php83 vendor/php-parallel-lint/php-parallel-lint/parallel-lint sources tests",
             "php82 vendor/php-parallel-lint/php-parallel-lint/parallel-lint sources tests",
             "php81 vendor/php-parallel-lint/php-parallel-lint/parallel-lint sources tests",
             "php80 vendor/php-parallel-lint/php-parallel-lint/parallel-lint sources tests",

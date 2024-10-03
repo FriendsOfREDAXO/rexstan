@@ -15,9 +15,9 @@ use SqlFtw\Sql\Charset;
 use SqlFtw\Sql\Dml\DmlCommand;
 use SqlFtw\Sql\Dml\DuplicateOption;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-abstract class LoadCommand extends Statement implements DmlCommand
+abstract class LoadCommand extends StatementImpl implements DmlCommand
 {
 
     private string $file;

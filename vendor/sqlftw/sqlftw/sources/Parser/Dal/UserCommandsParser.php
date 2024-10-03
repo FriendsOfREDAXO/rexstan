@@ -66,7 +66,6 @@ use SqlFtw\Sql\Expression\FunctionCall;
 use SqlFtw\Sql\Expression\Operator;
 use SqlFtw\Sql\Expression\StringValue;
 use SqlFtw\Sql\Keyword;
-use SqlFtw\Sql\Statement;
 use SqlFtw\Sql\UserName;
 use function array_values;
 use function count;
@@ -142,8 +141,6 @@ class UserCommandsParser
      *   | factor FINISH REGISTRATION SET CHALLENGE_RESPONSE AS 'auth_string'
      *   | factor UNREGISTER
      * }
-     *
-     * @return UserCommand&Statement
      */
     public function parseAlterUser(TokenList $tokenList): UserCommand
     {
@@ -267,7 +264,6 @@ class UserCommandsParser
      * }
      *
      * @param UserName|FunctionCall $user
-     * @return AlterUserRegistrationCommand&Statement
      */
     private function parseRegistration(TokenList $tokenList, $user, int $factor, bool $ifExists): AlterUserRegistrationCommand
     {
@@ -663,8 +659,6 @@ class UserCommandsParser
      *     TO user [auth_option] [, user [auth_option]] ...
      *     [REQUIRE {NONE | tls_option [[AND] tls_option] ...}]
      *     [WITH {GRANT OPTION | resource_option} ...]
-     *
-     * @return UserCommand&Statement
      */
     public function parseGrant(TokenList $tokenList): UserCommand
     {
@@ -882,8 +876,6 @@ class UserCommandsParser
      * REVOKE [IF EXISTS] role [, role ] ...
      *     FROM user_or_role [, user_or_role ] ...
      *     [IGNORE UNKNOWN USER]
-     *
-     * @return UserCommand&Statement
      */
     public function parseRevoke(TokenList $tokenList): UserCommand
     {

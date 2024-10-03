@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Dal\Reset;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Dal\DalCommand;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class ResetCommand extends Statement implements DalCommand
+class ResetCommand extends StatementImpl implements DalCommand
 {
 
     /** @var non-empty-list<ResetOption> */

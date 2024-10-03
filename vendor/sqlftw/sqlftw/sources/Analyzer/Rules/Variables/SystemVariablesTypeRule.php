@@ -111,7 +111,7 @@ class SystemVariablesTypeRule implements SimpleRule
             if ($value instanceof ExpressionNode && !$value instanceof Value) {
                 // not resolved
                 // todo: insert real static type analysis here : ]
-                $formatter = new Formatter($context->getSession());
+                $formatter = new Formatter($context->getPlatform(), $context->getSession());
                 $expressionString = str_replace("\n", "", $expression->serialize($formatter));
                 $expressionType = get_class($expression);
                 $message = "System variable {$name} assignment with expression \"{$expressionString}\" ({$expressionType}) was not checked.";

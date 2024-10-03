@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Ddl\Table;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class DropTableCommand extends Statement implements DdlTablesCommand
+class DropTableCommand extends StatementImpl implements DdlTablesCommand
 {
 
     /** @var non-empty-list<ObjectIdentifier> */

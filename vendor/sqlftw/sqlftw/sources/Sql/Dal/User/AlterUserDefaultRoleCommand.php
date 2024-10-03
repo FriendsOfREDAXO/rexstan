@@ -13,10 +13,10 @@ use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\FunctionCall;
 use SqlFtw\Sql\InvalidDefinitionException;
 use SqlFtw\Sql\SqlSerializable;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 use SqlFtw\Sql\UserName;
 
-class AlterUserDefaultRoleCommand extends Statement implements UserCommand
+class AlterUserDefaultRoleCommand extends StatementImpl implements UserCommand
 {
 
     public const NO_ROLES = false;

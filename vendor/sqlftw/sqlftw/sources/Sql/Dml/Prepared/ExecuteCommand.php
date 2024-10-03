@@ -10,10 +10,10 @@
 namespace SqlFtw\Sql\Dml\Prepared;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 use function implode;
 
-class ExecuteCommand extends Statement implements PreparedStatementCommand
+class ExecuteCommand extends StatementImpl implements PreparedStatementCommand
 {
 
     private string $name;

@@ -12,9 +12,9 @@ namespace SqlFtw\Sql\Dal\Replication;
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\RootNode;
 use SqlFtw\Sql\InvalidDefinitionException;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class PurgeBinaryLogsCommand extends Statement implements ReplicationCommand
+class PurgeBinaryLogsCommand extends StatementImpl implements ReplicationCommand
 {
 
     private ?string $toLog;

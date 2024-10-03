@@ -12,9 +12,9 @@ namespace SqlFtw\Sql\Dal\Show;
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\RootNode;
 use SqlFtw\Sql\Expression\Scope;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class ShowVariablesCommand extends Statement implements ShowCommand
+class ShowVariablesCommand extends StatementImpl implements ShowCommand
 {
 
     private ?Scope $scope;

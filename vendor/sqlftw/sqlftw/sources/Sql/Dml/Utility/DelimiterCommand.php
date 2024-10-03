@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Dml\Utility;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Dml\DmlCommand;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class DelimiterCommand extends Statement implements DmlCommand
+class DelimiterCommand extends StatementImpl implements DmlCommand
 {
 
     private string $newDelimiter;

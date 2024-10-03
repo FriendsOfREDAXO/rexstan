@@ -187,6 +187,8 @@ class ColumnDefinition implements TableItem
     }
 
     /**
+     * NullLiteral means default value is NULL. PHP null means there is no default value
+     *
      * @return scalar|RootNode|null
      */
     public function getDefaultValue()

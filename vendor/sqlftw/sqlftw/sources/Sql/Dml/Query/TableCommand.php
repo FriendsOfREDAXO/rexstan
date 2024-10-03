@@ -15,9 +15,9 @@ use SqlFtw\Sql\Expression\OrderByExpression;
 use SqlFtw\Sql\Expression\Placeholder;
 use SqlFtw\Sql\Expression\SimpleName;
 use SqlFtw\Sql\SqlSerializable;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class TableCommand extends Statement implements SimpleQuery
+class TableCommand extends StatementImpl implements SimpleQuery
 {
 
     private ObjectIdentifier $table;

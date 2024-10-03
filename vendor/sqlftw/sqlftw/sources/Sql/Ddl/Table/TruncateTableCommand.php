@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Ddl\Table;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class TruncateTableCommand extends Statement implements DdlTableCommand
+class TruncateTableCommand extends StatementImpl implements DdlTableCommand
 {
 
     private ObjectIdentifier $name;

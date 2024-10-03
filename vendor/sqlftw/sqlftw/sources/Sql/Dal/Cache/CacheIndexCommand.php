@@ -10,13 +10,13 @@
 namespace SqlFtw\Sql\Dal\Cache;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 use function is_array;
 
 /**
  * MySQL MyISAM tables only
  */
-class CacheIndexCommand extends Statement implements CacheCommand
+class CacheIndexCommand extends StatementImpl implements CacheCommand
 {
 
     private string $keyCache;

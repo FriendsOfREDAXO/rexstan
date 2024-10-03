@@ -13,6 +13,7 @@ namespace SqlFtw\Parser;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Parser\Dml\QueryParser;
+use SqlFtw\Platform\Platform;
 use SqlFtw\Session\SessionUpdater;
 use SqlFtw\Sql\Command;
 use SqlFtw\Sql\Dal\Flush\FlushCommand;
@@ -75,6 +76,8 @@ use function in_array;
 class RoutineBodyParser
 {
 
+    private Platform $platform;
+
     private Parser $parser;
 
     private ExpressionParser $expressionParser;
@@ -84,11 +87,13 @@ class RoutineBodyParser
     private SessionUpdater $sessionUpdater;
 
     public function __construct(
+        Platform $platform,
         Parser $parser,
         ExpressionParser $expressionParser,
         QueryParser $queryParser,
         SessionUpdater $sessionUpdater
     ) {
+        $this->platform = $platform;
         $this->parser = $parser;
         $this->expressionParser = $expressionParser;
         $this->queryParser = $queryParser;
@@ -196,13 +201,13 @@ class RoutineBodyParser
                 $statement = $this->parseDeclare($tokenList);
                 break;
             case Keyword::OPEN:
-                $statement = new OpenCursorStatement($tokenList->expectName(null));
+                $statement = new OpenCursorStatement($tokenList->expectName(EntityType::CURSOR));
                 break;
             case Keyword::FETCH:
                 $statement = $this->parseFetch($tokenList);
                 break;
             case Keyword::CLOSE:
-                $statement = new CloseCursorStatement($tokenList->expectName(null));
+                $statement = new CloseCursorStatement($tokenList->expectName(EntityType::CURSOR));
                 break;
             case Keyword::RETURN:
                 $statement = new ReturnStatement($this->expressionParser->parseExpression($tokenList));
@@ -258,9 +263,6 @@ class RoutineBodyParser
         return $statement;
     }
 
-    /**
-     * @return Command&Statement
-     */
     private function parseCommand(TokenList $tokenList, bool $topLevel): Command
     {
         $in = $tokenList->inRoutine();
@@ -299,7 +301,7 @@ class RoutineBodyParser
             // ok
         } else {
             $class = get_class($statement);
-            if (!in_array($class, $tokenList->getSession()->getPlatform()->getPreparableCommands(), true)) {
+            if (!in_array($class, $this->platform->getPreparableCommands(), true)) {
                 throw new ParserException('Non-preparable statement in routine body: ' . $class, $tokenList);
             }
         }
@@ -447,7 +449,7 @@ class RoutineBodyParser
             $condition = $this->expressionParser->parseExpression($tokenList);
             $tokenList->expectKeyword(Keyword::WHEN);
         }
-        $formatter = new Formatter($tokenList->getSession());
+        $formatter = new Formatter($this->platform, $tokenList->getSession());
         $values = [];
         /** @var non-empty-list<list<Statement>> $statementLists */
         $statementLists = [];
@@ -455,7 +457,7 @@ class RoutineBodyParser
             $expression = $this->expressionParser->parseExpression($tokenList);
             $key = $expression->serialize($formatter);
             if (isset($values[$key])) {
-                throw new ParserException('Duplicit CASE value.', $tokenList);
+                throw new ParserException('Duplicate CASE value.', $tokenList);
             }
             $values[$key] = $expression;
             $tokenList->expectKeyword(Keyword::THEN);
@@ -557,7 +559,7 @@ class RoutineBodyParser
                         throw new ParserException('Only non-success SQL states are allowed.', $tokenList);
                     }
                 } else {
-                    $value = $tokenList->getNonReservedName(null);
+                    $value = $tokenList->getNonReservedName(EntityType::CONDITION);
                     if ($value !== null) {
                         $type = new ConditionType(ConditionType::CONDITION);
                     } else {
@@ -579,7 +581,7 @@ class RoutineBodyParser
             return new DeclareHandlerStatement($action, $conditions, $statement);
         }
 
-        $name = $tokenList->expectNonReservedName(null, null, TokenType::AT_VARIABLE);
+        $name = $tokenList->expectNonReservedName(EntityType::GENERAL, TokenType::AT_VARIABLE); // todo: type - cursor or condition
 
         if ($tokenList->hasKeyword(Keyword::CURSOR)) {
             $tokenList->expectKeyword(Keyword::FOR);
@@ -610,7 +612,7 @@ class RoutineBodyParser
         /** @var non-empty-list<string> $names */
         $names = [$name];
         while ($tokenList->hasSymbol(',')) {
-            $names[] = $tokenList->expectNonReservedName(null, null, TokenType::AT_VARIABLE);
+            $names[] = $tokenList->expectNonReservedName(EntityType::LOCAL_VARIABLE, TokenType::AT_VARIABLE);
         }
         $type = $this->expressionParser->parseColumnType($tokenList);
         $charset = $type->getCharset();
@@ -636,11 +638,11 @@ class RoutineBodyParser
         } else {
             $tokenList->passKeyword(Keyword::FROM);
         }
-        $cursor = $tokenList->expectName(null);
+        $cursor = $tokenList->expectName(EntityType::CURSOR);
         $tokenList->expectKeyword(Keyword::INTO);
         $variables = [];
         do {
-            $variables[] = $tokenList->expectName(null);
+            $variables[] = $tokenList->expectName(EntityType::LOCAL_VARIABLE);
         } while ($tokenList->hasSymbol(','));
 
         return new FetchStatement($cursor, $variables);

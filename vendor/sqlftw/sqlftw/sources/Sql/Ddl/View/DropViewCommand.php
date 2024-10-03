@@ -12,9 +12,9 @@ namespace SqlFtw\Sql\Ddl\View;
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Ddl\SchemaObjectsCommand;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class DropViewCommand extends Statement implements ViewCommand, SchemaObjectsCommand
+class DropViewCommand extends StatementImpl implements ViewCommand, SchemaObjectsCommand
 {
 
     /** @var non-empty-list<ObjectIdentifier> */

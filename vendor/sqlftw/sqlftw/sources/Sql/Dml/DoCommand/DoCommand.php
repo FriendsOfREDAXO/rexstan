@@ -12,9 +12,9 @@ namespace SqlFtw\Sql\Dml\DoCommand;
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Dml\DmlCommand;
 use SqlFtw\Sql\Expression\ExpressionNode;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class DoCommand extends Statement implements DmlCommand
+class DoCommand extends StatementImpl implements DmlCommand
 {
 
     /** @var non-empty-list<ExpressionNode> */

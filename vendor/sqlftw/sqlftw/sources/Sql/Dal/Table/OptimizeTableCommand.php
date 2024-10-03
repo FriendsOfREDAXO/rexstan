@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Dal\Table;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class OptimizeTableCommand extends Statement implements DalTablesCommand
+class OptimizeTableCommand extends StatementImpl implements DalTablesCommand
 {
 
     /** @var non-empty-list<ObjectIdentifier> */

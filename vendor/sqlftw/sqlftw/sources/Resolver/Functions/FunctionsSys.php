@@ -146,7 +146,7 @@ trait FunctionsSys
      */
     public function sys_version_major(): int
     {
-        return $this->session->getPlatform()->getVersion()->getMajor();
+        return $this->platform->getVersion()->getMajor();
     }
 
     /**
@@ -154,7 +154,7 @@ trait FunctionsSys
      */
     public function sys_version_minor(): int
     {
-        return $this->session->getPlatform()->getVersion()->getMinor();
+        return $this->platform->getVersion()->getMinor();
     }
 
     /**
@@ -162,7 +162,7 @@ trait FunctionsSys
      */
     public function sys_version_patch(): int
     {
-        return $this->session->getPlatform()->getVersion()->getPatch();
+        return $this->platform->getVersion()->getPatch();
     }
 
 }

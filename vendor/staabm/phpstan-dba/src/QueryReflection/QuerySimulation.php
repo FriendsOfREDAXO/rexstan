@@ -5,13 +5,8 @@ declare(strict_types=1);
 namespace staabm\PHPStanDba\QueryReflection;
 
 use PHPStan\ShouldNotHappenException;
-use PHPStan\Type\Accessory\AccessoryType;
-use PHPStan\Type\ArrayType;
-use PHPStan\Type\BooleanType;
 use PHPStan\Type\ConstantScalarType;
 use PHPStan\Type\ErrorType;
-use PHPStan\Type\FloatType;
-use PHPStan\Type\IntegerType;
 use PHPStan\Type\IntersectionType;
 use PHPStan\Type\MixedType;
 use PHPStan\Type\ObjectType;
@@ -39,26 +34,19 @@ final class QuerySimulation
             return (string) $paramType->getValue();
         }
 
-        if ($paramType instanceof ArrayType) {
-            return self::simulateParamValueType($paramType->getItemType(), $preparedParam);
+        if ($paramType->isArray()->yes()) {
+            return self::simulateParamValueType($paramType->getIterableValueType(), $preparedParam);
         }
 
-        $integerType = new IntegerType();
-        if ($integerType->isSuperTypeOf($paramType)->yes()) {
+        if (
+            $paramType->isInteger()->yes()
+            || $paramType->isBoolean()->yes()
+            || $paramType->isNumericString()->yes()
+        ) {
             return '1';
         }
 
-        $booleanType = new BooleanType();
-        if ($booleanType->isSuperTypeOf($paramType)->yes()) {
-            return '1';
-        }
-
-        if ($paramType->isNumericString()->yes()) {
-            return '1';
-        }
-
-        $floatType = new FloatType();
-        if ($floatType->isSuperTypeOf($paramType)->yes()) {
+        if ($paramType->isFloat()->yes()) {
             return '1.0';
         }
 
@@ -100,19 +88,6 @@ final class QuerySimulation
             }
 
             return null;
-        }
-
-        if ($paramType instanceof IntersectionType) {
-            foreach ($paramType->getTypes() as $type) {
-                if ($type instanceof AccessoryType) {
-                    continue;
-                }
-
-                $simulated = self::simulateParamValueType($type, $preparedParam);
-                if (null !== $simulated) {
-                    return $simulated;
-                }
-            }
         }
 
         // all types which we can't simulate and render a query unresolvable at analysis time

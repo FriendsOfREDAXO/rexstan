@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Dal\Show;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\RootNode;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class ShowCollationCommand extends Statement implements ShowCommand
+class ShowCollationCommand extends StatementImpl implements ShowCommand
 {
 
     private ?string $like;

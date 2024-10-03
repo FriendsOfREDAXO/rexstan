@@ -11,11 +11,11 @@ namespace SqlFtw\Sql\Dal\Flush;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Dal\DalCommand;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 use function array_map;
 use function implode;
 
-class FlushCommand extends Statement implements DalCommand
+class FlushCommand extends StatementImpl implements DalCommand
 {
 
     /** @var non-empty-list<FlushOption> */

@@ -16,9 +16,9 @@ use SqlFtw\Sql\Ddl\Table\DdlTableCommand;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
 use SqlFtw\Sql\Expression\QualifiedName;
 use SqlFtw\Sql\Expression\SimpleName;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class DropIndexCommand extends Statement implements IndexCommand, DdlTableCommand
+class DropIndexCommand extends StatementImpl implements IndexCommand, DdlTableCommand
 {
 
     private string $index;

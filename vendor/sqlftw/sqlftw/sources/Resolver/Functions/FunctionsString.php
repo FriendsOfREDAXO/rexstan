@@ -299,6 +299,10 @@ trait FunctionsString
         $decimals = $this->cast->toInt($decimals);
         $locale = $this->cast->toString($locale);
 
+        if ($decimals < 0) {
+            $decimals = 0;
+        }
+
         if ($number === null || $decimals === null) {
             return null;
         } else {

@@ -10,9 +10,9 @@
 namespace SqlFtw\Sql\Dml\Prepared;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class DeallocatePrepareCommand extends Statement implements PreparedStatementCommand
+class DeallocatePrepareCommand extends StatementImpl implements PreparedStatementCommand
 {
 
     private string $name;

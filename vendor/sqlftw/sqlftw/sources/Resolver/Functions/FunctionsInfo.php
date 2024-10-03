@@ -168,7 +168,7 @@ trait FunctionsInfo
      */
     public function version(): string
     {
-        return $this->session->getPlatform()->getVersion()->format();
+        return $this->platform->getVersion()->format();
     }
 
 }

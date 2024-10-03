@@ -49,7 +49,7 @@ class CacheCommandsParser
         $partitions = $this->parsePartitions($tokenList);
 
         $tokenList->expectKeyword(Keyword::IN);
-        $keyCache = $tokenList->expectName(null);
+        $keyCache = $tokenList->expectName(EntityType::INDEX_CACHE);
 
         return new CacheIndexCommand($keyCache, $tableIndexLists, $partitions);
     }

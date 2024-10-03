@@ -10,9 +10,9 @@
 namespace SqlFtw\Sql\Dml\Transaction;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class LockTablesCommand extends Statement implements TransactionCommand
+class LockTablesCommand extends StatementImpl implements TransactionCommand
 {
 
     /** @var non-empty-list<LockTablesItem> */

@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Ddl\Tablespace;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Ddl\Table\Option\StorageEngine;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class DropTablespaceCommand extends Statement implements TablespaceCommand
+class DropTablespaceCommand extends StatementImpl implements TablespaceCommand
 {
 
     private string $tablespace;

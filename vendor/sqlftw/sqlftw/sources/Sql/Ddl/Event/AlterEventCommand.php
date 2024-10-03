@@ -13,8 +13,9 @@ use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Ddl\UserExpression;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
 use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class AlterEventCommand extends Statement implements EventCommand
+class AlterEventCommand extends StatementImpl implements EventCommand
 {
 
     private ObjectIdentifier $event;

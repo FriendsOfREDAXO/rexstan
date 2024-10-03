@@ -26,6 +26,7 @@ use SqlFtw\Sql\Dml\Transaction\StartTransactionCommand;
 use SqlFtw\Sql\Dml\Transaction\TransactionIsolationLevel;
 use SqlFtw\Sql\Dml\Transaction\UnlockInstanceCommand;
 use SqlFtw\Sql\Dml\Transaction\UnlockTablesCommand;
+use SqlFtw\Sql\EntityType;
 use SqlFtw\Sql\Expression\Scope;
 use SqlFtw\Sql\Keyword;
 
@@ -99,7 +100,7 @@ class TransactionCommandsParser
     public function parseReleaseSavepoint(TokenList $tokenList): ReleaseSavepointCommand
     {
         $tokenList->expectKeywords(Keyword::RELEASE, Keyword::SAVEPOINT);
-        $name = $tokenList->expectName(null);
+        $name = $tokenList->expectName(EntityType::SAVEPOINT);
 
         return new ReleaseSavepointCommand($name);
     }
@@ -143,7 +144,7 @@ class TransactionCommandsParser
         $tokenList->expectKeyword(Keyword::TO);
         $tokenList->passKeyword(Keyword::SAVEPOINT);
 
-        $name = $tokenList->expectName(null);
+        $name = $tokenList->expectName(EntityType::SAVEPOINT);
 
         return new RollbackToSavepointCommand($name);
     }
@@ -154,7 +155,7 @@ class TransactionCommandsParser
     public function parseSavepoint(TokenList $tokenList): SavepointCommand
     {
         $tokenList->expectKeyword(Keyword::SAVEPOINT);
-        $name = $tokenList->expectName(null);
+        $name = $tokenList->expectName(EntityType::SAVEPOINT);
 
         return new SavepointCommand($name);
     }

@@ -19,9 +19,9 @@ use SqlFtw\Sql\Expression\Placeholder;
 use SqlFtw\Sql\Expression\SimpleName;
 use SqlFtw\Sql\InvalidDefinitionException;
 use SqlFtw\Sql\SqlSerializable;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class SelectCommand extends Statement implements SimpleQuery
+class SelectCommand extends StatementImpl implements SimpleQuery
 {
 
     /** @var non-empty-list<SelectExpression> */

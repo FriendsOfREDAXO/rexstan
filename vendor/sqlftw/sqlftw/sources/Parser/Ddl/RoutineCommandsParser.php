@@ -24,6 +24,7 @@ use SqlFtw\Sql\Ddl\Routine\InOutParamFlag;
 use SqlFtw\Sql\Ddl\Routine\ProcedureParam;
 use SqlFtw\Sql\Ddl\Routine\RoutineSideEffects;
 use SqlFtw\Sql\Ddl\SqlSecurity;
+use SqlFtw\Sql\EntityType;
 use SqlFtw\Sql\Expression\Operator;
 use SqlFtw\Sql\Keyword;
 use SqlFtw\Sql\Routine\RoutineType;
@@ -165,9 +166,9 @@ class RoutineCommandsParser
         $tokenList->expectSymbol('(');
         if (!$tokenList->hasSymbol(')')) {
             do {
-                $param = $tokenList->expectName(null);
+                $param = $tokenList->expectName(EntityType::PARAMETER);
                 if (isset($params[$param])) {
-                    throw new ParserException('Duplicit parameter name.', $tokenList);
+                    throw new ParserException('Duplicate parameter name.', $tokenList);
                 }
                 $type = $this->expressionParser->parseColumnType($tokenList);
                 $charset = $type->getCharset();
@@ -236,9 +237,9 @@ class RoutineCommandsParser
         if (!$tokenList->hasSymbol(')')) {
             do {
                 $inOut = $tokenList->getKeywordEnum(InOutParamFlag::class);
-                $param = $tokenList->expectName(null);
+                $param = $tokenList->expectName(EntityType::PARAMETER);
                 if (isset($params[$param])) {
-                    throw new ParserException('Duplicit parameter name.', $tokenList);
+                    throw new ParserException('Duplicate parameter name.', $tokenList);
                 }
                 $type = $this->expressionParser->parseColumnType($tokenList);
                 $charset = $type->getCharset();

@@ -20,30 +20,30 @@ use SqlFtw\Session\Session;
 class SimpleContext
 {
 
-    private Session $session;
-
     private Platform $platform;
+
+    private Session $session;
 
     private ExpressionResolver $resolver;
 
     private CastingTypeChecker $typeChecker;
 
-    public function __construct(Session $session, ExpressionResolver $resolver)
+    public function __construct(Platform $platform, Session $session, ExpressionResolver $resolver)
     {
+        $this->platform = $platform;
         $this->session = $session;
-        $this->platform = $session->getPlatform();
         $this->resolver = $resolver;
         $this->typeChecker = new CastingTypeChecker();
-    }
-
-    public function getSession(): Session
-    {
-        return $this->session;
     }
 
     public function getPlatform(): Platform
     {
         return $this->platform;
+    }
+
+    public function getSession(): Session
+    {
+        return $this->session;
     }
 
     public function getResolver(): ExpressionResolver

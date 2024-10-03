@@ -13,9 +13,10 @@ use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Charset;
 use SqlFtw\Sql\Collation;
 use SqlFtw\Sql\Ddl\Table\Option\ThreeStateValue;
+use SqlFtw\Sql\SqlSerializable;
 use function implode;
 
-class SchemaOptions implements SchemaCommand
+class SchemaOptions implements SqlSerializable
 {
 
     private ?Charset $charset;

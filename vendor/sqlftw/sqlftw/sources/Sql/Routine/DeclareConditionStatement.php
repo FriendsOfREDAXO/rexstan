@@ -11,10 +11,9 @@ namespace SqlFtw\Sql\Routine;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Dml\Error\SqlState;
-use SqlFtw\Sql\SqlSerializable;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class DeclareConditionStatement extends Statement implements SqlSerializable
+class DeclareConditionStatement extends StatementImpl
 {
 
     private string $condition;

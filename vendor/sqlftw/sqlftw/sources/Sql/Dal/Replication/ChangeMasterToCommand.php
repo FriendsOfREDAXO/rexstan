@@ -13,7 +13,7 @@ use Dogma\Arr;
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\TimeIntervalExpression;
 use SqlFtw\Sql\InvalidDefinitionException;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 use SqlFtw\Util\TypeChecker;
 use function array_filter;
 use function implode;
@@ -21,7 +21,7 @@ use function implode;
 /**
  * @phpstan-import-type SlaveOptionValue from SlaveOption
  */
-class ChangeMasterToCommand extends Statement implements ReplicationCommand
+class ChangeMasterToCommand extends StatementImpl implements ReplicationCommand
 {
 
     /** @var non-empty-array<SlaveOption::*, SlaveOptionValue|null> */

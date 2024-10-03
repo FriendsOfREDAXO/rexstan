@@ -15,11 +15,11 @@ use SqlFtw\Sql\Expression\Placeholder;
 use SqlFtw\Sql\Expression\SimpleName;
 use SqlFtw\Sql\InvalidDefinitionException;
 use SqlFtw\Sql\SqlSerializable;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 use function array_values;
 use function count;
 
-class QueryExpression extends Statement implements Query
+class QueryExpression extends StatementImpl implements Query
 {
 
     /** @var non-empty-list<Query> */

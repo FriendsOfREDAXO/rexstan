@@ -2382,6 +2382,7 @@ class MysqlFeatures extends FeaturesList
         [MysqlVariable::NDB_LOG_ORIG, self::MIN, self::MAX],
         [MysqlVariable::NDB_LOG_TRANSACTION_COMPRESSION, 80031, self::MAX],
         [MysqlVariable::NDB_LOG_TRANSACTION_COMPRESSION_LEVEL_ZSTD, 80031, self::MAX],
+        [MysqlVariable::NDB_LOG_TRANSACTION_DEPENDENCY, 80033, self::MAX],
         [MysqlVariable::NDB_LOG_TRANSACTION_ID, self::MIN, self::MAX],
         [MysqlVariable::NDB_LOG_UPDATE_AS_WRITE, self::MIN, self::MAX],
         [MysqlVariable::NDB_LOG_UPDATE_MINIMAL, 50636, 50699],
@@ -2712,35 +2713,53 @@ class MysqlFeatures extends FeaturesList
 
     /** @var array<EntityType::*, int> */
     public array $maxLengths = [
+        EntityType::GENERAL => 65535, // limit unknown, but bigger than 64
         EntityType::SCHEMA => 64,
         EntityType::TABLE => 64,
         EntityType::VIEW => 64,
         EntityType::COLUMN => 64,
         EntityType::INDEX => 64,
+        EntityType::INDEX_PART => 64, // not documented
+        EntityType::INDEX_CACHE => 64, // not documented
+        EntityType::INDEX_PARSER => 64, // not documented
         EntityType::CONSTRAINT => 64,
+        EntityType::TRIGGER => 64, // not documented
         EntityType::ROUTINE => 64,
         EntityType::EVENT => 64, // not documented
-        EntityType::TRIGGER => 64, // not documented
-        EntityType::SYSTEM_VARIABLE => 64, // not documented
-        EntityType::LOCAL_VARIABLE => 64, // not documented
-        EntityType::USER_VARIABLE => 64,
         EntityType::TABLESPACE => 64,
         EntityType::PARTITION => 64, // not documented
         EntityType::SERVER => 64,
+        EntityType::PLUGIN => 64, // not documented
         EntityType::LOG_FILE_GROUP => 64,
         EntityType::RESOURCE_GROUP => 64,
-        EntityType::QUERY_BLOCK => 64,
-        EntityType::ALIAS => 256,
-        EntityType::LABEL => 256, // doc says 16, but db parses anything
+        EntityType::SYSTEM_VARIABLE => 64, // not documented
         EntityType::USER => 32,
         EntityType::HOST => 255,
-        EntityType::XA_TRANSACTION => 64,
         EntityType::CHANNEL => 64,
         EntityType::SRS => 80,
+        EntityType::CHARACTER_SET => 64, // not documented
         EntityType::ENUM_VALUE => 255,
         EntityType::FIELD_COMMENT => 1024,
         EntityType::TABLE_COMMENT => 2048,
         EntityType::INDEX_COMMENT => 1024,
+
+        EntityType::USER_VARIABLE => 64,
+        EntityType::USER_LOCK => 64, // not documented
+        EntityType::PREPARED_STATEMENT => 64, // not documented
+        EntityType::SAVEPOINT => 64, // not documented
+        EntityType::XA_TRANSACTION => 64,
+
+        EntityType::PARAMETER => 64, // not documented
+        EntityType::LOCAL_VARIABLE => 64, // not documented
+        EntityType::CURSOR => 64, // not documented
+        EntityType::CONDITION => 64, // not documented
+
+        EntityType::WINDOW => 64, // not documented
+        EntityType::CTE => 64, // not documented
+        EntityType::QUERY_BLOCK => 64,
+        EntityType::ALIAS => 256,
+        EntityType::LABEL => 256, // doc says 16, but DB parses anything
+        EntityType::ODBC_EXPRESSION_IDENTIFIER => 64, // not documented
     ];
 
 }

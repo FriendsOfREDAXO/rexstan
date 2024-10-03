@@ -34,7 +34,6 @@ use SqlFtw\Sql\Expression\PrimaryLiteral;
 use SqlFtw\Sql\Expression\RootNode;
 use SqlFtw\Sql\Expression\SimpleName;
 use SqlFtw\Sql\Keyword;
-use SqlFtw\Sql\Statement;
 use SqlFtw\Sql\SubqueryType;
 use function count;
 
@@ -276,9 +275,6 @@ class TableReferenceParser
         }
     }
 
-    /**
-     * @return Query&Statement
-     */
     private function parseSubquery(TokenList $tokenList): Query
     {
         $tokenList->startSubquery(SubqueryType::FROM);

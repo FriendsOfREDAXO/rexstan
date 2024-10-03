@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Dal\Shutdown;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Dal\DalCommand;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class ShutdownCommand extends Statement implements DalCommand
+class ShutdownCommand extends StatementImpl implements DalCommand
 {
 
     public function serialize(Formatter $formatter): string

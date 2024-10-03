@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Ddl\Spatial;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\InvalidDefinitionException;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class CreateSpatialReferenceSystemCommand extends Statement implements SpatialReferenceSystemCommand
+class CreateSpatialReferenceSystemCommand extends StatementImpl implements SpatialReferenceSystemCommand
 {
 
     private int $srid;
