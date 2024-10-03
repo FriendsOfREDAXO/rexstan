@@ -6,6 +6,7 @@
 /tests/data/addons/developer/Module Navigationspunkt (Anker).input.php:-1:Module "Module Navigationspunkt (Anker)" contains ouput value "REX_LINK[1]" which is not used in module input.
 /tests/data/addons/developer/Module Navigationspunkt (Anker).input.php:-1:Module "Module Navigationspunkt (Anker)" contains ouput value "REX_MEDIA[2]" which is not used in module input.
 /tests/data/addons/developer/Module Navigationspunkt (Anker).input.php:-1:Module "Module Navigationspunkt (Anker)" contains ouput value "REX_VALUE[10]" which is not used in module input.
+/tests/data/addons/developer/Module Navigationspunkt (Anker).input.php:43:Expression "$x + []" on a separate line does not do anything.
 /tests/data/addons/developer/Module Navigationspunkt (Anker).output.php:44:Loose comparison via "==" is not allowed.
 /tests/data/addons/developer/Module Navigationspunkt (Anker).output.php:47:Loose comparison via "==" is not allowed.
 /tests/data/addons/developer/Template ctypes.template.php:-1:Template "Template ctypes" includes invalid template by ID "REX_TEMPLATE[99999999]"
@@ -15,6 +16,7 @@
 /tests/data/any-get.php:13:No rex_media found with id 'does-not-exist.jpg'.
 /tests/data/any-get.php:14:No rex_article found with id 9999999.
 /tests/data/any-get.php:15:No rex_category found with id 9999999.
+/tests/data/multi-use.php:14:Expression on left side of ?? is not nullable.
 /tests/data/object-oriented-framework.php:22:Unknown name 'unknownColumn' given to rex_user::getValue().
 /tests/data/object-oriented-framework.php:24:No rex_media found with id 'markus.jpg'.
 /tests/data/object-oriented-framework.php:30:Unknown name 'unknownColumn' given to rex_media::getValue().

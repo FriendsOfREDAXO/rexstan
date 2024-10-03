@@ -23,7 +23,7 @@ final class RexSqlFactoryDynamicReturnTypeExtension implements DynamicStaticMeth
         return strtolower($methodReflection->getName()) === 'factory';
     }
 
-    public function getTypeFromStaticMethodCall(MethodReflection $methodReflection, StaticCall $methodCall, Scope $scope): ?Type
+    public function getTypeFromStaticMethodCall(MethodReflection $methodReflection, StaticCall $methodCall, Scope $scope): Type
     {
         return new RexSqlObjectType();
     }

@@ -82,11 +82,7 @@ final class RexSqlInjectionRule implements Rule
         }
 
         $callerType = $scope->getType($methodCall->var);
-        if (!$callerType instanceof TypeWithClassName) {
-            return [];
-        }
-
-        if ($callerType->getClassName() !== rex_sql::class) {
+        if ($callerType->getObjectClassNames() !== [rex_sql::class]) {
             return [];
         }
 
@@ -244,18 +240,15 @@ final class RexSqlInjectionRule implements Rule
             return true;
         }
 
-        $integer = new IntegerType();
-        if ($integer->isSuperTypeOf($type)->yes()) {
+        if ($type->isInteger()->yes()) {
             return true;
         }
 
-        $bool = new BooleanType();
-        if ($bool->isSuperTypeOf($type)->yes()) {
+        if ($type->isBoolean()->yes()) {
             return true;
         }
 
-        $float = new FloatType();
-        if ($float->isSuperTypeOf($type)->yes()) {
+        if ($type->isFloat()->yes()) {
             return true;
         }
 
