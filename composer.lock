@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "359e153af4970e8c825c4d84076b1919",
+    "content-hash": "da7b7413ccac26dedc7efbb9f614c4e9",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -988,16 +988,16 @@
         },
         {
             "name": "sqlftw/sqlftw",
-            "version": "v0.1.15",
+            "version": "v0.1.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SQLFTW/sqlftw.git",
-                "reference": "a52e714d6d2b26b4b647988c47bd93f489c016ea"
+                "reference": "9133b54d23ffc944b9d371033d335ea4a4d01039"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SQLFTW/sqlftw/zipball/a52e714d6d2b26b4b647988c47bd93f489c016ea",
-                "reference": "a52e714d6d2b26b4b647988c47bd93f489c016ea",
+                "url": "https://api.github.com/repos/SQLFTW/sqlftw/zipball/9133b54d23ffc944b9d371033d335ea4a4d01039",
+                "reference": "9133b54d23ffc944b9d371033d335ea4a4d01039",
                 "shasum": ""
             },
             "require": {
@@ -1032,9 +1032,9 @@
             "homepage": "https://github.com/sqlftw/sqlftw",
             "support": {
                 "issues": "https://github.com/SQLFTW/sqlftw/issues",
-                "source": "https://github.com/SQLFTW/sqlftw/tree/v0.1.15"
+                "source": "https://github.com/SQLFTW/sqlftw/tree/v0.1.16"
             },
-            "time": "2024-02-27T16:57:30+00:00"
+            "time": "2024-08-20T13:37:36+00:00"
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
