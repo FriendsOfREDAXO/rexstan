@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Ddl\Routine;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class DropProcedureCommand extends Statement implements StoredProcedureCommand, DropRoutineCommand
+class DropProcedureCommand extends StatementImpl implements StoredProcedureCommand, DropRoutineCommand
 {
 
     private ObjectIdentifier $procedure;

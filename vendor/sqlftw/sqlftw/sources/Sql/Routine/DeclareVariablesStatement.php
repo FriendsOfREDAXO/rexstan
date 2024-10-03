@@ -12,10 +12,9 @@ namespace SqlFtw\Sql\Routine;
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\ColumnType;
 use SqlFtw\Sql\Expression\RootNode;
-use SqlFtw\Sql\SqlSerializable;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class DeclareVariablesStatement extends Statement implements SqlSerializable
+class DeclareVariablesStatement extends StatementImpl
 {
 
     /** @var non-empty-list<string> */

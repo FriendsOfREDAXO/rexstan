@@ -15,6 +15,7 @@ use Dogma\Time\Date;
 use Dogma\Time\DateTime;
 use Dogma\Time\Time;
 use LogicException;
+use SqlFtw\Platform\Platform;
 use SqlFtw\Session\Session;
 use SqlFtw\Sql\Dml\Utility\DelimiterCommand;
 use SqlFtw\Sql\Expression\AllLiteral;
@@ -51,6 +52,8 @@ class Formatter
         "\x1a" => '\Z', // 1a (legacy Win EOF)
     ];
 
+    private Platform $platform;
+
     private Session $session;
 
     public string $indent;
@@ -74,12 +77,14 @@ class Formatter
     private array $escapeWsValues;
 
     public function __construct(
+        Platform $platform,
         Session $session,
         string $indent = '  ',
         bool $comments = false,
         bool $quoteAllNames = false,
         bool $escapeWhitespace = true
     ) {
+        $this->platform = $platform;
         $this->session = $session;
         $this->indent = $indent;
         $this->comments = $comments;
@@ -94,6 +99,11 @@ class Formatter
         }
         $this->escapeKeys = array_keys($escapes);
         $this->escapeValues = array_values($escapes);
+    }
+
+    public function getPlatform(): Platform
+    {
+        return $this->platform;
     }
 
     public function getSession(): Session
@@ -119,7 +129,7 @@ class Formatter
             || strpos($name, $quote) !== false // contains quote
             || preg_match('~[\pL_]~u', $name) === 0 // does not contain letters
             || preg_match('~[\pC\pM\pS\pZ\p{Pd}\p{Pe}\p{Pf}\p{Pi}\p{Po}\p{Ps}]~u', ltrim($name, '@')) !== 0 // contains control, mark, symbols, whitespace, punctuation except _
-            || $this->session->getPlatform()->isReserved($name);
+            || $this->platform->isReserved($name);
 
         if ($needsQuoting && !$sqlMode->containsAny(SqlMode::NO_BACKSLASH_ESCAPES)) {
             $name = str_replace($this->escapeKeys, $this->escapeValues, $name);

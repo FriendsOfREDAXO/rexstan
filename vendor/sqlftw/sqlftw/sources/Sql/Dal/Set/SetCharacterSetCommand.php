@@ -12,9 +12,9 @@ namespace SqlFtw\Sql\Dal\Set;
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Assignment;
 use SqlFtw\Sql\Charset;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class SetCharacterSetCommand extends Statement implements SetCommand
+class SetCharacterSetCommand extends StatementImpl implements SetCommand
 {
 
     private ?Charset $charset;

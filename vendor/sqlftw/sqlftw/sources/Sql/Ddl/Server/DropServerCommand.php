@@ -10,9 +10,9 @@
 namespace SqlFtw\Sql\Ddl\Server;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class DropServerCommand extends Statement implements ServerCommand
+class DropServerCommand extends StatementImpl implements ServerCommand
 {
 
     private string $server;

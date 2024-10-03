@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Dal\Set;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Assignment;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class SetVariablesCommand extends Statement implements SetCommand
+class SetVariablesCommand extends StatementImpl implements SetCommand
 {
 
     /** @var non-empty-list<Assignment> */

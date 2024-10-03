@@ -12,10 +12,10 @@ namespace SqlFtw\Sql\Dal\User;
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\FunctionCall;
 use SqlFtw\Sql\SqlSerializable;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 use SqlFtw\Sql\UserName;
 
-class AlterUserInitiateRegistrationCommand extends Statement implements AlterUserRegistrationCommand
+class AlterUserInitiateRegistrationCommand extends StatementImpl implements AlterUserRegistrationCommand
 {
 
     /** @var UserName|FunctionCall */

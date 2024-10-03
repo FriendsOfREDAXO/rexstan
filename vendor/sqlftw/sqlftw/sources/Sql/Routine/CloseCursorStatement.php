@@ -10,10 +10,9 @@
 namespace SqlFtw\Sql\Routine;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\SqlSerializable;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class CloseCursorStatement extends Statement implements SqlSerializable
+class CloseCursorStatement extends StatementImpl
 {
 
     private string $cursor;

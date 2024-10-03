@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Dml\Utility;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Dml\DmlCommand;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class ExplainForConnectionCommand extends Statement implements DmlCommand
+class ExplainForConnectionCommand extends StatementImpl implements DmlCommand
 {
 
     private int $connectionId;

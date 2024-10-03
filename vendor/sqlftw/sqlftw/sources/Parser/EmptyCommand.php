@@ -11,12 +11,12 @@ namespace SqlFtw\Parser;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Command;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
 /**
  * Returned when parsing empty string
  */
-class EmptyCommand extends Statement implements Command
+class EmptyCommand extends StatementImpl implements Command
 {
 
     /**

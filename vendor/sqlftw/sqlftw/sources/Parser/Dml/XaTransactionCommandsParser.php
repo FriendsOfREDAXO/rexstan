@@ -24,7 +24,6 @@ use SqlFtw\Sql\EntityType;
 use SqlFtw\Sql\Expression\HexadecimalLiteral;
 use SqlFtw\Sql\Expression\UintLiteral;
 use SqlFtw\Sql\Keyword;
-use SqlFtw\Sql\Statement;
 use const PHP_INT_MAX;
 
 class XaTransactionCommandsParser
@@ -42,8 +41,6 @@ class XaTransactionCommandsParser
      * XA ROLLBACK xid
      *
      * XA RECOVER [CONVERT XID]
-     *
-     * @return XaTransactionCommand&Statement
      */
     public function parseXa(TokenList $tokenList): XaTransactionCommand
     {

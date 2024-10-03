@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Ddl\Event;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class DropEventCommand extends Statement implements EventCommand
+class DropEventCommand extends StatementImpl implements EventCommand
 {
 
     private ObjectIdentifier $event;

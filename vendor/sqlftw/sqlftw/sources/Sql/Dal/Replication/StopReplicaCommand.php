@@ -10,9 +10,9 @@
 namespace SqlFtw\Sql\Dal\Replication;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class StopReplicaCommand extends Statement implements ReplicationCommand
+class StopReplicaCommand extends StatementImpl implements ReplicationCommand
 {
 
     private bool $ioThread;

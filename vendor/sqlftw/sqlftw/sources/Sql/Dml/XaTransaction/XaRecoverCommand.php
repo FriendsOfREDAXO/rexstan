@@ -10,9 +10,9 @@
 namespace SqlFtw\Sql\Dml\XaTransaction;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class XaRecoverCommand extends Statement implements XaTransactionCommand
+class XaRecoverCommand extends StatementImpl implements XaTransactionCommand
 {
 
     private bool $convertXid;

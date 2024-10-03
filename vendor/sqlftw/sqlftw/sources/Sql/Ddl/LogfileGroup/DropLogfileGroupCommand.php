@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Ddl\LogfileGroup;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Ddl\Table\Option\StorageEngine;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class DropLogfileGroupCommand extends Statement implements LogfileGroupCommand
+class DropLogfileGroupCommand extends StatementImpl implements LogfileGroupCommand
 {
 
     private string $logFileGroup;

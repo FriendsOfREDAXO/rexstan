@@ -12,9 +12,9 @@ namespace SqlFtw\Sql\Dal\Show;
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
 use SqlFtw\Sql\Expression\RootNode;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class ShowIndexesCommand extends Statement implements ShowCommand
+class ShowIndexesCommand extends StatementImpl implements ShowCommand
 {
 
     private ObjectIdentifier $table;

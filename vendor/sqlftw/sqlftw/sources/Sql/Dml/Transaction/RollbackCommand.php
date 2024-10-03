@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Dml\Transaction;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\InvalidDefinitionException;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class RollbackCommand extends Statement implements TransactionCommand
+class RollbackCommand extends StatementImpl implements TransactionCommand
 {
 
     private ?bool $chain;

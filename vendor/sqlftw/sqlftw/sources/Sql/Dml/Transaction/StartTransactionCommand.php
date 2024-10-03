@@ -10,9 +10,9 @@
 namespace SqlFtw\Sql\Dml\Transaction;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class StartTransactionCommand extends Statement implements TransactionCommand
+class StartTransactionCommand extends StatementImpl implements TransactionCommand
 {
 
     private ?bool $consistent;

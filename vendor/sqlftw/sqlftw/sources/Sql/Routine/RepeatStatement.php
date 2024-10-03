@@ -4,10 +4,10 @@ namespace SqlFtw\Sql\Routine;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\RootNode;
-use SqlFtw\Sql\SqlSerializable;
 use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class RepeatStatement extends Statement implements SqlSerializable
+class RepeatStatement extends StatementImpl
 {
 
     /** @var list<Statement> */

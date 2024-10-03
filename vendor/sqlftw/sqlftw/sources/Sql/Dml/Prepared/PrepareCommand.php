@@ -13,8 +13,9 @@ use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\UserVariable;
 use SqlFtw\Sql\SqlSerializable;
 use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class PrepareCommand extends Statement implements PreparedStatementCommand
+class PrepareCommand extends StatementImpl implements PreparedStatementCommand
 {
 
     private string $name;

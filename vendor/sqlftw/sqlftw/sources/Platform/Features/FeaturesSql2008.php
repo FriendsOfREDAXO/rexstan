@@ -532,7 +532,7 @@ class FeaturesSql2008 //extends FeaturesList
     ];
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getReservedWords(): array
     {
@@ -540,7 +540,7 @@ class FeaturesSql2008 //extends FeaturesList
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getNonReservedWords(): array
     {
@@ -548,7 +548,7 @@ class FeaturesSql2008 //extends FeaturesList
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getOperators(): array
     {
@@ -557,7 +557,7 @@ class FeaturesSql2008 //extends FeaturesList
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getTypes(): array
     {
@@ -566,7 +566,7 @@ class FeaturesSql2008 //extends FeaturesList
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getTypeAliases(): array
     {
@@ -575,7 +575,7 @@ class FeaturesSql2008 //extends FeaturesList
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getBuiltInFunctions(): array
     {
@@ -584,7 +584,7 @@ class FeaturesSql2008 //extends FeaturesList
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getSystemVariables(): array
     {

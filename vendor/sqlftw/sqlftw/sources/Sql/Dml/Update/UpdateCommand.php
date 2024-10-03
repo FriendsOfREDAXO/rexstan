@@ -22,10 +22,10 @@ use SqlFtw\Sql\Expression\RootNode;
 use SqlFtw\Sql\Expression\SimpleName;
 use SqlFtw\Sql\InvalidDefinitionException;
 use SqlFtw\Sql\SqlSerializable;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 use function count;
 
-class UpdateCommand extends Statement implements DmlCommand
+class UpdateCommand extends StatementImpl implements DmlCommand
 {
 
     private TableReferenceNode $tableReferences;

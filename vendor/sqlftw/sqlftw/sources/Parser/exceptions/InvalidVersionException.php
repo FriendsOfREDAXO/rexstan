@@ -9,6 +9,7 @@
 
 namespace SqlFtw\Parser;
 
+use SqlFtw\Platform\Platform;
 use Throwable;
 
 class InvalidVersionException extends ParserException
@@ -16,11 +17,11 @@ class InvalidVersionException extends ParserException
 
     private string $feature;
 
-    public function __construct(string $feature, TokenList $tokenList, ?Throwable $previous = null)
+    public function __construct(string $feature, Platform $platform, TokenList $tokenList, ?Throwable $previous = null)
     {
-        $platform = $tokenList->getSession()->getPlatform()->format();
+        $platformName = $platform->format();
 
-        parent::__construct("Platform $platform does not support feature $feature.", $tokenList, $previous);
+        parent::__construct("Platform {$platformName} does not support feature {$feature}.", $tokenList, $previous);
 
         $this->feature = $feature;
     }

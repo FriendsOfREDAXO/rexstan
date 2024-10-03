@@ -10,9 +10,9 @@
 namespace SqlFtw\Sql\Dal\Show;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class ShowReplicaStatusCommand extends Statement implements ShowCommand
+class ShowReplicaStatusCommand extends StatementImpl implements ShowCommand
 {
 
     private ?string $channel;

@@ -15,9 +15,9 @@ use SqlFtw\Sql\Ddl\SqlSecurity;
 use SqlFtw\Sql\Ddl\UserExpression;
 use SqlFtw\Sql\Dml\Query\Query;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class CreateViewCommand extends Statement implements ViewCommand, SchemaObjectCommand
+class CreateViewCommand extends StatementImpl implements ViewCommand, SchemaObjectCommand
 {
 
     private ObjectIdentifier $view;

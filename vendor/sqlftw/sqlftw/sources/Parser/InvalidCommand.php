@@ -11,13 +11,13 @@ namespace SqlFtw\Parser;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Command;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 use Throwable;
 
 /**
  * Returned when encountered a syntax error
  */
-class InvalidCommand extends Statement implements Command
+class InvalidCommand extends StatementImpl implements Command
 {
 
     private Throwable $exception;

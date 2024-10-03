@@ -12,7 +12,7 @@ namespace SqlFtw\Sql\Dal\Replication;
 use Dogma\Arr;
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\TimeIntervalExpression;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 use SqlFtw\Util\TypeChecker;
 use function array_filter;
 use function implode;
@@ -20,7 +20,7 @@ use function implode;
 /**
  * @phpstan-import-type ReplicaOptionValue from ReplicaOption
  */
-class ChangeReplicationSourceToCommand extends Statement implements ReplicationCommand
+class ChangeReplicationSourceToCommand extends StatementImpl implements ReplicationCommand
 {
 
     /** @var non-empty-array<ReplicaOption::*, ReplicaOptionValue|null> */

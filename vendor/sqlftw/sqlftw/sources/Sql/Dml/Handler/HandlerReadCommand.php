@@ -13,9 +13,9 @@ use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\Literal;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
 use SqlFtw\Sql\Expression\RootNode;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class HandlerReadCommand extends Statement implements HandlerCommand
+class HandlerReadCommand extends StatementImpl implements HandlerCommand
 {
 
     private ObjectIdentifier $table;

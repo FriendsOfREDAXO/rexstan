@@ -12,10 +12,10 @@ namespace SqlFtw\Sql\Dal\User;
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\FunctionCall;
 use SqlFtw\Sql\SqlSerializable;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 use SqlFtw\Sql\UserName;
 
-class GrantCommand extends Statement implements UserCommand
+class GrantCommand extends StatementImpl implements UserCommand
 {
 
     /** @var non-empty-list<UserPrivilege> */

@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Dml\Utility;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Dml\DmlCommand;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class HelpCommand extends Statement implements DmlCommand
+class HelpCommand extends StatementImpl implements DmlCommand
 {
 
     private string $term;

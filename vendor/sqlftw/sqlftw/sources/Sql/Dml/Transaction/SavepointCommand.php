@@ -10,9 +10,9 @@
 namespace SqlFtw\Sql\Dml\Transaction;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class SavepointCommand extends Statement implements TransactionCommand
+class SavepointCommand extends StatementImpl implements TransactionCommand
 {
 
     private string $savepoint;

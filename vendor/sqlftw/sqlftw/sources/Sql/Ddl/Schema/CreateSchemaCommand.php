@@ -10,9 +10,9 @@
 namespace SqlFtw\Sql\Ddl\Schema;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class CreateSchemaCommand extends Statement implements SchemaCommand
+class CreateSchemaCommand extends StatementImpl implements SchemaCommand
 {
 
     private string $schema;

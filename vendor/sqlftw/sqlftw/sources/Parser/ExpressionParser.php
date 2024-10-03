@@ -108,6 +108,8 @@ class ExpressionParser
         . '[ T](?:[01][0-9]|2[0-3])' . self::PUNCTUATION . '[0-5][0-9]' . self::PUNCTUATION . '[0-5][0-9])' // time
         . '(\\.[0-9]+)?$/'; // ms
 
+    private ParserConfig $config;
+
     /** @var callable(): QueryParser */
     private $queryParserProxy;
 
@@ -116,8 +118,9 @@ class ExpressionParser
     /**
      * @param callable(): QueryParser $queryParserProxy
      */
-    public function __construct(callable $queryParserProxy)
+    public function __construct(ParserConfig $config, callable $queryParserProxy)
     {
+        $this->config = $config;
         $this->queryParserProxy = $queryParserProxy;
     }
 
@@ -567,7 +570,7 @@ class ExpressionParser
         } elseif ($tokenList->hasSymbol('{')) {
             // {identifier expr}
             // @see https://docs.microsoft.com/en-us/sql/odbc/reference/develop-app/escape-sequences-in-odbc?view=sql-server-ver16
-            $name = $tokenList->expectName(null);
+            $name = $tokenList->expectName(EntityType::ODBC_EXPRESSION_IDENTIFIER);
             $expression = $this->parseExpression($tokenList);
             $tokenList->expectSymbol('}');
 
@@ -678,7 +681,7 @@ class ExpressionParser
         }
 
         $tokenList->rewind($position);
-        $name1 = $tokenList->expectNonReservedName(null);
+        $name1 = $tokenList->expectNonReservedName(EntityType::GENERAL); // schema, table, column, local variable
         $name2 = $name3 = null;
         if ($tokenList->hasSymbol('.')) {
             if ($tokenList->hasOperator(Operator::MULTIPLY)) {
@@ -723,9 +726,9 @@ class ExpressionParser
             }
             $scope = new Scope(substr($atVariable, 2));
 
-            $name = $tokenList->expectName(null);
+            $name = $tokenList->expectName(EntityType::SYSTEM_VARIABLE);
             if ($tokenList->hasSymbol('.')) {
-                $name .= '.' . $tokenList->expectName(null);
+                $name .= '.' . $tokenList->expectName(EntityType::SYSTEM_VARIABLE);
             }
 
             return $this->createSystemVariable($tokenList, $name, $scope, $write);
@@ -733,7 +736,7 @@ class ExpressionParser
             // @@foo
             $name = substr($atVariable, 2);
             if ($tokenList->hasSymbol('.')) {
-                $name .= '.' . $tokenList->expectName(null);
+                $name .= '.' . $tokenList->expectName(EntityType::SYSTEM_VARIABLE);
             }
 
             return $this->createSystemVariable($tokenList, $name, null, $write);
@@ -997,7 +1000,7 @@ class ExpressionParser
             return null;
         }
 
-        $extensions = $tokenList->getSession()->getClientSideExtensions();
+        $extensions = $this->config->getClientSideExtensions();
         if (($token->type & TokenType::QUESTION_MARK_PLACEHOLDER) !== 0 && (($extensions & ClientSideExtension::ALLOW_QUESTION_MARK_PLACEHOLDERS_OUTSIDE_PREPARED_STATEMENTS) !== 0 || $tokenList->inPrepared())) {
             // param_marker
             return new QuestionMarkPlaceholder();
@@ -1085,10 +1088,10 @@ class ExpressionParser
             if ($alias !== null) {
                 return $alias;
             } else {
-                return $tokenList->expectNonReservedName(EntityType::ALIAS, null, TokenType::AT_VARIABLE);
+                return $tokenList->expectNonReservedName(EntityType::ALIAS,  TokenType::AT_VARIABLE);
             }
         } else {
-            $alias = $tokenList->getNonReservedName(EntityType::ALIAS, null, TokenType::AT_VARIABLE);
+            $alias = $tokenList->getNonReservedName(EntityType::ALIAS, TokenType::AT_VARIABLE);
             if ($alias !== null) {
                 return $alias;
             } else {
@@ -1363,7 +1366,7 @@ class ExpressionParser
             $values = [];
             do {
                 $value = $tokenList->expectStringValue();
-                $limit = $tokenList->getSession()->getPlatform()->getMaxLengths()[EntityType::ENUM_VALUE];
+                $limit = $this->config->getPlatform()->getMaxLengths()[EntityType::ENUM_VALUE];
                 if (strlen($value->asString()) > $limit) {
                     throw new ParserException("Enum value '{$value->getValue()}' exceeds limit of {$limit} bytes.", $tokenList);
                 }

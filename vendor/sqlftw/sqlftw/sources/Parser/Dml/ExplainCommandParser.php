@@ -86,8 +86,8 @@ class ExplainCommandParser
         if ($type !== null) {
             if ($type === Keyword::ANALYZE) {
                 if ($tokenList->hasKeyword(Keyword::FORMAT)) {
-                    $tokenList->expectSymbol('=');
-                    $tokenList->expectName(null, 'TREE');
+                    $tokenList->expectOperator(Operator::EQUAL);
+                    $tokenList->expectAnyName('TREE');
                 }
                 $type = new ExplainType(ExplainType::ANALYZE);
             } elseif ($type === Keyword::FORMAT) {

@@ -14,9 +14,10 @@ use SqlFtw\Sql\Ddl\SqlSecurity;
 use SqlFtw\Sql\Ddl\UserExpression;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
 use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 use function array_values;
 
-class CreateProcedureCommand extends Statement implements StoredProcedureCommand, CreateRoutineCommand
+class CreateProcedureCommand extends StatementImpl implements StoredProcedureCommand, CreateRoutineCommand
 {
 
     private ObjectIdentifier $procedure;

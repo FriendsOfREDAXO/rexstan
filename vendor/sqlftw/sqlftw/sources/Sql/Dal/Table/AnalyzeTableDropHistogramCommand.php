@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Dal\Table;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class AnalyzeTableDropHistogramCommand extends Statement implements DalTablesCommand
+class AnalyzeTableDropHistogramCommand extends StatementImpl implements DalTablesCommand
 {
 
     /** @var non-empty-list<ObjectIdentifier> */

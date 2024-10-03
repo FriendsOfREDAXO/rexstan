@@ -212,7 +212,7 @@ trait ExpressionParserFunctions
         }
 
         $over = null;
-        if ($tokenList->getKeyword(Keyword::OVER) !== null) {
+        if ($tokenList->hasKeyword(Keyword::OVER)) {
             if ($function instanceof BuiltInFunction && $function->isWindow()) {
                 $over = $this->parseOver($tokenList);
             } else {

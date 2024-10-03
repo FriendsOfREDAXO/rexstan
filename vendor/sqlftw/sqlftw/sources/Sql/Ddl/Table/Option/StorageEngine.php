@@ -48,6 +48,9 @@ class StorageEngine implements SqlSerializable
     public const NDBCLUSTER = 'ndbcluster';
     public const NDBINFO = 'ndbinfo';
 
+    // HeatWave (secondary engine)
+    public const RAPID = 'rapid';
+
     // Percona
     public const TOKUDB = 'TokuDB';
     public const XTRADB = 'XtraDB';
@@ -80,7 +83,7 @@ class StorageEngine implements SqlSerializable
         'aria' => self::ARIA,
         'berkeleydb' => self::BERKELEYDB,
         'blackhole' => self::BLACKHOLE,
-        'columnstrore' => self::COLUMN_STORE,
+        'columnstore' => self::COLUMN_STORE,
         'csv' => self::CSV,
         'falcon' => self::FALCON,
         'federated' => self::FEDERATED,

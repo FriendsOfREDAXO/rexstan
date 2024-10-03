@@ -13,6 +13,7 @@ use Dogma\Re;
 use SqlFtw\Parser\ExpressionParser;
 use SqlFtw\Parser\ParserException;
 use SqlFtw\Parser\TokenList;
+use SqlFtw\Platform\Platform;
 use SqlFtw\Sql\Ddl\Index\CreateIndexCommand;
 use SqlFtw\Sql\Ddl\Index\DropIndexCommand;
 use SqlFtw\Sql\Ddl\Table\Alter\AlterTableAlgorithm;
@@ -33,10 +34,13 @@ use function strtoupper;
 class IndexCommandsParser
 {
 
+    private Platform $platform;
+
     private ExpressionParser $expressionParser;
 
-    public function __construct(ExpressionParser $expressionParser)
+    public function __construct(Platform $platform, ExpressionParser $expressionParser)
     {
+        $this->platform = $platform;
         $this->expressionParser = $expressionParser;
     }
 
@@ -162,10 +166,10 @@ class IndexCommandsParser
                 $keyBlockSize = (int) $tokenList->expectUnsignedInt();
             } elseif ($keyword === Keyword::WITH) {
                 $tokenList->expectKeyword(Keyword::PARSER);
-                $withParser = $tokenList->expectName(null);
+                $withParser = $tokenList->expectName(EntityType::INDEX_PARSER);
             } elseif ($keyword === Keyword::COMMENT) {
                 $commentString = $tokenList->expectString();
-                $limit = $tokenList->getSession()->getPlatform()->getMaxLengths()[EntityType::INDEX_COMMENT];
+                $limit = $this->platform->getMaxLengths()[EntityType::INDEX_COMMENT];
                 if (strlen($commentString) > $limit && $tokenList->getSession()->getMode()->containsAny(SqlMode::STRICT_ALL_TABLES)) {
                     throw new ParserException("Index comment length exceeds limit of {$limit} bytes.", $tokenList);
                 }

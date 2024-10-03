@@ -10,9 +10,9 @@
 namespace SqlFtw\Sql\Dal\Replication;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class ChangeReplicationFilterCommand extends Statement implements ReplicationCommand
+class ChangeReplicationFilterCommand extends StatementImpl implements ReplicationCommand
 {
 
     /** @var non-empty-list<ReplicationFilter> */

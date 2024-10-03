@@ -12,9 +12,9 @@ namespace SqlFtw\Sql\Dal\Kill;
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Dal\DalCommand;
 use SqlFtw\Sql\Expression\RootNode;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class KillCommand extends Statement implements DalCommand
+class KillCommand extends StatementImpl implements DalCommand
 {
 
     private RootNode $processId;

@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Dal\Restart;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Dal\DalCommand;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class RestartCommand extends Statement implements DalCommand
+class RestartCommand extends StatementImpl implements DalCommand
 {
 
     public function serialize(Formatter $formatter): string

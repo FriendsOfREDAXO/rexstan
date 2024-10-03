@@ -125,12 +125,12 @@ class SetCommandsParser
         $tokenList->expectKeywords(Keyword::RESET, Keyword::PERSIST);
         $ifExists = $tokenList->hasKeywords(Keyword::IF, Keyword::EXISTS);
         if ($ifExists) {
-            $variable = $tokenList->expectName(null); // todo: type?
+            $variable = $tokenList->expectName(EntityType::SYSTEM_VARIABLE);
         } else {
-            $variable = $tokenList->getName(null); // todo: type?
+            $variable = $tokenList->getName(EntityType::SYSTEM_VARIABLE);
         }
         if ($tokenList->hasSymbol('.')) {
-            $variable .= '.' . $tokenList->expectName(null); // todo: type?
+            $variable .= '.' . $tokenList->expectName(EntityType::SYSTEM_VARIABLE);
         }
         if ($variable !== null) {
             $variable = new MysqlVariable($variable);
@@ -165,17 +165,17 @@ class SetCommandsParser
                 // GLOBAL foo
                 $name = $tokenList->getKeyword(Keyword::DEFAULT);
                 if ($name === null) {
-                    $name = $tokenList->expectNonReservedNameOrString(); // todo: type?
+                    $name = $tokenList->expectNonReservedNameOrString(); // todo: type? prefix or sysvar
                 }
                 if ($tokenList->hasSymbol('.')) {
-                    $name .= '.' . $tokenList->expectName(null); // todo: type?
+                    $name .= '.' . $tokenList->expectName(EntityType::SYSTEM_VARIABLE);
                 }
                 $variable = $this->expressionParser->createSystemVariable($tokenList, $name, $lastKeywordScope, true);
             } elseif (($token = $tokenList->get(TokenType::AT_VARIABLE)) !== null) {
                 // @foo, @@foo...
                 $variable = $this->expressionParser->parseAtVariable($tokenList, $token->value, true);
             } else {
-                $name = $tokenList->expectName(null); // todo: type?
+                $name = $tokenList->expectName(EntityType::SYSTEM_VARIABLE);
                 if ($tokenList->hasSymbol('.')) {
                     $name2 = $tokenList->expectName(EntityType::COLUMN);
                     $fullName = $name . '.' . $name2;

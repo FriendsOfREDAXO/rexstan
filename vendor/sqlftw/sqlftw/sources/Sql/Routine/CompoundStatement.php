@@ -4,8 +4,9 @@ namespace SqlFtw\Sql\Routine;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class CompoundStatement extends Statement
+class CompoundStatement extends StatementImpl
 {
 
     /** @var list<Statement> */

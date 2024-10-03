@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Dal\Binlog;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Dal\DalCommand;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class BinlogCommand extends Statement implements DalCommand
+class BinlogCommand extends StatementImpl implements DalCommand
 {
 
     private string $value;

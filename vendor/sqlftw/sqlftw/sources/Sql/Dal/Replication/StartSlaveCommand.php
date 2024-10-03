@@ -11,14 +11,14 @@ namespace SqlFtw\Sql\Dal\Replication;
 
 use Dogma\Arr;
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 use function implode;
 use function is_array;
 
 /**
  * @phpstan-type UntilKeyword 'SQL_AFTER_MTS_GAPS'|'SQL_BEFORE_GTIDS'|'SQL_AFTER_GTIDS'|'MASTER_LOG_FILE'|'MASTER_LOG_POS'|'SOURCE_LOG_FILE'|'SOURCE_LOG_POS'|'RELAY_LOG_FILE'|'RELAY_LOG_POS'
  */
-class StartSlaveCommand extends Statement implements ReplicationCommand
+class StartSlaveCommand extends StatementImpl implements ReplicationCommand
 {
 
     private ?string $user;

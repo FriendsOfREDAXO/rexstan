@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Dal\Show;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\RootNode;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class ShowTriggersCommand extends Statement implements ShowCommand
+class ShowTriggersCommand extends StatementImpl implements ShowCommand
 {
 
     private ?string $schema;

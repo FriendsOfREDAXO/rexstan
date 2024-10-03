@@ -13,9 +13,9 @@ use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Dal\DalCommand;
 use SqlFtw\Sql\Ddl\Routine\UdfReturnDataType;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class CreateFunctionSonameCommand extends Statement implements DalCommand
+class CreateFunctionSonameCommand extends StatementImpl implements DalCommand
 {
 
     private ObjectIdentifier $function;

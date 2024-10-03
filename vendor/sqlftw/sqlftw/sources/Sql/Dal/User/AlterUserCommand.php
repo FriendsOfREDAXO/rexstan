@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Dal\User;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\InvalidDefinitionException;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class AlterUserCommand extends Statement implements UserCommand
+class AlterUserCommand extends StatementImpl implements UserCommand
 {
 
     /** @var non-empty-list<AlteredUser> */

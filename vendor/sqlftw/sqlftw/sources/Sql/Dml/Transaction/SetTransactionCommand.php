@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Dml\Transaction;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\Scope;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class SetTransactionCommand extends Statement implements TransactionCommand
+class SetTransactionCommand extends StatementImpl implements TransactionCommand
 {
 
     private ?Scope $scope;

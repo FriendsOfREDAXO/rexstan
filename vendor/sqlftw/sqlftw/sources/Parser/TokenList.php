@@ -7,6 +7,8 @@
  * For the full copyright and license information read the file 'license.md', distributed with this source code
  */
 
+// phpcs-disable Squiz.WhiteSpace.MemberVarSpacing.AfterComment
+
 namespace SqlFtw\Parser;
 
 use Dogma\Language\Encoding;
@@ -91,9 +93,9 @@ class TokenList
     /** @var non-empty-list<Token> */
     private array $tokens;
 
-    private Session $session;
-
     private Platform $platform;
+
+    private Session $session;
 
     /** @var array<string, int> */
     private array $maxLengths;
@@ -101,6 +103,7 @@ class TokenList
     private bool $invalid;
 
     // parser state ----------------------------------------------------------------------------------------------------
+
     private int $autoSkip;
 
     private int $position = 0;
@@ -128,12 +131,12 @@ class TokenList
     /**
      * @param non-empty-list<Token> $tokens
      */
-    public function __construct(array $tokens, Session $session, int $autoSkip = 0, bool $invalid = false)
+    public function __construct(array $tokens, Platform $platform, Session $session, int $autoSkip = 0, bool $invalid = false)
     {
         $this->tokens = $tokens;
+        $this->platform = $platform;
         $this->session = $session;
-        $this->platform = $session->getPlatform();
-        $this->maxLengths = $this->platform->getMaxLengths();
+        $this->maxLengths = $platform->getMaxLengths();
         $this->autoSkip = $autoSkip;
         $this->invalid = $invalid;
     }
@@ -151,7 +154,7 @@ class TokenList
     public function check(string $feature, ?int $minVersion = null, ?int $maxVersion = null, ?string $platform = null): void
     {
         if (!$this->platform->matches($platform, $minVersion, $maxVersion)) {
-            throw new InvalidVersionException($feature, $this);
+            throw new InvalidVersionException($feature, $this->platform, $this);
         }
     }
 
@@ -438,7 +441,7 @@ class TokenList
         /** @var non-empty-list<Token> $tokens */
         $tokens = array_slice($this->tokens, $startOffset, $endOffset - $startOffset + 1);
 
-        return new self($tokens, $this->session, $this->autoSkip);
+        return new self($tokens, $this->platform, $this->session, $this->autoSkip);
     }
 
     /**
@@ -454,7 +457,7 @@ class TokenList
             }
         }
 
-        return new self($tokens, $this->session, $this->autoSkip);
+        return new self($tokens, $this->platform, $this->session, $this->autoSkip);
     }
 
     /**
@@ -468,7 +471,7 @@ class TokenList
             $tokens[] = $mapper($token);
         }
 
-        return new self($tokens, $this->session, $this->autoSkip);
+        return new self($tokens, $this->platform, $this->session, $this->autoSkip);
     }
 
     public function getLast(): Token
@@ -1009,9 +1012,9 @@ class TokenList
      * @param class-string<T> $className
      * @return T
      */
-    public function expectNameEnum(string $className, ?string $entity = null): SqlEnum
+    public function expectNameEnum(string $className): SqlEnum
     {
-        $value = $this->expectName($entity);
+        $value = $this->expectName(EntityType::GENERAL);
 
         try {
             /** @var T $enum */
@@ -1032,9 +1035,9 @@ class TokenList
      * @param class-string<T> $className
      * @return T
      */
-    public function getNameEnum(string $className, ?string $entity = null): ?SqlEnum
+    public function getNameEnum(string $className): ?SqlEnum
     {
-        $value = $this->getName($entity);
+        $value = $this->getName(EntityType::GENERAL);
         if ($value === null) {
             return null;
         }
@@ -1138,7 +1141,10 @@ class TokenList
 
     // names ---------------------------------------------------------------------------------------------------------
 
-    public function expectNameOrString(?string $entity): string
+    /**
+     * @param EntityType::* $entity
+     */
+    public function expectNameOrString(string $entity): string
     {
         $token = $this->expect(T::NAME | T::STRING);
         $this->validateName($entity, $token->value);
@@ -1146,14 +1152,12 @@ class TokenList
         return $token->value;
     }
 
-    public function expectName(?string $entity, ?string $name = null, int $mask = 0): string
+    /**
+     * @param EntityType::* $entity
+     */
+    public function expectName(string $entity, int $mask = 0): string
     {
         $token = $this->expect(T::NAME, $mask);
-        if ($name !== null && strtoupper($token->value) !== $name) {
-            $this->position--;
-
-            throw InvalidTokenException::tokens(T::NAME, 0, $name, $token, $this);
-        }
         $this->validateName($entity, $token->value);
 
         return $token->value;
@@ -1170,10 +1174,13 @@ class TokenList
         return $token->value;
     }
 
-    public function getName(?string $entity, ?string $name = null): ?string
+    /**
+     * @param EntityType::* $entity
+     */
+    public function getName(string $entity): ?string
     {
         $position = $this->position;
-        $token = $this->get(T::NAME, 0, $name);
+        $token = $this->get(T::NAME);
         if ($token !== null) {
             $this->validateName($entity, $token->value);
 
@@ -1205,10 +1212,20 @@ class TokenList
      */
     public function hasName(string $name): bool
     {
-        return $this->getName(null, $name) !== null;
+        $position = $this->position;
+        $token = $this->get(T::NAME, 0, $name);
+        if ($token !== null) {
+            return true;
+        }
+        $this->position = $position;
+
+        return false;
     }
 
-    public function getNonKeywordNameOrString(?string $entity): ?string
+    /**
+     * @param EntityType::* $entity
+     */
+    public function getNonKeywordNameOrString(string $entity): ?string
     {
         $token = $this->get(T::NAME | T::STRING, T::KEYWORD);
         if ($token === null) {
@@ -1219,9 +1236,12 @@ class TokenList
         return $token->value;
     }
 
-    public function getNonKeywordName(?string $entity, ?string $name = null): ?string
+    /**
+     * @param EntityType::* $entity
+     */
+    public function getNonKeywordName(string $entity): ?string
     {
-        $token = $this->get(T::NAME, T::KEYWORD, $name);
+        $token = $this->get(T::NAME, T::KEYWORD);
         if ($token === null) {
             return null;
         }
@@ -1230,22 +1250,23 @@ class TokenList
         return $token->value;
     }
 
-    public function expectNonReservedName(?string $entity, ?string $name = null, int $mask = 0): string
+    /**
+     * @param EntityType::* $entity
+     */
+    public function expectNonReservedName(string $entity, int $mask = 0): string
     {
         $token = $this->expect(T::NAME, T::RESERVED | $mask);
-        if ($name !== null && $token->value !== $name) {
-            $this->position--;
-
-            throw InvalidTokenException::tokens(T::NAME, T::RESERVED | $mask, $name, $token, $this);
-        }
         $this->validateName($entity, $token->value);
 
         return $token->value;
     }
 
-    public function getNonReservedName(?string $entity, ?string $name = null, int $mask = 0): ?string
+    /**
+     * @param EntityType::* $entity
+     */
+    public function getNonReservedName(string $entity, int $mask = 0): ?string
     {
-        $token = $this->get(T::NAME, T::RESERVED | $mask, $name);
+        $token = $this->get(T::NAME, T::RESERVED | $mask);
         if ($token === null) {
             return null;
         }
@@ -1254,13 +1275,16 @@ class TokenList
         return $token->value;
     }
 
-    public function validateName(?string $entity, string $name): void
+    /**
+     * @param EntityType::* $entity
+     */
+    public function validateName(string $entity, string $name): void
     {
         // todo: move to platform
         static $trailingWhitespaceNotAllowed = [
             EntityType::SCHEMA, EntityType::TABLE, EntityType::COLUMN, EntityType::PARTITION, EntityType::USER_VARIABLE, EntityType::SRS, EntityType::CHANNEL,
         ];
-        static $emptyAllowed = [null, EntityType::TABLESPACE, EntityType::XA_TRANSACTION, EntityType::CHANNEL];
+        static $emptyAllowed = [EntityType::GENERAL, EntityType::TABLESPACE, EntityType::XA_TRANSACTION, EntityType::CHANNEL];
 
         if ($entity === EntityType::TABLE || $entity === EntityType::SCHEMA) {
             // might return an int collation id on unknown collations
@@ -1277,19 +1301,17 @@ class TokenList
         if ($name === '' && !in_array($entity, $emptyAllowed, true)) {
             throw new ParserException('Name must not be empty.', $this);
         }
-        if ($entity !== null) {
-            if ($entity === EntityType::SRS && ltrim($name, " \t\r\n") !== $name) {
-                throw new ParserException(ucfirst($entity) . ' name must not contain left side white space.', $this);
-            }
-            if (in_array($entity, $trailingWhitespaceNotAllowed, true) && rtrim($name, " \t\r\n") !== $name) {
-                throw new ParserException(ucfirst($entity) . ' name must not contain right side white space.', $this);
-            }
-            if (Str::length($name) > $this->maxLengths[$entity]) {
-                throw new ParserException(ucfirst($entity) . " name must be at most {$this->maxLengths[$entity]} characters long.", $this);
-            }
-            if ($entity === EntityType::INDEX && strtoupper($name) === 'GEN_CLUST_INDEX') {
-                throw new ParserException('GEN_CLUST_INDEX is a reserved name for primary index.', $this);
-            }
+        if ($entity === EntityType::SRS && ltrim($name, " \t\r\n") !== $name) {
+            throw new ParserException(ucfirst($entity) . ' name must not contain left side white space.', $this);
+        }
+        if (in_array($entity, $trailingWhitespaceNotAllowed, true) && rtrim($name, " \t\r\n") !== $name) {
+            throw new ParserException(ucfirst($entity) . ' name must not contain right side white space.', $this);
+        }
+        if (isset($this->maxLengths[$entity]) && Str::length($name) > $this->maxLengths[$entity]) { // todo: chars or bytes?
+            throw new ParserException(ucfirst($entity) . " name must be at most {$this->maxLengths[$entity]} characters long.", $this);
+        }
+        if ($entity === EntityType::INDEX && strtoupper($name) === 'GEN_CLUST_INDEX') {
+            throw new ParserException('GEN_CLUST_INDEX is a reserved name for primary index.', $this);
         }
     }
 
@@ -1618,7 +1640,7 @@ class TokenList
         } else {
             $charset = $this->getString();
             if ($charset === null) {
-                $charset = $this->expectName(null);
+                $charset = $this->expectName(EntityType::CHARACTER_SET);
             }
             if (!Charset::isValidValue($charset)) {
                 $values = array_values(Charset::getAllowedValues());

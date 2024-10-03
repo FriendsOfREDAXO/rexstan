@@ -12,11 +12,11 @@ namespace SqlFtw\Sql\Routine;
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\RootNode;
 use SqlFtw\Sql\InvalidDefinitionException;
-use SqlFtw\Sql\SqlSerializable;
 use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 use function count;
 
-class CaseStatement extends Statement implements SqlSerializable
+class CaseStatement extends StatementImpl
 {
 
     private ?RootNode $condition;

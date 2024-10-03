@@ -15,9 +15,9 @@ use SqlFtw\Sql\Expression\OrderByExpression;
 use SqlFtw\Sql\Expression\Placeholder;
 use SqlFtw\Sql\Expression\SimpleName;
 use SqlFtw\Sql\SqlSerializable;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class ParenthesizedQueryExpression extends Statement implements Query
+class ParenthesizedQueryExpression extends StatementImpl implements Query
 {
 
     private Query $query;

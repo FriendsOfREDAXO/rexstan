@@ -15,12 +15,12 @@ use SqlFtw\Sql\Expression\ObjectIdentifier;
 use SqlFtw\Sql\Expression\QualifiedName;
 use SqlFtw\Sql\Expression\SimpleName;
 use SqlFtw\Sql\InvalidDefinitionException;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 use function array_values;
 use function count;
 use function rtrim;
 
-class RenameTableCommand extends Statement implements DdlTablesCommand
+class RenameTableCommand extends StatementImpl implements DdlTablesCommand
 {
 
     /** @var non-empty-list<ObjectIdentifier> */

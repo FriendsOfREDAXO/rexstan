@@ -36,8 +36,6 @@ class Session
 
     private ?Charset $charset;
 
-    private int $extensions;
-
     /** @var list<Collation> */
     private array $collation = [];
 
@@ -53,12 +51,9 @@ class Session
     /** @var array<string, UnresolvedExpression|scalar|Value|null> */
     private array $localVariables = [];
 
-    public function __construct(
-        Platform $platform,
-        int $clientSideExtensions = 0
-    ) {
+    public function __construct(Platform $platform)
+    {
         $this->platform = $platform;
-        $this->extensions = $clientSideExtensions;
 
         $this->reset();
     }
@@ -83,16 +78,6 @@ class Session
             $defaultMode = MysqlVariable::getDefault(MysqlVariable::SQL_MODE);
             $this->setMode(SqlMode::getFromString($defaultMode));
         }
-    }
-
-    public function getPlatform(): Platform
-    {
-        return $this->platform;
-    }
-
-    public function getClientSideExtensions(): int
-    {
-        return $this->extensions;
     }
 
     public function getDelimiter(): string

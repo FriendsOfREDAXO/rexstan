@@ -12,9 +12,9 @@ namespace SqlFtw\Sql\Ddl\Routine;
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Ddl\SqlSecurity;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class AlterFunctionCommand extends Statement implements StoredFunctionCommand, AlterRoutineCommand
+class AlterFunctionCommand extends StatementImpl implements StoredFunctionCommand, AlterRoutineCommand
 {
 
     private ObjectIdentifier $function;

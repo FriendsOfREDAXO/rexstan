@@ -13,7 +13,7 @@ use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\SizeLiteral;
 use SqlFtw\Sql\Keyword;
 use SqlFtw\Sql\SqlSerializable;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 use function assert;
 use function is_bool;
 use function is_string;
@@ -21,7 +21,7 @@ use function is_string;
 /**
  * @phpstan-import-type TablespaceOptionValue from TablespaceOption
  */
-class CreateTablespaceCommand extends Statement implements TablespaceCommand
+class CreateTablespaceCommand extends StatementImpl implements TablespaceCommand
 {
 
     private string $tablespace;

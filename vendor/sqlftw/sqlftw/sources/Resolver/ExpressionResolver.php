@@ -10,6 +10,7 @@
 namespace SqlFtw\Resolver;
 
 use LogicException;
+use SqlFtw\Platform\Platform;
 use SqlFtw\Resolver\Functions\Functions;
 use SqlFtw\Session\Session;
 use SqlFtw\Sql\Dml\Query\ParenthesizedQueryExpression;
@@ -88,11 +89,11 @@ class ExpressionResolver
 
     private Functions $functions;
 
-    public function __construct(Session $session)
+    public function __construct(Platform $platform, Session $session)
     {
         $this->session = $session;
         $this->cast = new Cast();
-        $this->functions = new Functions($session, $this->cast);
+        $this->functions = new Functions($platform, $session, $this->cast);
     }
 
     public function cast(): Cast

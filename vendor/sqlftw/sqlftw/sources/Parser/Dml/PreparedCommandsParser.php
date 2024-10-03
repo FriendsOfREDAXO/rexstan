@@ -14,10 +14,12 @@ use SqlFtw\Parser\Parser;
 use SqlFtw\Parser\ParserException;
 use SqlFtw\Parser\TokenList;
 use SqlFtw\Parser\TokenType;
+use SqlFtw\Platform\Platform;
 use SqlFtw\Sql\Ddl\Routine\StoredProcedureCommand;
 use SqlFtw\Sql\Dml\Prepared\DeallocatePrepareCommand;
 use SqlFtw\Sql\Dml\Prepared\ExecuteCommand;
 use SqlFtw\Sql\Dml\Prepared\PrepareCommand;
+use SqlFtw\Sql\EntityType;
 use SqlFtw\Sql\Expression\UserVariable;
 use SqlFtw\Sql\Keyword;
 use SqlFtw\Sql\Routine\RoutineType;
@@ -29,10 +31,13 @@ use function iterator_to_array;
 class PreparedCommandsParser
 {
 
+    private Platform $platform;
+
     private Parser $parser;
 
-    public function __construct(Parser $parser)
+    public function __construct(Platform $platform, Parser $parser)
     {
+        $this->platform = $platform;
         $this->parser = $parser;
     }
 
@@ -43,7 +48,7 @@ class PreparedCommandsParser
     {
         $tokenList->expectAnyKeyword(Keyword::DEALLOCATE, Keyword::DROP);
         $tokenList->expectKeyword(Keyword::PREPARE);
-        $name = $tokenList->expectName(null);
+        $name = $tokenList->expectName(EntityType::PREPARED_STATEMENT);
 
         return new DeallocatePrepareCommand($name);
     }
@@ -55,7 +60,7 @@ class PreparedCommandsParser
     public function parseExecute(TokenList $tokenList): ExecuteCommand
     {
         $tokenList->expectKeyword(Keyword::EXECUTE);
-        $name = $tokenList->expectName(null);
+        $name = $tokenList->expectName(EntityType::PREPARED_STATEMENT);
         $variables = null;
         if ($tokenList->hasKeyword(Keyword::USING)) {
             $variables = [];
@@ -74,7 +79,7 @@ class PreparedCommandsParser
     public function parsePrepare(TokenList $tokenList): PrepareCommand
     {
         $tokenList->expectKeyword(Keyword::PREPARE);
-        $name = $tokenList->expectName(null);
+        $name = $tokenList->expectName(EntityType::PREPARED_STATEMENT);
         $tokenList->expectKeyword(Keyword::FROM);
 
         $variable = $tokenList->get(TokenType::AT_VARIABLE);
@@ -86,15 +91,14 @@ class PreparedCommandsParser
             if (count($statements) > 1) {
                 throw new ParserException('Multiple statements in PREPARE.', $tokenList);
             }
-            // phpcs:ignore
-            [$statement, ] = $statements[0];
+            $statement = $statements[0];
             if ($statement instanceof InvalidCommand) {
                 throw new ParserException('Invalid statement in PREPARE.', $tokenList, $statement->getException());
             }
             $class = get_class($statement);
             if ($statement instanceof StoredProcedureCommand && $tokenList->inRoutine() === RoutineType::PROCEDURE) {
                 // ok
-            } elseif (!in_array($class, $tokenList->getSession()->getPlatform()->getPreparableCommands(), true)) {
+            } elseif (!in_array($class, $this->platform->getPreparableCommands(), true)) {
                 throw new ParserException('Non-preparable statement in PREPARE: ' . $class, $tokenList);
             }
         }

@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Ddl\Instance;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Ddl\DdlCommand;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class AlterInstanceCommand extends Statement implements DdlCommand
+class AlterInstanceCommand extends StatementImpl implements DdlCommand
 {
 
     private AlterInstanceAction $action;

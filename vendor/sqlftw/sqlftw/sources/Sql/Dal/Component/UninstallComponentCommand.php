@@ -10,9 +10,9 @@
 namespace SqlFtw\Sql\Dal\Component;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class UninstallComponentCommand extends Statement implements ComponentCommand
+class UninstallComponentCommand extends StatementImpl implements ComponentCommand
 {
 
     /** @var non-empty-list<string> */

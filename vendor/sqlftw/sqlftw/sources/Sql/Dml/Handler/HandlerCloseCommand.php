@@ -11,9 +11,9 @@ namespace SqlFtw\Sql\Dml\Handler;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class HandlerCloseCommand extends Statement implements HandlerCommand
+class HandlerCloseCommand extends StatementImpl implements HandlerCommand
 {
 
     private ObjectIdentifier $table;

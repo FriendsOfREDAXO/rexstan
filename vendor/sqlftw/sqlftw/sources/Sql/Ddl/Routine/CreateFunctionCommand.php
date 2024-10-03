@@ -16,9 +16,10 @@ use SqlFtw\Sql\Ddl\UserExpression;
 use SqlFtw\Sql\Expression\ColumnType;
 use SqlFtw\Sql\Expression\ObjectIdentifier;
 use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 use function implode;
 
-class CreateFunctionCommand extends Statement implements StoredFunctionCommand, CreateRoutineCommand
+class CreateFunctionCommand extends StatementImpl implements StoredFunctionCommand, CreateRoutineCommand
 {
 
     private ObjectIdentifier $function;

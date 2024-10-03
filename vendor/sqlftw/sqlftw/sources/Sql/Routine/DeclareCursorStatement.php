@@ -11,10 +11,9 @@ namespace SqlFtw\Sql\Routine;
 
 use SqlFtw\Formatter\Formatter;
 use SqlFtw\Sql\Dml\Query\Query;
-use SqlFtw\Sql\SqlSerializable;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class DeclareCursorStatement extends Statement implements SqlSerializable
+class DeclareCursorStatement extends StatementImpl
 {
 
     private string $cursor;

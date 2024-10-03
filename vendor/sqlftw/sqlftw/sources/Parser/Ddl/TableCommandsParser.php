@@ -16,6 +16,7 @@ use SqlFtw\Parser\InvalidValueException;
 use SqlFtw\Parser\ParserException;
 use SqlFtw\Parser\TokenList;
 use SqlFtw\Parser\TokenType;
+use SqlFtw\Platform\Platform;
 use SqlFtw\Sql\Charset;
 use SqlFtw\Sql\Ddl\StorageType;
 use SqlFtw\Sql\Ddl\Table\Alter\Action\AddColumnAction;
@@ -115,7 +116,6 @@ use SqlFtw\Sql\InvalidDefinitionException;
 use SqlFtw\Sql\InvalidEnumValueException;
 use SqlFtw\Sql\Keyword;
 use SqlFtw\Sql\SqlMode;
-use SqlFtw\Sql\Statement;
 use SqlFtw\Sql\SubqueryType;
 use function array_values;
 use function count;
@@ -128,6 +128,8 @@ use function strtoupper;
 class TableCommandsParser
 {
 
+    private Platform $platform;
+
     private ExpressionParser $expressionParser;
 
     private IndexCommandsParser $indexCommandsParser;
@@ -135,10 +137,12 @@ class TableCommandsParser
     private QueryParser $queryParser;
 
     public function __construct(
+        Platform $platform,
         ExpressionParser $expressionParser,
         IndexCommandsParser $indexCommandsParser,
         QueryParser $queryParser
     ) {
+        $this->platform = $platform;
         $this->expressionParser = $expressionParser;
         $this->indexCommandsParser = $indexCommandsParser;
         $this->queryParser = $queryParser;
@@ -711,8 +715,6 @@ class TableCommandsParser
      *
      * query_expression:
      *     SELECT ...   (Some valid select or union statement)
-     *
-     * @return AnyCreateTableCommand&Statement
      */
     public function parseCreateTable(TokenList $tokenList): AnyCreateTableCommand
     {
@@ -983,7 +985,7 @@ class TableCommandsParser
                 case Keyword::COMMENT:
                     // [COMMENT 'string']
                     $comment = $tokenList->expectString();
-                    $limit = $tokenList->getSession()->getPlatform()->getMaxLengths()[EntityType::FIELD_COMMENT];
+                    $limit = $this->platform->getMaxLengths()[EntityType::FIELD_COMMENT];
                     if (strlen($comment) > $limit && $tokenList->getSession()->getMode()->containsAny(SqlMode::STRICT_ALL_TABLES)) {
                         throw new ParserException("Column comment length exceeds limit of {$limit} bytes.", $tokenList);
                     }
@@ -1123,7 +1125,7 @@ class TableCommandsParser
                 case Keyword::COMMENT:
                     // [COMMENT 'string']
                     $comment = $tokenList->expectString();
-                    $limit = $tokenList->getSession()->getPlatform()->getMaxLengths()[EntityType::FIELD_COMMENT];
+                    $limit = $this->platform->getMaxLengths()[EntityType::FIELD_COMMENT];
                     if (strlen($comment) > $limit && $tokenList->getSession()->getMode()->containsAny(SqlMode::STRICT_ALL_TABLES)) {
                         throw new ParserException("Column comment length exceeds limit of {$limit} bytes.", $tokenList);
                     }
@@ -1381,7 +1383,7 @@ class TableCommandsParser
             case Keyword::COMMENT:
                 $tokenList->passSymbol('=');
                 $comment = $tokenList->expectString();
-                $limit = $tokenList->getSession()->getPlatform()->getMaxLengths()[EntityType::TABLE_COMMENT];
+                $limit = $this->platform->getMaxLengths()[EntityType::TABLE_COMMENT];
                 if (strlen($comment) > $limit && $tokenList->getSession()->getMode()->containsAny(SqlMode::STRICT_ALL_TABLES)) {
                     throw new ParserException("Table comment length exceeds limit of {$limit} bytes.", $tokenList);
                 }

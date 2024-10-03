@@ -14,7 +14,7 @@ use SqlFtw\Formatter\Formatter;
 /**
  * Column name including table name and schema name, e.g. "foo.bar.baz"
  */
-class ColumnName implements Identifier, ColumnIdentifier
+class ColumnName implements ColumnIdentifier
 {
 
     private string $name;

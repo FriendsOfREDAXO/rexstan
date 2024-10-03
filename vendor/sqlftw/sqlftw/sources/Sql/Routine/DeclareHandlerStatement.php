@@ -10,10 +10,10 @@
 namespace SqlFtw\Sql\Routine;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\SqlSerializable;
 use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class DeclareHandlerStatement extends Statement implements SqlSerializable
+class DeclareHandlerStatement extends StatementImpl
 {
 
     private HandlerAction $action;

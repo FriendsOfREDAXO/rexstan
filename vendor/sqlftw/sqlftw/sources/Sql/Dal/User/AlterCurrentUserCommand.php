@@ -10,9 +10,9 @@
 namespace SqlFtw\Sql\Dal\User;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class AlterCurrentUserCommand extends Statement implements UserCommand
+class AlterCurrentUserCommand extends StatementImpl implements UserCommand
 {
 
     private ?AuthOption $option;

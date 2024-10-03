@@ -66,7 +66,6 @@ use SqlFtw\Sql\Expression\UintLiteral;
 use SqlFtw\Sql\Expression\UserVariable;
 use SqlFtw\Sql\Keyword;
 use SqlFtw\Sql\Order;
-use SqlFtw\Sql\Statement;
 use SqlFtw\Sql\SubqueryType;
 use function array_pop;
 use function count;
@@ -101,7 +100,7 @@ class QueryParser
      *     cte_name [(col_name [, col_name] ...)] AS (subquery)
      *     [, cte_name [(col_name [, col_name] ...)] AS (subquery)] ...
      *
-     * @return Statement&(Query|UpdateCommand|DeleteCommand)
+     * @return Query|UpdateCommand|DeleteCommand
      */
     public function parseWith(TokenList $tokenList): Command
     {
@@ -111,7 +110,7 @@ class QueryParser
 
         $expressions = [];
         do {
-            $name = $tokenList->expectName(null);
+            $name = $tokenList->expectName(EntityType::CTE);
             $columns = null;
             if ($tokenList->hasSymbol('(')) {
                 $columns = [];
@@ -185,8 +184,6 @@ class QueryParser
      *   | [WITH ...] SELECT ...
      *   | TABLE ...
      *   | VALUES ...
-     *
-     * @return Query&Statement
      */
     public function parseQuery(TokenList $tokenList, ?WithClause $with = null): Query
     {
@@ -310,9 +307,6 @@ class QueryParser
         return new QueryExpression($queries, $operators, $orderBy, $limit, $offset, $into, $locking);
     }
 
-    /**
-     * @return Query&Statement
-     */
     public function parseQueryBlock(TokenList $tokenList, ?WithClause $with = null): Query
     {
         if ($tokenList->hasSymbol('(')) {
@@ -395,8 +389,6 @@ class QueryParser
      *     [FOR {UPDATE | SHARE} [OF tbl_name [, tbl_name] ...] [NOWAIT | SKIP LOCKED]
      *       | LOCK IN SHARE MODE]]
      *     [into_option]
-     *
-     * @return Query&Statement
      */
     public function parseSelect(TokenList $tokenList, ?WithClause $with = null): Query
     {
@@ -478,7 +470,7 @@ class QueryParser
                     $window = $this->parseWindow($tokenList);
                     $tokenList->expectSymbol(')');
                 } else {
-                    $window = $tokenList->expectName(null);
+                    $window = $tokenList->expectName(EntityType::WINDOW);
                 }
             }
             $alias = $this->expressionParser->parseAlias($tokenList);
@@ -531,7 +523,7 @@ class QueryParser
         if ($tokenList->hasKeyword(Keyword::WINDOW)) {
             $windows = [];
             do {
-                $name = $tokenList->expectName(null);
+                $name = $tokenList->expectName(EntityType::WINDOW);
                 $tokenList->expectKeyword(Keyword::AS);
 
                 $tokenList->expectSymbol('(');
@@ -704,7 +696,7 @@ class QueryParser
                 if ($token !== null) {
                     $variable = new UserVariable($token->value);
                 } else {
-                    $name = $tokenList->expectName(null);
+                    $name = $tokenList->expectName(EntityType::LOCAL_VARIABLE);
                     $variable = new SimpleName($name);
                 }
                 $variables[] = $variable;
@@ -777,7 +769,7 @@ class QueryParser
      */
     public function parseWindow(TokenList $tokenList): WindowSpecification
     {
-        $name = $tokenList->getNonReservedName(null);
+        $name = $tokenList->getNonReservedName(EntityType::WINDOW);
 
         $partitionBy = $orderBy = $frame = null;
         if ($tokenList->hasKeywords(Keyword::PARTITION, Keyword::BY)) {

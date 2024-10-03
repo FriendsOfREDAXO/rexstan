@@ -54,7 +54,7 @@ class SystemVariable implements Identifier
     public function serialize(Formatter $formatter): string
     {
         $parts = array_map(static function (string $part) use ($formatter): string {
-            return $formatter->getSession()->getPlatform()->isReserved($part) ? '`' . $part . '`' : $part;
+            return $formatter->getPlatform()->isReserved($part) ? '`' . $part . '`' : $part;
         }, explode('.', $this->name));
 
         return ($this->scope !== null ? '@@' . $this->scope->getValue() . '.' : '@@') . implode('.', $parts);

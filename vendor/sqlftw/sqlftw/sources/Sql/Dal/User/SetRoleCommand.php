@@ -10,9 +10,9 @@
 namespace SqlFtw\Sql\Dal\User;
 
 use SqlFtw\Formatter\Formatter;
-use SqlFtw\Sql\Statement;
+use SqlFtw\Sql\StatementImpl;
 
-class SetRoleCommand extends Statement implements UserCommand
+class SetRoleCommand extends StatementImpl implements UserCommand
 {
 
     private RolesSpecification $role;
