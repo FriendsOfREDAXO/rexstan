@@ -82,11 +82,7 @@ final class RexSqlInjectionRule implements Rule
         }
 
         $callerType = $scope->getType($methodCall->var);
-        if (!$callerType instanceof TypeWithClassName) {
-            return [];
-        }
-
-        if ($callerType->getClassName() !== rex_sql::class) {
+        if ($callerType->getObjectClassNames() !== [rex_sql::class]) {
             return [];
         }
 
