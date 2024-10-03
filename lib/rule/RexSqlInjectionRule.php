@@ -114,6 +114,7 @@ final class RexSqlInjectionRule implements Rule
                 RuleErrorBuilder::message(
                     'Possible SQL-injection in expression '. $description .'.')
                     ->tip('Consider use of more SQL-safe types, prepared statements, rex_sql::escape(), rex_sql::escapeIdentifier() or rex_sql::in().')
+                    ->identifier('rexstan.rexSqlInjection')
                     ->build(),
             ];
         }

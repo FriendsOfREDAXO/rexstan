@@ -86,7 +86,7 @@ final class RexGetValueRule implements Rule
                         $nameType->describe(VerbosityLevel::precise()),
                         $className
                     )
-                )->build()
+                )->identifier('rexstan.rexGetValue')->build()
             ;
         }
 

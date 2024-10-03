@@ -84,7 +84,7 @@ final class RexGetRule implements Rule
                     return [
                         RuleErrorBuilder::message(
                             sprintf('No %s found with id %s.', $callerType->getClassName(), $idType->describe(VerbosityLevel::precise()))
-                        )->build(),
+                        )->identifier('rexstan.rexGet')->build(),
                     ];
                 }
             }
@@ -111,7 +111,7 @@ final class RexGetRule implements Rule
                 return [
                     RuleErrorBuilder::message(
                         sprintf('No %s found with id %s.', $callerType->getClassName(), $idType->describe(VerbosityLevel::precise()))
-                    )->build(),
+                    )->identifier('rexstan.rexGet')->build(),
                 ];
             }
         }

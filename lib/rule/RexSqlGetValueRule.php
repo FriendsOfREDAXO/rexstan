@@ -59,14 +59,14 @@ final class RexSqlGetValueRule implements Rule
             return [
                 RuleErrorBuilder::message(
                     sprintf('Value %s was not selected in the used sql-query.', $valueNameType->describe(VerbosityLevel::precise()))
-                )->build(),
+                )->identifier('rexstan.rexSqlGetValue')->build(),
             ];
         }
 
         return [
             RuleErrorBuilder::message(
                 sprintf('All or one of the values %s was not selected in the used sql-query.', $valueNameType->describe(VerbosityLevel::precise()))
-            )->build(),
+            )->identifier('rexstan.rexSqlGetValue')->build(),
         ];
     }
 }

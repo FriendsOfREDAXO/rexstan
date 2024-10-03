@@ -94,7 +94,7 @@ final class YOrmDatasetOptionalTableRule implements Rule
                 'Method "%s" requires $table parameter, when invoked on %s base-class.',
                 $node->name->name,
                 rex_yform_manager_dataset::class
-            ))->build()];
+            ))->identifier('rexstan.yormTable')->build()];
         }
         if (!$isSubclass) {
             return [];
@@ -106,6 +106,6 @@ final class YOrmDatasetOptionalTableRule implements Rule
             'Method "%s" should not be called with $table parameter, when invoked from a class extending %s.',
             $node->name->name,
             rex_yform_manager_dataset::class
-        ))->build()];
+        ))->identifier('rexstan.yormTable')->build()];
     }
 }

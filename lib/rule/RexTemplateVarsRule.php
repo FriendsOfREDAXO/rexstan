@@ -43,7 +43,7 @@ final class RexTemplateVarsRule implements Rule
                             'Template "%s" includes invalid template by ID "%s"',
                             str_replace(RexTemplateVarsCollector::FILE_SUFFIX, '', basename($templateFile)),
                             $varName.'['.$id.']',
-                        ))->file($templateFile)->build();
+                        ))->identifier('rexstan.rexTemplateVar')->file($templateFile)->build();
                     }
                 } elseif (array_key_exists('key', $args)) {
                     $key = (string) $args['key'];
@@ -54,7 +54,7 @@ final class RexTemplateVarsRule implements Rule
                             'Template "%s" includes invalid template by key "%s"',
                             str_replace(RexTemplateVarsCollector::FILE_SUFFIX, '', basename($templateFile)),
                             $varName.'['.$key.']',
-                        ))->file($templateFile)->build();
+                        ))->identifier('rexstan.rexTemplateVar')->file($templateFile)->build();
                     }
                 }
             }
