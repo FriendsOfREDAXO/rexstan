@@ -50,7 +50,7 @@ final class RexSqlSetValueRule implements Rule
                 return [
                     RuleErrorBuilder::message(
                         'setArrayValue() expects a database column which can store string values.'
-                    )->build(),
+                    )->identifier('rexstan.rexSqlSetValue')->build(),
                 ];
             }
 
@@ -68,14 +68,14 @@ final class RexSqlSetValueRule implements Rule
             return [
                 RuleErrorBuilder::message(
                     sprintf('Value %s does not exist in table selected via setTable().', $valueNameType->describe(VerbosityLevel::precise()))
-                )->build(),
+                )->identifier('rexstan.rexSqlSetValue')->build(),
             ];
         }
 
         return [
             RuleErrorBuilder::message(
                 sprintf('All or one of the values %s was not selected in the used sql-query.', $valueNameType->describe(VerbosityLevel::precise()))
-            )->build(),
+            )->identifier('rexstan.rexSqlSetValue')->build(),
         ];
     }
 }

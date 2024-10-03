@@ -55,7 +55,7 @@ final class RexSqlSetTableRule implements Rule
             if ($schemaReflection->getTable($constantString->getValue()) === null) {
                 $errors[] = RuleErrorBuilder::message(
                     sprintf("Table '%s' does not exist.", $constantString->getValue())
-                )->build();
+                )->identifier('rexstan.rexSqlSetTable')->build();
             }
         }
 

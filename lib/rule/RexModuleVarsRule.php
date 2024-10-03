@@ -56,7 +56,7 @@ final class RexModuleVarsRule implements Rule
                             str_replace(RexModuleInputVarsCollector::FILE_SUFFIX, '', basename($inputFile)),
                             $varName.'['.$id.']',
                         )
-                    )->file($inputFile)->build();
+                    )->identifier('rexstan.rexModuleInputVar')->file($inputFile)->build();
                 }
             }
         }
@@ -80,7 +80,7 @@ final class RexModuleVarsRule implements Rule
                         'Module "%s" contains ouput value "%s" which is not used in module input.',
                         str_replace(RexModuleInputVarsCollector::FILE_SUFFIX, '', basename($inputFile)),
                         $varName.'['.$id.']',
-                    ))->file($inputFile)->build();
+                    ))->identifier('rexstan.rexModuleOutputVar')->file($inputFile)->build();
                 }
             }
         }
