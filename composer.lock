@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "af7735f8f371e531ade668d98be5c647",
+    "content-hash": "e22f71c056f63880334dc35370153162",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1547,16 +1547,16 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.2.82",
+            "version": "0.2.83",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "dffa34bd0ab3391952b4e1bb8d4ae6c5278d2267"
+                "reference": "16f34c09099e14f35731e9fa9ab2af333eaf0a56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/dffa34bd0ab3391952b4e1bb8d4ae6c5278d2267",
-                "reference": "dffa34bd0ab3391952b4e1bb8d4ae6c5278d2267",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/16f34c09099e14f35731e9fa9ab2af333eaf0a56",
+                "reference": "16f34c09099e14f35731e9fa9ab2af333eaf0a56",
                 "shasum": ""
             },
             "require": {
@@ -1564,8 +1564,7 @@
                 "composer/semver": "^3.2",
                 "doctrine/dbal": "3.*",
                 "php": "^7.4 || ^8.0",
-                "phpstan/phpstan": "^1.9.4",
-                "sqlftw/sqlftw": "^0.1.16"
+                "phpstan/phpstan": "^1.9.4"
             },
             "conflict": {
                 "sqlftw/sqlftw": "<0.1.16"
@@ -1612,7 +1611,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.82"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.83"
             },
             "funding": [
                 {
@@ -1620,7 +1619,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-03T07:45:11+00:00"
+            "time": "2024-10-03T10:24:37+00:00"
         },
         {
             "name": "staabm/phpstan-todo-by",
