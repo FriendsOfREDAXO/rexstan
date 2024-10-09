@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e22f71c056f63880334dc35370153162",
+    "content-hash": "538e04d99e28e75c4f676d88f0f12894",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1623,16 +1623,16 @@
         },
         {
             "name": "staabm/phpstan-todo-by",
-            "version": "0.1.31",
+            "version": "0.1.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-todo-by.git",
-                "reference": "2715e6d792de8e72cf1eae2ea1bb87c55d93618b"
+                "reference": "81a55caa8af4451082c5688f9e69089275332d9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/2715e6d792de8e72cf1eae2ea1bb87c55d93618b",
-                "reference": "2715e6d792de8e72cf1eae2ea1bb87c55d93618b",
+                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/81a55caa8af4451082c5688f9e69089275332d9a",
+                "reference": "81a55caa8af4451082c5688f9e69089275332d9a",
                 "shasum": ""
             },
             "require": {
@@ -1645,8 +1645,10 @@
                 "phpstan/phpstan": "^1.10"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.41",
+                "friendsofphp/php-cs-fixer": "^3.64",
                 "nikic/php-parser": "^4.0",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan-deprecation-rules": "^1.2",
                 "phpunit/phpunit": "^9 || ^10.5",
                 "redaxo/php-cs-fixer-config": "^1.0"
             },
@@ -1677,7 +1679,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-todo-by/issues",
-                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.31"
+                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.1.32"
             },
             "funding": [
                 {
@@ -1685,7 +1687,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-16T15:02:14+00:00"
+            "time": "2024-10-08T10:08:28+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
