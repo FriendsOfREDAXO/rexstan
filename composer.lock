@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "538e04d99e28e75c4f676d88f0f12894",
+    "content-hash": "eea4b3f27da564df4e5e31f0b46d8e48",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1482,16 +1482,16 @@
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
-            "version": "0.12.5",
+            "version": "0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-baseline-analysis.git",
-                "reference": "b073efd02258d09f8472294af3074ec90a33b59e"
+                "reference": "e4f75e2cd323cb85cd81992b83d8fd5892c6022e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/b073efd02258d09f8472294af3074ec90a33b59e",
-                "reference": "b073efd02258d09f8472294af3074ec90a33b59e",
+                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/e4f75e2cd323cb85cd81992b83d8fd5892c6022e",
+                "reference": "e4f75e2cd323cb85cd81992b83d8fd5892c6022e",
                 "shasum": ""
             },
             "require": {
@@ -1500,15 +1500,19 @@
                 "symfony/polyfill-php80": "^1.26",
                 "thecodingmachine/safe": "^1.3 || ^2.0"
             },
+            "conflict": {
+                "tomasvotruba/type-coverage": "<1.0"
+            },
             "require-dev": {
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.9",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^1.12",
+                "phpstan/phpstan-deprecation-rules": "^1.2",
                 "phpunit/phpunit": "^9.6",
                 "symfony/var-dumper": "^5.3",
                 "thecodingmachine/phpstan-safe-rule": "^1.2",
                 "tomasvotruba/cognitive-complexity": "0.2.3",
-                "tomasvotruba/type-coverage": "0.2.5",
-                "tomasvotruba/unused-public": "0.3.8"
+                "tomasvotruba/type-coverage": "1.0.0",
+                "tomasvotruba/unused-public": "0.3.11"
             },
             "bin": [
                 "bin/phpstan-baseline-analyze",
@@ -1535,7 +1539,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-baseline-analysis/issues",
-                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.12.5"
+                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.13"
             },
             "funding": [
                 {
@@ -1543,7 +1547,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-15T13:33:14+00:00"
+            "time": "2024-10-09T14:45:08+00:00"
         },
         {
             "name": "staabm/phpstan-dba",
