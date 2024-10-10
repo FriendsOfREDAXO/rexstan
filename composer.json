@@ -10,7 +10,7 @@
         "phpstan/phpstan-symfony": "1.4.10",
         "spaze/phpstan-disallowed-calls": "2.16.1",
         "sqlftw/sqlftw": "0.1.16",
-        "staabm/phpstan-baseline-analysis": "0.12.5",
+        "staabm/phpstan-baseline-analysis": "0.13",
         "staabm/phpstan-dba": "0.2.83",
         "staabm/phpstan-todo-by": "0.1.32",
         "symplify/phpstan-rules": "12.7.0",
