@@ -8,7 +8,7 @@
         "phpstan/phpstan-phpunit": "1.4.0",
         "phpstan/phpstan-strict-rules": "1.6.1",
         "phpstan/phpstan-symfony": "1.4.10",
-        "spaze/phpstan-disallowed-calls": "2.16.1",
+        "spaze/phpstan-disallowed-calls": "3.5.0",
         "sqlftw/sqlftw": "0.1.16",
         "staabm/phpstan-baseline-analysis": "0.13",
         "staabm/phpstan-dba": "0.2.83",
