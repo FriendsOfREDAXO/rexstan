@@ -261,26 +261,29 @@ final class RexSqlInjectionRule implements Rule
             throw new ShouldNotHappenException();
         }
 
-        if ($callableType instanceof ConstantArrayType) {
-            $valueTypes = $callableType->getValueTypes();
+        $constArrays = $callableType->getConstantArrays();
+        if ($constArrays !== []) {
+            foreach($constArrays as $constArray) {
+                foreach($constArray->findTypeAndMethodNames() as $typeAndMethod) {
+                    if ($typeAndMethod->isUnknown()) {
+                        continue;
+                    }
+                    if (!$typeAndMethod->getCertainty()->yes()) {
+                        continue;
+                    }
 
-            if (count($valueTypes) === 2) {
-                [$objectType, $methodType] = $valueTypes;
-
-                $classReflections = $objectType->getObjectClassReflections();
-                $methodNames = $methodType->getConstantStrings();
-                foreach ($classReflections as $classReflection) {
-                    foreach ($methodNames as $methodStringType) {
-                        $methodReflection = $classReflection->getMethod($methodStringType->getValue(), $scope);
-
-                        if (PhpDocUtil::matchTaintEscape($methodReflection, $scope) !== 'sql') {
-                            return false;
-                        }
+                    $calledOnType = $typeAndMethod->getType();
+                    $methodReflection = $scope->getMethodReflection($calledOnType, $typeAndMethod->getMethod());
+                    if ($methodReflection === null) {
+                        continue;
+                    }
+                    if (PhpDocUtil::matchTaintEscape($methodReflection, $scope) !== 'sql') {
+                        return false;
                     }
                 }
-
-                return true;
             }
+
+            return true;
         }
 
         $parameterAcceptors = $callableType->getCallableParametersAcceptors($scope);
