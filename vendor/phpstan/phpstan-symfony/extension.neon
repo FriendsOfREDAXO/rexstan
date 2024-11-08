@@ -66,6 +66,7 @@ parameters:
 		- stubs/Symfony/Component/Messenger/Envelope.stub
 		- stubs/Symfony/Component/OptionsResolver/Exception/InvalidOptionsException.stub
 		- stubs/Symfony/Component/OptionsResolver/Options.stub
+		- stubs/Symfony/Component/Process/Exception/LogicException.stub
 		- stubs/Symfony/Component/Process/Process.stub
 		- stubs/Symfony/Component/PropertyAccess/Exception/AccessException.stub
 		- stubs/Symfony/Component/PropertyAccess/Exception/ExceptionInterface.stub
