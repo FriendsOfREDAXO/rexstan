@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "beberlei/assert",
-            "version": "v3.3.2",
-            "version_normalized": "3.3.2.0",
+            "version": "v3.3.3",
+            "version_normalized": "3.3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/assert.git",
-                "reference": "cb70015c04be1baee6f5f5c953703347c0ac1655"
+                "reference": "b5fd8eacd8915a1b627b8bfc027803f1939734dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/assert/zipball/cb70015c04be1baee6f5f5c953703347c0ac1655",
-                "reference": "cb70015c04be1baee6f5f5c953703347c0ac1655",
+                "url": "https://api.github.com/repos/beberlei/assert/zipball/b5fd8eacd8915a1b627b8bfc027803f1939734dd",
+                "reference": "b5fd8eacd8915a1b627b8bfc027803f1939734dd",
                 "shasum": ""
             },
             "require": {
@@ -20,7 +20,7 @@
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "ext-simplexml": "*",
-                "php": "^7.0 || ^8.0"
+                "php": "^7.1 || ^8.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "*",
@@ -31,7 +31,7 @@
             "suggest": {
                 "ext-intl": "Needed to allow Assertion::count(), Assertion::isCountable(), Assertion::minCount(), and Assertion::maxCount() to operate on ResourceBundles"
             },
-            "time": "2021-12-16T21:41:27+00:00",
+            "time": "2024-07-15T13:18:35+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -66,7 +66,7 @@
             ],
             "support": {
                 "issues": "https://github.com/beberlei/assert/issues",
-                "source": "https://github.com/beberlei/assert/tree/v3.3.2"
+                "source": "https://github.com/beberlei/assert/tree/v3.3.3"
             },
             "install-path": "../beberlei/assert"
         },
@@ -1021,17 +1021,17 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.12.7",
-            "version_normalized": "1.12.7.0",
+            "version": "1.12.8",
+            "version_normalized": "1.12.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "dc2b9976bd8b0f84ec9b0e50cc35378551de7af0"
+                "reference": "f6a60a4d66142b8156c9da923f1972657bc4748c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/dc2b9976bd8b0f84ec9b0e50cc35378551de7af0",
-                "reference": "dc2b9976bd8b0f84ec9b0e50cc35378551de7af0",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/f6a60a4d66142b8156c9da923f1972657bc4748c",
+                "reference": "f6a60a4d66142b8156c9da923f1972657bc4748c",
                 "shasum": ""
             },
             "require": {
@@ -1040,7 +1040,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2024-10-18T11:12:07+00:00",
+            "time": "2024-11-06T19:06:49+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -1239,17 +1239,17 @@
         },
         {
             "name": "phpstan/phpstan-symfony",
-            "version": "1.4.10",
-            "version_normalized": "1.4.10.0",
+            "version": "1.4.12",
+            "version_normalized": "1.4.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-symfony.git",
-                "reference": "f7d5782044bedf93aeb3f38e09c91148ee90e5a1"
+                "reference": "c7b7e7f520893621558bfbfdb2694d4364565c1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/f7d5782044bedf93aeb3f38e09c91148ee90e5a1",
-                "reference": "f7d5782044bedf93aeb3f38e09c91148ee90e5a1",
+                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/c7b7e7f520893621558bfbfdb2694d4364565c1d",
+                "reference": "c7b7e7f520893621558bfbfdb2694d4364565c1d",
                 "shasum": ""
             },
             "require": {
@@ -1278,7 +1278,7 @@
                 "symfony/serializer": "^5.4",
                 "symfony/service-contracts": "^2.2.0"
             },
-            "time": "2024-09-26T18:14:50+00:00",
+            "time": "2024-11-06T10:13:18+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1308,7 +1308,7 @@
             "description": "Symfony Framework extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-symfony/issues",
-                "source": "https://github.com/phpstan/phpstan-symfony/tree/1.4.10"
+                "source": "https://github.com/phpstan/phpstan-symfony/tree/1.4.12"
             },
             "install-path": "../phpstan/phpstan-symfony"
         },
@@ -1614,17 +1614,17 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.2.83",
-            "version_normalized": "0.2.83.0",
+            "version": "0.2.85",
+            "version_normalized": "0.2.85.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "16f34c09099e14f35731e9fa9ab2af333eaf0a56"
+                "reference": "f55924169165d70e6eafb9479f6d061420bfdc21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/16f34c09099e14f35731e9fa9ab2af333eaf0a56",
-                "reference": "16f34c09099e14f35731e9fa9ab2af333eaf0a56",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/f55924169165d70e6eafb9479f6d061420bfdc21",
+                "reference": "f55924169165d70e6eafb9479f6d061420bfdc21",
                 "shasum": ""
             },
             "require": {
@@ -1652,7 +1652,7 @@
                 "tomasvotruba/unused-public": "^1.0",
                 "vlucas/phpdotenv": "^5.4"
             },
-            "time": "2024-10-03T10:24:37+00:00",
+            "time": "2024-10-28T14:28:22+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1681,7 +1681,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.83"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.2.85"
             },
             "funding": [
                 {
