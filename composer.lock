@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cd3ad904376001a06db74e98f80fef36",
+    "content-hash": "ec3244b81e07160b4d14552bc57c38fa",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2134,16 +2134,16 @@
         },
         {
             "name": "tomasvotruba/unused-public",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/unused-public.git",
-                "reference": "8c8a94c3abd60d76ccace897c5dabab35953e5ca"
+                "reference": "f05169f07f4a8a53ef05107ee81e4e1201e0d47f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/8c8a94c3abd60d76ccace897c5dabab35953e5ca",
-                "reference": "8c8a94c3abd60d76ccace897c5dabab35953e5ca",
+                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/f05169f07f4a8a53ef05107ee81e4e1201e0d47f",
+                "reference": "f05169f07f4a8a53ef05107ee81e4e1201e0d47f",
                 "shasum": ""
             },
             "require": {
@@ -2175,7 +2175,7 @@
             ],
             "support": {
                 "issues": "https://github.com/TomasVotruba/unused-public/issues",
-                "source": "https://github.com/TomasVotruba/unused-public/tree/1.0.0"
+                "source": "https://github.com/TomasVotruba/unused-public/tree/1.1.0"
             },
             "funding": [
                 {
@@ -2187,7 +2187,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-01T15:42:57+00:00"
+            "time": "2024-12-06T16:01:31+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -2251,13 +2251,13 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.4"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "platform-overrides": {
         "php": "7.4.30"
     },
