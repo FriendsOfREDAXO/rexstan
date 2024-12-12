@@ -27,6 +27,6 @@ final class RexTemplateVarsCollector implements Collector
             return null;
         }
 
-        return RexTemplateVarsReflection::matchVars(\Safe\file_get_contents($scope->getFile()));
+        return RexTemplateVarsReflection::matchVars(\rex_file::get($scope->getFile(), ''));
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b610d670c163e34bb87c6ca555607821",
+    "content-hash": "b5ea2ca1b13058ddc0d79aa7b5aad0bb",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -362,29 +362,27 @@
         },
         {
             "name": "doctrine/deprecations",
-            "version": "1.1.3",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/deprecations.git",
-                "reference": "dfbaa3c2d2e9a9df1118213f3b8b0c597bb99fab"
+                "reference": "31610dbb31faa98e6b5447b62340826f54fbc4e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/deprecations/zipball/dfbaa3c2d2e9a9df1118213f3b8b0c597bb99fab",
-                "reference": "dfbaa3c2d2e9a9df1118213f3b8b0c597bb99fab",
+                "url": "https://api.github.com/repos/doctrine/deprecations/zipball/31610dbb31faa98e6b5447b62340826f54fbc4e9",
+                "reference": "31610dbb31faa98e6b5447b62340826f54fbc4e9",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1 || ^8.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^9",
-                "phpstan/phpstan": "1.4.10 || 1.10.15",
-                "phpstan/phpstan-phpunit": "^1.0",
+                "doctrine/coding-standard": "^9 || ^12",
+                "phpstan/phpstan": "1.4.10 || 2.0.3",
+                "phpstan/phpstan-phpunit": "^1.0 || ^2",
                 "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5",
-                "psalm/plugin-phpunit": "0.18.4",
-                "psr/log": "^1 || ^2 || ^3",
-                "vimeo/psalm": "4.30.0 || 5.12.0"
+                "psr/log": "^1 || ^2 || ^3"
             },
             "suggest": {
                 "psr/log": "Allows logging deprecations via PSR-3 logger implementation"
@@ -392,7 +390,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Doctrine\\Deprecations\\": "lib/Doctrine/Deprecations"
+                    "Doctrine\\Deprecations\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -403,9 +401,9 @@
             "homepage": "https://www.doctrine-project.org/",
             "support": {
                 "issues": "https://github.com/doctrine/deprecations/issues",
-                "source": "https://github.com/doctrine/deprecations/tree/1.1.3"
+                "source": "https://github.com/doctrine/deprecations/tree/1.1.4"
             },
-            "time": "2024-01-30T19:34:25+00:00"
+            "time": "2024-12-07T21:18:45+00:00"
         },
         {
             "name": "doctrine/event-manager",
@@ -1713,8 +1711,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -1826,63 +1824,6 @@
                 }
             ],
             "time": "2024-05-25T15:32:40+00:00"
-        },
-        {
-            "name": "thecodingmachine/phpstan-safe-rule",
-            "version": "v1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thecodingmachine/phpstan-safe-rule.git",
-                "reference": "8a7b88e0d54f209a488095085f183e9174c40e1e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thecodingmachine/phpstan-safe-rule/zipball/8a7b88e0d54f209a488095085f183e9174c40e1e",
-                "reference": "8a7b88e0d54f209a488095085f183e9174c40e1e",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1 || ^8.0",
-                "phpstan/phpstan": "^1.0",
-                "thecodingmachine/safe": "^1.0 || ^2.0"
-            },
-            "require-dev": {
-                "php-coveralls/php-coveralls": "^2.1",
-                "phpunit/phpunit": "^7.5.2 || ^8.0",
-                "squizlabs/php_codesniffer": "^3.4"
-            },
-            "type": "phpstan-extension",
-            "extra": {
-                "phpstan": {
-                    "includes": [
-                        "phpstan-safe-rule.neon"
-                    ]
-                },
-                "branch-alias": {
-                    "dev-master": "1.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "TheCodingMachine\\Safe\\PHPStan\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "David Négrier",
-                    "email": "d.negrier@thecodingmachine.com"
-                }
-            ],
-            "description": "A PHPStan rule to detect safety issues. Must be used in conjunction with thecodingmachine/safe",
-            "support": {
-                "issues": "https://github.com/thecodingmachine/phpstan-safe-rule/issues",
-                "source": "https://github.com/thecodingmachine/phpstan-safe-rule/tree/v1.2.0"
-            },
-            "time": "2022-01-17T10:12:29+00:00"
         },
         {
             "name": "thecodingmachine/safe",
@@ -2251,13 +2192,13 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.4"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "platform-overrides": {
         "php": "7.4.30"
     },

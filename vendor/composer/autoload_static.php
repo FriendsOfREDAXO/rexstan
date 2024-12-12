@@ -9,6 +9,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
     public static $files = array (
         '9b38cf48e83f5d8f60375221cd213eee' => __DIR__ . '/..' . '/phpstan/phpstan/bootstrap.php',
         'a4ecaeafb8cfb009ad0e052c90355e98' => __DIR__ . '/..' . '/beberlei/assert/lib/Assert/functions.php',
+        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '51fcf4e06c07cc00c920b44bcd900e7a' => __DIR__ . '/..' . '/thecodingmachine/safe/deprecated/apc.php',
         '47f619d9197b36cf5ab70738d7743fe2' => __DIR__ . '/..' . '/thecodingmachine/safe/deprecated/libevent.php',
         'ea6bb8a12ef9b68f6ada99058e530760' => __DIR__ . '/..' . '/thecodingmachine/safe/deprecated/mssql.php',
@@ -98,7 +99,6 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         '4af1dca6db8c527c6eed27bff85ff0e5' => __DIR__ . '/..' . '/thecodingmachine/safe/generated/yaz.php',
         'fe43ca06499ac37bc2dedd823af71eb5' => __DIR__ . '/..' . '/thecodingmachine/safe/generated/zip.php',
         '356736db98a6834f0a886b8d509b0ecd' => __DIR__ . '/..' . '/thecodingmachine/safe/generated/zlib.php',
-        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -120,7 +120,6 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
             'TomasVotruba\\UnusedPublic\\' => 26,
             'TomasVotruba\\TypeCoverage\\' => 26,
             'TomasVotruba\\CognitiveComplexity\\' => 33,
-            'TheCodingMachine\\Safe\\PHPStan\\' => 30,
         ),
         'S' => 
         array (
@@ -185,10 +184,6 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         array (
             0 => __DIR__ . '/..' . '/tomasvotruba/cognitive-complexity/src',
         ),
-        'TheCodingMachine\\Safe\\PHPStan\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/thecodingmachine/phpstan-safe-rule/src',
-        ),
         'Symplify\\PHPStanRules\\' => 
         array (
             0 => __DIR__ . '/..' . '/symplify/phpstan-rules/src',
@@ -228,7 +223,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         ),
         'Doctrine\\Deprecations\\' => 
         array (
-            0 => __DIR__ . '/..' . '/doctrine/deprecations/lib/Doctrine/Deprecations',
+            0 => __DIR__ . '/..' . '/doctrine/deprecations/src',
         ),
         'Doctrine\\DBAL\\' => 
         array (
@@ -631,8 +626,8 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'Doctrine\\DBAL\\Types\\VarDateTimeImmutableType' => __DIR__ . '/..' . '/doctrine/dbal/src/Types/VarDateTimeImmutableType.php',
         'Doctrine\\DBAL\\Types\\VarDateTimeType' => __DIR__ . '/..' . '/doctrine/dbal/src/Types/VarDateTimeType.php',
         'Doctrine\\DBAL\\VersionAwarePlatformDriver' => __DIR__ . '/..' . '/doctrine/dbal/src/VersionAwarePlatformDriver.php',
-        'Doctrine\\Deprecations\\Deprecation' => __DIR__ . '/..' . '/doctrine/deprecations/lib/Doctrine/Deprecations/Deprecation.php',
-        'Doctrine\\Deprecations\\PHPUnit\\VerifyDeprecations' => __DIR__ . '/..' . '/doctrine/deprecations/lib/Doctrine/Deprecations/PHPUnit/VerifyDeprecations.php',
+        'Doctrine\\Deprecations\\Deprecation' => __DIR__ . '/..' . '/doctrine/deprecations/src/Deprecation.php',
+        'Doctrine\\Deprecations\\PHPUnit\\VerifyDeprecations' => __DIR__ . '/..' . '/doctrine/deprecations/src/PHPUnit/VerifyDeprecations.php',
         'Dogma\\Application\\Colors' => __DIR__ . '/..' . '/dogma/dogma/src/Application/Colors.php',
         'Dogma\\Application\\ConfigurationProfile' => __DIR__ . '/..' . '/dogma/dogma/src/Application/ConfigurationProfile.php',
         'Dogma\\Application\\Configurator' => __DIR__ . '/..' . '/dogma/dogma/src/Application/Configurator.php',
@@ -2270,11 +2265,6 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'Symplify\\PHPStanRules\\ValueObject\\ClassNamespaceAndDirectory' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/ValueObject/ClassNamespaceAndDirectory.php',
         'Symplify\\PHPStanRules\\ValueObject\\Configuration\\RequiredWithMessage' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/ValueObject/Configuration/RequiredWithMessage.php',
         'Symplify\\PHPStanRules\\ValueObject\\MethodCallReference' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/ValueObject/MethodCallReference.php',
-        'TheCodingMachine\\Safe\\PHPStan\\Rules\\UseSafeClassesRule' => __DIR__ . '/..' . '/thecodingmachine/phpstan-safe-rule/src/Rules/UseSafeClassesRule.php',
-        'TheCodingMachine\\Safe\\PHPStan\\Rules\\UseSafeFunctionsRule' => __DIR__ . '/..' . '/thecodingmachine/phpstan-safe-rule/src/Rules/UseSafeFunctionsRule.php',
-        'TheCodingMachine\\Safe\\PHPStan\\Type\\Php\\ReplaceSafeFunctionsDynamicReturnTypeExtension' => __DIR__ . '/..' . '/thecodingmachine/phpstan-safe-rule/src/Type/Php/ReplaceSafeFunctionsDynamicReturnTypeExtension.php',
-        'TheCodingMachine\\Safe\\PHPStan\\Utils\\ClassListLoader' => __DIR__ . '/..' . '/thecodingmachine/phpstan-safe-rule/src/Utils/ClassListLoader.php',
-        'TheCodingMachine\\Safe\\PHPStan\\Utils\\FunctionListLoader' => __DIR__ . '/..' . '/thecodingmachine/phpstan-safe-rule/src/Utils/FunctionListLoader.php',
         'TomasVotruba\\CognitiveComplexity\\AstCognitiveComplexityAnalyzer' => __DIR__ . '/..' . '/tomasvotruba/cognitive-complexity/src/AstCognitiveComplexityAnalyzer.php',
         'TomasVotruba\\CognitiveComplexity\\ClassReflectionParser' => __DIR__ . '/..' . '/tomasvotruba/cognitive-complexity/src/ClassReflectionParser.php',
         'TomasVotruba\\CognitiveComplexity\\Configuration' => __DIR__ . '/..' . '/tomasvotruba/cognitive-complexity/src/Configuration.php',
@@ -2308,7 +2298,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'TomasVotruba\\UnusedPublic\\ClassTypeDetector' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/ClassTypeDetector.php',
         'TomasVotruba\\UnusedPublic\\CollectorMapper\\MethodCallCollectorMapper' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/CollectorMapper/MethodCallCollectorMapper.php',
         'TomasVotruba\\UnusedPublic\\Collectors\\Callable_\\AttributeCallableCollector' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Collectors/Callable_/AttributeCallableCollector.php',
-        'TomasVotruba\\UnusedPublic\\Collectors\\Callable_\\CallUserFuncCollector' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Collectors/Callable_/CallUserFuncCollector.php',
+        'TomasVotruba\\UnusedPublic\\Collectors\\Callable_\\CallableTypeCollector' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Collectors/Callable_/CallableTypeCollector.php',
         'TomasVotruba\\UnusedPublic\\Collectors\\ClassConstFetchCollector' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Collectors/ClassConstFetchCollector.php',
         'TomasVotruba\\UnusedPublic\\Collectors\\FormTypeClassCollector' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Collectors/FormTypeClassCollector.php',
         'TomasVotruba\\UnusedPublic\\Collectors\\MethodCall\\MethodCallCollector' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Collectors/MethodCall/MethodCallCollector.php',
