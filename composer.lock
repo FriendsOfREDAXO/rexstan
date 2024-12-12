@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b5ea2ca1b13058ddc0d79aa7b5aad0bb",
+    "content-hash": "d6f4ddfaa9cf8993a36363b4d5b1dd89",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1363,30 +1363,30 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v2.16.1",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "1500f90ff6a705009731cc14e50d4faf2d202bf3"
+                "reference": "0f030fd3fb770ee7c262445c8ad3c0b470a32ac5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/1500f90ff6a705009731cc14e50d4faf2d202bf3",
-                "reference": "1500f90ff6a705009731cc14e50d4faf2d202bf3",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/0f030fd3fb770ee7c262445c8ad3c0b470a32ac5",
+                "reference": "0f030fd3fb770ee7c262445c8ad3c0b470a32ac5",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2 || ^8.0",
-                "phpstan/phpstan": "^1.10"
+                "php": "^7.4 || ^8.0",
+                "phpstan/phpstan": "^1.12.6 || ^2.0"
             },
             "require-dev": {
-                "nette/neon": "^3.2",
-                "nikic/php-parser": "^4.13",
+                "nette/neon": "^3.3.1",
+                "nikic/php-parser": "^4.13 || ^5.0",
                 "php-parallel-lint/php-console-highlighter": "^1.0",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
-                "phpunit/phpunit": "^8.5 || ^10.1",
-                "spaze/coding-standard": "^1.7",
-                "symfony/polyfill-php80": "^1.27"
+                "phpstan/phpstan-deprecation-rules": "^1.2 || ^2.0",
+                "phpunit/phpunit": "^8.5.14 || ^10.1 || ^11.0",
+                "spaze/coding-standard": "^1.7"
             },
             "type": "phpstan-extension",
             "extra": {
@@ -1418,7 +1418,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v2.16.1"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v4.0.1"
             },
             "funding": [
                 {
@@ -1426,7 +1426,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-28T15:29:27+00:00"
+            "time": "2024-11-13T17:17:13+00:00"
         },
         {
             "name": "sqlftw/sqlftw",
@@ -2192,13 +2192,13 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.4"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "platform-overrides": {
         "php": "7.4.30"
     },
