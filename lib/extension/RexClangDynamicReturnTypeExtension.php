@@ -44,7 +44,11 @@ final class RexClangDynamicReturnTypeExtension implements DynamicStaticMethodRet
             }
 
             $type = $scope->getType($args[0]->value);
-            $defaultReturn = ParametersAcceptorSelector::selectSingle($methodReflection->getVariants())->getReturnType();
+            $defaultReturn = ParametersAcceptorSelector::selectFromArgs(
+                $scope,
+                $args,
+                $methodReflection->getVariants()
+            )->getReturnType();
 
             if ($type instanceof ConstantIntegerType) {
                 $clang = rex_clang::get($type->getValue());
