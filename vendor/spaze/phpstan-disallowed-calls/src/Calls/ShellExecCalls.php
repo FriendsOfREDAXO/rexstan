@@ -7,11 +7,11 @@ use PhpParser\Node;
 use PhpParser\Node\Expr\ShellExec;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleError;
 use PHPStan\ShouldNotHappenException;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedCall;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedCallFactory;
 use Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedCallsRuleErrors;
+use Spaze\PHPStan\Rules\Disallowed\RuleErrors\ErrorIdentifiers;
 
 /**
  * Reports on dynamically using the execution backtick operator (<code>`ls`</code>).
@@ -26,11 +26,10 @@ use Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedCallsRuleErrors;
 class ShellExecCalls implements Rule
 {
 
-	/** @var DisallowedCallsRuleErrors */
-	private $disallowedCallsRuleErrors;
+	private DisallowedCallsRuleErrors $disallowedCallsRuleErrors;
 
 	/** @var list<DisallowedCall> */
-	private $disallowedCalls;
+	private array $disallowedCalls;
 
 
 	/**
@@ -55,9 +54,6 @@ class ShellExecCalls implements Rule
 
 
 	/**
-	 * @param ShellExec $node
-	 * @param Scope $scope
-	 * @return list<RuleError>
 	 * @throws ShouldNotHappenException
 	 */
 	public function processNode(Node $node, Scope $scope): array
@@ -69,7 +65,8 @@ class ShellExecCalls implements Rule
 			null,
 			null,
 			$this->disallowedCalls,
-			'Using the backtick operator (`...`) is forbidden because shell_exec() is forbidden, %2$s%3$s'
+			ErrorIdentifiers::DISALLOWED_BACKTICK,
+			'Using the backtick operator (`...`) is forbidden because shell_exec() is forbidden%2$s%3$s'
 		);
 	}
 

@@ -23,15 +23,14 @@ class StrictFunctionCallsRule implements Rule
 {
 
 	/** @var int[] */
-	private $functionArguments = [
+	private array $functionArguments = [
 		'in_array' => 2,
 		'array_search' => 2,
 		'base64_decode' => 1,
 		'array_keys' => 2,
 	];
 
-	/** @var ReflectionProvider */
-	private $reflectionProvider;
+	private ReflectionProvider $reflectionProvider;
 
 	public function __construct(ReflectionProvider $reflectionProvider)
 	{
@@ -74,7 +73,7 @@ class StrictFunctionCallsRule implements Rule
 				RuleErrorBuilder::message(sprintf(
 					'Call to function %s() requires parameter #%d to be set.',
 					$functionName,
-					$argumentPosition + 1
+					$argumentPosition + 1,
 				))->identifier('function.strict')->build(),
 			];
 		}
@@ -86,7 +85,7 @@ class StrictFunctionCallsRule implements Rule
 				RuleErrorBuilder::message(sprintf(
 					'Call to function %s() requires parameter #%d to be true.',
 					$functionName,
-					$argumentPosition + 1
+					$argumentPosition + 1,
 				))->identifier('function.strict')->build(),
 			];
 		}

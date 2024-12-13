@@ -9,7 +9,6 @@ use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\Symfony\Config\ValueObject\ParentObjectType;
 use PHPStan\Type\Type;
-use PHPStan\Type\TypeUtils;
 use PHPStan\Type\VerbosityLevel;
 use function count;
 use function in_array;
@@ -55,14 +54,18 @@ final class ArrayNodeDefinitionPrototypeDynamicReturnTypeExtension implements Dy
 	{
 		$calledOnType = $scope->getType($methodCall->var);
 
-		$defaultType = ParametersAcceptorSelector::selectSingle($methodReflection->getVariants())->getReturnType();
+		$defaultType = ParametersAcceptorSelector::selectFromArgs(
+			$scope,
+			$methodCall->getArgs(),
+			$methodReflection->getVariants(),
+		)->getReturnType();
 
 		if ($methodReflection->getName() === 'prototype') {
 			if (!isset($methodCall->getArgs()[0])) {
 				return $defaultType;
 			}
 
-			$argStrings = TypeUtils::getConstantStrings($scope->getType($methodCall->getArgs()[0]->value));
+			$argStrings = $scope->getType($methodCall->getArgs()[0]->value)->getConstantStrings();
 			if (count($argStrings) === 1 && isset(self::MAPPING[$argStrings[0]->getValue()])) {
 				$type = $argStrings[0]->getValue();
 
@@ -72,7 +75,7 @@ final class ArrayNodeDefinitionPrototypeDynamicReturnTypeExtension implements Dy
 
 		return new ParentObjectType(
 			$defaultType->describe(VerbosityLevel::typeOnly()),
-			$calledOnType
+			$calledOnType,
 		);
 	}
 

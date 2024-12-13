@@ -40,19 +40,13 @@ final class MysqliQueryReflector implements QueryReflector, RecordingReflector
     private const MAX_CACHE_SIZE = 50;
 
     /**
-     * @var array<string, mysqli_sql_exception|list<object>|null>
+     * @var array<string, mysqli_sql_exception|array<object>|null>
      */
-    private $cache = [];
+    private array $cache = [];
 
-    /**
-     * @var mysqli
-     */
-    private $db;
+    private mysqli $db;
 
-    /**
-     * @var MysqliTypeMapper
-     */
-    private $typeMapper;
+    private MysqliTypeMapper $typeMapper;
 
     public function __construct(mysqli $mysqli)
     {
@@ -102,9 +96,13 @@ final class MysqliQueryReflector implements QueryReflector, RecordingReflector
         foreach ($result as $val) {
             if (
                 ! property_exists($val, 'name')
+                || ! is_string($val->name)
                 || ! property_exists($val, 'type')
+                || ! is_int($val->type)
                 || ! property_exists($val, 'flags')
+                || ! is_int($val->flags)
                 || ! property_exists($val, 'length')
+                || ! is_int($val->length)
             ) {
                 throw new ShouldNotHappenException();
             }
@@ -133,7 +131,7 @@ final class MysqliQueryReflector implements QueryReflector, RecordingReflector
     }
 
     /**
-     * @return mysqli_sql_exception|list<object>|null
+     * @return mysqli_sql_exception|array<object>|null
      */
     private function simulateQuery(string $queryString)
     {

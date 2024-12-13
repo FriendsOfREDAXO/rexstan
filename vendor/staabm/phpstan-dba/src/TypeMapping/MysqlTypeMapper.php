@@ -19,19 +19,13 @@ use staabm\PHPStanDba\Types\MysqlIntegerRanges;
 
 final class MysqlTypeMapper implements TypeMapper
 {
-    /**
-     * @var DbaApi|null
-     */
-    private $dbaApi;
+    private ?DbaApi $dbaApi;
 
     public function __construct(?DbaApi $dbaApi)
     {
         $this->dbaApi = $dbaApi;
     }
 
-    /**
-     * @param list<string> $mysqlFlags
-     */
     public function mapToPHPStanType(string $mysqlType, array $mysqlFlags, int $length): Type
     {
         $numeric = false;

@@ -13,7 +13,7 @@ use staabm\PHPStanDba\TypeMapping\TypeMapper;
 use function array_shift;
 
 /**
- * @phpstan-type PDOColumnMeta array{name: string, table?: string, native_type: string, len: int, flags: list<string>}
+ * @phpstan-type PDOColumnMeta array{name: string, table?: string, native_type: string, len: int, flags: array<int, string>}
  */
 final class PdoPgSqlQueryReflector extends BasePdoQueryReflector
 {
@@ -28,9 +28,9 @@ final class PdoPgSqlQueryReflector extends BasePdoQueryReflector
     }
 
     /**
-     * @return PDOException|list<PDOColumnMeta>|null
+     * @return PDOException|array<PDOColumnMeta>|null
      */
-    protected function simulateQuery(string $queryString) // @phpstan-ignore-line
+    protected function simulateQuery(string $queryString) // @phpstan-ignore method.childReturnType
     {
         if (\array_key_exists($queryString, $this->cache)) {
             return $this->cache[$queryString];
@@ -119,8 +119,9 @@ PSQL
         $this->stmt->execute([$tableName]);
         $result = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        // pgsql and mysql have a similar named but different information schema, with different cased key-words
         /** @var array{column_default?: string, column_name: string, is_nullable: string} $row */
-        foreach ($result as $row) {
+        foreach ($result as $row) { // @phpstan-ignore varTag.type
             $default = $row['column_default'] ?? '';
             $columnName = $row['column_name'];
             $isNullable = 'YES' === $row['is_nullable'];

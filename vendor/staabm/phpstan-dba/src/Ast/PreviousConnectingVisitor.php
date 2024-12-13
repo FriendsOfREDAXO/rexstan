@@ -6,6 +6,7 @@ namespace staabm\PHPStanDba\Ast;
 
 use PhpParser\Node;
 use PhpParser\NodeVisitorAbstract;
+use staabm\PHPStanDba\QueryReflection\DIContainerBridge;
 use function array_pop;
 
 final class PreviousConnectingVisitor extends NodeVisitorAbstract
@@ -17,12 +18,18 @@ final class PreviousConnectingVisitor extends NodeVisitorAbstract
     /**
      * @var list<Node>
      */
-    private $stack = [];
+    private array $stack = [];
 
-    /**
-     * @var ?Node
-     */
-    private $previous;
+    private ?Node $previous;
+
+    // a dummy property to force instantiation of DIContainerBridge
+    // for use all over the phpstan-dba codebase
+    private DIContainerBridge $containerBridge; // @phpstan-ignore property.onlyWritten
+
+    public function __construct(DIContainerBridge $dummyParameter)
+    {
+        $this->containerBridge = $dummyParameter;
+    }
 
     public function beforeTraverse(array $nodes)
     {

@@ -3,28 +3,29 @@
 namespace PHPStan\Type\Symfony;
 
 use PhpParser\Node\Expr\MethodCall;
-use PhpParser\PrettyPrinter\Standard;
 use PHPStan\Analyser\Scope;
 use PHPStan\Analyser\SpecifiedTypes;
 use PHPStan\Analyser\TypeSpecifier;
 use PHPStan\Analyser\TypeSpecifierAwareExtension;
 use PHPStan\Analyser\TypeSpecifierContext;
+use PHPStan\Node\Printer\Printer;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\MethodTypeSpecifyingExtension;
 
 final class ServiceTypeSpecifyingExtension implements MethodTypeSpecifyingExtension, TypeSpecifierAwareExtension
 {
 
-	/** @var string */
-	private $className;
+	/** @var class-string */
+	private string $className;
 
-	/** @var Standard */
-	private $printer;
+	private Printer $printer;
 
-	/** @var TypeSpecifier */
-	private $typeSpecifier;
+	private TypeSpecifier $typeSpecifier;
 
-	public function __construct(string $className, Standard $printer)
+	/**
+	 * @param class-string $className
+	 */
+	public function __construct(string $className, Printer $printer)
 	{
 		$this->className = $className;
 		$this->printer = $printer;
@@ -49,7 +50,8 @@ final class ServiceTypeSpecifyingExtension implements MethodTypeSpecifyingExtens
 		return $this->typeSpecifier->create(
 			Helper::createMarkerNode($node->var, $argType, $this->printer),
 			$argType,
-			$context
+			$context,
+			$scope,
 		);
 	}
 

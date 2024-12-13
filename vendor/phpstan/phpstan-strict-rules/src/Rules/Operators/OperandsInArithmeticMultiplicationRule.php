@@ -18,16 +18,11 @@ use function sprintf;
 class OperandsInArithmeticMultiplicationRule implements Rule
 {
 
-	/** @var OperatorRuleHelper */
-	private $helper;
+	private OperatorRuleHelper $helper;
 
-	/** @var bool */
-	private $bleedingEdge;
-
-	public function __construct(OperatorRuleHelper $helper, bool $bleedingEdge)
+	public function __construct(OperatorRuleHelper $helper)
 	{
 		$this->helper = $helper;
-		$this->bleedingEdge = $bleedingEdge;
 	}
 
 	public function getNodeType(): string
@@ -40,7 +35,7 @@ class OperandsInArithmeticMultiplicationRule implements Rule
 		if ($node instanceof BinaryOpMul) {
 			$left = $node->left;
 			$right = $node->right;
-		} elseif ($node instanceof AssignOpMul && $this->bleedingEdge) {
+		} elseif ($node instanceof AssignOpMul) {
 			$left = $node->var;
 			$right = $node->expr;
 		} else {
@@ -52,7 +47,7 @@ class OperandsInArithmeticMultiplicationRule implements Rule
 		if (!$this->helper->isValidForArithmeticOperation($scope, $left)) {
 			$messages[] = RuleErrorBuilder::message(sprintf(
 				'Only numeric types are allowed in *, %s given on the left side.',
-				$leftType->describe(VerbosityLevel::typeOnly())
+				$leftType->describe(VerbosityLevel::typeOnly()),
 			))->identifier('mul.leftNonNumeric')->build();
 		}
 
@@ -60,7 +55,7 @@ class OperandsInArithmeticMultiplicationRule implements Rule
 		if (!$this->helper->isValidForArithmeticOperation($scope, $right)) {
 			$messages[] = RuleErrorBuilder::message(sprintf(
 				'Only numeric types are allowed in *, %s given on the right side.',
-				$rightType->describe(VerbosityLevel::typeOnly())
+				$rightType->describe(VerbosityLevel::typeOnly()),
 			))->identifier('mul.rightNonNumeric')->build();
 		}
 

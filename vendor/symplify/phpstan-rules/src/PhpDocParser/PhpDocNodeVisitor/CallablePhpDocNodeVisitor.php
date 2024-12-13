@@ -10,9 +10,8 @@ final class CallablePhpDocNodeVisitor extends AbstractPhpDocNodeVisitor
 {
     /**
      * @readonly
-     * @var string|null
      */
-    private $docContent;
+    private ?string $docContent;
     /**
      * @var callable(Node, string|null): (int|null|Node)
      */

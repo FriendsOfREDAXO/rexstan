@@ -12,10 +12,11 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ParameterReflection;
 use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Rules\Rule;
-use PHPStan\Type\TypeWithClassName;
+use PHPStan\Rules\RuleErrorBuilder;
 use TomasVotruba\CognitiveComplexity\AstCognitiveComplexityAnalyzer;
 use TomasVotruba\CognitiveComplexity\ClassReflectionParser;
 use TomasVotruba\CognitiveComplexity\Configuration;
+use TomasVotruba\CognitiveComplexity\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<InClassNode>
@@ -31,21 +32,18 @@ final class ClassDependencyTreeRule implements Rule
 
     /**
      * @readonly
-     * @var \TomasVotruba\CognitiveComplexity\AstCognitiveComplexityAnalyzer
      */
-    private $astCognitiveComplexityAnalyzer;
+    private AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer;
 
     /**
      * @readonly
-     * @var \TomasVotruba\CognitiveComplexity\ClassReflectionParser
      */
-    private $classReflectionParser;
+    private ClassReflectionParser $classReflectionParser;
 
     /**
      * @readonly
-     * @var \TomasVotruba\CognitiveComplexity\Configuration
      */
-    private $configuration;
+    private Configuration $configuration;
 
     public function __construct(AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer, ClassReflectionParser $classReflectionParser, Configuration $configuration)
     {
@@ -87,7 +85,9 @@ final class ClassDependencyTreeRule implements Rule
 
         $extendedMethodReflection = $classReflection->getConstructor();
 
-        $parametersAcceptorWithPhpDocs = ParametersAcceptorSelector::selectSingle(
+        $parametersAcceptorWithPhpDocs = ParametersAcceptorSelector::selectFromArgs(
+            $scope,
+            [],
             $extendedMethodReflection->getVariants()
         );
 
@@ -107,13 +107,13 @@ final class ClassDependencyTreeRule implements Rule
             return [];
         }
 
-        return [
-            sprintf(
-                self::ERROR_MESSAGE,
-                $totaDependencyTreeComplexity,
-                $this->configuration->getMaxDependencyTreeComplexity()
-            ),
-        ];
+        $message = sprintf(
+            self::ERROR_MESSAGE,
+            $totaDependencyTreeComplexity,
+            $this->configuration->getMaxDependencyTreeComplexity()
+        );
+
+        return [RuleErrorBuilder::message($message)->identifier(RuleIdentifier::DEPENDENCY_TREE)->build()];
     }
 
     private function isTypeToAnalyse(ClassReflection $classReflection): bool
@@ -130,15 +130,12 @@ final class ClassDependencyTreeRule implements Rule
     private function resolveParameterTypeClass(ParameterReflection $parameterReflection): ?Class_
     {
         $parameterType = $parameterReflection->getType();
-        if (! $parameterType instanceof TypeWithClassName) {
+        $classReflections = $parameterType->getObjectClassReflections();
+        // XXX add support for union types
+        if (count($classReflections) !== 1) {
             return null;
         }
 
-        $parameterClassReflection = $parameterType->getClassReflection();
-        if (! $parameterClassReflection instanceof ClassReflection) {
-            return null;
-        }
-
-        return $this->classReflectionParser->parse($parameterClassReflection);
+        return $this->classReflectionParser->parse($classReflections[0]);
     }
 }

@@ -23,33 +23,28 @@ final class MethodCallCollector implements Collector
 {
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\CallReferece\ParentCallReferenceResolver
      */
-    private $parentCallReferenceResolver;
+    private ParentCallReferenceResolver $parentCallReferenceResolver;
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\ClassMethodCallReferenceResolver
      */
-    private $classMethodCallReferenceResolver;
+    private ClassMethodCallReferenceResolver $classMethodCallReferenceResolver;
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\Configuration
      */
-    private $configuration;
+    private Configuration $configuration;
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\ClassTypeDetector
      */
-    private $classTypeDetector;
+    private ClassTypeDetector $classTypeDetector;
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\CallReferece\CallReferencesFlatter
      */
-    private $callReferencesFlatter;
+    private CallReferencesFlatter $callReferencesFlatter;
 
     public function __construct(ParentCallReferenceResolver $parentCallReferenceResolver, ClassMethodCallReferenceResolver $classMethodCallReferenceResolver, Configuration $configuration, ClassTypeDetector $classTypeDetector, CallReferencesFlatter $callReferencesFlatter)
     {

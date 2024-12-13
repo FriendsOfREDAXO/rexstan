@@ -19,9 +19,8 @@ final class PublicClassMethodMatcher
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\ClassTypeDetector
      */
-    private $classTypeDetector;
+    private ClassTypeDetector $classTypeDetector;
 
     public function __construct(ClassTypeDetector $classTypeDetector)
     {

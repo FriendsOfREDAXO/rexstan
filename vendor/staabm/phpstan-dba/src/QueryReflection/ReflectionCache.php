@@ -13,46 +13,37 @@ use const LOCK_EX;
 
 final class ReflectionCache
 {
-    private const SCHEMA_VERSION = 'v11-phpstan1_9_3-update';
+    private const SCHEMA_VERSION = 'v12-new-cache5';
 
-    /**
-     * @var string
-     */
-    private $cacheFile;
+    private string $cacheFile;
 
     /**
      * @var array<string, array{error?: ?Error, result?: array<QueryReflector::FETCH_TYPE*, ?Type>}>
      */
-    private $records = [];
+    private array $records = [];
 
     /**
      * @var array<string, array{error?: ?Error, result?: array<QueryReflector::FETCH_TYPE*, ?Type>}>
      */
-    private $changes = [];
+    private array $changes = [];
 
-    /**
-     * @var string|null
-     */
-    private $schemaHash;
+    private ?string $schemaHash = null;
 
-    /**
-     * @var bool
-     */
-    private $cacheIsDirty = false;
+    private bool $cacheIsDirty = false;
 
-    /**
-     * @var bool
-     */
-    private $initialized = false;
+    private bool $initialized = false;
 
     /**
      * @var resource
      */
     private static $lockHandle;
 
+    private TypeSerializer $typeSerializer;
+
     private function __construct(string $cacheFile)
     {
         $this->cacheFile = $cacheFile;
+        $this->typeSerializer = new TypeSerializer();
 
         if (null === self::$lockHandle) {
             // prevent parallel phpstan-worker-process from writing into the cache file at the same time
@@ -158,7 +149,7 @@ final class ReflectionCache
 
         if (! \is_array($cache) ||
             ! \array_key_exists('schemaVersion', $cache) ||
-            ! \array_key_exists('schemaHash', $cache) ||
+            ! \array_key_exists('schemaHash', $cache) || // schemaHash exists but is null in recording mode
             self::SCHEMA_VERSION !== $cache['schemaVersion']) {
             return null;
         }
@@ -169,6 +160,9 @@ final class ReflectionCache
 
         // the schemaHash is only available in replay-and-record mode.
         if (null === $this->schemaHash) {
+            if ($cache['schemaHash'] !== null && ! is_string($cache['schemaHash'])) {
+                throw new ShouldNotHappenException();
+            }
             $this->schemaHash = $cache['schemaHash'];
         } elseif ($this->schemaHash !== $cache['schemaHash']) {
             return null;
@@ -178,7 +172,7 @@ final class ReflectionCache
             throw new ShouldNotHappenException();
         }
 
-        return $cache['records'];
+        return $this->typeSerializer->unserialize($cache['records']); // @phpstan-ignore-line
     }
 
     public function persist(): void
@@ -212,10 +206,9 @@ final class ReflectionCache
             $cacheContent = '<?php return ' . var_export([
                 'schemaVersion' => self::SCHEMA_VERSION,
                 'schemaHash' => $this->schemaHash,
-                'records' => $newRecords,
+                'records' => $this->typeSerializer->serialize($newRecords),
                 'runtimeConfig' => QueryReflection::getRuntimeConfiguration()->toArray(),
             ], true) . ';';
-
             if (false === file_put_contents($this->cacheFile, $cacheContent, LOCK_EX)) {
                 throw new DbaException(sprintf('Unable to write cache file "%s"', $this->cacheFile));
             }

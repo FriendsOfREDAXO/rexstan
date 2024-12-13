@@ -39,27 +39,23 @@ final class PublicClassMethodCollector implements Collector
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\ApiDocStmtAnalyzer
      */
-    private $apiDocStmtAnalyzer;
+    private ApiDocStmtAnalyzer $apiDocStmtAnalyzer;
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\PublicClassMethodMatcher
      */
-    private $publicClassMethodMatcher;
+    private PublicClassMethodMatcher $publicClassMethodMatcher;
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\MethodTypeDetector
      */
-    private $methodTypeDetector;
+    private MethodTypeDetector $methodTypeDetector;
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\Configuration
      */
-    private $configuration;
+    private Configuration $configuration;
 
     public function __construct(ApiDocStmtAnalyzer $apiDocStmtAnalyzer, PublicClassMethodMatcher $publicClassMethodMatcher, MethodTypeDetector $methodTypeDetector, Configuration $configuration)
     {

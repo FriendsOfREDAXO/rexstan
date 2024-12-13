@@ -14,6 +14,7 @@ use PHPStan\ShouldNotHappenException;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedCall;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedCallFactory;
 use Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedCallsRuleErrors;
+use Spaze\PHPStan\Rules\Disallowed\RuleErrors\ErrorIdentifiers;
 
 /**
  * Reports on creating objects (calling constructors).
@@ -25,11 +26,10 @@ class NewCalls implements Rule
 {
 	private const CONSTRUCT = '::__construct';
 
-	/** @var DisallowedCallsRuleErrors */
-	private $disallowedCallsRuleErrors;
+	private DisallowedCallsRuleErrors $disallowedCallsRuleErrors;
 
 	/** @var list<DisallowedCall> */
-	private $disallowedCalls;
+	private array $disallowedCalls;
 
 
 	/**
@@ -86,14 +86,13 @@ class NewCalls implements Rule
 					$names[] = $interface->getName();
 				}
 			}
+			$definedIn = $reflection ? $reflection->getFileName() : null;
 
 			foreach ($names as $name) {
-				$classRef = $type->getClassReflection();
-				$definedIn = $classRef ? $classRef->getFileName() : null;
 				$name .= self::CONSTRUCT;
 				$errors = array_merge(
 					$errors,
-					$this->disallowedCallsRuleErrors->get($node, $scope, $name, $type->getClassName() . self::CONSTRUCT, $definedIn, $this->disallowedCalls)
+					$this->disallowedCallsRuleErrors->get($node, $scope, $name, $type->getClassName() . self::CONSTRUCT, $definedIn, $this->disallowedCalls, ErrorIdentifiers::DISALLOWED_NEW)
 				);
 			}
 		}

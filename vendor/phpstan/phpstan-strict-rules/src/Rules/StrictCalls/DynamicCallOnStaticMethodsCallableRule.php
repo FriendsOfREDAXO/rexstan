@@ -18,8 +18,7 @@ use function sprintf;
 class DynamicCallOnStaticMethodsCallableRule implements Rule
 {
 
-	/** @var RuleLevelHelper */
-	private $ruleLevelHelper;
+	private RuleLevelHelper $ruleLevelHelper;
 
 	public function __construct(RuleLevelHelper $ruleLevelHelper)
 	{
@@ -42,9 +41,7 @@ class DynamicCallOnStaticMethodsCallableRule implements Rule
 			$scope,
 			$node->getVar(),
 			'',
-			static function (Type $type) use ($name): bool {
-				return $type->canCallMethods()->yes() && $type->hasMethod($name)->yes();
-			}
+			static fn (Type $type): bool => $type->canCallMethods()->yes() && $type->hasMethod($name)->yes(),
 		)->getType();
 
 		if ($type instanceof ErrorType || !$type->canCallMethods()->yes() || !$type->hasMethod($name)->yes()) {
@@ -57,7 +54,7 @@ class DynamicCallOnStaticMethodsCallableRule implements Rule
 				RuleErrorBuilder::message(sprintf(
 					'Dynamic call to static method %s::%s().',
 					$methodReflection->getDeclaringClass()->getDisplayName(),
-					$methodReflection->getName()
+					$methodReflection->getName(),
 				))->identifier('staticMethod.dynamicCall')->build(),
 			];
 		}

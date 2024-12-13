@@ -4,26 +4,28 @@ declare(strict_types = 1);
 namespace Spaze\PHPStan\Rules\Disallowed\RuleErrors;
 
 use PHPStan\Analyser\Scope;
-use PHPStan\Rules\RuleError;
+use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use Spaze\PHPStan\Rules\Disallowed\Allowed\AllowedPath;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedNamespace;
+use Spaze\PHPStan\Rules\Disallowed\Formatter\Formatter;
 use Spaze\PHPStan\Rules\Disallowed\Identifier\Identifier;
 
 class DisallowedNamespaceRuleErrors
 {
 
-	/** @var AllowedPath */
-	private $allowedPath;
+	private AllowedPath $allowedPath;
 
-	/** @var Identifier */
-	private $identifier;
+	private Identifier $identifier;
+
+	private Formatter $formatter;
 
 
-	public function __construct(AllowedPath $allowedPath, Identifier $identifier)
+	public function __construct(AllowedPath $allowedPath, Identifier $identifier, Formatter $formatter)
 	{
 		$this->allowedPath = $allowedPath;
 		$this->identifier = $identifier;
+		$this->formatter = $formatter;
 	}
 
 
@@ -32,9 +34,10 @@ class DisallowedNamespaceRuleErrors
 	 * @param string $description
 	 * @param Scope $scope
 	 * @param list<DisallowedNamespace> $disallowedNamespaces
-	 * @return list<RuleError>
+	 * @param string $identifier
+	 * @return list<IdentifierRuleError>
 	 */
-	public function getDisallowedMessage(string $namespace, string $description, Scope $scope, array $disallowedNamespaces): array
+	public function getDisallowedMessage(string $namespace, string $description, Scope $scope, array $disallowedNamespaces, string $identifier): array
 	{
 		foreach ($disallowedNamespaces as $disallowedNamespace) {
 			if ($this->allowedPath->isAllowedPath($scope, $disallowedNamespace)) {
@@ -46,15 +49,13 @@ class DisallowedNamespaceRuleErrors
 			}
 
 			$errorBuilder = RuleErrorBuilder::message(sprintf(
-				'%s %s is forbidden, %s%s',
+				'%s %s is forbidden%s%s',
 				$description,
 				$namespace,
-				$disallowedNamespace->getMessage(),
+				$this->formatter->formatDisallowedMessage($disallowedNamespace->getMessage()),
 				$disallowedNamespace->getNamespace() !== $namespace ? " [{$namespace} matches {$disallowedNamespace->getNamespace()}]" : ''
 			));
-			if ($disallowedNamespace->getErrorIdentifier()) {
-				$errorBuilder->identifier($disallowedNamespace->getErrorIdentifier());
-			}
+			$errorBuilder->identifier($disallowedNamespace->getErrorIdentifier() ?? $identifier);
 			if ($disallowedNamespace->getErrorTip()) {
 				$errorBuilder->tip($disallowedNamespace->getErrorTip());
 			}

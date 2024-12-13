@@ -5,32 +5,33 @@ namespace Spaze\PHPStan\Rules\Disallowed\RuleErrors;
 
 use PhpParser\Node\Expr\CallLike;
 use PHPStan\Analyser\Scope;
-use PHPStan\Rules\RuleError;
+use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\ShouldNotHappenException;
 use Spaze\PHPStan\Rules\Disallowed\Allowed\Allowed;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedCall;
 use Spaze\PHPStan\Rules\Disallowed\File\FilePath;
+use Spaze\PHPStan\Rules\Disallowed\Formatter\Formatter;
 use Spaze\PHPStan\Rules\Disallowed\Identifier\Identifier;
 
 class DisallowedCallsRuleErrors
 {
 
-	/** @var Allowed */
-	private $allowed;
+	private Allowed $allowed;
 
-	/** @var Identifier */
-	private $identifier;
+	private Identifier $identifier;
 
-	/** @var FilePath */
-	private $filePath;
+	private FilePath $filePath;
+
+	private Formatter $formatter;
 
 
-	public function __construct(Allowed $allowed, Identifier $identifier, FilePath $filePath)
+	public function __construct(Allowed $allowed, Identifier $identifier, FilePath $filePath, Formatter $formatter)
 	{
 		$this->allowed = $allowed;
 		$this->identifier = $identifier;
 		$this->filePath = $filePath;
+		$this->formatter = $formatter;
 	}
 
 
@@ -41,11 +42,12 @@ class DisallowedCallsRuleErrors
 	 * @param string|null $displayName
 	 * @param string|null $definedIn
 	 * @param list<DisallowedCall> $disallowedCalls
+	 * @param string $identifier
 	 * @param string|null $message
-	 * @return list<RuleError>
+	 * @return list<IdentifierRuleError>
 	 * @throws ShouldNotHappenException
 	 */
-	public function get(?CallLike $node, Scope $scope, string $name, ?string $displayName, ?string $definedIn, array $disallowedCalls, ?string $message = null): array
+	public function get(?CallLike $node, Scope $scope, string $name, ?string $displayName, ?string $definedIn, array $disallowedCalls, string $identifier, ?string $message = null): array
 	{
 		foreach ($disallowedCalls as $disallowedCall) {
 			if (
@@ -54,14 +56,12 @@ class DisallowedCallsRuleErrors
 				&& !$this->allowed->isAllowed($scope, isset($node) ? $node->getArgs() : null, $disallowedCall)
 			) {
 				$errorBuilder = RuleErrorBuilder::message(sprintf(
-					$message ?? 'Calling %s is forbidden, %s%s',
+					$message ?? 'Calling %s is forbidden%s%s',
 					($displayName && $displayName !== $name) ? "{$name}() (as {$displayName}())" : "{$name}()",
-					$disallowedCall->getMessage(),
+					$this->formatter->formatDisallowedMessage($disallowedCall->getMessage()),
 					$disallowedCall->getCall() !== $name ? " [{$name}() matches {$disallowedCall->getCall()}()]" : ''
 				));
-				if ($disallowedCall->getErrorIdentifier()) {
-					$errorBuilder->identifier($disallowedCall->getErrorIdentifier());
-				}
+				$errorBuilder->identifier($disallowedCall->getErrorIdentifier() ?? $identifier);
 				if ($disallowedCall->getErrorTip()) {
 					$errorBuilder->tip($disallowedCall->getErrorTip());
 				}

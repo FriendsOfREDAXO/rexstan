@@ -31,9 +31,7 @@ class MockObjectDynamicReturnTypeExtension implements DynamicMethodReturnTypeExt
 	public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
 	{
 		$type = $scope->getType($methodCall->var);
-		$mockClasses = array_values(array_filter($type->getObjectClassNames(), static function (string $class): bool {
-			return $class !== MockObject::class;
-		}));
+		$mockClasses = array_values(array_filter($type->getObjectClassNames(), static fn (string $class): bool => $class !== MockObject::class));
 
 		if (count($mockClasses) !== 1) {
 			return new ObjectType(InvocationMocker::class);

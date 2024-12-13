@@ -5,7 +5,6 @@ namespace PHPStan\Type\Symfony;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
-use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Type\ArrayType;
 use PHPStan\Type\Constant\ConstantBooleanType;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
@@ -30,11 +29,11 @@ final class KernelInterfaceDynamicReturnTypeExtension implements DynamicMethodRe
 		MethodReflection $methodReflection,
 		MethodCall $methodCall,
 		Scope $scope
-	): Type
+	): ?Type
 	{
 		$firstArgType = isset($methodCall->getArgs()[2]) ? $scope->getType($methodCall->getArgs()[2]->value) : new ConstantBooleanType(true);
-		$isTrueType = (new ConstantBooleanType(true))->isSuperTypeOf($firstArgType);
-		$isFalseType = (new ConstantBooleanType(false))->isSuperTypeOf($firstArgType);
+		$isTrueType = (new ConstantBooleanType(true))->isSuperTypeOf($firstArgType)->result;
+		$isFalseType = (new ConstantBooleanType(false))->isSuperTypeOf($firstArgType)->result;
 		$compareTypes = $isTrueType->compareTo($isFalseType);
 
 		if ($compareTypes === $isTrueType) {
@@ -44,7 +43,7 @@ final class KernelInterfaceDynamicReturnTypeExtension implements DynamicMethodRe
 			return new ArrayType(new IntegerType(), new StringType());
 		}
 
-		return ParametersAcceptorSelector::selectSingle($methodReflection->getVariants())->getReturnType();
+		return null;
 	}
 
 }

@@ -9,8 +9,10 @@ use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use TomasVotruba\CognitiveComplexity\AstCognitiveComplexityAnalyzer;
 use TomasVotruba\CognitiveComplexity\Configuration;
+use TomasVotruba\CognitiveComplexity\Enum\RuleIdentifier;
 
 /**
  * @see \TomasVotruba\CognitiveComplexity\Tests\Rules\ClassLikeCognitiveComplexityRule\ClassLikeCognitiveComplexityRuleTest
@@ -18,22 +20,19 @@ use TomasVotruba\CognitiveComplexity\Configuration;
 final class ClassLikeCognitiveComplexityRule implements Rule
 {
     /**
-     * @api used in tests
      * @var string
      */
     public const ERROR_MESSAGE = 'Class cognitive complexity is %d, keep it under %d';
 
     /**
      * @readonly
-     * @var \TomasVotruba\CognitiveComplexity\AstCognitiveComplexityAnalyzer
      */
-    private $astCognitiveComplexityAnalyzer;
+    private AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer;
 
     /**
      * @readonly
-     * @var \TomasVotruba\CognitiveComplexity\Configuration
      */
-    private $configuration;
+    private Configuration $configuration;
 
     public function __construct(AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer, Configuration $configuration)
     {
@@ -51,7 +50,6 @@ final class ClassLikeCognitiveComplexityRule implements Rule
 
     /**
      * @param InClassNode $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -71,6 +69,6 @@ final class ClassLikeCognitiveComplexityRule implements Rule
             $this->configuration->getMaxClassCognitiveComplexity()
         );
 
-        return [$message];
+        return [RuleErrorBuilder::message($message)->identifier(RuleIdentifier::CLASS_LIKE_COMPLEXITY)->build()];
     }
 }

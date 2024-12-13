@@ -66,15 +66,20 @@ parameters:
 		booleansInConditions: false
 		uselessCast: false
 		requireParentConstructorCall: false
-		disallowedConstructs: false
+		disallowedBacktick: false
+		disallowedEmpty: false
+		disallowedImplicitArrayCreation: false
+		disallowedShortTernary: false
 		overwriteVariablesWithLoop: false
 		closureUsesThis: false
 		matchingInheritedMethodNames: false
 		numericOperandsInArithmeticOperators: false
-		strictCalls: false
+		strictFunctionCalls: false
+		dynamicCallOnStaticMethod: false
 		switchConditionsMatchingType: false
 		noVariableVariables: false
 		strictArrayFilter: false
+		illegalConstructorMethodCall: false
 ```
 
 Aside from introducing new custom rules, phpstan-strict-rules also [change the default values of some configuration parameters](https://github.com/phpstan/phpstan-strict-rules/blob/1.6.x/rules.neon#L1) that are present in PHPStan itself. These parameters are [documented on phpstan.org](https://phpstan.org/config-reference#stricter-analysis).

@@ -8,26 +8,22 @@ use Spaze\PHPStan\Rules\Disallowed\Exceptions\NotImplementedYetException;
 class DisallowedNamespace implements Disallowed
 {
 
-	/** @var string */
-	private $namespace;
+	private string $namespace;
 
 	/** @var list<string> */
-	private $excludes;
+	private array $excludes;
 
-	/** @var string|null */
-	private $message;
-
-	/** @var list<string> */
-	private $allowIn;
+	private ?string $message;
 
 	/** @var list<string> */
-	private $allowExceptIn;
+	private array $allowIn;
 
-	/** @var string|null */
-	private $errorIdentifier;
+	/** @var list<string> */
+	private array $allowExceptIn;
 
-	/** @var string|null */
-	private $errorTip;
+	private ?string $errorIdentifier;
+
+	private ?string $errorTip;
 
 
 	/**
@@ -73,9 +69,9 @@ class DisallowedNamespace implements Disallowed
 	}
 
 
-	public function getMessage(): string
+	public function getMessage(): ?string
 	{
-		return $this->message ?? 'because reasons';
+		return $this->message;
 	}
 
 

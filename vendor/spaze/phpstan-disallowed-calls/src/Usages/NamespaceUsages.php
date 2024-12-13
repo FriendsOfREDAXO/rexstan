@@ -22,6 +22,7 @@ use Spaze\PHPStan\Rules\Disallowed\DisallowedNamespace;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedNamespaceFactory;
 use Spaze\PHPStan\Rules\Disallowed\Normalizer\Normalizer;
 use Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedNamespaceRuleErrors;
+use Spaze\PHPStan\Rules\Disallowed\RuleErrors\ErrorIdentifiers;
 
 /**
  * @implements Rule<Node>
@@ -29,21 +30,19 @@ use Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedNamespaceRuleErrors;
 class NamespaceUsages implements Rule
 {
 
-	/** @var DisallowedNamespaceRuleErrors */
-	private $disallowedNamespaceRuleErrors;
+	private DisallowedNamespaceRuleErrors $disallowedNamespaceRuleErrors;
 
 	/** @var list<DisallowedNamespace> */
-	private $disallowedNamespace;
+	private array $disallowedNamespace;
 
-	/** @var Normalizer */
-	private $normalizer;
+	private Normalizer $normalizer;
 
 
 	/**
 	 * @param DisallowedNamespaceRuleErrors $disallowedNamespaceRuleErrors
 	 * @param DisallowedNamespaceFactory $disallowNamespaceFactory
 	 * @param Normalizer $normalizer
-	 * @param array<array{namespace:string, message?:string, allowIn?:list<string>}> $forbiddenNamespaces
+	 * @param array<array{namespace?:string|list<string>, class?:string|list<string>, exclude?:string|list<string>, message?:string, allowIn?:list<string>, allowExceptIn?:list<string>, disallowIn?:list<string>, errorIdentifier?:string, errorTip?:string}> $forbiddenNamespaces
 	 */
 	public function __construct(
 		DisallowedNamespaceRuleErrors $disallowedNamespaceRuleErrors,
@@ -72,12 +71,15 @@ class NamespaceUsages implements Rule
 	{
 		if ($node instanceof FullyQualified) {
 			$description = 'Class';
+			$identifier = ErrorIdentifiers::DISALLOWED_CLASS;
 			$namespaces = [$node->toString()];
 		} elseif ($node instanceof NullableType && $node->type instanceof FullyQualified) {
 			$description = 'Class';
+			$identifier = ErrorIdentifiers::DISALLOWED_CLASS;
 			$namespaces = [$node->type->toString()];
 		} elseif ($node instanceof UnionType || $node instanceof IntersectionType) {
 			$description = 'Class';
+			$identifier = ErrorIdentifiers::DISALLOWED_CLASS;
 			$namespaces = [];
 			foreach ($node->types as $type) {
 				if ($type instanceof FullyQualified) {
@@ -89,8 +91,13 @@ class NamespaceUsages implements Rule
 		} elseif ($node instanceof StaticCall && $node->class instanceof Name) {
 			$namespaces = [$node->class->toString()];
 		} elseif ($node instanceof ClassConstFetch && $node->class instanceof Name) {
-			$description = 'Class';
-			$namespaces = [$node->class->toString()];
+			$namespaces = [];
+			$classReflection = $scope->resolveTypeByName($node->class)->getClassReflection();
+			if ($classReflection && $classReflection->isEnum()) {
+				$description = 'Enum';
+				$identifier = ErrorIdentifiers::DISALLOWED_ENUM;
+				$namespaces = [$node->class->toString()];
+			}
 		} elseif ($node instanceof Class_ && ($node->extends !== null || count($node->implements) > 0)) {
 			$namespaces = [];
 
@@ -103,9 +110,11 @@ class NamespaceUsages implements Rule
 			}
 		} elseif ($node instanceof New_ && $node->class instanceof Name) {
 			$description = 'Class';
+			$identifier = ErrorIdentifiers::DISALLOWED_CLASS;
 			$namespaces = [$node->class->toString()];
 		} elseif ($node instanceof TraitUse) {
 			$description = 'Trait';
+			$identifier = ErrorIdentifiers::DISALLOWED_TRAIT;
 			$namespaces = [];
 			foreach ($node->traits as $trait) {
 				$namespaces[] = $trait->toString();
@@ -118,7 +127,13 @@ class NamespaceUsages implements Rule
 		foreach ($namespaces as $namespace) {
 			$errors = array_merge(
 				$errors,
-				$this->disallowedNamespaceRuleErrors->getDisallowedMessage($this->normalizer->normalizeNamespace($namespace), $description ?? 'Namespace', $scope, $this->disallowedNamespace)
+				$this->disallowedNamespaceRuleErrors->getDisallowedMessage(
+					$this->normalizer->normalizeNamespace($namespace),
+					$description ?? 'Namespace',
+					$scope,
+					$this->disallowedNamespace,
+					$identifier ?? $identifier = ErrorIdentifiers::DISALLOWED_NAMESPACE
+				)
 			);
 		}
 

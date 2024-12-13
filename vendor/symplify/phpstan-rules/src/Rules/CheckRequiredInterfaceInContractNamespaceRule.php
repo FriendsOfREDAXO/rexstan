@@ -9,6 +9,7 @@ use PhpParser\Node;
 use PhpParser\Node\Stmt\Interface_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
@@ -30,9 +31,6 @@ final class CheckRequiredInterfaceInContractNamespaceRule implements Rule
      */
     private const A_CONTRACT_NAMESPACE_REGEX = '#\bContracts?\b#';
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return Interface_::class;
@@ -40,7 +38,6 @@ final class CheckRequiredInterfaceInContractNamespaceRule implements Rule
 
     /**
      * @param Interface_ $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -53,7 +50,7 @@ final class CheckRequiredInterfaceInContractNamespaceRule implements Rule
             return [];
         }
 
-        return [self::ERROR_MESSAGE];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
     }
 
     public function getRuleDefinition(): RuleDefinition
@@ -70,12 +67,6 @@ CODE_SAMPLE
                 ,
                 <<<'CODE_SAMPLE'
 namespace App\Contract\Repository;
-
-interface ProductRepositoryInterface
-{
-}
-
-namespace App\Contracts\Repository;
 
 interface ProductRepositoryInterface
 {

@@ -32,13 +32,13 @@ class AssertTypeSpecifyingExtensionHelper
 {
 
 	/** @var Closure[] */
-	private static $resolvers;
+	private static ?array $resolvers = null;
 
 	/**
 	 * Those can specify types correctly, but would produce always-true issue
 	 * @var string[]
 	 */
-	private static $resolversCausingAlwaysTrue = ['ContainsOnlyInstancesOf', 'ContainsEquals', 'Contains'];
+	private static array $resolversCausingAlwaysTrue = ['ContainsOnlyInstancesOf', 'ContainsEquals', 'Contains'];
 
 	/**
 	 * @param Arg[] $args
@@ -101,8 +101,7 @@ class AssertTypeSpecifyingExtensionHelper
 			$scope,
 			$expression,
 			TypeSpecifierContext::createTruthy(),
-			$bypassAlwaysTrueIssue ? new Expr\BinaryOp\BooleanAnd($expression, new Expr\Variable('nonsense')) : null
-		);
+		)->setRootExpr($bypassAlwaysTrueIssue ? new Expr\BinaryOp\BooleanAnd($expression, new Expr\Variable('nonsense')) : $expression);
 	}
 
 	/**
@@ -136,95 +135,57 @@ class AssertTypeSpecifyingExtensionHelper
 	{
 		if (self::$resolvers === null) {
 			self::$resolvers = [
-				'Count' => static function (Scope $scope, Arg $expected, Arg $actual): Identical {
-					return new Identical(
+				'Count' => static fn (Scope $scope, Arg $expected, Arg $actual): Identical => new Identical(
+					$expected->value,
+					new FuncCall(new Name('count'), [$actual]),
+				),
+				'NotCount' => static fn (Scope $scope, Arg $expected, Arg $actual): BooleanNot => new BooleanNot(
+					new Identical(
 						$expected->value,
-						new FuncCall(new Name('count'), [$actual])
-					);
-				},
-				'NotCount' => static function (Scope $scope, Arg $expected, Arg $actual): BooleanNot {
-					return new BooleanNot(
-						new Identical(
-							$expected->value,
-							new FuncCall(new Name('count'), [$actual])
-						)
-					);
-				},
-				'InstanceOf' => static function (Scope $scope, Arg $class, Arg $object): Instanceof_ {
-					return new Instanceof_(
-						$object->value,
-						$class->value
-					);
-				},
-				'Same' => static function (Scope $scope, Arg $expected, Arg $actual): Identical {
-					return new Identical(
-						$expected->value,
-						$actual->value
-					);
-				},
-				'True' => static function (Scope $scope, Arg $actual): Identical {
-					return new Identical(
-						$actual->value,
-						new ConstFetch(new Name('true'))
-					);
-				},
-				'False' => static function (Scope $scope, Arg $actual): Identical {
-					return new Identical(
-						$actual->value,
-						new ConstFetch(new Name('false'))
-					);
-				},
-				'Null' => static function (Scope $scope, Arg $actual): Identical {
-					return new Identical(
-						$actual->value,
-						new ConstFetch(new Name('null'))
-					);
-				},
-				'Empty' => static function (Scope $scope, Arg $actual): Expr\BinaryOp\BooleanOr {
-					return new Expr\BinaryOp\BooleanOr(
-						new Instanceof_($actual->value, new Name(EmptyIterator::class)),
-						new Expr\BinaryOp\BooleanOr(
-							new Expr\BinaryOp\BooleanAnd(
-								new Instanceof_($actual->value, new Name(Countable::class)),
-								new Identical(new FuncCall(new Name('count'), [new Arg($actual->value)]), new LNumber(0))
-							),
-							new Expr\Empty_($actual->value)
-						)
-					);
-				},
-				'IsArray' => static function (Scope $scope, Arg $actual): FuncCall {
-					return new FuncCall(new Name('is_array'), [$actual]);
-				},
-				'IsBool' => static function (Scope $scope, Arg $actual): FuncCall {
-					return new FuncCall(new Name('is_bool'), [$actual]);
-				},
-				'IsCallable' => static function (Scope $scope, Arg $actual): FuncCall {
-					return new FuncCall(new Name('is_callable'), [$actual]);
-				},
-				'IsFloat' => static function (Scope $scope, Arg $actual): FuncCall {
-					return new FuncCall(new Name('is_float'), [$actual]);
-				},
-				'IsInt' => static function (Scope $scope, Arg $actual): FuncCall {
-					return new FuncCall(new Name('is_int'), [$actual]);
-				},
-				'IsIterable' => static function (Scope $scope, Arg $actual): FuncCall {
-					return new FuncCall(new Name('is_iterable'), [$actual]);
-				},
-				'IsNumeric' => static function (Scope $scope, Arg $actual): FuncCall {
-					return new FuncCall(new Name('is_numeric'), [$actual]);
-				},
-				'IsObject' => static function (Scope $scope, Arg $actual): FuncCall {
-					return new FuncCall(new Name('is_object'), [$actual]);
-				},
-				'IsResource' => static function (Scope $scope, Arg $actual): FuncCall {
-					return new FuncCall(new Name('is_resource'), [$actual]);
-				},
-				'IsString' => static function (Scope $scope, Arg $actual): FuncCall {
-					return new FuncCall(new Name('is_string'), [$actual]);
-				},
-				'IsScalar' => static function (Scope $scope, Arg $actual): FuncCall {
-					return new FuncCall(new Name('is_scalar'), [$actual]);
-				},
+						new FuncCall(new Name('count'), [$actual]),
+					),
+				),
+				'InstanceOf' => static fn (Scope $scope, Arg $class, Arg $object): Instanceof_ => new Instanceof_(
+					$object->value,
+					$class->value,
+				),
+				'Same' => static fn (Scope $scope, Arg $expected, Arg $actual): Identical => new Identical(
+					$expected->value,
+					$actual->value,
+				),
+				'True' => static fn (Scope $scope, Arg $actual): Identical => new Identical(
+					$actual->value,
+					new ConstFetch(new Name('true')),
+				),
+				'False' => static fn (Scope $scope, Arg $actual): Identical => new Identical(
+					$actual->value,
+					new ConstFetch(new Name('false')),
+				),
+				'Null' => static fn (Scope $scope, Arg $actual): Identical => new Identical(
+					$actual->value,
+					new ConstFetch(new Name('null')),
+				),
+				'Empty' => static fn (Scope $scope, Arg $actual): Expr\BinaryOp\BooleanOr => new Expr\BinaryOp\BooleanOr(
+					new Instanceof_($actual->value, new Name(EmptyIterator::class)),
+					new Expr\BinaryOp\BooleanOr(
+						new Expr\BinaryOp\BooleanAnd(
+							new Instanceof_($actual->value, new Name(Countable::class)),
+							new Identical(new FuncCall(new Name('count'), [new Arg($actual->value)]), new LNumber(0)),
+						),
+						new Expr\Empty_($actual->value),
+					),
+				),
+				'IsArray' => static fn (Scope $scope, Arg $actual): FuncCall => new FuncCall(new Name('is_array'), [$actual]),
+				'IsBool' => static fn (Scope $scope, Arg $actual): FuncCall => new FuncCall(new Name('is_bool'), [$actual]),
+				'IsCallable' => static fn (Scope $scope, Arg $actual): FuncCall => new FuncCall(new Name('is_callable'), [$actual]),
+				'IsFloat' => static fn (Scope $scope, Arg $actual): FuncCall => new FuncCall(new Name('is_float'), [$actual]),
+				'IsInt' => static fn (Scope $scope, Arg $actual): FuncCall => new FuncCall(new Name('is_int'), [$actual]),
+				'IsIterable' => static fn (Scope $scope, Arg $actual): FuncCall => new FuncCall(new Name('is_iterable'), [$actual]),
+				'IsNumeric' => static fn (Scope $scope, Arg $actual): FuncCall => new FuncCall(new Name('is_numeric'), [$actual]),
+				'IsObject' => static fn (Scope $scope, Arg $actual): FuncCall => new FuncCall(new Name('is_object'), [$actual]),
+				'IsResource' => static fn (Scope $scope, Arg $actual): FuncCall => new FuncCall(new Name('is_resource'), [$actual]),
+				'IsString' => static fn (Scope $scope, Arg $actual): FuncCall => new FuncCall(new Name('is_string'), [$actual]),
+				'IsScalar' => static fn (Scope $scope, Arg $actual): FuncCall => new FuncCall(new Name('is_scalar'), [$actual]),
 				'InternalType' => static function (Scope $scope, Arg $type, Arg $value): ?FuncCall {
 					$typeNames = $scope->getType($type->value)->getConstantStrings();
 					if (count($typeNames) !== 1) {
@@ -286,61 +247,49 @@ class AssertTypeSpecifyingExtensionHelper
 						new Name($functionName),
 						[
 							$value,
-						]
+						],
 					);
 				},
-				'ArrayHasKey' => static function (Scope $scope, Arg $key, Arg $array): Expr {
-					return new Expr\BinaryOp\BooleanOr(
-						new Expr\BinaryOp\BooleanAnd(
-							new Expr\Instanceof_($array->value, new Name('ArrayAccess')),
-							new Expr\MethodCall($array->value, 'offsetExists', [$key])
-						),
-						new FuncCall(new Name('array_key_exists'), [$key, $array])
-					);
-				},
-				'ObjectHasAttribute' => static function (Scope $scope, Arg $property, Arg $object): FuncCall {
-					return new FuncCall(new Name('property_exists'), [$object, $property]);
-				},
-				'ObjectHasProperty' => static function (Scope $scope, Arg $property, Arg $object): FuncCall {
-					return new FuncCall(new Name('property_exists'), [$object, $property]);
-				},
-				'Contains' => static function (Scope $scope, Arg $needle, Arg $haystack): Expr {
-					return new Expr\BinaryOp\BooleanOr(
-						new Expr\Instanceof_($haystack->value, new Name('Traversable')),
-						new FuncCall(new Name('in_array'), [$needle, $haystack, new Arg(new ConstFetch(new Name('true')))])
-					);
-				},
-				'ContainsEquals' => static function (Scope $scope, Arg $needle, Arg $haystack): Expr {
-					return new Expr\BinaryOp\BooleanOr(
-						new Expr\Instanceof_($haystack->value, new Name('Traversable')),
-						new Expr\BinaryOp\BooleanAnd(
-							new Expr\BooleanNot(new Expr\Empty_($haystack->value)),
-							new FuncCall(new Name('in_array'), [$needle, $haystack, new Arg(new ConstFetch(new Name('false')))])
-						)
-					);
-				},
-				'ContainsOnlyInstancesOf' => static function (Scope $scope, Arg $className, Arg $haystack): Expr {
-					return new Expr\BinaryOp\BooleanOr(
-						new Expr\Instanceof_($haystack->value, new Name('Traversable')),
-						new Identical(
-							$haystack->value,
-							new FuncCall(new Name('array_filter'), [
-								$haystack,
-								new Arg(new Expr\Closure([
-									'static' => true,
-									'params' => [
-										new Param(new Expr\Variable('_')),
-									],
-									'stmts' => [
-										new Stmt\Return_(
-											new FuncCall(new Name('is_a'), [new Arg(new Expr\Variable('_')), $className])
-										),
-									],
-								])),
-							])
-						)
-					);
-				},
+				'ArrayHasKey' => static fn (Scope $scope, Arg $key, Arg $array): Expr => new Expr\BinaryOp\BooleanOr(
+					new Expr\BinaryOp\BooleanAnd(
+						new Expr\Instanceof_($array->value, new Name('ArrayAccess')),
+						new Expr\MethodCall($array->value, 'offsetExists', [$key]),
+					),
+					new FuncCall(new Name('array_key_exists'), [$key, $array]),
+				),
+				'ObjectHasAttribute' => static fn (Scope $scope, Arg $property, Arg $object): FuncCall => new FuncCall(new Name('property_exists'), [$object, $property]),
+				'ObjectHasProperty' => static fn (Scope $scope, Arg $property, Arg $object): FuncCall => new FuncCall(new Name('property_exists'), [$object, $property]),
+				'Contains' => static fn (Scope $scope, Arg $needle, Arg $haystack): Expr => new Expr\BinaryOp\BooleanOr(
+					new Expr\Instanceof_($haystack->value, new Name('Traversable')),
+					new FuncCall(new Name('in_array'), [$needle, $haystack, new Arg(new ConstFetch(new Name('true')))]),
+				),
+				'ContainsEquals' => static fn (Scope $scope, Arg $needle, Arg $haystack): Expr => new Expr\BinaryOp\BooleanOr(
+					new Expr\Instanceof_($haystack->value, new Name('Traversable')),
+					new Expr\BinaryOp\BooleanAnd(
+						new Expr\BooleanNot(new Expr\Empty_($haystack->value)),
+						new FuncCall(new Name('in_array'), [$needle, $haystack, new Arg(new ConstFetch(new Name('false')))]),
+					),
+				),
+				'ContainsOnlyInstancesOf' => static fn (Scope $scope, Arg $className, Arg $haystack): Expr => new Expr\BinaryOp\BooleanOr(
+					new Expr\Instanceof_($haystack->value, new Name('Traversable')),
+					new Identical(
+						$haystack->value,
+						new FuncCall(new Name('array_filter'), [
+							$haystack,
+							new Arg(new Expr\Closure([
+								'static' => true,
+								'params' => [
+									new Param(new Expr\Variable('_')),
+								],
+								'stmts' => [
+									new Stmt\Return_(
+										new FuncCall(new Name('is_a'), [new Arg(new Expr\Variable('_')), $className]),
+									),
+								],
+							])),
+						]),
+					),
+				),
 			];
 		}
 

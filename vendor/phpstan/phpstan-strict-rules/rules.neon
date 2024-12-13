@@ -1,35 +1,35 @@
 parameters:
 	polluteScopeWithLoopInitialAssignments: false
 	polluteScopeWithAlwaysIterableForeach: false
-	checkAlwaysTrueCheckTypeFunctionCall: true
-	checkAlwaysTrueInstanceof: true
-	checkAlwaysTrueStrictComparison: true
-	checkAlwaysTrueLooseComparison: true
-	checkDynamicProperties: %featureToggles.bleedingEdge%
+	polluteScopeWithBlock: false
+	checkDynamicProperties: true
 	checkExplicitMixedMissingReturn: true
 	checkFunctionNameCase: true
 	checkInternalClassCaseSensitivity: true
 	reportMaybesInMethodSignatures: true
 	reportStaticMethodSignatures: true
 	reportMaybesInPropertyPhpDocTypes: true
-	reportWrongPhpDocTypeInVarTag: %featureToggles.bleedingEdge%
-	featureToggles:
-		illegalConstructorMethodCall: %featureToggles.bleedingEdge%
+	reportWrongPhpDocTypeInVarTag: true
 	strictRules:
 		allRules: true
-		disallowedLooseComparison: [%strictRules.allRules%, %featureToggles.bleedingEdge%]
+		disallowedLooseComparison: %strictRules.allRules%
 		booleansInConditions: %strictRules.allRules%
 		uselessCast: %strictRules.allRules%
 		requireParentConstructorCall: %strictRules.allRules%
-		disallowedConstructs: %strictRules.allRules%
+		disallowedBacktick: %strictRules.allRules%
+		disallowedEmpty: %strictRules.allRules%
+		disallowedImplicitArrayCreation: %strictRules.allRules%
+		disallowedShortTernary: %strictRules.allRules%
 		overwriteVariablesWithLoop: %strictRules.allRules%
 		closureUsesThis: %strictRules.allRules%
 		matchingInheritedMethodNames: %strictRules.allRules%
 		numericOperandsInArithmeticOperators: %strictRules.allRules%
-		strictCalls: %strictRules.allRules%
+		strictFunctionCalls: %strictRules.allRules%
+		dynamicCallOnStaticMethod: %strictRules.allRules%
 		switchConditionsMatchingType: %strictRules.allRules%
 		noVariableVariables: %strictRules.allRules%
-		strictArrayFilter: [%strictRules.allRules%, %featureToggles.bleedingEdge%]
+		strictArrayFilter: %strictRules.allRules%
+		illegalConstructorMethodCall: %strictRules.allRules%
 
 parametersSchema:
 	strictRules: structure([
@@ -38,15 +38,20 @@ parametersSchema:
 		booleansInConditions: anyOf(bool(), arrayOf(bool()))
 		uselessCast: anyOf(bool(), arrayOf(bool()))
 		requireParentConstructorCall: anyOf(bool(), arrayOf(bool()))
-		disallowedConstructs: anyOf(bool(), arrayOf(bool()))
+		disallowedBacktick: anyOf(bool(), arrayOf(bool()))
+		disallowedEmpty: anyOf(bool(), arrayOf(bool()))
+		disallowedImplicitArrayCreation: anyOf(bool(), arrayOf(bool()))
+		disallowedShortTernary: anyOf(bool(), arrayOf(bool()))
 		overwriteVariablesWithLoop: anyOf(bool(), arrayOf(bool()))
 		closureUsesThis: anyOf(bool(), arrayOf(bool()))
 		matchingInheritedMethodNames: anyOf(bool(), arrayOf(bool()))
 		numericOperandsInArithmeticOperators: anyOf(bool(), arrayOf(bool()))
-		strictCalls: anyOf(bool(), arrayOf(bool()))
+		strictFunctionCalls: anyOf(bool(), arrayOf(bool()))
+		dynamicCallOnStaticMethod: anyOf(bool(), arrayOf(bool()))
 		switchConditionsMatchingType: anyOf(bool(), arrayOf(bool()))
 		noVariableVariables: anyOf(bool(), arrayOf(bool()))
 		strictArrayFilter: anyOf(bool(), arrayOf(bool()))
+		illegalConstructorMethodCall: anyOf(bool(), arrayOf(bool()))
 	])
 
 conditionalTags:
@@ -69,13 +74,13 @@ conditionalTags:
 	PHPStan\Rules\Classes\RequireParentConstructCallRule:
 		phpstan.rules.rule: %strictRules.requireParentConstructorCall%
 	PHPStan\Rules\DisallowedConstructs\DisallowedBacktickRule:
-		phpstan.rules.rule: %strictRules.disallowedConstructs%
+		phpstan.rules.rule: %strictRules.disallowedBacktick%
 	PHPStan\Rules\DisallowedConstructs\DisallowedEmptyRule:
-		phpstan.rules.rule: %strictRules.disallowedConstructs%
+		phpstan.rules.rule: %strictRules.disallowedEmpty%
 	PHPStan\Rules\DisallowedConstructs\DisallowedImplicitArrayCreationRule:
-		phpstan.rules.rule: %strictRules.disallowedConstructs%
+		phpstan.rules.rule: %strictRules.disallowedImplicitArrayCreation%
 	PHPStan\Rules\DisallowedConstructs\DisallowedShortTernaryRule:
-		phpstan.rules.rule: %strictRules.disallowedConstructs%
+		phpstan.rules.rule: %strictRules.disallowedShortTernary%
 	PHPStan\Rules\ForeachLoop\OverwriteVariablesWithForeachRule:
 		phpstan.rules.rule: %strictRules.overwriteVariablesWithLoop%
 	PHPStan\Rules\ForLoop\OverwriteVariablesWithForLoopInitRule:
@@ -107,11 +112,11 @@ conditionalTags:
 	PHPStan\Rules\Operators\OperandsInArithmeticSubtractionRule:
 		phpstan.rules.rule: %strictRules.numericOperandsInArithmeticOperators%
 	PHPStan\Rules\StrictCalls\DynamicCallOnStaticMethodsRule:
-		phpstan.rules.rule: %strictRules.strictCalls%
+		phpstan.rules.rule: %strictRules.dynamicCallOnStaticMethod%
 	PHPStan\Rules\StrictCalls\DynamicCallOnStaticMethodsCallableRule:
-		phpstan.rules.rule: %strictRules.strictCalls%
+		phpstan.rules.rule: %strictRules.dynamicCallOnStaticMethod%
 	PHPStan\Rules\StrictCalls\StrictFunctionCallsRule:
-		phpstan.rules.rule: %strictRules.strictCalls%
+		phpstan.rules.rule: %strictRules.strictFunctionCalls%
 	PHPStan\Rules\SwitchConditions\MatchingTypeInSwitchCaseConditionRule:
 		phpstan.rules.rule: %strictRules.switchConditionsMatchingType%
 	PHPStan\Rules\VariableVariables\VariableMethodCallRule:
@@ -128,6 +133,10 @@ conditionalTags:
 		phpstan.rules.rule: %strictRules.noVariableVariables%
 	PHPStan\Rules\VariableVariables\VariablePropertyFetchRule:
 		phpstan.rules.rule: %strictRules.noVariableVariables%
+	PHPStan\Rules\Methods\IllegalConstructorMethodCallRule:
+		phpstan.rules.rule: %strictRules.illegalConstructorMethodCall%
+	PHPStan\Rules\Methods\IllegalConstructorStaticCallRule:
+		phpstan.rules.rule: %strictRules.illegalConstructorMethodCall%
 
 services:
 	-
@@ -146,16 +155,12 @@ services:
 
 	-
 		class: PHPStan\Rules\BooleansInConditions\BooleanInBooleanAndRule
-		arguments:
-			bleedingEdge: %featureToggles.bleedingEdge%
 
 	-
 		class: PHPStan\Rules\BooleansInConditions\BooleanInBooleanNotRule
 
 	-
 		class: PHPStan\Rules\BooleansInConditions\BooleanInBooleanOrRule
-		arguments:
-			bleedingEdge: %featureToggles.bleedingEdge%
 
 	-
 		class: PHPStan\Rules\BooleansInConditions\BooleanInElseIfConditionRule
@@ -207,6 +212,12 @@ services:
 		class: PHPStan\Rules\Methods\WrongCaseOfInheritedMethodRule
 
 	-
+		class: PHPStan\Rules\Methods\IllegalConstructorMethodCallRule
+
+	-
+		class: PHPStan\Rules\Methods\IllegalConstructorStaticCallRule
+
+	-
 		class: PHPStan\Rules\Operators\OperandInArithmeticPostDecrementRule
 
 	-
@@ -220,33 +231,21 @@ services:
 
 	-
 		class: PHPStan\Rules\Operators\OperandsInArithmeticAdditionRule
-		arguments:
-			bleedingEdge: %featureToggles.bleedingEdge%
 
 	-
 		class: PHPStan\Rules\Operators\OperandsInArithmeticDivisionRule
-		arguments:
-			bleedingEdge: %featureToggles.bleedingEdge%
 
 	-
 		class: PHPStan\Rules\Operators\OperandsInArithmeticExponentiationRule
-		arguments:
-			bleedingEdge: %featureToggles.bleedingEdge%
 
 	-
 		class: PHPStan\Rules\Operators\OperandsInArithmeticModuloRule
-		arguments:
-			bleedingEdge: %featureToggles.bleedingEdge%
 
 	-
 		class: PHPStan\Rules\Operators\OperandsInArithmeticMultiplicationRule
-		arguments:
-			bleedingEdge: %featureToggles.bleedingEdge%
 
 	-
 		class: PHPStan\Rules\Operators\OperandsInArithmeticSubtractionRule
-		arguments:
-			bleedingEdge: %featureToggles.bleedingEdge%
 
 	-
 		class: PHPStan\Rules\StrictCalls\DynamicCallOnStaticMethodsRule

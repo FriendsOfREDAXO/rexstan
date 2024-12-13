@@ -14,9 +14,8 @@ final class PhpDocResolver
 {
     /**
      * @readonly
-     * @var \PHPStan\Type\FileTypeMapper
      */
-    private $fileTypeMapper;
+    private FileTypeMapper $fileTypeMapper;
     public function __construct(FileTypeMapper $fileTypeMapper)
     {
         $this->fileTypeMapper = $fileTypeMapper;

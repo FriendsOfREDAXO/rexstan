@@ -13,10 +13,7 @@ use PhpParser\NodeVisitorAbstract;
 
 final class HasScopedReturnNodeVisitor extends NodeVisitorAbstract
 {
-    /**
-     * @var bool
-     */
-    private $hasReturn = false;
+    private bool $hasReturn = false;
     public function __construct(bool $hasReturn = false)
     {
         $this->hasReturn = $hasReturn;

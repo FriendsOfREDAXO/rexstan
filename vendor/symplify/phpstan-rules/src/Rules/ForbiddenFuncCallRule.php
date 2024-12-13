@@ -9,6 +9,7 @@ use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\TypeCombinator;
 use SimpleXMLElement;
@@ -21,32 +22,31 @@ use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
+ * @implements Rule<FuncCall>
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenFuncCallRule\ForbiddenFuncCallRuleTest
  */
 final class ForbiddenFuncCallRule implements Rule
 {
     /**
-     * @var string[]|array<(string | int), string>
+     * @var array<string>
      * @readonly
      */
-    private $forbiddenFunctions;
+    private array $forbiddenFunctions;
     /**
      * @readonly
-     * @var \Symplify\PHPStanRules\Matcher\ArrayStringAndFnMatcher
      */
-    private $arrayStringAndFnMatcher;
+    private ArrayStringAndFnMatcher $arrayStringAndFnMatcher;
     /**
      * @readonly
-     * @var \Symplify\PHPStanRules\Formatter\RequiredWithMessageFormatter
      */
-    private $requiredWithMessageFormatter;
+    private RequiredWithMessageFormatter $requiredWithMessageFormatter;
     /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Function "%s()" cannot be used/left in the code';
 
     /**
-     * @param string[]|array<string|int, string> $forbiddenFunctions
+     * @param array<string> $forbiddenFunctions
      */
     public function __construct(array $forbiddenFunctions, ArrayStringAndFnMatcher $arrayStringAndFnMatcher, RequiredWithMessageFormatter $requiredWithMessageFormatter)
     {
@@ -55,9 +55,6 @@ final class ForbiddenFuncCallRule implements Rule
         $this->requiredWithMessageFormatter = $requiredWithMessageFormatter;
     }
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return FuncCall::class;
@@ -65,7 +62,6 @@ final class ForbiddenFuncCallRule implements Rule
 
     /**
      * @param FuncCall $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -87,7 +83,7 @@ final class ForbiddenFuncCallRule implements Rule
             }
 
             $errorMessage = $this->createErrorMessage($requiredWithMessage, $funcName);
-            return [$errorMessage];
+            return [RuleErrorBuilder::message($errorMessage)->build()];
         }
 
         return [];

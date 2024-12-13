@@ -8,14 +8,12 @@ final class RequiredWithMessage
 {
     /**
      * @readonly
-     * @var string
      */
-    private $required;
+    private string $required;
     /**
      * @readonly
-     * @var string|null
      */
-    private $message;
+    private ?string $message;
     public function __construct(string $required, ?string $message)
     {
         $this->required = $required;

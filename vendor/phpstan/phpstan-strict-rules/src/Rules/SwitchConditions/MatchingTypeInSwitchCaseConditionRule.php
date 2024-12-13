@@ -4,8 +4,8 @@ namespace PHPStan\Rules\SwitchConditions;
 
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Switch_;
-use PhpParser\PrettyPrinter\Standard;
 use PHPStan\Analyser\Scope;
+use PHPStan\Node\Printer\Printer;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\VerbosityLevel;
@@ -17,10 +17,9 @@ use function sprintf;
 class MatchingTypeInSwitchCaseConditionRule implements Rule
 {
 
-	/** @var Standard */
-	private $printer;
+	private Printer $printer;
 
-	public function __construct(Standard $printer)
+	public function __construct(Printer $printer)
 	{
 		$this->printer = $printer;
 	}
@@ -48,9 +47,9 @@ class MatchingTypeInSwitchCaseConditionRule implements Rule
 				'Switch condition type (%s) does not match case condition %s (%s).',
 				$conditionType->describe(VerbosityLevel::value()),
 				$this->printer->prettyPrintExpr($case->cond),
-				$caseType->describe(VerbosityLevel::typeOnly())
+				$caseType->describe(VerbosityLevel::typeOnly()),
 			))
-				->line($case->getLine())
+				->line($case->getStartLine())
 				->identifier('switch.type')
 				->build();
 		}

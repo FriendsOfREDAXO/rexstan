@@ -5,14 +5,13 @@ namespace PHPStan\Rules\Symfony;
 use InvalidArgumentException;
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
-use PhpParser\PrettyPrinter\Standard;
 use PHPStan\Analyser\Scope;
+use PHPStan\Node\Printer\Printer;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Symfony\ConsoleApplicationResolver;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Symfony\Helper;
-use PHPStan\Type\TypeUtils;
 use function count;
 use function sprintf;
 
@@ -22,13 +21,11 @@ use function sprintf;
 final class UndefinedArgumentRule implements Rule
 {
 
-	/** @var ConsoleApplicationResolver */
-	private $consoleApplicationResolver;
+	private ConsoleApplicationResolver $consoleApplicationResolver;
 
-	/** @var Standard */
-	private $printer;
+	private Printer $printer;
 
-	public function __construct(ConsoleApplicationResolver $consoleApplicationResolver, Standard $printer)
+	public function __construct(ConsoleApplicationResolver $consoleApplicationResolver, Printer $printer)
 	{
 		$this->consoleApplicationResolver = $consoleApplicationResolver;
 		$this->printer = $printer;
@@ -60,7 +57,7 @@ final class UndefinedArgumentRule implements Rule
 		}
 
 		$argType = $scope->getType($node->getArgs()[0]->value);
-		$argStrings = TypeUtils::getConstantStrings($argType);
+		$argStrings = $argType->getConstantStrings();
 		if (count($argStrings) !== 1) {
 			return [];
 		}

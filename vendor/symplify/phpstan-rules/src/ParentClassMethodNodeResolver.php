@@ -14,14 +14,12 @@ final class ParentClassMethodNodeResolver
 {
     /**
      * @readonly
-     * @var \Symplify\PHPStanRules\Reflection\ReflectionParser
      */
-    private $reflectionParser;
+    private ReflectionParser $reflectionParser;
     /**
      * @readonly
-     * @var \PHPStan\Reflection\ReflectionProvider
      */
-    private $reflectionProvider;
+    private ReflectionProvider $reflectionProvider;
     public function __construct(ReflectionParser $reflectionParser, ReflectionProvider $reflectionProvider)
     {
         $this->reflectionParser = $reflectionParser;
@@ -58,9 +56,7 @@ final class ParentClassMethodNodeResolver
         // all parent classes and interfaces
         return array_filter(
             $mainClassReflection->getAncestors(),
-            static function (ClassReflection $classReflection) use ($mainClassReflection) : bool {
-                return $classReflection !== $mainClassReflection;
-            }
+            static fn (ClassReflection $classReflection): bool => $classReflection !== $mainClassReflection
         );
     }
 }

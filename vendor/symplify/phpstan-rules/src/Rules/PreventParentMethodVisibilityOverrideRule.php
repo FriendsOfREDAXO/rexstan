@@ -11,20 +11,21 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ExtendedMethodReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
+ * @implements Rule<ClassMethod>
  * @see \Symplify\PHPStanRules\Tests\Rules\PreventParentMethodVisibilityOverrideRule\PreventParentMethodVisibilityOverrideRuleTest
  */
 final class PreventParentMethodVisibilityOverrideRule implements Rule
 {
     /**
      * @readonly
-     * @var \PHPStan\Reflection\ReflectionProvider
      */
-    private $reflectionProvider;
+    private ReflectionProvider $reflectionProvider;
     /**
      * @var string
      */
@@ -35,9 +36,6 @@ final class PreventParentMethodVisibilityOverrideRule implements Rule
         $this->reflectionProvider = $reflectionProvider;
     }
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return ClassMethod::class;
@@ -45,7 +43,6 @@ final class PreventParentMethodVisibilityOverrideRule implements Rule
 
     /**
      * @param ClassMethod $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -79,7 +76,7 @@ final class PreventParentMethodVisibilityOverrideRule implements Rule
             $methodVisibility = $this->resolveReflectionMethodVisibilityAsStrings($parentReflectionMethod);
 
             $errorMessage = sprintf(self::ERROR_MESSAGE, $methodName, $methodVisibility);
-            return [$errorMessage];
+            return [RuleErrorBuilder::message($errorMessage)->build()];
         }
 
         return [];

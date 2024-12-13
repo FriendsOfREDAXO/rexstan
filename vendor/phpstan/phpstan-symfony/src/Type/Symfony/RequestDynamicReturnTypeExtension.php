@@ -5,7 +5,6 @@ namespace PHPStan\Type\Symfony;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
-use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Type\Constant\ConstantBooleanType;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\ResourceType;
@@ -29,15 +28,15 @@ final class RequestDynamicReturnTypeExtension implements DynamicMethodReturnType
 		MethodReflection $methodReflection,
 		MethodCall $methodCall,
 		Scope $scope
-	): Type
+	): ?Type
 	{
 		if (!isset($methodCall->getArgs()[0])) {
 			return new StringType();
 		}
 
 		$argType = $scope->getType($methodCall->getArgs()[0]->value);
-		$isTrueType = (new ConstantBooleanType(true))->isSuperTypeOf($argType);
-		$isFalseType = (new ConstantBooleanType(false))->isSuperTypeOf($argType);
+		$isTrueType = (new ConstantBooleanType(true))->isSuperTypeOf($argType)->result;
+		$isFalseType = (new ConstantBooleanType(false))->isSuperTypeOf($argType)->result;
 		$compareTypes = $isTrueType->compareTo($isFalseType);
 		if ($compareTypes === $isTrueType) {
 			return new ResourceType();
@@ -46,7 +45,7 @@ final class RequestDynamicReturnTypeExtension implements DynamicMethodReturnType
 			return new StringType();
 		}
 
-		return ParametersAcceptorSelector::selectSingle($methodReflection->getVariants())->getReturnType();
+		return null;
 	}
 
 }

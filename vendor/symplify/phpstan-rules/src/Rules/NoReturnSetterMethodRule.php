@@ -12,6 +12,7 @@ use PhpParser\NodeTraverser;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder;
 use Symplify\PHPStanRules\NodeVisitor\HasScopedReturnNodeVisitor;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
@@ -19,15 +20,15 @@ use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
+ * @implements Rule<ClassMethod>
  * @see \Symplify\PHPStanRules\Tests\Rules\NoReturnSetterMethodRule\NoReturnSetterMethodRuleTest
  */
 final class NoReturnSetterMethodRule implements Rule
 {
     /**
      * @readonly
-     * @var \Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder
      */
-    private $typeAwareNodeFinder;
+    private TypeAwareNodeFinder $typeAwareNodeFinder;
     /**
      * @var string
      */
@@ -80,7 +81,7 @@ final class NoReturnSetterMethodRule implements Rule
             return [];
         }
 
-        return [self::ERROR_MESSAGE];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
     }
 
     public function getRuleDefinition(): RuleDefinition

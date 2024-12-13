@@ -8,21 +8,18 @@ final class MethodCallReference
 {
     /**
      * @readonly
-     * @var string
      */
-    private $class;
+    private string $class;
 
     /**
      * @readonly
-     * @var string
      */
-    private $method;
+    private string $method;
 
     /**
      * @readonly
-     * @var bool
      */
-    private $isLocal;
+    private bool $isLocal;
 
     public function __construct(string $class, string $method, bool $isLocal)
     {

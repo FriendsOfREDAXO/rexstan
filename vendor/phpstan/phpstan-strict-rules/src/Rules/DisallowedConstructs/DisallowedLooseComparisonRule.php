@@ -26,7 +26,7 @@ class DisallowedLooseComparisonRule implements Rule
 		if ($node instanceof Equal) {
 			return [
 				RuleErrorBuilder::message(
-					'Loose comparison via "==" is not allowed.'
+					'Loose comparison via "==" is not allowed.',
 				)->tip('Use strict comparison via "===" instead.')
 					->identifier('equal.notAllowed')
 					->build(),
@@ -35,7 +35,7 @@ class DisallowedLooseComparisonRule implements Rule
 		if ($node instanceof NotEqual) {
 			return [
 				RuleErrorBuilder::message(
-					'Loose comparison via "!=" is not allowed.'
+					'Loose comparison via "!=" is not allowed.',
 				)->tip('Use strict comparison via "!==" instead.')
 					->identifier('notEqual.notAllowed')
 					->build(),

@@ -32,27 +32,23 @@ final class LocalOnlyPublicClassMethodRule implements Rule
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\Configuration
      */
-    private $configuration;
+    private Configuration $configuration;
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\Templates\UsedMethodAnalyzer
      */
-    private $usedMethodAnalyzer;
+    private UsedMethodAnalyzer $usedMethodAnalyzer;
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\Templates\TemplateMethodCallsProvider
      */
-    private $templateMethodCallsProvider;
+    private TemplateMethodCallsProvider $templateMethodCallsProvider;
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\NodeCollectorExtractor
      */
-    private $nodeCollectorExtractor;
+    private NodeCollectorExtractor $nodeCollectorExtractor;
 
     public function __construct(Configuration $configuration, UsedMethodAnalyzer $usedMethodAnalyzer, TemplateMethodCallsProvider $templateMethodCallsProvider, NodeCollectorExtractor $nodeCollectorExtractor)
     {

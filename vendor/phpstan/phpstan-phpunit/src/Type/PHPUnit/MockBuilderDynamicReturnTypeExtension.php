@@ -27,7 +27,7 @@ class MockBuilderDynamicReturnTypeExtension implements DynamicMethodReturnTypeEx
 				'getMockForAbstractClass',
 				'getMockForTrait',
 			],
-			true
+			true,
 		);
 	}
 

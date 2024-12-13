@@ -12,7 +12,7 @@ final class TemplateRegexFinder
     /**
      * @var array<string, string[]>
      */
-    private $resultsByCacheKey = [];
+    private array $resultsByCacheKey = [];
 
     /**
      * @param string[] $directories
@@ -31,9 +31,7 @@ final class TemplateRegexFinder
 
         // convert to file contents
         $templateFilesContents = array_map(
-            static function (string $templateFilePath): string {
-                return (string) file_get_contents($templateFilePath);
-            },
+            static fn (string $templateFilePath): string => (string) file_get_contents($templateFilePath),
             $templateFilePaths
         );
 

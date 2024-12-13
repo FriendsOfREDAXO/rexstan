@@ -18,11 +18,9 @@ use function sprintf;
 class UselessCastRule implements Rule
 {
 
-	/** @var bool */
-	private $treatPhpDocTypesAsCertain;
+	private bool $treatPhpDocTypesAsCertain;
 
-	/** @var bool */
-	private $treatPhpDocTypesAsCertainTip;
+	private bool $treatPhpDocTypesAsCertainTip;
 
 	public function __construct(
 		bool $treatPhpDocTypesAsCertain,
@@ -72,7 +70,7 @@ class UselessCastRule implements Rule
 				$addTip(RuleErrorBuilder::message(sprintf(
 					'Casting to %s something that\'s already %s.',
 					$castType->describe(VerbosityLevel::typeOnly()),
-					$expressionType->describe(VerbosityLevel::typeOnly())
+					$expressionType->describe(VerbosityLevel::typeOnly()),
 				)))->identifier('cast.useless')->build(),
 			];
 		}

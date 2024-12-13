@@ -31,9 +31,8 @@ final class UnusedPublicPropertyRule implements Rule
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\Configuration
      */
-    private $configuration;
+    private Configuration $configuration;
 
     public function __construct(Configuration $configuration)
     {

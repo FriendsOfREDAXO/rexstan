@@ -10,13 +10,13 @@ final class LocalAndExternalMethodCallReferences
      * @var string[]
      * @readonly
      */
-    private $localMethodCallReferences;
+    private array $localMethodCallReferences;
 
     /**
      * @var string[]
      * @readonly
      */
-    private $externalMethodCallReferences;
+    private array $externalMethodCallReferences;
 
     /**
      * @param string[] $localMethodCallReferences

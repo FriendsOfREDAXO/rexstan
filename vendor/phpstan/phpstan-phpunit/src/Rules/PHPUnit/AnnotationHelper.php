@@ -56,7 +56,7 @@ class AnnotationHelper
 			}
 
 			$errors[] = RuleErrorBuilder::message(
-				'Annotation "' . $matches['annotation'] . '" is invalid, "@' . $matches['property'] . '" should be followed by a space and a value.'
+				'Annotation "' . $matches['annotation'] . '" is invalid, "@' . $matches['property'] . '" should be followed by a space and a value.',
 			)->identifier('phpunit.invalidPhpDoc')->build();
 		}
 

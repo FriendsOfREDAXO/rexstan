@@ -14,12 +14,12 @@ final class TypeAwareNodeFinder
 {
     /**
      * @readonly
-     * @var \PhpParser\NodeFinder
      */
-    private $nodeFinder;
-    public function __construct(NodeFinder $nodeFinder)
+    private NodeFinder $nodeFinder;
+
+    public function __construct()
     {
-        $this->nodeFinder = $nodeFinder;
+        $this->nodeFinder = new NodeFinder();
     }
 
     /**

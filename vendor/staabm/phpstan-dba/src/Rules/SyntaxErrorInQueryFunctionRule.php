@@ -25,12 +25,9 @@ final class SyntaxErrorInQueryFunctionRule implements Rule
     /**
      * @var list<string>
      */
-    private $functionNames;
+    private array $functionNames;
 
-    /**
-     * @var ReflectionProvider
-     */
-    private $reflectionProvider;
+    private ReflectionProvider $reflectionProvider;
 
     /**
      * @param list<string> $functionNames
@@ -96,13 +93,13 @@ final class SyntaxErrorInQueryFunctionRule implements Rule
                 $queryError = $queryReflection->validateQueryString($queryString);
                 if (null !== $queryError) {
                     return [
-                        RuleErrorBuilder::message($queryError->asRuleMessage())->line($node->getStartLine())->build(),
+                        RuleErrorBuilder::message($queryError->asRuleMessage())->identifier('dba.syntaxError')->line($node->getStartLine())->build(),
                     ];
                 }
             }
         } catch (UnresolvableQueryException $exception) {
             return [
-                RuleErrorBuilder::message($exception->asRuleMessage())->tip($exception::getTip())->line($node->getStartLine())->build(),
+                RuleErrorBuilder::message($exception->asRuleMessage())->tip($exception::getTip())->identifier('dba.unresolvableQuery')->line($node->getStartLine())->build(),
             ];
         }
 

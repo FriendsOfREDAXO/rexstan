@@ -28,19 +28,16 @@ class DataProviderHelper
 	/**
 	 * Reflection provider.
 	 *
-	 * @var ReflectionProvider
 	 */
-	private $reflectionProvider;
+	private ReflectionProvider $reflectionProvider;
 
 	/**
 	 * The file type mapper.
 	 *
-	 * @var FileTypeMapper
 	 */
-	private $fileTypeMapper;
+	private FileTypeMapper $fileTypeMapper;
 
-	/** @var bool */
-	private $phpunit10OrNewer;
+	private bool $phpunit10OrNewer;
 
 	public function __construct(
 		ReflectionProvider $reflectionProvider,
@@ -69,7 +66,7 @@ class DataProviderHelper
 				$classReflection->getName(),
 				$scope->isInTrait() ? $scope->getTraitReflection()->getName() : null,
 				$node->name->toString(),
-				$docComment->getText()
+				$docComment->getText(),
 			);
 			foreach ($this->getDataProviderAnnotations($methodPhpDoc) as $annotation) {
 				$dataProviderValue = $this->getDataProviderAnnotationValue($annotation);
@@ -122,7 +119,7 @@ class DataProviderHelper
 		foreach ($phpDocNodes as $docNode) {
 			$annotations = array_merge(
 				$annotations,
-				$docNode->getTagsByName('@dataProvider')
+				$docNode->getTagsByName('@dataProvider'),
 			);
 		}
 
@@ -145,7 +142,7 @@ class DataProviderHelper
 			return [
 				RuleErrorBuilder::message(sprintf(
 					'@dataProvider %s related class not found.',
-					$dataProviderValue
+					$dataProviderValue,
 				))
 					->line($lineNumber)
 					->identifier('phpunit.dataProviderClass')
@@ -159,7 +156,7 @@ class DataProviderHelper
 			return [
 				RuleErrorBuilder::message(sprintf(
 					'@dataProvider %s related method not found.',
-					$dataProviderValue
+					$dataProviderValue,
 				))
 					->line($lineNumber)
 					->identifier('phpunit.dataProviderMethod')
@@ -173,7 +170,7 @@ class DataProviderHelper
 			$errors[] = RuleErrorBuilder::message(sprintf(
 				'@dataProvider %s related method is used with incorrect case: %s.',
 				$dataProviderValue,
-				$dataProviderMethodReflection->getName()
+				$dataProviderMethodReflection->getName(),
 			))
 				->line($lineNumber)
 				->identifier('method.nameCase')
@@ -183,7 +180,7 @@ class DataProviderHelper
 		if (!$dataProviderMethodReflection->isPublic()) {
 			$errors[] = RuleErrorBuilder::message(sprintf(
 				'@dataProvider %s related method must be public.',
-				$dataProviderValue
+				$dataProviderValue,
 			))
 				->line($lineNumber)
 				->identifier('phpunit.dataProviderPublic')
@@ -193,7 +190,7 @@ class DataProviderHelper
 		if ($deprecationRulesInstalled && $this->phpunit10OrNewer && !$dataProviderMethodReflection->isStatic()) {
 			$errors[] = RuleErrorBuilder::message(sprintf(
 				'@dataProvider %s related method must be static in PHPUnit 10 and newer.',
-				$dataProviderValue
+				$dataProviderValue,
 			))
 				->line($lineNumber)
 				->identifier('phpunit.dataProviderStatic')

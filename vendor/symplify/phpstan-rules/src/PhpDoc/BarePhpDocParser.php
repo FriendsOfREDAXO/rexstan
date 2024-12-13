@@ -16,14 +16,12 @@ final class BarePhpDocParser
 {
     /**
      * @readonly
-     * @var \PHPStan\PhpDocParser\Parser\PhpDocParser
      */
-    private $phpDocParser;
+    private PhpDocParser $phpDocParser;
     /**
      * @readonly
-     * @var \PHPStan\PhpDocParser\Lexer\Lexer
      */
-    private $lexer;
+    private Lexer $lexer;
     public function __construct(PhpDocParser $phpDocParser, Lexer $lexer)
     {
         $this->phpDocParser = $phpDocParser;

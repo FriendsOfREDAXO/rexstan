@@ -26,10 +26,7 @@ use staabm\PHPStanDba\UnresolvableQueryException;
 
 final class MysqliQueryDynamicReturnTypeExtension implements DynamicMethodReturnTypeExtension, DynamicFunctionReturnTypeExtension
 {
-    /**
-     * @var PhpVersion
-     */
-    private $phpVersion;
+    private PhpVersion $phpVersion;
 
     public function __construct(PhpVersion $phpVersion)
     {
@@ -121,7 +118,7 @@ final class MysqliQueryDynamicReturnTypeExtension implements DynamicMethodReturn
         $queryReflection = new QueryReflection();
         $queryStrings = $queryReflection->resolveQueryStrings($queryExpr, $scope);
 
-        $genericObjects = [];
+        $objects = [];
         foreach ($queryStrings as $queryString) {
             $resultType = $queryReflection->getResultType($queryString, QueryReflector::FETCH_TYPE_ASSOC);
 
@@ -129,14 +126,17 @@ final class MysqliQueryDynamicReturnTypeExtension implements DynamicMethodReturn
                 return null;
             }
 
-            $genericObjects[] = new MysqliResultObjectType($resultType);
+            $resultObjectType = new MysqliResultObjectType(\mysqli_result::class);
+            $resultObjectType->setRowType($resultType);
+
+            $objects[] = $resultObjectType;
         }
 
-        if (0 === \count($genericObjects)) {
+        if (0 === \count($objects)) {
             return null;
         }
 
-        $resultType = TypeCombinator::union(...$genericObjects);
+        $resultType = TypeCombinator::union(...$objects);
 
         if (! QueryReflection::getRuntimeConfiguration()->throwsMysqliExceptions($this->phpVersion)) {
             return TypeCombinator::union(
