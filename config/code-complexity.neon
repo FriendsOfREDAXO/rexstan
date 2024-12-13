@@ -1,3 +1,10 @@
-services:
-    - Symplify\PHPStanRules\Rules\Explicit\NoMixedPropertyFetcherRule
-    - Symplify\PHPStanRules\Rules\Explicit\NoMixedMethodCallerRule
+includes:
+    - ../vendor/rector/type-perfect/config/extension.neon
+
+parameters:
+    type_perfect:
+        no_mixed_property: true
+        no_mixed_caller: true
+        null_over_false: false
+        narrow_param: false
+        narrow_return: false

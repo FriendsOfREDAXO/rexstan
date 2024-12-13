@@ -128,6 +128,10 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
             'Spaze\\PHPStan\\Rules\\Disallowed\\' => 31,
             'Safe\\' => 5,
         ),
+        'R' => 
+        array (
+            'Rector\\TypePerfect\\' => 19,
+        ),
         'P' => 
         array (
             'Psr\\Log\\' => 8,
@@ -201,6 +205,10 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
             0 => __DIR__ . '/..' . '/thecodingmachine/safe/lib',
             1 => __DIR__ . '/..' . '/thecodingmachine/safe/deprecated',
             2 => __DIR__ . '/..' . '/thecodingmachine/safe/generated',
+        ),
+        'Rector\\TypePerfect\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rector/type-perfect/src',
         ),
         'Psr\\Log\\' => 
         array (
@@ -1299,6 +1307,34 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/DummyTest.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
+        'Rector\\TypePerfect\\Collector\\ClassMethod\\PublicClassMethodParamTypesCollector' => __DIR__ . '/..' . '/rector/type-perfect/src/Collector/ClassMethod/PublicClassMethodParamTypesCollector.php',
+        'Rector\\TypePerfect\\Collector\\MethodCall\\MethodCallArgTypesCollector' => __DIR__ . '/..' . '/rector/type-perfect/src/Collector/MethodCall/MethodCallArgTypesCollector.php',
+        'Rector\\TypePerfect\\Collector\\MethodCallableNode\\MethodCallableCollector' => __DIR__ . '/..' . '/rector/type-perfect/src/Collector/MethodCallableNode/MethodCallableCollector.php',
+        'Rector\\TypePerfect\\Configuration' => __DIR__ . '/..' . '/rector/type-perfect/src/Configuration.php',
+        'Rector\\TypePerfect\\Enum\\Types\\ResolvedTypes' => __DIR__ . '/..' . '/rector/type-perfect/src/Enum/Types/ResolvedTypes.php',
+        'Rector\\TypePerfect\\Guard\\EmptyIssetGuard' => __DIR__ . '/..' . '/rector/type-perfect/src/Guard/EmptyIssetGuard.php',
+        'Rector\\TypePerfect\\Matcher\\ClassMethodCallReferenceResolver' => __DIR__ . '/..' . '/rector/type-perfect/src/Matcher/ClassMethodCallReferenceResolver.php',
+        'Rector\\TypePerfect\\Matcher\\Collector\\PublicClassMethodMatcher' => __DIR__ . '/..' . '/rector/type-perfect/src/Matcher/Collector/PublicClassMethodMatcher.php',
+        'Rector\\TypePerfect\\NodeFinder\\ClassMethodNodeFinder' => __DIR__ . '/..' . '/rector/type-perfect/src/NodeFinder/ClassMethodNodeFinder.php',
+        'Rector\\TypePerfect\\NodeFinder\\MethodCallNodeFinder' => __DIR__ . '/..' . '/rector/type-perfect/src/NodeFinder/MethodCallNodeFinder.php',
+        'Rector\\TypePerfect\\NodeFinder\\ReturnNodeFinder' => __DIR__ . '/..' . '/rector/type-perfect/src/NodeFinder/ReturnNodeFinder.php',
+        'Rector\\TypePerfect\\NodeVisitor\\CallableNodeVisitor' => __DIR__ . '/..' . '/rector/type-perfect/src/NodeVisitor/CallableNodeVisitor.php',
+        'Rector\\TypePerfect\\PhpDoc\\ApiDocStmtAnalyzer' => __DIR__ . '/..' . '/rector/type-perfect/src/PhpDoc/ApiDocStmtAnalyzer.php',
+        'Rector\\TypePerfect\\Printer\\CollectorMetadataPrinter' => __DIR__ . '/..' . '/rector/type-perfect/src/Printer/CollectorMetadataPrinter.php',
+        'Rector\\TypePerfect\\Printer\\NodeComparator' => __DIR__ . '/..' . '/rector/type-perfect/src/Printer/NodeComparator.php',
+        'Rector\\TypePerfect\\Reflection\\MethodNodeAnalyser' => __DIR__ . '/..' . '/rector/type-perfect/src/Reflection/MethodNodeAnalyser.php',
+        'Rector\\TypePerfect\\Reflection\\ReflectionParser' => __DIR__ . '/..' . '/rector/type-perfect/src/Reflection/ReflectionParser.php',
+        'Rector\\TypePerfect\\Rules\\NarrowPrivateClassMethodParamTypeRule' => __DIR__ . '/..' . '/rector/type-perfect/src/Rules/NarrowPrivateClassMethodParamTypeRule.php',
+        'Rector\\TypePerfect\\Rules\\NarrowPublicClassMethodParamTypeRule' => __DIR__ . '/..' . '/rector/type-perfect/src/Rules/NarrowPublicClassMethodParamTypeRule.php',
+        'Rector\\TypePerfect\\Rules\\NarrowReturnObjectTypeRule' => __DIR__ . '/..' . '/rector/type-perfect/src/Rules/NarrowReturnObjectTypeRule.php',
+        'Rector\\TypePerfect\\Rules\\NoArrayAccessOnObjectRule' => __DIR__ . '/..' . '/rector/type-perfect/src/Rules/NoArrayAccessOnObjectRule.php',
+        'Rector\\TypePerfect\\Rules\\NoEmptyOnObjectRule' => __DIR__ . '/..' . '/rector/type-perfect/src/Rules/NoEmptyOnObjectRule.php',
+        'Rector\\TypePerfect\\Rules\\NoIssetOnObjectRule' => __DIR__ . '/..' . '/rector/type-perfect/src/Rules/NoIssetOnObjectRule.php',
+        'Rector\\TypePerfect\\Rules\\NoMixedMethodCallerRule' => __DIR__ . '/..' . '/rector/type-perfect/src/Rules/NoMixedMethodCallerRule.php',
+        'Rector\\TypePerfect\\Rules\\NoMixedPropertyFetcherRule' => __DIR__ . '/..' . '/rector/type-perfect/src/Rules/NoMixedPropertyFetcherRule.php',
+        'Rector\\TypePerfect\\Rules\\NoParamTypeRemovalRule' => __DIR__ . '/..' . '/rector/type-perfect/src/Rules/NoParamTypeRemovalRule.php',
+        'Rector\\TypePerfect\\Rules\\ReturnNullOverFalseRule' => __DIR__ . '/..' . '/rector/type-perfect/src/Rules/ReturnNullOverFalseRule.php',
+        'Rector\\TypePerfect\\ValueObject\\MethodCallReference' => __DIR__ . '/..' . '/rector/type-perfect/src/ValueObject/MethodCallReference.php',
         'Safe\\DateTime' => __DIR__ . '/..' . '/thecodingmachine/safe/lib/DateTime.php',
         'Safe\\DateTimeImmutable' => __DIR__ . '/..' . '/thecodingmachine/safe/lib/DateTimeImmutable.php',
         'Safe\\Exceptions\\ApacheException' => __DIR__ . '/..' . '/thecodingmachine/safe/generated/Exceptions/ApacheException.php',

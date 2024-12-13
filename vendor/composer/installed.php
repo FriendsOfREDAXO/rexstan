@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => '__root__',
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
-        'reference' => 'fef7d60350c3affdf5a8127ec50c921e72f2f6d4',
+        'pretty_version' => '3.x-dev',
+        'version' => '3.9999999.9999999.9999999-dev',
+        'reference' => 'd78d8ae94fff47b251ad0b8b6c22e222571b5701',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => 'fef7d60350c3affdf5a8127ec50c921e72f2f6d4',
+            'pretty_version' => '3.x-dev',
+            'version' => '3.9999999.9999999.9999999-dev',
+            'reference' => 'd78d8ae94fff47b251ad0b8b6c22e222571b5701',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -208,6 +208,15 @@
             'reference' => 'd49695b909c3b7628b6289db5479a1c204601f11',
             'type' => 'library',
             'install_path' => __DIR__ . '/../psr/log',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'rector/type-perfect' => array(
+            'pretty_version' => '2.0.0',
+            'version' => '2.0.0.0',
+            'reference' => 'b57af900a2a3dea11d4be4165b3614aaba640c46',
+            'type' => 'phpstan-extension',
+            'install_path' => __DIR__ . '/../rector/type-perfect',
             'aliases' => array(),
             'dev_requirement' => false,
         ),

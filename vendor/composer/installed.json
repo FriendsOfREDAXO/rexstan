@@ -1413,6 +1413,62 @@
             "install-path": "../psr/log"
         },
         {
+            "name": "rector/type-perfect",
+            "version": "2.0.0",
+            "version_normalized": "2.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rectorphp/type-perfect.git",
+                "reference": "b57af900a2a3dea11d4be4165b3614aaba640c46"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rectorphp/type-perfect/zipball/b57af900a2a3dea11d4be4165b3614aaba640c46",
+                "reference": "b57af900a2a3dea11d4be4165b3614aaba640c46",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0",
+                "phpstan/phpstan": "^2.0",
+                "webmozart/assert": "^1.11"
+            },
+            "time": "2024-12-12T10:40:32+00:00",
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "config/extension.neon"
+                    ]
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Rector\\TypePerfect\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Next level type declaration checks",
+            "support": {
+                "issues": "https://github.com/rectorphp/type-perfect/issues",
+                "source": "https://github.com/rectorphp/type-perfect/tree/2.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/rectorphp",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/tomasvotruba",
+                    "type": "github"
+                }
+            ],
+            "install-path": "../rector/type-perfect"
+        },
+        {
             "name": "spaze/phpstan-disallowed-calls",
             "version": "v4.0.1",
             "version_normalized": "4.0.1.0",
