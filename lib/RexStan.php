@@ -18,7 +18,7 @@ final class RexStan
     /**
      * @param int $exitCode
      * @param-out int $exitCode
-     * @param-out string  $errorOutput
+     * @param-out null|string  $errorOutput
      *
      * @return string
      */
