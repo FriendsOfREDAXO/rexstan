@@ -52,7 +52,7 @@ final class RexSqlSetTableTypeSpecifyingExtension implements MethodTypeSpecifyin
         }
 
         if ($inferedType !== null) {
-            return $this->typeSpecifier->create($methodCall->var, $inferedType, TypeSpecifierContext::createTruthy(), true);
+            return $this->typeSpecifier->create($methodCall->var, $inferedType, TypeSpecifierContext::createTruthy(), $scope)->setAlwaysOverwriteTypes();
         }
 
         return new SpecifiedTypes();
