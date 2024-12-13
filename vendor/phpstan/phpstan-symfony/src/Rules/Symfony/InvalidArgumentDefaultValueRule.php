@@ -13,7 +13,6 @@ use PHPStan\Type\IntegerType;
 use PHPStan\Type\NullType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\StringType;
-use PHPStan\Type\TypeUtils;
 use PHPStan\Type\UnionType;
 use PHPStan\Type\VerbosityLevel;
 use function count;
@@ -46,7 +45,7 @@ final class InvalidArgumentDefaultValueRule implements Rule
 		if ($modeType->isNull()->yes()) {
 			$modeType = new ConstantIntegerType(2); // InputArgument::OPTIONAL
 		}
-		$modeTypes = TypeUtils::getConstantScalars($modeType);
+		$modeTypes = $modeType->getConstantScalarTypes();
 		if (count($modeTypes) !== 1) {
 			return [];
 		}
@@ -62,7 +61,7 @@ final class InvalidArgumentDefaultValueRule implements Rule
 			return [
 				RuleErrorBuilder::message(sprintf(
 					'Parameter #4 $default of method Symfony\Component\Console\Command\Command::addArgument() expects string|null, %s given.',
-					$defaultType->describe(VerbosityLevel::typeOnly())
+					$defaultType->describe(VerbosityLevel::typeOnly()),
 				))->identifier('argument.type')->build(),
 			];
 		}
@@ -72,7 +71,7 @@ final class InvalidArgumentDefaultValueRule implements Rule
 			return [
 				RuleErrorBuilder::message(sprintf(
 					'Parameter #4 $default of method Symfony\Component\Console\Command\Command::addArgument() expects array<int, string>|null, %s given.',
-					$defaultType->describe(VerbosityLevel::typeOnly())
+					$defaultType->describe(VerbosityLevel::typeOnly()),
 				))->identifier('argument.type')->build(),
 			];
 		}

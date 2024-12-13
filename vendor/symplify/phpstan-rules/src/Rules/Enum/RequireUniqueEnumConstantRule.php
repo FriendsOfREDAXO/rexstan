@@ -9,6 +9,7 @@ use PhpParser\Node\Stmt\ClassLike;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
 use Symplify\PHPStanRules\NodeAnalyzer\EnumAnalyzer;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
@@ -16,15 +17,15 @@ use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
+ * @implements Rule<InClassNode>
  * @see \Symplify\PHPStanRules\Tests\Rules\Enum\RequireUniqueEnumConstantRule\RequireUniqueEnumConstantRuleTest
  */
 final class RequireUniqueEnumConstantRule implements Rule
 {
     /**
      * @readonly
-     * @var \Symplify\PHPStanRules\NodeAnalyzer\EnumAnalyzer
      */
-    private $enumAnalyzer;
+    private EnumAnalyzer $enumAnalyzer;
     /**
      * @var string
      */
@@ -35,9 +36,6 @@ final class RequireUniqueEnumConstantRule implements Rule
         $this->enumAnalyzer = $enumAnalyzer;
     }
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return InClassNode::class;
@@ -45,7 +43,6 @@ final class RequireUniqueEnumConstantRule implements Rule
 
     /**
      * @param InClassNode $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -65,7 +62,7 @@ final class RequireUniqueEnumConstantRule implements Rule
         }
 
         $errorMessage = sprintf(self::ERROR_MESSAGE, implode('", "', $duplicatedConstantValues));
-        return [$errorMessage];
+        return [RuleErrorBuilder::message($errorMessage)->build()];
     }
 
     public function getRuleDefinition(): RuleDefinition
@@ -98,8 +95,8 @@ CODE_SAMPLE
     }
 
     /**
-     * @param array<string|int> $values
-     * @return array<string|int>
+     * @param array<int|float|bool|string> $values
+     * @return array<int|float|bool|string>
      */
     private function filterDuplicatedValues(array $values): array
     {

@@ -30,7 +30,7 @@ class AssertRuleHelper
 							'static',
 							'parent',
 						],
-						true
+						true,
 					)
 				) {
 					$calledOnType = new ObjectType($scope->getClassReflection()->getName());

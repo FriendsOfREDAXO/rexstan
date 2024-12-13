@@ -14,12 +14,15 @@ use PhpParser\Node\Param;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Reflection\ClassReflection;
+use PHPStan\Rules\RuleError;
+use PHPStan\Rules\RuleErrorBuilder;
 use SplFileInfo;
 use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
+ * @implements Rule<Node>
  * @see \Symplify\PHPStanRules\Tests\Rules\PreferredClassRule\PreferredClassRuleTest
  */
 final class PreferredClassRule extends AbstractSymplifyRule
@@ -28,7 +31,7 @@ final class PreferredClassRule extends AbstractSymplifyRule
      * @var string[]
      * @readonly
      */
-    private $oldToPreferredClasses;
+    private array $oldToPreferredClasses;
     /**
      * @var string
      */
@@ -40,16 +43,12 @@ final class PreferredClassRule extends AbstractSymplifyRule
     {
         $this->oldToPreferredClasses = $oldToPreferredClasses;
     }
-    /**
-     * @return array<class-string<Node>>
-     */
     public function getNodeTypes(): array
     {
         return [New_::class, Name::class, InClassNode::class, StaticCall::class, Instanceof_::class];
     }
     /**
      * @param New_|Name|InClassNode|StaticCall|Instanceof_ $node
-     * @return string[]
      */
     public function process(Node $node, Scope $scope): array
     {
@@ -112,7 +111,7 @@ CODE_SAMPLE
         return $this->processClassName($className);
     }
     /**
-     * @return string[]
+     * @return list<RuleError>
      */
     private function processClass(InClassNode $inClassNode): array
     {
@@ -137,13 +136,13 @@ CODE_SAMPLE
             }
 
             $errorMessage = sprintf(self::ERROR_MESSAGE, $oldClass, $prefferedClass);
-            return [$errorMessage];
+            return [RuleErrorBuilder::message($errorMessage)->build()];
         }
 
         return [];
     }
     /**
-     * @return string[]
+     * @return list<RuleError>
      */
     private function processClassName(string $className): array
     {
@@ -153,13 +152,13 @@ CODE_SAMPLE
             }
 
             $errorMessage = sprintf(self::ERROR_MESSAGE, $oldClass, $prefferedClass);
-            return [$errorMessage];
+            return [RuleErrorBuilder::message($errorMessage)->build()];
         }
 
         return [];
     }
     /**
-     * @return string[]
+     * @return list<RuleError>
      * @param \PhpParser\Node\Expr\StaticCall|\PhpParser\Node\Expr\Instanceof_ $node
      */
     private function processExprWithClass($node): array

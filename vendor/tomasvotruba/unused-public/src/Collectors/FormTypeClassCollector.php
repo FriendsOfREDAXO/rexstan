@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace TomasVotruba\UnusedPublic\Collectors;
 
 use PhpParser\Node;
-use PhpParser\Node\Expr\ArrayItem;
+use PhpParser\Node\ArrayItem;
 use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Collectors\Collector;
@@ -20,9 +20,8 @@ final class FormTypeClassCollector implements Collector
 {
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\Configuration
      */
-    private $configuration;
+    private Configuration $configuration;
 
     public function __construct(Configuration $configuration)
     {

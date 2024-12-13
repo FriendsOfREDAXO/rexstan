@@ -1,5 +1,8 @@
 services:
     -
+        class: staabm\PHPStanDba\QueryReflection\DIContainerBridge
+
+    -
         class: staabm\PHPStanDba\Ast\PreviousConnectingVisitor
         tags:
             - phpstan.parser.richParserNodeVisitor

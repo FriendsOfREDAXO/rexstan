@@ -21,15 +21,13 @@ final class ClassConstFetchCollector implements Collector
 {
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\Configuration
      */
-    private $configuration;
+    private Configuration $configuration;
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\ClassTypeDetector
      */
-    private $classTypeDetector;
+    private ClassTypeDetector $classTypeDetector;
 
     public function __construct(Configuration $configuration, ClassTypeDetector $classTypeDetector)
     {

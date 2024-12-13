@@ -25,16 +25,14 @@ class ClassMethodCoversExistsRule implements Rule
 	/**
 	 * Covers helper.
 	 *
-	 * @var CoversHelper
 	 */
-	private $coversHelper;
+	private CoversHelper $coversHelper;
 
 	/**
 	 * The file type mapper.
 	 *
-	 * @var FileTypeMapper
 	 */
-	private $fileTypeMapper;
+	private FileTypeMapper $fileTypeMapper;
 
 	public function __construct(
 		CoversHelper $coversHelper,
@@ -65,9 +63,7 @@ class ClassMethodCoversExistsRule implements Rule
 		$classPhpDoc = $classReflection->getResolvedPhpDoc();
 		[$classCovers, $classCoversDefaultClasses] = $this->coversHelper->getCoverAnnotations($classPhpDoc);
 
-		$classCoversStrings = array_map(static function (PhpDocTagNode $covers): string {
-			return (string) $covers->value;
-		}, $classCovers);
+		$classCoversStrings = array_map(static fn (PhpDocTagNode $covers): string => (string) $covers->value, $classCovers);
 
 		$docComment = $node->getDocComment();
 		if ($docComment === null) {
@@ -83,7 +79,7 @@ class ClassMethodCoversExistsRule implements Rule
 			$classReflection->getName(),
 			$scope->isInTrait() ? $scope->getTraitReflection()->getName() : null,
 			$node->name->toString(),
-			$docComment->getText()
+			$docComment->getText(),
 		);
 
 		[$methodCovers, $methodCoversDefaultClasses] = $this->coversHelper->getCoverAnnotations($methodPhpDoc);
@@ -93,7 +89,7 @@ class ClassMethodCoversExistsRule implements Rule
 		if (count($methodCoversDefaultClasses) > 0) {
 			$errors[] = RuleErrorBuilder::message(sprintf(
 				'@coversDefaultClass defined on class method %s.',
-				$node->name
+				$node->name,
 			))->identifier('phpunit.covers')->build();
 		}
 
@@ -101,13 +97,13 @@ class ClassMethodCoversExistsRule implements Rule
 			if (in_array((string) $covers->value, $classCoversStrings, true)) {
 				$errors[] = RuleErrorBuilder::message(sprintf(
 					'Class already @covers %s so the method @covers is redundant.',
-					$covers->value
+					$covers->value,
 				))->identifier('phpunit.coversDuplicate')->build();
 			}
 
 			$errors = array_merge(
 				$errors,
-				$this->coversHelper->processCovers($node, $covers, $coversDefaultClass)
+				$this->coversHelper->processCovers($node, $covers, $coversDefaultClass),
 			);
 		}
 

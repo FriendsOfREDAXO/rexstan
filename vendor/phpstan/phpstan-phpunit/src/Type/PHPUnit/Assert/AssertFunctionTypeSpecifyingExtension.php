@@ -17,8 +17,7 @@ use function substr;
 class AssertFunctionTypeSpecifyingExtension implements FunctionTypeSpecifyingExtension, TypeSpecifierAwareExtension
 {
 
-	/** @var TypeSpecifier */
-	private $typeSpecifier;
+	private TypeSpecifier $typeSpecifier;
 
 	public function setTypeSpecifier(TypeSpecifier $typeSpecifier): void
 	{
@@ -33,7 +32,7 @@ class AssertFunctionTypeSpecifyingExtension implements FunctionTypeSpecifyingExt
 	{
 		return AssertTypeSpecifyingExtensionHelper::isSupported(
 			$this->trimName($functionReflection->getName()),
-			$node->getArgs()
+			$node->getArgs(),
 		);
 	}
 
@@ -48,7 +47,7 @@ class AssertFunctionTypeSpecifyingExtension implements FunctionTypeSpecifyingExt
 			$this->typeSpecifier,
 			$scope,
 			$this->trimName($functionReflection->getName()),
-			$node->getArgs()
+			$node->getArgs(),
 		);
 	}
 

@@ -27,21 +27,18 @@ final class PropertyTypeCoverageRule implements Rule
 
     /**
      * @readonly
-     * @var \TomasVotruba\TypeCoverage\Formatter\TypeCoverageFormatter
      */
-    private $typeCoverageFormatter;
+    private TypeCoverageFormatter $typeCoverageFormatter;
 
     /**
      * @readonly
-     * @var \TomasVotruba\TypeCoverage\Configuration
      */
-    private $configuration;
+    private Configuration $configuration;
 
     /**
      * @readonly
-     * @var \TomasVotruba\TypeCoverage\CollectorDataNormalizer
      */
-    private $collectorDataNormalizer;
+    private CollectorDataNormalizer $collectorDataNormalizer;
 
     public function __construct(TypeCoverageFormatter $typeCoverageFormatter, Configuration $configuration, CollectorDataNormalizer $collectorDataNormalizer)
     {

@@ -54,9 +54,7 @@ class MockMethodCallRule implements Rule
 				)
 				&& !$type->hasMethod($method)->yes()
 			) {
-				$mockClasses = array_filter($type->getObjectClassNames(), static function (string $class): bool {
-					return $class !== MockObject::class && $class !== Stub::class;
-				});
+				$mockClasses = array_filter($type->getObjectClassNames(), static fn (string $class): bool => $class !== MockObject::class && $class !== Stub::class);
 				if (count($mockClasses) === 0) {
 					continue;
 				}
@@ -64,7 +62,7 @@ class MockMethodCallRule implements Rule
 				$errors[] = RuleErrorBuilder::message(sprintf(
 					'Trying to mock an undefined method %s() on class %s.',
 					$method,
-					implode('&', $mockClasses)
+					implode('&', $mockClasses),
 				))->identifier('phpunit.mockMethod')->build();
 				continue;
 			}
@@ -82,7 +80,7 @@ class MockMethodCallRule implements Rule
 			$errors[] = RuleErrorBuilder::message(sprintf(
 				'Trying to mock an undefined method %s() on class %s.',
 				$method,
-				implode('|', $classNames)
+				implode('|', $classNames),
 			))->identifier('phpunit.mockMethod')->build();
 		}
 

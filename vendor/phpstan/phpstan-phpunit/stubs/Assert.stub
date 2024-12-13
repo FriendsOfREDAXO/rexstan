@@ -5,7 +5,7 @@ namespace PHPUnit\Framework;
 abstract class Assert
 {
     /**
-     * @phpstan-assert list $array
+     * @phpstan-assert list<mixed> $array
      *
      * @throws ExpectationFailedException
      */

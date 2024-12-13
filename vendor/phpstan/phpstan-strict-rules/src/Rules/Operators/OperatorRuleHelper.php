@@ -19,8 +19,7 @@ use PHPStan\Type\UnionType;
 class OperatorRuleHelper
 {
 
-	/** @var RuleLevelHelper */
-	private $ruleLevelHelper;
+	private RuleLevelHelper $ruleLevelHelper;
 
 	public function __construct(RuleLevelHelper $ruleLevelHelper)
 	{
@@ -75,9 +74,7 @@ class OperatorRuleHelper
 			$scope,
 			$expr,
 			'',
-			static function (Type $type) use ($acceptedType): bool {
-				return $acceptedType->isSuperTypeOf($type)->yes();
-			}
+			static fn (Type $type): bool => $acceptedType->isSuperTypeOf($type)->yes(),
 		)->getType();
 
 		if ($type instanceof ErrorType) {

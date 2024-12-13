@@ -7,7 +7,6 @@ namespace Symplify\PHPStanRules\Reflection;
 use Nette\Utils\FileSystem;
 use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\ClassMethod;
-use PhpParser\Node\Stmt\Property;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitor\NameResolver;
 use PhpParser\Parser;
@@ -16,37 +15,31 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\MethodReflection;
 use ReflectionClass;
 use ReflectionMethod;
-use ReflectionProperty;
 use Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder;
 use Throwable;
 
-/**
- * @api
- */
 final class ReflectionParser
 {
     /**
      * @readonly
-     * @var \Symplify\PHPStanRules\NodeFinder\TypeAwareNodeFinder
      */
-    private $typeAwareNodeFinder;
+    private TypeAwareNodeFinder $typeAwareNodeFinder;
     /**
      * @var array<string, ClassLike>
      */
-    private $classesByFilename = [];
+    private array $classesByFilename = [];
 
     /**
      * @readonly
-     * @var \PhpParser\Parser
      */
-    private $parser;
+    private Parser $parser;
 
     public function __construct(
         TypeAwareNodeFinder $typeAwareNodeFinder
     ) {
         $this->typeAwareNodeFinder = $typeAwareNodeFinder;
         $parserFactory = new ParserFactory();
-        $this->parser = $parserFactory->create(ParserFactory::PREFER_PHP7);
+        $this->parser = $parserFactory->createForNewestSupportedVersion();
     }
 
     /**
@@ -62,16 +55,9 @@ final class ReflectionParser
         return $classLike->getMethod($reflectionMethod->getName());
     }
 
-    public function parsePropertyReflection(ReflectionProperty $reflectionProperty): ?Property
-    {
-        $classLike = $this->parseNativeClassReflection($reflectionProperty->getDeclaringClass());
-        if (! $classLike instanceof ClassLike) {
-            return null;
-        }
-
-        return $classLike->getProperty($reflectionProperty->getName());
-    }
-
+    /**
+     * @api used by extensions
+     */
     public function parseClassReflection(ClassReflection $classReflection): ?ClassLike
     {
         $fileName = $classReflection->getFileName();

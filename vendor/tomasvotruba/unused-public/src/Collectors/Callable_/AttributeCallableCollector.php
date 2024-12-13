@@ -8,7 +8,6 @@ use PhpParser\Node;
 use PhpParser\Node\Attribute;
 use PhpParser\Node\AttributeGroup;
 use PhpParser\Node\Expr\Array_;
-use PhpParser\Node\Expr\ArrayItem;
 use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Collectors\Collector;
@@ -23,9 +22,8 @@ final class AttributeCallableCollector implements Collector
 {
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\Configuration
      */
-    private $configuration;
+    private Configuration $configuration;
 
     public function __construct(Configuration $configuration)
     {
@@ -87,14 +85,6 @@ final class AttributeCallableCollector implements Collector
 
         $array = $firstArg->value;
         if (count($array->items) !== 2) {
-            return null;
-        }
-
-        if (! $array->items[0] instanceof ArrayItem) {
-            return null;
-        }
-
-        if (! $array->items[1] instanceof ArrayItem) {
             return null;
         }
 

@@ -16,9 +16,8 @@ final class EnumAnalyzer
 {
     /**
      * @readonly
-     * @var \Symplify\PHPStanRules\PhpDoc\BarePhpDocParser
      */
-    private $barePhpDocParser;
+    private BarePhpDocParser $barePhpDocParser;
     public function __construct(BarePhpDocParser $barePhpDocParser)
     {
         $this->barePhpDocParser = $barePhpDocParser;

@@ -4,8 +4,8 @@ namespace PHPStan\Rules\Symfony;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
-use PhpParser\PrettyPrinter\Standard;
 use PHPStan\Analyser\Scope;
+use PHPStan\Node\Printer\Printer;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Symfony\ServiceMap;
@@ -19,13 +19,11 @@ use function sprintf;
 final class ContainerInterfaceUnknownServiceRule implements Rule
 {
 
-	/** @var ServiceMap */
-	private $serviceMap;
+	private ServiceMap $serviceMap;
 
-	/** @var Standard */
-	private $printer;
+	private Printer $printer;
 
-	public function __construct(ServiceMap $symfonyServiceMap, Standard $printer)
+	public function __construct(ServiceMap $symfonyServiceMap, Printer $printer)
 	{
 		$this->serviceMap = $symfonyServiceMap;
 		$this->printer = $printer;

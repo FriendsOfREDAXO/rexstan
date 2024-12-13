@@ -13,7 +13,6 @@ use PhpParser\Node\Name\FullyQualified;
 use PhpParser\Node\Scalar\String_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
-use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\NullType;
 use PHPStan\Type\ObjectType;
@@ -51,18 +50,16 @@ final class NodeGetAttributeTypeExtension implements DynamicMethodReturnTypeExte
         MethodReflection $methodReflection,
         MethodCall $methodCall,
         Scope $scope
-    ): Type {
-        $returnType = ParametersAcceptorSelector::selectSingle($methodReflection->getVariants())->getReturnType();
-
+    ): ?Type {
         $firstArg = $methodCall->getArgs()[0];
 
         $argumentValue = $this->resolveArgumentValue($firstArg->value);
         if ($argumentValue === null) {
-            return $returnType;
+            return null;
         }
 
         if (! isset(self::ARGUMENT_KEY_TO_RETURN_TYPE[$argumentValue])) {
-            return $returnType;
+            return null;
         }
 
         $knownReturnType = self::ARGUMENT_KEY_TO_RETURN_TYPE[$argumentValue];

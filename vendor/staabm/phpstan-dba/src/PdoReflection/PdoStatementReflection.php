@@ -7,7 +7,6 @@ namespace staabm\PHPStanDba\PdoReflection;
 use PDO;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;
-use PHPStan\Type\Constant\ConstantArrayType;
 use PHPStan\Type\Constant\ConstantIntegerType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
@@ -88,7 +87,7 @@ final class PdoStatementReflection
             $bothType = $queryReflection->getResultType($queryString, QueryReflector::FETCH_TYPE_BOTH);
 
             if (null !== $bothType) {
-                $genericObjects[] = new PdoStatementObjectType($bothType, $reflectionFetchType);
+                $genericObjects[] = PdoStatementObjectType::newWithBothAndFetchType($bothType, $reflectionFetchType);
             }
         }
 
@@ -131,8 +130,14 @@ final class PdoStatementReflection
     public function getColumnRowType(Type $statementType, int $columnIndex): ?Type
     {
         $statementType = $this->getRowType($statementType, QueryReflector::FETCH_TYPE_NUMERIC);
+        if ($statementType === null) {
+            return null;
+        }
 
-        if ($statementType instanceof ConstantArrayType) {
+        $arrays = $statementType->getConstantArrays();
+        if (count($arrays) === 1) {
+            $statementType = $arrays[0];
+
             $valueTypes = $statementType->getValueTypes();
             if (\array_key_exists($columnIndex, $valueTypes)) {
                 return $valueTypes[$columnIndex];
@@ -145,7 +150,7 @@ final class PdoStatementReflection
     /**
      * @param class-string $className
      */
-    public function getClassRowType(Type $statementType, string $className): ?Type
+    public function getClassRowType(Type $statementType, string $className): Type
     {
         return new ObjectType($className);
     }

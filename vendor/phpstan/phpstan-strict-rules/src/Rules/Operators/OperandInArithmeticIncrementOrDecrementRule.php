@@ -20,8 +20,7 @@ use function sprintf;
 abstract class OperandInArithmeticIncrementOrDecrementRule implements Rule
 {
 
-	/** @var OperatorRuleHelper */
-	private $helper;
+	private OperatorRuleHelper $helper;
 
 	public function __construct(OperatorRuleHelper $helper)
 	{
@@ -45,7 +44,7 @@ abstract class OperandInArithmeticIncrementOrDecrementRule implements Rule
 			$messages[] = RuleErrorBuilder::message(sprintf(
 				'Only numeric types are allowed in %s, %s given.',
 				$this->describeOperation(),
-				$varType->describe(VerbosityLevel::typeOnly())
+				$varType->describe(VerbosityLevel::typeOnly()),
 			))->identifier(sprintf('%s.nonNumeric', $this->getIdentifier()))->build();
 		}
 

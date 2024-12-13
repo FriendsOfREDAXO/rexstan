@@ -32,10 +32,7 @@ use staabm\PHPStanDba\UnresolvableAstInQueryException;
 
 final class ParserInference
 {
-    /**
-     * @var SchemaReflection
-     */
-    private $schemaReflection;
+    private SchemaReflection $schemaReflection;
 
     public function __construct(SchemaReflection $schemaReflection)
     {
@@ -77,6 +74,10 @@ final class ParserInference
                     $fromTable = $this->schemaReflection->getTable($fromName);
                 } elseif ($from instanceof Join) {
                     while (1) {
+                        if (! $from instanceof Join || ! method_exists($from, 'getCondition')) {
+                            return $resultType;
+                        }
+
                         if ($from->getCondition() === null) {
                             if (QueryReflection::getRuntimeConfiguration()->isDebugEnabled()) {
                                 throw new UnresolvableAstInQueryException('Cannot narrow down types null join conditions: ' . $queryString);
@@ -107,14 +108,16 @@ final class ParserInference
                             $joinType = SchemaJoin::TYPE_INNER;
                         }
 
-                        $joinedTable = $this->schemaReflection->getTable($from->getRight()->getTable()->getName());
+                        if ($from->getRight() instanceof TableReferenceTable) {
+                            $joinedTable = $this->schemaReflection->getTable($from->getRight()->getTable()->getName());
 
-                        if ($joinedTable !== null) {
-                            $joins[] = new SchemaJoin(
-                                $joinType,
-                                $joinedTable,
-                                $from->getCondition()
-                            );
+                            if ($joinedTable !== null) {
+                                $joins[] = new SchemaJoin(
+                                    $joinType,
+                                    $joinedTable,
+                                    $from->getCondition()
+                                );
+                            }
                         }
 
                         if ($from->getLeft() instanceof TableReferenceTable) {

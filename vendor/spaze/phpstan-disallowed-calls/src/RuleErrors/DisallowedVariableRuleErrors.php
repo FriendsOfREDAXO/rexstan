@@ -9,17 +9,20 @@ use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\ShouldNotHappenException;
 use Spaze\PHPStan\Rules\Disallowed\Allowed\AllowedPath;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedVariable;
+use Spaze\PHPStan\Rules\Disallowed\Formatter\Formatter;
 
 class DisallowedVariableRuleErrors
 {
 
-	/** @var AllowedPath */
-	private $allowedPath;
+	private AllowedPath $allowedPath;
+
+	private Formatter $formatter;
 
 
-	public function __construct(AllowedPath $allowedPath)
+	public function __construct(AllowedPath $allowedPath, Formatter $formatter)
 	{
 		$this->allowedPath = $allowedPath;
+		$this->formatter = $formatter;
 	}
 
 
@@ -35,13 +38,11 @@ class DisallowedVariableRuleErrors
 		foreach ($disallowedVariables as $disallowedVariable) {
 			if ($disallowedVariable->getVariable() === $variable && !$this->allowedPath->isAllowedPath($scope, $disallowedVariable)) {
 				$errorBuilder = RuleErrorBuilder::message(sprintf(
-					'Using %s is forbidden, %s',
+					'Using %s is forbidden%s',
 					$disallowedVariable->getVariable(),
-					$disallowedVariable->getMessage()
+					$this->formatter->formatDisallowedMessage($disallowedVariable->getMessage())
 				));
-				if ($disallowedVariable->getErrorIdentifier()) {
-					$errorBuilder->identifier($disallowedVariable->getErrorIdentifier());
-				}
+				$errorBuilder->identifier($disallowedVariable->getErrorIdentifier() ?? ErrorIdentifiers::DISALLOWED_VARIABLE);
 				if ($disallowedVariable->getErrorTip()) {
 					$errorBuilder->tip($disallowedVariable->getErrorTip());
 				}

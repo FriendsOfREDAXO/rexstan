@@ -18,9 +18,8 @@ final class NodeCollectorExtractor
 {
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\CollectorMapper\MethodCallCollectorMapper
      */
-    private $methodCallCollectorMapper;
+    private MethodCallCollectorMapper $methodCallCollectorMapper;
 
     public function __construct(MethodCallCollectorMapper $methodCallCollectorMapper)
     {

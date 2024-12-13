@@ -7,89 +7,235 @@ parameters:
 	disallowedStaticCalls: []
 	disallowedFunctionCalls: []
 	disallowedConstants: []
+	disallowedEnums: []
 	disallowedSuperglobals: []
 	disallowedAttributes: []
+	disallowedControlStructures: []
 
 parametersSchema:
 	allowInRootDir: schema(string(), nullable())
 	filesRootDir: schema(string(), nullable())
-	# These should be defined using `structure` with listed keys but it seems to me that PHPStan requires
-	# all keys to be present in a structure but `message` & `allow*`/`disallow*` are optional.
 	disallowedNamespaces: listOf(
-		arrayOf(
-			anyOf(
-				string(),
-				listOf(string()),
-				arrayOf(anyOf(int(), string(), bool())),
-			)
-		)
+		structure([
+			?namespace: anyOf(string(), listOf(string())),
+			?class: anyOf(string(), listOf(string())),
+			?exclude: anyOf(string(), listOf(string())),
+			?message: string(),
+			?allowIn: listOf(string()),
+			?allowExceptIn: listOf(string()),
+			?disallowIn: listOf(string()),
+			?errorIdentifier: string(),
+			?errorTip: string(),
+		])
 	)
 	disallowedClasses: listOf(
-		arrayOf(
-			anyOf(
-				string(),
-				listOf(string()),
-				arrayOf(anyOf(int(), string(), bool())),
-			)
-		)
+		structure([
+			?namespace: anyOf(string(), listOf(string())),
+			?class: anyOf(string(), listOf(string())),
+			?exclude: anyOf(string(), listOf(string())),
+			?message: string(),
+			?allowIn: listOf(string()),
+			?allowExceptIn: listOf(string()),
+			?disallowIn: listOf(string()),
+			?errorIdentifier: string(),
+			?errorTip: string(),
+		])
 	)
 	disallowedMethodCalls: listOf(
-		arrayOf(
-			anyOf(
-				string(),
-				listOf(string()),
-				arrayOf(anyOf(int(), string(), bool())),
-				listOf(arrayOf(anyOf(int(), string(), bool()))),
-			)
-		)
+		structure([
+			?function: anyOf(string(), listOf(string())),
+			?method: anyOf(string(), listOf(string())),
+			?exclude: anyOf(string(), listOf(string())),
+			?definedIn: anyOf(string(), listOf(string())),
+			?message: string(),
+			?allowIn: listOf(string()),
+			?allowExceptIn: listOf(string()),
+			?disallowIn: listOf(string()),
+			?allowInFunctions: listOf(string()),
+			?allowInMethods: listOf(string()),
+			?allowExceptInFunctions: listOf(string()),
+			?allowExceptInMethods: listOf(string()),
+			?disallowInFunctions: listOf(string()),
+			?disallowInMethods: listOf(string()),
+			?allowParamsInAllowed: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowParamsInAllowedAnyValue: arrayOf(anyOf(int(), structure([position: int(), ?name: string()])), anyOf(int(), string())),
+			?allowParamFlagsInAllowed: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowParamsAnywhere: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowParamsAnywhereAnyValue: arrayOf(anyOf(int(), structure([position: int(), ?name: string()])), anyOf(int(), string())),
+			?allowParamFlagsAnywhere: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptParamsInAllowed: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptParamFlagsInAllowed: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?disallowParamFlagsInAllowed: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?disallowParamsInAllowed: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptParams: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?disallowParams: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptParamsAnyValue: arrayOf(anyOf(int(), structure([position: int(), ?name: string()])), anyOf(int(), string())),
+			?disallowParamsAnyValue: arrayOf(anyOf(int(), structure([position: int(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptParamFlags: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?disallowParamFlags: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptCaseInsensitiveParams: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?disallowCaseInsensitiveParams: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?errorIdentifier: string(),
+			?errorTip: string(),
+		])
 	)
 	disallowedStaticCalls: listOf(
-		arrayOf(
-			anyOf(
-				string(),
-				listOf(string()),
-				arrayOf(anyOf(int(), string(), bool())),
-				listOf(arrayOf(anyOf(int(), string(), bool()))),
-			)
-		)
+		structure([
+			?function: anyOf(string(), listOf(string())),
+			?method: anyOf(string(), listOf(string())),
+			?exclude: anyOf(string(), listOf(string())),
+			?definedIn: anyOf(string(), listOf(string())),
+			?message: string(),
+			?allowIn: listOf(string()),
+			?allowExceptIn: listOf(string()),
+			?disallowIn: listOf(string()),
+			?allowInFunctions: listOf(string()),
+			?allowInMethods: listOf(string()),
+			?allowExceptInFunctions: listOf(string()),
+			?allowExceptInMethods: listOf(string()),
+			?disallowInFunctions: listOf(string()),
+			?disallowInMethods: listOf(string()),
+			?allowParamsInAllowed: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowParamsInAllowedAnyValue: arrayOf(anyOf(int(), structure([position: int(), ?name: string()])), anyOf(int(), string())),
+			?allowParamFlagsInAllowed: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowParamsAnywhere: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowParamsAnywhereAnyValue: arrayOf(anyOf(int(), structure([position: int(), ?name: string()])), anyOf(int(), string())),
+			?allowParamFlagsAnywhere: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptParamsInAllowed: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptParamFlagsInAllowed: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?disallowParamFlagsInAllowed: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?disallowParamsInAllowed: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptParams: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?disallowParams: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptParamsAnyValue: arrayOf(anyOf(int(), structure([position: int(), ?name: string()])), anyOf(int(), string())),
+			?disallowParamsAnyValue: arrayOf(anyOf(int(), structure([position: int(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptParamFlags: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?disallowParamFlags: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptCaseInsensitiveParams: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?disallowCaseInsensitiveParams: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?errorIdentifier: string(),
+			?errorTip: string(),
+		])
 	)
 	disallowedFunctionCalls: listOf(
-		arrayOf(
-			anyOf(
-				string(),
-				listOf(string()),
-				arrayOf(anyOf(int(), string(), bool())),
-				listOf(arrayOf(anyOf(int(), string(), bool()))),
-			)
-		)
+		structure([
+			?function: anyOf(string(), listOf(string())),
+			?method: anyOf(string(), listOf(string())),
+			?exclude: anyOf(string(), listOf(string())),
+			?definedIn: anyOf(string(), listOf(string())),
+			?message: string(),
+			?allowIn: listOf(string()),
+			?allowExceptIn: listOf(string()),
+			?disallowIn: listOf(string()),
+			?allowInFunctions: listOf(string()),
+			?allowInMethods: listOf(string()),
+			?allowExceptInFunctions: listOf(string()),
+			?allowExceptInMethods: listOf(string()),
+			?disallowInFunctions: listOf(string()),
+			?disallowInMethods: listOf(string()),
+			?allowParamsInAllowed: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowParamsInAllowedAnyValue: arrayOf(anyOf(int(), structure([position: int(), ?name: string()])), anyOf(int(), string())),
+			?allowParamFlagsInAllowed: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowParamsAnywhere: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowParamsAnywhereAnyValue: arrayOf(anyOf(int(), structure([position: int(), ?name: string()])), anyOf(int(), string())),
+			?allowParamFlagsAnywhere: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptParamsInAllowed: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptParamFlagsInAllowed: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?disallowParamFlagsInAllowed: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?disallowParamsInAllowed: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptParams: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?disallowParams: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptParamsAnyValue: arrayOf(anyOf(int(), structure([position: int(), ?name: string()])), anyOf(int(), string())),
+			?disallowParamsAnyValue: arrayOf(anyOf(int(), structure([position: int(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptParamFlags: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?disallowParamFlags: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptCaseInsensitiveParams: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?disallowCaseInsensitiveParams: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?errorIdentifier: string(),
+			?errorTip: string(),
+		])
 	)
 	disallowedConstants: listOf(
-		arrayOf(
-			anyOf(
-				string(),
-				listOf(string()),
-				arrayOf(anyOf(int(), string(), bool())),
-			)
-		)
+		structure([
+			?class: string(),
+			constant: anyOf(string(), listOf(string())),
+			?message: string(),
+			?allowIn: listOf(string()),
+			?allowExceptIn: listOf(string()),
+			?disallowIn: listOf(string()),
+			?errorIdentifier: string(),
+			?errorTip: string(),
+		])
+	)
+	disallowedEnums: listOf(
+		structure([
+			enum: string(),
+			case: anyOf(string(), listOf(string())),
+			?allowIn: listOf(string()),
+			?allowExceptIn: listOf(string()),
+			?disallowIn: listOf(string()),
+			?errorIdentifier: string(),
+			?errorTip: string(),
+		])
 	)
 	disallowedSuperglobals: listOf(
-		arrayOf(
-			anyOf(
-				string(),
-				listOf(string()),
-				arrayOf(anyOf(int(), string(), bool())),
-			)
-		)
+		structure([
+			?superglobal: anyOf(string(), listOf(string())),
+			?message: string(),
+			?allowIn: listOf(string()),
+			?allowExceptIn: list(string()),
+			?disallowIn: list(string()),
+			?errorIdentifier: string(),
+			?errorTip: string(),
+		])
 	)
 	disallowedAttributes: listOf(
-		arrayOf(
-			anyOf(
-				string(),
-				listOf(string()),
-				arrayOf(anyOf(int(), string(), bool())),
-				listOf(arrayOf(anyOf(int(), string(), bool()))),
-			)
-		)
+		structure([
+			attribute: anyOf(string(), listOf(string())),
+			?exclude: anyOf(string(), listOf(string())),
+			?message: string(),
+			?allowIn: listOf(string()),
+			?allowExceptIn: listOf(string()),
+			?disallowIn: listOf(string()),
+			?allowInFunctions: listOf(string()),
+			?allowInMethods: listOf(string()),
+			?allowExceptInFunctions: listOf(string()),
+			?allowExceptInMethods: listOf(string()),
+			?disallowInFunctions: listOf(string()),
+			?disallowInMethods: listOf(string()),
+			?allowParamsInAllowed: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowParamsInAllowedAnyValue: arrayOf(anyOf(int(), structure([position: int(), ?name: string()])), anyOf(int(), string())),
+			?allowParamFlagsInAllowed: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowParamsAnywhere: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowParamsAnywhereAnyValue: arrayOf(anyOf(int(), structure([position: int(), ?name: string()])), anyOf(int(), string())),
+			?allowParamFlagsAnywhere: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptParamsInAllowed: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptParamFlagsInAllowed: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?disallowParamFlagsInAllowed: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?disallowParamsInAllowed: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptParams: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?disallowParams: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptParamsAnyValue: arrayOf(anyOf(int(), structure([position: int(), ?name: string()])), anyOf(int(), string())),
+			?disallowParamsAnyValue: arrayOf(anyOf(int(), structure([position: int(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptParamFlags: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?disallowParamFlags: arrayOf(anyOf(int(), structure([position: int(), ?value: int(), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?allowExceptCaseInsensitiveParams: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?disallowCaseInsensitiveParams: arrayOf(anyOf(int(), string(), bool(), structure([position: int(), ?value: anyOf(int(), string(), bool()), ?typeString: string(), ?name: string()])), anyOf(int(), string())),
+			?errorIdentifier: string(),
+			?errorTip: string(),
+		])
+	)
+	disallowedControlStructures: listOf(
+		structure([
+			?controlStructure: anyOf(string(), listOf(string())),
+			?structure: anyOf(string(), listOf(string())),
+			?message: string(),
+			?allowIn: listOf(string()),
+			?allowExceptIn: list(string()),
+			?disallowIn: list(string()),
+			?errorIdentifier: string(),
+			?errorTip: string(),
+		])
 	)
 
 services:
@@ -98,6 +244,7 @@ services:
 	- Spaze\PHPStan\Rules\Disallowed\DisallowedAttributeFactory
 	- Spaze\PHPStan\Rules\Disallowed\DisallowedCallFactory
 	- Spaze\PHPStan\Rules\Disallowed\DisallowedConstantFactory
+	- Spaze\PHPStan\Rules\Disallowed\DisallowedControlStructureFactory
 	- Spaze\PHPStan\Rules\Disallowed\DisallowedNamespaceFactory
 	- Spaze\PHPStan\Rules\Disallowed\DisallowedSuperglobalFactory
 	- Spaze\PHPStan\Rules\Disallowed\File\FilePath(rootDir: %filesRootDir%)
@@ -106,6 +253,7 @@ services:
 	- Spaze\PHPStan\Rules\Disallowed\Normalizer\Normalizer
 	- Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedAttributeRuleErrors
 	- Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedConstantRuleErrors
+	- Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedControlStructureRuleErrors
 	- Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedMethodRuleErrors
 	- Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedNamespaceRuleErrors
 	- Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedCallsRuleErrors
@@ -163,8 +311,12 @@ services:
 		factory: Spaze\PHPStan\Rules\Disallowed\Usages\ConstantUsages(disallowedConstants: %disallowedConstants%)
 		tags:
 			- phpstan.rules.rule
-	-
+	classConstantUsages:
 		factory: Spaze\PHPStan\Rules\Disallowed\Usages\ClassConstantUsages(disallowedConstants: %disallowedConstants%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Usages\ClassConstantUsages(disallowedConstants: %disallowedEnums%)
 		tags:
 			- phpstan.rules.rule
 	-
@@ -173,5 +325,65 @@ services:
 			- phpstan.rules.rule
 	-
 		factory: Spaze\PHPStan\Rules\Disallowed\Usages\AttributeUsages(disallowedAttributes: %disallowedAttributes%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\ControlStructures\BreakControlStructure(disallowedControlStructures: @Spaze\PHPStan\Rules\Disallowed\DisallowedControlStructureFactory::getDisallowedControlStructures(%disallowedControlStructures%))
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\ControlStructures\ContinueControlStructure(disallowedControlStructures: @Spaze\PHPStan\Rules\Disallowed\DisallowedControlStructureFactory::getDisallowedControlStructures(%disallowedControlStructures%))
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\ControlStructures\DeclareControlStructure(disallowedControlStructures: @Spaze\PHPStan\Rules\Disallowed\DisallowedControlStructureFactory::getDisallowedControlStructures(%disallowedControlStructures%))
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\ControlStructures\DoWhileControlStructure(disallowedControlStructures: @Spaze\PHPStan\Rules\Disallowed\DisallowedControlStructureFactory::getDisallowedControlStructures(%disallowedControlStructures%))
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\ControlStructures\ElseControlStructure(disallowedControlStructures: @Spaze\PHPStan\Rules\Disallowed\DisallowedControlStructureFactory::getDisallowedControlStructures(%disallowedControlStructures%))
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\ControlStructures\ElseIfControlStructure(disallowedControlStructures: @Spaze\PHPStan\Rules\Disallowed\DisallowedControlStructureFactory::getDisallowedControlStructures(%disallowedControlStructures%))
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\ControlStructures\ForControlStructure(disallowedControlStructures: @Spaze\PHPStan\Rules\Disallowed\DisallowedControlStructureFactory::getDisallowedControlStructures(%disallowedControlStructures%))
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\ControlStructures\ForeachControlStructure(disallowedControlStructures: @Spaze\PHPStan\Rules\Disallowed\DisallowedControlStructureFactory::getDisallowedControlStructures(%disallowedControlStructures%))
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\ControlStructures\GotoControlStructure(disallowedControlStructures: @Spaze\PHPStan\Rules\Disallowed\DisallowedControlStructureFactory::getDisallowedControlStructures(%disallowedControlStructures%))
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\ControlStructures\IfControlStructure(disallowedControlStructures: @Spaze\PHPStan\Rules\Disallowed\DisallowedControlStructureFactory::getDisallowedControlStructures(%disallowedControlStructures%))
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\ControlStructures\MatchControlStructure(disallowedControlStructures: @Spaze\PHPStan\Rules\Disallowed\DisallowedControlStructureFactory::getDisallowedControlStructures(%disallowedControlStructures%))
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\ControlStructures\RequireIncludeControlStructure(disallowedControlStructures: @Spaze\PHPStan\Rules\Disallowed\DisallowedControlStructureFactory::getDisallowedControlStructures(%disallowedControlStructures%))
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\ControlStructures\ReturnControlStructure(disallowedControlStructures: @Spaze\PHPStan\Rules\Disallowed\DisallowedControlStructureFactory::getDisallowedControlStructures(%disallowedControlStructures%))
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\ControlStructures\SwitchControlStructure(disallowedControlStructures: @Spaze\PHPStan\Rules\Disallowed\DisallowedControlStructureFactory::getDisallowedControlStructures(%disallowedControlStructures%))
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\ControlStructures\WhileControlStructure(disallowedControlStructures: @Spaze\PHPStan\Rules\Disallowed\DisallowedControlStructureFactory::getDisallowedControlStructures(%disallowedControlStructures%))
 		tags:
 			- phpstan.rules.rule

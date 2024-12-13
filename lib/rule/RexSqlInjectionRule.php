@@ -118,7 +118,10 @@ final class RexSqlInjectionRule implements Rule
         return [];
     }
 
-    private function findInsecureSqlExpr(Node\Expr $expr, Scope $scope, bool $resolveVariables = true): ?Node\Expr
+    /**
+     * @param Node\Expr|Node\InterpolatedStringPart $expr
+     */
+    private function findInsecureSqlExpr($expr, Scope $scope, bool $resolveVariables = true): ?Node\Expr
     {
         if ($resolveVariables === true && $expr instanceof Node\Expr\Variable) {
             $finder = new ExpressionFinder();

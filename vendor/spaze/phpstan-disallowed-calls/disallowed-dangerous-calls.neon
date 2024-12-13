@@ -10,6 +10,10 @@ parameters:
 			function: 'eval()'
 			message: 'eval is evil, please write more code and do not use eval()'
 		-
+			function: 'create_function()'
+			message: 'the function is about as evil as using eval()'
+			errorTip: 'create_function() has been deprecated as of PHP 7.2, and removed as of PHP 8.0'
+		-
 			function: 'extract()'
 			message: 'do not use extract() and especially not on untrusted data'
 		-
@@ -58,3 +62,7 @@ parameters:
 			message: 'use some logger instead'
 			allowParamsAnywhere:
 				2: true
+		-
+			function: 'phpinfo()'
+			message: 'might reveal session id or other tokens in cookies'
+			errorTip: 'see https://www.michalspacek.com/stealing-session-ids-with-phpinfo-and-how-to-stop-it and use e.g. spaze/phpinfo instead'

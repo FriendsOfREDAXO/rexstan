@@ -12,9 +12,8 @@ final class ClassNamespaceMatcher
 {
     /**
      * @readonly
-     * @var \Symplify\PHPStanRules\Location\DirectoryChecker
      */
-    private $directoryChecker;
+    private DirectoryChecker $directoryChecker;
     public function __construct(DirectoryChecker $directoryChecker)
     {
         $this->directoryChecker = $directoryChecker;

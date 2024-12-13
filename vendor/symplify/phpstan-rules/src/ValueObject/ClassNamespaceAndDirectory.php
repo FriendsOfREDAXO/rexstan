@@ -8,19 +8,16 @@ final class ClassNamespaceAndDirectory
 {
     /**
      * @readonly
-     * @var string
      */
-    private $namespace;
+    private string $namespace;
     /**
      * @readonly
-     * @var string
      */
-    private $directory;
+    private string $directory;
     /**
      * @readonly
-     * @var string
      */
-    private $namespaceBeforeClass;
+    private string $namespaceBeforeClass;
     public function __construct(string $namespace, string $directory, string $namespaceBeforeClass)
     {
         $this->namespace = $namespace;

@@ -35,7 +35,7 @@ class WrongCaseOfInheritedMethodRule implements Rule
 			$parentMessage = $this->findMethod(
 				$declaringClass,
 				$declaringClass->getParentClass(),
-				$methodReflection->getName()
+				$methodReflection->getName(),
 			);
 			if ($parentMessage !== null) {
 				$messages[] = $parentMessage;
@@ -46,7 +46,7 @@ class WrongCaseOfInheritedMethodRule implements Rule
 			$interfaceMessage = $this->findMethod(
 				$declaringClass,
 				$interface,
-				$methodReflection->getName()
+				$methodReflection->getName(),
 			);
 			if ($interfaceMessage === null) {
 				continue;
@@ -79,7 +79,7 @@ class WrongCaseOfInheritedMethodRule implements Rule
 			$methodName,
 			$classReflection->isInterface() ? 'interface' : 'parent',
 			$classReflection->getDisplayName(),
-			$parentMethod->getName()
+			$parentMethod->getName(),
 		))->identifier('method.nameCase')->build();
 	}
 

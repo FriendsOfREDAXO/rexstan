@@ -12,11 +12,13 @@ use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\ShouldNotHappenException;
 use PHPStan\Type\Constant\ConstantStringType;
+use PHPStan\Type\Type;
 use PHPStan\Type\VerbosityLevel;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedConstant;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedConstantFactory;
 use Spaze\PHPStan\Rules\Disallowed\Formatter\Formatter;
 use Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedConstantRuleErrors;
+use Spaze\PHPStan\Rules\Disallowed\RuleErrors\ErrorIdentifiers;
 use Spaze\PHPStan\Rules\Disallowed\Type\TypeResolver;
 
 /**
@@ -28,17 +30,14 @@ use Spaze\PHPStan\Rules\Disallowed\Type\TypeResolver;
 class ClassConstantUsages implements Rule
 {
 
-	/** @var DisallowedConstantRuleErrors */
-	private $disallowedConstantRuleErrors;
+	private DisallowedConstantRuleErrors $disallowedConstantRuleErrors;
 
-	/** @var TypeResolver */
-	private $typeResolver;
+	private TypeResolver $typeResolver;
 
-	/** @var Formatter */
-	private $formatter;
+	private Formatter $formatter;
 
 	/** @var list<DisallowedConstant> */
-	private $disallowedConstants;
+	private array $disallowedConstants;
 
 
 	/**
@@ -46,7 +45,7 @@ class ClassConstantUsages implements Rule
 	 * @param DisallowedConstantFactory $disallowedConstantFactory
 	 * @param TypeResolver $typeResolver
 	 * @param Formatter $formatter
-	 * @param array<array{class?:string, constant?:string, message?:string, allowIn?:list<string>}> $disallowedConstants
+	 * @param array<array{class?:string, enum?:string, constant?:string|list<string>, case?:string|list<string>, message?:string, allowIn?:list<string>}> $disallowedConstants
 	 * @throws ShouldNotHappenException
 	 */
 	public function __construct(
@@ -80,17 +79,35 @@ class ClassConstantUsages implements Rule
 		if (!($node instanceof ClassConstFetch)) {
 			throw new ShouldNotHappenException(sprintf('$node should be %s but is %s', ClassConstFetch::class, get_class($node)));
 		}
-		if (!($node->name instanceof Identifier)) {
-			throw new ShouldNotHappenException(sprintf('$node->name should be %s but is %s', Identifier::class, get_class($node->name)));
+		if ($node->name instanceof Identifier) {
+			return $this->getConstantRuleErrors($scope, (string)$node->name, $this->typeResolver->getType($node->class, $scope));
 		}
-		$constant = (string)$node->name;
-		$type = $this->typeResolver->getType($node->class, $scope);
-		$usedOnType = $type->getObjectTypeOrClassStringObjectType();
+		$type = $scope->getType($node->name);
+		$errors = [];
+		foreach ($type->getConstantStrings() as $constantString) {
+			$errors = array_merge(
+				$errors,
+				$this->getConstantRuleErrors($scope, $constantString->getValue(), $this->typeResolver->getType($node->class, $scope))
+			);
+		}
+		return $errors;
+	}
 
+
+	/**
+	 * @param Scope $scope
+	 * @param string $constant
+	 * @param Type $type
+	 * @return list<RuleError>
+	 * @throws ShouldNotHappenException
+	 */
+	private function getConstantRuleErrors(Scope $scope, string $constant, Type $type): array
+	{
 		if (strtolower($constant) === 'class') {
 			return [];
 		}
 
+		$usedOnType = $type->getObjectTypeOrClassStringObjectType();
 		$displayName = $usedOnType->getObjectClassNames() ? $this->getFullyQualified($usedOnType->getObjectClassNames(), $constant) : null;
 		if ($usedOnType->getConstantStrings()) {
 			$classNames = array_map(
@@ -105,7 +122,7 @@ class ClassConstantUsages implements Rule
 			} elseif ($type->hasConstant($constant)->no()) {
 				return [
 					RuleErrorBuilder::message(sprintf(
-						'Cannot access constant %s on %s',
+						'Cannot access constant %s on %s.',
 						$constant,
 						$type->describe(VerbosityLevel::getRecommendedLevelByType($type))
 					))->build(),
@@ -114,7 +131,7 @@ class ClassConstantUsages implements Rule
 				return [];
 			}
 		}
-		return $this->disallowedConstantRuleErrors->get($this->getFullyQualified($classNames, $constant), $scope, $displayName, $this->disallowedConstants);
+		return $this->disallowedConstantRuleErrors->get($this->getFullyQualified($classNames, $constant), $scope, $displayName, $this->disallowedConstants, ErrorIdentifiers::DISALLOWED_CLASS_CONSTANT);
 	}
 
 

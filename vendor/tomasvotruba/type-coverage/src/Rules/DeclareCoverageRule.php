@@ -26,9 +26,8 @@ final class DeclareCoverageRule implements Rule
 
     /**
      * @readonly
-     * @var \TomasVotruba\TypeCoverage\Configuration
      */
-    private $configuration;
+    private Configuration $configuration;
 
     public function __construct(Configuration $configuration)
     {
@@ -100,7 +99,7 @@ final class DeclareCoverageRule implements Rule
                 $totalPossibleDeclares,
                 $coveredDeclares,
                 $declareCoverage,
-                $requiredDeclareLevel
+                $requiredDeclareLevel,
             );
 
             $ruleErrors[] = RuleErrorBuilder::message($errorMessage)->file($notCoveredDeclareFilePath)->build();

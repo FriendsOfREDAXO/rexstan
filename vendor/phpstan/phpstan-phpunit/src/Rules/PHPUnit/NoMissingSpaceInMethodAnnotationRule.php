@@ -17,9 +17,8 @@ class NoMissingSpaceInMethodAnnotationRule implements Rule
 	/**
 	 * Covers helper.
 	 *
-	 * @var AnnotationHelper
 	 */
-	private $annotationHelper;
+	private AnnotationHelper $annotationHelper;
 
 	public function __construct(AnnotationHelper $annotationHelper)
 	{

@@ -20,10 +20,7 @@ use staabm\PHPStanDba\UnresolvableQueryException;
 
 final class PdoStatementExecuteTypeSpecifyingExtension implements MethodTypeSpecifyingExtension, TypeSpecifierAwareExtension
 {
-    /**
-     * @var TypeSpecifier
-     */
-    private $typeSpecifier;
+    private TypeSpecifier $typeSpecifier;
 
     public function getClass(): string
     {
@@ -52,7 +49,7 @@ final class PdoStatementExecuteTypeSpecifyingExtension implements MethodTypeSpec
         }
 
         if (null !== $inferredType) {
-            return $this->typeSpecifier->create($methodCall->var, $inferredType, TypeSpecifierContext::createTruthy(), true);
+            return $this->typeSpecifier->create($methodCall->var, $inferredType, TypeSpecifierContext::createTruthy(), $scope)->setAlwaysOverwriteTypes();
         }
 
         return new SpecifiedTypes();

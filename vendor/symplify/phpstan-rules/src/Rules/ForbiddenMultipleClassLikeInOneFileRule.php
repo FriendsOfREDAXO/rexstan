@@ -11,33 +11,32 @@ use PhpParser\NodeFinder;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\FileNode;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
+ * @implements Rule<FileNode>
  * @see \Symplify\PHPStanRules\Tests\Rules\ForbiddenMultipleClassLikeInOneFileRule\ForbiddenMultipleClassLikeInOneFileRuleTest
  */
 final class ForbiddenMultipleClassLikeInOneFileRule implements Rule
 {
     /**
-     * @readonly
-     * @var \PhpParser\NodeFinder
-     */
-    private $nodeFinder;
-    /**
      * @var string
      */
     public const ERROR_MESSAGE = 'Multiple class/interface/trait is not allowed in single file';
 
-    public function __construct(NodeFinder $nodeFinder)
-    {
-        $this->nodeFinder = $nodeFinder;
+    /**
+     * @readonly
+     */
+    private NodeFinder $nodeFinder;
+
+    public function __construct(
+    ) {
+        $this->nodeFinder = new NodeFinder();
     }
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return FileNode::class;
@@ -45,7 +44,6 @@ final class ForbiddenMultipleClassLikeInOneFileRule implements Rule
 
     /**
      * @param FileNode $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -65,7 +63,7 @@ final class ForbiddenMultipleClassLikeInOneFileRule implements Rule
             return [];
         }
 
-        return [self::ERROR_MESSAGE];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
     }
 
     public function getRuleDefinition(): RuleDefinition

@@ -12,15 +12,13 @@ final class TemplateMethodCallsProvider
 {
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\Configuration
      */
-    private $configuration;
+    private Configuration $configuration;
 
     /**
      * @readonly
-     * @var \TomasVotruba\UnusedPublic\Templates\TemplateRegexFinder
      */
-    private $templateRegexFinder;
+    private TemplateRegexFinder $templateRegexFinder;
 
     public function __construct(Configuration $configuration, TemplateRegexFinder $templateRegexFinder)
     {

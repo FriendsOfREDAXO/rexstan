@@ -5,7 +5,6 @@ namespace PHPStan\Rules\Deprecations;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassMethodNode;
-use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use function sprintf;
@@ -17,11 +16,9 @@ use function strtolower;
 class TypeHintDeprecatedInClassMethodSignatureRule implements Rule
 {
 
-	/** @var DeprecatedClassHelper */
-	private $deprecatedClassHelper;
+	private DeprecatedClassHelper $deprecatedClassHelper;
 
-	/** @var DeprecatedScopeHelper */
-	private $deprecatedScopeHelper;
+	private DeprecatedScopeHelper $deprecatedScopeHelper;
 
 	public function __construct(DeprecatedClassHelper $deprecatedClassHelper, DeprecatedScopeHelper $deprecatedScopeHelper)
 	{
@@ -41,10 +38,9 @@ class TypeHintDeprecatedInClassMethodSignatureRule implements Rule
 		}
 
 		$method = $node->getMethodReflection();
-		$methodSignature = ParametersAcceptorSelector::selectSingle($method->getVariants());
 
 		$errors = [];
-		foreach ($methodSignature->getParameters() as $parameter) {
+		foreach ($method->getParameters() as $parameter) {
 			$deprecatedClasses = $this->deprecatedClassHelper->filterDeprecatedClasses($parameter->getType()->getReferencedClasses());
 			foreach ($deprecatedClasses as $deprecatedClass) {
 				if ($method->getDeclaringClass()->isAnonymous()) {
@@ -54,7 +50,7 @@ class TypeHintDeprecatedInClassMethodSignatureRule implements Rule
 						$method->getName(),
 						strtolower($deprecatedClass->getClassTypeDescription()),
 						$deprecatedClass->getName(),
-						$this->deprecatedClassHelper->getClassDeprecationDescription($deprecatedClass)
+						$this->deprecatedClassHelper->getClassDeprecationDescription($deprecatedClass),
 					))->identifier(sprintf('parameter.deprecated%s', $deprecatedClass->getClassTypeDescription()))->build();
 				} else {
 					$errors[] = RuleErrorBuilder::message(sprintf(
@@ -64,13 +60,13 @@ class TypeHintDeprecatedInClassMethodSignatureRule implements Rule
 						$method->getName(),
 						strtolower($deprecatedClass->getClassTypeDescription()),
 						$deprecatedClass->getName(),
-						$this->deprecatedClassHelper->getClassDeprecationDescription($deprecatedClass)
+						$this->deprecatedClassHelper->getClassDeprecationDescription($deprecatedClass),
 					))->identifier(sprintf('parameter.deprecated%s', $deprecatedClass->getClassTypeDescription()))->build();
 				}
 			}
 		}
 
-		$deprecatedClasses = $this->deprecatedClassHelper->filterDeprecatedClasses($methodSignature->getReturnType()->getReferencedClasses());
+		$deprecatedClasses = $this->deprecatedClassHelper->filterDeprecatedClasses($method->getReturnType()->getReferencedClasses());
 		foreach ($deprecatedClasses as $deprecatedClass) {
 			if ($method->getDeclaringClass()->isAnonymous()) {
 				$errors[] = RuleErrorBuilder::message(sprintf(
@@ -78,7 +74,7 @@ class TypeHintDeprecatedInClassMethodSignatureRule implements Rule
 					$method->getName(),
 					strtolower($deprecatedClass->getClassTypeDescription()),
 					$deprecatedClass->getName(),
-					$this->deprecatedClassHelper->getClassDeprecationDescription($deprecatedClass)
+					$this->deprecatedClassHelper->getClassDeprecationDescription($deprecatedClass),
 				))->identifier(sprintf('return.deprecated%s', $deprecatedClass->getClassTypeDescription()))->build();
 			} else {
 				$errors[] = RuleErrorBuilder::message(sprintf(
@@ -87,7 +83,7 @@ class TypeHintDeprecatedInClassMethodSignatureRule implements Rule
 					$method->getName(),
 					strtolower($deprecatedClass->getClassTypeDescription()),
 					$deprecatedClass->getName(),
-					$this->deprecatedClassHelper->getClassDeprecationDescription($deprecatedClass)
+					$this->deprecatedClassHelper->getClassDeprecationDescription($deprecatedClass),
 				))->identifier(sprintf('return.deprecated%s', $deprecatedClass->getClassTypeDescription()))->build();
 			}
 		}

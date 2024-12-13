@@ -12,8 +12,7 @@ use PHPStan\Type\Type;
 class BooleanRuleHelper
 {
 
-	/** @var RuleLevelHelper */
-	private $ruleLevelHelper;
+	private RuleLevelHelper $ruleLevelHelper;
 
 	public function __construct(RuleLevelHelper $ruleLevelHelper)
 	{
@@ -30,9 +29,7 @@ class BooleanRuleHelper
 			$scope,
 			$expr,
 			'',
-			static function (Type $type): bool {
-				return $type->isBoolean()->yes();
-			}
+			static fn (Type $type): bool => $type->isBoolean()->yes(),
 		);
 		$foundType = $typeToCheck->getType();
 		if ($foundType instanceof ErrorType) {

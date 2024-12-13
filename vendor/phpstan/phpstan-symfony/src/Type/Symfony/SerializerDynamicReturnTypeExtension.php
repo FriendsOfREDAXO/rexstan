@@ -17,12 +17,14 @@ use function substr;
 class SerializerDynamicReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
 
-	/** @var string */
-	private $class;
+	/** @var class-string */
+	private string $class;
 
-	/** @var string */
-	private $method;
+	private string $method;
 
+	/**
+	 * @param class-string $class
+	 */
 	public function __construct(string $class, string $method)
 	{
 		$this->class = $class;

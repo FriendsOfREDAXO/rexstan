@@ -10,15 +10,13 @@ final class ClassAndMethodArrayExprs
 {
     /**
      * @readonly
-     * @var \PhpParser\Node\Expr
      */
-    private $classExpr;
+    private Expr $classExpr;
 
     /**
      * @readonly
-     * @var \PhpParser\Node\Expr
      */
-    private $methodExpr;
+    private Expr $methodExpr;
 
     public function __construct(Expr $classExpr, Expr $methodExpr)
     {

@@ -14,6 +14,7 @@ use PhpParser\Node\Stmt\Return_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\ParentClassMethodNodeResolver;
 use Symplify\PHPStanRules\Testing\StaticPHPUnitEnvironment;
 use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
@@ -21,15 +22,15 @@ use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
+ * @implements Rule<Return_>
  * @see \Symplify\PHPStanRules\Tests\Rules\NoReturnArrayVariableListRule\NoReturnArrayVariableListRuleTest
  */
 final class NoReturnArrayVariableListRule implements Rule
 {
     /**
      * @readonly
-     * @var \Symplify\PHPStanRules\ParentClassMethodNodeResolver
      */
-    private $parentClassMethodNodeResolver;
+    private ParentClassMethodNodeResolver $parentClassMethodNodeResolver;
     /**
      * @var string
      */
@@ -46,9 +47,6 @@ final class NoReturnArrayVariableListRule implements Rule
         $this->parentClassMethodNodeResolver = $parentClassMethodNodeResolver;
     }
 
-    /**
-     * @return class-string<Node>
-     */
     public function getNodeType(): string
     {
         return Return_::class;
@@ -56,7 +54,6 @@ final class NoReturnArrayVariableListRule implements Rule
 
     /**
      * @param Return_ $node
-     * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
     {
@@ -77,7 +74,7 @@ final class NoReturnArrayVariableListRule implements Rule
             return [];
         }
 
-        return [self::ERROR_MESSAGE];
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
     }
 
     public function getRuleDefinition(): RuleDefinition
@@ -158,6 +155,10 @@ CODE_SAMPLE
             }
 
             if ($item->value instanceof New_) {
+                continue;
+            }
+
+            if ($item->unpack) {
                 continue;
             }
 

@@ -16,8 +16,7 @@ use function sprintf;
 class BooleanInTernaryOperatorRule implements Rule
 {
 
-	/** @var BooleanRuleHelper */
-	private $helper;
+	private BooleanRuleHelper $helper;
 
 	public function __construct(BooleanRuleHelper $helper)
 	{
@@ -44,7 +43,7 @@ class BooleanInTernaryOperatorRule implements Rule
 		return [
 			RuleErrorBuilder::message(sprintf(
 				'Only booleans are allowed in a ternary operator condition, %s given.',
-				$conditionExpressionType->describe(VerbosityLevel::typeOnly())
+				$conditionExpressionType->describe(VerbosityLevel::typeOnly()),
 			))->identifier('ternary.condNotBoolean')->build(),
 		];
 	}

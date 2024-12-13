@@ -7,11 +7,11 @@ use PhpParser\Node;
 use PhpParser\Node\Stmt\Echo_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleError;
 use PHPStan\ShouldNotHappenException;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedCall;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedCallFactory;
 use Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedCallsRuleErrors;
+use Spaze\PHPStan\Rules\Disallowed\RuleErrors\ErrorIdentifiers;
 
 /**
  * Reports on dynamically calling echo().
@@ -22,11 +22,10 @@ use Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedCallsRuleErrors;
 class EchoCalls implements Rule
 {
 
-	/** @var DisallowedCallsRuleErrors */
-	private $disallowedCallsRuleErrors;
+	private DisallowedCallsRuleErrors $disallowedCallsRuleErrors;
 
 	/** @var list<DisallowedCall> */
-	private $disallowedCalls;
+	private array $disallowedCalls;
 
 
 	/**
@@ -51,14 +50,11 @@ class EchoCalls implements Rule
 
 
 	/**
-	 * @param Echo_ $node
-	 * @param Scope $scope
-	 * @return list<RuleError>
 	 * @throws ShouldNotHappenException
 	 */
 	public function processNode(Node $node, Scope $scope): array
 	{
-		return $this->disallowedCallsRuleErrors->get(null, $scope, 'echo', 'echo', null, $this->disallowedCalls);
+		return $this->disallowedCallsRuleErrors->get(null, $scope, 'echo', 'echo', null, $this->disallowedCalls, ErrorIdentifiers::DISALLOWED_ECHO);
 	}
 
 }

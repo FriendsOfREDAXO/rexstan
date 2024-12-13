@@ -10,15 +10,13 @@ use PHPStan\Symfony\ConsoleApplicationResolver;
 use PHPStan\Type\Constant\ConstantBooleanType;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\Type;
-use PHPStan\Type\TypeUtils;
 use function array_unique;
 use function count;
 
 final class InputInterfaceHasOptionDynamicReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
 
-	/** @var ConsoleApplicationResolver */
-	private $consoleApplicationResolver;
+	private ConsoleApplicationResolver $consoleApplicationResolver;
 
 	public function __construct(ConsoleApplicationResolver $consoleApplicationResolver)
 	{
@@ -46,7 +44,7 @@ final class InputInterfaceHasOptionDynamicReturnTypeExtension implements Dynamic
 			return null;
 		}
 
-		$optStrings = TypeUtils::getConstantStrings($scope->getType($methodCall->getArgs()[0]->value));
+		$optStrings = $scope->getType($methodCall->getArgs()[0]->value)->getConstantStrings();
 		if (count($optStrings) !== 1) {
 			return null;
 		}

@@ -1,5 +1,20 @@
 rules:
-    - Symplify\PHPStanRules\Rules\Explicit\NoMixedPropertyFetcherRule
-    - Symplify\PHPStanRules\Rules\Explicit\NoMixedMethodCallerRule
     - Symplify\PHPStanRules\Rules\NoDynamicNameRule
     - Symplify\PHPStanRules\Rules\NoReturnArrayVariableListRule
+    - Symplify\PHPStanRules\Rules\NoSingleInterfaceImplementerRule
+
+services:
+    -
+        class: Symplify\PHPStanRules\Collector\InterfaceCollector
+        tags:
+            - phpstan.collector
+
+    -
+        class: Symplify\PHPStanRules\Collector\ImplementedInterfaceCollector
+        tags:
+            - phpstan.collector
+
+    -
+        class: Symplify\PHPStanRules\Collector\InterfaceOfAbstractClassCollector
+        tags:
+            - phpstan.collector

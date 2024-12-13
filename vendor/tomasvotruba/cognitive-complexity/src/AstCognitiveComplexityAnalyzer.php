@@ -18,21 +18,18 @@ final class AstCognitiveComplexityAnalyzer
 {
     /**
      * @readonly
-     * @var \TomasVotruba\CognitiveComplexity\NodeTraverser\ComplexityNodeTraverserFactory
      */
-    private $complexityNodeTraverserFactory;
+    private ComplexityNodeTraverserFactory $complexityNodeTraverserFactory;
 
     /**
      * @readonly
-     * @var \TomasVotruba\CognitiveComplexity\DataCollector\CognitiveComplexityDataCollector
      */
-    private $cognitiveComplexityDataCollector;
+    private CognitiveComplexityDataCollector $cognitiveComplexityDataCollector;
 
     /**
      * @readonly
-     * @var \TomasVotruba\CognitiveComplexity\NodeVisitor\NestingNodeVisitor
      */
-    private $nestingNodeVisitor;
+    private NestingNodeVisitor $nestingNodeVisitor;
 
     public function __construct(ComplexityNodeTraverserFactory $complexityNodeTraverserFactory, CognitiveComplexityDataCollector $cognitiveComplexityDataCollector, NestingNodeVisitor $nestingNodeVisitor)
     {

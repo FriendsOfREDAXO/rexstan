@@ -7,16 +7,14 @@ namespace staabm\PHPStanDba\QueryReflection;
 use Composer\InstalledVersions;
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\BinaryOp\Concat;
-use PhpParser\Node\Scalar\Encapsed;
-use PhpParser\Node\Scalar\EncapsedStringPart;
+use PhpParser\Node\InterpolatedStringPart;
+use PhpParser\Node\Scalar\InterpolatedString;
 use PHPStan\Analyser\Scope;
 use PHPStan\ShouldNotHappenException;
 use PHPStan\TrinaryLogic;
 use PHPStan\Type\Accessory\AccessoryNumericStringType;
 use PHPStan\Type\Constant\ConstantArrayType;
 use PHPStan\Type\Constant\ConstantArrayTypeBuilder;
-use PHPStan\Type\Constant\ConstantIntegerType;
-use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\FloatType;
 use PHPStan\Type\IntegerType;
 use PHPStan\Type\IntersectionType;
@@ -46,20 +44,11 @@ final class QueryReflection
 
     private const REGEX_NAMED_PLACEHOLDER = '{(["\'])((?:(?!\1)(?s:.))*\1)|(' . self::NAMED_PATTERN . ')}';
 
-    /**
-     * @var QueryReflector|null
-     */
-    private static $reflector;
+    private static ?QueryReflector $reflector = null;
 
-    /**
-     * @var RuntimeConfiguration|null
-     */
-    private static $runtimeConfiguration;
+    private static ?RuntimeConfiguration $runtimeConfiguration = null;
 
-    /**
-     * @var SchemaReflection
-     */
-    private $schemaReflection;
+    private ?SchemaReflection $schemaReflection = null;
 
     public function __construct(?DbaApi $dbaApi = null)
     {
@@ -119,11 +108,13 @@ final class QueryReflection
 
         $reflector = self::reflector();
         $resultType = $reflector->getResultType($queryString, $fetchType);
+        if ($resultType === null) {
+            return null;
+        }
+        $arrays = $resultType->getConstantArrays();
 
-        if (null !== $resultType) {
-            if (! $resultType instanceof ConstantArrayType) {
-                throw new ShouldNotHappenException();
-            }
+        if (count($arrays) === 1) {
+            $resultType = $arrays[0];
 
             if (
                 self::getRuntimeConfiguration()->isUtilizingSqlAst()
@@ -148,9 +139,11 @@ final class QueryReflection
 
     private function stringifyResult(Type $type): Type
     {
-        if (! $type instanceof ConstantArrayType) {
+        $arrays = $type->getConstantArrays();
+        if (count($arrays) !== 1) {
             return $type;
         }
+        $type = $arrays[0];
 
         $builder = ConstantArrayTypeBuilder::createEmpty();
 
@@ -213,7 +206,7 @@ final class QueryReflection
         }
         $isStringOrMixed = $type->isSuperTypeOf(new StringType());
 
-        return $isStringOrMixed->negate();
+        return $isStringOrMixed->negate()->result;
     }
 
     /**
@@ -376,9 +369,14 @@ final class QueryReflection
             return $leftString . $rightString;
         }
 
-        if ($queryExpr instanceof Encapsed) {
+        if ($queryExpr instanceof InterpolatedString) {
             $string = '';
             foreach ($queryExpr->parts as $part) {
+                if ($part instanceof InterpolatedStringPart) {
+                    $string .= $part->value;
+                    continue;
+                }
+
                 $resolvedPart = $this->resolveQueryStringExpr($part, $scope);
                 if (null === $resolvedPart) {
                     return null;
@@ -387,10 +385,6 @@ final class QueryReflection
             }
 
             return $string;
-        }
-
-        if ($queryExpr instanceof EncapsedStringPart) {
-            return $queryExpr->value;
         }
 
         $type = $scope->getType($queryExpr);
@@ -438,8 +432,9 @@ final class QueryReflection
             return $parameters;
         }
 
-        if ($parameterTypes instanceof ConstantArrayType) {
-            return $this->resolveConstantArray($parameterTypes);
+        $arrays = $parameterTypes->getConstantArrays();
+        if (count($arrays) === 1) {
+            return $this->resolveConstantArray($arrays[0]);
         }
 
         return null;
@@ -461,10 +456,10 @@ final class QueryReflection
         foreach ($keyTypes as $i => $keyType) {
             $isOptional = \in_array($i, $optionalKeys, true);
 
-            if ($keyType instanceof ConstantStringType) {
+            if ($keyType->isString()->yes()) {
                 $placeholderName = $keyType->getValue();
 
-                if ('' === $placeholderName) {
+                if (! is_string($placeholderName) || '' === $placeholderName) {
                     throw new ShouldNotHappenException('Empty placeholder name');
                 }
 
@@ -476,7 +471,7 @@ final class QueryReflection
                 );
 
                 $parameters[$param->name] = $param;
-            } elseif ($keyType instanceof ConstantIntegerType) {
+            } elseif ($keyType->isInteger()->yes()) {
                 $param = new Parameter(
                     null,
                     $valueTypes[$i],
@@ -596,7 +591,7 @@ final class QueryReflection
     }
 
     /**
-     * @return list<string>
+     * @return array<string>
      */
     public function extractNamedPlaceholders(string $queryString): array
     {

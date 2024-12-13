@@ -15,7 +15,6 @@ use PHPStan\Type\MixedType;
 use PHPStan\Type\NullType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\StringType;
-use PHPStan\Type\TypeUtils;
 use PHPStan\Type\UnionType;
 use PHPStan\Type\VerbosityLevel;
 use function count;
@@ -48,7 +47,7 @@ final class InvalidOptionDefaultValueRule implements Rule
 		if ($modeType->isNull()->yes()) {
 			$modeType = new ConstantIntegerType(1); // InputOption::VALUE_NONE
 		}
-		$modeTypes = TypeUtils::getConstantScalars($modeType);
+		$modeTypes = $modeType->getConstantScalarTypes();
 		if (count($modeTypes) !== 1) {
 			return [];
 		}
@@ -67,7 +66,7 @@ final class InvalidOptionDefaultValueRule implements Rule
 					RuleErrorBuilder::message(sprintf(
 						'Parameter #5 $default of method Symfony\Component\Console\Command\Command::addOption() expects %s, %s given.',
 						$checkType->describe(VerbosityLevel::typeOnly()),
-						$defaultType->describe(VerbosityLevel::typeOnly())
+						$defaultType->describe(VerbosityLevel::typeOnly()),
 					))->identifier('argument.type')->build(),
 				];
 			}
@@ -78,7 +77,7 @@ final class InvalidOptionDefaultValueRule implements Rule
 			return [
 				RuleErrorBuilder::message(sprintf(
 					'Parameter #5 $default of method Symfony\Component\Console\Command\Command::addOption() expects array<string>|null, %s given.',
-					$defaultType->describe(VerbosityLevel::typeOnly())
+					$defaultType->describe(VerbosityLevel::typeOnly()),
 				))->identifier('argument.type')->build(),
 			];
 		}

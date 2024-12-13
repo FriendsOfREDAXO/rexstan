@@ -40,7 +40,7 @@ final class RexCmd
             $output = stream_get_contents($pipes[1]);
             fclose($pipes[1]);
 
-            $stderrOutput = stream_get_contents($pipes[2]);
+            $stderrOutput = stream_get_contents($pipes[2]) ?: '';
             fclose($pipes[2]);
 
             $status = proc_get_status($process);

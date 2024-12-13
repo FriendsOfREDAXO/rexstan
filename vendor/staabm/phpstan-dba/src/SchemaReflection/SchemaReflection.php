@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace staabm\PHPStanDba\SchemaReflection;
 
-use PHPStan\Type\Constant\ConstantArrayType;
+use PHPStan\Type\Type;
 
 final class SchemaReflection
 {
     /**
      * @var array<string, Table|null>
      */
-    private $tables = [];
+    private array $tables = [];
 
     /**
      * @var callable(string):?\PHPStan\Type\Type
@@ -33,10 +33,15 @@ final class SchemaReflection
         }
 
         $resultType = ($this->queryResolver)('SELECT * FROM ' . $tableName);
-        if (! $resultType instanceof ConstantArrayType) {
+        if (! $resultType instanceof Type) {
+            return $this->tables[$tableName] = null;
+        }
+        $arrays = $resultType->getConstantArrays();
+        if (count($arrays) !== 1) {
             return $this->tables[$tableName] = null;
         }
 
+        $resultType = $arrays[0];
         $keyTypes = $resultType->getKeyTypes();
         $valueTypes = $resultType->getValueTypes();
         $columns = [];

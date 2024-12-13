@@ -21,14 +21,11 @@ use Spaze\PHPStan\Rules\Disallowed\Type\TypeResolver;
 class DisallowedMethodRuleErrors
 {
 
-	/** @var DisallowedCallsRuleErrors */
-	private $disallowedCallsRuleErrors;
+	private DisallowedCallsRuleErrors $disallowedCallsRuleErrors;
 
-	/** @var TypeResolver */
-	private $typeResolver;
+	private TypeResolver $typeResolver;
 
-	/** @var Formatter */
-	private $formatter;
+	private Formatter $formatter;
 
 
 	public function __construct(
@@ -93,7 +90,7 @@ class DisallowedMethodRuleErrors
 		foreach ($classes as $class) {
 			if ($class->hasMethod($method->getName())) {
 				$declaredAs = $this->formatter->getFullyQualified($class->getDisplayName(false), $method);
-				$ruleErrors = $this->disallowedCallsRuleErrors->get($node, $scope, $declaredAs, $calledAs, $class->getFileName(), $disallowedCalls);
+				$ruleErrors = $this->disallowedCallsRuleErrors->get($node, $scope, $declaredAs, $calledAs, $class->getFileName(), $disallowedCalls, ErrorIdentifiers::DISALLOWED_METHOD);
 				if ($ruleErrors) {
 					return $ruleErrors;
 				}

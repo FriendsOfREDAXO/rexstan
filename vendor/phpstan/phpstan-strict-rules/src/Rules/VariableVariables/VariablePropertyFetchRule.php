@@ -18,11 +18,10 @@ use function sprintf;
 class VariablePropertyFetchRule implements Rule
 {
 
-	/** @var ReflectionProvider */
-	private $reflectionProvider;
+	private ReflectionProvider $reflectionProvider;
 
 	/** @var string[] */
-	private $universalObjectCratesClasses;
+	private array $universalObjectCratesClasses;
 
 	/**
 	 * @param string[] $universalObjectCratesClasses
@@ -58,7 +57,7 @@ class VariablePropertyFetchRule implements Rule
 		return [
 			RuleErrorBuilder::message(sprintf(
 				'Variable property access on %s.',
-				$fetchedOnType->describe(VerbosityLevel::typeOnly())
+				$fetchedOnType->describe(VerbosityLevel::typeOnly()),
 			))->identifier('property.dynamicName')->build(),
 		];
 	}

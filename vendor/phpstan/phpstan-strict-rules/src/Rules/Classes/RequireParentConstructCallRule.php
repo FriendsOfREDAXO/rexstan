@@ -59,7 +59,7 @@ class RequireParentConstructCallRule implements Rule
 				RuleErrorBuilder::message(sprintf(
 					'%s::__construct() does not call parent constructor from %s.',
 					$classReflection->getName(),
-					$parentClass->getName()
+					$parentClass->getName(),
 				))->identifier('constructor.missingParentCall')->build(),
 			];
 		}

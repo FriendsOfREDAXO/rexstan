@@ -42,7 +42,7 @@ class ClosureUsesThisRule implements Rule
 			}
 
 			$messages[] = RuleErrorBuilder::message(sprintf('Anonymous function uses $this assigned to variable $%s. Use $this directly in the function body.', $closureUse->var->name))
-				->line($closureUse->getLine())
+				->line($closureUse->getStartLine())
 				->identifier('closure.useThis')
 				->build();
 		}

@@ -16,8 +16,7 @@ use function sprintf;
 class BooleanInBooleanNotRule implements Rule
 {
 
-	/** @var BooleanRuleHelper */
-	private $helper;
+	private BooleanRuleHelper $helper;
 
 	public function __construct(BooleanRuleHelper $helper)
 	{
@@ -40,7 +39,7 @@ class BooleanInBooleanNotRule implements Rule
 		return [
 			RuleErrorBuilder::message(sprintf(
 				'Only booleans are allowed in a negated boolean, %s given.',
-				$expressionType->describe(VerbosityLevel::typeOnly())
+				$expressionType->describe(VerbosityLevel::typeOnly()),
 			))->identifier('booleanNot.exprNotBoolean')->build(),
 		];
 	}

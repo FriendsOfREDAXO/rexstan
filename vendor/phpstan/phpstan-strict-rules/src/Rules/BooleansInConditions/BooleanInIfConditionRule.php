@@ -16,8 +16,7 @@ use function sprintf;
 class BooleanInIfConditionRule implements Rule
 {
 
-	/** @var BooleanRuleHelper */
-	private $helper;
+	private BooleanRuleHelper $helper;
 
 	public function __construct(BooleanRuleHelper $helper)
 	{
@@ -40,7 +39,7 @@ class BooleanInIfConditionRule implements Rule
 		return [
 			RuleErrorBuilder::message(sprintf(
 				'Only booleans are allowed in an if condition, %s given.',
-				$conditionExpressionType->describe(VerbosityLevel::typeOnly())
+				$conditionExpressionType->describe(VerbosityLevel::typeOnly()),
 			))->identifier('if.condNotBoolean')->build(),
 		];
 	}

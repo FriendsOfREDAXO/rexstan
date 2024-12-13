@@ -4,23 +4,25 @@ declare(strict_types = 1);
 namespace Spaze\PHPStan\Rules\Disallowed\RuleErrors;
 
 use PHPStan\Analyser\Scope;
-use PHPStan\Rules\RuleError;
+use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\ShouldNotHappenException;
 use Spaze\PHPStan\Rules\Disallowed\Allowed\AllowedPath;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedConstant;
+use Spaze\PHPStan\Rules\Disallowed\Formatter\Formatter;
 
 class DisallowedConstantRuleErrors
 {
 
+	private AllowedPath $allowedPath;
 
-	/** @var AllowedPath */
-	private $allowedPath;
+	private Formatter $formatter;
 
 
-	public function __construct(AllowedPath $allowedPath)
+	public function __construct(AllowedPath $allowedPath, Formatter $formatter)
 	{
 		$this->allowedPath = $allowedPath;
+		$this->formatter = $formatter;
 	}
 
 
@@ -29,22 +31,21 @@ class DisallowedConstantRuleErrors
 	 * @param Scope $scope
 	 * @param string|null $displayName
 	 * @param list<DisallowedConstant> $disallowedConstants
-	 * @return list<RuleError>
+	 * @param string $identifier
+	 * @return list<IdentifierRuleError>
 	 * @throws ShouldNotHappenException
 	 */
-	public function get(string $constant, Scope $scope, ?string $displayName, array $disallowedConstants): array
+	public function get(string $constant, Scope $scope, ?string $displayName, array $disallowedConstants, string $identifier): array
 	{
 		foreach ($disallowedConstants as $disallowedConstant) {
 			if ($disallowedConstant->getConstant() === $constant && !$this->allowedPath->isAllowedPath($scope, $disallowedConstant)) {
 				$errorBuilder = RuleErrorBuilder::message(sprintf(
-					'Using %s%s is forbidden, %s',
+					'Using %s%s is forbidden%s',
 					$disallowedConstant->getConstant(),
 					$displayName && $displayName !== $disallowedConstant->getConstant() ? ' (as ' . $displayName . ')' : '',
-					$disallowedConstant->getMessage()
+					$this->formatter->formatDisallowedMessage($disallowedConstant->getMessage())
 				));
-				if ($disallowedConstant->getErrorIdentifier()) {
-					$errorBuilder->identifier($disallowedConstant->getErrorIdentifier());
-				}
+				$errorBuilder->identifier($disallowedConstant->getErrorIdentifier() ?? $identifier);
 				if ($disallowedConstant->getErrorTip()) {
 					$errorBuilder->tip($disallowedConstant->getErrorTip());
 				}

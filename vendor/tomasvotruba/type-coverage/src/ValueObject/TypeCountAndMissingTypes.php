@@ -8,21 +8,19 @@ final class TypeCountAndMissingTypes
 {
     /**
      * @readonly
-     * @var int
      */
-    private $totalCount;
+    private int $totalCount;
 
     /**
      * @readonly
-     * @var int
      */
-    private $missingCount;
+    private int $missingCount;
 
     /**
      * @var array<string, int[]>
      * @readonly
      */
-    private $missingTypeLinesByFilePath;
+    private array $missingTypeLinesByFilePath;
 
     /**
      * @param array<string, int[]> $missingTypeLinesByFilePath

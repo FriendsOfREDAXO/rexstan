@@ -6,6 +6,7 @@ namespace TomasVotruba\CognitiveComplexity;
 
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\NodeFinder;
+use PhpParser\Parser;
 use PhpParser\ParserFactory;
 use PHPStan\Reflection\ClassReflection;
 
@@ -13,20 +14,18 @@ final class ClassReflectionParser
 {
     /**
      * @readonly
-     * @var \PhpParser\Parser
      */
-    private $phpParser;
+    private Parser $phpParser;
 
     /**
      * @readonly
-     * @var \PhpParser\NodeFinder
      */
-    private $nodeFinder;
+    private NodeFinder $nodeFinder;
 
     public function __construct()
     {
         $parserFactory = new ParserFactory();
-        $this->phpParser = $parserFactory->create(ParserFactory::PREFER_PHP7);
+        $this->phpParser = $parserFactory->createForHostVersion();
 
         $this->nodeFinder = new NodeFinder();
     }
@@ -46,11 +45,6 @@ final class ClassReflectionParser
             return null;
         }
 
-        $foundClass = $this->nodeFinder->findFirstInstanceOf($stmts, Class_::class);
-        if (! $foundClass instanceof Class_) {
-            return null;
-        }
-
-        return $foundClass;
+        return $this->nodeFinder->findFirstInstanceOf($stmts, Class_::class);
     }
 }

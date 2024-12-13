@@ -6,17 +6,16 @@
 		"MIT"
 	],
 	"require": {
-		"php": "^7.2 || ^8.0",
-		"phpstan/phpstan": "^1.12"
+		"php": "^7.4 || ^8.0",
+		"phpstan/phpstan": "^2.0"
 	},
 	"conflict": {
 		"phpunit/phpunit": "<7.0"
 	},
 	"require-dev": {
-		"nikic/php-parser": "^4.13.0",
 		"php-parallel-lint/php-parallel-lint": "^1.2",
-		"phpstan/phpstan-strict-rules": "^1.5.1",
-		"phpunit/phpunit": "^9.5"
+		"phpstan/phpstan-strict-rules": "^2.0",
+		"phpunit/phpunit": "^9.6"
 	},
 	"config": {
 		"platform": {

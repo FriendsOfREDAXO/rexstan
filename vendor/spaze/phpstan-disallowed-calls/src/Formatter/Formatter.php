@@ -9,8 +9,7 @@ use Spaze\PHPStan\Rules\Disallowed\Normalizer\Normalizer;
 class Formatter
 {
 
-	/** @var Normalizer */
-	private $normalizer;
+	private Normalizer $normalizer;
 
 
 	public function __construct(Normalizer $normalizer)
@@ -26,7 +25,7 @@ class Formatter
 
 
 	/**
-	 * @param list<string> $identifiers
+	 * @param non-empty-list<string> $identifiers
 	 * @return string
 	 */
 	public function formatIdentifier(array $identifiers): string
@@ -39,6 +38,18 @@ class Formatter
 			});
 			return '{' . implode(',', $identifiers) . '}';
 		}
+	}
+
+
+	public function formatDisallowedMessage(?string $message): string
+	{
+		if (!$message) {
+			return '.';
+		}
+		if ($message[-1] !== '?' && $message[-1] !== '!') {
+			$message = rtrim($message, '.') . '.';
+		}
+		return ', ' . $message;
 	}
 
 }

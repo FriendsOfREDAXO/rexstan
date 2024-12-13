@@ -53,9 +53,9 @@ abstract class BasePdoQueryReflector implements QueryReflector, RecordingReflect
     protected const MAX_CACHE_SIZE = 50;
 
     /**
-     * @var array<string, PDOException|list<ColumnMeta>|null>
+     * @var array<string, PDOException|array<ColumnMeta>|null>
      */
-    protected $cache = [];
+    protected array $cache = [];
 
     /**
      * @var TypeMapper
@@ -69,14 +69,11 @@ abstract class BasePdoQueryReflector implements QueryReflector, RecordingReflect
     protected $stmt = null;
 
     /**
-     * @var array<string, array<string, list<string>>>
+     * @var array<string, array<string, array<int, string>>>
      */
-    protected $emulatedFlags = [];
+    protected array $emulatedFlags = [];
 
-    /**
-     * @var PDO
-     */
-    protected $pdo;
+    protected PDO $pdo;
 
     public function __construct(PDO $pdo)
     {
@@ -141,7 +138,7 @@ abstract class BasePdoQueryReflector implements QueryReflector, RecordingReflect
     }
 
     /**
-     * @return list<string>
+     * @return array<int, string>
      */
     protected function emulateFlags(string $nativeType, string $tableName, string $columnName): array
     {
@@ -178,7 +175,7 @@ abstract class BasePdoQueryReflector implements QueryReflector, RecordingReflect
     }
 
     /**
-     * @return PDOException|list<ColumnMeta>|null
+     * @return PDOException|array<ColumnMeta>|null
      */
     abstract protected function simulateQuery(string $queryString);
 

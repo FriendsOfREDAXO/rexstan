@@ -5,10 +5,16 @@ namespace Spaze\PHPStan\Rules\Disallowed\Allowed;
 
 use PhpParser\Node\Arg;
 use PHPStan\Analyser\Scope;
+use PHPStan\PhpDoc\TypeStringResolver;
 use PHPStan\Reflection\FunctionReflection;
 use PHPStan\Reflection\MethodReflection;
+use PHPStan\Type\Constant\ConstantBooleanType;
+use PHPStan\Type\Constant\ConstantIntegerType;
+use PHPStan\Type\Constant\ConstantStringType;
+use PHPStan\Type\NullType;
 use PHPStan\Type\Type;
 use PHPStan\Type\UnionType;
+use PHPStan\Type\VerbosityLevel;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedWithParams;
 use Spaze\PHPStan\Rules\Disallowed\Exceptions\UnsupportedParamTypeException;
 use Spaze\PHPStan\Rules\Disallowed\Exceptions\UnsupportedParamTypeInConfigException;
@@ -19,6 +25,8 @@ use Spaze\PHPStan\Rules\Disallowed\Params\ParamValue;
 use Spaze\PHPStan\Rules\Disallowed\Params\ParamValueAny;
 use Spaze\PHPStan\Rules\Disallowed\Params\ParamValueCaseInsensitiveExcept;
 use Spaze\PHPStan\Rules\Disallowed\Params\ParamValueExcept;
+use Spaze\PHPStan\Rules\Disallowed\Params\ParamValueExceptAny;
+use Spaze\PHPStan\Rules\Disallowed\Params\ParamValueFlag;
 use Spaze\PHPStan\Rules\Disallowed\Params\ParamValueFlagExcept;
 use Spaze\PHPStan\Rules\Disallowed\Params\ParamValueFlagSpecific;
 use Spaze\PHPStan\Rules\Disallowed\Params\ParamValueSpecific;
@@ -26,27 +34,31 @@ use Spaze\PHPStan\Rules\Disallowed\Params\ParamValueSpecific;
 class Allowed
 {
 
-	/** @var Formatter */
-	private $formatter;
+	private Formatter $formatter;
 
-	/** @var Normalizer */
-	private $normalizer;
+	private Normalizer $normalizer;
 
-	/** @var AllowedPath */
-	private $allowedPath;
+	private AllowedPath $allowedPath;
+
+	private TypeStringResolver $typeStringResolver;
 
 
-	public function __construct(Formatter $formatter, Normalizer $normalizer, AllowedPath $allowedPath)
-	{
+	public function __construct(
+		Formatter $formatter,
+		Normalizer $normalizer,
+		AllowedPath $allowedPath,
+		TypeStringResolver $typeStringResolver
+	) {
 		$this->formatter = $formatter;
 		$this->normalizer = $normalizer;
 		$this->allowedPath = $allowedPath;
+		$this->typeStringResolver = $typeStringResolver;
 	}
 
 
 	/**
 	 * @param Scope $scope
-	 * @param array<int, Arg>|null $args
+	 * @param array<Arg>|null $args
 	 * @param DisallowedWithParams $disallowed
 	 * @return bool
 	 */
@@ -100,7 +112,7 @@ class Allowed
 
 	/**
 	 * @param Scope $scope
-	 * @param array<int, Arg>|null $args
+	 * @param array<Arg>|null $args
 	 * @param array<int|string, Param> $allowConfig
 	 * @param bool $paramsRequired
 	 * @return bool
@@ -111,6 +123,7 @@ class Allowed
 			return true;
 		}
 
+		$disallowedParams = false;
 		foreach ($allowConfig as $param) {
 			$type = $this->getArgType($args, $scope, $param);
 			if ($type === null) {
@@ -123,21 +136,19 @@ class Allowed
 			}
 			foreach ($types as $type) {
 				try {
-					if (!$param->matches($type)) {
-						return false;
-					}
+					$disallowedParams = $disallowedParams || !$param->matches($type);
 				} catch (UnsupportedParamTypeException $e) {
 					return !$paramsRequired;
 				}
 			}
 		}
-		return true;
+		return !$disallowedParams;
 	}
 
 
 	/**
 	 * @param Scope $scope
-	 * @param array<int, Arg>|null $args
+	 * @param array<Arg>|null $args
 	 * @param DisallowedWithParams $disallowed
 	 * @return bool
 	 */
@@ -154,7 +165,7 @@ class Allowed
 
 
 	/**
-	 * @param array<int, Arg> $args
+	 * @param array<Arg> $args
 	 * @param Scope $scope
 	 * @param Param $param
 	 * @return Type|null
@@ -216,6 +227,9 @@ class Allowed
 		foreach ($allowed['allowExceptParams'] ?? $allowed['disallowParams'] ?? [] as $param => $value) {
 			$allowExceptParams[$param] = $this->paramFactory(ParamValueExcept::class, $param, $value);
 		}
+		foreach ($allowed['allowExceptParamsAnyValue'] ?? $allowed['disallowParamsAnyValue'] ?? [] as $param => $value) {
+			$allowExceptParams[$param] = $this->paramFactory(ParamValueExceptAny::class, $param, $value);
+		}
 		foreach ($allowed['allowExceptParamFlags'] ?? $allowed['disallowParamFlags'] ?? [] as $param => $value) {
 			$allowExceptParams[$param] = $this->paramFactory(ParamValueFlagExcept::class, $param, $value);
 		}
@@ -239,7 +253,7 @@ class Allowed
 	 * @template T of ParamValue
 	 * @param class-string<T> $class
 	 * @param int|string $key
-	 * @param int|bool|string|null|array{position:int, value?:int|bool|string, name?:string} $value
+	 * @param int|bool|string|null|array{position:int, value?:int|bool|string, typeString?:string, name?:string} $value
 	 * @return T
 	 * @throws UnsupportedParamTypeInConfigException
 	 */
@@ -250,7 +264,8 @@ class Allowed
 				$paramPosition = $value['position'];
 				$paramName = $value['name'] ?? null;
 				$paramValue = $value['value'] ?? null;
-			} elseif ($class === ParamValueAny::class) {
+				$typeString = $value['typeString'] ?? null;
+			} elseif (in_array($class, [ParamValueAny::class, ParamValueExceptAny::class], true)) {
 				if (is_numeric($value)) {
 					$paramPosition = (int)$value;
 					$paramName = null;
@@ -258,22 +273,41 @@ class Allowed
 					$paramPosition = null;
 					$paramName = (string)$value;
 				}
-				$paramValue = null;
+				$paramValue = $typeString = null;
 			} else {
 				$paramPosition = (int)$key;
 				$paramName = null;
 				$paramValue = $value;
+				$typeString = null;
 			}
 		} else {
 			$paramPosition = null;
 			$paramName = $key;
 			$paramValue = $value;
+			$typeString = null;
 		}
 
-		if (!is_int($paramValue) && !is_bool($paramValue) && !is_string($paramValue) && !is_null($paramValue)) {
+		if ($typeString) {
+			$type = $this->typeStringResolver->resolve($typeString);
+		} elseif (is_int($paramValue)) {
+			$type = new ConstantIntegerType($paramValue);
+		} elseif (is_bool($paramValue)) {
+			$type = new ConstantBooleanType($paramValue);
+		} elseif (is_string($paramValue)) {
+			$type = new ConstantStringType($paramValue);
+		} elseif (is_null($paramValue)) {
+			$type = new NullType();
+		} else {
 			throw new UnsupportedParamTypeInConfigException($paramPosition, $paramName, gettype($paramValue));
 		}
-		return new $class($paramPosition, $paramName, $paramValue);
+		if (is_subclass_of($class, ParamValueFlag::class)) {
+			foreach ($type->getConstantScalarValues() as $value) {
+				if (!is_int($value)) {
+					throw new UnsupportedParamTypeInConfigException($paramPosition, $paramName, gettype($value) . ' of ' . $type->describe(VerbosityLevel::precise()));
+				}
+			}
+		}
+		return new $class($paramPosition, $paramName, $type);
 	}
 
 }

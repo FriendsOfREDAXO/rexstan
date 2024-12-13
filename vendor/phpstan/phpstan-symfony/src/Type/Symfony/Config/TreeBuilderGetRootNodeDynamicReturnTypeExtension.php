@@ -5,7 +5,6 @@ namespace PHPStan\Type\Symfony\Config;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
-use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\Symfony\Config\ValueObject\ParentObjectType;
 use PHPStan\Type\Symfony\Config\ValueObject\TreeBuilderType;
@@ -28,20 +27,17 @@ final class TreeBuilderGetRootNodeDynamicReturnTypeExtension implements DynamicM
 		MethodReflection $methodReflection,
 		MethodCall $methodCall,
 		Scope $scope
-	): Type
+	): ?Type
 	{
 		$calledOnType = $scope->getType($methodCall->var);
-
-		$defaultType = ParametersAcceptorSelector::selectSingle($methodReflection->getVariants())->getReturnType();
-
 		if ($calledOnType instanceof TreeBuilderType) {
 			return new ParentObjectType(
 				$calledOnType->getRootNodeClassName(),
-				$calledOnType
+				$calledOnType,
 			);
 		}
 
-		return $defaultType;
+		return null;
 	}
 
 }
