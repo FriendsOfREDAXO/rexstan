@@ -35,7 +35,7 @@ final class RexStan
 
         $cmd .= ' 2>&1';
 
-        return RexCmd::execCmd($cmd, $errorOutput, $exitCode);
+        return RexCmd::execCmd($cmd, $errorOutput, $exitCode); // @phpstan-ignore argument.type
     }
 
     /**
