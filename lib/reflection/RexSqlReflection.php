@@ -107,7 +107,7 @@ final class RexSqlReflection
             return null;
         }
 
-        if (!$statementType instanceof GenericObjectType) {
+        if (!$statementType instanceof GenericObjectType) { // @phpstan-ignore phpstanApi.instanceofType
             return null;
         }
 
