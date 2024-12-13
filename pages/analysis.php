@@ -86,8 +86,8 @@ if (
         echo '<span class="rexstan-achievement">'.$emoji .'</span>';
         echo rex_view::success('Gratulation, es wurden keine Fehler in Level '. $level .' gefunden.');
 
-        if ($level === 9) {
-            echo RexResultsRenderer::getLevel9Jseffect();
+        if ($level === 10) {
+            echo RexResultsRenderer::getLevel10Jseffect();
         } else {
             echo '<p>';
 

@@ -46,7 +46,7 @@ class rexstan_command extends rex_console_command
         $arguments = '';
         if ($input->getOption('level') !== null) {
             $level = $input->getOption('level');
-            if (!preg_match('/^[0-9]$/', $level)) {
+            if (!preg_match('/^1?[0-9]$/', $level)) {
                 throw new Exception('Invalid level: '. $level);
             }
             $arguments .= ' --level='.$level;
