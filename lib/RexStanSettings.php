@@ -131,9 +131,9 @@ final class RexStanSettings
         self::fixAbsoluteToRelativePaths();
 
         $form = rex_config_form::factory('rexstan');
-        $field = $form->addInputField('number', 'level', null, ['class' => 'form-control', 'min' => 0, 'max' => 9]);
+        $field = $form->addInputField('number', 'level', null, ['class' => 'form-control', 'min' => 0, 'max' => 10]);
         $field->setLabel('Level');
-        $field->setNotice('von 0 einfach, bis 9 sehr strikt - <a href="https://phpstan.org/user-guide/rule-levels">PHPStan Rule Levels</a>');
+        $field->setNotice('von 0 einfach, bis 10 sehr strikt - <a href="https://phpstan.org/user-guide/rule-levels">PHPStan Rule Levels</a>');
 
         $field = $form->addCheckboxField('baseline');
         $field->addOption('Baseline verwenden', self::BASELINE_ENABLED);

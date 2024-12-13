@@ -47,11 +47,14 @@ final class RexResultsRenderer
             case 9:
                 $emoji = '🏆';
                 break;
+            case 10:
+                $emoji = '👑';
+                break;
         }
         return $emoji;
     }
 
-    public static function getLevel9Jseffect(): string
+    public static function getLevel10Jseffect(): string
     {
         $nonce = method_exists(rex_response::class, 'getNonce') ? ' nonce="'.rex_response::getNonce().'"' : '';
         return
