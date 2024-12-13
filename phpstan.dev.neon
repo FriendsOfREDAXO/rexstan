@@ -7,7 +7,6 @@ parameters:
 
     ignoreErrors:
       # error to be fixed in phpstan 2.0, see https://github.com/phpstan/phpstan-src/pull/1754
-      - '#.*getValueType\(\) expects class\-string, string given\.$#'
       - '#^Cannot access offset ''running'' on array\{command\: string, pid\: int, running\: bool, signaled\: bool, stopped\: bool, exitcode\: int, termsig\: int, stopsig\: int\}\|false\.$#'
       # functions get polyfilled by redaxo core
       -
