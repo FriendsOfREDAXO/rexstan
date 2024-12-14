@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "324fbf98700c9acf17f50200893feb4b",
+    "content-hash": "239df2096669236fff4a17809dde4a9f",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1597,16 +1597,16 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.3",
+            "version": "0.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "b32c279fcb7e9fa0c30a3aedc1f4b4913dac14f1"
+                "reference": "6dac52ebaa925ea05b3e178ed3bb4dbf87be29f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/b32c279fcb7e9fa0c30a3aedc1f4b4913dac14f1",
-                "reference": "b32c279fcb7e9fa0c30a3aedc1f4b4913dac14f1",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/6dac52ebaa925ea05b3e178ed3bb4dbf87be29f2",
+                "reference": "6dac52ebaa925ea05b3e178ed3bb4dbf87be29f2",
                 "shasum": ""
             },
             "require": {
@@ -1662,7 +1662,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.3"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.3.1"
             },
             "funding": [
                 {
@@ -1670,7 +1670,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-17T08:36:10+00:00"
+            "time": "2024-11-26T21:46:03+00:00"
         },
         {
             "name": "staabm/phpstan-todo-by",
@@ -2102,13 +2102,13 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.4"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "platform-overrides": {
         "php": "7.4.30"
     },
