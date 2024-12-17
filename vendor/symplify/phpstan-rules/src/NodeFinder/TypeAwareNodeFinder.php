@@ -25,7 +25,7 @@ final class TypeAwareNodeFinder
     /**
      * @template TNode as Node
      *
-     * @param mixed[]|\PhpParser\Node $nodes
+     * @param Node[]|Node $nodes
      * @param class-string<TNode> $type
      * @return TNode|null
      */

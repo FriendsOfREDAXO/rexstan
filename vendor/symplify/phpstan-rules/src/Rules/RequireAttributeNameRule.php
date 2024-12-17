@@ -11,9 +11,7 @@ use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\RequireAttributeNameRule\RequireAttributeNameRuleTest
@@ -29,37 +27,6 @@ final class RequireAttributeNameRule implements Rule
     public function getNodeType(): string
     {
         return AttributeGroup::class;
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-use Symfony\Component\Routing\Annotation\Route;
-
-class SomeController
-{
-    #[Route("/path")]
-    public function someAction()
-    {
-    }
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-use Symfony\Component\Routing\Annotation\Route;
-
-class SomeController
-{
-    #[Route(path: "/path")]
-    public function someAction()
-    {
-    }
-}
-CODE_SAMPLE
-            ),
-        ]);
     }
 
     /**
@@ -86,6 +53,7 @@ CODE_SAMPLE
                 }
 
                 $ruleErrors[] = RuleErrorBuilder::message(self::ERROR_MESSAGE)
+                    ->identifier(RuleIdentifier::REQUIRE_ATTRIBUTE_NAME)
                     ->line($attribute->getLine())
                     ->build();
             }

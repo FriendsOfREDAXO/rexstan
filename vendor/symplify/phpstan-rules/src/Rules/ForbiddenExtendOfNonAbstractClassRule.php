@@ -10,9 +10,7 @@ use PHPStan\Node\InClassNode;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<InClassNode>
@@ -64,33 +62,8 @@ final class ForbiddenExtendOfNonAbstractClassRule implements Rule
             return [];
         }
 
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-final class SomeClass extends ParentClass
-{
-}
-
-class ParentClass
-{
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-final class SomeClass extends ParentClass
-{
-}
-
-abstract class ParentClass
-{
-}
-CODE_SAMPLE
-            ),
-        ]);
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::FORBIDDEN_EXTEND_OF_NON_ABSTRACT_CLASS)
+            ->build()];
     }
 }

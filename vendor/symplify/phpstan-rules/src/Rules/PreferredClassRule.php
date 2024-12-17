@@ -14,15 +14,11 @@ use PhpParser\Node\Param;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Reflection\ClassReflection;
-use PHPStan\Rules\RuleError;
+use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use SplFileInfo;
-use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
- * @implements Rule<Node>
  * @see \Symplify\PHPStanRules\Tests\Rules\PreferredClassRule\PreferredClassRuleTest
  */
 final class PreferredClassRule extends AbstractSymplifyRule
@@ -36,6 +32,7 @@ final class PreferredClassRule extends AbstractSymplifyRule
      * @var string
      */
     public const ERROR_MESSAGE = 'Instead of "%s" class/interface use "%s"';
+
     /**
      * @param string[] $oldToPreferredClasses
      */
@@ -43,10 +40,12 @@ final class PreferredClassRule extends AbstractSymplifyRule
     {
         $this->oldToPreferredClasses = $oldToPreferredClasses;
     }
+
     public function getNodeTypes(): array
     {
         return [New_::class, Name::class, InClassNode::class, StaticCall::class, Instanceof_::class];
     }
+
     /**
      * @param New_|Name|InClassNode|StaticCall|Instanceof_ $node
      */
@@ -66,40 +65,9 @@ final class PreferredClassRule extends AbstractSymplifyRule
 
         return $this->processClassName($node->toString());
     }
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new ConfiguredCodeSample(
-                <<<'CODE_SAMPLE'
-class SomeClass
-{
-    public function run()
-    {
-        return new SplFileInfo('...');
-    }
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-class SomeClass
-{
-    public function run()
-    {
-        return new CustomFileInfo('...');
-    }
-}
-CODE_SAMPLE
-                ,
-                [
-                    'oldToPreferredClasses' => [
-                        SplFileInfo::class => 'CustomFileInfo',
-                    ],
-                ]
-            ),
-        ]);
-    }
+
     /**
-     * @return string[]
+     * @return IdentifierRuleError[]
      */
     private function processNew(New_ $new): array
     {
@@ -110,8 +78,9 @@ CODE_SAMPLE
         $className = $new->class->toString();
         return $this->processClassName($className);
     }
+
     /**
-     * @return list<RuleError>
+     * @return list<IdentifierRuleError>
      */
     private function processClass(InClassNode $inClassNode): array
     {
@@ -136,13 +105,16 @@ CODE_SAMPLE
             }
 
             $errorMessage = sprintf(self::ERROR_MESSAGE, $oldClass, $prefferedClass);
-            return [RuleErrorBuilder::message($errorMessage)->build()];
+            return [RuleErrorBuilder::message($errorMessage)
+                ->identifier(RuleIdentifier::PREFERRED_CLASS)
+                ->build()];
         }
 
         return [];
     }
+
     /**
-     * @return list<RuleError>
+     * @return list<IdentifierRuleError>
      */
     private function processClassName(string $className): array
     {
@@ -152,13 +124,18 @@ CODE_SAMPLE
             }
 
             $errorMessage = sprintf(self::ERROR_MESSAGE, $oldClass, $prefferedClass);
-            return [RuleErrorBuilder::message($errorMessage)->build()];
+            $ruleError = RuleErrorBuilder::message($errorMessage)
+                ->identifier(RuleIdentifier::PREFERRED_CLASS)
+                ->build();
+
+            return [$ruleError];
         }
 
         return [];
     }
+
     /**
-     * @return list<RuleError>
+     * @return list<IdentifierRuleError>
      * @param \PhpParser\Node\Expr\StaticCall|\PhpParser\Node\Expr\Instanceof_ $node
      */
     private function processExprWithClass($node): array

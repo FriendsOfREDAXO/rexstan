@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules\Rector;
 
-use Nette\Utils\FileSystem;
 use Nette\Utils\Strings;
 use PhpParser\Node;
 use PHPStan\Analyser\Scope;
@@ -12,12 +11,13 @@ use PHPStan\Node\InClassNode;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Rector\Contract\Rector\ConfigurableRectorInterface;
-use Rector\Contract\Rector\RectorInterface;
 use Rector\Set\ValueObject\DowngradeSetList;
 use Rector\Set\ValueObject\SetList;
 use SplFileInfo;
+use Symplify\PHPStanRules\Enum\ClassName;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\Exception\ShouldNotHappenException;
+use Symplify\PHPStanRules\FileSystem\FileSystem;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\Rector\PhpUpgradeDowngradeRegisteredInSetRule\PhpUpgradeDowngradeRegisteredInSetRuleTest
@@ -65,7 +65,9 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
         }
 
         $errorMessage = $this->createErrorMessage($configFilePath, $className);
-        return [RuleErrorBuilder::message($errorMessage)->build()];
+        return [RuleErrorBuilder::message($errorMessage)
+            ->identifier(RuleIdentifier::RECTOR_UPGRADE_DOWNGRADE_REGISTERED_IN_SET)
+            ->build()];
     }
 
     private function resolveRelatedConfigFilePath(string $className): ?string
@@ -108,12 +110,12 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
             return null;
         }
 
-        if (! $classReflection->isSubclassOf(RectorInterface::class)) {
+        if (! $classReflection->isSubclassOf(ClassName::RECTOR)) {
             return null;
         }
 
         // configurable Rector can be registered optionally
-        if ($classReflection->isSubclassOf(ConfigurableRectorInterface::class)) {
+        if ($classReflection->isSubclassOf(ClassName::CONFIGURABLE_RECTOR)) {
             return null;
         }
 
