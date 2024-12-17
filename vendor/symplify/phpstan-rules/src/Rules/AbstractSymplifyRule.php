@@ -8,7 +8,6 @@ use PhpParser\Node;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use Symplify\PHPStanRules\Contract\ManyNodeRuleInterface;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
 
 /**
  * @implements Rule<Node>

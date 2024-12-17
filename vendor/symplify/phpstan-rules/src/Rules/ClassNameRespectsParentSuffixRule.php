@@ -5,24 +5,17 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules;
 
 use Exception;
-use PHP_CodeSniffer\Sniffs\Sniff;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Reflection\ClassReflection;
+use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
-use PHPUnit\Framework\TestCase;
-use Rector\Rector\AbstractRector;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symplify\PHPStanRules\Enum\ClassName;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\Naming\ClassToSuffixResolver;
-use Symplify\RuleDocGenerator\Contract\ConfigurableRuleInterface;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\ConfiguredCodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
  * @implements Rule<InClassNode>
@@ -44,14 +37,14 @@ final class ClassNameRespectsParentSuffixRule implements Rule
      */
     private const DEFAULT_PARENT_CLASSES = [
         'Symfony\Component\Console\Command\Command',
-        EventSubscriberInterface::class,
-        AbstractController::class,
-        Sniff::class,
-        TestCase::class,
+        ClassName::EVENT_DISPATCHER_INTERFACE,
+        ClassName::SYMFONY_ABSTRACT_CONTROLLER,
+        ClassName::SNIFF,
+        ClassName::PHPUNIT_TEST_CASE,
         Exception::class,
         'PhpCsFixer\Fixer\FixerInterface',
         Rule::class,
-        AbstractRector::class,
+        ClassName::ABSTRACT_RECTOR,
     ];
 
     /**
@@ -95,31 +88,8 @@ final class ClassNameRespectsParentSuffixRule implements Rule
         return $this->processClassNameAndShort($classReflection);
     }
 
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new ConfiguredCodeSample(
-                <<<'CODE_SAMPLE'
-class Some extends Command
-{
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-class SomeCommand extends Command
-{
-}
-CODE_SAMPLE
-                ,
-                [
-                    'parentClasses' => ['Symfony\Component\Console\Command\Command'],
-                ]
-            ),
-        ]);
-    }
-
     /**
-     * @return list<RuleError>
+     * @return list<IdentifierRuleError>
      */
     private function processClassNameAndShort(ClassReflection $classReflection): array
     {
@@ -134,7 +104,9 @@ CODE_SAMPLE
             }
 
             $errorMessage = sprintf(self::ERROR_MESSAGE, $expectedSuffix);
-            return [RuleErrorBuilder::message($errorMessage)->build()];
+            return [RuleErrorBuilder::message($errorMessage)
+                ->identifier(RuleIdentifier::CLASS_NAME_RESPECTS_PARENT_SUFFIX)
+                ->build()];
         }
 
         return [];

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Symplify\PHPStanRules\Rules;
 
-use Nette\Utils\Strings;
 use PhpParser\Comment\Doc;
 use PhpParser\Node;
 use PhpParser\Node\Scalar\String_;
@@ -12,9 +11,7 @@ use PhpParser\Node\Stmt\ClassConst;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @implements Rule<ClassConst>
@@ -67,35 +64,15 @@ final class AnnotateRegexClassConstWithRegexLinkRule implements Rule
             return [];
         }
 
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [new CodeSample(
-            <<<'CODE_SAMPLE'
-class SomeClass
-{
-    private const COMPLICATED_REGEX = '#some_complicated_stu|ff#';
-}
-CODE_SAMPLE
-            ,
-            <<<'CODE_SAMPLE'
-class SomeClass
-{
-    /**
-     * @see https://regex101.com/r/SZr0X5/12
-     */
-    private const COMPLICATED_REGEX = '#some_complicated_stu|ff#';
-}
-CODE_SAMPLE
-        )]);
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::REGEX_ANNOTATE_CLASS_CONST)
+            ->build()];
     }
 
     private function isNonSingleCharRegexPattern(string $value): bool
     {
         // skip 1-char regexs
-        if (Strings::length($value) < 4) {
+        if (strlen($value) < 4) {
             return false;
         }
 
@@ -107,11 +84,12 @@ CODE_SAMPLE
 
         $patternWithoutModifiers = rtrim($value, self::ALL_MODIFIERS);
 
-        if (Strings::length($patternWithoutModifiers) < 1) {
+        if (strlen($patternWithoutModifiers) < 1) {
             return false;
         }
 
-        $lastChar = Strings::substring($patternWithoutModifiers, -1, 1);
+        $lastChar = substr($patternWithoutModifiers, -1, 1);
+
         // this is probably a regex
         return $firstChar === $lastChar;
     }

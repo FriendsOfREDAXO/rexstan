@@ -10,9 +10,7 @@ use PhpParser\Node\Stmt\Interface_;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\RuleDocGenerator\Contract\DocumentedRuleInterface;
-use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
-use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
+use Symplify\PHPStanRules\Enum\RuleIdentifier;
 
 /**
  * @see \Symplify\PHPStanRules\Tests\Rules\CheckRequiredInterfaceInContractNamespaceRule\CheckRequiredInterfaceInContractNamespaceRuleTest
@@ -50,29 +48,8 @@ final class CheckRequiredInterfaceInContractNamespaceRule implements Rule
             return [];
         }
 
-        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)->build()];
-    }
-
-    public function getRuleDefinition(): RuleDefinition
-    {
-        return new RuleDefinition(self::ERROR_MESSAGE, [
-            new CodeSample(
-                <<<'CODE_SAMPLE'
-namespace App\Repository;
-
-interface ProductRepositoryInterface
-{
-}
-CODE_SAMPLE
-                ,
-                <<<'CODE_SAMPLE'
-namespace App\Contract\Repository;
-
-interface ProductRepositoryInterface
-{
-}
-CODE_SAMPLE
-            ),
-        ]);
+        return [RuleErrorBuilder::message(self::ERROR_MESSAGE)
+            ->identifier(RuleIdentifier::REQUIRED_INTERFACE_CONTRACT_NAMESPACE)
+            ->build()];
     }
 }
