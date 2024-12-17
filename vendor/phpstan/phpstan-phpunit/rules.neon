@@ -9,6 +9,10 @@ rules:
 	- PHPStan\Rules\PHPUnit\NoMissingSpaceInMethodAnnotationRule
 	- PHPStan\Rules\PHPUnit\ShouldCallParentMethodsRule
 
+conditionalTags:
+	PHPStan\Rules\PHPUnit\AssertEqualsIsDiscouragedRule:
+		phpstan.rules.rule: [%strictRulesInstalled%, %featureToggles.bleedingEdge%]
+
 services:
 	-
 		class: PHPStan\Rules\PHPUnit\DataProviderDeclarationRule
@@ -17,3 +21,6 @@ services:
 			deprecationRulesInstalled: %deprecationRulesInstalled%
 		tags:
 			- phpstan.rules.rule
+
+	-
+		class: PHPStan\Rules\PHPUnit\AssertEqualsIsDiscouragedRule

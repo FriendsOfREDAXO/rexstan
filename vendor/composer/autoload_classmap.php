@@ -949,6 +949,7 @@ return array(
     'PHPStan\\Rules\\Operators\\OperandsInArithmeticSubtractionRule' => $vendorDir . '/phpstan/phpstan-strict-rules/src/Rules/Operators/OperandsInArithmeticSubtractionRule.php',
     'PHPStan\\Rules\\Operators\\OperatorRuleHelper' => $vendorDir . '/phpstan/phpstan-strict-rules/src/Rules/Operators/OperatorRuleHelper.php',
     'PHPStan\\Rules\\PHPUnit\\AnnotationHelper' => $vendorDir . '/phpstan/phpstan-phpunit/src/Rules/PHPUnit/AnnotationHelper.php',
+    'PHPStan\\Rules\\PHPUnit\\AssertEqualsIsDiscouragedRule' => $vendorDir . '/phpstan/phpstan-phpunit/src/Rules/PHPUnit/AssertEqualsIsDiscouragedRule.php',
     'PHPStan\\Rules\\PHPUnit\\AssertRuleHelper' => $vendorDir . '/phpstan/phpstan-phpunit/src/Rules/PHPUnit/AssertRuleHelper.php',
     'PHPStan\\Rules\\PHPUnit\\AssertSameBooleanExpectedRule' => $vendorDir . '/phpstan/phpstan-phpunit/src/Rules/PHPUnit/AssertSameBooleanExpectedRule.php',
     'PHPStan\\Rules\\PHPUnit\\AssertSameNullExpectedRule' => $vendorDir . '/phpstan/phpstan-phpunit/src/Rules/PHPUnit/AssertSameNullExpectedRule.php',
