@@ -125,9 +125,9 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'PHPStan\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
-            1 => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src',
-            2 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
-            3 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
+            1 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
+            2 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
+            3 => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src',
         ),
         'JsonSchema\\' => 
         array (
@@ -1103,6 +1103,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'PHPStan\\Rules\\Operators\\OperandsInArithmeticSubtractionRule' => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src/Rules/Operators/OperandsInArithmeticSubtractionRule.php',
         'PHPStan\\Rules\\Operators\\OperatorRuleHelper' => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src/Rules/Operators/OperatorRuleHelper.php',
         'PHPStan\\Rules\\PHPUnit\\AnnotationHelper' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/Rules/PHPUnit/AnnotationHelper.php',
+        'PHPStan\\Rules\\PHPUnit\\AssertEqualsIsDiscouragedRule' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/Rules/PHPUnit/AssertEqualsIsDiscouragedRule.php',
         'PHPStan\\Rules\\PHPUnit\\AssertRuleHelper' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/Rules/PHPUnit/AssertRuleHelper.php',
         'PHPStan\\Rules\\PHPUnit\\AssertSameBooleanExpectedRule' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/Rules/PHPUnit/AssertSameBooleanExpectedRule.php',
         'PHPStan\\Rules\\PHPUnit\\AssertSameNullExpectedRule' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/Rules/PHPUnit/AssertSameNullExpectedRule.php',
