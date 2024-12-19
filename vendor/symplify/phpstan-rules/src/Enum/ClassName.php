@@ -14,11 +14,6 @@ final class ClassName
     /**
      * @var string
      */
-    public const NETTE_STRINGS = 'Nette\Utils\Strings';
-
-    /**
-     * @var string
-     */
     public const SYMFONY_ABSTRACT_CONTROLLER = 'Symfony\Bundle\FrameworkBundle\Controller\AbstractController';
 
     /**
@@ -29,7 +24,12 @@ final class ClassName
     /**
      * @var string
      */
-    public const EVENT_DISPATCHER_INTERFACE = 'Symfony\Component\EventDispatcher\EventSubscriberInterface';
+    public const EVENT_DISPATCHER_INTERFACE = 'Symfony\Component\EventDispatcher\EventDispatcherInterface';
+
+    /**
+     * @var string
+     */
+    public const EVENT_SUBSCRIBER_INTERFACE = 'Symfony\Component\EventDispatcher\EventSubscriberInterface';
 
     /**
      * @var string
@@ -55,4 +55,29 @@ final class ClassName
      * @var string
      */
     public const RECTOR_ATTRIBUTE_KEY = 'Rector\NodeTypeResolver\Node\AttributeKey';
+
+    /**
+     * @var string
+     */
+    public const FORM_EVENTS = 'Symfony\Component\Form\FormEvents';
+
+    /**
+     * @var string
+     */
+    public const SYMFONY_CONTROLLER = 'Symfony\Bundle\FrameworkBundle\Controller\Controller';
+
+    /**
+     * @var string
+     */
+    public const DOCTRINE_FIXTURE_INTERFACE = 'Doctrine\Common\DataFixtures\FixtureInterface';
+
+    /**
+     * @var string
+     */
+    public const ENTITY_REPOSITORY_CLASS = 'Doctrine\ORM\EntityRepository';
+
+    /**
+     * @var string
+     */
+    public const MOCK_OBJECT_CLASS = 'PHPUnit\Framework\MockObject\MockObject';
 }
