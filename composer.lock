@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "46425b976382ded86a3a0bba5e41b8bc",
+    "content-hash": "c45719abfdf04b928f507b89befe46a4",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1928,16 +1928,16 @@
         },
         {
             "name": "tomasvotruba/type-coverage",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/type-coverage.git",
-                "reference": "8be49c45aaba2615bf82829fb3ce3cab81e878b0"
+                "reference": "4c3cd7bf660dfd9025d5f583eb32101f9aaf8fde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/8be49c45aaba2615bf82829fb3ce3cab81e878b0",
-                "reference": "8be49c45aaba2615bf82829fb3ce3cab81e878b0",
+                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/4c3cd7bf660dfd9025d5f583eb32101f9aaf8fde",
+                "reference": "4c3cd7bf660dfd9025d5f583eb32101f9aaf8fde",
                 "shasum": ""
             },
             "require": {
@@ -1969,7 +1969,7 @@
             ],
             "support": {
                 "issues": "https://github.com/TomasVotruba/type-coverage/issues",
-                "source": "https://github.com/TomasVotruba/type-coverage/tree/2.0.0"
+                "source": "https://github.com/TomasVotruba/type-coverage/tree/2.0.1"
             },
             "funding": [
                 {
@@ -1981,7 +1981,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-12-12T11:39:04+00:00"
+            "time": "2024-12-26T11:46:24+00:00"
         },
         {
             "name": "tomasvotruba/unused-public",
