@@ -6,13 +6,13 @@ namespace Symplify\PHPStanRules\Rules\Doctrine;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Doctrine\DoctrineEntityDocumentAnalyser;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\NodeAnalyzer\MethodCallNameAnalyzer;
 
 /**
  * The ORM entities and ODM documents should never be mocked, as it leads to typeless code.
@@ -48,7 +48,7 @@ final class NoEntityMockingRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if (! $this->isCreateMockMethod($node)) {
+        if (! MethodCallNameAnalyzer::isThisMethodCall($node, 'createMock')) {
             return [];
         }
 
@@ -73,19 +73,5 @@ final class NoEntityMockingRule implements Rule
         }
 
         return [];
-    }
-
-    private function isCreateMockMethod(MethodCall $methodCall): bool
-    {
-        if ($methodCall->isFirstClassCallable()) {
-            return false;
-        }
-
-        if (! $methodCall->name instanceof Identifier) {
-            return false;
-        }
-
-        $methodName = $methodCall->name->toString();
-        return $methodName === 'createMock';
     }
 }

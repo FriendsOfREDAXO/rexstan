@@ -26,6 +26,11 @@ final class ConstantTypeCoverageRule implements Rule
     public const ERROR_MESSAGE = 'Out of %d possible constant types, only %d - %.1f %% actually have it. Add more constant types to get over %s %%';
 
     /**
+     * @var string
+     */
+    private const IDENTIFIER = 'typeCoverage.constantTypeCoverage';
+
+    /**
      * @readonly
      */
     private TypeCoverageFormatter $typeCoverageFormatter;
@@ -80,6 +85,7 @@ final class ConstantTypeCoverageRule implements Rule
 
         return $this->typeCoverageFormatter->formatErrors(
             self::ERROR_MESSAGE,
+            self::IDENTIFIER,
             $this->configuration->getRequiredConstantTypeLevel(),
             $typeCountAndMissingTypes
         );
