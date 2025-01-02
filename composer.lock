@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2c2164e0c47533804dd6413565d41087",
+    "content-hash": "88475cd4ead6b663496c19cca1cb66b4",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1823,16 +1823,16 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "14.1.1",
+            "version": "14.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "9db21cd17a6780b6ef8e524b29132fe282bae686"
+                "reference": "321102e16bd758a3fee2a18f42a1ea7d69c0fd6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/9db21cd17a6780b6ef8e524b29132fe282bae686",
-                "reference": "9db21cd17a6780b6ef8e524b29132fe282bae686",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/321102e16bd758a3fee2a18f42a1ea7d69c0fd6e",
+                "reference": "321102e16bd758a3fee2a18f42a1ea7d69c0fd6e",
                 "shasum": ""
             },
             "require": {
@@ -1861,7 +1861,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/14.1.1"
+                "source": "https://github.com/symplify/phpstan-rules/tree/14.1.2"
             },
             "funding": [
                 {
@@ -1873,7 +1873,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-12-25T09:14:42+00:00"
+            "time": "2025-01-01T15:58:31+00:00"
         },
         {
             "name": "tomasvotruba/cognitive-complexity",
@@ -2103,13 +2103,13 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.4"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "platform-overrides": {
         "php": "7.4.30"
     },
