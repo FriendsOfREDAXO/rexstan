@@ -17,7 +17,7 @@
         "tomasvotruba/cognitive-complexity": "1.0",
         "tomasvotruba/type-coverage": "2.0.1",
         "tomasvotruba/unused-public": "2.0.0",
-        "rector/type-perfect": "2.0.1"
+        "rector/type-perfect": "2.0.2"
     },
     "autoload": {
         "classmap": [

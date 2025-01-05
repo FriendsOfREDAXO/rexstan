@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "625874dccb4b5cf425f8804cc89b1390",
+    "content-hash": "4e6e1a1508083bc1a847d1691d105886",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1360,16 +1360,16 @@
         },
         {
             "name": "rector/type-perfect",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/type-perfect.git",
-                "reference": "6fe66697a6f9f79401b7d5fc92b619914fbda320"
+                "reference": "eefd712f182ebdde175090ccdb1ee8acb0265986"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/type-perfect/zipball/6fe66697a6f9f79401b7d5fc92b619914fbda320",
-                "reference": "6fe66697a6f9f79401b7d5fc92b619914fbda320",
+                "url": "https://api.github.com/repos/rectorphp/type-perfect/zipball/eefd712f182ebdde175090ccdb1ee8acb0265986",
+                "reference": "eefd712f182ebdde175090ccdb1ee8acb0265986",
                 "shasum": ""
             },
             "require": {
@@ -1397,7 +1397,7 @@
             "description": "Next level type declaration checks",
             "support": {
                 "issues": "https://github.com/rectorphp/type-perfect/issues",
-                "source": "https://github.com/rectorphp/type-perfect/tree/2.0.1"
+                "source": "https://github.com/rectorphp/type-perfect/tree/2.0.2"
             },
             "funding": [
                 {
@@ -1409,7 +1409,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-12-30T10:41:26+00:00"
+            "time": "2025-01-04T09:04:08+00:00"
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
