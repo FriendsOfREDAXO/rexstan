@@ -74,7 +74,10 @@ final class CollectorMetadataPrinter
                 }
             }
 
-            $stringArgTypes[] = $this->printTypeToString($argType);
+            $printedArgType = $this->printTypeToString($argType);
+            $printedArgType = $this->normalizeDateTime($printedArgType);
+
+            $stringArgTypes[] = $printedArgType;
         }
 
         return implode('|', $stringArgTypes);
@@ -103,6 +106,9 @@ final class CollectorMetadataPrinter
             $printedParamType = str_replace('\Closure', 'callable', $printedParamType);
             $printedParamType = ltrim($printedParamType, '\\');
             $printedParamType = str_replace('|\\', '|', $printedParamType);
+
+            // to avoid DateTime vs DateTimeImmutable vs DateTimeInterface conflicts
+            $printedParamType = $this->normalizeDateTime($printedParamType);
 
             $printedParamTypes[] = $printedParamType;
         }
@@ -188,5 +194,18 @@ final class CollectorMetadataPrinter
         }
 
         return $type->describe(VerbosityLevel::typeOnly());
+    }
+
+    private function normalizeDateTime(string $printedType): string
+    {
+        if ($printedType === 'DateTimeImmutable') {
+            return 'DateTimeInterface';
+        }
+
+        if ($printedType === 'DateTime') {
+            return 'DateTimeInterface';
+        }
+
+        return $printedType;
     }
 }

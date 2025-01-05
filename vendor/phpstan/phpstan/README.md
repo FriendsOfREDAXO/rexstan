@@ -64,6 +64,8 @@ can be checked before you run the actual line.
 &nbsp;&nbsp;&nbsp;
 <a href="https://route4me.com/"><img src="website/src/images/sponsor/route4me.png" alt="Route4Me: Route Optimizer and Route Planner Software" width="283" height="64"></a>
 <br>
+<a href="https://werkenbijbelsimpel.nl/en/about-us/"><img src="website/src/images/sponsor/belsimpel.png" alt="Belsimpel" width="284" height="64"></a>
+&nbsp;&nbsp;&nbsp;
 <a href="https://jobs.ticketswap.com/"><img src="website/src/images/sponsor/ticketswap.png" alt="TicketSwap" width="269" height="64"></a>
 
 

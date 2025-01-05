@@ -1019,17 +1019,17 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.0",
-            "version_normalized": "2.1.0.0",
+            "version": "2.1.1",
+            "version_normalized": "2.1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "2392d360fdf54ea253aa6c68cad1d4ba2e54e927"
+                "reference": "cd6e973e04b4c2b94c86e8612b5a65f0da0e08e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/2392d360fdf54ea253aa6c68cad1d4ba2e54e927",
-                "reference": "2392d360fdf54ea253aa6c68cad1d4ba2e54e927",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/cd6e973e04b4c2b94c86e8612b5a65f0da0e08e7",
+                "reference": "cd6e973e04b4c2b94c86e8612b5a65f0da0e08e7",
                 "shasum": ""
             },
             "require": {
@@ -1038,7 +1038,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2024-12-31T07:30:03+00:00",
+            "time": "2025-01-05T16:43:48+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -1235,17 +1235,17 @@
         },
         {
             "name": "phpstan/phpstan-symfony",
-            "version": "2.0.0",
-            "version_normalized": "2.0.0.0",
+            "version": "2.0.1",
+            "version_normalized": "2.0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-symfony.git",
-                "reference": "1ef4dce2baabd464c2dd3109d051bad94efa1e79"
+                "reference": "c08cd8e54a08d651bc402d304cfa161c3c3766c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/1ef4dce2baabd464c2dd3109d051bad94efa1e79",
-                "reference": "1ef4dce2baabd464c2dd3109d051bad94efa1e79",
+                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/c08cd8e54a08d651bc402d304cfa161c3c3766c4",
+                "reference": "c08cd8e54a08d651bc402d304cfa161c3c3766c4",
                 "shasum": ""
             },
             "require": {
@@ -1273,7 +1273,7 @@
                 "symfony/serializer": "^5.4",
                 "symfony/service-contracts": "^2.2.0"
             },
-            "time": "2024-11-06T10:13:40+00:00",
+            "time": "2025-01-04T13:58:15+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1303,7 +1303,7 @@
             "description": "Symfony Framework extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-symfony/issues",
-                "source": "https://github.com/phpstan/phpstan-symfony/tree/2.0.0"
+                "source": "https://github.com/phpstan/phpstan-symfony/tree/2.0.1"
             },
             "install-path": "../phpstan/phpstan-symfony"
         },
@@ -1414,17 +1414,17 @@
         },
         {
             "name": "rector/type-perfect",
-            "version": "2.0.1",
-            "version_normalized": "2.0.1.0",
+            "version": "2.0.2",
+            "version_normalized": "2.0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/type-perfect.git",
-                "reference": "6fe66697a6f9f79401b7d5fc92b619914fbda320"
+                "reference": "eefd712f182ebdde175090ccdb1ee8acb0265986"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/type-perfect/zipball/6fe66697a6f9f79401b7d5fc92b619914fbda320",
-                "reference": "6fe66697a6f9f79401b7d5fc92b619914fbda320",
+                "url": "https://api.github.com/repos/rectorphp/type-perfect/zipball/eefd712f182ebdde175090ccdb1ee8acb0265986",
+                "reference": "eefd712f182ebdde175090ccdb1ee8acb0265986",
                 "shasum": ""
             },
             "require": {
@@ -1432,7 +1432,7 @@
                 "phpstan/phpstan": "^2.0",
                 "webmozart/assert": "^1.11"
             },
-            "time": "2024-12-30T10:41:26+00:00",
+            "time": "2025-01-04T09:04:08+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1454,7 +1454,7 @@
             "description": "Next level type declaration checks",
             "support": {
                 "issues": "https://github.com/rectorphp/type-perfect/issues",
-                "source": "https://github.com/rectorphp/type-perfect/tree/2.0.1"
+                "source": "https://github.com/rectorphp/type-perfect/tree/2.0.2"
             },
             "funding": [
                 {
@@ -1898,17 +1898,17 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "14.1.1",
-            "version_normalized": "14.1.1.0",
+            "version": "14.1.4",
+            "version_normalized": "14.1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "9db21cd17a6780b6ef8e524b29132fe282bae686"
+                "reference": "d9321e57abdc21a988bd83eeeb910d22c3eb94a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/9db21cd17a6780b6ef8e524b29132fe282bae686",
-                "reference": "9db21cd17a6780b6ef8e524b29132fe282bae686",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/d9321e57abdc21a988bd83eeeb910d22c3eb94a9",
+                "reference": "d9321e57abdc21a988bd83eeeb910d22c3eb94a9",
                 "shasum": ""
             },
             "require": {
@@ -1917,7 +1917,7 @@
                 "phpstan/phpstan": "^2.0",
                 "webmozart/assert": "^1.11"
             },
-            "time": "2024-12-25T09:14:42+00:00",
+            "time": "2025-01-02T16:58:00+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1939,7 +1939,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/14.1.1"
+                "source": "https://github.com/symplify/phpstan-rules/tree/14.1.4"
             },
             "funding": [
                 {
