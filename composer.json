@@ -15,7 +15,7 @@
         "staabm/phpstan-todo-by": "0.2",
         "symplify/phpstan-rules": "14.1.4",
         "tomasvotruba/cognitive-complexity": "1.0",
-        "tomasvotruba/type-coverage": "2.0.1",
+        "tomasvotruba/type-coverage": "2.0.2",
         "tomasvotruba/unused-public": "2.0.0",
         "rector/type-perfect": "2.0.2"
     },
