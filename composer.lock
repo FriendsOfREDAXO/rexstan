@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "05d98b3de7cb23edeb69b5bfeffb8e23",
+    "content-hash": "c05ebbe14686c567999502a35748f8b3",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1823,16 +1823,16 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "14.2.3",
+            "version": "14.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "ca360cdeadf96a4c0e411b727c839b2bb1e9b9c0"
+                "reference": "619dbf6994efce19d8671d060c8cbb575d31dfb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/ca360cdeadf96a4c0e411b727c839b2bb1e9b9c0",
-                "reference": "ca360cdeadf96a4c0e411b727c839b2bb1e9b9c0",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/619dbf6994efce19d8671d060c8cbb575d31dfb8",
+                "reference": "619dbf6994efce19d8671d060c8cbb575d31dfb8",
                 "shasum": ""
             },
             "require": {
@@ -1850,6 +1850,9 @@
                 }
             },
             "autoload": {
+                "files": [
+                    "src/functions/fast-functions.php"
+                ],
                 "psr-4": {
                     "Symplify\\PHPStanRules\\": "src"
                 }
@@ -1861,7 +1864,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/14.2.3"
+                "source": "https://github.com/symplify/phpstan-rules/tree/14.2.5"
             },
             "funding": [
                 {
@@ -1873,7 +1876,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-07T14:12:09+00:00"
+            "time": "2025-01-13T09:27:41+00:00"
         },
         {
             "name": "tomasvotruba/cognitive-complexity",
