@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "81d7a97d55c2c3c9ae2f140bc815e238",
+    "content-hash": "05d98b3de7cb23edeb69b5bfeffb8e23",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1142,16 +1142,16 @@
         },
         {
             "name": "phpstan/phpstan-strict-rules",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-strict-rules.git",
-                "reference": "ed6fea0ad4ad9c7e25f3ad2e7c4d420cf1e67fe3"
+                "reference": "02277ce4b0dd03d74f15282064f8f027d1dec9cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-strict-rules/zipball/ed6fea0ad4ad9c7e25f3ad2e7c4d420cf1e67fe3",
-                "reference": "ed6fea0ad4ad9c7e25f3ad2e7c4d420cf1e67fe3",
+                "url": "https://api.github.com/repos/phpstan/phpstan-strict-rules/zipball/02277ce4b0dd03d74f15282064f8f027d1dec9cc",
+                "reference": "02277ce4b0dd03d74f15282064f8f027d1dec9cc",
                 "shasum": ""
             },
             "require": {
@@ -1184,9 +1184,9 @@
             "description": "Extra strict and opinionated rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-strict-rules/issues",
-                "source": "https://github.com/phpstan/phpstan-strict-rules/tree/2.0.1"
+                "source": "https://github.com/phpstan/phpstan-strict-rules/tree/2.0.2"
             },
-            "time": "2024-12-12T20:21:10+00:00"
+            "time": "2025-01-19T13:03:11+00:00"
         },
         {
             "name": "phpstan/phpstan-symfony",
@@ -2113,5 +2113,5 @@
     "platform-overrides": {
         "php": "7.4.30"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
