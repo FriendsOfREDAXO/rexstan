@@ -5,16 +5,14 @@ namespace Spaze\PHPStan\Rules\Disallowed\Calls;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\FuncCall;
-use PhpParser\Node\Name;
 use PHPStan\Analyser\Scope;
-use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\ShouldNotHappenException;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedCall;
 use Spaze\PHPStan\Rules\Disallowed\DisallowedCallFactory;
-use Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedCallsRuleErrors;
-use Spaze\PHPStan\Rules\Disallowed\RuleErrors\ErrorIdentifiers;
+use Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedCallableParameterRuleErrors;
+use Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedFunctionRuleErrors;
 
 /**
  * Reports on dynamically calling a disallowed function.
@@ -25,28 +23,32 @@ use Spaze\PHPStan\Rules\Disallowed\RuleErrors\ErrorIdentifiers;
 class FunctionCalls implements Rule
 {
 
-	private DisallowedCallsRuleErrors $disallowedCallsRuleErrors;
+	private DisallowedFunctionRuleErrors $disallowedFunctionRuleErrors;
+
+	private DisallowedCallableParameterRuleErrors $disallowedCallableParameterRuleErrors;
 
 	/** @var list<DisallowedCall> */
 	private array $disallowedCalls;
 
-	private ReflectionProvider $reflectionProvider;
-
 
 	/**
-	 * @param DisallowedCallsRuleErrors $disallowedCallsRuleErrors
+	 * @param DisallowedFunctionRuleErrors $disallowedFunctionRuleErrors
+	 * @param DisallowedCallableParameterRuleErrors $disallowedCallableParameterRuleErrors
 	 * @param DisallowedCallFactory $disallowedCallFactory
-	 * @param ReflectionProvider $reflectionProvider
 	 * @param array $forbiddenCalls
 	 * @phpstan-param ForbiddenCallsConfig $forbiddenCalls
 	 * @noinspection PhpUndefinedClassInspection ForbiddenCallsConfig is a type alias defined in PHPStan config
 	 * @throws ShouldNotHappenException
 	 */
-	public function __construct(DisallowedCallsRuleErrors $disallowedCallsRuleErrors, DisallowedCallFactory $disallowedCallFactory, ReflectionProvider $reflectionProvider, array $forbiddenCalls)
-	{
-		$this->disallowedCallsRuleErrors = $disallowedCallsRuleErrors;
+	public function __construct(
+		DisallowedFunctionRuleErrors $disallowedFunctionRuleErrors,
+		DisallowedCallableParameterRuleErrors $disallowedCallableParameterRuleErrors,
+		DisallowedCallFactory $disallowedCallFactory,
+		array $forbiddenCalls
+	) {
+		$this->disallowedFunctionRuleErrors = $disallowedFunctionRuleErrors;
+		$this->disallowedCallableParameterRuleErrors = $disallowedCallableParameterRuleErrors;
 		$this->disallowedCalls = $disallowedCallFactory->createFromConfig($forbiddenCalls);
-		$this->reflectionProvider = $reflectionProvider;
 	}
 
 
@@ -64,30 +66,9 @@ class FunctionCalls implements Rule
 	 */
 	public function processNode(Node $node, Scope $scope): array
 	{
-		if (!($node->name instanceof Name)) {
-			return [];
-		}
-		$namespacedName = $node->name->getAttribute('namespacedName');
-		if ($namespacedName !== null && !($namespacedName instanceof Name)) {
-			throw new ShouldNotHappenException();
-		}
-		$displayName = $node->name->getAttribute('originalName');
-		if ($displayName !== null && !($displayName instanceof Name)) {
-			throw new ShouldNotHappenException();
-		}
-		foreach ([$namespacedName, $node->name] as $name) {
-			if ($name && $this->reflectionProvider->hasFunction($name, $scope)) {
-				$functionReflection = $this->reflectionProvider->getFunction($name, $scope);
-				$definedIn = $functionReflection->isBuiltin() ? null : $functionReflection->getFileName();
-			} else {
-				$definedIn = null;
-			}
-			$message = $this->disallowedCallsRuleErrors->get($node, $scope, (string)$name, (string)($displayName ?? $node->name), $definedIn, $this->disallowedCalls, ErrorIdentifiers::DISALLOWED_FUNCTION);
-			if ($message) {
-				return $message;
-			}
-		}
-		return [];
+		$errors = $this->disallowedFunctionRuleErrors->get($node, $scope, $this->disallowedCalls);
+		$paramErrors = $this->disallowedCallableParameterRuleErrors->getForFunction($node, $scope);
+		return $errors || $paramErrors ? array_merge($errors, $paramErrors) : [];
 	}
 
 }

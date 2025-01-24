@@ -11,7 +11,7 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Doctrine\DoctrineEntityDocumentAnalyser;
-use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Enum\DoctrineRuleIdentifier;
 use Symplify\PHPStanRules\NodeAnalyzer\MethodCallNameAnalyzer;
 
 /**
@@ -66,7 +66,7 @@ final class NoEntityMockingRule implements Rule
             }
 
             $ruleError = RuleErrorBuilder::message(self::ERROR_MESSAGE)
-                ->identifier(RuleIdentifier::NO_ENTITY_MOCKING)
+                ->identifier(DoctrineRuleIdentifier::NO_ENTITY_MOCKING)
                 ->build();
 
             return [$ruleError];

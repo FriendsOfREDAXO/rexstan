@@ -30,6 +30,7 @@ class ErrorIdentifiers
 	public const DISALLOWED_IF = 'disallowed.if';
 	public const DISALLOWED_INCLUDE = 'disallowed.include';
 	public const DISALLOWED_INCLUDE_ONCE = 'disallowed.includeOnce';
+	public const DISALLOWED_ISSET = 'disallowed.isset';
 	public const DISALLOWED_MATCH = 'disallowed.match';
 	public const DISALLOWED_METHOD = 'disallowed.method';
 	public const DISALLOWED_NAMESPACE = 'disallowed.namespace';
@@ -40,6 +41,7 @@ class ErrorIdentifiers
 	public const DISALLOWED_RETURN = 'disallowed.return';
 	public const DISALLOWED_SWITCH = 'disallowed.switch';
 	public const DISALLOWED_TRAIT = 'disallowed.trait';
+	public const DISALLOWED_UNSET = 'disallowed.unset';
 	public const DISALLOWED_VARIABLE = 'disallowed.variable';
 	public const DISALLOWED_WHILE = 'disallowed.while';
 
