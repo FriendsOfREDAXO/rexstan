@@ -9,4 +9,5 @@ return array(
     '9b38cf48e83f5d8f60375221cd213eee' => $vendorDir . '/phpstan/phpstan/bootstrap.php',
     'a4ecaeafb8cfb009ad0e052c90355e98' => $vendorDir . '/beberlei/assert/lib/Assert/functions.php',
     'a4a119a56e50fbb293281d9a48007e0e' => $vendorDir . '/symfony/polyfill-php80/bootstrap.php',
+    '238fdbca8bd5b745bcd17208ecf28492' => $vendorDir . '/symplify/phpstan-rules/src/functions/fast-functions.php',
 );

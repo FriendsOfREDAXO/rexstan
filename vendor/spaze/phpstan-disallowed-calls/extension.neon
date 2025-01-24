@@ -252,8 +252,10 @@ services:
 	- Spaze\PHPStan\Rules\Disallowed\Identifier\Identifier
 	- Spaze\PHPStan\Rules\Disallowed\Normalizer\Normalizer
 	- Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedAttributeRuleErrors
+	- Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedCallableParameterRuleErrors(forbiddenFunctionCalls: %disallowedFunctionCalls%, forbiddenMethodCalls: %disallowedMethodCalls%, forbiddenStaticCalls: %disallowedStaticCalls%)
 	- Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedConstantRuleErrors
 	- Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedControlStructureRuleErrors
+	- Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedFunctionRuleErrors
 	- Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedMethodRuleErrors
 	- Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedNamespaceRuleErrors
 	- Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedCallsRuleErrors
@@ -293,6 +295,14 @@ services:
 			- phpstan.rules.rule
 	-
 		factory: Spaze\PHPStan\Rules\Disallowed\Calls\EmptyCalls(forbiddenCalls: %disallowedFunctionCalls%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Calls\IssetCalls(forbiddenCalls: %disallowedFunctionCalls%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Calls\UnsetCalls(forbiddenCalls: %disallowedFunctionCalls%)
 		tags:
 			- phpstan.rules.rule
 	-
