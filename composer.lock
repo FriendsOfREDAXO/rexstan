@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "edd35e501d64f8a3c8e56ff1bec46d86",
+    "content-hash": "62b9b39a84a077ef6b2c50ed3622a100",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -497,27 +497,28 @@
         },
         {
             "name": "dogma/dogma",
-            "version": "v0.2.17",
+            "version": "v0.2.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paranoiq/dogma.git",
-                "reference": "0f8f60d3dce9deba721467764f8cfba06c92910d"
+                "reference": "5ed8a35420ce4fc80b2952e5b4e377d834409141"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paranoiq/dogma/zipball/0f8f60d3dce9deba721467764f8cfba06c92910d",
-                "reference": "0f8f60d3dce9deba721467764f8cfba06c92910d",
+                "url": "https://api.github.com/repos/paranoiq/dogma/zipball/5ed8a35420ce4fc80b2952e5b4e377d834409141",
+                "reference": "5ed8a35420ce4fc80b2952e5b4e377d834409141",
                 "shasum": ""
             },
             "require": {
                 "ext-calendar": "*",
                 "nette/http": "~2.4|~3.0",
-                "nette/utils": "~2.4|~3.0",
-                "php": "^7.2|^8.0"
+                "nette/utils": "~2.4|~3.0|~4.0",
+                "php": "^7.4|^8.0"
             },
             "require-dev": {
                 "dogma/dogma-dev": "0.1.29",
-                "phpstan/phpstan": "1.8.2"
+                "phpstan/phpstan": "1.10.2",
+                "phpstan/phpstan-strict-rules": "^1.0"
             },
             "suggest": {
                 "ext-dom": "for Dom (basic functionality)",
@@ -538,8 +539,7 @@
             },
             "autoload": {
                 "classmap": [
-                    "src",
-                    "tests"
+                    "src"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -556,9 +556,9 @@
             "homepage": "http://github.com/paranoiq/dogma",
             "support": {
                 "issues": "https://github.com/paranoiq/dogma/issues",
-                "source": "https://github.com/paranoiq/dogma/tree/v0.2.17"
+                "source": "https://github.com/paranoiq/dogma/tree/v0.2.22"
             },
-            "time": "2022-09-29T16:54:43+00:00"
+            "time": "2023-06-22T08:25:35+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -1478,20 +1478,20 @@
         },
         {
             "name": "sqlftw/sqlftw",
-            "version": "v0.1.16",
+            "version": "v0.1.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SQLFTW/sqlftw.git",
-                "reference": "9133b54d23ffc944b9d371033d335ea4a4d01039"
+                "reference": "75ad341c9687922c2f08df019781d9508ceb29a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SQLFTW/sqlftw/zipball/9133b54d23ffc944b9d371033d335ea4a4d01039",
-                "reference": "9133b54d23ffc944b9d371033d335ea4a4d01039",
+                "url": "https://api.github.com/repos/SQLFTW/sqlftw/zipball/75ad341c9687922c2f08df019781d9508ceb29a4",
+                "reference": "75ad341c9687922c2f08df019781d9508ceb29a4",
                 "shasum": ""
             },
             "require": {
-                "dogma/dogma": "0.2.17",
+                "dogma/dogma": "^0.2.17",
                 "php": "^7.4|^8.0"
             },
             "require-dev": {
@@ -1522,9 +1522,9 @@
             "homepage": "https://github.com/sqlftw/sqlftw",
             "support": {
                 "issues": "https://github.com/SQLFTW/sqlftw/issues",
-                "source": "https://github.com/SQLFTW/sqlftw/tree/v0.1.16"
+                "source": "https://github.com/SQLFTW/sqlftw/tree/v0.1.17"
             },
-            "time": "2024-08-20T13:37:36+00:00"
+            "time": "2025-02-04T15:11:42+00:00"
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
