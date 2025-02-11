@@ -11,14 +11,15 @@
         }
     ],
     "require": {
-        "php": "^7.2|^8.0",
+        "php": "^7.4|^8.0",
         "ext-calendar":"*",
         "nette/http": "~2.4|~3.0",
-        "nette/utils": "~2.4|~3.0"
+        "nette/utils": "~2.4|~3.0|~4.0"
     },
     "require-dev": {
         "dogma/dogma-dev": "0.1.29",
-        "phpstan/phpstan": "1.8.2"
+        "phpstan/phpstan": "1.10.2",
+        "phpstan/phpstan-strict-rules": "^1.0"
     },
     "suggest": {
         "ext-dom": "for Dom (basic functionality)",
@@ -37,7 +38,10 @@
         }
     },
     "autoload": {
-        "classmap": ["src", "tests"]
+        "classmap": ["src"]
+    },
+    "autoload-dev": {
+        "classmap": ["tests"]
     },
     "scripts": {
         "da": "composer dump-autoload",
@@ -76,20 +80,16 @@
             "php82 vendor/nette/tester/src/tester tests -c tests --colors 1",
             "php81 vendor/nette/tester/src/tester tests -c tests --colors 1",
             "php80 vendor/nette/tester/src/tester tests -c tests --colors 1",
-            "php74 vendor/nette/tester/src/tester tests -c tests --colors 1",
-            "php73 vendor/nette/tester/src/tester tests -c tests --colors 1",
-            "php72 vendor/nette/tester/src/tester tests -c tests --colors 1"
+            "php74 vendor/nette/tester/src/tester tests -c tests --colors 1"
         ],
         "tests:coverage": "php vendor/nette/tester/src/tester tests -c tests --colors 1 -p phpdbg --coverage tests/coverage.html --coverage-src src",
 
-        "phpstan:run": "php vendor/phpstan/phpstan/phpstan analyse --memory-limit 256M -c build/phpstan.neon",
+        "phpstan:run": "php vendor/phpstan/phpstan/phpstan analyse --memory-limit 256M -c build/PHPStan/phpstan.neon",
         "phpstan:all": [
-            "php82 vendor/phpstan/phpstan/phpstan analyse --memory-limit 256M -c build/phpstan.neon",
-            "php81 vendor/phpstan/phpstan/phpstan analyse --memory-limit 256M -c build/phpstan.neon",
-            "php80 vendor/phpstan/phpstan/phpstan analyse --memory-limit 256M -c build/phpstan.neon",
-            "php74 vendor/phpstan/phpstan/phpstan analyse --memory-limit 256M -c build/phpstan.neon",
-            "php73 vendor/phpstan/phpstan/phpstan analyse --memory-limit 256M -c build/phpstan.neon",
-            "php72 vendor/phpstan/phpstan/phpstan analyse --memory-limit 256M -c build/phpstan.neon"
+            "php82 vendor/phpstan/phpstan/phpstan analyse --memory-limit 256M -c build/PHPStan/phpstan.neon",
+            "php81 vendor/phpstan/phpstan/phpstan analyse --memory-limit 256M -c build/PHPStan/phpstan.neon",
+            "php80 vendor/phpstan/phpstan/phpstan analyse --memory-limit 256M -c build/PHPStan/phpstan.neon",
+            "php74 vendor/phpstan/phpstan/phpstan analyse --memory-limit 256M -c build/PHPStan/phpstan.neon"
         ],
 
         "lint:php": "php vendor/php-parallel-lint/php-parallel-lint/parallel-lint src tests",
@@ -97,9 +97,7 @@
             "php82 vendor/php-parallel-lint/php-parallel-lint/parallel-lint src tests",
             "php81 vendor/php-parallel-lint/php-parallel-lint/parallel-lint src tests",
             "php80 vendor/php-parallel-lint/php-parallel-lint/parallel-lint src tests",
-            "php74 vendor/php-parallel-lint/php-parallel-lint/parallel-lint src tests",
-            "php73 vendor/php-parallel-lint/php-parallel-lint/parallel-lint src tests",
-            "php72 vendor/php-parallel-lint/php-parallel-lint/parallel-lint src tests"
+            "php74 vendor/php-parallel-lint/php-parallel-lint/parallel-lint src tests"
         ],
 
         "phpcs:all": [
@@ -107,19 +105,19 @@
             "@phpcs:src",
             "@phpcs:tests"
         ],
-        "phpcs:src": "php vendor/squizlabs/php_codesniffer/bin/phpcs --standard=vendor/dogma/dogma-dev/src/CodeSniffer/ruleset.xml -sp src",
+        "phpcs:src": "php vendor/squizlabs/php_codesniffer/bin/phpcs --standard=build/CodeSniffer/ruleset.xml -sp src",
         "phpcs:src-fast": [
             "@modified-php-src",
-            "php vendor/squizlabs/php_codesniffer/bin/phpcs --standard=vendor/dogma/dogma-dev/src/CodeSniffer/ruleset.xml --file-list=temp/modified-php-src.txt -sp"
+            "php vendor/squizlabs/php_codesniffer/bin/phpcs --standard=build/CodeSniffer/ruleset.xml --file-list=temp/modified-php-src.txt -sp"
         ],
-        "phpcs:tests": "php vendor/squizlabs/php_codesniffer/bin/phpcs --standard=vendor/dogma/dogma-dev/src/CodeSniffer/ruleset-tests.xml -sp tests",
+        "phpcs:tests": "php vendor/squizlabs/php_codesniffer/bin/phpcs --standard=build/CodeSniffer/ruleset-tests.xml -sp tests",
         "phpcs:tests-fast": [
             "@modified-php-tests",
-            "php vendor/squizlabs/php_codesniffer/bin/phpcs --standard=vendor/dogma/dogma-dev/src/CodeSniffer/ruleset-tests.xml --file-list=temp/modified-php-tests.txt -sp"
+            "php vendor/squizlabs/php_codesniffer/bin/phpcs --standard=build/CodeSniffer/ruleset-tests.xml --file-list=temp/modified-php-tests.txt -sp"
         ],
-        "phpcs:fix": "php vendor/squizlabs/php_codesniffer/bin/phpcbf --standard=vendor/dogma/dogma-dev/src/CodeSniffer/ruleset-tests.xml -sp src tests",
+        "phpcs:fix": "php vendor/squizlabs/php_codesniffer/bin/phpcbf --standard=build/CodeSniffer/ruleset-tests.xml -sp src tests",
 
-        "spell:check": "php vendor/spell-checker/spell-checker/spell-checker -c build/spell-checker.neon --checkDictionaryFiles --memoryLimit 1024M --noLogo",
+        "spell:check": "php vendor/spell-checker/spell-checker/spell-checker -c build/spell-checker/spell-checker.neon --checkDictionaryFiles --memoryLimit 1024M --noLogo",
 
         "require:check": "php vendor/maglnet/composer-require-checker/bin/composer-require-checker.php check",
 
@@ -156,7 +154,7 @@
     "config": {
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": false,
-            "sllh/composer-versions-check": true
+            "sllh/composer-versions-check": false
         }
     }
 }

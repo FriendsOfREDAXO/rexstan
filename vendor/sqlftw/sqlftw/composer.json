@@ -12,7 +12,7 @@
     ],
     "require": {
         "php": "^7.4|^8.0",
-        "dogma/dogma": "0.2.17"
+        "dogma/dogma": "^0.2.17"
     },
     "require-dev": {
         "dogma/dogma-dev": "0.1.29",
@@ -90,14 +90,14 @@
         "tests:mysql": "php tests/Mysql/test.php",
         "tests:mysql-s": "php tests/Mysql/test.php --single",
 
-        "phpstan:run": "php vendor/phpstan/phpstan/phpstan analyse -c build/phpstan/phpstan.neon --memory-limit=512M",
+        "phpstan:run": "php vendor/phpstan/phpstan/phpstan analyse -c build/PhpStan/phpstan.neon --memory-limit=512M",
         "phpstan:all": [
-            "php84 vendor/phpstan/phpstan/phpstan analyse -c build/phpstan/phpstan.neon --memory-limit=512M",
-            "php83 vendor/phpstan/phpstan/phpstan analyse -c build/phpstan/phpstan.neon --memory-limit=512M",
-            "php82 vendor/phpstan/phpstan/phpstan analyse -c build/phpstan/phpstan.neon --memory-limit=512M",
-            "php81 vendor/phpstan/phpstan/phpstan analyse -c build/phpstan/phpstan.neon --memory-limit=512M",
-            "php80 vendor/phpstan/phpstan/phpstan analyse -c build/phpstan/phpstan.neon --memory-limit=512M",
-            "php74 vendor/phpstan/phpstan/phpstan analyse -c build/phpstan/phpstan.neon --memory-limit=512M"
+            "php84 vendor/phpstan/phpstan/phpstan analyse -c build/PhpStan/phpstan.neon --memory-limit=512M",
+            "php83 vendor/phpstan/phpstan/phpstan analyse -c build/PhpStan/phpstan.neon --memory-limit=512M",
+            "php82 vendor/phpstan/phpstan/phpstan analyse -c build/PhpStan/phpstan.neon --memory-limit=512M",
+            "php81 vendor/phpstan/phpstan/phpstan analyse -c build/PhpStan/phpstan.neon --memory-limit=512M",
+            "php80 vendor/phpstan/phpstan/phpstan analyse -c build/PhpStan/phpstan.neon --memory-limit=512M",
+            "php74 vendor/phpstan/phpstan/phpstan analyse -c build/PhpStan/phpstan.neon --memory-limit=512M"
         ],
 
         "phpcs:all": [

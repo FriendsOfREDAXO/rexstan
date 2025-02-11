@@ -7,7 +7,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\PhpDoc\TypeStringResolver;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\ShouldNotHappenException;
-use PHPStan\Symfony\Configuration;
 use PHPStan\Symfony\ParameterMap;
 use PHPStan\Type\ArrayType;
 use PHPStan\Type\BooleanType;
@@ -62,7 +61,7 @@ final class ParameterDynamicReturnTypeExtension implements DynamicMethodReturnTy
 		string $className,
 		?string $methodGet,
 		?string $methodHas,
-		Configuration $configuration,
+		bool $constantHassers,
 		ParameterMap $symfonyParameterMap,
 		TypeStringResolver $typeStringResolver
 	)
@@ -70,7 +69,7 @@ final class ParameterDynamicReturnTypeExtension implements DynamicMethodReturnTy
 		$this->className = $className;
 		$this->methodGet = $methodGet;
 		$this->methodHas = $methodHas;
-		$this->constantHassers = $configuration->hasConstantHassers();
+		$this->constantHassers = $constantHassers;
 		$this->parameterMap = $symfonyParameterMap;
 		$this->typeStringResolver = $typeStringResolver;
 	}

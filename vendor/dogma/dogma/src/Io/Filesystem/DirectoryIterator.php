@@ -10,6 +10,7 @@
 namespace Dogma\Io\Filesystem;
 
 use FilesystemIterator;
+use ReturnTypeWillChange;
 use UnexpectedValueException;
 
 class DirectoryIterator extends FilesystemIterator
@@ -53,6 +54,7 @@ class DirectoryIterator extends FilesystemIterator
     /**
      * @return FileInfo|mixed
      */
+    #[ReturnTypeWillChange]
     public function current()
     {
         if (!($this->flags & FilesystemIterator::CURRENT_AS_PATHNAME) && !($this->flags & FilesystemIterator::CURRENT_AS_SELF)) {

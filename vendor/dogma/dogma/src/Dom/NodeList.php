@@ -15,9 +15,10 @@ use DOMElement;
 use DOMNode;
 use DOMNodeList;
 use Iterator;
+use ReturnTypeWillChange;
 
 /**
- * @implements Iterator<int, DOMNode>
+ * @implements Iterator<int, Element|DOMNode>
  */
 class NodeList implements Countable, Iterator
 {
@@ -65,6 +66,7 @@ class NodeList implements Countable, Iterator
     /**
      * @return Element|DOMNode
      */
+    #[ReturnTypeWillChange]
     public function current()
     {
         /** @var DOMNode $item */

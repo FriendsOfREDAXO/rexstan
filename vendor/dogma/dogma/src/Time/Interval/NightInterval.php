@@ -311,6 +311,10 @@ class NightInterval implements Interval, DateOrTimeInterval, Pokeable
      */
     public function containsValue($date): bool
     {
+        if ($this->isEmpty()) {
+            return false;
+        }
+
         if (!$date instanceof Date) {
             $date = Date::createFromDateTimeInterface($date);
         }

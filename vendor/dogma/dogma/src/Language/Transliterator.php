@@ -18,6 +18,7 @@ use function explode;
 use function implode;
 use function intl_get_error_message;
 use function is_array;
+use function is_string;
 
 /**
  * @see http://userguide.icu-project.org/transforms/general
@@ -252,18 +253,22 @@ class Transliterator extends PhpTransliterator
      *      Transliterator::COMPOSE,
      * ]
      * ```
+     * @see https://unicode-org.github.io/icu/userguide/transforms/general/rules.html
      *
-     * @param string[]|string[][]|string[][][] $rules
+     * @param non-empty-list<string|array{string, string|non-empty-list<string>}> $rules
      * @return PhpTransliterator
      */
     public static function createFromIds(array $rules, ?int $direction = null): PhpTransliterator
     {
         $rules = array_map(static function ($rule): string {
-            return is_array($rule)
-                ? (is_array($rule[1])
-                    ? '[[:' . implode(':][:', $rule[1]) . ':]] ' . $rule[0]
-                    : '[:' . $rule[1] . ':] ' . $rule[0])
-                : $rule;
+            if (is_string($rule)) {
+                return $rule;
+            }
+            if (is_array($rule[1])) {
+                return '[[:' . implode(':][:', $rule[1]) . ':]] ' . $rule[0];
+            } else {
+                return '[:' . $rule[1] . ':] ' . $rule[0];
+            }
         }, $rules);
 
         return self::create(implode(';', $rules), $direction);

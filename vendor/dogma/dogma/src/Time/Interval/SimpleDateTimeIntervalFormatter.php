@@ -9,8 +9,12 @@
 
 namespace Dogma\Time\Interval;
 
+use Dogma\ShouldNotHappenException;
 use Dogma\StrictBehaviorMixin;
+use Dogma\Time\Date;
+use Dogma\Time\DateTime;
 use Dogma\Time\InvalidFormattingStringException;
+use Dogma\Time\Time;
 use function count;
 use function explode;
 
@@ -32,9 +36,17 @@ class SimpleDateTimeIntervalFormatter implements DateTimeIntervalFormatter
             }
             [$startFormat, $endFormat] = $parts;
             $separator = '';
-        } else {
-            $startFormat = $endFormat = null;
+        } elseif ($interval instanceof TimeInterval) {
+            $startFormat = $endFormat = Time::DEFAULT_FORMAT;
             $separator = ' - ';
+        } elseif ($interval instanceof DateTimeInterval) {
+            $startFormat = $endFormat = DateTime::DEFAULT_FORMAT;
+            $separator = ' - ';
+        } elseif ($interval instanceof DateInterval || $interval instanceof NightInterval) {
+            $startFormat = $endFormat = Date::DEFAULT_FORMAT;
+            $separator = ' - ';
+        } else {
+            throw new ShouldNotHappenException('Default format for ' . get_class($interval) . ' is not defined.');
         }
 
         if ($interval instanceof DateInterval) {

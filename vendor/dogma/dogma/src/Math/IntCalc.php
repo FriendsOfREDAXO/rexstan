@@ -14,19 +14,29 @@ namespace Dogma\Math;
 use Dogma\Check;
 use Dogma\Math\Sequence\Prime;
 use Dogma\StaticClassMixin;
-use const PHP_INT_MAX;
 use function abs;
 use function array_product;
 use function ceil;
 use function floor;
 use function min;
 use function range;
+use const PHP_INT_MAX;
 
 class IntCalc
 {
     use StaticClassMixin;
 
     // rounding & mapping ----------------------------------------------------------------------------------------------
+
+    public static function floor(float $number): int
+    {
+        return (int) floor($number);
+    }
+
+    public static function ceil(float $number): int
+    {
+        return (int) ceil($number);
+    }
 
     public static function roundTo(int $n, int $multiple): int
     {
@@ -38,14 +48,14 @@ class IntCalc
 
     public static function roundDownTo(int $n, int $multiple): int
     {
-        $multiple = abs($multiple);
+        $multiple = (int) abs($multiple);
 
         return (int) (floor($n / $multiple) * $multiple);
     }
 
     public static function roundUpTo(int $n, int $multiple): int
     {
-        $multiple = abs($multiple);
+        $multiple = (int) abs($multiple);
 
         return (int) (ceil($n / $multiple) * $multiple);
     }

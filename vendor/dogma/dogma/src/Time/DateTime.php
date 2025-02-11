@@ -220,6 +220,27 @@ class DateTime extends DateTimeImmutable implements DateOrDateTime, DateTimeOrTi
         return new static($date->format(Date::DEFAULT_FORMAT) . ' ' . $time->format(Time::DEFAULT_FORMAT), $timeZone);
     }
 
+    public static function validateComponents(
+        int $year,
+        int $month,
+        int $day,
+        int $hours = 0,
+        int $minutes = 0,
+        int $seconds = 0,
+        int $microseconds = 0
+    ): bool
+    {
+        if ($year < 0 || $year > 9999 || $month < 1 || $month > 12 || $day < 1 || $day > 31 || $hours < 0 || $hours > 23
+            || $minutes < 0 || $minutes > 59 || $seconds < 0 || $seconds > 59 || $microseconds < 0 || $microseconds > 999999
+        ) {
+            return false;
+        }
+
+        $lengths = Month::getLengthsForYear($year);
+
+        return $day <= $lengths[$month];
+    }
+
     /**
      * @deprecated replaced by https://github.com/paranoiq/dogma-debug/
      */
