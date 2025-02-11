@@ -6,7 +6,6 @@ use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\ShouldNotHappenException;
-use PHPStan\Symfony\Configuration;
 use PHPStan\Symfony\ParameterMap;
 use PHPStan\Symfony\ServiceDefinition;
 use PHPStan\Symfony\ServiceMap;
@@ -38,13 +37,13 @@ final class ServiceDynamicReturnTypeExtension implements DynamicMethodReturnType
 	 */
 	public function __construct(
 		string $className,
-		Configuration $configuration,
+		bool $constantHassers,
 		ServiceMap $symfonyServiceMap,
 		ParameterMap $symfonyParameterMap
 	)
 	{
 		$this->className = $className;
-		$this->constantHassers = $configuration->hasConstantHassers();
+		$this->constantHassers = $constantHassers;
 		$this->serviceMap = $symfonyServiceMap;
 		$this->parameterMap = $symfonyParameterMap;
 	}

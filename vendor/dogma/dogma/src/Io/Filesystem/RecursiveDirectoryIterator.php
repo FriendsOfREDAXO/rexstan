@@ -11,6 +11,7 @@ namespace Dogma\Io\Filesystem;
 
 use FilesystemIterator;
 use RecursiveDirectoryIterator as PhpRecursiveDirectoryIterator;
+use ReturnTypeWillChange;
 use UnexpectedValueException;
 
 class RecursiveDirectoryIterator extends PhpRecursiveDirectoryIterator
@@ -44,7 +45,7 @@ class RecursiveDirectoryIterator extends PhpRecursiveDirectoryIterator
     public function setFlags($flags = null): void
     {
         $this->flags = $flags;
-        if ($flags & FilesystemIterator::CURRENT_AS_FILEINFO) {
+        if (!($flags & FilesystemIterator::CURRENT_AS_PATHNAME) && !($flags & FilesystemIterator::CURRENT_AS_SELF)) {
             parent::setFlags($flags | FilesystemIterator::CURRENT_AS_PATHNAME);
         } else {
             parent::setFlags($flags);
@@ -54,9 +55,10 @@ class RecursiveDirectoryIterator extends PhpRecursiveDirectoryIterator
     /**
      * @return FileInfo|mixed
      */
+    #[ReturnTypeWillChange]
     public function current()
     {
-        if ($this->flags & FilesystemIterator::CURRENT_AS_FILEINFO) {
+        if (!($this->flags & FilesystemIterator::CURRENT_AS_PATHNAME) && !($this->flags & FilesystemIterator::CURRENT_AS_SELF)) {
             /** @var string $path */
             $path = parent::current();
 

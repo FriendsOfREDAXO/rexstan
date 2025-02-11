@@ -181,6 +181,16 @@ class Month extends IntEnum
             ];
     }
 
+    /**
+     * @return int[]
+     */
+    public static function getLengthsForYear(int $year): array
+    {
+        $leapYear = ($year % 4) === 0 && (($year % 100) !== 0 || ($year % 400) === 0);
+
+        return self::getLengths($leapYear);
+    }
+
     public function getName(): string
     {
         return self::getNames()[$this->getValue()];
@@ -193,6 +203,13 @@ class Month extends IntEnum
 
     public function getDays(bool $leapYear): int
     {
+        return self::getLengths($leapYear)[$this->getValue()];
+    }
+
+    public function getDaysForYear(int $year): int
+    {
+        $leapYear = ($year % 4) === 0 && (($year % 100) !== 0 || ($year % 400) === 0);
+
         return self::getLengths($leapYear)[$this->getValue()];
     }
 

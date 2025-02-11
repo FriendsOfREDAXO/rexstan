@@ -15,6 +15,7 @@ use Dogma\StrictBehaviorMixin;
 use Dogma\Type;
 use Iterator;
 use IteratorAggregate;
+use ReturnTypeWillChange;
 use function is_array;
 
 /**
@@ -77,6 +78,7 @@ class MappingIterator implements Iterator
     /**
      * @return mixed|null
      */
+    #[ReturnTypeWillChange]
     public function current()
     {
         if ($this->reverse) {

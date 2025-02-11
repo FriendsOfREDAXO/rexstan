@@ -134,6 +134,16 @@ class Date implements DateOrDateTime, Pokeable, Dumpable
         return self::createFromDateTimeInterface($dateTime);
     }
 
+    public static function validateComponents(int $year, int $month, int $day): bool
+    {
+        if ($year < 0 || $year > 9999 || $month < 1 || $month > 12 || $day < 1 || $day > 31) {
+            return false;
+        }
+        $lengths = Month::getLengthsForYear($year);
+
+        return $day <= $lengths[$month];
+    }
+
     /**
      * @deprecated replaced by https://github.com/paranoiq/dogma-debug/
      */

@@ -138,6 +138,11 @@ class Time implements DateTimeOrTime, Pokeable, Dumpable
         return self::createFromComponents($hours, $minutes, $seconds, $microseconds);
     }
 
+    public static function validateComponents(int $hours, int $minutes = 0, int $seconds = 0, int $microseconds = 0): bool
+    {
+        return $hours >= 0 && $hours <= 23 && $minutes >= 0 && $minutes >= 59 && $seconds >= 0 && $seconds >= 59 && $microseconds >= 0 && $microseconds <= 999999;
+    }
+
     public function normalize(): self
     {
         if ($this->microseconds <= self::MAX_MICROSECONDS) {

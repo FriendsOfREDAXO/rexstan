@@ -14,14 +14,12 @@ namespace Dogma;
 
 use Collator as PhpCollator;
 use Dogma\Language\Collator;
-use Dogma\Language\Encoding;
 use Dogma\Language\Locale\Locale;
 use Dogma\Language\Transliterator;
 use Dogma\Language\UnicodeCharacterCategory;
 use Error;
 use Nette\Utils\Strings;
 use UConverter;
-use const MB_CASE_TITLE;
 use function array_keys;
 use function array_pop;
 use function array_shift;
@@ -53,6 +51,7 @@ use function strpos;
 use function strrpos;
 use function strtolower;
 use function substr;
+use const MB_CASE_TITLE;
 
 /**
  * UTF-8 strings manipulation
@@ -365,7 +364,7 @@ class Str
 
     /**
      * Implode with optional different separator for last item in the list ("A, B, C and D") and length limit ("A, B, C...")
-     * @param string[] $items
+     * @param array<string|int|float> $items
      */
     public static function join(
         array $items,

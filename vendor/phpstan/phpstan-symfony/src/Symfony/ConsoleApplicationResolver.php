@@ -20,9 +20,9 @@ final class ConsoleApplicationResolver
 
 	private ?Application $consoleApplication = null;
 
-	public function __construct(Configuration $configuration)
+	public function __construct(?string $consoleApplicationLoader)
 	{
-		$this->consoleApplicationLoader = $configuration->getConsoleApplicationLoader();
+		$this->consoleApplicationLoader = $consoleApplicationLoader;
 	}
 
 	public function hasConsoleApplicationLoader(): bool

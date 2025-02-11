@@ -509,28 +509,29 @@
         },
         {
             "name": "dogma/dogma",
-            "version": "v0.2.17",
-            "version_normalized": "0.2.17.0",
+            "version": "v0.2.22",
+            "version_normalized": "0.2.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paranoiq/dogma.git",
-                "reference": "0f8f60d3dce9deba721467764f8cfba06c92910d"
+                "reference": "5ed8a35420ce4fc80b2952e5b4e377d834409141"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paranoiq/dogma/zipball/0f8f60d3dce9deba721467764f8cfba06c92910d",
-                "reference": "0f8f60d3dce9deba721467764f8cfba06c92910d",
+                "url": "https://api.github.com/repos/paranoiq/dogma/zipball/5ed8a35420ce4fc80b2952e5b4e377d834409141",
+                "reference": "5ed8a35420ce4fc80b2952e5b4e377d834409141",
                 "shasum": ""
             },
             "require": {
                 "ext-calendar": "*",
                 "nette/http": "~2.4|~3.0",
-                "nette/utils": "~2.4|~3.0",
-                "php": "^7.2|^8.0"
+                "nette/utils": "~2.4|~3.0|~4.0",
+                "php": "^7.4|^8.0"
             },
             "require-dev": {
                 "dogma/dogma-dev": "0.1.29",
-                "phpstan/phpstan": "1.8.2"
+                "phpstan/phpstan": "1.10.2",
+                "phpstan/phpstan-strict-rules": "^1.0"
             },
             "suggest": {
                 "ext-dom": "for Dom (basic functionality)",
@@ -543,7 +544,7 @@
                 "symfony/polyfill-intl-normalizer": "for Str",
                 "symfony/polyfill-mbstring": "for Str"
             },
-            "time": "2022-09-29T16:54:43+00:00",
+            "time": "2023-06-22T08:25:35+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -553,8 +554,7 @@
             "installation-source": "dist",
             "autoload": {
                 "classmap": [
-                    "src",
-                    "tests"
+                    "src"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -571,7 +571,7 @@
             "homepage": "http://github.com/paranoiq/dogma",
             "support": {
                 "issues": "https://github.com/paranoiq/dogma/issues",
-                "source": "https://github.com/paranoiq/dogma/tree/v0.2.17"
+                "source": "https://github.com/paranoiq/dogma/tree/v0.2.22"
             },
             "install-path": "../dogma/dogma"
         },
@@ -1017,17 +1017,17 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.2",
-            "version_normalized": "2.1.2.0",
+            "version": "2.1.4",
+            "version_normalized": "2.1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "7d08f569e582ade182a375c366cbd896eccadd3a"
+                "reference": "8f99e18eb775dbaf6460c95fa0b65312da9c746a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7d08f569e582ade182a375c366cbd896eccadd3a",
-                "reference": "7d08f569e582ade182a375c366cbd896eccadd3a",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/8f99e18eb775dbaf6460c95fa0b65312da9c746a",
+                "reference": "8f99e18eb775dbaf6460c95fa0b65312da9c746a",
                 "shasum": ""
             },
             "require": {
@@ -1036,7 +1036,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2025-01-21T14:54:06+00:00",
+            "time": "2025-02-10T08:25:21+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -1233,23 +1233,23 @@
         },
         {
             "name": "phpstan/phpstan-symfony",
-            "version": "2.0.1",
-            "version_normalized": "2.0.1.0",
+            "version": "2.0.2",
+            "version_normalized": "2.0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-symfony.git",
-                "reference": "c08cd8e54a08d651bc402d304cfa161c3c3766c4"
+                "reference": "65f02c7e585f3c7372e42e14d3d87da034031553"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/c08cd8e54a08d651bc402d304cfa161c3c3766c4",
-                "reference": "c08cd8e54a08d651bc402d304cfa161c3c3766c4",
+                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/65f02c7e585f3c7372e42e14d3d87da034031553",
+                "reference": "65f02c7e585f3c7372e42e14d3d87da034031553",
                 "shasum": ""
             },
             "require": {
                 "ext-simplexml": "*",
                 "php": "^7.4 || ^8.0",
-                "phpstan/phpstan": "^2.0"
+                "phpstan/phpstan": "^2.1.2"
             },
             "conflict": {
                 "symfony/framework-bundle": "<3.0"
@@ -1271,7 +1271,7 @@
                 "symfony/serializer": "^5.4",
                 "symfony/service-contracts": "^2.2.0"
             },
-            "time": "2025-01-04T13:58:15+00:00",
+            "time": "2025-01-21T18:57:07+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1301,7 +1301,7 @@
             "description": "Symfony Framework extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-symfony/issues",
-                "source": "https://github.com/phpstan/phpstan-symfony/tree/2.0.1"
+                "source": "https://github.com/phpstan/phpstan-symfony/tree/2.0.2"
             },
             "install-path": "../phpstan/phpstan-symfony"
         },
@@ -1538,21 +1538,21 @@
         },
         {
             "name": "sqlftw/sqlftw",
-            "version": "v0.1.16",
-            "version_normalized": "0.1.16.0",
+            "version": "v0.1.17",
+            "version_normalized": "0.1.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SQLFTW/sqlftw.git",
-                "reference": "9133b54d23ffc944b9d371033d335ea4a4d01039"
+                "reference": "75ad341c9687922c2f08df019781d9508ceb29a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SQLFTW/sqlftw/zipball/9133b54d23ffc944b9d371033d335ea4a4d01039",
-                "reference": "9133b54d23ffc944b9d371033d335ea4a4d01039",
+                "url": "https://api.github.com/repos/SQLFTW/sqlftw/zipball/75ad341c9687922c2f08df019781d9508ceb29a4",
+                "reference": "75ad341c9687922c2f08df019781d9508ceb29a4",
                 "shasum": ""
             },
             "require": {
-                "dogma/dogma": "0.2.17",
+                "dogma/dogma": "^0.2.17",
                 "php": "^7.4|^8.0"
             },
             "require-dev": {
@@ -1563,7 +1563,7 @@
                 "phpstan/phpstan-strict-rules": "^1.0",
                 "rector/rector": "0.14.8"
             },
-            "time": "2024-08-20T13:37:36+00:00",
+            "time": "2025-02-04T15:11:42+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1585,7 +1585,7 @@
             "homepage": "https://github.com/sqlftw/sqlftw",
             "support": {
                 "issues": "https://github.com/SQLFTW/sqlftw/issues",
-                "source": "https://github.com/SQLFTW/sqlftw/tree/v0.1.16"
+                "source": "https://github.com/SQLFTW/sqlftw/tree/v0.1.17"
             },
             "install-path": "../sqlftw/sqlftw"
         },
@@ -1896,17 +1896,17 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "14.2.5",
-            "version_normalized": "14.2.5.0",
+            "version": "14.2.7",
+            "version_normalized": "14.2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "619dbf6994efce19d8671d060c8cbb575d31dfb8"
+                "reference": "c3ecd80987b75a2c01f9e11ebbf954b7cff5b24b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/619dbf6994efce19d8671d060c8cbb575d31dfb8",
-                "reference": "619dbf6994efce19d8671d060c8cbb575d31dfb8",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/c3ecd80987b75a2c01f9e11ebbf954b7cff5b24b",
+                "reference": "c3ecd80987b75a2c01f9e11ebbf954b7cff5b24b",
                 "shasum": ""
             },
             "require": {
@@ -1915,7 +1915,7 @@
                 "phpstan/phpstan": "^2.0",
                 "webmozart/assert": "^1.11"
             },
-            "time": "2025-01-13T09:27:41+00:00",
+            "time": "2025-01-31T11:24:35+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1940,7 +1940,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/14.2.5"
+                "source": "https://github.com/symplify/phpstan-rules/tree/14.2.7"
             },
             "funding": [
                 {

@@ -126,9 +126,9 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'PHPStan\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
-            1 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
-            2 => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src',
-            3 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
+            1 => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src',
+            2 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
+            3 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
         ),
         'JsonSchema\\' => 
         array (
@@ -1137,7 +1137,6 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'PHPStan\\Rules\\VariableVariables\\VariableStaticMethodCallableRule' => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src/Rules/VariableVariables/VariableStaticMethodCallableRule.php',
         'PHPStan\\Rules\\VariableVariables\\VariableStaticPropertyFetchRule' => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src/Rules/VariableVariables/VariableStaticPropertyFetchRule.php',
         'PHPStan\\Rules\\VariableVariables\\VariableVariablesRule' => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src/Rules/VariableVariables/VariableVariablesRule.php',
-        'PHPStan\\Symfony\\Configuration' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/Configuration.php',
         'PHPStan\\Symfony\\ConsoleApplicationResolver' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/ConsoleApplicationResolver.php',
         'PHPStan\\Symfony\\DefaultParameterMap' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/DefaultParameterMap.php',
         'PHPStan\\Symfony\\DefaultServiceMap' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/DefaultServiceMap.php',
@@ -1158,6 +1157,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'PHPStan\\Symfony\\ServiceMapFactory' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/ServiceMapFactory.php',
         'PHPStan\\Symfony\\ServiceTag' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/ServiceTag.php',
         'PHPStan\\Symfony\\ServiceTagDefinition' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/ServiceTagDefinition.php',
+        'PHPStan\\Symfony\\SymfonyContainerResultCacheMetaExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/SymfonyContainerResultCacheMetaExtension.php',
         'PHPStan\\Symfony\\SymfonyDiagnoseExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/SymfonyDiagnoseExtension.php',
         'PHPStan\\Symfony\\XmlContainerNotExistsException' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/XmlContainerNotExistsException.php',
         'PHPStan\\Symfony\\XmlParameterMapFactory' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Symfony/XmlParameterMapFactory.php',
@@ -2129,6 +2129,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'Symplify\\PHPStanRules\\Rules\\RequireAttributeNameRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/RequireAttributeNameRule.php',
         'Symplify\\PHPStanRules\\Rules\\SeeAnnotationToTestRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/SeeAnnotationToTestRule.php',
         'Symplify\\PHPStanRules\\Rules\\Symfony\\NoAbstractControllerConstructorRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Symfony/NoAbstractControllerConstructorRule.php',
+        'Symplify\\PHPStanRules\\Rules\\Symfony\\NoConstructorAndRequiredTogetherRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Symfony/NoConstructorAndRequiredTogetherRule.php',
         'Symplify\\PHPStanRules\\Rules\\Symfony\\NoGetDoctrineInControllerRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Symfony/NoGetDoctrineInControllerRule.php',
         'Symplify\\PHPStanRules\\Rules\\Symfony\\NoGetInControllerRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Symfony/NoGetInControllerRule.php',
         'Symplify\\PHPStanRules\\Rules\\Symfony\\NoListenerWithoutContractRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Symfony/NoListenerWithoutContractRule.php',
