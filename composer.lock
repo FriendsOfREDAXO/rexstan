@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e31c4c4398ab309325e3afd35326edeb",
+    "content-hash": "7a9c6dae8c1c29fc88a4bd901b3145ac",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1821,16 +1821,16 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "14.3.1",
+            "version": "14.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "e3ca6051fec05616ba7d2144b88771e7437b8dc2"
+                "reference": "9f910fcae783adfa1932d5f58b387260227dbe63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/e3ca6051fec05616ba7d2144b88771e7437b8dc2",
-                "reference": "e3ca6051fec05616ba7d2144b88771e7437b8dc2",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/9f910fcae783adfa1932d5f58b387260227dbe63",
+                "reference": "9f910fcae783adfa1932d5f58b387260227dbe63",
                 "shasum": ""
             },
             "require": {
@@ -1862,7 +1862,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/14.3.1"
+                "source": "https://github.com/symplify/phpstan-rules/tree/14.3.3"
             },
             "funding": [
                 {
@@ -1874,7 +1874,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-17T11:28:41+00:00"
+            "time": "2025-02-19T10:07:58+00:00"
         },
         {
             "name": "tomasvotruba/cognitive-complexity",
