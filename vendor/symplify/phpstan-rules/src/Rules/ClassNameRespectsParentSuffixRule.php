@@ -15,6 +15,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\ClassName;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
+use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Symplify\PHPStanRules\Naming\ClassToSuffixResolver;
 
 /**
@@ -37,8 +38,8 @@ final class ClassNameRespectsParentSuffixRule implements Rule
      */
     private const DEFAULT_PARENT_CLASSES = [
         'Symfony\Component\Console\Command\Command',
-        ClassName::EVENT_SUBSCRIBER_INTERFACE,
-        ClassName::SYMFONY_ABSTRACT_CONTROLLER,
+        SymfonyClass::EVENT_SUBSCRIBER_INTERFACE,
+        SymfonyClass::SYMFONY_ABSTRACT_CONTROLLER,
         ClassName::SNIFF,
         ClassName::PHPUNIT_TEST_CASE,
         Exception::class,

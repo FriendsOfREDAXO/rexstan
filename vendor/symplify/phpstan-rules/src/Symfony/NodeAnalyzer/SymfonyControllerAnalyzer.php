@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Symfony\NodeAnalyzer;
 
 use PhpParser\Comment\Doc;
+use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
-use Symplify\PHPStanRules\Enum\ClassName;
+use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Symplify\PHPStanRules\NodeAnalyzer\AttributeFinder;
 
 final class SymfonyControllerAnalyzer
@@ -16,8 +17,8 @@ final class SymfonyControllerAnalyzer
      * @var string[]
      */
     private const CONTROLLER_TYPES = [
-        ClassName::SYMFONY_CONTROLLER,
-        ClassName::SYMFONY_ABSTRACT_CONTROLLER,
+        SymfonyClass::SYMFONY_CONTROLLER,
+        SymfonyClass::SYMFONY_ABSTRACT_CONTROLLER,
     ];
 
     public static function isControllerScope(Scope $scope): bool
@@ -38,17 +39,25 @@ final class SymfonyControllerAnalyzer
 
     public static function isControllerActionMethod(ClassMethod $classMethod): bool
     {
-        $attributeFinder = new AttributeFinder();
+        return self::hasRouteAnnotationOrAttribute($classMethod);
+    }
 
-        if (! $classMethod->isPublic()) {
+    /**
+     * @param \PhpParser\Node\Stmt\ClassLike|\PhpParser\Node\Stmt\ClassMethod $node
+     */
+    public static function hasRouteAnnotationOrAttribute($node): bool
+    {
+        if ($node instanceof ClassMethod && ! $node->isPublic()) {
             return false;
         }
 
-        if ($attributeFinder->hasAttribute($classMethod, ClassName::ROUTE_ATTRIBUTE)) {
+        $attributeFinder = new AttributeFinder();
+
+        if ($attributeFinder->hasAttribute($node, SymfonyClass::ROUTE_ATTRIBUTE)) {
             return true;
         }
 
-        $docComment = $classMethod->getDocComment();
+        $docComment = $node->getDocComment();
         if (! $docComment instanceof Doc) {
             return false;
         }
