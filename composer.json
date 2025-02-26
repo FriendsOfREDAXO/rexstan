@@ -13,7 +13,7 @@
         "staabm/phpstan-baseline-analysis": "0.13.1",
         "staabm/phpstan-dba": "0.3.3",
         "staabm/phpstan-todo-by": "0.2",
-        "symplify/phpstan-rules": "14.3.3",
+        "symplify/phpstan-rules": "14.3.4",
         "tomasvotruba/cognitive-complexity": "1.0",
         "tomasvotruba/type-coverage": "2.0.2",
         "tomasvotruba/unused-public": "2.0.0",
