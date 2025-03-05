@@ -47,13 +47,14 @@ The extension supports versatile [custom rules](docs/custom-rules.md), too.
 
 ### Allow some previously disallowed calls or usages
 
-Let's say you have disallowed `foo()` with custom rules. But you want to re-allow it when used in your custom wrapper, or when the first parameter equals, or not, a specified value. The extension offers multiple ways of doing that:
+Let's say you have disallowed the `foo()` function (or any other supported items like constants or method calls etc.) with custom rules. But you want to re-allow it when used in your custom wrapper, or when the first parameter equals, or not, a specified value. The extension offers multiple ways of doing that:
 
 - [Ignore errors](docs/allow-ignore-errors.md) the PHPStan way
 - [Allow in paths](docs/allow-in-paths.md)
 - [Allow in methods or functions](docs/allow-in-methods.md)
 - [Allow with specified parameters](docs/allow-with-parameters.md)
 - [Allow with specified flags](docs/allow-with-flags.md)
+- [Allow in classes, child classes, classes implementing an interface](docs/allow-in-instance-of.md) (same as the `instanceof` operator)
 - [Allow in class with given attributes](docs/allow-in-class-with-attributes.md)
 - [Allow in methods or functions with given attributes](docs/allow-in-methods.md)
 - [Allow in class with given attributes on any method](docs/allow-in-class-with-method-attributes.md)

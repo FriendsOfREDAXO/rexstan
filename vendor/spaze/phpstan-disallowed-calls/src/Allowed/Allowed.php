@@ -32,6 +32,8 @@ class Allowed
 
 	private Identifier $identifier;
 
+	private GetAttributesWhenInSignature $attributesWhenInSignature;
+
 	private AllowedPath $allowedPath;
 
 
@@ -39,11 +41,13 @@ class Allowed
 		Formatter $formatter,
 		Reflector $reflector,
 		Identifier $identifier,
+		GetAttributesWhenInSignature $attributesWhenInSignature,
 		AllowedPath $allowedPath
 	) {
 		$this->formatter = $formatter;
 		$this->reflector = $reflector;
 		$this->identifier = $identifier;
+		$this->attributesWhenInSignature = $attributesWhenInSignature;
 		$this->allowedPath = $allowedPath;
 	}
 
@@ -80,6 +84,12 @@ class Allowed
 				}
 			}
 			return true;
+		}
+		if ($disallowed->getAllowInInstanceOf()) {
+			return $this->isInstanceOf($scope, $disallowed->getAllowInInstanceOf());
+		}
+		if ($disallowed->getAllowExceptInInstanceOf()) {
+			return !$this->isInstanceOf($scope, $disallowed->getAllowExceptInInstanceOf());
 		}
 		if ($hasParams && $disallowed->getAllowExceptParams()) {
 			return $this->hasAllowedParams($scope, $args, $disallowed->getAllowExceptParams(), false);
@@ -119,6 +129,22 @@ class Allowed
 			$name = '';
 		}
 		return $this->identifier->matches($call, $name);
+	}
+
+
+	/**
+	 * @param Scope $scope
+	 * @param list<string> $allowConfig
+	 * @return bool
+	 */
+	private function isInstanceOf(Scope $scope, array $allowConfig): bool
+	{
+		foreach ($allowConfig as $allowInstanceOf) {
+			if ($scope->isInClass() && $scope->getClassReflection()->is($allowInstanceOf)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 
@@ -246,6 +272,10 @@ class Allowed
 				return $scope->getClassReflection()->getNativeReflection()->getMethod($node->name->name)->getAttributes();
 			} elseif ($node instanceof Function_) {
 				return $this->reflector->reflectFunction($node->name->name)->getAttributes();
+			}
+			$attributes = $this->attributesWhenInSignature->get($scope);
+			if ($attributes !== null) {
+				return $attributes;
 			}
 		}
 		return [];
