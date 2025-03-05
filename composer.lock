@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0547cf90718a7f0ddb3978f0f18589c0",
+    "content-hash": "c198b447fb036c0ef004b9e9041cc650",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1595,16 +1595,16 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.3.3",
+            "version": "0.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "525a9fae5d03f482ada9dd31d1ce039a11565a2d"
+                "reference": "813afaae6b99aa0dd2cde561f77355d9df508b3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/525a9fae5d03f482ada9dd31d1ce039a11565a2d",
-                "reference": "525a9fae5d03f482ada9dd31d1ce039a11565a2d",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/813afaae6b99aa0dd2cde561f77355d9df508b3b",
+                "reference": "813afaae6b99aa0dd2cde561f77355d9df508b3b",
                 "shasum": ""
             },
             "require": {
@@ -1661,7 +1661,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.3.3"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.3.5"
             },
             "funding": [
                 {
@@ -1669,7 +1669,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-12-30T15:49:02+00:00"
+            "time": "2025-03-05T14:16:34+00:00"
         },
         {
             "name": "staabm/phpstan-todo-by",
