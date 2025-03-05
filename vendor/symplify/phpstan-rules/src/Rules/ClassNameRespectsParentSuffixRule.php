@@ -16,6 +16,7 @@ use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\ClassName;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\Enum\SymfonyClass;
+use Symplify\PHPStanRules\Enum\TestClassName;
 use Symplify\PHPStanRules\Naming\ClassToSuffixResolver;
 
 /**
@@ -37,11 +38,11 @@ final class ClassNameRespectsParentSuffixRule implements Rule
      * @var string[]
      */
     private const DEFAULT_PARENT_CLASSES = [
-        'Symfony\Component\Console\Command\Command',
+        SymfonyClass::COMMAND,
         SymfonyClass::EVENT_SUBSCRIBER_INTERFACE,
-        SymfonyClass::SYMFONY_ABSTRACT_CONTROLLER,
+        SymfonyClass::ABSTRACT_CONTROLLER,
         ClassName::SNIFF,
-        ClassName::PHPUNIT_TEST_CASE,
+        TestClassName::PHPUNIT_TEST_CASE,
         Exception::class,
         'PhpCsFixer\Fixer\FixerInterface',
         Rule::class,

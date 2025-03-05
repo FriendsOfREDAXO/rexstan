@@ -11,6 +11,7 @@ use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Collectors\Collector;
 use PHPStan\Reflection\ClassReflection;
+use PHPStan\Type\TypeCombinator;
 use TomasVotruba\UnusedPublic\ClassTypeDetector;
 use TomasVotruba\UnusedPublic\Configuration;
 
@@ -69,6 +70,7 @@ final class PublicPropertyFetchCollector implements Collector
 
         $result = [];
         $propertyFetcherType = $scope->getType($node->var);
+        $propertyFetcherType = TypeCombinator::removeNull($propertyFetcherType);
         foreach ($propertyFetcherType->getObjectClassReflections() as $classReflection) {
             $propertyName = $node->name->toString();
 
