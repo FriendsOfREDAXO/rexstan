@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3f621e038b028c4fba2c981286d2cd1c",
+    "content-hash": "ba7aaeafc0d0394d81589221374be6f5",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1821,22 +1821,22 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "14.3.5",
+            "version": "14.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "b7568de69b4376264e6a02e657f0a235999f154c"
+                "reference": "ed73a1f3057e618e44bd95aa8b4137dacc03f184"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/b7568de69b4376264e6a02e657f0a235999f154c",
-                "reference": "b7568de69b4376264e6a02e657f0a235999f154c",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/ed73a1f3057e618e44bd95aa8b4137dacc03f184",
+                "reference": "ed73a1f3057e618e44bd95aa8b4137dacc03f184",
                 "shasum": ""
             },
             "require": {
                 "nette/utils": "^3.2|^4.0",
                 "php": "^7.4|^8.0",
-                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan": "^2.1.8",
                 "webmozart/assert": "^1.11"
             },
             "type": "phpstan-extension",
@@ -1862,7 +1862,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/14.3.5"
+                "source": "https://github.com/symplify/phpstan-rules/tree/14.4.1"
             },
             "funding": [
                 {
@@ -1874,7 +1874,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-03T08:32:42+00:00"
+            "time": "2025-03-12T12:44:06+00:00"
         },
         {
             "name": "tomasvotruba/cognitive-complexity",
@@ -2104,15 +2104,15 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.4"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "platform-overrides": {
         "php": "7.4.30"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
