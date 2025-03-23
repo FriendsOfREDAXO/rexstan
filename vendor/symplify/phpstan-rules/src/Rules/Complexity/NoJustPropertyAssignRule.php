@@ -144,7 +144,7 @@ final class NoJustPropertyAssignRule implements Rule
             $classReflection = $scope->getClassReflection();
 
             // skip Symfony form types as rather static
-            if ($classReflection->isSubclassOf(AbstractType::class)) {
+            if ($classReflection->is(AbstractType::class)) {
                 return true;
             }
         }

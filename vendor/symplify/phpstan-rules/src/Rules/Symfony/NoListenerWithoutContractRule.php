@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace Symplify\PHPStanRules\Rules\Symfony;
 
 use PhpParser\Node;
+use PhpParser\Node\Name;
 use PhpParser\Node\Stmt\Class_;
+use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
 use PHPStan\Node\InClassNode;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use Symplify\PHPStanRules\Enum\SymfonyClass;
 use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
 
 /**
@@ -25,7 +28,7 @@ final class NoListenerWithoutContractRule implements Rule
     /**
      * @var string
      */
-    public const ERROR_MESSAGE = 'There should be no listeners modified in config. Use EventSubscriberInterface contract and PHP instead';
+    public const ERROR_MESSAGE = 'There should be no listeners modified in config. Use EventSubscriberInterface contract or #[AsEventListener] attribute and native PHP instead';
 
     /**
      * @see https://www.doctrine-project.org/projects/doctrine-orm/en/3.3/reference/events.html
@@ -44,6 +47,8 @@ final class NoListenerWithoutContractRule implements Rule
         'onFlush',
         'postFlush',
         'onClear',
+        // ODM
+        'documentNotFound',
     ];
 
     public function getNodeType(): string
@@ -74,7 +79,24 @@ final class NoListenerWithoutContractRule implements Rule
             return [];
         }
 
+        // is invokable listeners?
+        if ($classLike->getMethod('__invoke') instanceof ClassMethod) {
+            return [];
+        }
+
         if ($this->isDoctrineListener($classLike)) {
+            return [];
+        }
+
+        if ($this->isSecurityListener($classLike)) {
+            return [];
+        }
+
+        if ($this->hasAsListenerAttribute($classLike)) {
+            return [];
+        }
+
+        if ($this->isFormEventsListener($classLike)) {
             return [];
         }
 
@@ -95,5 +117,48 @@ final class NoListenerWithoutContractRule implements Rule
         }
 
         return false;
+    }
+
+    private function hasAsListenerAttribute(Class_ $class): bool
+    {
+        foreach ($class->attrGroups as $attrGroup) {
+            foreach ($attrGroup->attrs as $attr) {
+                if ($attr->name->toString() === SymfonyClass::EVENT_LISTENER_ATTRIBUTE) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Form listeners are often registered manually in code and don't need any specific hooks
+     */
+    private function isFormEventsListener(Class_ $class): bool
+    {
+        foreach ($class->getMethods() as $classMethod) {
+            if (! $classMethod->isPublic()) {
+                continue;
+            }
+
+            foreach ($classMethod->params as $param) {
+                if ($param->type instanceof Name && strncmp($param->type->toString(), 'Symfony\Component\Form\Event\\', strlen('Symfony\Component\Form\Event\\')) === 0) {
+
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private function isSecurityListener(Class_ $class): bool
+    {
+        if (! $class->extends instanceof Name) {
+            return false;
+        }
+
+        return in_array($class->extends->toString(), [SymfonyClass::SECURITY_LISTENER, SymfonyClass::FORM_SECURITY_LISTENER], true);
     }
 }
