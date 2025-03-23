@@ -33,11 +33,16 @@ final class RequireExceptionNamespaceRule implements Rule
     public function processNode(Node $node, Scope $scope): array
     {
         $classReflection = $node->getClassReflection();
+
+        if ($classReflection->isAnonymous()) {
+            return [];
+        }
+
         if (! $classReflection->isClass()) {
             return [];
         }
 
-        if (! $classReflection->isSubclassOf('Exception')) {
+        if (! $classReflection->is('Exception')) {
             return [];
         }
 
