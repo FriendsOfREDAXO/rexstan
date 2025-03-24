@@ -125,10 +125,10 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         ),
         'PHPStan\\' => 
         array (
-            0 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
-            1 => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src',
-            2 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
-            3 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
+            0 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
+            1 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
+            2 => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src',
+            3 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
         ),
         'JsonSchema\\' => 
         array (
@@ -1168,9 +1168,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'PHPStan\\Type\\PHPUnit\\Assert\\AssertMethodTypeSpecifyingExtension' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/Type/PHPUnit/Assert/AssertMethodTypeSpecifyingExtension.php',
         'PHPStan\\Type\\PHPUnit\\Assert\\AssertStaticMethodTypeSpecifyingExtension' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/Type/PHPUnit/Assert/AssertStaticMethodTypeSpecifyingExtension.php',
         'PHPStan\\Type\\PHPUnit\\Assert\\AssertTypeSpecifyingExtensionHelper' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/Type/PHPUnit/Assert/AssertTypeSpecifyingExtensionHelper.php',
-        'PHPStan\\Type\\PHPUnit\\InvocationMockerDynamicReturnTypeExtension' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/Type/PHPUnit/InvocationMockerDynamicReturnTypeExtension.php',
         'PHPStan\\Type\\PHPUnit\\MockBuilderDynamicReturnTypeExtension' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/Type/PHPUnit/MockBuilderDynamicReturnTypeExtension.php',
-        'PHPStan\\Type\\PHPUnit\\MockObjectDynamicReturnTypeExtension' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/Type/PHPUnit/MockObjectDynamicReturnTypeExtension.php',
         'PHPStan\\Type\\Symfony\\ArgumentTypeSpecifyingExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Type/Symfony/ArgumentTypeSpecifyingExtension.php',
         'PHPStan\\Type\\Symfony\\CacheInterfaceGetDynamicReturnTypeExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Type/Symfony/CacheInterfaceGetDynamicReturnTypeExtension.php',
         'PHPStan\\Type\\Symfony\\CommandGetHelperDynamicReturnTypeExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Type/Symfony/CommandGetHelperDynamicReturnTypeExtension.php',
