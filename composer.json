@@ -1,7 +1,7 @@
 {
     "require": {
         "php": ">=7.4",
-        "justinrainbow/json-schema": "^5.3",
+        "justinrainbow/json-schema": "^6.4",
         "php-parallel-lint/php-parallel-lint": "1.4",
         "phpstan/phpstan": "2.1.11",
         "phpstan/phpstan-deprecation-rules": "2.0.1",
