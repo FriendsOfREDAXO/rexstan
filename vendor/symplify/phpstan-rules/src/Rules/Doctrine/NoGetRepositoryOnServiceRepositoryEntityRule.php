@@ -142,6 +142,10 @@ final class NoGetRepositoryOnServiceRepositoryEntityRule implements Rule
             return true;
         }
 
+        if ($repositoryClassReflection->is(DoctrineClass::ODM_SERVICE_REPOSITORY_INTERFACE)) {
+            return true;
+        }
+
         return $repositoryClassReflection->is(DoctrineClass::ORM_SERVICE_REPOSITORY);
     }
 }
