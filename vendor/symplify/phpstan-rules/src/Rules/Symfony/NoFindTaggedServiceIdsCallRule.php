@@ -6,12 +6,12 @@ namespace Symplify\PHPStanRules\Rules\Symfony;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
-use Symplify\PHPStanRules\Enum\SymfonyRuleIdentifier;
+use Symplify\PHPStanRules\Enum\RuleIdentifier\SymfonyRuleIdentifier;
+use Symplify\PHPStanRules\Helper\NamingHelper;
 
 /**
  * @implements Rule<MethodCall>
@@ -34,11 +34,7 @@ final class NoFindTaggedServiceIdsCallRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if (! $node->name instanceof Identifier) {
-            return [];
-        }
-
-        if ($node->name->toString() !== 'findTaggedServiceIds') {
+        if (! NamingHelper::isName($node->name, 'findTaggedServiceIds')) {
             return [];
         }
 

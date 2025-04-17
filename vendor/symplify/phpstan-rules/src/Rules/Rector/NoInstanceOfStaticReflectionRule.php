@@ -14,7 +14,8 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\Type;
-use Symplify\PHPStanRules\Enum\RectorRuleIdentifier;
+use Symplify\PHPStanRules\Enum\RuleIdentifier\RectorRuleIdentifier;
+use Symplify\PHPStanRules\Helper\NamingHelper;
 use Symplify\PHPStanRules\TypeAnalyzer\RectorAllowedAutoloadedTypeAnalyzer;
 
 /**
@@ -68,11 +69,7 @@ final class NoInstanceOfStaticReflectionRule implements Rule
             return $this->resolveInstanceOfType($node, $scope);
         }
 
-        if (! $node->name instanceof Name) {
-            return null;
-        }
-
-        if ($node->name->toString() !== 'is_a') {
+        if (! NamingHelper::isName($node->name, 'is_a')) {
             return null;
         }
 
