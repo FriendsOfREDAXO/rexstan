@@ -11,8 +11,18 @@ $REX['REDAXO'] = true;
 if (is_dir(__DIR__.'/../../../var/')) {
     // yakamara directoy layout
     $REX['HTDOCS_PATH'] = realpath(__DIR__.'/../../../');
-    require __DIR__ . '/../../../src/AppPathProvider.php';
-    $REX['PATH_PROVIDER'] = new AppPathProvider();
+
+    if (is_file(__DIR__ . '/../../../src/path_provider.php'))
+    {
+        require __DIR__ . '/../../../src/path_provider.php';
+        $REX['PATH_PROVIDER'] = new app_path_provider();
+    } elseif (is_file(__DIR__ . '/../../../src/AppPathProvider.php'))
+    {
+        require __DIR__ . '/../../../src/AppPathProvider.php';
+        $REX['PATH_PROVIDER'] = new AppPathProvider();
+    } else {
+        throw new LogicException();
+    }
 } else {
     // default redaxo5 directory layout
     $REX['HTDOCS_PATH'] = realpath(__DIR__.'/../../../../');
