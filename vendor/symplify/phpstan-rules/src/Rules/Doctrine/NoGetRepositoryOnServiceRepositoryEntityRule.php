@@ -7,7 +7,6 @@ namespace Symplify\PHPStanRules\Rules\Doctrine;
 use Nette\Utils\Strings;
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ReflectionProvider;
@@ -17,8 +16,9 @@ use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\Constant\ConstantStringType;
 use Symplify\PHPStanRules\Doctrine\RepositoryClassResolver;
 use Symplify\PHPStanRules\Enum\DoctrineClass;
-use Symplify\PHPStanRules\Enum\DoctrineRuleIdentifier;
+use Symplify\PHPStanRules\Enum\RuleIdentifier\DoctrineRuleIdentifier;
 use Symplify\PHPStanRules\Enum\TestClassName;
+use Symplify\PHPStanRules\Helper\NamingHelper;
 
 /**
  * @implements Rule<MethodCall>
@@ -59,7 +59,7 @@ final class NoGetRepositoryOnServiceRepositoryEntityRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if (! $node->name instanceof Identifier || $node->name->toString() !== 'getRepository') {
+        if (! NamingHelper::isName($node->name, 'getRepository')) {
             return [];
         }
 
