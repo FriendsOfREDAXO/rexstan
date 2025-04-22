@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "13a84b504ef6eb441978fa5f065c7107",
+    "content-hash": "7ef8724940864790dcf8e196c9ed415d",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1677,6 +1677,76 @@
             "time": "2025-03-06T15:23:27+00:00"
         },
         {
+            "name": "staabm/phpstan-psr3",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/staabm/phpstan-psr3.git",
+                "reference": "39508d6706a2c7ffb41062d90930430945047e00"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/staabm/phpstan-psr3/zipball/39508d6706a2c7ffb41062d90930430945047e00",
+                "reference": "39508d6706a2c7ffb41062d90930430945047e00",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0",
+                "phpstan/phpstan": "^2.0",
+                "psr/log": "^1.0 || ^2.0 || ^3.0"
+            },
+            "require-dev": {
+                "illuminate/support": "^8 || ^9 || ^10 || ^11 || ^12",
+                "monolog/monolog": "^2 || ^3.9",
+                "php-parallel-lint/php-parallel-lint": "^1.4",
+                "phpstan/extension-installer": "^1.4.3",
+                "phpstan/phpstan-deprecation-rules": "^2.0.1",
+                "phpstan/phpstan-phpunit": "^2.0.6",
+                "phpstan/phpstan-strict-rules": "^2.0.4",
+                "phpunit/phpunit": "^9 || ^10.5.45",
+                "redaxo/source": "^5",
+                "symplify/easy-coding-standard": "^12.5.11",
+                "tomasvotruba/unused-public": "^2.0.1"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "config/extension.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "staabm\\PHPStanPsr3\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "keywords": [
+                "PHPStan",
+                "dev",
+                "monolog",
+                "phpstan-extension",
+                "psr-3",
+                "psr-log",
+                "static analysis"
+            ],
+            "support": {
+                "issues": "https://github.com/staabm/phpstan-psr3/issues",
+                "source": "https://github.com/staabm/phpstan-psr3/tree/1.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/staabm",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-04-22T08:28:05+00:00"
+        },
+        {
             "name": "staabm/phpstan-todo-by",
             "version": "0.2",
             "source": {
@@ -2106,78 +2176,7 @@
             "time": "2022-06-03T18:03:27+00:00"
         }
     ],
-    "packages-dev": [
-        {
-            "name": "staabm/phpstan-psr3",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/staabm/phpstan-psr3.git",
-                "reference": "39508d6706a2c7ffb41062d90930430945047e00"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-psr3/zipball/39508d6706a2c7ffb41062d90930430945047e00",
-                "reference": "39508d6706a2c7ffb41062d90930430945047e00",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "phpstan/phpstan": "^2.0",
-                "psr/log": "^1.0 || ^2.0 || ^3.0"
-            },
-            "require-dev": {
-                "illuminate/support": "^8 || ^9 || ^10 || ^11 || ^12",
-                "monolog/monolog": "^2 || ^3.9",
-                "php-parallel-lint/php-parallel-lint": "^1.4",
-                "phpstan/extension-installer": "^1.4.3",
-                "phpstan/phpstan-deprecation-rules": "^2.0.1",
-                "phpstan/phpstan-phpunit": "^2.0.6",
-                "phpstan/phpstan-strict-rules": "^2.0.4",
-                "phpunit/phpunit": "^9 || ^10.5.45",
-                "redaxo/source": "^5",
-                "symplify/easy-coding-standard": "^12.5.11",
-                "tomasvotruba/unused-public": "^2.0.1"
-            },
-            "type": "phpstan-extension",
-            "extra": {
-                "phpstan": {
-                    "includes": [
-                        "config/extension.neon"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "staabm\\PHPStanPsr3\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "keywords": [
-                "PHPStan",
-                "dev",
-                "monolog",
-                "phpstan-extension",
-                "psr-3",
-                "psr-log",
-                "static analysis"
-            ],
-            "support": {
-                "issues": "https://github.com/staabm/phpstan-psr3/issues",
-                "source": "https://github.com/staabm/phpstan-psr3/tree/1.0.1"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/staabm",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-04-22T08:28:05+00:00"
-        }
-    ],
+    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {},

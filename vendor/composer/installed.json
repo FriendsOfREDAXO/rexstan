@@ -2270,7 +2270,5 @@
         }
     ],
     "dev": true,
-    "dev-package-names": [
-        "staabm/phpstan-psr3"
-    ]
+    "dev-package-names": []
 }
