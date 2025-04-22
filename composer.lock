@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ef8724940864790dcf8e196c9ed415d",
+    "content-hash": "10288881877eeb40b09810a42c034066",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1896,16 +1896,16 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "14.6.2",
+            "version": "14.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "0739d34b5e275df765813054b9503daa841e1594"
+                "reference": "8411b9a323263c8e27ca8ac69d78b6a9f5825a52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/0739d34b5e275df765813054b9503daa841e1594",
-                "reference": "0739d34b5e275df765813054b9503daa841e1594",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/8411b9a323263c8e27ca8ac69d78b6a9f5825a52",
+                "reference": "8411b9a323263c8e27ca8ac69d78b6a9f5825a52",
                 "shasum": ""
             },
             "require": {
@@ -1937,7 +1937,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/14.6.2"
+                "source": "https://github.com/symplify/phpstan-rules/tree/14.6.3"
             },
             "funding": [
                 {
@@ -1949,7 +1949,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-11T08:11:16+00:00"
+            "time": "2025-04-19T09:01:43+00:00"
         },
         {
             "name": "tomasvotruba/cognitive-complexity",
@@ -2179,15 +2179,15 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.4"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "platform-overrides": {
         "php": "7.4.30"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
