@@ -2297,6 +2297,7 @@ return array(
     'staabm\\PHPStanDba\\UnresolvableQueryException' => $vendorDir . '/staabm/phpstan-dba/src/UnresolvableQueryException.php',
     'staabm\\PHPStanDba\\UnresolvableQueryMixedTypeException' => $vendorDir . '/staabm/phpstan-dba/src/UnresolvableQueryMixedTypeException.php',
     'staabm\\PHPStanDba\\UnresolvableQueryStringTypeException' => $vendorDir . '/staabm/phpstan-dba/src/UnresolvableQueryStringTypeException.php',
+    'staabm\\PHPStanPsr3\\Rules\\MessageInterpolationRule' => $vendorDir . '/staabm/phpstan-psr3/src/Rules/MessageInterpolationRule.php',
     'staabm\\PHPStanTodoBy\\TodoByDateRule' => $vendorDir . '/staabm/phpstan-todo-by/src/TodoByDateRule.php',
     'staabm\\PHPStanTodoBy\\TodoByIssueUrlRule' => $vendorDir . '/staabm/phpstan-todo-by/src/TodoByIssueUrlRule.php',
     'staabm\\PHPStanTodoBy\\TodoByPackageVersionRule' => $vendorDir . '/staabm/phpstan-todo-by/src/TodoByPackageVersionRule.php',

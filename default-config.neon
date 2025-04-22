@@ -6,6 +6,7 @@ includes:
     - vendor/staabm/phpstan-todo-by/extension.neon
     # required for dead-code.neon, code-complexity.neon, native-type-coverage.neon
     - vendor/symplify/phpstan-rules/config/services/services.neon
+    - vendor/staabm/phpstan-psr3/config/extension.neon
 
 parameters:
     level: 5

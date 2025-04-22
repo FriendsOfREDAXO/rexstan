@@ -1,0 +1,2 @@
+rules:
+	- staabm\PHPStanPsr3\Rules\MessageInterpolationRule
