@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '345c3ad683627686aa297792326b51e2448e0cdf',
+        'reference' => '4d00db1f9dc3a598c304c1ca1ee8e70e4959f7dc',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '345c3ad683627686aa297792326b51e2448e0cdf',
+            'reference' => '4d00db1f9dc3a598c304c1ca1ee8e70e4959f7dc',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -255,6 +255,15 @@
             'install_path' => __DIR__ . '/../staabm/phpstan-dba',
             'aliases' => array(),
             'dev_requirement' => false,
+        ),
+        'staabm/phpstan-psr3' => array(
+            'pretty_version' => '1.0.1',
+            'version' => '1.0.1.0',
+            'reference' => '39508d6706a2c7ffb41062d90930430945047e00',
+            'type' => 'phpstan-extension',
+            'install_path' => __DIR__ . '/../staabm/phpstan-psr3',
+            'aliases' => array(),
+            'dev_requirement' => true,
         ),
         'staabm/phpstan-todo-by' => array(
             'pretty_version' => '0.2',

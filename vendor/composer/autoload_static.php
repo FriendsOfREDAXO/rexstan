@@ -17,6 +17,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         's' => 
         array (
             'staabm\\PHPStanTodoBy\\' => 21,
+            'staabm\\PHPStanPsr3\\' => 19,
             'staabm\\PHPStanDba\\' => 18,
         ),
         'W' => 
@@ -75,6 +76,10 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         array (
             0 => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src',
         ),
+        'staabm\\PHPStanPsr3\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/staabm/phpstan-psr3/src',
+        ),
         'staabm\\PHPStanDba\\' => 
         array (
             0 => __DIR__ . '/..' . '/staabm/phpstan-dba/src',
@@ -125,10 +130,10 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         ),
         'PHPStan\\' => 
         array (
-            0 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
-            1 => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src',
-            2 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
-            3 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
+            0 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
+            1 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
+            2 => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src',
+            3 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
         ),
         'JsonSchema\\' => 
         array (
@@ -2452,6 +2457,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'staabm\\PHPStanDba\\UnresolvableQueryException' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/UnresolvableQueryException.php',
         'staabm\\PHPStanDba\\UnresolvableQueryMixedTypeException' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/UnresolvableQueryMixedTypeException.php',
         'staabm\\PHPStanDba\\UnresolvableQueryStringTypeException' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/UnresolvableQueryStringTypeException.php',
+        'staabm\\PHPStanPsr3\\Rules\\MessageInterpolationRule' => __DIR__ . '/..' . '/staabm/phpstan-psr3/src/Rules/MessageInterpolationRule.php',
         'staabm\\PHPStanTodoBy\\TodoByDateRule' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/TodoByDateRule.php',
         'staabm\\PHPStanTodoBy\\TodoByIssueUrlRule' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/TodoByIssueUrlRule.php',
         'staabm\\PHPStanTodoBy\\TodoByPackageVersionRule' => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src/TodoByPackageVersionRule.php',

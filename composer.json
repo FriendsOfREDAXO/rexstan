@@ -49,5 +49,8 @@
         ],
         "phpstan": "phpstan analyze -c phpstan.dev.neon",
         "tests": "php tests/run.php"
+    },
+    "require-dev": {
+        "staabm/phpstan-psr3": "^1.0"
     }
 }
