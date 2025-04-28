@@ -1678,16 +1678,16 @@
         },
         {
             "name": "staabm/phpstan-psr3",
-            "version": "1.0.1",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-psr3.git",
-                "reference": "39508d6706a2c7ffb41062d90930430945047e00"
+                "reference": "eb28b6f4cde754a8950547d633fc983cbfc59651"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-psr3/zipball/39508d6706a2c7ffb41062d90930430945047e00",
-                "reference": "39508d6706a2c7ffb41062d90930430945047e00",
+                "url": "https://api.github.com/repos/staabm/phpstan-psr3/zipball/eb28b6f4cde754a8950547d633fc983cbfc59651",
+                "reference": "eb28b6f4cde754a8950547d633fc983cbfc59651",
                 "shasum": ""
             },
             "require": {
@@ -1696,6 +1696,7 @@
                 "psr/log": "^1.0 || ^2.0 || ^3.0"
             },
             "require-dev": {
+                "illuminate/log": "^8 || ^9 || ^10 || ^11 || ^12",
                 "illuminate/support": "^8 || ^9 || ^10 || ^11 || ^12",
                 "monolog/monolog": "^2 || ^3.9",
                 "php-parallel-lint/php-parallel-lint": "^1.4",
@@ -1736,7 +1737,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-psr3/issues",
-                "source": "https://github.com/staabm/phpstan-psr3/tree/1.0.1"
+                "source": "https://github.com/staabm/phpstan-psr3/tree/1.0.3"
             },
             "funding": [
                 {
@@ -1744,7 +1745,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-22T08:28:05+00:00"
+            "time": "2025-04-22T16:20:54+00:00"
         },
         {
             "name": "staabm/phpstan-todo-by",
