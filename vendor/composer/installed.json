@@ -1020,17 +1020,17 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.12",
-            "version_normalized": "2.1.12.0",
+            "version": "2.1.14",
+            "version_normalized": "2.1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "96dde49e967c0c22812bcfa7bda4ff82c09f3b0c"
+                "reference": "8f2e03099cac24ff3b379864d171c5acbfc6b9a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/96dde49e967c0c22812bcfa7bda4ff82c09f3b0c",
-                "reference": "96dde49e967c0c22812bcfa7bda4ff82c09f3b0c",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/8f2e03099cac24ff3b379864d171c5acbfc6b9a2",
+                "reference": "8f2e03099cac24ff3b379864d171c5acbfc6b9a2",
                 "shasum": ""
             },
             "require": {
@@ -1039,7 +1039,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2025-04-16T13:19:18+00:00",
+            "time": "2025-05-02T15:32:28+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -1747,17 +1747,17 @@
         },
         {
             "name": "staabm/phpstan-psr3",
-            "version": "1.0.1",
-            "version_normalized": "1.0.1.0",
+            "version": "1.0.3",
+            "version_normalized": "1.0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-psr3.git",
-                "reference": "39508d6706a2c7ffb41062d90930430945047e00"
+                "reference": "eb28b6f4cde754a8950547d633fc983cbfc59651"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-psr3/zipball/39508d6706a2c7ffb41062d90930430945047e00",
-                "reference": "39508d6706a2c7ffb41062d90930430945047e00",
+                "url": "https://api.github.com/repos/staabm/phpstan-psr3/zipball/eb28b6f4cde754a8950547d633fc983cbfc59651",
+                "reference": "eb28b6f4cde754a8950547d633fc983cbfc59651",
                 "shasum": ""
             },
             "require": {
@@ -1766,6 +1766,7 @@
                 "psr/log": "^1.0 || ^2.0 || ^3.0"
             },
             "require-dev": {
+                "illuminate/log": "^8 || ^9 || ^10 || ^11 || ^12",
                 "illuminate/support": "^8 || ^9 || ^10 || ^11 || ^12",
                 "monolog/monolog": "^2 || ^3.9",
                 "php-parallel-lint/php-parallel-lint": "^1.4",
@@ -1778,7 +1779,7 @@
                 "symplify/easy-coding-standard": "^12.5.11",
                 "tomasvotruba/unused-public": "^2.0.1"
             },
-            "time": "2025-04-22T08:28:05+00:00",
+            "time": "2025-04-22T16:20:54+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1808,7 +1809,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-psr3/issues",
-                "source": "https://github.com/staabm/phpstan-psr3/tree/1.0.1"
+                "source": "https://github.com/staabm/phpstan-psr3/tree/1.0.3"
             },
             "funding": [
                 {
@@ -1891,28 +1892,28 @@
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.31.0",
-            "version_normalized": "1.31.0.0",
+            "version": "v1.32.0",
+            "version_normalized": "1.32.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "60328e362d4c2c802a54fcbf04f9d3fb892b4cf8"
+                "reference": "0cc9dd0f17f61d8131e7df6b84bd344899fe2608"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/60328e362d4c2c802a54fcbf04f9d3fb892b4cf8",
-                "reference": "60328e362d4c2c802a54fcbf04f9d3fb892b4cf8",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/0cc9dd0f17f61d8131e7df6b84bd344899fe2608",
+                "reference": "0cc9dd0f17f61d8131e7df6b84bd344899fe2608",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2"
             },
-            "time": "2024-09-09T11:45:10+00:00",
+            "time": "2025-01-02T08:10:11+00:00",
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "installation-source": "dist",
@@ -1954,7 +1955,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/v1.31.0"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.32.0"
             },
             "funding": [
                 {
@@ -1974,17 +1975,17 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "14.6.2",
-            "version_normalized": "14.6.2.0",
+            "version": "14.6.9",
+            "version_normalized": "14.6.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "0739d34b5e275df765813054b9503daa841e1594"
+                "reference": "0d3f5b5f9f6c20df5405fcbc123313c932d2562c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/0739d34b5e275df765813054b9503daa841e1594",
-                "reference": "0739d34b5e275df765813054b9503daa841e1594",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/0d3f5b5f9f6c20df5405fcbc123313c932d2562c",
+                "reference": "0d3f5b5f9f6c20df5405fcbc123313c932d2562c",
                 "shasum": ""
             },
             "require": {
@@ -1993,7 +1994,7 @@
                 "phpstan/phpstan": "^2.1.8",
                 "webmozart/assert": "^1.11"
             },
-            "time": "2025-04-11T08:11:16+00:00",
+            "time": "2025-04-28T13:48:58+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -2018,7 +2019,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/14.6.2"
+                "source": "https://github.com/symplify/phpstan-rules/tree/14.6.9"
             },
             "funding": [
                 {

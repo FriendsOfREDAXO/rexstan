@@ -5,7 +5,7 @@ PHPStan rules for [PSR3](https://www.php-fig.org/psr/psr-3/) compatible logger p
 Supports
 - psr/log interface
 - any PSR3 compatible logger package, e.g. monolog/monolog
-- illuminate/log facade (laravel)
+- illuminate/log facade, Illuminate\Log\LogManager (laravel)
 - REDAXO rex_logger
 
 ## Related articles
@@ -29,7 +29,7 @@ If you don't want to use `phpstan/extension-installer`, include extension.neon i
 
 ```
 includes:
-    - vendor/staabm/phpstan-psr3/extension.neon
+    - vendor/staabm/phpstan-psr3/config/extension.neon
 ```
 
 </details>
