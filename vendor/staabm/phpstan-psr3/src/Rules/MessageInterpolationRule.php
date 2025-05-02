@@ -11,6 +11,11 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use PHPStan\Type\BooleanType;
+use PHPStan\Type\FloatType;
+use PHPStan\Type\IntegerType;
+use PHPStan\Type\Type;
+use PHPStan\Type\UnionType;
 
 /**
  * @implements Rule<Node\Expr\CallLike>
@@ -69,19 +74,69 @@ final class MessageInterpolationRule implements Rule
             return [];
         }
 
-        if ($args[0]->value instanceof Node\Expr\BinaryOp\Concat) {
-            return [RuleErrorBuilder::message('Using interpolated strings in log messages is potentially a security risk.')->identifier('psr3.concat')->build()];
-        }
-        if ($args[0]->value instanceof Node\Scalar\InterpolatedString) {
-            return [RuleErrorBuilder::message('Using interpolated strings in log messages is potentially a security risk.')->identifier('psr3.interpolated')->build()];
+        if ($this->isRiskyExpr($args[0]->value, $scope)) {
+            return [RuleErrorBuilder::message('Using interpolated strings in log messages is potentially a security risk. Use PSR-3 placeholders instead.')->identifier('psr3.interpolated')->build()];
         }
 
         return [];
     }
 
+    private function isRiskyExpr(Node\Expr $expr, Scope $scope): bool
+    {
+        if ($expr instanceof Node\Expr\BinaryOp\Concat) {
+            if ($this->isRiskyExpr($expr->left, $scope)) {
+                return true;
+            }
+            if ($this->isRiskyExpr($expr->right, $scope)) {
+                return true;
+            }
+            return false;
+        }
+
+        if ($expr instanceof Node\Scalar\InterpolatedString) {
+            foreach ($expr->parts as $part) {
+                if ($part instanceof Node\InterpolatedStringPart) {
+                    continue;
+                }
+                if ($this->isRiskyExpr($part, $scope)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        if ($expr instanceof Node\Scalar) {
+            return false;
+        }
+
+        return $this->isRiskyType($scope->getNativeType($expr));
+    }
+
+    private function isRiskyType(Type $type): bool
+    {
+        $safe = new UnionType([
+            new FloatType(),
+            new IntegerType(),
+            new BooleanType(),
+        ]);
+
+        if ($safe->isSuperTypeOf($type)->yes()) {
+            return false;
+        }
+
+        if ($type->isLiteralString()->yes() || $type->isEnum()->yes()) {
+            return false;
+        }
+
+        return true;
+    }
+
     private function isPsr3LikeCall(MethodReflection $methodReflection): bool
     {
-        if ($methodReflection->getDeclaringClass()->is(\Psr\Log\LoggerInterface::class)) {
+        if (
+            $methodReflection->getDeclaringClass()->is(\Psr\Log\LoggerInterface::class)
+            || $methodReflection->getDeclaringClass()->implementsInterface(\Psr\Log\LoggerInterface::class)
+        ) {
             return in_array(strtolower($methodReflection->getName()), $this->psr3LogMethods, true);
         }
 
