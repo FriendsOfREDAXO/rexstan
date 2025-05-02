@@ -1473,17 +1473,17 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v4.4.1",
-            "version_normalized": "4.4.1.0",
+            "version": "v4.5.0",
+            "version_normalized": "4.5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "b24661b61262abdac1b35d8f4f88d7e3ffb38d1e"
+                "reference": "1c5e6996bd75a1460f5e2683fc4294665b37bee2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/b24661b61262abdac1b35d8f4f88d7e3ffb38d1e",
-                "reference": "b24661b61262abdac1b35d8f4f88d7e3ffb38d1e",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/1c5e6996bd75a1460f5e2683fc4294665b37bee2",
+                "reference": "1c5e6996bd75a1460f5e2683fc4294665b37bee2",
                 "shasum": ""
             },
             "require": {
@@ -1499,7 +1499,7 @@
                 "phpunit/phpunit": "^8.5.14 || ^10.1 || ^11.0 || ^12.0",
                 "spaze/coding-standard": "^1.8"
             },
-            "time": "2025-03-03T21:14:21+00:00",
+            "time": "2025-04-10T19:01:43+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1525,13 +1525,13 @@
                     "homepage": "https://www.michalspacek.cz"
                 }
             ],
-            "description": "PHPStan rules to detect disallowed method & function calls, constant, namespace & superglobal usages",
+            "description": "PHPStan rules to detect disallowed method & function calls, constant, namespace, attribute & superglobal usages, with powerful rules to re-allow a call or a usage in places where it should be allowed.",
             "keywords": [
                 "static analysis"
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v4.4.1"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v4.5.0"
             },
             "funding": [
                 {
