@@ -17,8 +17,11 @@ final class ClassMethodCallReferenceResolver
     /**
      * @param \PhpParser\Node\Expr\MethodCall|\PHPStan\Node\MethodCallableNode $methodCallOrMethodCallable
      */
-    public function resolve($methodCallOrMethodCallable, Scope $scope, bool $allowThisType): ?MethodCallReference
-    {
+    public function resolve(
+        $methodCallOrMethodCallable,
+        Scope $scope,
+        bool $allowThisType
+    ): ?MethodCallReference {
         if ($methodCallOrMethodCallable instanceof MethodCallableNode) {
             $methodName = $methodCallOrMethodCallable->getName();
             $variable = $methodCallOrMethodCallable->getVar();

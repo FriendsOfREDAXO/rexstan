@@ -71,7 +71,11 @@ final class MethodCallArgTypesCollector implements Collector
 
         $classMethodReference = $this->createClassMethodReference($classMethodCallReference);
 
-        $stringArgTypesString = $this->collectorMetadataPrinter->printArgTypesAsString($node, $methodReflection, $scope);
+        $stringArgTypesString = $this->collectorMetadataPrinter->printArgTypesAsString(
+            $node,
+            $methodReflection,
+            $scope
+        );
         return [$classMethodReference, $stringArgTypesString];
     }
 
