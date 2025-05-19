@@ -149,6 +149,7 @@ final class NarrowReturnObjectTypeRule implements Rule
             return true;
         }
 
-        return $type->getObjectClassReflections()[0]->isAnonymous();
+        return $type->getObjectClassReflections()[0]
+            ->isAnonymous();
     }
 }

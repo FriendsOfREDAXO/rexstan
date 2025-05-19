@@ -41,9 +41,17 @@ final class CollectorMetadataPrinter
         $this->standard = new Standard();
     }
 
-    public function printArgTypesAsString(MethodCall $methodCall, ExtendedMethodReflection $extendedMethodReflection, Scope $scope): string
-    {
-        $parametersAcceptor = ParametersAcceptorSelector::selectFromArgs($scope, $methodCall->getArgs(), $extendedMethodReflection->getVariants(), $extendedMethodReflection->getNamedArgumentsVariants());
+    public function printArgTypesAsString(
+        MethodCall $methodCall,
+        ExtendedMethodReflection $extendedMethodReflection,
+        Scope $scope
+    ): string {
+        $parametersAcceptor = ParametersAcceptorSelector::selectFromArgs(
+            $scope,
+            $methodCall->getArgs(),
+            $extendedMethodReflection->getVariants(),
+            $extendedMethodReflection->getNamedArgumentsVariants()
+        );
         $parameters = $parametersAcceptor->getParameters();
 
         $stringArgTypes = [];
@@ -133,8 +141,10 @@ final class CollectorMetadataPrinter
      * @param \PhpParser\Node\UnionType|NodeIntersectionType $paramType
      * @return \PhpParser\Node\UnionType|NodeIntersectionType
      */
-    private function resolveSortedTypes($paramType, ?string $className)
-    {
+    private function resolveSortedTypes(
+        $paramType,
+        ?string $className
+    ) {
         $typeNames = [];
 
         foreach ($paramType->types as $type) {
@@ -190,7 +200,8 @@ final class CollectorMetadataPrinter
         }
 
         if (count($type->getEnumCases()) === 1) {
-            return $type->getEnumCases()[0]->getClassName();
+            return $type->getEnumCases()[0]
+                ->getClassName();
         }
 
         return $type->describe(VerbosityLevel::typeOnly());
