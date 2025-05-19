@@ -1076,7 +1076,6 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'PHPStan\\Rules\\Deprecations\\RestrictedDeprecatedFunctionUsageExtension' => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src/Rules/Deprecations/RestrictedDeprecatedFunctionUsageExtension.php',
         'PHPStan\\Rules\\Deprecations\\RestrictedDeprecatedMethodUsageExtension' => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src/Rules/Deprecations/RestrictedDeprecatedMethodUsageExtension.php',
         'PHPStan\\Rules\\Deprecations\\RestrictedDeprecatedPropertyUsageExtension' => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src/Rules/Deprecations/RestrictedDeprecatedPropertyUsageExtension.php',
-        'PHPStan\\Rules\\Deprecations\\UsageOfDeprecatedCastRule' => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src/Rules/Deprecations/UsageOfDeprecatedCastRule.php',
         'PHPStan\\Rules\\DisallowedConstructs\\DisallowedBacktickRule' => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src/Rules/DisallowedConstructs/DisallowedBacktickRule.php',
         'PHPStan\\Rules\\DisallowedConstructs\\DisallowedEmptyRule' => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src/Rules/DisallowedConstructs/DisallowedEmptyRule.php',
         'PHPStan\\Rules\\DisallowedConstructs\\DisallowedImplicitArrayCreationRule' => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src/Rules/DisallowedConstructs/DisallowedImplicitArrayCreationRule.php',

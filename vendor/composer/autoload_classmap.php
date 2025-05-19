@@ -916,7 +916,6 @@ return array(
     'PHPStan\\Rules\\Deprecations\\RestrictedDeprecatedFunctionUsageExtension' => $vendorDir . '/phpstan/phpstan-deprecation-rules/src/Rules/Deprecations/RestrictedDeprecatedFunctionUsageExtension.php',
     'PHPStan\\Rules\\Deprecations\\RestrictedDeprecatedMethodUsageExtension' => $vendorDir . '/phpstan/phpstan-deprecation-rules/src/Rules/Deprecations/RestrictedDeprecatedMethodUsageExtension.php',
     'PHPStan\\Rules\\Deprecations\\RestrictedDeprecatedPropertyUsageExtension' => $vendorDir . '/phpstan/phpstan-deprecation-rules/src/Rules/Deprecations/RestrictedDeprecatedPropertyUsageExtension.php',
-    'PHPStan\\Rules\\Deprecations\\UsageOfDeprecatedCastRule' => $vendorDir . '/phpstan/phpstan-deprecation-rules/src/Rules/Deprecations/UsageOfDeprecatedCastRule.php',
     'PHPStan\\Rules\\DisallowedConstructs\\DisallowedBacktickRule' => $vendorDir . '/phpstan/phpstan-strict-rules/src/Rules/DisallowedConstructs/DisallowedBacktickRule.php',
     'PHPStan\\Rules\\DisallowedConstructs\\DisallowedEmptyRule' => $vendorDir . '/phpstan/phpstan-strict-rules/src/Rules/DisallowedConstructs/DisallowedEmptyRule.php',
     'PHPStan\\Rules\\DisallowedConstructs\\DisallowedImplicitArrayCreationRule' => $vendorDir . '/phpstan/phpstan-strict-rules/src/Rules/DisallowedConstructs/DisallowedImplicitArrayCreationRule.php',
