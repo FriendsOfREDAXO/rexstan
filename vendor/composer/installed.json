@@ -1666,23 +1666,23 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.3.6",
-            "version_normalized": "0.3.6.0",
+            "version": "0.4",
+            "version_normalized": "0.4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "f33136c81acc3ae6aae576df98e292024e2cff2e"
+                "reference": "d93014580232b604cbd5f7498100586d60fe3a40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/f33136c81acc3ae6aae576df98e292024e2cff2e",
-                "reference": "f33136c81acc3ae6aae576df98e292024e2cff2e",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/d93014580232b604cbd5f7498100586d60fe3a40",
+                "reference": "d93014580232b604cbd5f7498100586d60fe3a40",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2.0",
                 "composer/semver": "^3.2",
-                "doctrine/dbal": "3.*",
+                "doctrine/dbal": "3.*|4.*",
                 "php": "^7.4 || ^8.0",
                 "phpstan/phpstan": "^2.0"
             },
@@ -1703,7 +1703,7 @@
                 "tomasvotruba/unused-public": "^2.0",
                 "vlucas/phpdotenv": "^5.4"
             },
-            "time": "2025-03-06T15:23:27+00:00",
+            "time": "2025-05-16T12:47:17+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1735,7 +1735,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.3.6"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.4"
             },
             "funding": [
                 {
