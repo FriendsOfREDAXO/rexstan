@@ -58,7 +58,6 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         array (
             'Doctrine\\Deprecations\\' => 22,
             'Doctrine\\DBAL\\' => 14,
-            'Doctrine\\Common\\Cache\\' => 22,
             'Doctrine\\Common\\' => 16,
         ),
         'C' => 
@@ -147,10 +146,6 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         array (
             0 => __DIR__ . '/..' . '/doctrine/dbal/src',
         ),
-        'Doctrine\\Common\\Cache\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache',
-        ),
         'Doctrine\\Common\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/event-manager/src',
@@ -187,19 +182,6 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'Composer\\Semver\\Intervals' => __DIR__ . '/..' . '/composer/semver/src/Intervals.php',
         'Composer\\Semver\\Semver' => __DIR__ . '/..' . '/composer/semver/src/Semver.php',
         'Composer\\Semver\\VersionParser' => __DIR__ . '/..' . '/composer/semver/src/VersionParser.php',
-        'Doctrine\\Common\\Cache\\Cache' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/Cache.php',
-        'Doctrine\\Common\\Cache\\CacheProvider' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/CacheProvider.php',
-        'Doctrine\\Common\\Cache\\ClearableCache' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/ClearableCache.php',
-        'Doctrine\\Common\\Cache\\FlushableCache' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/FlushableCache.php',
-        'Doctrine\\Common\\Cache\\MultiDeleteCache' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/MultiDeleteCache.php',
-        'Doctrine\\Common\\Cache\\MultiGetCache' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/MultiGetCache.php',
-        'Doctrine\\Common\\Cache\\MultiOperationCache' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/MultiOperationCache.php',
-        'Doctrine\\Common\\Cache\\MultiPutCache' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/MultiPutCache.php',
-        'Doctrine\\Common\\Cache\\Psr6\\CacheAdapter' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/Psr6/CacheAdapter.php',
-        'Doctrine\\Common\\Cache\\Psr6\\CacheItem' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/Psr6/CacheItem.php',
-        'Doctrine\\Common\\Cache\\Psr6\\DoctrineProvider' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/Psr6/DoctrineProvider.php',
-        'Doctrine\\Common\\Cache\\Psr6\\InvalidArgument' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/Psr6/InvalidArgument.php',
-        'Doctrine\\Common\\Cache\\Psr6\\TypedCacheItem' => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache/Psr6/TypedCacheItem.php',
         'Doctrine\\Common\\EventArgs' => __DIR__ . '/..' . '/doctrine/event-manager/src/EventArgs.php',
         'Doctrine\\Common\\EventManager' => __DIR__ . '/..' . '/doctrine/event-manager/src/EventManager.php',
         'Doctrine\\Common\\EventSubscriber' => __DIR__ . '/..' . '/doctrine/event-manager/src/EventSubscriber.php',
@@ -1288,7 +1270,6 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'Spaze\\PHPStan\\Rules\\Disallowed\\DisallowedNamespaceFactory' => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src/DisallowedNamespaceFactory.php',
         'Spaze\\PHPStan\\Rules\\Disallowed\\DisallowedSuperglobalFactory' => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src/DisallowedSuperglobalFactory.php',
         'Spaze\\PHPStan\\Rules\\Disallowed\\DisallowedVariable' => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src/DisallowedVariable.php',
-        'Spaze\\PHPStan\\Rules\\Disallowed\\DisallowedVariableFactory' => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src/DisallowedVariableFactory.php',
         'Spaze\\PHPStan\\Rules\\Disallowed\\DisallowedWithParams' => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src/DisallowedWithParams.php',
         'Spaze\\PHPStan\\Rules\\Disallowed\\Exceptions\\UnsupportedParamTypeException' => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src/Exceptions/UnsupportedParamTypeException.php',
         'Spaze\\PHPStan\\Rules\\Disallowed\\Exceptions\\UnsupportedParamTypeInConfigException' => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src/Exceptions/UnsupportedParamTypeInConfigException.php',
@@ -1322,11 +1303,11 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'Spaze\\PHPStan\\Rules\\Disallowed\\RuleErrors\\DisallowedVariableRuleErrors' => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src/RuleErrors/DisallowedVariableRuleErrors.php',
         'Spaze\\PHPStan\\Rules\\Disallowed\\RuleErrors\\ErrorIdentifiers' => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src/RuleErrors/ErrorIdentifiers.php',
         'Spaze\\PHPStan\\Rules\\Disallowed\\Type\\TypeResolver' => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src/Type/TypeResolver.php',
+        'Spaze\\PHPStan\\Rules\\Disallowed\\UsageFactory\\NamespaceUsage' => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src/UsageFactory/NamespaceUsage.php',
+        'Spaze\\PHPStan\\Rules\\Disallowed\\UsageFactory\\NamespaceUsageFactory' => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src/UsageFactory/NamespaceUsageFactory.php',
         'Spaze\\PHPStan\\Rules\\Disallowed\\Usages\\AttributeUsages' => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src/Usages/AttributeUsages.php',
         'Spaze\\PHPStan\\Rules\\Disallowed\\Usages\\ClassConstantUsages' => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src/Usages/ClassConstantUsages.php',
         'Spaze\\PHPStan\\Rules\\Disallowed\\Usages\\ConstantUsages' => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src/Usages/ConstantUsages.php',
-        'Spaze\\PHPStan\\Rules\\Disallowed\\Usages\\NamespaceUsage' => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src/Usages/NamespaceUsage.php',
-        'Spaze\\PHPStan\\Rules\\Disallowed\\Usages\\NamespaceUsageFactory' => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src/Usages/NamespaceUsageFactory.php',
         'Spaze\\PHPStan\\Rules\\Disallowed\\Usages\\NamespaceUsages' => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src/Usages/NamespaceUsages.php',
         'Spaze\\PHPStan\\Rules\\Disallowed\\Usages\\VariableUsages' => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src/Usages/VariableUsages.php',
         'SqlFtw\\Analyzer\\AnalyzerFlags' => __DIR__ . '/..' . '/sqlftw/sqlftw/sources/Analyzer/AnalyzerFlags.php',

@@ -155,141 +155,48 @@
             "install-path": "./semver"
         },
         {
-            "name": "doctrine/cache",
-            "version": "2.2.0",
-            "version_normalized": "2.2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/doctrine/cache.git",
-                "reference": "1ca8f21980e770095a31456042471a57bc4c68fb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/1ca8f21980e770095a31456042471a57bc4c68fb",
-                "reference": "1ca8f21980e770095a31456042471a57bc4c68fb",
-                "shasum": ""
-            },
-            "require": {
-                "php": "~7.1 || ^8.0"
-            },
-            "conflict": {
-                "doctrine/common": ">2.2,<2.4"
-            },
-            "require-dev": {
-                "cache/integration-tests": "dev-master",
-                "doctrine/coding-standard": "^9",
-                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5",
-                "psr/cache": "^1.0 || ^2.0 || ^3.0",
-                "symfony/cache": "^4.4 || ^5.4 || ^6",
-                "symfony/var-exporter": "^4.4 || ^5.4 || ^6"
-            },
-            "time": "2022-05-20T20:07:39+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "Doctrine\\Common\\Cache\\": "lib/Doctrine/Common/Cache"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Guilherme Blanco",
-                    "email": "guilhermeblanco@gmail.com"
-                },
-                {
-                    "name": "Roman Borschel",
-                    "email": "roman@code-factory.org"
-                },
-                {
-                    "name": "Benjamin Eberlei",
-                    "email": "kontakt@beberlei.de"
-                },
-                {
-                    "name": "Jonathan Wage",
-                    "email": "jonwage@gmail.com"
-                },
-                {
-                    "name": "Johannes Schmitt",
-                    "email": "schmittjoh@gmail.com"
-                }
-            ],
-            "description": "PHP Doctrine Cache library is a popular cache implementation that supports many different drivers such as redis, memcache, apc, mongodb and others.",
-            "homepage": "https://www.doctrine-project.org/projects/cache.html",
-            "keywords": [
-                "abstraction",
-                "apcu",
-                "cache",
-                "caching",
-                "couchdb",
-                "memcached",
-                "php",
-                "redis",
-                "xcache"
-            ],
-            "support": {
-                "issues": "https://github.com/doctrine/cache/issues",
-                "source": "https://github.com/doctrine/cache/tree/2.2.0"
-            },
-            "funding": [
-                {
-                    "url": "https://www.doctrine-project.org/sponsorship.html",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://www.patreon.com/phpdoctrine",
-                    "type": "patreon"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Fcache",
-                    "type": "tidelift"
-                }
-            ],
-            "install-path": "../doctrine/cache"
-        },
-        {
             "name": "doctrine/dbal",
-            "version": "3.9.4",
-            "version_normalized": "3.9.4.0",
+            "version": "3.10.0",
+            "version_normalized": "3.10.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "ec16c82f20be1a7224e65ac67144a29199f87959"
+                "reference": "1cf840d696373ea0d58ad0a8875c0fadcfc67214"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/ec16c82f20be1a7224e65ac67144a29199f87959",
-                "reference": "ec16c82f20be1a7224e65ac67144a29199f87959",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/1cf840d696373ea0d58ad0a8875c0fadcfc67214",
+                "reference": "1cf840d696373ea0d58ad0a8875c0fadcfc67214",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2",
-                "doctrine/cache": "^1.11|^2.0",
                 "doctrine/deprecations": "^0.5.3|^1",
                 "doctrine/event-manager": "^1|^2",
                 "php": "^7.4 || ^8.0",
                 "psr/cache": "^1|^2|^3",
                 "psr/log": "^1|^2|^3"
             },
+            "conflict": {
+                "doctrine/cache": "< 1.11"
+            },
             "require-dev": {
-                "doctrine/coding-standard": "12.0.0",
+                "doctrine/cache": "^1.11|^2.0",
+                "doctrine/coding-standard": "13.0.0",
                 "fig/log-test": "^1",
                 "jetbrains/phpstorm-stubs": "2023.1",
-                "phpstan/phpstan": "2.1.1",
+                "phpstan/phpstan": "2.1.17",
                 "phpstan/phpstan-strict-rules": "^2",
-                "phpunit/phpunit": "9.6.22",
-                "slevomat/coding-standard": "8.13.1",
-                "squizlabs/php_codesniffer": "3.10.2",
+                "phpunit/phpunit": "9.6.23",
+                "slevomat/coding-standard": "8.16.2",
+                "squizlabs/php_codesniffer": "3.13.1",
                 "symfony/cache": "^5.4|^6.0|^7.0",
                 "symfony/console": "^4.4|^5.4|^6.0|^7.0"
             },
             "suggest": {
                 "symfony/console": "For helpful console commands such as SQL execution and import of files."
             },
-            "time": "2025-01-16T08:28:55+00:00",
+            "time": "2025-07-10T21:11:04+00:00",
             "bin": [
                 "bin/doctrine-dbal"
             ],
@@ -346,7 +253,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/3.9.4"
+                "source": "https://github.com/doctrine/dbal/tree/3.10.0"
             },
             "funding": [
                 {
@@ -1020,17 +927,17 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.17",
-            "version_normalized": "2.1.17.0",
+            "version": "2.1.18",
+            "version_normalized": "2.1.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "89b5ef665716fa2a52ecd2633f21007a6a349053"
+                "reference": "ee1f390b7a70cdf74a2b737e554f68afea885db7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/89b5ef665716fa2a52ecd2633f21007a6a349053",
-                "reference": "89b5ef665716fa2a52ecd2633f21007a6a349053",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ee1f390b7a70cdf74a2b737e554f68afea885db7",
+                "reference": "ee1f390b7a70cdf74a2b737e554f68afea885db7",
                 "shasum": ""
             },
             "require": {
@@ -1039,7 +946,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2025-05-21T20:55:28+00:00",
+            "time": "2025-07-17T17:22:31+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -1473,17 +1380,17 @@
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
-            "version": "v4.5.0",
-            "version_normalized": "4.5.0.0",
+            "version": "v4.6.0",
+            "version_normalized": "4.6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spaze/phpstan-disallowed-calls.git",
-                "reference": "1c5e6996bd75a1460f5e2683fc4294665b37bee2"
+                "reference": "d77ea1351ac2cc16c00a389ea0db87fc11072b80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/1c5e6996bd75a1460f5e2683fc4294665b37bee2",
-                "reference": "1c5e6996bd75a1460f5e2683fc4294665b37bee2",
+                "url": "https://api.github.com/repos/spaze/phpstan-disallowed-calls/zipball/d77ea1351ac2cc16c00a389ea0db87fc11072b80",
+                "reference": "d77ea1351ac2cc16c00a389ea0db87fc11072b80",
                 "shasum": ""
             },
             "require": {
@@ -1497,9 +1404,10 @@
                 "php-parallel-lint/php-parallel-lint": "^1.2",
                 "phpstan/phpstan-deprecation-rules": "^1.2 || ^2.0",
                 "phpunit/phpunit": "^8.5.14 || ^10.1 || ^11.0 || ^12.0",
+                "shipmonk/dead-code-detector": "^0.12",
                 "spaze/coding-standard": "^1.8"
             },
-            "time": "2025-04-10T19:01:43+00:00",
+            "time": "2025-07-11T18:17:33+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1531,7 +1439,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spaze/phpstan-disallowed-calls/issues",
-                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v4.5.0"
+                "source": "https://github.com/spaze/phpstan-disallowed-calls/tree/v4.6.0"
             },
             "funding": [
                 {
@@ -1821,17 +1729,17 @@
         },
         {
             "name": "staabm/phpstan-todo-by",
-            "version": "0.2",
-            "version_normalized": "0.2.0.0",
+            "version": "0.3",
+            "version_normalized": "0.3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-todo-by.git",
-                "reference": "de149a2dcdc0bcb5f3ebc6f6c571bf50d74aea92"
+                "reference": "da684ec1641e56b6dd67cd01207cdae9ca216d1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/de149a2dcdc0bcb5f3ebc6f6c571bf50d74aea92",
-                "reference": "de149a2dcdc0bcb5f3ebc6f6c571bf50d74aea92",
+                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/da684ec1641e56b6dd67cd01207cdae9ca216d1e",
+                "reference": "da684ec1641e56b6dd67cd01207cdae9ca216d1e",
                 "shasum": ""
             },
             "require": {
@@ -1841,17 +1749,17 @@
                 "ext-json": "*",
                 "nikolaposa/version": "^4.1",
                 "php": "^7.4 || ^8.0",
-                "phpstan/phpstan": "^1.10 || ^2.0"
+                "phpstan/phpstan": "^2.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.64",
-                "nikic/php-parser": "^4.0",
+                "friendsofphp/php-cs-fixer": "^3.75",
+                "nikic/php-parser": "^5.3",
                 "phpstan/extension-installer": "^1.4",
-                "phpstan/phpstan-deprecation-rules": "^1.2",
+                "phpstan/phpstan-deprecation-rules": "^2",
                 "phpunit/phpunit": "^9 || ^10.5",
                 "redaxo/php-cs-fixer-config": "^1.0"
             },
-            "time": "2024-11-11T08:11:22+00:00",
+            "time": "2025-06-26T18:16:06+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1880,7 +1788,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-todo-by/issues",
-                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.2"
+                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.3"
             },
             "funding": [
                 {
@@ -1975,17 +1883,17 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "14.6.9",
-            "version_normalized": "14.6.9.0",
+            "version": "14.6.11",
+            "version_normalized": "14.6.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "0d3f5b5f9f6c20df5405fcbc123313c932d2562c"
+                "reference": "afe3b8a5b4662d703035fc3689d27180a1d4cb8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/0d3f5b5f9f6c20df5405fcbc123313c932d2562c",
-                "reference": "0d3f5b5f9f6c20df5405fcbc123313c932d2562c",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/afe3b8a5b4662d703035fc3689d27180a1d4cb8e",
+                "reference": "afe3b8a5b4662d703035fc3689d27180a1d4cb8e",
                 "shasum": ""
             },
             "require": {
@@ -1994,7 +1902,7 @@
                 "phpstan/phpstan": "^2.1.8",
                 "webmozart/assert": "^1.11"
             },
-            "time": "2025-04-28T13:48:58+00:00",
+            "time": "2025-07-17T19:33:44+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -2019,7 +1927,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/14.6.9"
+                "source": "https://github.com/symplify/phpstan-rules/tree/14.6.11"
             },
             "funding": [
                 {

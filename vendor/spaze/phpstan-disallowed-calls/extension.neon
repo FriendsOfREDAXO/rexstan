@@ -441,7 +441,7 @@ services:
 	- Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedCallsRuleErrors
 	- Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedVariableRuleErrors
 	- Spaze\PHPStan\Rules\Disallowed\Type\TypeResolver
-	- Spaze\PHPStan\Rules\Disallowed\Usages\NamespaceUsageFactory
+	- Spaze\PHPStan\Rules\Disallowed\UsageFactory\NamespaceUsageFactory
 	-
 		factory: Spaze\PHPStan\Rules\Disallowed\Usages\NamespaceUsages(forbiddenNamespaces: %disallowedNamespaces%)
 		tags:
@@ -496,6 +496,18 @@ services:
 			- phpstan.rules.rule
 	-
 		factory: Spaze\PHPStan\Rules\Disallowed\Calls\ShellExecCalls(forbiddenCalls: %disallowedFunctionCalls%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Calls\FunctionFirstClassCallables(forbiddenCalls: %disallowedFunctionCalls%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Calls\MethodFirstClassCallables(forbiddenCalls: %disallowedMethodCalls%)
+		tags:
+			- phpstan.rules.rule
+	-
+		factory: Spaze\PHPStan\Rules\Disallowed\Calls\StaticFirstClassCallables(forbiddenCalls: %disallowedStaticCalls%)
 		tags:
 			- phpstan.rules.rule
 	-
