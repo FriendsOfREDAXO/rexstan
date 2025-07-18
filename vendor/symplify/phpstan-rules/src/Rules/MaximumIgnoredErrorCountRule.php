@@ -35,7 +35,7 @@ final class MaximumIgnoredErrorCountRule implements Rule
         int $limit = 0
     ) {
         $this->limit = $limit;
-        $this->neonAdapter = new NeonAdapter();
+        $this->neonAdapter = new NeonAdapter([]);
     }
 
     /**
