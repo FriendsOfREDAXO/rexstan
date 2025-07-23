@@ -1,0 +1,21 @@
+<?php
+
+namespace Symfony\Component\Validator;
+
+class Constraint
+{
+    /**
+     * @var array<string, string>
+     */
+    protected static $errorNames = [];
+
+    /**
+     * @return array<mixed>
+     */
+    public function getRequiredOptions();
+
+    /**
+     * @return string|array<string>
+     */
+    public function getTargets();
+}

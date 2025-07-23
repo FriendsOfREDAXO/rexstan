@@ -1,0 +1,26 @@
+<?php
+
+namespace Symfony\Component\Process;
+
+use Symfony\Component\Process\Exception\LogicException;
+
+/**
+ * @implements \IteratorAggregate<string, string>
+ */
+class Process implements \IteratorAggregate
+{
+
+    /**
+     * @param int $flags
+     *
+     * @return \Generator<string, string, mixed, mixed>
+     *
+     * @throws LogicException in case the output has been disabled
+     * @throws LogicException In case the process is not started
+     */
+    public function getIterator(int $flags = 0): \Generator
+    {
+
+    }
+
+}
