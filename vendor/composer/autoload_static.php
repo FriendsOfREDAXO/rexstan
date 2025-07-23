@@ -1075,6 +1075,8 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'PHPStan\\Rules\\Operators\\OperandInArithmeticPostIncrementRule' => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src/Rules/Operators/OperandInArithmeticPostIncrementRule.php',
         'PHPStan\\Rules\\Operators\\OperandInArithmeticPreDecrementRule' => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src/Rules/Operators/OperandInArithmeticPreDecrementRule.php',
         'PHPStan\\Rules\\Operators\\OperandInArithmeticPreIncrementRule' => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src/Rules/Operators/OperandInArithmeticPreIncrementRule.php',
+        'PHPStan\\Rules\\Operators\\OperandInArithmeticUnaryMinusRule' => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src/Rules/Operators/OperandInArithmeticUnaryMinusRule.php',
+        'PHPStan\\Rules\\Operators\\OperandInArithmeticUnaryPlusRule' => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src/Rules/Operators/OperandInArithmeticUnaryPlusRule.php',
         'PHPStan\\Rules\\Operators\\OperandsInArithmeticAdditionRule' => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src/Rules/Operators/OperandsInArithmeticAdditionRule.php',
         'PHPStan\\Rules\\Operators\\OperandsInArithmeticDivisionRule' => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src/Rules/Operators/OperandsInArithmeticDivisionRule.php',
         'PHPStan\\Rules\\Operators\\OperandsInArithmeticExponentiationRule' => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src/Rules/Operators/OperandsInArithmeticExponentiationRule.php',

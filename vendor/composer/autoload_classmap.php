@@ -920,6 +920,8 @@ return array(
     'PHPStan\\Rules\\Operators\\OperandInArithmeticPostIncrementRule' => $vendorDir . '/phpstan/phpstan-strict-rules/src/Rules/Operators/OperandInArithmeticPostIncrementRule.php',
     'PHPStan\\Rules\\Operators\\OperandInArithmeticPreDecrementRule' => $vendorDir . '/phpstan/phpstan-strict-rules/src/Rules/Operators/OperandInArithmeticPreDecrementRule.php',
     'PHPStan\\Rules\\Operators\\OperandInArithmeticPreIncrementRule' => $vendorDir . '/phpstan/phpstan-strict-rules/src/Rules/Operators/OperandInArithmeticPreIncrementRule.php',
+    'PHPStan\\Rules\\Operators\\OperandInArithmeticUnaryMinusRule' => $vendorDir . '/phpstan/phpstan-strict-rules/src/Rules/Operators/OperandInArithmeticUnaryMinusRule.php',
+    'PHPStan\\Rules\\Operators\\OperandInArithmeticUnaryPlusRule' => $vendorDir . '/phpstan/phpstan-strict-rules/src/Rules/Operators/OperandInArithmeticUnaryPlusRule.php',
     'PHPStan\\Rules\\Operators\\OperandsInArithmeticAdditionRule' => $vendorDir . '/phpstan/phpstan-strict-rules/src/Rules/Operators/OperandsInArithmeticAdditionRule.php',
     'PHPStan\\Rules\\Operators\\OperandsInArithmeticDivisionRule' => $vendorDir . '/phpstan/phpstan-strict-rules/src/Rules/Operators/OperandsInArithmeticDivisionRule.php',
     'PHPStan\\Rules\\Operators\\OperandsInArithmeticExponentiationRule' => $vendorDir . '/phpstan/phpstan-strict-rules/src/Rules/Operators/OperandsInArithmeticExponentiationRule.php',
