@@ -1,7 +1,0 @@
-<?php
-
-namespace Symfony\Component\Serializer\Exception;
-
-class BadMethodCallException extends \BadMethodCallException implements ExceptionInterface
-{
-}
