@@ -11,7 +11,7 @@
         "spaze/phpstan-disallowed-calls": "4.6.0",
         "sqlftw/sqlftw": "0.1.17",
         "staabm/phpstan-baseline-analysis": "0.13.1",
-        "staabm/phpstan-dba": "0.4",
+        "staabm/phpstan-dba": "0.4.1",
         "staabm/phpstan-todo-by": "0.3",
         "symplify/phpstan-rules": "14.6.11",
         "tomasvotruba/cognitive-complexity": "1.0",
