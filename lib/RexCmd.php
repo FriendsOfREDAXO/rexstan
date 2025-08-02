@@ -80,7 +80,11 @@ final class RexCmd
                     $path .= ':' . $mampPhp;
                 }
 
-                $homeDir = getenv('HOME') ?: posix_getpwuid(posix_getuid())['dir'];
+                $homeDir = getenv('HOME');
+                if (!$homeDir) {
+                    $userInfo = posix_getpwuid(posix_getuid());
+                    $homeDir = $userInfo['dir'];
+                }
                 $herdPhp = $homeDir . '/Library/Application Support/Herd/bin/';
                 if (is_executable($herdPhp . 'php' . PHP_MAJOR_VERSION . PHP_MINOR_VERSION)) {
                     $path .= ':' . $herdPhp;
