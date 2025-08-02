@@ -83,11 +83,16 @@ final class RexCmd
                 $homeDir = getenv('HOME');
                 if (!$homeDir) {
                     $userInfo = posix_getpwuid(posix_getuid());
-                    $homeDir = $userInfo['dir'];
+                    if ($userInfo !== false) {
+                        $homeDir = $userInfo['dir'];
+                    }
                 }
-                $herdPhp = $homeDir . '/Library/Application Support/Herd/bin/';
-                if (is_executable($herdPhp . 'php' . PHP_MAJOR_VERSION . PHP_MINOR_VERSION)) {
-                    $path .= ':' . $herdPhp;
+
+                if ($homeDir) {
+                    $herdPhp = $homeDir . '/Library/Application Support/Herd/bin/';
+                    if (is_executable($herdPhp . 'php' . PHP_MAJOR_VERSION . PHP_MINOR_VERSION)) {
+                        $path .= ':' . $herdPhp;
+                    }
                 }
             }
 
