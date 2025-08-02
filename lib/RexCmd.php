@@ -62,22 +62,19 @@ final class RexCmd
 
     public static function phpExecutable(): string
     {
-        $logger = new \rex_logger();
-        $logger->log('debug', "phpExecutable");
-
         if ('Windows' !== PHP_OS_FAMILY) {
             $executable = 'php';
             $path = '$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin';
 
             if ('Darwin' === PHP_OS_FAMILY) {
-                $customConfig = '/Library/Application Support/appsolute/MAMP PRO/conf/php' . PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION . '.' . PHP_RELEASE_VERSION . '.ini';
+                $customConfig = '/Library/Application Support/appsolute/MAMP PRO/conf/php'.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION.'.ini';
                 if (is_file($customConfig)) {
-                    $executable .= ' -c "' . $customConfig . '"';
+                    $executable .= ' -c "'.$customConfig.'"';
                 }
 
-                $mampPhp = '/Applications/MAMP/bin/php/php' . PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION . '.' . PHP_RELEASE_VERSION . '/bin/';
-                if (is_executable($mampPhp . 'php')) {
-                    $path .= ':' . $mampPhp;
+                $mampPhp = '/Applications/MAMP/bin/php/php'.PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION.'/bin/';
+                if (is_executable($mampPhp.'php')) {
+                    $path .= ':'.$mampPhp;
                 }
 
                 $homeDir = getenv('HOME');
@@ -94,10 +91,12 @@ final class RexCmd
                         $path .= ':' . $herdPhp;
                     }
                 }
+
             }
 
-            return 'PATH="' . $path . '" ' . $executable;
+            return 'PATH="'. $path .'" '.$executable;
         }
+
         return 'php';
     }
 
@@ -106,8 +105,7 @@ final class RexCmd
      */
     public static function getCliPhpVersion(): ?string
     {
-
-        $cliPhpVersion = self::execCmd(self::phpExecutable() . ' -r "echo PHP_VERSION_ID;"', $stderrOutput, $exitCode);
+        $cliPhpVersion = self::execCmd(self::phpExecutable().' -r "echo PHP_VERSION_ID;"', $stderrOutput, $exitCode);
 
         if (is_numeric($cliPhpVersion)) {
             return $cliPhpVersion;
@@ -118,7 +116,7 @@ final class RexCmd
 
     public static function getFormattedCliPhpVersion(): ?string
     {
-        $cliPhpVersion = self::execCmd(self::phpExecutable() . ' -r "echo phpversion();"', $stderrOutput, $exitCode);
+        $cliPhpVersion = self::execCmd(self::phpExecutable().' -r "echo phpversion();"', $stderrOutput, $exitCode);
 
         if ($exitCode === 0) {
             return $cliPhpVersion;
