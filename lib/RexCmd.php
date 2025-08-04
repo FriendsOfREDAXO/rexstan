@@ -5,7 +5,10 @@ namespace rexstan;
 use Exception;
 
 use function function_exists;
+use function getenv;
 use function is_resource;
+use function posix_getpwuid;
+use function posix_getuid;
 use function proc_open;
 
 final class RexCmd
@@ -73,6 +76,26 @@ final class RexCmd
                 if (is_executable($mampPhp.'php')) {
                     $path .= ':'.$mampPhp;
                 }
+
+                $homeDir = getenv('HOME');
+                if (
+                    !$homeDir
+                    && function_exists('posix_getpwuid')
+                    && function_exists('posix_getuid')
+                ) {
+                    $userInfo = posix_getpwuid(posix_getuid());
+                    if ($userInfo !== false) {
+                        $homeDir = $userInfo['dir'];
+                    }
+                }
+
+                if ($homeDir) {
+                    $herdPhp = $homeDir . '/Library/Application Support/Herd/bin/';
+                    if (is_executable($herdPhp . 'php' . PHP_MAJOR_VERSION . PHP_MINOR_VERSION)) {
+                        $path .= ':' . $herdPhp;
+                    }
+                }
+
             }
 
             return 'PATH="'. $path .'" '.$executable;
