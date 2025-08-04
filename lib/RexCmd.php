@@ -78,7 +78,11 @@ final class RexCmd
                 }
 
                 $homeDir = getenv('HOME');
-                if (!$homeDir) {
+                if (
+                    !$homeDir
+                    && function_exists('posix_getpwuid')
+                    && function_exists('posix_getuid')
+                ) {
                     $userInfo = posix_getpwuid(posix_getuid());
                     if ($userInfo !== false) {
                         $homeDir = $userInfo['dir'];
