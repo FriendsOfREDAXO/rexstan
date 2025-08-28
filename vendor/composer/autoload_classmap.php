@@ -1985,6 +1985,7 @@ return array(
     'Symplify\\PHPStanRules\\Rules\\Symfony\\ConfigClosure\\NoDuplicateArgAutowireByTypeRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/Symfony/ConfigClosure/NoDuplicateArgAutowireByTypeRule.php',
     'Symplify\\PHPStanRules\\Rules\\Symfony\\ConfigClosure\\NoDuplicateArgsAutowireByTypeRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/Symfony/ConfigClosure/NoDuplicateArgsAutowireByTypeRule.php',
     'Symplify\\PHPStanRules\\Rules\\Symfony\\ConfigClosure\\NoServiceSameNameSetClassRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/Symfony/ConfigClosure/NoServiceSameNameSetClassRule.php',
+    'Symplify\\PHPStanRules\\Rules\\Symfony\\ConfigClosure\\NoSetClassServiceDuplicationRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/Symfony/ConfigClosure/NoSetClassServiceDuplicationRule.php',
     'Symplify\\PHPStanRules\\Rules\\Symfony\\ConfigClosure\\PreferAutowireAttributeOverConfigParamRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/Symfony/ConfigClosure/PreferAutowireAttributeOverConfigParamRule.php',
     'Symplify\\PHPStanRules\\Rules\\Symfony\\ConfigClosure\\ServicesExcludedDirectoryMustExistRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/Symfony/ConfigClosure/ServicesExcludedDirectoryMustExistRule.php',
     'Symplify\\PHPStanRules\\Rules\\Symfony\\ConfigClosure\\TaggedIteratorOverRepeatedServiceCallRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/Symfony/ConfigClosure/TaggedIteratorOverRepeatedServiceCallRule.php',
