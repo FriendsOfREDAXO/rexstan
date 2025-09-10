@@ -69,11 +69,6 @@ Open the Docker console and set the new memory limit with :
 
 Restart the container
 
-## 💌 Support rexstan
-
-[Consider supporting the project](https://github.com/sponsors/staabm), so we can make this tool even better even faster for everyone.
-
-
 ## Credits
 
 - rexstan by [Markus Staab](https://github.com/staabm)
