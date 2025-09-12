@@ -26,7 +26,7 @@ final class TodoByIssueUrlRule implements Rule
             @?[a-zA-Z0-9_-]* # optional username
             \s*[:-]?\s* # optional colon or hyphen
             \s+ # keyword/version separator
-            (?P<url>https://github.com/(?P<owner>[\S]{2,})/(?P<repo>[\S]+)/issues/(?P<issueNumber>\d+)) # url
+            (?P<url>https://github.com/(?P<owner>[\S]{2,})/(?P<repo>[\S]+)/(issues|pull)/(?P<issueNumber>\d+)) # url
             \s*[:-]?\s* # optional colon or hyphen
             (?P<comment>(?:(?!\*+/).)*) # rest of line as comment text, excluding block end
         }ix
@@ -84,10 +84,12 @@ final class TodoByIssueUrlRule implements Rule
                     continue;
                 }
 
+                // Adding a space after the {url} allows to have a proper clickable link, without the
+                // additional character at the end being part of the link's URL, which breaks GitHub links.
                 if ('' !== $todoText) {
-                    $errorMessage = "Should have been resolved in {$url}: ". rtrim($todoText, '.') .'.';
+                    $errorMessage = "Should have been resolved in {$url} : ". rtrim($todoText, '.') .'.';
                 } else {
-                    $errorMessage = "Comment should have been resolved with {$url}.";
+                    $errorMessage = "Comment should have been resolved with {$url} .";
                 }
 
                 $errors[] = $this->errorBuilder->buildError(
