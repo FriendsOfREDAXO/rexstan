@@ -116,6 +116,7 @@ return array(
     'Doctrine\\DBAL\\Driver\\PDO\\Exception' => $vendorDir . '/doctrine/dbal/src/Driver/PDO/Exception.php',
     'Doctrine\\DBAL\\Driver\\PDO\\MySQL\\Driver' => $vendorDir . '/doctrine/dbal/src/Driver/PDO/MySQL/Driver.php',
     'Doctrine\\DBAL\\Driver\\PDO\\OCI\\Driver' => $vendorDir . '/doctrine/dbal/src/Driver/PDO/OCI/Driver.php',
+    'Doctrine\\DBAL\\Driver\\PDO\\PDOConnect' => $vendorDir . '/doctrine/dbal/src/Driver/PDO/PDOConnect.php',
     'Doctrine\\DBAL\\Driver\\PDO\\PDOException' => $vendorDir . '/doctrine/dbal/src/Driver/PDO/PDOException.php',
     'Doctrine\\DBAL\\Driver\\PDO\\ParameterTypeMap' => $vendorDir . '/doctrine/dbal/src/Driver/PDO/ParameterTypeMap.php',
     'Doctrine\\DBAL\\Driver\\PDO\\PgSQL\\Driver' => $vendorDir . '/doctrine/dbal/src/Driver/PDO/PgSQL/Driver.php',
