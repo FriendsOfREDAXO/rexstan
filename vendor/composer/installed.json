@@ -152,17 +152,17 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "3.10.2",
-            "version_normalized": "3.10.2.0",
+            "version": "3.10.3",
+            "version_normalized": "3.10.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "c6c16cf787eaba3112203dfcd715fa2059c62282"
+                "reference": "65edaca19a752730f290ec2fb89d593cb40afb43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/c6c16cf787eaba3112203dfcd715fa2059c62282",
-                "reference": "c6c16cf787eaba3112203dfcd715fa2059c62282",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/65edaca19a752730f290ec2fb89d593cb40afb43",
+                "reference": "65edaca19a752730f290ec2fb89d593cb40afb43",
                 "shasum": ""
             },
             "require": {
@@ -178,21 +178,21 @@
             },
             "require-dev": {
                 "doctrine/cache": "^1.11|^2.0",
-                "doctrine/coding-standard": "13.0.1",
+                "doctrine/coding-standard": "14.0.0",
                 "fig/log-test": "^1",
                 "jetbrains/phpstorm-stubs": "2023.1",
-                "phpstan/phpstan": "2.1.22",
+                "phpstan/phpstan": "2.1.30",
                 "phpstan/phpstan-strict-rules": "^2",
-                "phpunit/phpunit": "9.6.23",
-                "slevomat/coding-standard": "8.16.2",
-                "squizlabs/php_codesniffer": "3.13.1",
+                "phpunit/phpunit": "9.6.29",
+                "slevomat/coding-standard": "8.24.0",
+                "squizlabs/php_codesniffer": "4.0.0",
                 "symfony/cache": "^5.4|^6.0|^7.0",
                 "symfony/console": "^4.4|^5.4|^6.0|^7.0"
             },
             "suggest": {
                 "symfony/console": "For helpful console commands such as SQL execution and import of files."
             },
-            "time": "2025-09-04T23:51:27+00:00",
+            "time": "2025-10-09T09:05:12+00:00",
             "bin": [
                 "bin/doctrine-dbal"
             ],
@@ -249,7 +249,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/3.10.2"
+                "source": "https://github.com/doctrine/dbal/tree/3.10.3"
             },
             "funding": [
                 {
@@ -923,12 +923,12 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.30",
-            "version_normalized": "2.1.30.0",
+            "version": "2.1.31",
+            "version_normalized": "2.1.31.0",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a4a7f159927983dd4f7c8020ed227d80b7f39d7d",
-                "reference": "a4a7f159927983dd4f7c8020ed227d80b7f39d7d",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ead89849d879fe203ce9292c6ef5e7e76f867b96",
+                "reference": "ead89849d879fe203ce9292c6ef5e7e76f867b96",
                 "shasum": ""
             },
             "require": {
@@ -937,7 +937,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2025-10-02T16:07:52+00:00",
+            "time": "2025-10-10T14:14:11+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -1315,17 +1315,17 @@
         },
         {
             "name": "rector/type-perfect",
-            "version": "2.1.0",
-            "version_normalized": "2.1.0.0",
+            "version": "2.1.1",
+            "version_normalized": "2.1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/type-perfect.git",
-                "reference": "098eea3fe0e884fe281d939e5e4142151ab67368"
+                "reference": "542941e6d7268212d7d0c67ce9b594770ae3eb0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/type-perfect/zipball/098eea3fe0e884fe281d939e5e4142151ab67368",
-                "reference": "098eea3fe0e884fe281d939e5e4142151ab67368",
+                "url": "https://api.github.com/repos/rectorphp/type-perfect/zipball/542941e6d7268212d7d0c67ce9b594770ae3eb0d",
+                "reference": "542941e6d7268212d7d0c67ce9b594770ae3eb0d",
                 "shasum": ""
             },
             "require": {
@@ -1333,7 +1333,7 @@
                 "phpstan/phpstan": "^2.1.14",
                 "webmozart/assert": "^1.11"
             },
-            "time": "2025-05-04T20:38:57+00:00",
+            "time": "2025-10-09T15:49:34+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1355,7 +1355,7 @@
             "description": "Next level type declaration checks",
             "support": {
                 "issues": "https://github.com/rectorphp/type-perfect/issues",
-                "source": "https://github.com/rectorphp/type-perfect/tree/2.1.0"
+                "source": "https://github.com/rectorphp/type-perfect/tree/2.1.1"
             },
             "funding": [
                 {
@@ -1878,17 +1878,17 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "14.7.0",
-            "version_normalized": "14.7.0.0",
+            "version": "14.8.0",
+            "version_normalized": "14.8.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "83569d442ffb9373bf3124aec4fe5cbbc1b0475a"
+                "reference": "27edd52710424b71d62985e2e48f8cd94f29f17b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/83569d442ffb9373bf3124aec4fe5cbbc1b0475a",
-                "reference": "83569d442ffb9373bf3124aec4fe5cbbc1b0475a",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/27edd52710424b71d62985e2e48f8cd94f29f17b",
+                "reference": "27edd52710424b71d62985e2e48f8cd94f29f17b",
                 "shasum": ""
             },
             "require": {
@@ -1897,7 +1897,7 @@
                 "phpstan/phpstan": "^2.1.22",
                 "webmozart/assert": "^1.11"
             },
-            "time": "2025-08-27T10:34:20+00:00",
+            "time": "2025-10-09T15:57:03+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1922,7 +1922,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/14.7.0"
+                "source": "https://github.com/symplify/phpstan-rules/tree/14.8.0"
             },
             "funding": [
                 {

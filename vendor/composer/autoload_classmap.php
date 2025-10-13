@@ -1995,6 +1995,7 @@ return array(
     'Symplify\\PHPStanRules\\Rules\\Symfony\\NoBareAndSecurityIsGrantedContentsRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/Symfony/NoBareAndSecurityIsGrantedContentsRule.php',
     'Symplify\\PHPStanRules\\Rules\\Symfony\\NoClassLevelRouteRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/Symfony/NoClassLevelRouteRule.php',
     'Symplify\\PHPStanRules\\Rules\\Symfony\\NoConstructorAndRequiredTogetherRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/Symfony/NoConstructorAndRequiredTogetherRule.php',
+    'Symplify\\PHPStanRules\\Rules\\Symfony\\NoControllerMethodInjectionRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/Symfony/NoControllerMethodInjectionRule.php',
     'Symplify\\PHPStanRules\\Rules\\Symfony\\NoFindTaggedServiceIdsCallRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/Symfony/NoFindTaggedServiceIdsCallRule.php',
     'Symplify\\PHPStanRules\\Rules\\Symfony\\NoGetDoctrineInControllerRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/Symfony/NoGetDoctrineInControllerRule.php',
     'Symplify\\PHPStanRules\\Rules\\Symfony\\NoGetInCommandRule' => $vendorDir . '/symplify/phpstan-rules/src/Rules/Symfony/NoGetInCommandRule.php',
