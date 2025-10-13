@@ -122,6 +122,10 @@ final class NarrowPrivateClassMethodParamTypeRule implements Rule
                 continue;
             }
 
+            if ($param->variadic) {
+                return [];
+            }
+
             $paramRuleError = $this->validateParam($param, $position, $arg->value, $scope);
             if (! $paramRuleError instanceof RuleError) {
                 continue;

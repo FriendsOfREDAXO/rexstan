@@ -2150,6 +2150,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'Symplify\\PHPStanRules\\Rules\\Symfony\\NoBareAndSecurityIsGrantedContentsRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Symfony/NoBareAndSecurityIsGrantedContentsRule.php',
         'Symplify\\PHPStanRules\\Rules\\Symfony\\NoClassLevelRouteRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Symfony/NoClassLevelRouteRule.php',
         'Symplify\\PHPStanRules\\Rules\\Symfony\\NoConstructorAndRequiredTogetherRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Symfony/NoConstructorAndRequiredTogetherRule.php',
+        'Symplify\\PHPStanRules\\Rules\\Symfony\\NoControllerMethodInjectionRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Symfony/NoControllerMethodInjectionRule.php',
         'Symplify\\PHPStanRules\\Rules\\Symfony\\NoFindTaggedServiceIdsCallRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Symfony/NoFindTaggedServiceIdsCallRule.php',
         'Symplify\\PHPStanRules\\Rules\\Symfony\\NoGetDoctrineInControllerRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Symfony/NoGetDoctrineInControllerRule.php',
         'Symplify\\PHPStanRules\\Rules\\Symfony\\NoGetInCommandRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Symfony/NoGetInCommandRule.php',
