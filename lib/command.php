@@ -1,8 +1,9 @@
 <?php
 
-namespace FriendsOfRedaxo\RexStan;
+namespace rexstan;
 
 use Exception;
+use FriendsOfRedaxo\RexStan\RexStan;
 use rex_console_command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -28,7 +29,7 @@ class rexstan_command extends rex_console_command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = $this->getStyle($input, $output);
         $stdErr = $output instanceof ConsoleOutputInterface ? $output->getErrorOutput() : $output;
