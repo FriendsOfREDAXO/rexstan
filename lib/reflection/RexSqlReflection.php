@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace rexstan;
+namespace FriendsOfRedaxo\RexStan;
 
 use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\MethodCall;

@@ -1,6 +1,6 @@
 <?php
 
-namespace rexstan;
+namespace FriendsOfRedaxo\RexStan;
 
 use rex_addon;
 use rex_file;

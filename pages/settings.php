@@ -1,7 +1,7 @@
 <?php
 
-use rexstan\RexStanSettings;
-use rexstan\RexStanUserConfig;
+use FriendsOfRedaxo\RexStan\RexStanSettings;
+use FriendsOfRedaxo\RexStan\RexStanUserConfig;
 
 $form = RexStanSettings::createForm();
 $faqUrl = rex_url::backendPage('rexstan/faq');

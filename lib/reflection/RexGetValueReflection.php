@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace rexstan;
+namespace FriendsOfRedaxo\RexStan;
 
 use PHPStan\ShouldNotHappenException;
 use PHPStan\Type\Type;

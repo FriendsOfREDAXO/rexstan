@@ -1,6 +1,6 @@
 <?php
 
-namespace rexstan;
+namespace FriendsOfRedaxo\RexStan;
 
 use rex_developer_manager;
 
