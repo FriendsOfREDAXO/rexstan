@@ -159,42 +159,42 @@ parameters:
 
 services:
     -
-        class: rexstan\RexClassDynamicReturnTypeExtension
+        class: FriendsOfRedaxo\RexStan\RexClassDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicStaticMethodReturnTypeExtension
 
     -
-        class: rexstan\RexFunctionsDynamicReturnTypeExtension
+        class: FriendsOfRedaxo\RexStan\RexFunctionsDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicFunctionReturnTypeExtension
             - phpstan.broker.dynamicStaticMethodReturnTypeExtension
 
     -
-        class: rexstan\RexModuleInputVarsCollector
+        class: FriendsOfRedaxo\RexStan\RexModuleInputVarsCollector
         tags:
             - phpstan.collector
 
     -
-        class: rexstan\RexModuleOutputVarsCollector
+        class: FriendsOfRedaxo\RexStan\RexModuleOutputVarsCollector
         tags:
             - phpstan.collector
 
     -
-        class: rexstan\RexModuleVarsRule
+        class: FriendsOfRedaxo\RexStan\RexModuleVarsRule
         tags:
             - phpstan.rules.rule
 
     -
-        class: rexstan\RexTemplateVarsCollector
+        class: FriendsOfRedaxo\RexStan\RexTemplateVarsCollector
         tags:
             - phpstan.collector
 
     -
-        class: rexstan\RexTemplateVarsRule
+        class: FriendsOfRedaxo\RexStan\RexTemplateVarsRule
         tags:
             - phpstan.rules.rule
 
     -
-        class: rexstan\YOrmDatasetOptionalTableRule
+        class: FriendsOfRedaxo\RexStan\YOrmDatasetOptionalTableRule
         tags:
             - phpstan.rules.rule

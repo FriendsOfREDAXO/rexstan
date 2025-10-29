@@ -32,114 +32,114 @@ services:
                 - 'rex_sql::getQueryType#0'
 
     -
-        class: rexstan\RexSqlFactoryDynamicReturnTypeExtension
+        class: FriendsOfRedaxo\RexStan\RexSqlFactoryDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicStaticMethodReturnTypeExtension
 
     -
-        class: rexstan\RexSqlEscapeDynamicReturnTypeExtension
+        class: FriendsOfRedaxo\RexStan\RexSqlEscapeDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
 
     -
-        class: rexstan\RexSqlSetQueryTypeSpecifyingExtension
+        class: FriendsOfRedaxo\RexStan\RexSqlSetQueryTypeSpecifyingExtension
         tags:
             - phpstan.typeSpecifier.methodTypeSpecifyingExtension
     -
-        class: rexstan\RexSqlSetQueryDynamicReturnTypeExtension
+        class: FriendsOfRedaxo\RexStan\RexSqlSetQueryDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
 
     -
-        class: rexstan\RexSqlSetTableTypeSpecifyingExtension
+        class: FriendsOfRedaxo\RexStan\RexSqlSetTableTypeSpecifyingExtension
         tags:
             - phpstan.typeSpecifier.methodTypeSpecifyingExtension
     -
-        class: rexstan\RexSqlSetTableDynamicReturnTypeExtension
+        class: FriendsOfRedaxo\RexStan\RexSqlSetTableDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
 
     -
-        class: rexstan\RexSqlSelectTypeSpecifyingExtension
+        class: FriendsOfRedaxo\RexStan\RexSqlSelectTypeSpecifyingExtension
         tags:
             - phpstan.typeSpecifier.methodTypeSpecifyingExtension
     -
-        class: rexstan\RexSqlSelectDynamicReturnTypeExtension
+        class: FriendsOfRedaxo\RexStan\RexSqlSelectDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
 
     -
-        class: rexstan\RexSqlGetValueDynamicReturnTypeExtension
+        class: FriendsOfRedaxo\RexStan\RexSqlGetValueDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
     -
-        class: rexstan\RexSqlGetArrayDynamicReturnTypeExtension
-        tags:
-            - phpstan.broker.dynamicMethodReturnTypeExtension
-
-    -
-        class: rexstan\RexGetRule
-        tags:
-            - phpstan.rules.rule
-    -
-        class: rexstan\RexGetValueRule
-        tags:
-            - phpstan.rules.rule
-    -
-        class: rexstan\RexSqlGetValueRule
-        tags:
-            - phpstan.rules.rule
-    -
-        class: rexstan\RexSqlSetValueRule
-        tags:
-            - phpstan.rules.rule
-    -
-        class: rexstan\RexSqlSetTableRule
-        tags:
-            - phpstan.rules.rule
-    -
-        class: rexstan\RexSqlInjectionRule
-        tags:
-            - phpstan.rules.rule
-
-    -
-        class: rexstan\RexMediaGetValueDynamicReturnTypeExtension
-        tags:
-            - phpstan.broker.dynamicMethodReturnTypeExtension
-    -
-        class: rexstan\RexArticleGetValueDynamicReturnTypeExtension
-        tags:
-            - phpstan.broker.dynamicMethodReturnTypeExtension
-    -
-        class: rexstan\RexCategoryGetValueDynamicReturnTypeExtension
-        tags:
-            - phpstan.broker.dynamicMethodReturnTypeExtension
-    -
-        class: rexstan\RexArticleSliceGetValueDynamicReturnTypeExtension
-        tags:
-            - phpstan.broker.dynamicMethodReturnTypeExtension
-    -
-        class: rexstan\RexUserGetValueDynamicReturnTypeExtension
+        class: FriendsOfRedaxo\RexStan\RexSqlGetArrayDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
 
     -
-        class: rexstan\RexClangDynamicReturnTypeExtension
+        class: FriendsOfRedaxo\RexStan\RexGetRule
+        tags:
+            - phpstan.rules.rule
+    -
+        class: FriendsOfRedaxo\RexStan\RexGetValueRule
+        tags:
+            - phpstan.rules.rule
+    -
+        class: FriendsOfRedaxo\RexStan\RexSqlGetValueRule
+        tags:
+            - phpstan.rules.rule
+    -
+        class: FriendsOfRedaxo\RexStan\RexSqlSetValueRule
+        tags:
+            - phpstan.rules.rule
+    -
+        class: FriendsOfRedaxo\RexStan\RexSqlSetTableRule
+        tags:
+            - phpstan.rules.rule
+    -
+        class: FriendsOfRedaxo\RexStan\RexSqlInjectionRule
+        tags:
+            - phpstan.rules.rule
+
+    -
+        class: FriendsOfRedaxo\RexStan\RexMediaGetValueDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+    -
+        class: FriendsOfRedaxo\RexStan\RexArticleGetValueDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+    -
+        class: FriendsOfRedaxo\RexStan\RexCategoryGetValueDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+    -
+        class: FriendsOfRedaxo\RexStan\RexArticleSliceGetValueDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+    -
+        class: FriendsOfRedaxo\RexStan\RexUserGetValueDynamicReturnTypeExtension
+        tags:
+            - phpstan.broker.dynamicMethodReturnTypeExtension
+
+    -
+        class: FriendsOfRedaxo\RexStan\RexClangDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicStaticMethodReturnTypeExtension
 
     -
-        class: rexstan\YOrmDatasetRelatedDataDynamicReturnTypeExtension
+        class: FriendsOfRedaxo\RexStan\YOrmDatasetRelatedDataDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
 
     -
-        class: rexstan\YOrmDatasetGetValueDynamicReturnTypeExtension
+        class: FriendsOfRedaxo\RexStan\YOrmDatasetGetValueDynamicReturnTypeExtension
         tags:
             - phpstan.broker.dynamicMethodReturnTypeExtension
 
     -
-        class: rexstan\YOrmDatasetPropertyClassReflectionExtension
+        class: FriendsOfRedaxo\RexStan\YOrmDatasetPropertyClassReflectionExtension
         tags:
             - phpstan.broker.propertiesClassReflectionExtension
 

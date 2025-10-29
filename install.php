@@ -1,8 +1,8 @@
 <?php
 
-use rexstan\RexCmd;
-use rexstan\RexStanSettings;
-use rexstan\RexStanUserConfig;
+use FriendsOfRedaxo\RexStan\RexCmd;
+use FriendsOfRedaxo\RexStan\RexStanSettings;
+use FriendsOfRedaxo\RexStan\RexStanUserConfig;
 
 $addon = rex_addon::get('rexstan');
 

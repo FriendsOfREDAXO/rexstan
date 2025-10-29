@@ -1,6 +1,6 @@
 <?php
 
-namespace rexstan;
+namespace FriendsOfRedaxo\RexStan;
 
 final class RexPhpVersion
 {

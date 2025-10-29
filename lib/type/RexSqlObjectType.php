@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace rexstan;
+namespace FriendsOfRedaxo\RexStan;
 
 use PHPStan\TrinaryLogic;
 use PHPStan\Type\IsSuperTypeOfResult;
