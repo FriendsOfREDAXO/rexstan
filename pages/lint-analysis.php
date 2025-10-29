@@ -2,9 +2,9 @@
 
 /** @var rex_addon $this */
 
-use rexstan\RexCmd;
-use rexstan\RexLint;
-use rexstan\RexResultsRenderer;
+use FriendsOfRedaxo\RexStan\RexCmd;
+use FriendsOfRedaxo\RexStan\RexLint;
+use FriendsOfRedaxo\RexStan\RexResultsRenderer;
 
 $errors = RexLint::runFromWeb();
 if (count($errors) > 0) {

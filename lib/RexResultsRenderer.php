@@ -1,6 +1,6 @@
 <?php
 
-namespace rexstan;
+namespace FriendsOfRedaxo\RexStan;
 
 use rex_editor;
 use rex_fragment;
