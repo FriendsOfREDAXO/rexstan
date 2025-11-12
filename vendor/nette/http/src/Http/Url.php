@@ -10,6 +10,8 @@ declare(strict_types=1);
 namespace Nette\Http;
 
 use Nette;
+use function array_pop, array_slice, bin2hex, chunk_split, defined, explode, function_exists, http_build_query, idn_to_utf8, implode, ini_get, ip2long, is_array, is_string, ksort, parse_str, parse_url, preg_match, preg_quote, preg_replace, preg_replace_callback, rawurldecode, rawurlencode, rtrim, str_contains, str_replace, str_starts_with, strcasecmp, strlen, strrpos, strtolower, strtoupper, substr;
+use const IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46, PHP_QUERY_RFC3986;
 
 
 /**
@@ -45,43 +47,26 @@ class Url implements \JsonSerializable
 {
 	use Nette\SmartObject;
 
-	/** @var array */
-	public static $defaultPorts = [
+	public static array $defaultPorts = [
 		'http' => 80,
 		'https' => 443,
 		'ftp' => 21,
 	];
 
-	/** @var string */
-	private $scheme = '';
-
-	/** @var string */
-	private $user = '';
-
-	/** @var string */
-	private $password = '';
-
-	/** @var string */
-	private $host = '';
-
-	/** @var int|null */
-	private $port;
-
-	/** @var string */
-	private $path = '';
-
-	/** @var array */
-	private $query = [];
-
-	/** @var string */
-	private $fragment = '';
+	private string $scheme = '';
+	private string $user = '';
+	private string $password = '';
+	private string $host = '';
+	private ?int $port = null;
+	private string $path = '';
+	private array $query = [];
+	private string $fragment = '';
 
 
 	/**
-	 * @param  string|self|UrlImmutable  $url
 	 * @throws Nette\InvalidArgumentException if URL is malformed
 	 */
-	public function __construct($url = null)
+	public function __construct(string|self|UrlImmutable|null $url = null)
 	{
 		if (is_string($url)) {
 			$p = @parse_url($url); // @ - is escalated to exception
@@ -100,15 +85,11 @@ class Url implements \JsonSerializable
 
 		} elseif ($url instanceof UrlImmutable || $url instanceof self) {
 			[$this->scheme, $this->user, $this->password, $this->host, $this->port, $this->path, $this->query, $this->fragment] = $url->export();
-
-		} elseif ($url !== null) {
-			throw new Nette\InvalidArgumentException;
 		}
 	}
 
 
-	/** @return static */
-	public function setScheme(string $scheme)
+	public function setScheme(string $scheme): static
 	{
 		$this->scheme = $scheme;
 		return $this;
@@ -121,36 +102,37 @@ class Url implements \JsonSerializable
 	}
 
 
-	/** @return static */
-	public function setUser(string $user)
+	/** @deprecated */
+	public function setUser(string $user): static
 	{
 		$this->user = $user;
 		return $this;
 	}
 
 
+	/** @deprecated */
 	public function getUser(): string
 	{
 		return $this->user;
 	}
 
 
-	/** @return static */
-	public function setPassword(string $password)
+	/** @deprecated */
+	public function setPassword(string $password): static
 	{
 		$this->password = $password;
 		return $this;
 	}
 
 
+	/** @deprecated */
 	public function getPassword(): string
 	{
 		return $this->password;
 	}
 
 
-	/** @return static */
-	public function setHost(string $host)
+	public function setHost(string $host): static
 	{
 		$this->host = $host;
 		$this->setPath($this->path);
@@ -179,8 +161,7 @@ class Url implements \JsonSerializable
 	}
 
 
-	/** @return static */
-	public function setPort(int $port)
+	public function setPort(int $port): static
 	{
 		$this->port = $port;
 		return $this;
@@ -199,11 +180,10 @@ class Url implements \JsonSerializable
 	}
 
 
-	/** @return static */
-	public function setPath(string $path)
+	public function setPath(string $path): static
 	{
 		$this->path = $path;
-		if ($this->host && substr($this->path, 0, 1) !== '/') {
+		if ($this->host && !str_starts_with($this->path, '/')) {
 			$this->path = '/' . $this->path;
 		}
 
@@ -217,22 +197,14 @@ class Url implements \JsonSerializable
 	}
 
 
-	/**
-	 * @param  string|array  $value
-	 * @return static
-	 */
-	public function setQuery($query)
+	public function setQuery(string|array $query): static
 	{
 		$this->query = is_array($query) ? $query : self::parseQuery($query);
 		return $this;
 	}
 
 
-	/**
-	 * @param  string|array  $value
-	 * @return static
-	 */
-	public function appendQuery($query)
+	public function appendQuery(string|array $query): static
 	{
 		$this->query = is_array($query)
 			? $query + $this->query
@@ -253,30 +225,20 @@ class Url implements \JsonSerializable
 	}
 
 
-	/** @return mixed */
-	public function getQueryParameter(string $name)
+	public function getQueryParameter(string $name): mixed
 	{
-		if (func_num_args() > 1) {
-			trigger_error(__METHOD__ . '() parameter $default is deprecated, use operator ??', E_USER_DEPRECATED);
-		}
-
 		return $this->query[$name] ?? null;
 	}
 
 
-	/**
-	 * @param mixed  $value  null unsets the parameter
-	 * @return static
-	 */
-	public function setQueryParameter(string $name, $value)
+	public function setQueryParameter(string $name, mixed $value): static
 	{
 		$this->query[$name] = $value;
 		return $this;
 	}
 
 
-	/** @return static */
-	public function setFragment(string $fragment)
+	public function setFragment(string $fragment): static
 	{
 		$this->fragment = $fragment;
 		return $this;
@@ -348,9 +310,8 @@ class Url implements \JsonSerializable
 
 	/**
 	 * URL comparison.
-	 * @param  string|self  $url
 	 */
-	public function isEqual($url): bool
+	public function isEqual(string|self|UrlImmutable $url): bool
 	{
 		$url = new self($url);
 		$query = $url->query;
@@ -373,15 +334,13 @@ class Url implements \JsonSerializable
 
 	/**
 	 * Transforms URL to canonical form.
-	 * @return static
-	 * @deprecated
 	 */
-	public function canonicalize()
+	public function canonicalize(): static
 	{
 		$this->path = preg_replace_callback(
-			'#[^!$&\'()*+,/:;=@%]+#',
-			function (array $m): string { return rawurlencode($m[0]); },
-			self::unescape($this->path, '%/')
+			'#[^!$&\'()*+,/:;=@%"]+#',
+			fn(array $m): string => rawurlencode($m[0]),
+			self::unescape($this->path, '%/'),
 		);
 		$this->host = rtrim($this->host, '.');
 		$this->host = self::idnHostToUnicode(strtolower($this->host));
@@ -413,7 +372,7 @@ class Url implements \JsonSerializable
 	 */
 	private static function idnHostToUnicode(string $host): string
 	{
-		if (strpos($host, '--') === false) { // host does not contain IDN
+		if (!str_contains($host, '--')) { // host does not contain IDN
 			return $host;
 		}
 
@@ -436,8 +395,8 @@ class Url implements \JsonSerializable
 		if ($reserved !== '') {
 			$s = preg_replace_callback(
 				'#%(' . substr(chunk_split(bin2hex($reserved), 2, '|'), 0, -1) . ')#i',
-				function (array $m): string { return '%25' . strtoupper($m[1]); },
-				$s
+				fn(array $m): string => '%25' . strtoupper($m[1]),
+				$s,
 			);
 		}
 
@@ -455,5 +414,41 @@ class Url implements \JsonSerializable
 		$s = preg_replace("#([$sep])([^[$sep=]+)([^$sep]*)#", '&0[$2]$3', '&' . $s);
 		parse_str($s, $res);
 		return $res[0] ?? [];
+	}
+
+
+	/**
+	 * Determines if URL is absolute, ie if it starts with a scheme followed by colon.
+	 */
+	public static function isAbsolute(string $url): bool
+	{
+		return (bool) preg_match('#^[a-z][a-z0-9+.-]*:#i', $url);
+	}
+
+
+	/**
+	 * Normalizes a path by handling and removing relative path references like '.', '..' and directory traversal.
+	 */
+	public static function removeDotSegments(string $path): string
+	{
+		$prefix = $segment = '';
+		if (str_starts_with($path, '/')) {
+			$prefix = '/';
+			$path = substr($path, 1);
+		}
+		$segments = explode('/', $path);
+		$res = [];
+		foreach ($segments as $segment) {
+			if ($segment === '..') {
+				array_pop($res);
+			} elseif ($segment !== '.') {
+				$res[] = $segment;
+			}
+		}
+
+		if ($segment === '.' || $segment === '..') {
+			$res[] = '';
+		}
+		return $prefix . implode('/', $res);
 	}
 }

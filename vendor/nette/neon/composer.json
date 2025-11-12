@@ -2,7 +2,7 @@
 	"name": "nette/neon",
 	"description": "🍸 Nette NEON: encodes and decodes NEON file format.",
 	"keywords": ["nette", "neon", "import", "export", "yaml"],
-	"homepage": "https://ne-on.org",
+	"homepage": "https://neon.nette.org",
 	"license": ["BSD-3-Clause", "GPL-2.0-only", "GPL-3.0-only"],
 	"authors": [
 		{
@@ -15,16 +15,19 @@
 		}
 	],
 	"require": {
-		"php": "7.1 - 8.4",
+		"php": "8.0 - 8.5",
 		"ext-json": "*"
 	},
 	"require-dev": {
-		"nette/tester": "^2.0",
+		"nette/tester": "^2.4",
 		"tracy/tracy": "^2.7",
-		"phpstan/phpstan": "^0.12"
+		"phpstan/phpstan-nette": "^2.0@stable"
 	},
 	"autoload": {
-		"classmap": ["src/"]
+		"classmap": ["src/"],
+		"psr-4": {
+			"Nette\\": "src"
+		}
 	},
 	"minimum-stability": "dev",
 	"bin": ["bin/neon-lint"],
@@ -34,7 +37,7 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "3.3-dev"
+			"dev-master": "3.4-dev"
 		}
 	}
 }

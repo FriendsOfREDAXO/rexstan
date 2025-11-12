@@ -18,15 +18,13 @@ use Tracy;
  */
 class SessionPanel implements Tracy\IBarPanel
 {
-	use Nette\SmartObject;
-
 	/**
 	 * Renders tab.
 	 */
 	public function getTab(): string
 	{
 		return Nette\Utils\Helpers::capture(function () {
-			require __DIR__ . '/templates/SessionPanel.tab.phtml';
+			require __DIR__ . '/dist/tab.phtml';
 		});
 	}
 
@@ -37,7 +35,7 @@ class SessionPanel implements Tracy\IBarPanel
 	public function getPanel(): string
 	{
 		return Nette\Utils\Helpers::capture(function () {
-			require __DIR__ . '/templates/SessionPanel.panel.phtml';
+			require __DIR__ . '/dist/panel.phtml';
 		});
 	}
 }

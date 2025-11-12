@@ -1,5 +1,4 @@
-[NEON](https://ne-on.org): Nette Object Notation
-================================================
+[![NEON](https://github.com/nette/neon/assets/194960/9d3c809d-0a60-4ff0-a54a-bbb25273a8a8)](https://neon.nette.org)
 
 [![Downloads this Month](https://img.shields.io/packagist/dm/nette/neon.svg)](https://packagist.org/packages/nette/neon)
 [![Tests](https://github.com/nette/neon/workflows/Tests/badge.svg?branch=master)](https://github.com/nette/neon/actions)
@@ -7,16 +6,18 @@
 [![Latest Stable Version](https://poser.pugx.org/nette/neon/v/stable)](https://github.com/nette/neon/releases)
 [![License](https://img.shields.io/badge/license-New%20BSD-blue.svg)](https://github.com/nette/neon/blob/master/license.md)
 
+ <!---->
 
 Introduction
 ============
 
-NEON is a human-readable structured data format. In Nette, it is used for configuration files. It is also used for structured data such as settings, language translations, etc. [Try it on the sandbox](https://ne-on.org).
+NEON is a human-readable structured data format. In Nette, it is used for configuration files. It is also used for structured data such as settings, language translations, etc. [Try it on the sandbox](https://fiddle.nette.org/neon/).
 
 NEON stands for *Nette Object Notation*. It is less complex and ungainly than XML or JSON, but provides similar capabilities. It is very similar to YAML. The main advantage is that NEON has so-called [entities](#entities), thanks to which the configuration of DI services is so sexy. And allows tabs for indentation.
 
 NEON is built from the ground up to be simple to use.
 
+ <!---->
 
 [Support Neon](https://github.com/sponsors/dg)
 ----------------------------------------------
@@ -27,6 +28,7 @@ Do you like NEON? Are you looking forward to the new features?
 
 Thank you!
 
+ <!---->
 
 Usage
 =====
@@ -37,7 +39,7 @@ Install via Composer:
 composer require nette/neon
 ```
 
-It requires PHP version 7.1 up to 8.4. Documentation can be found on the [website](https://doc.nette.org/neon).
+It requires PHP version 8.0 up to 8.5. Documentation can be found on the [website](https://doc.nette.org/neon).
 
 `Neon::encode()` returns `$value` converted to NEON. As the second parameter `$blockMode` you can pass true, which will create multiline output. The third parameter `$indentation` specifies the characters used for indentation (default is tab).
 
@@ -62,6 +64,7 @@ $value = Neon::decodeFile('config.neon');
 
 All methods throw `Nette\Neon\Exception` on error.
 
+ <!---->
 
 Integration
 ===========
@@ -83,6 +86,8 @@ You can check for syntax errors in Neon files using the `neon-lint` console comm
 ```shell
 vendor/bin/neon-lint <path>
 ```
+
+ <!---->
 
 Syntax
 ======
@@ -176,11 +181,11 @@ Values of mappings and sequences may be other mappings and sequences. The level 
 
 ```neon
 pets:
- - Cat
- - Dog
+   - Cat
+   - Dog
 cars:
- - Volvo
- - Skoda
+   - Volvo
+   - Skoda
 ```
 
 In PHP, the same structure would be written as:
@@ -218,6 +223,28 @@ item: [
 ]
 ```
 
+In the previous case, we wrote a mapping whose elements were sequences. Now, let's try it the other way around and create a sequence containing mappings:
+
+```neon
+-
+	name: John
+	age: 35
+-
+	name: Peter
+	age: 28
+```
+
+It's not necessary for the bullet points to be on separate lines; they can also be placed in this manner:
+
+```neon
+- name: John
+  age: 35
+- name: Peter
+  age: 28
+```
+
+It's up to you whether you align the keys in a column using spaces or a tab.
+
 Because PHP uses the same structure for mapping and sequences, that is, arrays, both can be merged. The indentation is the same this time:
 
 ```neon
@@ -236,6 +263,7 @@ In PHP, the same structure would be written as:
 ]
 ```
 
+
 Strings
 -------
 Strings in NEON can be enclosed in single or double quotes. But as you can see, they can also be without quotes.
@@ -246,7 +274,7 @@ Strings in NEON can be enclosed in single or double quotes. But as you can see, 
 - "A double-quoted string in NEON"
 ```
 
-If the string contains characters that can be confused with NEON syntax (hyphens, colons, etc.), it must be enclosed in quotation marks. We recommend using single quotes because they do not use escaping. If you need to enclose a quotation mark in such a string, double it:
+If the string contains characters `# " ' , : = - [ ] { } ( )` that can be confused with NEON syntax, it must be enclosed in quotation marks. We recommend using single quotes because they do not use escaping. If you need to enclose a quotation mark in such a string, double it:
 
 ```neon
 'A single quote '' inside a single-quoted string'
@@ -265,7 +293,7 @@ There are other cases where you need to enclose strings in quotation marks:
 - NEON would understand them as [dates](#dates)
 
 
-Multiline strings
+Multiline Strings
 -----------------
 
 A multiline string begins and ends with a triple quotation mark on separate lines. The indent of the first line is ignored for all lines:
@@ -307,6 +335,7 @@ NEON understands numbers written in so-called scientific notation and also numbe
 - 0x7A       # hexa number
 ```
 
+
 Nulls
 -----
 Null can be expressed in NEON by using `null` or by not specifying a value. Variants with a capital first or all uppercase letters are also allowed.
@@ -316,6 +345,7 @@ a: null
 b:
 ```
 
+
 Booleans
 --------
 Boolean values are expressed in NEON using `true` / `false` or `yes` / `no`. Variants with a capital first or all uppercase letters are also allowed.
@@ -323,6 +353,7 @@ Boolean values are expressed in NEON using `true` / `false` or `yes` / `no`. Var
 ```neon
 [true, TRUE, True, false, yes, no]
 ```
+
 
 Dates
 -----
@@ -345,7 +376,7 @@ An entity is a structure that resembles a function call:
 Column(type: int, nulls: yes)
 ```
 
-In PHP, it is parsed as an object [Nette\Neon\Entity](https://api.nette.org/3.0/Nette/Neon/Entity.html):
+In PHP, it is parsed as an object [Nette\Neon\Entity](https://api.nette.org/3.4/Nette/Neon/Entity.html):
 
 ```php
 // PHP
@@ -390,7 +421,7 @@ country: USA
 ```
 
 
-NEON versus JSON
+NEON Versus JSON
 ================
 JSON is a subset of NEON. Each JSON can therefore be parsed as NEON:
 

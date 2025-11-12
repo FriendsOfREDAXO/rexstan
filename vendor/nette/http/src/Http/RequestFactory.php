@@ -12,6 +12,8 @@ namespace Nette\Http;
 use Nette;
 use Nette\Utils\Arrays;
 use Nette\Utils\Strings;
+use function array_filter, base64_encode, count, end, explode, file_get_contents, filter_input_array, filter_var, function_exists, get_debug_type, in_array, ini_get, is_array, is_string, key, min, preg_last_error, preg_match, preg_replace, preg_split, rtrim, sprintf, str_contains, strcasecmp, strlen, strncmp, strpos, strrpos, strtolower, strtr, substr, trim;
+use const FILTER_UNSAFE_RAW, FILTER_VALIDATE_IP, INPUT_COOKIE, INPUT_POST, PHP_SAPI, UPLOAD_ERR_NO_FILE;
 
 
 /**
@@ -19,26 +21,21 @@ use Nette\Utils\Strings;
  */
 class RequestFactory
 {
-	use Nette\SmartObject;
-
 	/** @internal */
 	private const ValidChars = '\x09\x0A\x0D\x20-\x7E\xA0-\x{10FFFF}';
 
-	/** @var array */
-	public $urlFilters = [
+	public array $urlFilters = [
 		'path' => ['#//#' => '/'], // '%20' => ''
 		'url' => [], // '#[.,)]$#D' => ''
 	];
 
-	/** @var bool */
-	private $binary = false;
+	private bool $binary = false;
 
 	/** @var string[] */
-	private $proxies = [];
+	private array $proxies = [];
 
 
-	/** @return static */
-	public function setBinary(bool $binary = true)
+	public function setBinary(bool $binary = true): static
 	{
 		$this->binary = $binary;
 		return $this;
@@ -47,9 +44,8 @@ class RequestFactory
 
 	/**
 	 * @param  string|string[]  $proxy
-	 * @return static
 	 */
-	public function setProxy($proxy)
+	public function setProxy($proxy): static
 	{
 		$this->proxies = (array) $proxy;
 		return $this;
@@ -76,9 +72,7 @@ class RequestFactory
 			$this->getMethod(),
 			$remoteAddr,
 			$remoteHost,
-			function (): string {
-				return file_get_contents('php://input');
-			}
+			fn(): string => file_get_contents('php://input'),
 		);
 	}
 
@@ -165,7 +159,7 @@ class RequestFactory
 						$list[$key][$k] = (string) preg_replace('#[^' . self::ValidChars . ']+#u', '', $v);
 
 					} else {
-						throw new Nette\InvalidStateException(sprintf('Invalid value in $_POST/$_COOKIE in key %s, expected string, %s given.', "'$k'", gettype($v)));
+						throw new Nette\InvalidStateException(sprintf('Invalid value in $_POST/$_COOKIE in key %s, expected string, %s given.', "'$k'", get_debug_type($v)));
 					}
 				}
 			}
@@ -279,14 +273,10 @@ class RequestFactory
 
 	private function getClient(Url $url): array
 	{
-		$remoteAddr = !empty($_SERVER['REMOTE_ADDR'])
-			? trim($_SERVER['REMOTE_ADDR'], '[]') // workaround for PHP 7.3.0
-			: null;
+		$remoteAddr = !empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;
 
 		// use real client address and host if trusted proxy is used
-		$usingTrustedProxy = $remoteAddr && Arrays::some($this->proxies, function (string $proxy) use ($remoteAddr): bool {
-			return Helpers::ipMatch($remoteAddr, $proxy);
-		});
+		$usingTrustedProxy = $remoteAddr && Arrays::some($this->proxies, fn(string $proxy): bool => Helpers::ipMatch($remoteAddr, $proxy));
 		if ($usingTrustedProxy) {
 			$remoteHost = null;
 			$remoteAddr = empty($_SERVER['HTTP_FORWARDED'])
@@ -311,9 +301,9 @@ class RequestFactory
 
 		if (isset($proxyParams['for'])) {
 			$address = $proxyParams['for'][0];
-			$remoteAddr = strpos($address, '[') === false
-				? explode(':', $address)[0]  // IPv4
-				: substr($address, 1, strpos($address, ']') - 1); // IPv6
+			$remoteAddr = str_contains($address, '[')
+				? substr($address, 1, strpos($address, ']') - 1) // IPv6
+				: explode(':', $address)[0];  // IPv4
 		}
 
 		if (isset($proxyParams['proto']) && count($proxyParams['proto']) === 1) {
@@ -346,12 +336,11 @@ class RequestFactory
 		}
 
 		if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-			$xForwardedForWithoutProxies = array_filter(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']), function (string $ip): bool {
-				return filter_var(trim($ip), FILTER_VALIDATE_IP) === false ||
-					!Arrays::some($this->proxies, function (string $proxy) use ($ip): bool {
-						return Helpers::ipMatch(trim($ip), $proxy);
-					});
-			});
+			$xForwardedForWithoutProxies = array_filter(
+				explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']),
+				fn(string $ip): bool => filter_var($ip = trim($ip), FILTER_VALIDATE_IP) === false
+					|| !Arrays::some($this->proxies, fn(string $proxy): bool => Helpers::ipMatch($ip, $proxy)),
+			);
 			if ($xForwardedForWithoutProxies) {
 				$remoteAddr = trim(end($xForwardedForWithoutProxies));
 				$xForwardedForRealIpKey = key($xForwardedForWithoutProxies);
@@ -360,8 +349,14 @@ class RequestFactory
 
 		if (isset($xForwardedForRealIpKey) && !empty($_SERVER['HTTP_X_FORWARDED_HOST'])) {
 			$xForwardedHost = explode(',', $_SERVER['HTTP_X_FORWARDED_HOST']);
-			if (isset($xForwardedHost[$xForwardedForRealIpKey])) {
-				$url->setHost(trim($xForwardedHost[$xForwardedForRealIpKey]));
+			if (
+				isset($xForwardedHost[$xForwardedForRealIpKey])
+				&& ($pair = $this->parseHostAndPort(trim($xForwardedHost[$xForwardedForRealIpKey])))
+			) {
+				$url->setHost($pair[0]);
+				if (isset($pair[1])) {
+					$url->setPort($pair[1]);
+				}
 			}
 		}
 

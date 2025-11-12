@@ -28,30 +28,15 @@ class CachingIterator extends \CachingIterator implements \Countable
 {
 	use Nette\SmartObject;
 
-	/** @var int */
-	private $counter = 0;
+	private int $counter = 0;
 
 
-	public function __construct($iterator)
+	public function __construct(iterable|\stdClass $iterable)
 	{
-		if (is_array($iterator) || $iterator instanceof \stdClass) {
-			$iterator = new \ArrayIterator($iterator);
-
-		} elseif ($iterator instanceof \IteratorAggregate) {
-			do {
-				$iterator = $iterator->getIterator();
-			} while ($iterator instanceof \IteratorAggregate);
-
-			assert($iterator instanceof \Iterator);
-
-		} elseif ($iterator instanceof \Iterator) {
-		} elseif ($iterator instanceof \Traversable) {
-			$iterator = new \IteratorIterator($iterator);
-		} else {
-			throw new Nette\InvalidArgumentException(sprintf('Invalid argument passed to %s; array or Traversable expected, %s given.', self::class, is_object($iterator) ? get_class($iterator) : gettype($iterator)));
-		}
-
-		parent::__construct($iterator, 0);
+		$iterable = $iterable instanceof \stdClass
+			? new \ArrayIterator($iterable)
+			: Nette\Utils\Iterables::toIterator($iterable);
+		parent::__construct($iterable, 0);
 	}
 
 
@@ -148,9 +133,8 @@ class CachingIterator extends \CachingIterator implements \Countable
 
 	/**
 	 * Returns the next key.
-	 * @return mixed
 	 */
-	public function getNextKey()
+	public function getNextKey(): mixed
 	{
 		return $this->getInnerIterator()->key();
 	}
@@ -158,9 +142,8 @@ class CachingIterator extends \CachingIterator implements \Countable
 
 	/**
 	 * Returns the next element.
-	 * @return mixed
 	 */
-	public function getNextValue()
+	public function getNextValue(): mixed
 	{
 		return $this->getInnerIterator()->current();
 	}

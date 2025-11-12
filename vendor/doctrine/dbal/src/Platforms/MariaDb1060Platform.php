@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Doctrine\DBAL\Platforms;
 
 use Doctrine\DBAL\SQL\Builder\SelectSQLBuilder;
@@ -7,7 +9,7 @@ use Doctrine\DBAL\SQL\Builder\SelectSQLBuilder;
 /**
  * Provides the behavior, features and SQL dialect of the MariaDB 10.6 database platform.
  */
-class MariaDb1060Platform extends MariaDb1052Platform
+class MariaDB1060Platform extends MariaDB1052Platform
 {
     public function createSelectSQLBuilder(): SelectSQLBuilder
     {

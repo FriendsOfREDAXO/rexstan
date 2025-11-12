@@ -11,7 +11,7 @@ namespace Nette\Utils;
 
 
 /**
- * The exception that is thrown when an image error occurs.
+ * An error occurred while working with the image.
  */
 class ImageException extends \Exception
 {
@@ -19,7 +19,7 @@ class ImageException extends \Exception
 
 
 /**
- * The exception that indicates invalid image file.
+ * The image file is invalid or in an unsupported format.
  */
 class UnknownImageFileException extends ImageException
 {
@@ -27,31 +27,23 @@ class UnknownImageFileException extends ImageException
 
 
 /**
- * The exception that indicates error of JSON encoding/decoding.
+ * JSON encoding or decoding failed.
  */
-class JsonException extends \Exception
+class JsonException extends \JsonException
 {
 }
 
 
 /**
- * The exception that indicates error of the last Regexp execution.
+ * Regular expression pattern or execution failed.
  */
 class RegexpException extends \Exception
 {
-	public const MESSAGES = [
-		PREG_INTERNAL_ERROR => 'Internal error',
-		PREG_BACKTRACK_LIMIT_ERROR => 'Backtrack limit was exhausted',
-		PREG_RECURSION_LIMIT_ERROR => 'Recursion limit was exhausted',
-		PREG_BAD_UTF8_ERROR => 'Malformed UTF-8 data',
-		PREG_BAD_UTF8_OFFSET_ERROR => 'Offset didn\'t correspond to the begin of a valid UTF-8 code point',
-		6 => 'Failed due to limited JIT stack space', // PREG_JIT_STACKLIMIT_ERROR
-	];
 }
 
 
 /**
- * The exception that indicates assertion error.
+ * Type validation failed. The value doesn't match the expected type constraints.
  */
 class AssertionException extends \Exception
 {

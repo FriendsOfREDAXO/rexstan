@@ -9,12 +9,13 @@ declare(strict_types=1);
 
 namespace Nette\Neon;
 
+use function array_key_exists, count, end, is_scalar, min, strlen, strncmp, substr, substr_count;
+
 
 /** @internal */
 final class Parser
 {
-	/** @var TokenStream */
-	private $tokens;
+	private TokenStream $tokens;
 
 	/** @var int[] */
 	private $posToLine = [];
@@ -85,11 +86,16 @@ final class Parser
 				return $res;
 
 			} elseif ($item->key !== null && $this->tokens->isNext('-')) { // special dash subblock
-				$item->value = $this->parseBlock($indent, true);
+				$item->value = $this->parseBlock($indent, onlyBullets: true);
 			}
-		} elseif ($item->key === null) {
-			$item->value = $this->parseBlock($indent . '  '); // open new block after dash
-
+		} elseif ($item->key === null) {  // open new block after dash
+			$save = $this->tokens->getPos();
+			try {
+				$item->value = $this->parseBlock($indent . "\t");
+			} catch (Exception) {
+				$this->tokens->seek($save);
+				$item->value = $this->parseBlock($indent . '  ');
+			}
 		} elseif ($this->tokens->isNext()) {
 			$item->value = $this->parseValue();
 			if ($this->tokens->isNext() && !$this->tokens->isNext(Token::Newline)) {
@@ -207,12 +213,12 @@ final class Parser
 
 		$this->injectPos($item, $item->startTokenPos, $item->value->endTokenPos);
 
-		if ($this->tokens->consume(',', Token::Newline)) {
-			goto loop;
-		}
-
+		$old = $this->tokens->getPos();
 		while ($this->tokens->consume(Token::Newline));
-		if (!$this->tokens->isNext($endBrace)) {
+		$this->tokens->consume(',');
+		if ($old !== $this->tokens->getPos()) {
+			goto loop;
+		} elseif (!$this->tokens->isNext($endBrace)) {
 			$this->tokens->error();
 		}
 

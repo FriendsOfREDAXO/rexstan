@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Nette\Http;
 
 use Nette;
+use function strlen, strncmp, strrpos, substr;
 
 
 /**
@@ -34,28 +35,36 @@ use Nette;
  */
 class UrlScript extends UrlImmutable
 {
-	/** @var string */
-	private $scriptPath;
-
-	/** @var string */
-	private $basePath;
+	private string $scriptPath;
+	private string $basePath;
 
 
-	public function __construct($url = '/', string $scriptPath = '')
+	public function __construct(string|Url $url = '/', string $scriptPath = '')
 	{
 		parent::__construct($url);
-		$this->scriptPath = $scriptPath;
-		$this->build();
+		$this->setScriptPath($scriptPath);
 	}
 
 
-	/** @return static */
-	public function withPath(string $path, string $scriptPath = '')
+	public function withPath(string $path, string $scriptPath = ''): static
 	{
-		$dolly = clone $this;
-		$dolly->scriptPath = $scriptPath;
-		$parent = \Closure::fromCallable([UrlImmutable::class, 'withPath'])->bindTo($dolly);
-		return $parent($path);
+		$dolly = parent::withPath($path);
+		$dolly->setScriptPath($scriptPath);
+		return $dolly;
+	}
+
+
+	private function setScriptPath(string $scriptPath): void
+	{
+		$path = $this->getPath();
+		$scriptPath = $scriptPath ?: $path;
+		$pos = strrpos($scriptPath, '/');
+		if ($pos === false || strncmp($scriptPath, $path, $pos + 1)) {
+			throw new Nette\InvalidArgumentException("ScriptPath '$scriptPath' doesn't match path '$path'");
+		}
+
+		$this->scriptPath = $scriptPath;
+		$this->basePath = substr($scriptPath, 0, $pos + 1);
 	}
 
 
@@ -94,20 +103,13 @@ class UrlScript extends UrlImmutable
 	 */
 	public function getPathInfo(): string
 	{
-		return (string) substr($this->getPath(), strlen($this->scriptPath));
+		return substr($this->getPath(), strlen($this->scriptPath));
 	}
 
 
-	protected function build(): void
+	/** @internal */
+	protected function mergePath(string $path): string
 	{
-		parent::build();
-		$path = $this->getPath();
-		$this->scriptPath = $this->scriptPath ?: $path;
-		$pos = strrpos($this->scriptPath, '/');
-		if ($pos === false || strncmp($this->scriptPath, $path, $pos + 1)) {
-			throw new Nette\InvalidArgumentException("ScriptPath '$this->scriptPath' doesn't match path '$path'");
-		}
-
-		$this->basePath = substr($this->scriptPath, 0, $pos + 1);
+		return $this->basePath . $path;
 	}
 }

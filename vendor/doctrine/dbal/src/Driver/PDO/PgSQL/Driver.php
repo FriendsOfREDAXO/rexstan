@@ -1,18 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Doctrine\DBAL\Driver\PDO\PgSQL;
 
 use Doctrine\DBAL\Driver\AbstractPostgreSQLDriver;
 use Doctrine\DBAL\Driver\PDO\Connection;
 use Doctrine\DBAL\Driver\PDO\Exception;
+use Doctrine\DBAL\Driver\PDO\Exception\InvalidConfiguration;
 use Doctrine\DBAL\Driver\PDO\PDOConnect;
-use Doctrine\Deprecations\Deprecation;
 use PDO;
-use Pdo\Pgsql;
 use PDOException;
 use SensitiveParameter;
 
-use const PHP_VERSION_ID;
+use function is_string;
 
 final class Driver extends AbstractPostgreSQLDriver
 {
@@ -20,21 +21,25 @@ final class Driver extends AbstractPostgreSQLDriver
 
     /**
      * {@inheritDoc}
-     *
-     * @return Connection
      */
     public function connect(
         #[SensitiveParameter]
-        array $params
-    ) {
+        array $params,
+    ): Connection {
         $driverOptions = $params['driverOptions'] ?? [];
 
         if (! empty($params['persistent'])) {
             $driverOptions[PDO::ATTR_PERSISTENT] = true;
         }
 
+        foreach (['user', 'password'] as $key) {
+            if (isset($params[$key]) && ! is_string($params[$key])) {
+                throw InvalidConfiguration::notAStringOrNull($key, $params[$key]);
+            }
+        }
+
         $safeParams = $params;
-        unset($safeParams['password'], $safeParams['url']);
+        unset($safeParams['password']);
 
         try {
             $pdo = $this->doConnect(
@@ -47,14 +52,11 @@ final class Driver extends AbstractPostgreSQLDriver
             throw Exception::new($exception);
         }
 
-        $disablePreparesAttr = PHP_VERSION_ID >= 80400
-            ? Pgsql::ATTR_DISABLE_PREPARES
-            : PDO::PGSQL_ATTR_DISABLE_PREPARES;
         if (
-            ! isset($driverOptions[$disablePreparesAttr])
-            || $driverOptions[$disablePreparesAttr] === true
+            ! isset($driverOptions[PDO::PGSQL_ATTR_DISABLE_PREPARES])
+            || $driverOptions[PDO::PGSQL_ATTR_DISABLE_PREPARES] === true
         ) {
-            $pdo->setAttribute($disablePreparesAttr, true);
+            $pdo->setAttribute(PDO::PGSQL_ATTR_DISABLE_PREPARES, true);
         }
 
         $connection = new Connection($pdo);
@@ -88,27 +90,6 @@ final class Driver extends AbstractPostgreSQLDriver
 
         if (isset($params['dbname'])) {
             $dsn .= 'dbname=' . $params['dbname'] . ';';
-        } elseif (isset($params['default_dbname'])) {
-            Deprecation::trigger(
-                'doctrine/dbal',
-                'https://github.com/doctrine/dbal/pull/5705',
-                'The "default_dbname" connection parameter is deprecated. Use "dbname" instead.',
-            );
-
-            $dsn .= 'dbname=' . $params['default_dbname'] . ';';
-        } else {
-            if (isset($params['user']) && $params['user'] !== 'postgres') {
-                Deprecation::trigger(
-                    'doctrine/dbal',
-                    'https://github.com/doctrine/dbal/pull/5705',
-                    'Relying on the DBAL connecting to the "postgres" database by default is deprecated.'
-                        . ' Unless you want to have the server determine the default database for the connection,'
-                        . ' specify the database name explicitly.',
-                );
-            }
-
-            // Used for temporary connections to allow operations like dropping the database currently connected to.
-            $dsn .= 'dbname=postgres;';
         }
 
         if (isset($params['sslmode'])) {

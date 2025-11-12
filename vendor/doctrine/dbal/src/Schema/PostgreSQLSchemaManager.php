@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Doctrine\DBAL\Schema;
 
 use Doctrine\DBAL\Exception;
@@ -7,24 +9,20 @@ use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Result;
 use Doctrine\DBAL\Types\JsonType;
 use Doctrine\DBAL\Types\Type;
-use Doctrine\DBAL\Types\Types;
-use Doctrine\Deprecations\Deprecation;
 
 use function array_change_key_case;
-use function array_filter;
+use function array_key_exists;
 use function array_map;
 use function array_merge;
-use function array_shift;
 use function assert;
 use function explode;
-use function get_class;
 use function implode;
 use function in_array;
+use function is_string;
 use function preg_match;
-use function preg_replace;
 use function sprintf;
+use function str_contains;
 use function str_replace;
-use function strpos;
 use function strtolower;
 use function trim;
 
@@ -37,93 +35,14 @@ use const CASE_LOWER;
  */
 class PostgreSQLSchemaManager extends AbstractSchemaManager
 {
-    /** @var string[]|null */
-    private ?array $existingSchemaPaths = null;
-
-    /**
-     * {@inheritDoc}
-     */
-    public function listTableNames()
-    {
-        return $this->doListTableNames();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function listTables()
-    {
-        return $this->doListTables();
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @deprecated Use {@see introspectTable()} instead.
-     */
-    public function listTableDetails($name)
-    {
-        Deprecation::triggerIfCalledFromOutside(
-            'doctrine/dbal',
-            'https://github.com/doctrine/dbal/pull/5595',
-            '%s is deprecated. Use introspectTable() instead.',
-            __METHOD__,
-        );
-
-        return $this->doListTableDetails($name);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function listTableColumns($table, $database = null)
-    {
-        return $this->doListTableColumns($table, $database);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function listTableIndexes($table)
-    {
-        return $this->doListTableIndexes($table);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function listTableForeignKeys($table, $database = null)
-    {
-        return $this->doListTableForeignKeys($table, $database);
-    }
-
-    /**
-     * Gets all the existing schema names.
-     *
-     * @deprecated Use {@see listSchemaNames()} instead.
-     *
-     * @return string[]
-     *
-     * @throws Exception
-     */
-    public function getSchemaNames()
-    {
-        Deprecation::trigger(
-            'doctrine/dbal',
-            'https://github.com/doctrine/dbal/issues/4503',
-            'PostgreSQLSchemaManager::getSchemaNames() is deprecated,'
-                . ' use PostgreSQLSchemaManager::listSchemaNames() instead.',
-        );
-
-        return $this->listNamespaceNames();
-    }
+    private ?string $currentSchema = null;
 
     /**
      * {@inheritDoc}
      */
     public function listSchemaNames(): array
     {
-        return $this->_conn->fetchFirstColumn(
+        return $this->connection->fetchFirstColumn(
             <<<'SQL'
 SELECT schema_name
 FROM   information_schema.schemata
@@ -133,94 +52,42 @@ SQL,
         );
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @deprecated
-     */
-    public function getSchemaSearchPaths()
+    public function createSchemaConfig(): SchemaConfig
     {
-        Deprecation::triggerIfCalledFromOutside(
-            'doctrine/dbal',
-            'https://github.com/doctrine/dbal/pull/4821',
-            'PostgreSQLSchemaManager::getSchemaSearchPaths() is deprecated.',
-        );
+        $config = parent::createSchemaConfig();
 
-        $params = $this->_conn->getParams();
+        $config->setName($this->getCurrentSchema());
 
-        $searchPaths = $this->_conn->fetchOne('SHOW search_path');
-        assert($searchPaths !== false);
-
-        $schema = explode(',', $searchPaths);
-
-        if (isset($params['user'])) {
-            $schema = str_replace('"$user"', $params['user'], $schema);
-        }
-
-        return array_map('trim', $schema);
-    }
-
-    /**
-     * Gets names of all existing schemas in the current users search path.
-     *
-     * This is a PostgreSQL only function.
-     *
-     * @internal The method should be only used from within the PostgreSQLSchemaManager class hierarchy.
-     *
-     * @return string[]
-     *
-     * @throws Exception
-     */
-    public function getExistingSchemaSearchPaths()
-    {
-        if ($this->existingSchemaPaths === null) {
-            $this->determineExistingSchemaSearchPaths();
-        }
-
-        assert($this->existingSchemaPaths !== null);
-
-        return $this->existingSchemaPaths;
+        return $config;
     }
 
     /**
      * Returns the name of the current schema.
      *
-     * @return string|null
-     *
      * @throws Exception
      */
-    protected function getCurrentSchema()
+    protected function getCurrentSchema(): ?string
     {
-        $schemas = $this->getExistingSchemaSearchPaths();
-
-        return array_shift($schemas);
+        return $this->currentSchema ??= $this->determineCurrentSchema();
     }
 
     /**
-     * Sets or resets the order of the existing schemas in the current search path of the user.
-     *
-     * This is a PostgreSQL only function.
-     *
-     * @internal The method should be only used from within the PostgreSQLSchemaManager class hierarchy.
-     *
-     * @return void
+     * Determines the name of the current schema.
      *
      * @throws Exception
      */
-    public function determineExistingSchemaSearchPaths()
+    protected function determineCurrentSchema(): string
     {
-        $names = $this->listSchemaNames();
-        $paths = $this->getSchemaSearchPaths();
+        $currentSchema = $this->connection->fetchOne('SELECT current_schema()');
+        assert(is_string($currentSchema));
 
-        $this->existingSchemaPaths = array_filter($paths, static function ($v) use ($names): bool {
-            return in_array($v, $names, true);
-        });
+        return $currentSchema;
     }
 
     /**
      * {@inheritDoc}
      */
-    protected function _getPortableTableForeignKeyDefinition($tableForeignKey)
+    protected function _getPortableTableForeignKeyDefinition(array $tableForeignKey): ForeignKeyConstraint
     {
         $onUpdate = null;
         $onDelete = null;
@@ -266,7 +133,7 @@ SQL,
     /**
      * {@inheritDoc}
      */
-    protected function _getPortableViewDefinition($view)
+    protected function _getPortableViewDefinition(array $view): View
     {
         return new View($view['schemaname'] . '.' . $view['viewname'], $view['definition']);
     }
@@ -274,7 +141,7 @@ SQL,
     /**
      * {@inheritDoc}
      */
-    protected function _getPortableTableDefinition($table)
+    protected function _getPortableTableDefinition(array $table): string
     {
         $currentSchema = $this->getCurrentSchema();
 
@@ -288,7 +155,7 @@ SQL,
     /**
      * {@inheritDoc}
      */
-    protected function _getPortableTableIndexesList($tableIndexes, $tableName = null)
+    protected function _getPortableTableIndexesList(array $tableIndexes, string $tableName): array
     {
         $buffer = [];
         foreach ($tableIndexes as $row) {
@@ -306,7 +173,7 @@ SQL,
                 implode(', ', $colNumbers),
             );
 
-            $indexColumns = $this->_conn->fetchAllAssociative($columnNameSql);
+            $indexColumns = $this->connection->fetchAllAssociative($columnNameSql);
 
             // required for getting the order of the columns right.
             foreach ($colNumbers as $colNum) {
@@ -332,32 +199,15 @@ SQL,
     /**
      * {@inheritDoc}
      */
-    protected function _getPortableDatabaseDefinition($database)
+    protected function _getPortableDatabaseDefinition(array $database): string
     {
         return $database['datname'];
     }
 
     /**
      * {@inheritDoc}
-     *
-     * @deprecated Use {@see listSchemaNames()} instead.
      */
-    protected function getPortableNamespaceDefinition(array $namespace)
-    {
-        Deprecation::triggerIfCalledFromOutside(
-            'doctrine/dbal',
-            'https://github.com/doctrine/dbal/issues/4503',
-            'PostgreSQLSchemaManager::getPortableNamespaceDefinition() is deprecated,'
-                . ' use PostgreSQLSchemaManager::listSchemaNames() instead.',
-        );
-
-        return $namespace['nspname'];
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    protected function _getPortableSequenceDefinition($sequence)
+    protected function _getPortableSequenceDefinition(array $sequence): Sequence
     {
         if ($sequence['schemaname'] !== 'public') {
             $sequenceName = $sequence['schemaname'] . '.' . $sequence['relname'];
@@ -371,28 +221,25 @@ SQL,
     /**
      * {@inheritDoc}
      */
-    protected function _getPortableTableColumnDefinition($tableColumn)
+    protected function _getPortableTableColumnDefinition(array $tableColumn): Column
     {
         $tableColumn = array_change_key_case($tableColumn, CASE_LOWER);
 
-        if (strtolower($tableColumn['type']) === 'varchar' || strtolower($tableColumn['type']) === 'bpchar') {
-            // get length from varchar definition
-            $length                = preg_replace('~.*\(([0-9]*)\).*~', '$1', $tableColumn['complete_type']);
-            $tableColumn['length'] = $length;
+        $length = null;
+
+        if (
+            in_array(strtolower($tableColumn['type']), ['varchar', 'bpchar'], true)
+            && preg_match('/\((\d*)\)/', $tableColumn['complete_type'], $matches) === 1
+        ) {
+            $length = (int) $matches[1];
         }
+
+        $autoincrement = $tableColumn['attidentity'] === 'd';
 
         $matches = [];
 
-        $autoincrement = false;
-
-        if (
-            $tableColumn['default'] !== null
-            && preg_match("/^nextval\('(.*)'(::.*)?\)$/", $tableColumn['default'], $matches) === 1
-        ) {
-            $tableColumn['sequence'] = $matches[1];
-            $tableColumn['default']  = null;
-            $autoincrement           = true;
-        }
+        assert(array_key_exists('default', $tableColumn));
+        assert(array_key_exists('complete_type', $tableColumn));
 
         if ($tableColumn['default'] !== null) {
             if (preg_match("/^['(](.*)[')]::/", $tableColumn['default'], $matches) === 1) {
@@ -402,8 +249,7 @@ SQL,
             }
         }
 
-        $length = $tableColumn['length'] ?? null;
-        if ($length === '-1' && isset($tableColumn['atttypmod'])) {
+        if ($length === -1 && isset($tableColumn['atttypmod'])) {
             $length = $tableColumn['atttypmod'] - 4;
         }
 
@@ -411,48 +257,37 @@ SQL,
             $length = null;
         }
 
-        $fixed = null;
+        $fixed = false;
 
         if (! isset($tableColumn['name'])) {
             $tableColumn['name'] = '';
         }
 
         $precision = null;
-        $scale     = null;
+        $scale     = 0;
         $jsonb     = null;
 
         $dbType = strtolower($tableColumn['type']);
         if (
             $tableColumn['domain_type'] !== null
             && $tableColumn['domain_type'] !== ''
-            && ! $this->_platform->hasDoctrineTypeMappingFor($tableColumn['type'])
+            && ! $this->platform->hasDoctrineTypeMappingFor($tableColumn['type'])
         ) {
             $dbType                       = strtolower($tableColumn['domain_type']);
             $tableColumn['complete_type'] = $tableColumn['domain_complete_type'];
         }
 
-        $type                   = $this->_platform->getDoctrineTypeMapping($dbType);
-        $type                   = $this->extractDoctrineTypeFromComment($tableColumn['comment'], $type);
-        $tableColumn['comment'] = $this->removeDoctrineTypeFromComment($tableColumn['comment'], $type);
+        $type = $this->platform->getDoctrineTypeMapping($dbType);
 
         switch ($dbType) {
             case 'smallint':
             case 'int2':
-                $tableColumn['default'] = $this->fixVersion94NegativeNumericDefaultValue($tableColumn['default']);
-                $length                 = null;
-                break;
-
             case 'int':
             case 'int4':
             case 'integer':
-                $tableColumn['default'] = $this->fixVersion94NegativeNumericDefaultValue($tableColumn['default']);
-                $length                 = null;
-                break;
-
             case 'bigint':
             case 'int8':
-                $tableColumn['default'] = $this->fixVersion94NegativeNumericDefaultValue($tableColumn['default']);
-                $length                 = null;
+                $length = null;
                 break;
 
             case 'bool':
@@ -473,10 +308,6 @@ SQL,
             case '_varchar':
             case 'varchar':
                 $tableColumn['default'] = $this->parseDefaultExpression($tableColumn['default']);
-                $fixed                  = false;
-                break;
-            case 'interval':
-                $fixed = false;
                 break;
 
             case 'char':
@@ -493,8 +324,6 @@ SQL,
             case 'decimal':
             case 'money':
             case 'numeric':
-                $tableColumn['default'] = $this->fixVersion94NegativeNumericDefaultValue($tableColumn['default']);
-
                 if (
                     preg_match(
                         '([A-Za-z]+\(([0-9]+),([0-9]+)\))',
@@ -502,8 +331,8 @@ SQL,
                         $match,
                     ) === 1
                 ) {
-                    $precision = $match[1];
-                    $scale     = $match[2];
+                    $precision = (int) $match[1];
+                    $scale     = (int) $match[2];
                     $length    = null;
                 }
 
@@ -520,7 +349,7 @@ SQL,
         }
 
         if (
-            $tableColumn['default'] !== null && preg_match(
+            is_string($tableColumn['default']) && preg_match(
                 "('([^']+)'::)",
                 $tableColumn['default'],
                 $match,
@@ -537,10 +366,11 @@ SQL,
             'scale'         => $scale,
             'fixed'         => $fixed,
             'autoincrement' => $autoincrement,
-            'comment'       => isset($tableColumn['comment']) && $tableColumn['comment'] !== ''
-                ? $tableColumn['comment']
-                : null,
         ];
+
+        if (isset($tableColumn['comment'])) {
+            $options['comment'] = $tableColumn['comment'];
+        }
 
         $column = new Column($tableColumn['field'], Type::getType($type), $options);
 
@@ -548,41 +378,11 @@ SQL,
             $column->setPlatformOption('collation', $tableColumn['collation']);
         }
 
-        if ($column->getType()->getName() === Types::JSON) {
-            if (! $column->getType() instanceof JsonType) {
-                Deprecation::trigger(
-                    'doctrine/dbal',
-                    'https://github.com/doctrine/dbal/pull/5049',
-                    <<<'DEPRECATION'
-                    %s not extending %s while being named %s is deprecated,
-                    and will lead to jsonb never to being used in 4.0.,
-                    DEPRECATION,
-                    get_class($column->getType()),
-                    JsonType::class,
-                    Types::JSON,
-                );
-            }
-
+        if ($column->getType() instanceof JsonType) {
             $column->setPlatformOption('jsonb', $jsonb);
         }
 
         return $column;
-    }
-
-    /**
-     * PostgreSQL 9.4 puts parentheses around negative numeric default values that need to be stripped eventually.
-     *
-     * @param mixed $defaultValue
-     *
-     * @return mixed
-     */
-    private function fixVersion94NegativeNumericDefaultValue($defaultValue)
-    {
-        if ($defaultValue !== null && strpos($defaultValue, '(') === 0) {
-            return trim($defaultValue, '()');
-        }
-
-        return $defaultValue;
     }
 
     /**
@@ -613,15 +413,15 @@ ORDER BY
   quote_ident(table_name)
 SQL;
 
-        return $this->_conn->executeQuery($sql, [$databaseName]);
+        return $this->connection->executeQuery($sql, [$databaseName]);
     }
 
     protected function selectTableColumns(string $databaseName, ?string $tableName = null): Result
     {
-        $sql = 'SELECT';
+        $sql = 'SELECT ';
 
         if ($tableName === null) {
-            $sql .= ' quote_ident(c.relname) AS table_name, quote_ident(n.nspname) AS schema_name,';
+            $sql .= 'quote_ident(c.relname) AS table_name, quote_ident(n.nspname) AS schema_name,';
         }
 
         $sql .= sprintf(<<<'SQL'
@@ -634,6 +434,7 @@ SQL;
             (SELECT format_type(t2.typbasetype, t2.typtypmod) FROM
               pg_catalog.pg_type t2 WHERE t2.typtype = 'd' AND t2.oid = a.atttypid) AS domain_complete_type,
             a.attnotnull AS isnotnull,
+            a.attidentity,
             (SELECT 't'
              FROM pg_index
              WHERE c.oid = pg_index.indrelid
@@ -655,17 +456,30 @@ SQL;
                     ON d.objid = c.oid
                         AND d.deptype = 'e'
                         AND d.classid = (SELECT oid FROM pg_class WHERE relname = 'pg_class')
-SQL, $this->_platform->getDefaultColumnValueSQLSnippet());
+            SQL, $this->platform->getDefaultColumnValueSQLSnippet());
 
         $conditions = array_merge([
             'a.attnum > 0',
-            "c.relkind = 'r'",
             'd.refobjid IS NULL',
+
+            // 'r' for regular tables - 'p' for partitioned tables
+            "c.relkind IN('r', 'p')",
+
+            // exclude partitions (tables that inherit from partitioned tables)
+            <<<'SQL'
+            NOT EXISTS (
+                SELECT 1 
+                FROM pg_inherits 
+                INNER JOIN pg_class parent on pg_inherits.inhparent = parent.oid 
+                    AND parent.relkind = 'p' 
+                WHERE inhrelid = c.oid
+            )
+            SQL,
         ], $this->buildQueryConditions($tableName));
 
         $sql .= ' WHERE ' . implode(' AND ', $conditions) . ' ORDER BY a.attnum';
 
-        return $this->_conn->executeQuery($sql);
+        return $this->connection->executeQuery($sql);
     }
 
     protected function selectIndexColumns(string $databaseName, ?string $tableName = null): Result
@@ -699,7 +513,7 @@ SQL;
 
         $sql .= ' WHERE ' . implode(' AND ', $conditions) . ') ORDER BY quote_ident(ic.relname)';
 
-        return $this->_conn->executeQuery($sql);
+        return $this->connection->executeQuery($sql);
     }
 
     protected function selectForeignKeyColumns(string $databaseName, ?string $tableName = null): Result
@@ -726,7 +540,7 @@ SQL;
 
         $sql .= ' WHERE ' . implode(' AND ', $conditions) . ") AND r.contype = 'f' ORDER BY quote_ident(r.conname)";
 
-        return $this->_conn->executeQuery($sql);
+        return $this->connection->executeQuery($sql);
     }
 
     /**
@@ -735,8 +549,8 @@ SQL;
     protected function fetchTableOptionsByTable(string $databaseName, ?string $tableName = null): array
     {
         $sql = <<<'SQL'
-SELECT n.nspname AS schema_name,
-       c.relname AS table_name,
+SELECT quote_ident(n.nspname) AS schema_name,
+       quote_ident(c.relname) AS table_name,
        CASE c.relpersistence WHEN 'u' THEN true ELSE false END as unlogged,
        obj_description(c.oid, 'pg_class') AS comment
 FROM pg_class c
@@ -749,32 +563,28 @@ SQL;
         $sql .= ' WHERE ' . implode(' AND ', $conditions);
 
         $tableOptions = [];
-        foreach ($this->_conn->iterateAssociative($sql) as $row) {
+        foreach ($this->connection->iterateAssociative($sql) as $row) {
             $tableOptions[$this->_getPortableTableDefinition($row)] = $row;
         }
 
         return $tableOptions;
     }
 
-    /**
-     * @param string|null $tableName
-     *
-     * @return list<string>
-     */
-    private function buildQueryConditions($tableName): array
+    /** @return list<string> */
+    private function buildQueryConditions(?string $tableName): array
     {
         $conditions = [];
 
         if ($tableName !== null) {
-            if (strpos($tableName, '.') !== false) {
+            if (str_contains($tableName, '.')) {
                 [$schemaName, $tableName] = explode('.', $tableName);
-                $conditions[]             = 'n.nspname = ' . $this->_platform->quoteStringLiteral($schemaName);
+                $conditions[]             = 'n.nspname = ' . $this->platform->quoteStringLiteral($schemaName);
             } else {
                 $conditions[] = 'n.nspname = ANY(current_schemas(false))';
             }
 
             $identifier   = new Identifier($tableName);
-            $conditions[] = 'c.relname = ' . $this->_platform->quoteStringLiteral($identifier->getName());
+            $conditions[] = 'c.relname = ' . $this->platform->quoteStringLiteral($identifier->getName());
         }
 
         $conditions[] = "n.nspname NOT IN ('pg_catalog', 'information_schema', 'pg_toast')";

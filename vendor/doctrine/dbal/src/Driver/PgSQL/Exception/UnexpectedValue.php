@@ -21,7 +21,7 @@ final class UnexpectedValue extends UnexpectedValueException implements Exceptio
     }
 
     /** @return null */
-    public function getSQLState()
+    public function getSQLState(): string|null
     {
         return null;
     }

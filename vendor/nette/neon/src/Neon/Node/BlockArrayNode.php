@@ -9,17 +9,15 @@ declare(strict_types=1);
 
 namespace Nette\Neon\Node;
 
+use function count, preg_replace;
+
 
 /** @internal */
 final class BlockArrayNode extends ArrayNode
 {
-	/** @var string */
-	public $indentation;
-
-
-	public function __construct(string $indentation = '')
-	{
-		$this->indentation = $indentation;
+	public function __construct(
+		public string $indentation = '',
+	) {
 	}
 
 

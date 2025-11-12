@@ -10,6 +10,8 @@ declare(strict_types=1);
 namespace Nette\Utils;
 
 use Nette;
+use function array_pop, chmod, decoct, dirname, end, fclose, file_exists, file_get_contents, file_put_contents, fopen, implode, is_dir, is_file, is_link, mkdir, preg_match, preg_split, realpath, rename, rmdir, rtrim, sprintf, str_replace, stream_copy_to_stream, stream_is_local, strtr;
+use const DIRECTORY_SEPARATOR;
 
 
 /**
@@ -17,20 +19,18 @@ use Nette;
  */
 final class FileSystem
 {
-	use Nette\StaticClass;
-
 	/**
 	 * Creates a directory if it does not exist, including parent directories.
 	 * @throws Nette\IOException  on error occurred
 	 */
 	public static function createDir(string $dir, int $mode = 0777): void
 	{
-		if (!is_dir($dir) && !@mkdir($dir, $mode, true) && !is_dir($dir)) { // @ - dir may already exist
+		if (!is_dir($dir) && !@mkdir($dir, $mode, recursive: true) && !is_dir($dir)) { // @ - dir may already exist
 			throw new Nette\IOException(sprintf(
 				"Unable to create directory '%s' with mode %s. %s",
 				self::normalizePath($dir),
 				decoct($mode),
-				Helpers::getLastError()
+				Helpers::getLastError(),
 			));
 		}
 	}
@@ -64,19 +64,34 @@ final class FileSystem
 			}
 		} else {
 			static::createDir(dirname($target));
-			if (
-				($s = @fopen($origin, 'rb'))
-				&& ($d = @fopen($target, 'wb'))
-				&& @stream_copy_to_stream($s, $d) === false
-			) { // @ is escalated to exception
+			if (@stream_copy_to_stream(static::open($origin, 'rb'), static::open($target, 'wb')) === false) { // @ is escalated to exception
 				throw new Nette\IOException(sprintf(
 					"Unable to copy file '%s' to '%s'. %s",
 					self::normalizePath($origin),
 					self::normalizePath($target),
-					Helpers::getLastError()
+					Helpers::getLastError(),
 				));
 			}
 		}
+	}
+
+
+	/**
+	 * Opens file and returns resource.
+	 * @return resource
+	 * @throws Nette\IOException  on error occurred
+	 */
+	public static function open(string $path, string $mode)
+	{
+		$f = @fopen($path, $mode); // @ is escalated to exception
+		if (!$f) {
+			throw new Nette\IOException(sprintf(
+				"Unable to open file '%s'. %s",
+				self::normalizePath($path),
+				Helpers::getLastError(),
+			));
+		}
+		return $f;
 	}
 
 
@@ -92,7 +107,7 @@ final class FileSystem
 				throw new Nette\IOException(sprintf(
 					"Unable to delete '%s'. %s",
 					self::normalizePath($path),
-					Helpers::getLastError()
+					Helpers::getLastError(),
 				));
 			}
 		} elseif (is_dir($path)) {
@@ -104,7 +119,7 @@ final class FileSystem
 				throw new Nette\IOException(sprintf(
 					"Unable to delete directory '%s'. %s",
 					self::normalizePath($path),
-					Helpers::getLastError()
+					Helpers::getLastError(),
 				));
 			}
 		}
@@ -135,7 +150,7 @@ final class FileSystem
 					"Unable to rename file or directory '%s' to '%s'. %s",
 					self::normalizePath($origin),
 					self::normalizePath($target),
-					Helpers::getLastError()
+					Helpers::getLastError(),
 				));
 			}
 		}
@@ -153,11 +168,42 @@ final class FileSystem
 			throw new Nette\IOException(sprintf(
 				"Unable to read file '%s'. %s",
 				self::normalizePath($file),
-				Helpers::getLastError()
+				Helpers::getLastError(),
 			));
 		}
 
 		return $content;
+	}
+
+
+	/**
+	 * Reads the file content line by line. Because it reads continuously as we iterate over the lines,
+	 * it is possible to read files larger than the available memory.
+	 * @return \Generator<int, string>
+	 * @throws Nette\IOException  on error occurred
+	 */
+	public static function readLines(string $file, bool $stripNewLines = true): \Generator
+	{
+		return (function ($f) use ($file, $stripNewLines) {
+			$counter = 0;
+			do {
+				$line = Callback::invokeSafe('fgets', [$f], fn($error) => throw new Nette\IOException(sprintf(
+					"Unable to read file '%s'. %s",
+					self::normalizePath($file),
+					$error,
+				)));
+				if ($line === false) {
+					fclose($f);
+					break;
+				}
+				if ($stripNewLines) {
+					$line = rtrim($line, "\r\n");
+				}
+
+				yield $counter++ => $line;
+
+			} while (true);
+		})(static::open($file, 'r'));
 	}
 
 
@@ -172,7 +218,7 @@ final class FileSystem
 			throw new Nette\IOException(sprintf(
 				"Unable to write file '%s'. %s",
 				self::normalizePath($file),
-				Helpers::getLastError()
+				Helpers::getLastError(),
 			));
 		}
 
@@ -181,7 +227,7 @@ final class FileSystem
 				"Unable to chmod file '%s' to mode %s. %s",
 				self::normalizePath($file),
 				decoct($mode),
-				Helpers::getLastError()
+				Helpers::getLastError(),
 			));
 		}
 	}
@@ -200,7 +246,7 @@ final class FileSystem
 					"Unable to chmod file '%s' to mode %s. %s",
 					self::normalizePath($path),
 					decoct($fileMode),
-					Helpers::getLastError()
+					Helpers::getLastError(),
 				));
 			}
 		} elseif (is_dir($path)) {
@@ -213,7 +259,7 @@ final class FileSystem
 					"Unable to chmod directory '%s' to mode %s. %s",
 					self::normalizePath($path),
 					decoct($dirMode),
-					Helpers::getLastError()
+					Helpers::getLastError(),
 				));
 			}
 		} else {
@@ -227,7 +273,7 @@ final class FileSystem
 	 */
 	public static function isAbsolute(string $path): bool
 	{
-		return (bool) preg_match('#([a-z]:)?[/\\\\]|[a-z][a-z0-9+.-]*://#Ai', $path);
+		return (bool) preg_match('#([a-z]:)?[/\\\]|[a-z][a-z0-9+.-]*://#Ai', $path);
 	}
 
 
@@ -236,7 +282,7 @@ final class FileSystem
 	 */
 	public static function normalizePath(string $path): string
 	{
-		$parts = $path === '' ? [] : preg_split('~[/\\\\]+~', $path);
+		$parts = $path === '' ? [] : preg_split('~[/\\\]+~', $path);
 		$res = [];
 		foreach ($parts as $part) {
 			if ($part === '..' && $res && end($res) !== '..' && end($res) !== '') {
@@ -258,5 +304,38 @@ final class FileSystem
 	public static function joinPaths(string ...$paths): string
 	{
 		return self::normalizePath(implode('/', $paths));
+	}
+
+
+	/**
+	 * Resolves a path against a base path. If the path is absolute, returns it directly, if it's relative, joins it with the base path.
+	 */
+	public static function resolvePath(string $basePath, string $path): string
+	{
+		return match (true) {
+			self::isAbsolute($path) => self::platformSlashes($path),
+			$path === '' => self::platformSlashes($basePath),
+			default => self::joinPaths($basePath, $path),
+		};
+	}
+
+
+	/**
+	 * Converts backslashes to slashes.
+	 */
+	public static function unixSlashes(string $path): string
+	{
+		return strtr($path, '\\', '/');
+	}
+
+
+	/**
+	 * Converts slashes to platform-specific directory separators.
+	 */
+	public static function platformSlashes(string $path): string
+	{
+		return DIRECTORY_SEPARATOR === '/'
+			? strtr($path, '\\', '/')
+			: str_replace(':\\\\', '://', strtr($path, '/', '\\')); // protocol://
 	}
 }

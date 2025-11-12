@@ -16,7 +16,7 @@ trait PDOConnect
         string $dsn,
         string $username,
         string $password,
-        array $options
+        array $options,
     ): PDO {
         if (PHP_VERSION_ID < 80400) {
             return new PDO($dsn, $username, $password, $options);

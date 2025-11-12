@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Doctrine\DBAL\Platforms\Keywords;
 
-use Doctrine\Deprecations\Deprecation;
-
 use function array_diff;
 use function array_merge;
 
@@ -17,25 +15,9 @@ class MySQL84Keywords extends MySQL80Keywords
     /**
      * {@inheritDoc}
      *
-     * @deprecated
-     */
-    public function getName()
-    {
-        Deprecation::triggerIfCalledFromOutside(
-            'doctrine/dbal',
-            'https://github.com/doctrine/dbal/pull/5433',
-            'MySQL84Keywords::getName() is deprecated.',
-        );
-
-        return 'MySQL84';
-    }
-
-    /**
-     * {@inheritDoc}
-     *
      * @link https://dev.mysql.com/doc/refman/8.4/en/keywords.html
      */
-    protected function getKeywords()
+    protected function getKeywords(): array
     {
         $keywords = parent::getKeywords();
 

@@ -12,19 +12,23 @@ namespace Nette\Neon;
 
 /**
  * Simple parser & generator for Nette Object Notation.
- * @see https://ne-on.org
+ * @see https://neon.nette.org
  */
 final class Neon
 {
-	public const BLOCK = Encoder::BLOCK;
 	public const Chain = '!!chain';
+
+	/** @deprecated use Neon::Chain */
 	public const CHAIN = self::Chain;
+
+	/** @deprecated use parameter $blockMode */
+	public const BLOCK = Encoder::BLOCK;
 
 
 	/**
 	 * Returns value converted to NEON.
 	 */
-	public static function encode($value, bool $blockMode = false, string $indentation = "\t"): string
+	public static function encode(mixed $value, bool $blockMode = false, string $indentation = "\t"): string
 	{
 		$encoder = new Encoder;
 		$encoder->blockMode = $blockMode;
@@ -35,9 +39,8 @@ final class Neon
 
 	/**
 	 * Converts given NEON to PHP value.
-	 * @return mixed
 	 */
-	public static function decode(string $input)
+	public static function decode(string $input): mixed
 	{
 		$decoder = new Decoder;
 		return $decoder->decode($input);
@@ -46,9 +49,8 @@ final class Neon
 
 	/**
 	 * Converts given NEON file to PHP value.
-	 * @return mixed
 	 */
-	public static function decodeFile(string $file)
+	public static function decodeFile(string $file): mixed
 	{
 		$input = @file_get_contents($file); // @ is escalated to exception
 		if ($input === false) {
@@ -56,7 +58,7 @@ final class Neon
 			throw new Exception("Unable to read file '$file'. $error");
 		}
 
-		if (substr($input, 0, 3) === "\u{FEFF}") { // BOM
+		if (str_starts_with($input, "\u{FEFF}")) { // BOM
 			$input = substr($input, 3);
 		}
 

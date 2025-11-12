@@ -8,11 +8,13 @@ use Doctrine\DBAL\Driver\Exception;
 use Doctrine\DBAL\Driver\FetchUtils;
 use Doctrine\DBAL\Driver\OCI8\Exception\Error;
 use Doctrine\DBAL\Driver\Result as ResultInterface;
+use Doctrine\DBAL\Exception\InvalidColumnIndex;
 
 use function oci_cancel;
 use function oci_error;
 use function oci_fetch_all;
 use function oci_fetch_array;
+use function oci_field_name;
 use function oci_num_fields;
 use function oci_num_rows;
 
@@ -25,39 +27,26 @@ use const OCI_RETURN_NULLS;
 
 final class Result implements ResultInterface
 {
-    /** @var resource */
-    private $statement;
-
     /**
      * @internal The result can be only instantiated by its driver connection or statement.
      *
      * @param resource $statement
      */
-    public function __construct($statement)
+    public function __construct(private readonly mixed $statement)
     {
-        $this->statement = $statement;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function fetchNumeric()
+    public function fetchNumeric(): array|false
     {
         return $this->fetch(OCI_NUM);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function fetchAssociative()
+    public function fetchAssociative(): array|false
     {
         return $this->fetch(OCI_ASSOC);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function fetchOne()
+    public function fetchOne(): mixed
     {
         return FetchUtils::fetchOne($this);
     }
@@ -108,17 +97,25 @@ final class Result implements ResultInterface
         return 0;
     }
 
+    public function getColumnName(int $index): string
+    {
+        // OCI expects a 1-based index while DBAL works with a O-based index.
+        $name = @oci_field_name($this->statement, $index + 1);
+
+        if ($name === false) {
+            throw InvalidColumnIndex::new($index);
+        }
+
+        return $name;
+    }
+
     public function free(): void
     {
         oci_cancel($this->statement);
     }
 
-    /**
-     * @return mixed|false
-     *
-     * @throws Exception
-     */
-    private function fetch(int $mode)
+    /** @throws Exception */
+    private function fetch(int $mode): mixed
     {
         $result = oci_fetch_array($this->statement, $mode | OCI_RETURN_NULLS | OCI_RETURN_LOBS);
 

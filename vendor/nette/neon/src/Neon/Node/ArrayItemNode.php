@@ -10,16 +10,14 @@ declare(strict_types=1);
 namespace Nette\Neon\Node;
 
 use Nette\Neon\Node;
+use function substr;
 
 
 /** @internal */
 final class ArrayItemNode extends Node
 {
-	/** @var ?Node */
-	public $key;
-
-	/** @var Node */
-	public $value;
+	public ?Node $key = null;
+	public Node $value;
 
 
 	/**
@@ -71,7 +69,7 @@ final class ArrayItemNode extends Node
 	}
 
 
-	public function toValue()
+	public function toValue(): mixed
 	{
 		throw new \LogicException;
 	}

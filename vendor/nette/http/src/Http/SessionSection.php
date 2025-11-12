@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Nette\Http;
 
 use Nette;
+use function array_key_exists, func_num_args, ini_get, is_array, time;
 
 
 /**
@@ -17,25 +18,16 @@ use Nette;
  */
 class SessionSection implements \IteratorAggregate, \ArrayAccess
 {
-	use Nette\SmartObject;
-
-	/** @var bool */
-	public $warnOnUndefined = false;
-
-	/** @var Session */
-	private $session;
-
-	/** @var string */
-	private $name;
+	public bool $warnOnUndefined = false;
 
 
 	/**
 	 * Do not call directly. Use Session::getSection().
 	 */
-	public function __construct(Session $session, string $name)
-	{
-		$this->session = $session;
-		$this->name = $name;
+	public function __construct(
+		private readonly Session $session,
+		private readonly string $name,
+	) {
 	}
 
 
@@ -51,9 +43,8 @@ class SessionSection implements \IteratorAggregate, \ArrayAccess
 
 	/**
 	 * Sets a variable in this session section.
-	 * @param  mixed  $value
 	 */
-	public function set(string $name, $value, ?string $expire = null): void
+	public function set(string $name, mixed $value, ?string $expire = null): void
 	{
 		if ($value === null) {
 			$this->remove($name);
@@ -67,9 +58,8 @@ class SessionSection implements \IteratorAggregate, \ArrayAccess
 
 	/**
 	 * Gets a variable from this session section.
-	 * @return mixed
 	 */
-	public function get(string $name)
+	public function get(string $name): mixed
 	{
 		if (func_num_args() > 1) {
 			throw new \ArgumentCountError(__METHOD__ . '() expects 1 arguments, given more.');
@@ -84,7 +74,7 @@ class SessionSection implements \IteratorAggregate, \ArrayAccess
 	 * Removes a variable or whole section.
 	 * @param  string|string[]|null  $name
 	 */
-	public function remove($name = null): void
+	public function remove(string|array|null $name = null): void
 	{
 		$this->session->autoStart(false);
 		if (func_num_args() > 1) {
@@ -117,7 +107,7 @@ class SessionSection implements \IteratorAggregate, \ArrayAccess
 	 * Gets a variable from this session section.
 	 * @deprecated  use get() instead
 	 */
-	public function &__get(string $name)
+	public function &__get(string $name): mixed
 	{
 		$this->session->autoStart(true);
 		$data = &$this->getData();
@@ -164,8 +154,7 @@ class SessionSection implements \IteratorAggregate, \ArrayAccess
 	 * Gets a variable from this session section.
 	 * @deprecated  use get() instead
 	 */
-	#[\ReturnTypeWillChange]
-	public function offsetGet($name)
+	public function offsetGet($name): mixed
 	{
 		return $this->get($name);
 	}
@@ -193,11 +182,9 @@ class SessionSection implements \IteratorAggregate, \ArrayAccess
 
 	/**
 	 * Sets the expiration of the section or specific variables.
-	 * @param  ?string  $expire
 	 * @param  string|string[]|null  $variables  list of variables / single variable to expire
-	 * @return static
 	 */
-	public function setExpiration($expire, $variables = null)
+	public function setExpiration(?string $expire, string|array|null $variables = null): static
 	{
 		$this->session->autoStart((bool) $expire);
 		$meta = &$this->getMeta();
@@ -213,7 +200,7 @@ class SessionSection implements \IteratorAggregate, \ArrayAccess
 		}
 
 		foreach (is_array($variables) ? $variables : [$variables] as $variable) {
-			$meta[$variable]['T'] = $expire ?: null;
+			$meta[$variable ?? '']['T'] = $expire ?: null;
 		}
 
 		return $this;
@@ -224,7 +211,7 @@ class SessionSection implements \IteratorAggregate, \ArrayAccess
 	 * Removes the expiration from the section or specific variables.
 	 * @param  string|string[]|null  $variables  list of variables / single variable to expire
 	 */
-	public function removeExpiration($variables = null): void
+	public function removeExpiration(string|array|null $variables = null): void
 	{
 		$this->setExpiration(null, $variables);
 	}
