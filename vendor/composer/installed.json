@@ -1494,17 +1494,17 @@
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
-            "version": "0.13.1",
-            "version_normalized": "0.13.1.0",
+            "version": "0.13.2",
+            "version_normalized": "0.13.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-baseline-analysis.git",
-                "reference": "1deee1c113c7cdd86a0ef05887845ef7aef7b17b"
+                "reference": "1c5cc0a48379273d759ee6e26fdcbb5acad083a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/1deee1c113c7cdd86a0ef05887845ef7aef7b17b",
-                "reference": "1deee1c113c7cdd86a0ef05887845ef7aef7b17b",
+                "url": "https://api.github.com/repos/staabm/phpstan-baseline-analysis/zipball/1c5cc0a48379273d759ee6e26fdcbb5acad083a1",
+                "reference": "1c5cc0a48379273d759ee6e26fdcbb5acad083a1",
                 "shasum": ""
             },
             "require": {
@@ -1525,7 +1525,7 @@
                 "tomasvotruba/type-coverage": "^2.0",
                 "tomasvotruba/unused-public": "^2.0"
             },
-            "time": "2024-12-14T06:33:57+00:00",
+            "time": "2025-11-12T06:24:00+00:00",
             "bin": [
                 "bin/phpstan-baseline-analyze",
                 "bin/phpstan-baseline-filter",
@@ -1552,7 +1552,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-baseline-analysis/issues",
-                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.13.1"
+                "source": "https://github.com/staabm/phpstan-baseline-analysis/tree/0.13.2"
             },
             "funding": [
                 {
