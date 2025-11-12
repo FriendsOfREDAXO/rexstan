@@ -1,6 +1,6 @@
 <?php
 
-use rexstan\RexStan;
+use FriendsOfRedaxo\RexStan\RexStan;
 use staabm\PHPStanBaselineAnalysis\ResultPrinter;
 
 $result = RexStan::analyzeSummaryBaseline();

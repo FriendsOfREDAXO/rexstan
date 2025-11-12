@@ -2,10 +2,10 @@
 
 /** @var rex_addon $this */
 
-use rexstan\RexResultsRenderer;
-use rexstan\RexStan;
-use rexstan\RexStanSettings;
-use rexstan\RexStanUserConfig;
+use FriendsOfRedaxo\RexStan\RexResultsRenderer;
+use FriendsOfRedaxo\RexStan\RexStan;
+use FriendsOfRedaxo\RexStan\RexStanSettings;
+use FriendsOfRedaxo\RexStan\RexStanUserConfig;
 
 $regenerateBaseline = rex_get('regenerate-baseline', 'bool', false);
 if ($regenerateBaseline) {

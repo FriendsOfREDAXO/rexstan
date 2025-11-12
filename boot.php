@@ -1,6 +1,6 @@
 <?php
 
-use rexstan\RexStan;
+use FriendsOfRedaxo\RexStan\RexStan;
 
 $addon = rex_addon::get('rexstan');
 
