@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => '__root__',
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
-        'reference' => 'bb8f468a0db303a11cf57d1db97a28aa553c6f60',
+        'pretty_version' => '2.x-dev',
+        'version' => '2.9999999.9999999.9999999-dev',
+        'reference' => '3ab63c75a2041805e5b20ffb0ae1eb5af52ccb38',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => 'bb8f468a0db303a11cf57d1db97a28aa553c6f60',
+            'pretty_version' => '2.x-dev',
+            'version' => '2.9999999.9999999.9999999-dev',
+            'reference' => '3ab63c75a2041805e5b20ffb0ae1eb5af52ccb38',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -212,9 +212,9 @@
             'dev_requirement' => false,
         ),
         'spaze/phpstan-disallowed-calls' => array(
-            'pretty_version' => 'v4.6.0',
-            'version' => '4.6.0.0',
-            'reference' => 'd77ea1351ac2cc16c00a389ea0db87fc11072b80',
+            'pretty_version' => 'v4.7.0',
+            'version' => '4.7.0.0',
+            'reference' => '0765102eeb154da8a3bcef3200375bb4297a2141',
             'type' => 'phpstan-extension',
             'install_path' => __DIR__ . '/../spaze/phpstan-disallowed-calls',
             'aliases' => array(),
