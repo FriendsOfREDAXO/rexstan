@@ -7,7 +7,7 @@ $logoPath = $this->getAssetsUrl('rexstan.svg');
 // in the future this should instead use the native redaxo core loader api
 // https://github.com/redaxo/redaxo/pull/5664
 
-$nonce = method_exists(rex_response::class, 'getNonce') ? ' nonce="'.rex_response::getNonce().'"' : '';
+$nonce = ' nonce="'.rex_response::getNonce().'"';
 echo '
 <script type="text/javascript"'.$nonce.'>
     document.addEventListener("DOMContentLoaded", function () {

@@ -80,7 +80,7 @@ $contentCoverage = '
 
 $rexstanGraph = '<div class="rexstan-graph">'.rex_file::get(rex_addon::get('rexstan')->getDataPath().'/baseline-graph.html').'</div>';
 
-$nonce = method_exists(rex_response::class, 'getNonce') ? ' nonce="'.rex_response::getNonce().'"' : '';
+$nonce = ' nonce="'.rex_response::getNonce().'"';
 $rexstanGraph = str_replace(
     '<script>',
     '<script'.$nonce.'>',

@@ -4,14 +4,3 @@ parameters:
     paths:
       - lib/
       - pages/
-
-    ignoreErrors:
-      # error to be fixed in phpstan 2.0, see https://github.com/phpstan/phpstan-src/pull/1754
-      - '#^Cannot access offset ''running'' on array\{command\: string, pid\: int, running\: bool, signaled\: bool, stopped\: bool, exitcode\: int, termsig\: int, stopsig\: int\}\|false\.$#'
-      # functions get polyfilled by redaxo core
-      -
-        message: '#Function str_contains not found.#'
-        reportUnmatched: false
-      -
-        message: '#Function str_starts_with not found.#'
-        reportUnmatched: false
