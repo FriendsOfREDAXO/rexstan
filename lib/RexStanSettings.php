@@ -57,6 +57,8 @@ final class RexStanSettings
         80125 => '8.1.x',
         80212 => '8.2.x',
         80300 => '8.3.x',
+        80400 => '8.4.x',
+        80500 => '8.5.x',
     ];
 
     /**
@@ -66,6 +68,8 @@ final class RexStanSettings
         80125 => '8.1.x [Mindestanforderung für REDAXO ab 5.15]',
         80212 => '8.2.x',
         80300 => '8.3.x',
+        80400 => '8.4.x',
+        80500 => '8.5.x',
     ];
 
     /**
