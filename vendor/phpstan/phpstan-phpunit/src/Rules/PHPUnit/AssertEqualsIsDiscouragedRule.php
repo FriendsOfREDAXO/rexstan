@@ -27,21 +27,24 @@ class AssertEqualsIsDiscouragedRule implements Rule
 
 	public function processNode(Node $node, Scope $scope): array
 	{
-		if (!AssertRuleHelper::isMethodOrStaticCallOnAssert($node, $scope)) {
+		if (!$node instanceof Node\Expr\MethodCall && ! $node instanceof Node\Expr\StaticCall) {
 			return [];
 		}
-
+		if (count($node->getArgs()) < 2) {
+			return [];
+		}
 		if ($node->isFirstClassCallable()) {
 			return [];
 		}
 
-		if (count($node->getArgs()) < 2) {
-			return [];
-		}
 		if (
 			!$node->name instanceof Node\Identifier
 			|| !in_array(strtolower($node->name->name), ['assertequals', 'assertnotequals'], true)
 		) {
+			return [];
+		}
+
+		if (!AssertRuleHelper::isMethodOrStaticCallOnAssert($node, $scope)) {
 			return [];
 		}
 
@@ -70,13 +73,7 @@ class AssertEqualsIsDiscouragedRule implements Rule
 					),
 				)->identifier('phpunit.assertEquals')
 					->fixNode($node, static function (CallLike $node) use ($correctName) {
-						if ($node instanceof Node\Expr\MethodCall) {
-							$node->name = new Node\Identifier($correctName);
-						}
-
-						if ($node instanceof Node\Expr\StaticCall) {
-							$node->name = new Node\Identifier($correctName);
-						}
+						$node->name = new Node\Identifier($correctName);
 
 						return $node;
 					})
