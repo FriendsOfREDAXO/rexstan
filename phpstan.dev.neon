@@ -4,12 +4,3 @@ parameters:
     paths:
       - lib/
       - pages/
-
-    ignoreErrors:
-      # functions get polyfilled by redaxo core
-      -
-        message: '#Function str_contains not found.#'
-        reportUnmatched: false
-      -
-        message: '#Function str_starts_with not found.#'
-        reportUnmatched: false
