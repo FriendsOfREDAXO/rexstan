@@ -28,7 +28,7 @@ console_commands:
 
 requires:
     php:
-        version: '>=7.4, <8.6'
+        version: '>=8.1, <8.6'
     redaxo: '^5.2'
 
 installer_ignore:
