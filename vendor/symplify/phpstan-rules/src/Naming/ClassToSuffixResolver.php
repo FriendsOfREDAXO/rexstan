@@ -32,15 +32,15 @@ final class ClassToSuffixResolver
     private function removeAbstractInterfacePrefixSuffix(string $parentType): string
     {
         if (substr_compare($parentType, 'Interface', -strlen('Interface')) === 0) {
-            $parentType = substr($parentType, 0, -strlen('Interface'));
+            $parentType = (string) substr($parentType, 0, -strlen('Interface'));
         }
 
         if (substr_compare($parentType, 'Abstract', -strlen('Abstract')) === 0) {
-            $parentType = substr($parentType, 0, -strlen('Abstract'));
+            $parentType = (string) substr($parentType, 0, -strlen('Abstract'));
         }
 
         if (strncmp($parentType, 'Abstract', strlen('Abstract')) === 0) {
-            return substr($parentType, strlen('Abstract'));
+            return (string) substr($parentType, strlen('Abstract'));
         }
 
         return $parentType;
