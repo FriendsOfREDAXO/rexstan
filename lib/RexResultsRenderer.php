@@ -56,7 +56,7 @@ final class RexResultsRenderer
 
     public static function getLevel10Jseffect(): string
     {
-        $nonce = method_exists(rex_response::class, 'getNonce') ? ' nonce="'.rex_response::getNonce().'"' : '';
+        $nonce = ' nonce="'.rex_response::getNonce().'"';
         return
             '<script'.$nonce.'>
                 var duration = 10 * 1000;
