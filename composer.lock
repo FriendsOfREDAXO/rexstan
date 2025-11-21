@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c87d05bdcf038d2989268830c5875917",
+    "content-hash": "59a08946c8ea64e1180278a1e57b57ef",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1877,21 +1877,21 @@
         },
         {
             "name": "tomasvotruba/unused-public",
-            "version": "2.0.1",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/unused-public.git",
-                "reference": "340ed95967a06d9d1d9a93a5754e9ac5046d3b98"
+                "reference": "a1f049b24323494fda752f24268a3c874035c622"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/340ed95967a06d9d1d9a93a5754e9ac5046d3b98",
-                "reference": "340ed95967a06d9d1d9a93a5754e9ac5046d3b98",
+                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/a1f049b24323494fda752f24268a3c874035c622",
+                "reference": "a1f049b24323494fda752f24268a3c874035c622",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4 || ^8.0",
-                "phpstan/phpstan": "^2.0.3",
+                "phpstan/phpstan": "^2.1.6",
                 "webmozart/assert": "^1.11"
             },
             "type": "phpstan-extension",
@@ -1918,7 +1918,7 @@
             ],
             "support": {
                 "issues": "https://github.com/TomasVotruba/unused-public/issues",
-                "source": "https://github.com/TomasVotruba/unused-public/tree/2.0.1"
+                "source": "https://github.com/TomasVotruba/unused-public/tree/2.1.1"
             },
             "funding": [
                 {
@@ -1930,7 +1930,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-04T14:49:47+00:00"
+            "time": "2025-11-14T11:04:49+00:00"
         },
         {
             "name": "webmozart/assert",
