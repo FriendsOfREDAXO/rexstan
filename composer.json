@@ -12,7 +12,7 @@
         "sqlftw/sqlftw": "0.1.17",
         "staabm/phpstan-baseline-analysis": "0.13.2",
         "staabm/phpstan-dba": "0.4.2",
-        "staabm/phpstan-todo-by": "0.3.1",
+        "staabm/phpstan-todo-by": "0.3.2",
         "symplify/phpstan-rules": "14.8.5",
         "tomasvotruba/cognitive-complexity": "1.0",
         "tomasvotruba/type-coverage": "2.0.2",
