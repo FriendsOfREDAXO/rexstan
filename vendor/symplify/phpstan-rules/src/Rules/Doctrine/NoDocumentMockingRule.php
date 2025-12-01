@@ -42,8 +42,8 @@ final class NoDocumentMockingRule implements Rule
 
         $firstArg = $node->getArgs()[0];
         $mockedClassType = $scope->getType($firstArg->value);
-        foreach ($mockedClassType->getConstantStrings() as $constantString) {
-            if (strpos($constantString->getValue(), '\\Document\\') === false) {
+        foreach ($mockedClassType->getConstantStrings() as $constantStringType) {
+            if (strpos($constantStringType->getValue(), '\\Document\\') === false) {
                 continue;
             }
 

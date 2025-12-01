@@ -50,8 +50,12 @@ final class LocalOnlyPublicClassMethodRule implements Rule
      */
     private NodeCollectorExtractor $nodeCollectorExtractor;
 
-    public function __construct(Configuration $configuration, UsedMethodAnalyzer $usedMethodAnalyzer, TemplateMethodCallsProvider $templateMethodCallsProvider, NodeCollectorExtractor $nodeCollectorExtractor)
-    {
+    public function __construct(
+        Configuration $configuration,
+        UsedMethodAnalyzer $usedMethodAnalyzer,
+        TemplateMethodCallsProvider $templateMethodCallsProvider,
+        NodeCollectorExtractor $nodeCollectorExtractor
+    ) {
         $this->configuration = $configuration;
         $this->usedMethodAnalyzer = $usedMethodAnalyzer;
         $this->templateMethodCallsProvider = $templateMethodCallsProvider;

@@ -13,6 +13,7 @@ use PHPStan\Rules\RuleErrorBuilder;
 use TomasVotruba\UnusedPublic\Collectors\FormTypeClassCollector;
 use TomasVotruba\UnusedPublic\Collectors\PublicClassMethodCollector;
 use TomasVotruba\UnusedPublic\Configuration;
+use TomasVotruba\UnusedPublic\Enum\RuleIdentifier;
 use TomasVotruba\UnusedPublic\Enum\RuleTips;
 use TomasVotruba\UnusedPublic\NodeCollectorExtractor;
 use TomasVotruba\UnusedPublic\Templates\TemplateMethodCallsProvider;
@@ -52,8 +53,12 @@ final class UnusedPublicClassMethodRule implements Rule
      */
     private NodeCollectorExtractor $nodeCollectorExtractor;
 
-    public function __construct(Configuration $configuration, TemplateMethodCallsProvider $templateMethodCallsProvider, UsedMethodAnalyzer $usedMethodAnalyzer, NodeCollectorExtractor $nodeCollectorExtractor)
-    {
+    public function __construct(
+        Configuration $configuration,
+        TemplateMethodCallsProvider $templateMethodCallsProvider,
+        UsedMethodAnalyzer $usedMethodAnalyzer,
+        NodeCollectorExtractor $nodeCollectorExtractor
+    ) {
         $this->configuration = $configuration;
         $this->templateMethodCallsProvider = $templateMethodCallsProvider;
         $this->usedMethodAnalyzer = $usedMethodAnalyzer;
@@ -110,7 +115,7 @@ final class UnusedPublicClassMethodRule implements Rule
                     ->file($filePath)
                     ->line($line)
                     ->tip(RuleTips::SOLUTION_MESSAGE)
-                    ->identifier('public.method.unused')
+                    ->identifier(RuleIdentifier::PUBLIC_METHOD_UNUSED)
                     ->build();
             }
         }

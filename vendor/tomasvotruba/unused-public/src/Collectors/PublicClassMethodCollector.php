@@ -25,6 +25,8 @@ final class PublicClassMethodCollector implements Collector
     private const SKIPPED_TYPES = [
         // symfony
         'Symfony\Component\EventDispatcher\EventSubscriberInterface',
+        // doctrine
+        'Doctrine\Common\EventSubscriber',
         'JMS\Serializer\Handler\SubscribingHandlerInterface',
         'Twig\Extension\ExtensionInterface',
         'Symfony\Bundle\FrameworkBundle\Controller\Controller',
@@ -57,8 +59,12 @@ final class PublicClassMethodCollector implements Collector
      */
     private Configuration $configuration;
 
-    public function __construct(ApiDocStmtAnalyzer $apiDocStmtAnalyzer, PublicClassMethodMatcher $publicClassMethodMatcher, MethodTypeDetector $methodTypeDetector, Configuration $configuration)
-    {
+    public function __construct(
+        ApiDocStmtAnalyzer $apiDocStmtAnalyzer,
+        PublicClassMethodMatcher $publicClassMethodMatcher,
+        MethodTypeDetector $methodTypeDetector,
+        Configuration $configuration
+    ) {
         $this->apiDocStmtAnalyzer = $apiDocStmtAnalyzer;
         $this->publicClassMethodMatcher = $publicClassMethodMatcher;
         $this->methodTypeDetector = $methodTypeDetector;

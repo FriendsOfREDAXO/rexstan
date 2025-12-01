@@ -4,6 +4,9 @@ rules:
     - Symplify\PHPStanRules\Rules\Rector\NoInstanceOfStaticReflectionRule
     - Symplify\PHPStanRules\Rules\Rector\NoLeadingBackslashInNameRule
     - Symplify\PHPStanRules\Rules\Rector\NoClassReflectionStaticReflectionRule
+    - Symplify\PHPStanRules\Rules\Rector\NoPropertyNodeAssignRule
+    - Symplify\PHPStanRules\Rules\Rector\PreferDirectIsNameRule
+    - Symplify\PHPStanRules\Rules\Rector\NoOnlyNullReturnInRefactorRule
 
 services:
     # $node->getAttribute($1) => Type|null by $1
