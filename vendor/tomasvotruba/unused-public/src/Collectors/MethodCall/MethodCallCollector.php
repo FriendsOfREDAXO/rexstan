@@ -46,8 +46,13 @@ final class MethodCallCollector implements Collector
      */
     private CallReferencesFlatter $callReferencesFlatter;
 
-    public function __construct(ParentCallReferenceResolver $parentCallReferenceResolver, ClassMethodCallReferenceResolver $classMethodCallReferenceResolver, Configuration $configuration, ClassTypeDetector $classTypeDetector, CallReferencesFlatter $callReferencesFlatter)
-    {
+    public function __construct(
+        ParentCallReferenceResolver $parentCallReferenceResolver,
+        ClassMethodCallReferenceResolver $classMethodCallReferenceResolver,
+        Configuration $configuration,
+        ClassTypeDetector $classTypeDetector,
+        CallReferencesFlatter $callReferencesFlatter
+    ) {
         $this->parentCallReferenceResolver = $parentCallReferenceResolver;
         $this->classMethodCallReferenceResolver = $classMethodCallReferenceResolver;
         $this->configuration = $configuration;

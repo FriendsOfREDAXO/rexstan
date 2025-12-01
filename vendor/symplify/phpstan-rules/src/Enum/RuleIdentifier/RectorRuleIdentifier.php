@@ -13,4 +13,10 @@ final class RectorRuleIdentifier
     public const PHP_RULE_IMPLEMENTS_MIN_VERSION = 'rector.phpRuleImplementsMinVersion';
 
     public const NO_CLASS_REFLECTION_STATIC_REFLECTION = 'rector.noClassReflectionStaticReflection';
+
+    public const NO_PROPERTY_NODE_ASSIGN = 'rector.noPropertyNodeAssign';
+
+    public const PREFER_DIRECT_IS_NAME = 'rector.preferDirectIsName';
+
+    public const NO_ONLY_NULL_RETURN_IN_REFACTOR = 'rector.noOnlyNullReturnInRefactor';
 }

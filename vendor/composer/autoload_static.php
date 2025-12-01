@@ -14,152 +14,152 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
     );
 
     public static $prefixLengthsPsr4 = array (
-        's' => 
+        's' =>
         array (
             'staabm\\PHPStanTodoBy\\' => 21,
             'staabm\\PHPStanPsr3\\' => 19,
             'staabm\\PHPStanDba\\' => 18,
         ),
-        'W' => 
+        'W' =>
         array (
             'Webmozart\\Assert\\' => 17,
         ),
-        'V' => 
+        'V' =>
         array (
             'Version\\' => 8,
         ),
-        'T' => 
+        'T' =>
         array (
             'TomasVotruba\\UnusedPublic\\' => 26,
             'TomasVotruba\\TypeCoverage\\' => 26,
             'TomasVotruba\\CognitiveComplexity\\' => 33,
         ),
-        'S' => 
+        'S' =>
         array (
             'Symplify\\PHPStanRules\\' => 22,
             'Symfony\\Polyfill\\Php80\\' => 23,
             'Spaze\\PHPStan\\Rules\\Disallowed\\' => 31,
         ),
-        'R' => 
+        'R' =>
         array (
             'Rector\\TypePerfect\\' => 19,
         ),
-        'P' => 
+        'P' =>
         array (
             'Psr\\Log\\' => 8,
             'Psr\\Cache\\' => 10,
             'PHPStan\\' => 8,
         ),
-        'N' => 
+        'N' =>
         array (
             'Nette\\' => 6,
         ),
-        'J' => 
+        'J' =>
         array (
             'JsonSchema\\' => 11,
         ),
-        'D' => 
+        'D' =>
         array (
             'Doctrine\\Deprecations\\' => 22,
             'Doctrine\\DBAL\\' => 14,
         ),
-        'C' => 
+        'C' =>
         array (
             'Composer\\Semver\\' => 16,
         ),
-        'A' => 
+        'A' =>
         array (
             'Assert\\' => 7,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'staabm\\PHPStanTodoBy\\' => 
+        'staabm\\PHPStanTodoBy\\' =>
         array (
             0 => __DIR__ . '/..' . '/staabm/phpstan-todo-by/src',
         ),
-        'staabm\\PHPStanPsr3\\' => 
+        'staabm\\PHPStanPsr3\\' =>
         array (
             0 => __DIR__ . '/..' . '/staabm/phpstan-psr3/src',
         ),
-        'staabm\\PHPStanDba\\' => 
+        'staabm\\PHPStanDba\\' =>
         array (
             0 => __DIR__ . '/..' . '/staabm/phpstan-dba/src',
         ),
-        'Webmozart\\Assert\\' => 
+        'Webmozart\\Assert\\' =>
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
         ),
-        'Version\\' => 
+        'Version\\' =>
         array (
             0 => __DIR__ . '/..' . '/nikolaposa/version/src',
         ),
-        'TomasVotruba\\UnusedPublic\\' => 
+        'TomasVotruba\\UnusedPublic\\' =>
         array (
             0 => __DIR__ . '/..' . '/tomasvotruba/unused-public/src',
         ),
-        'TomasVotruba\\TypeCoverage\\' => 
+        'TomasVotruba\\TypeCoverage\\' =>
         array (
             0 => __DIR__ . '/..' . '/tomasvotruba/type-coverage/src',
         ),
-        'TomasVotruba\\CognitiveComplexity\\' => 
+        'TomasVotruba\\CognitiveComplexity\\' =>
         array (
             0 => __DIR__ . '/..' . '/tomasvotruba/cognitive-complexity/src',
         ),
-        'Symplify\\PHPStanRules\\' => 
+        'Symplify\\PHPStanRules\\' =>
         array (
             0 => __DIR__ . '/..' . '/symplify/phpstan-rules/src',
         ),
-        'Symfony\\Polyfill\\Php80\\' => 
+        'Symfony\\Polyfill\\Php80\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
         ),
-        'Spaze\\PHPStan\\Rules\\Disallowed\\' => 
+        'Spaze\\PHPStan\\Rules\\Disallowed\\' =>
         array (
             0 => __DIR__ . '/..' . '/spaze/phpstan-disallowed-calls/src',
         ),
-        'Rector\\TypePerfect\\' => 
+        'Rector\\TypePerfect\\' =>
         array (
             0 => __DIR__ . '/..' . '/rector/type-perfect/src',
         ),
-        'Psr\\Log\\' => 
+        'Psr\\Log\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/log/src',
         ),
-        'Psr\\Cache\\' => 
+        'Psr\\Cache\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
         ),
-        'PHPStan\\' => 
+        'PHPStan\\' =>
         array (
             0 => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src',
             1 => __DIR__ . '/..' . '/phpstan/phpstan-strict-rules/src',
             2 => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src',
             3 => __DIR__ . '/..' . '/phpstan/phpstan-deprecation-rules/src',
         ),
-        'Nette\\' => 
+        'Nette\\' =>
         array (
             0 => __DIR__ . '/..' . '/nette/neon/src',
             1 => __DIR__ . '/..' . '/nette/http/src',
             2 => __DIR__ . '/..' . '/nette/utils/src',
         ),
-        'JsonSchema\\' => 
+        'JsonSchema\\' =>
         array (
             0 => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema',
         ),
-        'Doctrine\\Deprecations\\' => 
+        'Doctrine\\Deprecations\\' =>
         array (
             0 => __DIR__ . '/..' . '/doctrine/deprecations/src',
         ),
-        'Doctrine\\DBAL\\' => 
+        'Doctrine\\DBAL\\' =>
         array (
             0 => __DIR__ . '/..' . '/doctrine/dbal/src',
         ),
-        'Composer\\Semver\\' => 
+        'Composer\\Semver\\' =>
         array (
             0 => __DIR__ . '/..' . '/composer/semver/src',
         ),
-        'Assert\\' => 
+        'Assert\\' =>
         array (
             0 => __DIR__ . '/..' . '/beberlei/assert/lib/Assert',
         ),
@@ -370,9 +370,6 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'Doctrine\\DBAL\\Platforms\\Keywords\\PostgreSQLKeywords' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/Keywords/PostgreSQLKeywords.php',
         'Doctrine\\DBAL\\Platforms\\Keywords\\SQLServerKeywords' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/Keywords/SQLServerKeywords.php',
         'Doctrine\\DBAL\\Platforms\\Keywords\\SQLiteKeywords' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/Keywords/SQLiteKeywords.php',
-        'Doctrine\\DBAL\\Platforms\\MariaDB1010Platform' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/MariaDB1010Platform.php',
-        'Doctrine\\DBAL\\Platforms\\MariaDB1052Platform' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/MariaDB1052Platform.php',
-        'Doctrine\\DBAL\\Platforms\\MariaDB1060Platform' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/MariaDB1060Platform.php',
         'Doctrine\\DBAL\\Platforms\\MariaDBPlatform' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/MariaDBPlatform.php',
         'Doctrine\\DBAL\\Platforms\\MySQL80Platform' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/MySQL80Platform.php',
         'Doctrine\\DBAL\\Platforms\\MySQL84Platform' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/MySQL84Platform.php',
@@ -391,7 +388,6 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'Doctrine\\DBAL\\Platforms\\SQLServerPlatform' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/SQLServerPlatform.php',
         'Doctrine\\DBAL\\Platforms\\SQLServer\\Comparator' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/SQLServer/Comparator.php',
         'Doctrine\\DBAL\\Platforms\\SQLServer\\SQL\\Builder\\SQLServerSelectSQLBuilder' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/SQLServer/SQL/Builder/SQLServerSelectSQLBuilder.php',
-        'Doctrine\\DBAL\\Platforms\\SQLitePlatform' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/SQLitePlatform.php',
         'Doctrine\\DBAL\\Platforms\\SQLite\\Comparator' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/SQLite/Comparator.php',
         'Doctrine\\DBAL\\Platforms\\TrimMode' => __DIR__ . '/..' . '/doctrine/dbal/src/Platforms/TrimMode.php',
         'Doctrine\\DBAL\\Portability\\Connection' => __DIR__ . '/..' . '/doctrine/dbal/src/Portability/Connection.php',
@@ -457,7 +453,6 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'Doctrine\\DBAL\\Schema\\OracleSchemaManager' => __DIR__ . '/..' . '/doctrine/dbal/src/Schema/OracleSchemaManager.php',
         'Doctrine\\DBAL\\Schema\\PostgreSQLSchemaManager' => __DIR__ . '/..' . '/doctrine/dbal/src/Schema/PostgreSQLSchemaManager.php',
         'Doctrine\\DBAL\\Schema\\SQLServerSchemaManager' => __DIR__ . '/..' . '/doctrine/dbal/src/Schema/SQLServerSchemaManager.php',
-        'Doctrine\\DBAL\\Schema\\SQLiteSchemaManager' => __DIR__ . '/..' . '/doctrine/dbal/src/Schema/SQLiteSchemaManager.php',
         'Doctrine\\DBAL\\Schema\\Schema' => __DIR__ . '/..' . '/doctrine/dbal/src/Schema/Schema.php',
         'Doctrine\\DBAL\\Schema\\SchemaConfig' => __DIR__ . '/..' . '/doctrine/dbal/src/Schema/SchemaConfig.php',
         'Doctrine\\DBAL\\Schema\\SchemaDiff' => __DIR__ . '/..' . '/doctrine/dbal/src/Schema/SchemaDiff.php',
@@ -918,7 +913,6 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'FriendsOfRedaxo\\RexStan\\YOrmDatasetOptionalTableRule' => __DIR__ . '/../..' . '/lib/rule/YOrmDatasetOptionalTableRule.php',
         'FriendsOfRedaxo\\RexStan\\YOrmDatasetPropertyClassReflectionExtension' => __DIR__ . '/../..' . '/lib/extension/YOrmDatasetPropertyClassReflectionExtension.php',
         'FriendsOfRedaxo\\RexStan\\YOrmDatasetRelatedDataDynamicReturnTypeExtension' => __DIR__ . '/../..' . '/lib/extension/YOrmDatasetRelatedDataDynamicReturnTypeExtension.php',
-        'FriendsOfRedaxo\\RexStan\\rexstan_command' => __DIR__ . '/../..' . '/lib/command.php',
         'JakubOnderka\\PhpParallelLint\\Application' => __DIR__ . '/..' . '/php-parallel-lint/php-parallel-lint/src/Application.php',
         'JakubOnderka\\PhpParallelLint\\ArrayIterator' => __DIR__ . '/..' . '/php-parallel-lint/php-parallel-lint/src/Settings.php',
         'JakubOnderka\\PhpParallelLint\\Blame' => __DIR__ . '/..' . '/php-parallel-lint/php-parallel-lint/src/Error.php',
@@ -2179,12 +2173,16 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'Symplify\\PHPStanRules\\Rules\\Rector\\NoClassReflectionStaticReflectionRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Rector/NoClassReflectionStaticReflectionRule.php',
         'Symplify\\PHPStanRules\\Rules\\Rector\\NoInstanceOfStaticReflectionRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Rector/NoInstanceOfStaticReflectionRule.php',
         'Symplify\\PHPStanRules\\Rules\\Rector\\NoLeadingBackslashInNameRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Rector/NoLeadingBackslashInNameRule.php',
+        'Symplify\\PHPStanRules\\Rules\\Rector\\NoOnlyNullReturnInRefactorRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Rector/NoOnlyNullReturnInRefactorRule.php',
+        'Symplify\\PHPStanRules\\Rules\\Rector\\NoPropertyNodeAssignRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Rector/NoPropertyNodeAssignRule.php',
         'Symplify\\PHPStanRules\\Rules\\Rector\\PhpUpgradeDowngradeRegisteredInSetRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Rector/PhpUpgradeDowngradeRegisteredInSetRule.php',
         'Symplify\\PHPStanRules\\Rules\\Rector\\PhpUpgradeImplementsMinPhpVersionInterfaceRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Rector/PhpUpgradeImplementsMinPhpVersionInterfaceRule.php',
+        'Symplify\\PHPStanRules\\Rules\\Rector\\PreferDirectIsNameRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Rector/PreferDirectIsNameRule.php',
         'Symplify\\PHPStanRules\\Rules\\RequireAttributeNameRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/RequireAttributeNameRule.php',
         'Symplify\\PHPStanRules\\Rules\\SeeAnnotationToTestRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/SeeAnnotationToTestRule.php',
         'Symplify\\PHPStanRules\\Rules\\StringFileAbsolutePathExistsRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/StringFileAbsolutePathExistsRule.php',
         'Symplify\\PHPStanRules\\Rules\\Symfony\\ConfigClosure\\AlreadyRegisteredAutodiscoveryServiceRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Symfony/ConfigClosure/AlreadyRegisteredAutodiscoveryServiceRule.php',
+        'Symplify\\PHPStanRules\\Rules\\Symfony\\ConfigClosure\\FileNameMatchesExtensionRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Symfony/ConfigClosure/FileNameMatchesExtensionRule.php',
         'Symplify\\PHPStanRules\\Rules\\Symfony\\ConfigClosure\\NoBundleResourceConfigRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Symfony/ConfigClosure/NoBundleResourceConfigRule.php',
         'Symplify\\PHPStanRules\\Rules\\Symfony\\ConfigClosure\\NoDuplicateArgAutowireByTypeRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Symfony/ConfigClosure/NoDuplicateArgAutowireByTypeRule.php',
         'Symplify\\PHPStanRules\\Rules\\Symfony\\ConfigClosure\\NoDuplicateArgsAutowireByTypeRule' => __DIR__ . '/..' . '/symplify/phpstan-rules/src/Rules/Symfony/ConfigClosure/NoDuplicateArgsAutowireByTypeRule.php',
@@ -2278,6 +2276,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'TomasVotruba\\UnusedPublic\\Collectors\\StaticCall\\StaticMethodCallableCollector' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Collectors/StaticCall/StaticMethodCallableCollector.php',
         'TomasVotruba\\UnusedPublic\\Configuration' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Configuration.php',
         'TomasVotruba\\UnusedPublic\\Enum\\ReferenceMarker' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Enum/ReferenceMarker.php',
+        'TomasVotruba\\UnusedPublic\\Enum\\RuleIdentifier' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Enum/RuleIdentifier.php',
         'TomasVotruba\\UnusedPublic\\Enum\\RuleTips' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Enum/RuleTips.php',
         'TomasVotruba\\UnusedPublic\\Enum\\Template\\BladeRegex' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Enum/Template/BladeRegex.php',
         'TomasVotruba\\UnusedPublic\\Enum\\Template\\TwigRegex' => __DIR__ . '/..' . '/tomasvotruba/unused-public/src/Enum/Template/TwigRegex.php',
@@ -2324,6 +2323,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'Webmozart\\Assert\\InvalidArgumentException' => __DIR__ . '/..' . '/webmozart/assert/src/InvalidArgumentException.php',
         'Webmozart\\Assert\\Mixin' => __DIR__ . '/..' . '/webmozart/assert/src/Mixin.php',
+        'rexstan\\rexstan_command' => __DIR__ . '/../..' . '/lib/command.php',
         'staabm\\PHPStanBaselineAnalysis\\AnalyzeApplication' => __DIR__ . '/..' . '/staabm/phpstan-baseline-analysis/lib/AnalyzeApplication.php',
         'staabm\\PHPStanBaselineAnalysis\\AnalyzerResult' => __DIR__ . '/..' . '/staabm/phpstan-baseline-analysis/lib/AnalyzerResult.php',
         'staabm\\PHPStanBaselineAnalysis\\AnalyzerResultReader' => __DIR__ . '/..' . '/staabm/phpstan-baseline-analysis/lib/AnalyzerResultReader.php',
