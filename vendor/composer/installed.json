@@ -609,17 +609,17 @@
         },
         {
             "name": "nette/utils",
-            "version": "v4.0.9",
-            "version_normalized": "4.0.9.0",
+            "version": "v4.0.10",
+            "version_normalized": "4.0.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/utils.git",
-                "reference": "505a30ad386daa5211f08a318e47015b501cad30"
+                "reference": "2778deb6aab136c8db4ed1f4d6e9f465ca2dbee3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/utils/zipball/505a30ad386daa5211f08a318e47015b501cad30",
-                "reference": "505a30ad386daa5211f08a318e47015b501cad30",
+                "url": "https://api.github.com/repos/nette/utils/zipball/2778deb6aab136c8db4ed1f4d6e9f465ca2dbee3",
+                "reference": "2778deb6aab136c8db4ed1f4d6e9f465ca2dbee3",
                 "shasum": ""
             },
             "require": {
@@ -643,7 +643,7 @@
                 "ext-mbstring": "to use Strings::lower() etc...",
                 "ext-tokenizer": "to use Nette\\Utils\\Reflection::getUseStatements()"
             },
-            "time": "2025-10-31T00:45:47+00:00",
+            "time": "2025-12-01T17:30:42+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -695,7 +695,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/utils/issues",
-                "source": "https://github.com/nette/utils/tree/v4.0.9"
+                "source": "https://github.com/nette/utils/tree/v4.0.10"
             },
             "install-path": "../nette/utils"
         },
@@ -829,12 +829,12 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.32",
-            "version_normalized": "2.1.32.0",
+            "version": "2.1.33",
+            "version_normalized": "2.1.33.0",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e126cad1e30a99b137b8ed75a85a676450ebb227",
-                "reference": "e126cad1e30a99b137b8ed75a85a676450ebb227",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9e800e6bee7d5bd02784d4c6069b48032d16224f",
+                "reference": "9e800e6bee7d5bd02784d4c6069b48032d16224f",
                 "shasum": ""
             },
             "require": {
@@ -843,7 +843,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2025-11-11T15:18:17+00:00",
+            "time": "2025-12-05T10:24:31+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -935,17 +935,17 @@
         },
         {
             "name": "phpstan/phpstan-phpunit",
-            "version": "2.0.8",
-            "version_normalized": "2.0.8.0",
+            "version": "2.0.9",
+            "version_normalized": "2.0.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-phpunit.git",
-                "reference": "2fe9fbeceaf76dd1ebaa7bbbb25e2fb5e59db2fe"
+                "reference": "cda423c709dae0126987fec04a381ec819c9d9a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/2fe9fbeceaf76dd1ebaa7bbbb25e2fb5e59db2fe",
-                "reference": "2fe9fbeceaf76dd1ebaa7bbbb25e2fb5e59db2fe",
+                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/cda423c709dae0126987fec04a381ec819c9d9a7",
+                "reference": "cda423c709dae0126987fec04a381ec819c9d9a7",
                 "shasum": ""
             },
             "require": {
@@ -962,7 +962,7 @@
                 "phpstan/phpstan-strict-rules": "^2.0",
                 "phpunit/phpunit": "^9.6"
             },
-            "time": "2025-11-11T07:55:22+00:00",
+            "time": "2025-12-05T08:04:44+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -985,7 +985,7 @@
             "description": "PHPUnit extensions and rules for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-phpunit/issues",
-                "source": "https://github.com/phpstan/phpstan-phpunit/tree/2.0.8"
+                "source": "https://github.com/phpstan/phpstan-phpunit/tree/2.0.9"
             },
             "install-path": "../phpstan/phpstan-phpunit"
         },
@@ -1625,17 +1625,17 @@
         },
         {
             "name": "staabm/phpstan-todo-by",
-            "version": "0.3.2",
-            "version_normalized": "0.3.2.0",
+            "version": "0.3.3",
+            "version_normalized": "0.3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-todo-by.git",
-                "reference": "90a1da0b88e56b17bbf1fa0d994bffd4b6484022"
+                "reference": "3c2b7f755965f5bb58354e7c492d3cb8de988f8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/90a1da0b88e56b17bbf1fa0d994bffd4b6484022",
-                "reference": "90a1da0b88e56b17bbf1fa0d994bffd4b6484022",
+                "url": "https://api.github.com/repos/staabm/phpstan-todo-by/zipball/3c2b7f755965f5bb58354e7c492d3cb8de988f8e",
+                "reference": "3c2b7f755965f5bb58354e7c492d3cb8de988f8e",
                 "shasum": ""
             },
             "require": {
@@ -1648,14 +1648,14 @@
                 "phpstan/phpstan": "^2.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.89",
+                "friendsofphp/php-cs-fixer": "^3.91",
                 "nikic/php-parser": "^5.6",
                 "phpstan/extension-installer": "^1.4",
                 "phpstan/phpstan-deprecation-rules": "^2",
                 "phpunit/phpunit": "^9 || ^10.5",
                 "redaxo/php-cs-fixer-config": "^1.0"
             },
-            "time": "2025-11-22T11:13:59+00:00",
+            "time": "2025-12-04T06:51:25+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1684,7 +1684,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-todo-by/issues",
-                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.3.2"
+                "source": "https://github.com/staabm/phpstan-todo-by/tree/0.3.3"
             },
             "funding": [
                 {
@@ -1783,17 +1783,17 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "14.9.1",
-            "version_normalized": "14.9.1.0",
+            "version": "14.9.3",
+            "version_normalized": "14.9.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "2e902398d950a02b334e1394935d313af59faa8c"
+                "reference": "3d9c46502852d89688242afef2621d005d9bccc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/2e902398d950a02b334e1394935d313af59faa8c",
-                "reference": "2e902398d950a02b334e1394935d313af59faa8c",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/3d9c46502852d89688242afef2621d005d9bccc2",
+                "reference": "3d9c46502852d89688242afef2621d005d9bccc2",
                 "shasum": ""
             },
             "require": {
@@ -1802,7 +1802,7 @@
                 "phpstan/phpstan": "^2.1.22",
                 "webmozart/assert": "^1.11"
             },
-            "time": "2025-11-28T21:31:11+00:00",
+            "time": "2025-12-02T13:11:47+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1827,7 +1827,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/14.9.1"
+                "source": "https://github.com/symplify/phpstan-rules/tree/14.9.3"
             },
             "funding": [
                 {
