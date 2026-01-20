@@ -16,6 +16,9 @@ use Symplify\PHPStanRules\NodeAnalyzer\SymfonyRequiredMethodAnalyzer;
  */
 final class SingleRequiredMethodRule implements Rule
 {
+    /**
+     * @var string
+     */
     public const ERROR_MESSAGE = 'Found %d @required methods. Use only one method to avoid unexpected behavior.';
 
     public function getNodeType(): string

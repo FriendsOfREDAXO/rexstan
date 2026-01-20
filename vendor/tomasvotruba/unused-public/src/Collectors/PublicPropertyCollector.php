@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace TomasVotruba\UnusedPublic\Collectors;
 
-use Livewire\Component;
 use PhpParser\Node;
+use PhpParser\Node\Expr\Variable;
+use PhpParser\Node\Param;
 use PhpParser\Node\Stmt\Class_;
+use PhpParser\Node\Stmt\ClassMethod;
 use PHPStan\Analyser\Scope;
 use PHPStan\Collectors\Collector;
 use PHPStan\Node\InClassNode;
@@ -20,7 +22,7 @@ use TomasVotruba\UnusedPublic\Configuration;
 final class PublicPropertyCollector implements Collector
 {
     /**
-     * @var array<class-string<Component>>
+     * @var array<string>
      */
     private const CLASSES_TO_SKIP = ['Livewire\Component'];
 
@@ -73,6 +75,8 @@ final class PublicPropertyCollector implements Collector
         }
 
         $publicPropertyNames = [];
+
+        // Collect traditional public properties
         foreach ($classLike->getProperties() as $property) {
             if (! $property->isPublic()) {
                 continue;
@@ -89,11 +93,55 @@ final class PublicPropertyCollector implements Collector
             }
         }
 
+        // Collect constructor promoted public properties
+        foreach ($classLike->getMethods() as $classMethod) {
+            if (! $this->isConstructorMethod($classMethod)) {
+                continue;
+            }
+
+            foreach ($classMethod->getParams() as $param) {
+                if (! $this->isPublicPromotedProperty($param)) {
+                    continue;
+                }
+
+                if (! $param->var instanceof Variable) {
+                    continue;
+                }
+
+                $propertyName = $param->var->name;
+                if (! is_string($propertyName)) {
+                    continue;
+                }
+
+                if ($this->shouldSkipProperty($classReflection, $propertyName, $scope)) {
+                    continue;
+                }
+
+                $publicPropertyNames[] = [$classReflection->getName(), $propertyName, $param->getLine()];
+            }
+        }
+
         if ($publicPropertyNames === []) {
             return null;
         }
 
         return $publicPropertyNames;
+    }
+
+    private function isConstructorMethod(ClassMethod $classMethod): bool
+    {
+        return $classMethod->name->toLowerString() === '__construct';
+    }
+
+    private function isPublicPromotedProperty(Param $param): bool
+    {
+        // Check if parameter has a visibility flag (promoted property)
+        if ($param->flags === 0) {
+            return false;
+        }
+
+        // Check if it's public (Class_::MODIFIER_PUBLIC = 1)
+        return ($param->flags & Class_::MODIFIER_PUBLIC) !== 0;
     }
 
     private function shouldSkipProperty(ClassReflection $classReflection, string $propertyName, Scope $scope): bool

@@ -8,6 +8,7 @@ final class DoctrineEvents
 {
     /**
      * @see https://www.doctrine-project.org/projects/doctrine-orm/en/3.3/reference/events.html
+     * @var mixed[]
      */
     public const ORM_LIST = [
         'preRemove',
@@ -27,6 +28,7 @@ final class DoctrineEvents
 
     /**
      * @see https://www.doctrine-project.org/projects/doctrine-mongodb-odm/en/latest/reference/events.html#lifecycle-events
+     * @var mixed[]
      */
     public const ODM_LIST = [
         'documentNotFound',

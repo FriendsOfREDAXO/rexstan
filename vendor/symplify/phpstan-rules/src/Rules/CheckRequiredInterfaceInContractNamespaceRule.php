@@ -24,8 +24,8 @@ final class CheckRequiredInterfaceInContractNamespaceRule implements Rule
     public const ERROR_MESSAGE = 'Interface must be located in "Contract" or "Contracts" namespace';
 
     /**
-     * @var string
      * @see https://regex101.com/r/kmrIG1/2
+     * @var string
      */
     private const A_CONTRACT_NAMESPACE_REGEX = '#\bContracts?\b#';
 

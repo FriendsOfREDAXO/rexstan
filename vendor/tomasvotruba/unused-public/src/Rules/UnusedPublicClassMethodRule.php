@@ -27,9 +27,8 @@ use TomasVotruba\UnusedPublic\Utils\Strings;
 final class UnusedPublicClassMethodRule implements Rule
 {
     /**
-     * @var string
-     *
      * @api
+     * @var string
      */
     public const ERROR_MESSAGE = 'Public method "%s::%s()" is never used';
 

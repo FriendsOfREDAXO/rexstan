@@ -24,9 +24,8 @@ use TomasVotruba\UnusedPublic\Utils\Strings;
 final class LocalOnlyPublicClassMethodRule implements Rule
 {
     /**
-     * @var string
-     *
      * @api
+     * @var string
      */
     public const ERROR_MESSAGE = 'Public method "%s::%s()" is used only locally and should be turned protected/private';
 
