@@ -21,6 +21,9 @@ final class NoAssertFuncCallInTestsRule implements Rule
      */
     public const ERROR_MESSAGE = 'Instead of assert() that can miss important checks, use native PHPUnit assert call';
 
+    /**
+     * @var mixed[]
+     */
     private const TEST_FILE_SUFFIXES = [
         'Test.php',
         'TestCase.php',

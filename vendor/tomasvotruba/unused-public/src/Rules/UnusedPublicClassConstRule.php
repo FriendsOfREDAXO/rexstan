@@ -24,9 +24,8 @@ use TomasVotruba\UnusedPublic\Utils\Arrays;
 final class UnusedPublicClassConstRule implements Rule
 {
     /**
-     * @var string
-     *
      * @api
+     * @var string
      */
     public const ERROR_MESSAGE = 'Public constant "%s::%s" is never used';
 

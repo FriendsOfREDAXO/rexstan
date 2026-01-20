@@ -27,8 +27,8 @@ final class PhpUpgradeImplementsMinPhpVersionInterfaceRule implements Rule
     public const ERROR_MESSAGE = 'Rule %s must implements Rector\VersionBonding\Contract\MinPhpVersionInterface';
 
     /**
-     * @var string
      * @see https://regex101.com/r/9d3jGP/2/
+     * @var string
      */
     private const PREFIX_REGEX = '#\\\\Php\d+\\\\#';
 

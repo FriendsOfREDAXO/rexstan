@@ -23,9 +23,8 @@ use TomasVotruba\UnusedPublic\Utils\Strings;
 final class RelativeUnusedPublicClassMethodRule implements Rule
 {
     /**
-     * @var string
-     *
      * @api
+     * @var string
      */
     public const ERROR_MESSAGE = 'Found %.1f %% of public methods as unused. Reduce it under %.1f %%';
 

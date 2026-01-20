@@ -33,8 +33,8 @@ final class NoReturnSetterMethodRule implements Rule
     public const ERROR_MESSAGE = 'Setter method cannot return anything, only set value';
 
     /**
-     * @var string
      * @see https://regex101.com/r/IIvg8L/1
+     * @var string
      */
     private const SETTER_START_REGEX = '#^set[A-Z]#';
 

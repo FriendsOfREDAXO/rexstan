@@ -23,9 +23,8 @@ use TomasVotruba\UnusedPublic\Utils\Arrays;
 final class UnusedPublicPropertyRule implements Rule
 {
     /**
-     * @var string
-     *
      * @api
+     * @var string
      */
     public const ERROR_MESSAGE = 'Public property "%s::$%s" is never used';
 

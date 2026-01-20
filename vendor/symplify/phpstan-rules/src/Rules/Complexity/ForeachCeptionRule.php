@@ -22,6 +22,9 @@ final class ForeachCeptionRule implements Rule
      */
     public const ERROR_MESSAGE = 'There is %d nested foreach nested in each other. Refactor to more flat approach or to collection to avoid high complexity';
 
+    /**
+     * @var int
+     */
     private const MAX_NESTED_FOREACHES = 3;
 
     public function getNodeType(): string

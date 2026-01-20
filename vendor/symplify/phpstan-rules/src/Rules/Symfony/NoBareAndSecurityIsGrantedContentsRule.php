@@ -21,6 +21,9 @@ use Symplify\PHPStanRules\Enum\SymfonyClass;
  */
 final class NoBareAndSecurityIsGrantedContentsRule implements Rule
 {
+    /**
+     * @var string
+     */
     public const ERROR_MESSAGE = 'Instead of using one long "and" condition join, split into multiple standalone #[IsGranted] attributes';
 
     public function getNodeType(): string

@@ -25,8 +25,8 @@ final class BladeRegex
     public const METHOD_CALL_REGEX = '#\w+(\-\>|::)(?<desired_name>\w+)\((.*?)\)#';
 
     /**
-     * @var string
      * @see https://regex101.com/r/pBkm53/1
+     * @var string
      */
     public const CONSTANT_FETCH_REGEX = '#\w+::(?<desired_name>[\w_]+)#';
 }

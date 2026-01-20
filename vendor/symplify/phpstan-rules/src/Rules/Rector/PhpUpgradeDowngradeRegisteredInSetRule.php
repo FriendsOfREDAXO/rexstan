@@ -32,8 +32,8 @@ final class PhpUpgradeDowngradeRegisteredInSetRule implements Rule
     public const ERROR_MESSAGE = 'Register "%s" service to "%s" config set';
 
     /**
-     * @var string
      * @see https://regex101.com/r/VGmFKR/1
+     * @var string
      */
     private const DOWNGRADE_PREFIX_REGEX = '#(?<is_downgrade>Downgrade)?Php(?<version>\d+)#';
 
