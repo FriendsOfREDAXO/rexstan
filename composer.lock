@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "368c01cea9965cafd9e7fc00c0518bd3",
+    "content-hash": "cf7acaaefb629c6df47ec035c6c5a1c2",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1877,22 +1877,22 @@
         },
         {
             "name": "tomasvotruba/unused-public",
-            "version": "2.1.1",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/unused-public.git",
-                "reference": "a1f049b24323494fda752f24268a3c874035c622"
+                "reference": "ec82a9a1e3216eb5db174430a740ad8d9ac1dfc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/a1f049b24323494fda752f24268a3c874035c622",
-                "reference": "a1f049b24323494fda752f24268a3c874035c622",
+                "url": "https://api.github.com/repos/TomasVotruba/unused-public/zipball/ec82a9a1e3216eb5db174430a740ad8d9ac1dfc2",
+                "reference": "ec82a9a1e3216eb5db174430a740ad8d9ac1dfc2",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4 || ^8.0",
-                "phpstan/phpstan": "^2.1.6",
-                "webmozart/assert": "^1.11"
+                "phpstan/phpstan": "^2.1.33",
+                "webmozart/assert": "^1.11|^2.0"
             },
             "type": "phpstan-extension",
             "extra": {
@@ -1918,7 +1918,7 @@
             ],
             "support": {
                 "issues": "https://github.com/TomasVotruba/unused-public/issues",
-                "source": "https://github.com/TomasVotruba/unused-public/tree/2.1.1"
+                "source": "https://github.com/TomasVotruba/unused-public/tree/2.2.0"
             },
             "funding": [
                 {
@@ -1930,7 +1930,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-14T11:04:49+00:00"
+            "time": "2026-01-07T22:23:06+00:00"
         },
         {
             "name": "webmozart/assert",
