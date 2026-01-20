@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0193b2454ce16d69a7defdced76053d8",
+    "content-hash": "368c01cea9965cafd9e7fc00c0518bd3",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1173,22 +1173,22 @@
         },
         {
             "name": "rector/type-perfect",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/type-perfect.git",
-                "reference": "542941e6d7268212d7d0c67ce9b594770ae3eb0d"
+                "reference": "0b25e6dc8596c04fb2d5bb686e5aebc91c85afd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/type-perfect/zipball/542941e6d7268212d7d0c67ce9b594770ae3eb0d",
-                "reference": "542941e6d7268212d7d0c67ce9b594770ae3eb0d",
+                "url": "https://api.github.com/repos/rectorphp/type-perfect/zipball/0b25e6dc8596c04fb2d5bb686e5aebc91c85afd1",
+                "reference": "0b25e6dc8596c04fb2d5bb686e5aebc91c85afd1",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4|^8.0",
                 "phpstan/phpstan": "^2.1.14",
-                "webmozart/assert": "^1.11"
+                "webmozart/assert": "^1.11 || ^2.1"
             },
             "type": "phpstan-extension",
             "extra": {
@@ -1210,7 +1210,7 @@
             "description": "Next level type declaration checks",
             "support": {
                 "issues": "https://github.com/rectorphp/type-perfect/issues",
-                "source": "https://github.com/rectorphp/type-perfect/tree/2.1.1"
+                "source": "https://github.com/rectorphp/type-perfect/tree/2.1.2"
             },
             "funding": [
                 {
@@ -1222,7 +1222,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-09T15:49:34+00:00"
+            "time": "2026-01-12T07:51:54+00:00"
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
