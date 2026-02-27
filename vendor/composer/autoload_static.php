@@ -1223,6 +1223,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'PHPStan\\Type\\Symfony\\InputInterfaceHasOptionDynamicReturnTypeExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Type/Symfony/InputInterfaceHasOptionDynamicReturnTypeExtension.php',
         'PHPStan\\Type\\Symfony\\KernelInterfaceDynamicReturnTypeExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Type/Symfony/KernelInterfaceDynamicReturnTypeExtension.php',
         'PHPStan\\Type\\Symfony\\MessengerHandleTraitReturnTypeExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Type/Symfony/MessengerHandleTraitReturnTypeExtension.php',
+        'PHPStan\\Type\\Symfony\\MessengerHandleTraitWrapperReturnTypeExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Type/Symfony/MessengerHandleTraitWrapperReturnTypeExtension.php',
         'PHPStan\\Type\\Symfony\\OptionTypeSpecifyingExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Type/Symfony/OptionTypeSpecifyingExtension.php',
         'PHPStan\\Type\\Symfony\\ParameterDynamicReturnTypeExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Type/Symfony/ParameterDynamicReturnTypeExtension.php',
         'PHPStan\\Type\\Symfony\\RequestDynamicReturnTypeExtension' => __DIR__ . '/..' . '/phpstan/phpstan-symfony/src/Type/Symfony/RequestDynamicReturnTypeExtension.php',
