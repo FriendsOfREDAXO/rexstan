@@ -1063,6 +1063,7 @@ return array(
     'PHPStan\\Type\\Symfony\\InputInterfaceHasOptionDynamicReturnTypeExtension' => $vendorDir . '/phpstan/phpstan-symfony/src/Type/Symfony/InputInterfaceHasOptionDynamicReturnTypeExtension.php',
     'PHPStan\\Type\\Symfony\\KernelInterfaceDynamicReturnTypeExtension' => $vendorDir . '/phpstan/phpstan-symfony/src/Type/Symfony/KernelInterfaceDynamicReturnTypeExtension.php',
     'PHPStan\\Type\\Symfony\\MessengerHandleTraitReturnTypeExtension' => $vendorDir . '/phpstan/phpstan-symfony/src/Type/Symfony/MessengerHandleTraitReturnTypeExtension.php',
+    'PHPStan\\Type\\Symfony\\MessengerHandleTraitWrapperReturnTypeExtension' => $vendorDir . '/phpstan/phpstan-symfony/src/Type/Symfony/MessengerHandleTraitWrapperReturnTypeExtension.php',
     'PHPStan\\Type\\Symfony\\OptionTypeSpecifyingExtension' => $vendorDir . '/phpstan/phpstan-symfony/src/Type/Symfony/OptionTypeSpecifyingExtension.php',
     'PHPStan\\Type\\Symfony\\ParameterDynamicReturnTypeExtension' => $vendorDir . '/phpstan/phpstan-symfony/src/Type/Symfony/ParameterDynamicReturnTypeExtension.php',
     'PHPStan\\Type\\Symfony\\RequestDynamicReturnTypeExtension' => $vendorDir . '/phpstan/phpstan-symfony/src/Type/Symfony/RequestDynamicReturnTypeExtension.php',
