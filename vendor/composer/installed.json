@@ -380,17 +380,17 @@
         },
         {
             "name": "justinrainbow/json-schema",
-            "version": "5.3.1",
-            "version_normalized": "5.3.1.0",
+            "version": "5.3.2",
+            "version_normalized": "5.3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jsonrainbow/json-schema.git",
-                "reference": "b5a44b6391a3bbb75c9f2b73e1ef03d6045e1e20"
+                "reference": "2f7abf648939847a789c55c206d4cb9dd0d53e2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/b5a44b6391a3bbb75c9f2b73e1ef03d6045e1e20",
-                "reference": "b5a44b6391a3bbb75c9f2b73e1ef03d6045e1e20",
+                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/2f7abf648939847a789c55c206d4cb9dd0d53e2c",
+                "reference": "2f7abf648939847a789c55c206d4cb9dd0d53e2c",
                 "shasum": ""
             },
             "require": {
@@ -401,7 +401,7 @@
                 "json-schema/json-schema-test-suite": "1.2.0",
                 "phpunit/phpunit": "^4.8.35"
             },
-            "time": "2025-12-12T08:56:22+00:00",
+            "time": "2026-02-27T12:33:19+00:00",
             "bin": [
                 "bin/validate-json"
             ],
@@ -442,7 +442,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jsonrainbow/json-schema/issues",
-                "source": "https://github.com/jsonrainbow/json-schema/tree/5.3.1"
+                "source": "https://github.com/jsonrainbow/json-schema/tree/5.3.2"
             },
             "install-path": "../justinrainbow/json-schema"
         },
@@ -829,12 +829,12 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.40",
-            "version_normalized": "2.1.40.0",
+            "version": "2.1.41",
+            "version_normalized": "2.1.41.0",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9b2c7aeb83a75d8680ea5e7c9b7fca88052b766b",
-                "reference": "9b2c7aeb83a75d8680ea5e7c9b7fca88052b766b",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a2eae8f20856b3afe74bf1f9726ce8c11438e300",
+                "reference": "a2eae8f20856b3afe74bf1f9726ce8c11438e300",
                 "shasum": ""
             },
             "require": {
@@ -843,7 +843,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2026-02-23T15:04:35+00:00",
+            "time": "2026-03-16T18:24:10+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
