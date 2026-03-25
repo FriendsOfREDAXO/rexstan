@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "06049da136eba42c3e0d5feb94a20a66",
+    "content-hash": "6547f62bdd76f8e842ed91422aafd589",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -371,16 +371,16 @@
         },
         {
             "name": "justinrainbow/json-schema",
-            "version": "5.3.2",
+            "version": "5.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jsonrainbow/json-schema.git",
-                "reference": "2f7abf648939847a789c55c206d4cb9dd0d53e2c"
+                "reference": "a0b7c13588b102d7d6536823e96d1c88d3dba85e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/2f7abf648939847a789c55c206d4cb9dd0d53e2c",
-                "reference": "2f7abf648939847a789c55c206d4cb9dd0d53e2c",
+                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/a0b7c13588b102d7d6536823e96d1c88d3dba85e",
+                "reference": "a0b7c13588b102d7d6536823e96d1c88d3dba85e",
                 "shasum": ""
             },
             "require": {
@@ -430,9 +430,9 @@
             ],
             "support": {
                 "issues": "https://github.com/jsonrainbow/json-schema/issues",
-                "source": "https://github.com/jsonrainbow/json-schema/tree/5.3.2"
+                "source": "https://github.com/jsonrainbow/json-schema/tree/5.3.3"
             },
-            "time": "2026-02-27T12:33:19+00:00"
+            "time": "2026-03-24T18:47:53+00:00"
         },
         {
             "name": "nette/http",
@@ -802,11 +802,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.42",
+            "version": "2.1.43",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/1279e1ce86ba768f0780c9d889852b4e02ff40d0",
-                "reference": "1279e1ce86ba768f0780c9d889852b4e02ff40d0",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d01bebe3edfd4d49b9666ee5b8271ddca561042f",
+                "reference": "d01bebe3edfd4d49b9666ee5b8271ddca561042f",
                 "shasum": ""
             },
             "require": {
@@ -851,7 +851,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-03-17T14:58:32+00:00"
+            "time": "2026-03-24T20:40:50+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
