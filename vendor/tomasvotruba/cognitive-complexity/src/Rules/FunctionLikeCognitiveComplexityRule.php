@@ -48,8 +48,10 @@ final class FunctionLikeCognitiveComplexityRule implements Rule
      */
     private Configuration $configuration;
 
-    public function __construct(AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer, Configuration $configuration)
-    {
+    public function __construct(
+        AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer,
+        Configuration $configuration
+    ) {
         $this->astCognitiveComplexityAnalyzer = $astCognitiveComplexityAnalyzer;
         $this->configuration = $configuration;
     }

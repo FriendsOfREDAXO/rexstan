@@ -47,8 +47,10 @@ final class NestingNodeVisitor extends NodeVisitorAbstract
 
     private int $previousNestingLevel = 0;
 
-    public function __construct(CognitiveComplexityDataCollector $cognitiveComplexityDataCollector, ComplexityAffectingNodeFinder $complexityAffectingNodeFinder)
-    {
+    public function __construct(
+        CognitiveComplexityDataCollector $cognitiveComplexityDataCollector,
+        ComplexityAffectingNodeFinder $complexityAffectingNodeFinder
+    ) {
         $this->cognitiveComplexityDataCollector = $cognitiveComplexityDataCollector;
         $this->complexityAffectingNodeFinder = $complexityAffectingNodeFinder;
     }
@@ -58,8 +60,15 @@ final class NestingNodeVisitor extends NodeVisitorAbstract
         $this->measuredNestingLevel = 1;
     }
 
-    public function enterNode(Node $node): ?Node
+    /**
+     * @param Node|int $node On PHP 8.5 with php-parser v5, BackedEnumCase values may be passed as int
+     */
+    public function enterNode($node): ?Node
     {
+        if (! $node instanceof Node) {
+            return null;
+        }
+
         if ($this->isNestingNode($node)) {
             ++$this->measuredNestingLevel;
         }
@@ -85,8 +94,15 @@ final class NestingNodeVisitor extends NodeVisitorAbstract
         return null;
     }
 
-    public function leaveNode(Node $node): ?Node
+    /**
+     * @param Node|int $node On PHP 8.5 with php-parser v5, BackedEnumCase values may be passed as int
+     */
+    public function leaveNode($node): ?Node
     {
+        if (! $node instanceof Node) {
+            return null;
+        }
+
         if ($this->isNestingNode($node)) {
             --$this->measuredNestingLevel;
         }
