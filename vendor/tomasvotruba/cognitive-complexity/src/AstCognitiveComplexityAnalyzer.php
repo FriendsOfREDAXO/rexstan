@@ -31,8 +31,11 @@ final class AstCognitiveComplexityAnalyzer
      */
     private NestingNodeVisitor $nestingNodeVisitor;
 
-    public function __construct(ComplexityNodeTraverserFactory $complexityNodeTraverserFactory, CognitiveComplexityDataCollector $cognitiveComplexityDataCollector, NestingNodeVisitor $nestingNodeVisitor)
-    {
+    public function __construct(
+        ComplexityNodeTraverserFactory $complexityNodeTraverserFactory,
+        CognitiveComplexityDataCollector $cognitiveComplexityDataCollector,
+        NestingNodeVisitor $nestingNodeVisitor
+    ) {
         $this->complexityNodeTraverserFactory = $complexityNodeTraverserFactory;
         $this->cognitiveComplexityDataCollector = $cognitiveComplexityDataCollector;
         $this->nestingNodeVisitor = $nestingNodeVisitor;

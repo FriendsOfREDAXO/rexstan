@@ -11,6 +11,7 @@ use PHPStan\Node\InClassNode;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ParameterReflection;
 use PHPStan\Reflection\ParametersAcceptorSelector;
+use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use TomasVotruba\CognitiveComplexity\AstCognitiveComplexityAnalyzer;
@@ -45,11 +46,21 @@ final class ClassDependencyTreeRule implements Rule
      */
     private Configuration $configuration;
 
-    public function __construct(AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer, ClassReflectionParser $classReflectionParser, Configuration $configuration)
-    {
+    /**
+     * @readonly
+     */
+    private ReflectionProvider $reflectionProvider;
+
+    public function __construct(
+        AstCognitiveComplexityAnalyzer $astCognitiveComplexityAnalyzer,
+        ClassReflectionParser $classReflectionParser,
+        Configuration $configuration,
+        ReflectionProvider $reflectionProvider
+    ) {
         $this->astCognitiveComplexityAnalyzer = $astCognitiveComplexityAnalyzer;
         $this->classReflectionParser = $classReflectionParser;
         $this->configuration = $configuration;
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function getNodeType(): string
@@ -119,7 +130,12 @@ final class ClassDependencyTreeRule implements Rule
     private function isTypeToAnalyse(ClassReflection $classReflection): bool
     {
         foreach ($this->configuration->getDependencyTreeTypes() as $dependencyTreeType) {
-            if ($classReflection->isSubclassOf($dependencyTreeType)) {
+            if (! $this->reflectionProvider->hasClass($dependencyTreeType)) {
+                continue;
+            }
+
+            $dependencyTreeClassReflection = $this->reflectionProvider->getClass($dependencyTreeType);
+            if ($classReflection->isSubclassOfClass($dependencyTreeClassReflection)) {
                 return true;
             }
         }
