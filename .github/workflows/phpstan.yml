@@ -27,6 +27,6 @@ jobs:
           php-version: ${{ matrix.php-version }}
           coverage: none
 
-      - run: composer require redaxo/source
+      - run: composer require redaxo/source:^5 --no-security-blocking
 
       - run: composer phpstan
