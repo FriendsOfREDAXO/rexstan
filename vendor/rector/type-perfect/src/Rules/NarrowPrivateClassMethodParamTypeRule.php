@@ -17,6 +17,7 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\Rules\RuleErrorBuilder;
+use PHPStan\Type\Generic\GenericObjectType;
 use PHPStan\Type\Generic\TemplateType;
 use PHPStan\Type\IntersectionType;
 use PHPStan\Type\MixedType;
@@ -161,7 +162,7 @@ final class NarrowPrivateClassMethodParamTypeRule implements Rule
             return null;
         }
 
-        if ($argType instanceof IntersectionType) {
+        if ($argType instanceof IntersectionType || $argType instanceof GenericObjectType) {
             return null;
         }
 
