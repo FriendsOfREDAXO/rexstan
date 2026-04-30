@@ -46,7 +46,7 @@ class DisallowedFunctionRuleErrors
 		if ($displayName !== null && !($displayName instanceof Name)) {
 			throw new ShouldNotHappenException();
 		}
-		foreach ($this->typeResolver->getNamesFromCall($node, $scope) as $name) {
+		foreach ($this->typeResolver->getNames($node, $scope) as $name) {
 			$errors = $this->getErrors($name, $scope, $node, $displayName, $disallowedCalls);
 			if ($errors) {
 				return $errors;
@@ -80,13 +80,21 @@ class DisallowedFunctionRuleErrors
 	 */
 	private function getErrors(Name $name, Scope $scope, ?FuncCall $node, ?Name $displayName, array $disallowedCalls): array
 	{
-		if ($this->reflectionProvider->hasFunction($name, $scope)) {
-			$functionReflection = $this->reflectionProvider->getFunction($name, $scope);
-			$definedIn = $functionReflection->isBuiltin() ? null : $functionReflection->getFileName();
-		} else {
-			$definedIn = null;
+		if (!$this->reflectionProvider->hasFunction($name, $scope)) {
+			return [];
 		}
-		return $this->disallowedCallsRuleErrors->get($node, $scope, (string)$name, (string)($displayName ?? $name), $definedIn, $disallowedCalls, ErrorIdentifiers::DISALLOWED_FUNCTION);
+
+		$functionReflection = $this->reflectionProvider->getFunction($name, $scope);
+		return $this->disallowedCallsRuleErrors->get(
+			$node,
+			$scope,
+			(string)$name,
+			(string)($displayName ?? $name),
+			$functionReflection->getFileName(),
+			$functionReflection->isBuiltin(),
+			$disallowedCalls,
+			ErrorIdentifiers::DISALLOWED_FUNCTION,
+		);
 	}
 
 }
