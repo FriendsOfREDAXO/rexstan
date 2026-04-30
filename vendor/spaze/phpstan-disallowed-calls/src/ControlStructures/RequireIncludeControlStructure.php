@@ -9,8 +9,8 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleError;
 use PHPStan\ShouldNotHappenException;
-use Spaze\PHPStan\Rules\Disallowed\DisallowedControlStructure;
-use Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedControlStructureRuleErrors;
+use Spaze\PHPStan\Rules\Disallowed\DisallowedKeyword;
+use Spaze\PHPStan\Rules\Disallowed\RuleErrors\DisallowedKeywordRuleErrors;
 use Spaze\PHPStan\Rules\Disallowed\RuleErrors\ErrorIdentifiers;
 
 /**
@@ -22,20 +22,20 @@ use Spaze\PHPStan\Rules\Disallowed\RuleErrors\ErrorIdentifiers;
 class RequireIncludeControlStructure implements Rule
 {
 
-	private DisallowedControlStructureRuleErrors $disallowedControlStructureRuleErrors;
+	private DisallowedKeywordRuleErrors $disallowedKeywordRuleErrors;
 
-	/** @var list<DisallowedControlStructure> */
-	private array $disallowedControlStructures;
+	/** @var list<DisallowedKeyword> */
+	private array $disallowedKeywords;
 
 
 	/**
-	 * @param DisallowedControlStructureRuleErrors $disallowedControlStructureRuleErrors
-	 * @param list<DisallowedControlStructure> $disallowedControlStructures
+	 * @param DisallowedKeywordRuleErrors $disallowedKeywordRuleErrors
+	 * @param list<DisallowedKeyword> $disallowedKeywords
 	 */
-	public function __construct(DisallowedControlStructureRuleErrors $disallowedControlStructureRuleErrors, array $disallowedControlStructures)
+	public function __construct(DisallowedKeywordRuleErrors $disallowedKeywordRuleErrors, array $disallowedKeywords)
 	{
-		$this->disallowedControlStructureRuleErrors = $disallowedControlStructureRuleErrors;
-		$this->disallowedControlStructures = $disallowedControlStructures;
+		$this->disallowedKeywordRuleErrors = $disallowedKeywordRuleErrors;
+		$this->disallowedKeywords = $disallowedKeywords;
 	}
 
 
@@ -71,11 +71,10 @@ class RequireIncludeControlStructure implements Rule
 				$type = 'require_once';
 				$identifier = ErrorIdentifiers::DISALLOWED_REQUIRE_ONCE;
 				break;
+			default:
+				return [];
 		}
-		if ($type === null) {
-			return [];
-		}
-		return $this->disallowedControlStructureRuleErrors->get($node, $scope, $type, $this->disallowedControlStructures, $identifier);
+		return $this->disallowedKeywordRuleErrors->get($node, $scope, $type, $this->disallowedKeywords, $identifier);
 	}
 
 }

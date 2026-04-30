@@ -4,13 +4,21 @@ declare(strict_types = 1);
 namespace Spaze\PHPStan\Rules\Disallowed\Allowed;
 
 use PHPStan\PhpDoc\TypeStringResolver;
+use PHPStan\PhpDocParser\Parser\ParserException;
 use PHPStan\Type\Constant\ConstantBooleanType;
 use PHPStan\Type\Constant\ConstantIntegerType;
 use PHPStan\Type\Constant\ConstantStringType;
 use PHPStan\Type\NullType;
 use PHPStan\Type\VerbosityLevel;
+use Spaze\PHPStan\Rules\Disallowed\Exceptions\EmptyClassPatternInConfigException;
+use Spaze\PHPStan\Rules\Disallowed\Exceptions\EmptyTypeStringInConfigException;
+use Spaze\PHPStan\Rules\Disallowed\Exceptions\InvalidConfigException;
+use Spaze\PHPStan\Rules\Disallowed\Exceptions\InvalidTypeStringInConfigException;
 use Spaze\PHPStan\Rules\Disallowed\Exceptions\UnsupportedParamTypeInConfigException;
 use Spaze\PHPStan\Rules\Disallowed\Normalizer\Normalizer;
+use Spaze\PHPStan\Rules\Disallowed\Params\Param;
+use Spaze\PHPStan\Rules\Disallowed\Params\ParamClassPattern;
+use Spaze\PHPStan\Rules\Disallowed\Params\ParamClassPatternExcept;
 use Spaze\PHPStan\Rules\Disallowed\Params\ParamValue;
 use Spaze\PHPStan\Rules\Disallowed\Params\ParamValueAny;
 use Spaze\PHPStan\Rules\Disallowed\Params\ParamValueCaseInsensitiveExcept;
@@ -42,7 +50,7 @@ class AllowedConfigFactory
 	 * @param array $allowed
 	 * @phpstan-param AllowDirectivesConfig $allowed
 	 * @return AllowedConfig
-	 * @throws UnsupportedParamTypeInConfigException
+	 * @throws InvalidConfigException
 	 */
 	public function getConfig(array $allowed): AllowedConfig
 	{
@@ -81,40 +89,40 @@ class AllowedConfigFactory
 			$allowExceptInClassWithMethodAttributes[] = $this->normalizer->normalizeAttribute($allowExceptInAnyMethodAttribute);
 		}
 		foreach ($allowed['allowParamsInAllowed'] ?? [] as $param => $value) {
-			$allowParamsInAllowed[$param] = $this->paramFactory(ParamValueSpecific::class, $param, $value);
+			$allowParamsInAllowed[$param] = $this->paramWithoutTypeFactory($param, $value, false) ?? $this->paramFactory(ParamValueSpecific::class, $param, $value);
 		}
 		foreach ($allowed['allowParamsInAllowedAnyValue'] ?? [] as $param => $value) {
-			$allowParamsInAllowed[$param] = $this->paramFactory(ParamValueAny::class, $param, $value);
+			$allowParamsInAllowed[$param] = $this->paramWithoutTypeFactory($param, $value, false) ?? $this->paramFactory(ParamValueAny::class, $param, $value);
 		}
 		foreach ($allowed['allowParamFlagsInAllowed'] ?? [] as $param => $value) {
-			$allowParamsInAllowed[$param] = $this->paramFactory(ParamValueFlagSpecific::class, $param, $value);
+			$allowParamsInAllowed[$param] = $this->paramWithoutTypeFactory($param, $value, false) ?? $this->paramFactory(ParamValueFlagSpecific::class, $param, $value);
 		}
 		foreach ($allowed['allowParamsAnywhere'] ?? [] as $param => $value) {
-			$allowParamsAnywhere[$param] = $this->paramFactory(ParamValueSpecific::class, $param, $value);
+			$allowParamsAnywhere[$param] = $this->paramWithoutTypeFactory($param, $value, false) ?? $this->paramFactory(ParamValueSpecific::class, $param, $value);
 		}
 		foreach ($allowed['allowParamsAnywhereAnyValue'] ?? [] as $param => $value) {
-			$allowParamsAnywhere[$param] = $this->paramFactory(ParamValueAny::class, $param, $value);
+			$allowParamsAnywhere[$param] = $this->paramWithoutTypeFactory($param, $value, false) ?? $this->paramFactory(ParamValueAny::class, $param, $value);
 		}
 		foreach ($allowed['allowParamFlagsAnywhere'] ?? [] as $param => $value) {
-			$allowParamsAnywhere[$param] = $this->paramFactory(ParamValueFlagSpecific::class, $param, $value);
+			$allowParamsAnywhere[$param] = $this->paramWithoutTypeFactory($param, $value, false) ?? $this->paramFactory(ParamValueFlagSpecific::class, $param, $value);
 		}
 		foreach ($allowed['allowExceptParamsInAllowed'] ?? $allowed['disallowParamsInAllowed'] ?? [] as $param => $value) {
-			$allowExceptParamsInAllowed[$param] = $this->paramFactory(ParamValueExcept::class, $param, $value);
+			$allowExceptParamsInAllowed[$param] = $this->paramWithoutTypeFactory($param, $value, true) ?? $this->paramFactory(ParamValueExcept::class, $param, $value);
 		}
 		foreach ($allowed['allowExceptParamFlagsInAllowed'] ?? $allowed['disallowParamFlagsInAllowed'] ?? [] as $param => $value) {
-			$allowExceptParamsInAllowed[$param] = $this->paramFactory(ParamValueFlagExcept::class, $param, $value);
+			$allowExceptParamsInAllowed[$param] = $this->paramWithoutTypeFactory($param, $value, true) ?? $this->paramFactory(ParamValueFlagExcept::class, $param, $value);
 		}
-		foreach ($allowed['allowExceptParams'] ?? $allowed['disallowParams'] ?? [] as $param => $value) {
-			$allowExceptParams[$param] = $this->paramFactory(ParamValueExcept::class, $param, $value);
+		foreach ($allowed['allowExceptParamsAnywhere'] ?? $allowed['disallowParamsAnywhere'] ?? $allowed['allowExceptParams'] ?? $allowed['disallowParams'] ?? [] as $param => $value) {
+			$allowExceptParams[$param] = $this->paramWithoutTypeFactory($param, $value, true) ?? $this->paramFactory(ParamValueExcept::class, $param, $value);
 		}
 		foreach ($allowed['allowExceptParamsAnyValue'] ?? $allowed['disallowParamsAnyValue'] ?? [] as $param => $value) {
-			$allowExceptParams[$param] = $this->paramFactory(ParamValueExceptAny::class, $param, $value);
+			$allowExceptParams[$param] = $this->paramWithoutTypeFactory($param, $value, true) ?? $this->paramFactory(ParamValueExceptAny::class, $param, $value);
 		}
 		foreach ($allowed['allowExceptParamFlags'] ?? $allowed['disallowParamFlags'] ?? [] as $param => $value) {
-			$allowExceptParams[$param] = $this->paramFactory(ParamValueFlagExcept::class, $param, $value);
+			$allowExceptParams[$param] = $this->paramWithoutTypeFactory($param, $value, true) ?? $this->paramFactory(ParamValueFlagExcept::class, $param, $value);
 		}
 		foreach ($allowed['allowExceptCaseInsensitiveParams'] ?? $allowed['disallowCaseInsensitiveParams'] ?? [] as $param => $value) {
-			$allowExceptParams[$param] = $this->paramFactory(ParamValueCaseInsensitiveExcept::class, $param, $value);
+			$allowExceptParams[$param] = $this->paramWithoutTypeFactory($param, $value, true) ?? $this->paramFactory(ParamValueCaseInsensitiveExcept::class, $param, $value);
 		}
 		return new AllowedConfig(
 			$allowed['allowIn'] ?? [],
@@ -132,8 +140,42 @@ class AllowedConfigFactory
 			$allowParamsInAllowed,
 			$allowParamsAnywhere,
 			$allowExceptParamsInAllowed,
-			$allowExceptParams
+			$allowExceptParams,
+			$allowed['allowInParamTypes'] ?? false,
+			$allowed['allowExceptInParamTypes'] ?? $allowed['disallowInParamTypes'] ?? false,
+			$allowed['allowInReturnType'] ?? false,
+			$allowed['allowExceptInReturnType'] ?? $allowed['disallowInReturnType'] ?? false
 		);
+	}
+
+
+	/**
+	 * For param directives whose config value does not resolve to a PHPStan Type implementation (e.g. classPattern).
+	 *
+	 * @param int|string $key
+	 * @param int|bool|string|null|array{position:int, value?:int|bool|string, typeString?:string, classPattern?:string, name?:string} $value
+	 * @param bool $except
+	 * @return Param|null
+	 * @throws InvalidConfigException
+	 */
+	private function paramWithoutTypeFactory($key, $value, bool $except): ?Param
+	{
+		if (!is_numeric($key) || !is_array($value)) {
+			return null;
+		}
+		$classPattern = $value['classPattern'] ?? null;
+		if ($classPattern === null) {
+			return null;
+		}
+		$classPattern = $this->normalizer->normalizeNamespace($classPattern);
+		if ($classPattern === '') {
+			throw new EmptyClassPatternInConfigException();
+		}
+		$paramPosition = $value['position'];
+		$paramName = $value['name'] ?? null;
+		return $except
+			? new ParamClassPatternExcept($paramPosition, $paramName, $classPattern)
+			: new ParamClassPattern($paramPosition, $paramName, $classPattern);
 	}
 
 
@@ -143,7 +185,7 @@ class AllowedConfigFactory
 	 * @param int|string $key
 	 * @param int|bool|string|null|array{position:int, value?:int|bool|string, typeString?:string, name?:string} $value
 	 * @return T
-	 * @throws UnsupportedParamTypeInConfigException
+	 * @throws InvalidConfigException
 	 */
 	private function paramFactory(string $class, $key, $value): ParamValue
 	{
@@ -175,8 +217,15 @@ class AllowedConfigFactory
 			$typeString = null;
 		}
 
-		if ($typeString) {
-			$type = $this->typeStringResolver->resolve($typeString);
+		if (is_string($typeString) && $typeString !== '') {
+			try {
+				$type = $this->typeStringResolver->resolve($typeString);
+			} catch (ParserException $e) {
+				$hint = str_contains($typeString, '*') ? ' Wildcards are not supported in typeString.' : '';
+				throw new InvalidTypeStringInConfigException($typeString, $e->getMessage() . $hint, $e);
+			}
+		} elseif ($typeString !== null) {
+			throw new EmptyTypeStringInConfigException();
 		} elseif (is_int($paramValue)) {
 			$type = new ConstantIntegerType($paramValue);
 		} elseif (is_bool($paramValue)) {

@@ -3,7 +3,7 @@
 
 [![PHP Tests](https://github.com/spaze/phpstan-disallowed-calls/workflows/PHP%20Tests/badge.svg)](https://github.com/spaze/phpstan-disallowed-calls/actions?query=workflow%3A%22PHP+Tests%22)
 
-There are some functions, methods, and constants which should not be used in production code. One good example is `var_dump()`,
+There are some functions, methods, constants, namespaces, attributes, variables and properties which should not be used in production code. One good example is the `var_dump()` function,
 it is often used to quickly debug problems but should be removed before committing the code. And sometimes it's not.
 
 Another example would be a generic logger. Let's say you're using one of the generic logging libraries but you have your own logger
@@ -58,6 +58,7 @@ Let's say you have disallowed the `foo()` function (or any other supported items
 - [Allow in class with given attributes](docs/allow-in-class-with-attributes.md)
 - [Allow in methods or functions with given attributes](docs/allow-in-methods.md)
 - [Allow in class with given attributes on any method](docs/allow-in-class-with-method-attributes.md)
+- [Allow in type hint positions](docs/allow-in-type-hint-positions.md) (param types, return types - `disallowedNamespaces` and `disallowedClasses` only)
 
 [Re-allowing attributes](docs/allow-attributes.md) uses a similar [configuration](docs/allow-attributes.md).
 
