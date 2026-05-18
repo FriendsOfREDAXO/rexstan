@@ -1,11 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * This file is part of the Nette Framework (https://nette.org)
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
-
-declare(strict_types=1);
 
 namespace Nette\Neon;
 
@@ -17,10 +15,11 @@ final class Parser
 {
 	private TokenStream $tokens;
 
-	/** @var int[] */
+	/** @var list<int> */
 	private array $posToLine = [];
 
 
+	/** Parses a token stream into an AST. */
 	public function parse(TokenStream $tokens): Node
 	{
 		$this->tokens = $tokens;
@@ -44,89 +43,88 @@ final class Parser
 		$this->injectPos($res);
 		$keyCheck = [];
 
-		loop:
-		$item = new Node\ArrayItemNode;
-		$this->injectPos($item);
-		if ($this->tokens->consume('-')) {
-			// continue
-		} elseif (!$this->tokens->isNext() || $onlyBullets) {
-			return $res->items
-				? $res
-				: $this->injectPos(new Node\LiteralNode(null));
+		while (true) {
+			$item = new Node\ArrayItemNode;
+			$this->injectPos($item);
+			if ($this->tokens->consume('-')) {
+				// continue
+			} elseif (!$this->tokens->isNext() || $onlyBullets) {
+				return $res->items
+					? $res
+					: $this->injectPos(new Node\LiteralNode(null));
 
-		} else {
-			$value = $this->parseValue();
-			if ($this->tokens->consume(':', '=')) {
-				$this->checkArrayKey($value, $keyCheck);
-				$item->key = $value;
 			} else {
-				if ($res->items) {
+				$value = $this->parseValue();
+				if ($this->tokens->consume(':', '=')) {
+					$this->checkArrayKey($value, $keyCheck);
+					$item->key = $value;
+				} else {
+					if ($res->items) {
+						$this->tokens->error();
+					}
+
+					return $value;
+				}
+			}
+
+			$res->items[] = $item;
+			$item->value = new Node\LiteralNode(null);
+			$this->injectPos($item->value);
+
+			if ($this->tokens->consume(Token::Newline)) {
+				while ($this->tokens->consume(Token::Newline));
+				$nextIndent = $this->tokens->getIndentation();
+
+				if (strncmp($nextIndent, $indent, min(strlen($nextIndent), strlen($indent)))) {
+					$this->tokens->error('Invalid combination of tabs and spaces');
+
+				} elseif (strlen($nextIndent) > strlen($indent)) { // open new block
+					$item->value = $this->parseBlock($nextIndent);
+
+				} elseif (strlen($nextIndent) < strlen($indent)) { // close block
+					return $res;
+
+				} elseif ($item->key !== null && $this->tokens->isNext('-')) { // special dash subblock
+					$item->value = $this->parseBlock($indent, onlyBullets: true);
+				}
+			} elseif ($item->key === null) {  // open new block after dash
+				$save = $this->tokens->getPos();
+				try {
+					$item->value = $this->parseBlock($indent . "\t");
+				} catch (Exception) {
+					$this->tokens->seek($save);
+					$item->value = $this->parseBlock($indent . '  ');
+				}
+			} elseif ($this->tokens->isNext()) {
+				$item->value = $this->parseValue();
+				if ($this->tokens->isNext() && !$this->tokens->isNext(Token::Newline)) {
 					$this->tokens->error();
 				}
-
-				return $value;
 			}
-		}
 
-		$res->items[] = $item;
-		$item->value = new Node\LiteralNode(null);
-		$this->injectPos($item->value);
+			if ($item->value instanceof Node\BlockArrayNode) {
+				$item->value->indentation = substr($item->value->indentation, strlen($indent));
+			}
 
-		if ($this->tokens->consume(Token::Newline)) {
+			$this->injectPos($res, $res->startTokenPos, $item->value->endTokenPos);
+			$this->injectPos($item, $item->startTokenPos, $item->value->endTokenPos);
+
 			while ($this->tokens->consume(Token::Newline));
-			$nextIndent = $this->tokens->getIndentation();
+			if (!$this->tokens->isNext()) {
+				return $res;
+			}
 
+			$nextIndent = $this->tokens->getIndentation();
 			if (strncmp($nextIndent, $indent, min(strlen($nextIndent), strlen($indent)))) {
 				$this->tokens->error('Invalid combination of tabs and spaces');
 
-			} elseif (strlen($nextIndent) > strlen($indent)) { // open new block
-				$item->value = $this->parseBlock($nextIndent);
+			} elseif (strlen($nextIndent) > strlen($indent)) {
+				$this->tokens->error('Bad indentation');
 
 			} elseif (strlen($nextIndent) < strlen($indent)) { // close block
 				return $res;
-
-			} elseif ($item->key !== null && $this->tokens->isNext('-')) { // special dash subblock
-				$item->value = $this->parseBlock($indent, onlyBullets: true);
-			}
-		} elseif ($item->key === null) {  // open new block after dash
-			$save = $this->tokens->getPos();
-			try {
-				$item->value = $this->parseBlock($indent . "\t");
-			} catch (Exception) {
-				$this->tokens->seek($save);
-				$item->value = $this->parseBlock($indent . '  ');
-			}
-		} elseif ($this->tokens->isNext()) {
-			$item->value = $this->parseValue();
-			if ($this->tokens->isNext() && !$this->tokens->isNext(Token::Newline)) {
-				$this->tokens->error();
 			}
 		}
-
-		if ($item->value instanceof Node\BlockArrayNode) {
-			$item->value->indentation = substr($item->value->indentation, strlen($indent));
-		}
-
-		$this->injectPos($res, $res->startTokenPos, $item->value->endTokenPos);
-		$this->injectPos($item, $item->startTokenPos, $item->value->endTokenPos);
-
-		while ($this->tokens->consume(Token::Newline));
-		if (!$this->tokens->isNext()) {
-			return $res;
-		}
-
-		$nextIndent = $this->tokens->getIndentation();
-		if (strncmp($nextIndent, $indent, min(strlen($nextIndent), strlen($indent)))) {
-			$this->tokens->error('Invalid combination of tabs and spaces');
-
-		} elseif (strlen($nextIndent) > strlen($indent)) {
-			$this->tokens->error('Bad indentation');
-
-		} elseif (strlen($nextIndent) < strlen($indent)) { // close block
-			return $res;
-		}
-
-		goto loop;
 	}
 
 
@@ -190,43 +188,42 @@ final class Parser
 		$this->injectPos($res, $this->tokens->getPos() - 1);
 		$keyCheck = [];
 
-		loop:
-		while ($this->tokens->consume(Token::Newline));
-		if ($this->tokens->consume($endBrace)) {
-			$this->injectPos($res, $res->startTokenPos, $this->tokens->getPos() - 1);
-			return $res;
+		while (true) {
+			while ($this->tokens->consume(Token::Newline));
+			if ($this->tokens->consume($endBrace)) {
+				$this->injectPos($res, $res->startTokenPos, $this->tokens->getPos() - 1);
+				return $res;
+			}
+
+			$res->items[] = $item = new Node\ArrayItemNode;
+			$this->injectPos($item, $this->tokens->getPos());
+			$value = $this->parseValue();
+
+			if ($this->tokens->consume(':', '=')) {
+				$this->checkArrayKey($value, $keyCheck);
+				$item->key = $value;
+				$item->value = $this->tokens->isNext(Token::Newline, ',', $endBrace)
+					? $this->injectPos(new Node\LiteralNode(null), $this->tokens->getPos())
+					: $this->parseValue();
+			} else {
+				$item->value = $value;
+			}
+
+			$this->injectPos($item, $item->startTokenPos, $item->value->endTokenPos);
+
+			$old = $this->tokens->getPos();
+			while ($this->tokens->consume(Token::Newline));
+			$this->tokens->consume(',');
+			if ($old !== $this->tokens->getPos()) {
+				continue;
+			} elseif (!$this->tokens->isNext($endBrace)) {
+				$this->tokens->error();
+			}
 		}
-
-		$res->items[] = $item = new Node\ArrayItemNode;
-		$this->injectPos($item, $this->tokens->getPos());
-		$value = $this->parseValue();
-
-		if ($this->tokens->consume(':', '=')) {
-			$this->checkArrayKey($value, $keyCheck);
-			$item->key = $value;
-			$item->value = $this->tokens->isNext(Token::Newline, ',', $endBrace)
-				? $this->injectPos(new Node\LiteralNode(null), $this->tokens->getPos())
-				: $this->parseValue();
-		} else {
-			$item->value = $value;
-		}
-
-		$this->injectPos($item, $item->startTokenPos, $item->value->endTokenPos);
-
-		$old = $this->tokens->getPos();
-		while ($this->tokens->consume(Token::Newline));
-		$this->tokens->consume(',');
-		if ($old !== $this->tokens->getPos()) {
-			goto loop;
-		} elseif (!$this->tokens->isNext($endBrace)) {
-			$this->tokens->error();
-		}
-
-		goto loop;
 	}
 
 
-	/** @param  true[]  $arr */
+	/** @param  array<string, true>  $arr */
 	private function checkArrayKey(Node $key, array &$arr): void
 	{
 		if ((!$key instanceof Node\StringNode && !$key instanceof Node\LiteralNode) || !is_scalar($key->value)) {
@@ -242,6 +239,11 @@ final class Parser
 	}
 
 
+	/**
+	 * @template T of Node
+	 * @param T $node
+	 * @return T
+	 */
 	private function injectPos(Node $node, ?int $start = null, ?int $end = null): Node
 	{
 		$node->startTokenPos = $start ?? $this->tokens->getPos();

@@ -1,11 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * This file is part of the Nette Framework (https://nette.org)
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
-
-declare(strict_types=1);
 
 namespace Nette\Neon\Node;
 
@@ -30,17 +28,20 @@ final class LiteralNode extends Node
 
 
 	public function __construct(
+		/** @var  bool|int|float|string|\DateTimeInterface|null */
 		public mixed $value,
 	) {
 	}
 
 
+	/** @return bool|int|float|string|\DateTimeInterface|null */
 	public function toValue(): mixed
 	{
 		return $this->value;
 	}
 
 
+	/** @return ($isKey is true ? int|float|string : bool|int|float|string|\DateTimeImmutable|null) */
 	public static function parse(string $value, bool $isKey = false): mixed
 	{
 		if (!$isKey && array_key_exists($value, self::SimpleTypes)) {
@@ -67,6 +68,7 @@ final class LiteralNode extends Node
 	}
 
 
+	/** Converts a base-N digit string to an integer, or to a decimal string if it exceeds PHP_INT_MAX. */
 	public static function baseConvert(string $number, int $base): string|int
 	{
 		if (strlen($number) < 16) {

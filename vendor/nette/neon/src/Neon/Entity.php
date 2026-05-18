@@ -1,17 +1,15 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * This file is part of the Nette Framework (https://nette.org)
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 
-declare(strict_types=1);
-
 namespace Nette\Neon;
 
 
 /**
- * Representation of NEON entity 'foo(bar=1)'
+ * Representation of a NEON entity, e.g. Column(type: int).
  */
 final class Entity extends \stdClass
 {
@@ -24,7 +22,7 @@ final class Entity extends \stdClass
 
 
 	/** @param  mixed[]  $properties */
-	public static function __set_state(array $properties)
+	public static function __set_state(array $properties): self
 	{
 		return new self($properties['value'], $properties['attributes']);
 	}

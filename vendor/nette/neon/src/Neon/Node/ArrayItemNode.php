@@ -1,11 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * This file is part of the Nette Framework (https://nette.org)
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
-
-declare(strict_types=1);
 
 namespace Nette\Neon\Node;
 
@@ -21,7 +19,7 @@ final class ArrayItemNode extends Node
 
 
 	/**
-	 * @param  self[]  $items
+	 * @param  list<self>  $items
 	 * @return mixed[]
 	 */
 	public static function itemsToArray(array $items): array
@@ -39,7 +37,7 @@ final class ArrayItemNode extends Node
 	}
 
 
-	/** @param  self[]  $items */
+	/** @param  list<self>  $items */
 	public static function itemsToInlineString(array $items): string
 	{
 		$res = '';
@@ -53,7 +51,7 @@ final class ArrayItemNode extends Node
 	}
 
 
-	/** @param  self[]  $items */
+	/** @param  list<self>  $items */
 	public static function itemsToBlockString(array $items): string
 	{
 		$res = '';
@@ -69,12 +67,14 @@ final class ArrayItemNode extends Node
 	}
 
 
+	/** @return never Use itemsToArray() on the parent array node instead. */
 	public function toValue(): mixed
 	{
 		throw new \LogicException;
 	}
 
 
+	/** @return never Use itemsToBlockString() or itemsToInlineString() instead. */
 	public function toString(): string
 	{
 		throw new \LogicException;
