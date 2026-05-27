@@ -1,11 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * This file is part of the Nette Framework (https://nette.org)
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
-
-declare(strict_types=1);
 
 namespace Nette\Http;
 
@@ -99,7 +97,7 @@ class UrlScript extends UrlImmutable
 
 
 	/**
-	 * Returns the additional path information.
+	 * Returns the path segment after the script name (PATH_INFO), or an empty string if not present.
 	 */
 	public function getPathInfo(): string
 	{

@@ -1,11 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * This file is part of the Nette Framework (https://nette.org)
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
-
-declare(strict_types=1);
 
 namespace Nette\Http;
 
@@ -38,7 +36,7 @@ use const PHP_QUERY_RFC3986;
  * @property-read string $absoluteUrl
  * @property-read string $authority
  * @property-read string $hostUrl
- * @property-read array $queryParameters
+ * @property-read array<string,mixed> $queryParameters
  */
 class UrlImmutable implements \JsonSerializable
 {
@@ -50,6 +48,8 @@ class UrlImmutable implements \JsonSerializable
 	private string $host = '';
 	private ?int $port = null;
 	private string $path = '';
+
+	/** @var mixed[] */
 	private array $query = [];
 	private string $fragment = '';
 	private ?string $authority = null;
@@ -139,6 +139,10 @@ class UrlImmutable implements \JsonSerializable
 	}
 
 
+	/**
+	 * Returns the specified number of rightmost domain labels (e.g. level 2 of 'www.nette.org' -> 'nette.org').
+	 * Negative values trim from the right instead.
+	 */
 	public function getDomain(int $level = 2): string
 	{
 		$parts = ip2long($this->host)
@@ -160,12 +164,18 @@ class UrlImmutable implements \JsonSerializable
 	}
 
 
+	/**
+	 * Returns the port number, falling back to the default port for the scheme if not explicitly set.
+	 */
 	public function getPort(): ?int
 	{
 		return $this->port ?: $this->getDefaultPort();
 	}
 
 
+	/**
+	 * Returns the default port for the current scheme, or null if the scheme is not recognized.
+	 */
 	public function getDefaultPort(): ?int
 	{
 		return Url::$defaultPorts[$this->scheme] ?? null;
@@ -191,6 +201,7 @@ class UrlImmutable implements \JsonSerializable
 	}
 
 
+	/** @param string|mixed[] $query */
 	public function withQuery(string|array $query): static
 	{
 		$dolly = clone $this;
@@ -213,12 +224,14 @@ class UrlImmutable implements \JsonSerializable
 	}
 
 
+	/** @return mixed[] */
 	public function getQueryParameters(): array
 	{
 		return $this->query;
 	}
 
 
+	/** @return mixed[]|string|null */
 	public function getQueryParameter(string $name): array|string|null
 	{
 		return $this->query[$name] ?? null;
@@ -239,9 +252,6 @@ class UrlImmutable implements \JsonSerializable
 	}
 
 
-	/**
-	 * Returns the entire URI including query string and fragment.
-	 */
 	public function getAbsoluteUrl(): string
 	{
 		return $this->getHostUrl() . $this->path
@@ -283,6 +293,9 @@ class UrlImmutable implements \JsonSerializable
 	}
 
 
+	/**
+	 * Checks whether two URLs are equal, ignoring query parameter order and trailing dots in hostnames.
+	 */
 	public function isEqual(string|Url|self $url): bool
 	{
 		return (new Url($this))->isEqual($url);
@@ -290,8 +303,8 @@ class UrlImmutable implements \JsonSerializable
 
 
 	/**
-	 * Resolves relative URLs in the same way as browser. If path is relative, it is resolved against
-	 * base URL, if begins with /, it is resolved against the host root.
+	 * Resolves a URI reference against this URL the same way a browser would.
+	 * Relative paths are resolved against the current path; paths starting with / are resolved against the host root.
 	 */
 	public function resolve(string $reference): self
 	{
@@ -337,7 +350,10 @@ class UrlImmutable implements \JsonSerializable
 	}
 
 
-	/** @internal */
+	/**
+	 * @return array{string, string, string, string, ?int, string, mixed[], string}
+	 * @internal
+	 */
 	final public function export(): array
 	{
 		return [$this->scheme, $this->user, $this->password, $this->host, $this->port, $this->path, $this->query, $this->fragment];

@@ -1,21 +1,33 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * This file is part of the Nette Framework (https://nette.org)
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 
-declare(strict_types=1);
-
 namespace Nette\Bridges\HttpDI;
 
 use Nette;
 use Nette\Schema\Expect;
-use function is_array;
+use function is_array, strval;
 
 
 /**
  * HTTP extension for Nette DI.
+ *
+ * @property object{
+ *     proxy: array<string>,
+ *     forceHttps: bool,
+ *     headers: array<string, ?scalar>,
+ *     frames: string|bool|null,
+ *     csp: array<string, array<mixed>|scalar|null>,
+ *     cspReportOnly: array<string, array<mixed>|scalar|null>,
+ *     featurePolicy: array<string, array<mixed>|scalar|null>,
+ *     cookiePath: ?string,
+ *     cookieDomain: ?string,
+ *     cookieSecure: bool|'auto'|null,
+ *     disableNetteCookie: bool,
+ * } $config
  */
 class HttpExtension extends Nette\DI\CompilerExtension
 {
@@ -29,6 +41,7 @@ class HttpExtension extends Nette\DI\CompilerExtension
 	{
 		return Expect::structure([
 			'proxy' => Expect::anyOf(Expect::arrayOf('string'), Expect::string()->castTo('array'))->firstIsDefault()->dynamic(),
+			'forceHttps' => Expect::bool(false)->dynamic(),
 			'headers' => Expect::arrayOf('scalar|null')->default([
 				'X-Powered-By' => 'Nette Framework 3',
 				'Content-Type' => 'text/html; charset=utf-8',
@@ -50,9 +63,13 @@ class HttpExtension extends Nette\DI\CompilerExtension
 		$builder = $this->getContainerBuilder();
 		$config = $this->config;
 
-		$builder->addDefinition($this->prefix('requestFactory'))
+		$requestFactory = $builder->addDefinition($this->prefix('requestFactory'))
 			->setFactory(Nette\Http\RequestFactory::class)
 			->addSetup('setProxy', [$config->proxy]);
+
+		if ($config->forceHttps) {
+			$requestFactory->addSetup('setForceHttps');
+		}
 
 		$request = $builder->addDefinition($this->prefix('request'))
 			->setFactory('@Nette\Http\RequestFactory::fromGlobals');
@@ -93,7 +110,7 @@ class HttpExtension extends Nette\DI\CompilerExtension
 	private function sendHeaders(): void
 	{
 		$config = $this->config;
-		$headers = array_map('strval', $config->headers);
+		$headers = array_map(strval(...), $config->headers);
 
 		if (isset($config->frames) && $config->frames !== true && !isset($headers['X-Frame-Options'])) {
 			$frames = $config->frames;
@@ -143,6 +160,7 @@ class HttpExtension extends Nette\DI\CompilerExtension
 	}
 
 
+	/** @param array<string, array<mixed>|scalar|null>  $config */
 	private static function buildPolicy(array $config): string
 	{
 		$nonQuoted = ['require-sri-for' => 1, 'sandbox' => 1];

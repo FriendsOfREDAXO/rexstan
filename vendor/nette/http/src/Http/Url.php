@@ -1,17 +1,15 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * This file is part of the Nette Framework (https://nette.org)
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 
-declare(strict_types=1);
-
 namespace Nette\Http;
 
 use Nette;
 use function array_pop, array_slice, bin2hex, chunk_split, defined, explode, function_exists, http_build_query, idn_to_utf8, implode, ini_get, ip2long, is_array, is_string, ksort, parse_str, parse_url, preg_match, preg_quote, preg_replace, preg_replace_callback, rawurldecode, rawurlencode, rtrim, str_contains, str_replace, str_starts_with, strcasecmp, strlen, strrpos, strtolower, strtoupper, substr;
-use const IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46, PHP_QUERY_RFC3986;
+use const PHP_QUERY_RFC3986;
 
 
 /**
@@ -41,12 +39,13 @@ use const IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46, PHP_QUERY_RFC3986;
  * @property-read string $basePath
  * @property-read string $baseUrl
  * @property-read string $relativeUrl
- * @property-read array $queryParameters
+ * @property-read array<string,mixed> $queryParameters
  */
 class Url implements \JsonSerializable
 {
 	use Nette\SmartObject;
 
+	/** @var array<string, int> */
 	public static array $defaultPorts = [
 		'http' => 80,
 		'https' => 443,
@@ -59,6 +58,8 @@ class Url implements \JsonSerializable
 	private string $host = '';
 	private ?int $port = null;
 	private string $path = '';
+
+	/** @var mixed[] */
 	private array $query = [];
 	private string $fragment = '';
 
@@ -147,7 +148,8 @@ class Url implements \JsonSerializable
 
 
 	/**
-	 * Returns the part of domain.
+	 * Returns the specified number of rightmost domain labels (e.g. level 2 of 'www.nette.org' -> 'nette.org').
+	 * Negative values trim from the right instead.
 	 */
 	public function getDomain(int $level = 2): string
 	{
@@ -168,18 +170,27 @@ class Url implements \JsonSerializable
 	}
 
 
+	/**
+	 * Returns the port number, falling back to the default port for the scheme if not explicitly set.
+	 */
 	public function getPort(): ?int
 	{
 		return $this->port ?: $this->getDefaultPort();
 	}
 
 
+	/**
+	 * Returns the default port for the current scheme, or null if the scheme is not recognized.
+	 */
 	public function getDefaultPort(): ?int
 	{
 		return self::$defaultPorts[$this->scheme] ?? null;
 	}
 
 
+	/**
+	 * Sets the path. Automatically prepends a leading slash when a host is set.
+	 */
 	public function setPath(string $path): static
 	{
 		$this->path = $path;
@@ -197,6 +208,7 @@ class Url implements \JsonSerializable
 	}
 
 
+	/** @param string|mixed[] $query */
 	public function setQuery(string|array $query): static
 	{
 		$this->query = is_array($query) ? $query : self::parseQuery($query);
@@ -204,6 +216,11 @@ class Url implements \JsonSerializable
 	}
 
 
+	/**
+	 * Merges query parameters into the existing query. Array values use union (existing keys are preserved);
+	 * string values are appended and reparsed.
+	 * @param string|mixed[] $query
+	 */
 	public function appendQuery(string|array $query): static
 	{
 		$this->query = is_array($query)
@@ -219,6 +236,7 @@ class Url implements \JsonSerializable
 	}
 
 
+	/** @return mixed[] */
 	public function getQueryParameters(): array
 	{
 		return $this->query;
@@ -309,7 +327,7 @@ class Url implements \JsonSerializable
 
 
 	/**
-	 * URL comparison.
+	 * Checks whether two URLs are equal, ignoring query parameter order and trailing dots in hostnames.
 	 */
 	public function isEqual(string|self|UrlImmutable $url): bool
 	{
@@ -333,7 +351,8 @@ class Url implements \JsonSerializable
 
 
 	/**
-	 * Transforms URL to canonical form.
+	 * Normalizes the URL to canonical form: percent-encodes path, lowercases and trims the host,
+	 * and converts IDN ASCII to Unicode.
 	 */
 	public function canonicalize(): static
 	{
@@ -360,7 +379,10 @@ class Url implements \JsonSerializable
 	}
 
 
-	/** @internal */
+	/**
+	 * @return array{string, string, string, string, ?int, string, mixed[], string}
+	 * @internal
+	 */
 	final public function export(): array
 	{
 		return [$this->scheme, $this->user, $this->password, $this->host, $this->port, $this->path, $this->query, $this->fragment];
@@ -377,15 +399,16 @@ class Url implements \JsonSerializable
 		}
 
 		if (function_exists('idn_to_utf8') && defined('INTL_IDNA_VARIANT_UTS46')) {
-			return idn_to_utf8($host, IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46) ?: $host;
+			return idn_to_utf8($host) ?: $host;
 		}
 
 		trigger_error('PHP extension intl is not loaded or is too old', E_USER_WARNING);
+		return $host;
 	}
 
 
 	/**
-	 * Similar to rawurldecode, but preserves reserved chars encoded.
+	 * Decodes percent-encoded characters, but keeps reserved characters (specified in $reserved) encoded.
 	 */
 	public static function unescape(string $s, string $reserved = '%;/?:@&=+$,'): string
 	{
@@ -397,7 +420,7 @@ class Url implements \JsonSerializable
 				'#%(' . substr(chunk_split(bin2hex($reserved), 2, '|'), 0, -1) . ')#i',
 				fn(array $m): string => '%25' . strtoupper($m[1]),
 				$s,
-			);
+			) ?? throw new \LogicException('Regular expression failed in unescape()');
 		}
 
 		return rawurldecode($s);
@@ -406,19 +429,20 @@ class Url implements \JsonSerializable
 
 	/**
 	 * Parses query string. Is affected by directive arg_separator.input.
+	 * @return mixed[]
 	 */
 	public static function parseQuery(string $s): array
 	{
 		$s = str_replace(['%5B', '%5b'], '[', $s);
-		$sep = preg_quote(ini_get('arg_separator.input'));
-		$s = preg_replace("#([$sep])([^[$sep=]+)([^$sep]*)#", '&0[$2]$3', '&' . $s);
+		$sep = preg_quote(ini_get('arg_separator.input') ?: '&');
+		$s = preg_replace("#([$sep])([^[$sep=]+)([^$sep]*)#", '&0[$2]$3', '&' . $s) ?? throw new \LogicException;
 		parse_str($s, $res);
-		return $res[0] ?? [];
+		return (array) ($res[0] ?? []);
 	}
 
 
 	/**
-	 * Determines if URL is absolute, ie if it starts with a scheme followed by colon.
+	 * Checks whether the URL is absolute, i.e. starts with a scheme followed by a colon.
 	 */
 	public static function isAbsolute(string $url): bool
 	{
@@ -427,7 +451,7 @@ class Url implements \JsonSerializable
 
 
 	/**
-	 * Normalizes a path by handling and removing relative path references like '.', '..' and directory traversal.
+	 * Resolves dot segments (. and ..) in a URL path, as per RFC 3986.
 	 */
 	public static function removeDotSegments(string $path): string
 	{

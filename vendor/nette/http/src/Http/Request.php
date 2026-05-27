@@ -1,49 +1,55 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * This file is part of the Nette Framework (https://nette.org)
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 
-declare(strict_types=1);
-
 namespace Nette\Http;
 
 use Nette;
-use function array_change_key_case, base64_decode, count, explode, func_num_args, gethostbyaddr, implode, preg_match, preg_match_all, rsort, strcasecmp, strtolower, strtr;
-use const CASE_LOWER;
+use function array_change_key_case, base64_decode, count, explode, gethostbyaddr, implode, in_array, preg_match, preg_match_all, rsort, strcasecmp, strtr;
 
 
 /**
- * HttpRequest provides access scheme for request sent via HTTP.
+ * Immutable representation of an HTTP request with access to URL, headers, cookies, uploaded files, and body.
  *
  * @property-read UrlScript $url
- * @property-read array $query
- * @property-read array $post
- * @property-read array $files
- * @property-read array $cookies
+ * @property-read array<string,mixed> $query
+ * @property-read array<string,mixed> $post
+ * @property-read array<string,mixed> $files
+ * @property-read array<string,string> $cookies
  * @property-read string $method
- * @property-read array $headers
- * @property-read UrlImmutable|null $referer
+ * @property-read array<string,string> $headers
+ * @property-read ?UrlImmutable $referer
  * @property-read bool $secured
  * @property-read bool $ajax
- * @property-read string|null $remoteAddress
- * @property-read string|null $remoteHost
- * @property-read string|null $rawBody
+ * @property-read ?string $remoteAddress
+ * @property-read ?string $remoteHost
+ * @property-read ?string $rawBody
  */
 class Request implements IRequest
 {
 	use Nette\SmartObject;
 
+	/** @var array<string, string> */
 	private readonly array $headers;
 
+	/** @var (\Closure(): string)|null */
 	private readonly ?\Closure $rawBodyCallback;
 
 
+	/**
+	 * @param array<string, string> $headers
+	 * @param ?(callable(): string) $rawBodyCallback
+	 */
 	public function __construct(
 		private UrlScript $url,
+		/** @var mixed[] */
 		private readonly array $post = [],
+		/** @var mixed[] */
 		private readonly array $files = [],
+		/** @var array<string, string> */
 		private readonly array $cookies = [],
 		array $headers = [],
 		private readonly string $method = 'GET',
@@ -51,7 +57,7 @@ class Request implements IRequest
 		private ?string $remoteHost = null,
 		?callable $rawBodyCallback = null,
 	) {
-		$this->headers = array_change_key_case($headers, CASE_LOWER);
+		$this->headers = array_change_key_case($headers);
 		$this->rawBodyCallback = $rawBodyCallback ? $rawBodyCallback(...) : null;
 	}
 
@@ -80,8 +86,7 @@ class Request implements IRequest
 
 
 	/**
-	 * Returns variable provided to the script via URL query ($_GET).
-	 * If no key is passed, returns the entire array.
+	 * Returns a URL query parameter, or all parameters as an array if no key is given.
 	 */
 	public function getQuery(?string $key = null): mixed
 	{
@@ -89,13 +94,13 @@ class Request implements IRequest
 			return $this->url->getQueryParameters();
 		}
 
+		assert($key !== null);
 		return $this->url->getQueryParameter($key);
 	}
 
 
 	/**
-	 * Returns variable provided to the script via POST method ($_POST).
-	 * If no key is passed, returns the entire array.
+	 * Returns a POST parameter, or all POST parameters as an array if no key is given.
 	 */
 	public function getPost(?string $key = null): mixed
 	{
@@ -103,12 +108,14 @@ class Request implements IRequest
 			return $this->post;
 		}
 
+		assert($key !== null);
 		return $this->post[$key] ?? null;
 	}
 
 
 	/**
-	 * Returns uploaded file.
+	 * Returns the uploaded file for the given key, or null if not present.
+	 * Accepts a string key or an array of keys for nested file structures (e.g. ['form', 'avatar']).
 	 * @param  string|string[]  $key
 	 */
 	public function getFile($key): ?FileUpload
@@ -119,7 +126,8 @@ class Request implements IRequest
 
 
 	/**
-	 * Returns tree of upload files in a normalized structure, with each leaf an instance of Nette\Http\FileUpload.
+	 * Returns the tree of uploaded files, with each leaf being a FileUpload instance.
+	 * @return mixed[]
 	 */
 	public function getFiles(): array
 	{
@@ -138,6 +146,7 @@ class Request implements IRequest
 
 	/**
 	 * Returns all cookies.
+	 * @return array<string, string>
 	 */
 	public function getCookies(): array
 	{
@@ -178,6 +187,7 @@ class Request implements IRequest
 
 	/**
 	 * Returns all HTTP headers as associative array.
+	 * @return array<string, string>
 	 */
 	public function getHeaders(): array
 	{
@@ -186,8 +196,8 @@ class Request implements IRequest
 
 
 	/**
-	 * What URL did the user come from? Beware, it is not reliable at all.
-	 * @deprecated  deprecated in favor of the getOrigin()
+	 * Returns the referrer URL from the Referer header. Unreliable - clients may omit or spoof it.
+	 * @deprecated  use getOrigin()
 	 */
 	public function getReferer(): ?UrlImmutable
 	{
@@ -198,23 +208,20 @@ class Request implements IRequest
 
 
 	/**
-	 * What origin did the user come from? It contains scheme, hostname and port.
+	 * Returns the request origin (scheme + host + port) from the Origin header, or null if absent or invalid.
 	 */
 	public function getOrigin(): ?UrlImmutable
 	{
-		$header = $this->headers['origin'] ?? 'null';
-		try {
-			return $header === 'null'
-				? null
-				: new UrlImmutable($header);
-		} catch (Nette\InvalidArgumentException $e) {
+		$header = $this->headers['origin'] ?? '';
+		if (!preg_match('~^[a-z][a-z0-9+.-]*://[^/]+$~i', $header)) {
 			return null;
 		}
+		return new UrlImmutable($header);
 	}
 
 
 	/**
-	 * Is the request sent via secure channel (https)?
+	 * Checks whether the request was sent via a secure channel (HTTPS).
 	 */
 	public function isSecured(): bool
 	{
@@ -223,7 +230,7 @@ class Request implements IRequest
 
 
 	/**
-	 * Is the request coming from the same site and is initiated by clicking on a link?
+	 * Checks whether the request is coming from the same site and was initiated by clicking on a link.
 	 */
 	public function isSameSite(): bool
 	{
@@ -232,7 +239,7 @@ class Request implements IRequest
 
 
 	/**
-	 * Is it an AJAX request?
+	 * Checks whether the request was made via AJAX (X-Requested-With: XMLHttpRequest).
 	 */
 	public function isAjax(): bool
 	{
@@ -255,7 +262,7 @@ class Request implements IRequest
 	public function getRemoteHost(): ?string
 	{
 		if ($this->remoteHost === null && $this->remoteAddress !== null) {
-			$this->remoteHost = gethostbyaddr($this->remoteAddress);
+			$this->remoteHost = gethostbyaddr($this->remoteAddress) ?: null;
 		}
 
 		return $this->remoteHost;
@@ -291,8 +298,9 @@ class Request implements IRequest
 
 
 	/**
-	 * Returns the most preferred language by browser. Uses the `Accept-Language` header. If no match is reached, it returns `null`.
-	 * @param  string[]  $langs  supported languages
+	 * Returns the most preferred language from the Accept-Language header that matches one of the supported languages,
+	 * or null if no match is found.
+	 * @param  array<string>  $langs  supported language codes (e.g. ['en', 'cs', 'de'])
 	 */
 	public function detectLanguage(array $langs): ?string
 	{

@@ -16,6 +16,7 @@ use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
+use PHPStan\Type\UnionType;
 use Symplify\PHPStanRules\Enum\RuleIdentifier;
 use Symplify\PHPStanRules\TypeAnalyzer\CallableTypeAnalyzer;
 
@@ -43,7 +44,7 @@ final class NoDynamicNameRule implements Rule
     public function getNodeType(): string
     {
         // trick to allow multiple node types
-        return Node::class;
+        return Expr::class;
     }
 
     public function processNode(Node $node, Scope $scope): array
@@ -58,6 +59,11 @@ final class NoDynamicNameRule implements Rule
             }
 
             if ($node->name->toString() === 'class') {
+                return [];
+            }
+
+            $classType = $scope->getType($node->class);
+            if ($classType instanceof UnionType && $classType->getObjectClassReflections() !== []) {
                 return [];
             }
 

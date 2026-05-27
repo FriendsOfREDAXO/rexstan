@@ -10,6 +10,7 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 use Symplify\PHPStanRules\Enum\RuleIdentifier\PHPUnitRuleIdentifier;
 use Symplify\PHPStanRules\Helper\NamingHelper;
+use Symplify\PHPStanRules\PHPUnit\TestClassDetector;
 
 /**
  * @implements Rule<FuncCall>
@@ -20,15 +21,6 @@ final class NoAssertFuncCallInTestsRule implements Rule
      * @var string
      */
     public const ERROR_MESSAGE = 'Instead of assert() that can miss important checks, use native PHPUnit assert call';
-
-    /**
-     * @var mixed[]
-     */
-    private const TEST_FILE_SUFFIXES = [
-        'Test.php',
-        'TestCase.php',
-        'Context.php',
-    ];
 
     public function getNodeType(): string
     {
@@ -45,7 +37,7 @@ final class NoAssertFuncCallInTestsRule implements Rule
             return [];
         }
 
-        if (! $this->isTestFile($scope)) {
+        if (! TestClassDetector::isTestClass($scope)) {
             return [];
         }
 
@@ -54,16 +46,5 @@ final class NoAssertFuncCallInTestsRule implements Rule
             ->build();
 
         return [$identifierRuleError];
-    }
-
-    private function isTestFile(Scope $scope): bool
-    {
-        foreach (self::TEST_FILE_SUFFIXES as $testFileSuffix) {
-            if (substr_compare($scope->getFile(), $testFileSuffix, -strlen($testFileSuffix)) === 0) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

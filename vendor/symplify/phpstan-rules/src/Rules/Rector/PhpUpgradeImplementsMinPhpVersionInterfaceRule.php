@@ -42,7 +42,6 @@ final class PhpUpgradeImplementsMinPhpVersionInterfaceRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        /** @var string $className */
         $className = (string) $node->namespacedName;
         if (substr_compare($className, 'Rector', -strlen('Rector')) !== 0) {
             return [];

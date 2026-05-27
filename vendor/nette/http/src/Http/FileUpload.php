@@ -1,18 +1,15 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * This file is part of the Nette Framework (https://nette.org)
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 
-declare(strict_types=1);
-
 namespace Nette\Http;
 
 use Nette;
 use Nette\Utils\Image;
 use function array_intersect_key, array_map, basename, chmod, dirname, file_get_contents, filesize, finfo_file, finfo_open, getimagesize, image_type_to_extension, in_array, is_string, is_uploaded_file, preg_replace, str_replace, trim, unlink;
-use const FILEINFO_EXTENSION, FILEINFO_MIME_TYPE, UPLOAD_ERR_NO_FILE, UPLOAD_ERR_OK;
 
 
 /**
@@ -21,12 +18,12 @@ use const FILEINFO_EXTENSION, FILEINFO_MIME_TYPE, UPLOAD_ERR_NO_FILE, UPLOAD_ERR
  * @property-read string $name
  * @property-read string $sanitizedName
  * @property-read string $untrustedFullPath
- * @property-read string|null $contentType
+ * @property-read ?string $contentType
  * @property-read int $size
  * @property-read string $temporaryFile
  * @property-read int $error
  * @property-read bool $ok
- * @property-read string|null $contents
+ * @property-read ?string $contents
  */
 final class FileUpload
 {
@@ -44,13 +41,14 @@ final class FileUpload
 	private readonly int $error;
 
 
+	/** @param array{name?: string, full_path?: string, size?: int, tmp_name?: string, error?: int, type?: string}|string|null  $value */
 	public function __construct(array|string|null $value)
 	{
 		if (is_string($value)) {
 			$value = [
 				'name' => basename($value),
 				'full_path' => $value,
-				'size' => filesize($value),
+				'size' => filesize($value) ?: 0,
 				'tmp_name' => $value,
 				'error' => UPLOAD_ERR_OK,
 			];
@@ -121,7 +119,7 @@ final class FileUpload
 	public function getContentType(): ?string
 	{
 		if ($this->isOk()) {
-			$this->type ??= finfo_file(finfo_open(FILEINFO_MIME_TYPE), $this->tmpName);
+			$this->type ??= ($finfo = finfo_open(FILEINFO_MIME_TYPE)) ? finfo_file($finfo, $this->tmpName) : false;
 		}
 
 		return $this->type ?: null;
@@ -134,13 +132,14 @@ final class FileUpload
 	public function getSuggestedExtension(): ?string
 	{
 		if ($this->isOk() && $this->extension === null) {
-			$exts = finfo_file(finfo_open(FILEINFO_EXTENSION), $this->tmpName);
+			$finfo = finfo_open(FILEINFO_EXTENSION);
+			$exts = $finfo ? finfo_file($finfo, $this->tmpName) : false;
 			if ($exts && $exts !== '???') {
 				return $this->extension = preg_replace('~[/,].*~', '', $exts);
 			}
-			[, , $type] = Nette\Utils\Helpers::falseToNull(@getimagesize($this->tmpName)); // @ - files smaller than 12 bytes causes read error
-			if ($type) {
-				return $this->extension = image_type_to_extension($type, false);
+			$info = Nette\Utils\Helpers::falseToNull(@getimagesize($this->tmpName)); // @ - files smaller than 12 bytes causes read error
+			if ($info) {
+				return $this->extension = image_type_to_extension($info[2], include_dot: false) ?: null;
 			}
 			$this->extension = false;
 		}
@@ -177,7 +176,7 @@ final class FileUpload
 
 
 	/**
-	 * Returns the error code. It has to be one of UPLOAD_ERR_XXX constants.
+	 * Returns the upload error code (one of the UPLOAD_ERR_XXX constants).
 	 * @see http://php.net/manual/en/features.file-upload.errors.php
 	 */
 	public function getError(): int
@@ -226,12 +225,12 @@ final class FileUpload
 
 
 	/**
-	 * Returns true if the uploaded file is an image and the format is supported by PHP, so it can be loaded using the toImage() method.
-	 * Detection is based on its signature, the integrity of the file is not checked. Requires PHP extensions fileinfo & gd.
+	 * Checks whether the uploaded file is an image in a format supported by PHP (detectable via fileinfo, loadable via GD).
+	 * Detection is based on file signature; full integrity is not verified.
 	 */
 	public function isImage(): bool
 	{
-		$types = array_map(fn($type) => Image::typeToMimeType($type), Image::getSupportedTypes());
+		$types = array_map(Image::typeToMimeType(...), Image::getSupportedTypes());
 		return in_array($this->getContentType(), $types, strict: true);
 	}
 
@@ -247,12 +246,13 @@ final class FileUpload
 
 
 	/**
-	 * Returns a pair of [width, height] with dimensions of the uploaded image.
+	 * Returns the [width, height] dimensions of the uploaded image, or null if it is not a valid image.
+	 * @return ?array{int, int}
 	 */
 	public function getImageSize(): ?array
 	{
-		return $this->isImage()
-			? array_intersect_key(getimagesize($this->tmpName), [0, 1])
+		return $this->isImage() && ($info = getimagesize($this->tmpName))
+			? array_intersect_key($info, [0, 1])
 			: null;
 	}
 
@@ -272,9 +272,13 @@ final class FileUpload
 	 */
 	public function getContents(): ?string
 	{
-		// future implementation can try to work around safe_mode and open_basedir limitations
-		return $this->isOk()
-			? file_get_contents($this->tmpName)
-			: null;
+		if (!$this->isOk()) {
+			return null;
+		}
+
+		$res = file_get_contents($this->tmpName);
+		return $res === false
+			? throw new Nette\IOException("Unable to read file '$this->tmpName'.")
+			: $res;
 	}
 }

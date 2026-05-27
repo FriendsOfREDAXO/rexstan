@@ -1,11 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * This file is part of the Nette Framework (https://nette.org)
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
-
-declare(strict_types=1);
 
 namespace Nette\Http;
 
@@ -29,7 +27,7 @@ final class Helpers
 
 
 	/**
-	 * Returns HTTP valid date format.
+	 * Formats a date and time in the HTTP date format (RFC 7231), e.g. 'Mon, 23 Jan 1978 10:00:00 GMT'.
 	 */
 	public static function formatDate(string|int|\DateTimeInterface $time): string
 	{
@@ -39,14 +37,18 @@ final class Helpers
 
 
 	/**
-	 * Is IP address in CIDR block?
+	 * Checks whether an IP address falls within a CIDR block (e.g. '192.168.1.0/24').
 	 */
 	public static function ipMatch(string $ip, string $mask): bool
 	{
 		[$mask, $size] = explode('/', $mask . '/');
+		if (!($ipBin = inet_pton($ip)) || !($maskBin = inet_pton($mask))) {
+			return false;
+		}
+
 		$tmp = fn(int $n): string => sprintf('%032b', $n);
-		$ip = implode('', array_map($tmp, unpack('N*', inet_pton($ip))));
-		$mask = implode('', array_map($tmp, unpack('N*', inet_pton($mask))));
+		$ip = implode('', array_map($tmp, unpack('N*', $ipBin) ?: []));
+		$mask = implode('', array_map($tmp, unpack('N*', $maskBin) ?: []));
 		$max = strlen($ip);
 		if (!$max || $max !== strlen($mask) || (int) $size < 0 || (int) $size > $max) {
 			return false;
@@ -56,7 +58,10 @@ final class Helpers
 	}
 
 
-	public static function initCookie(IRequest $request, IResponse $response)
+	/**
+	 * Sends the strict same-site cookie used to detect same-site requests.
+	 */
+	public static function initCookie(IRequest $request, IResponse $response): void
 	{
 		$response->setCookie(self::StrictCookieName, '1', 0, '/', sameSite: IResponse::SameSiteStrict);
 	}
