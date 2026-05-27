@@ -1,11 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * This file is part of the Nette Framework (https://nette.org)
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
-
-declare(strict_types=1);
 
 namespace Nette\Http;
 
@@ -13,7 +11,7 @@ use Nette;
 use Nette\Utils\Arrays;
 use Nette\Utils\Strings;
 use function array_filter, base64_encode, count, end, explode, file_get_contents, filter_input_array, filter_var, function_exists, get_debug_type, in_array, ini_get, is_array, is_string, key, min, preg_last_error, preg_match, preg_replace, preg_split, rtrim, sprintf, str_contains, strcasecmp, strlen, strncmp, strpos, strrpos, strtolower, strtr, substr, trim;
-use const FILTER_UNSAFE_RAW, FILTER_VALIDATE_IP, INPUT_COOKIE, INPUT_POST, PHP_SAPI, UPLOAD_ERR_NO_FILE;
+use const PHP_SAPI;
 
 
 /**
@@ -24,17 +22,26 @@ class RequestFactory
 	/** @internal */
 	private const ValidChars = '\x09\x0A\x0D\x20-\x7E\xA0-\x{10FFFF}';
 
+	/**
+	 * Regex-based filters applied to the URL before parsing. 'path' filters run on the path component only;
+	 * 'url' filters run on the full request URI.
+	 * @var array<string, array<string, string>>
+	 */
 	public array $urlFilters = [
 		'path' => ['#//#' => '/'], // '%20' => ''
 		'url' => [], // '#[.,)]$#D' => ''
 	];
 
 	private bool $binary = false;
+	private bool $forceHttps = false;
 
-	/** @var string[] */
+	/** @var list<string> */
 	private array $proxies = [];
 
 
+	/**
+	 * Disables sanitization of request data (GET, POST, cookies, file names) for binary-safe handling.
+	 */
 	public function setBinary(bool $binary = true): static
 	{
 		$this->binary = $binary;
@@ -43,11 +50,22 @@ class RequestFactory
 
 
 	/**
-	 * @param  string|string[]  $proxy
+	 * Sets the trusted proxy IP addresses or CIDR blocks used to resolve the real client IP and URL scheme.
+	 * @param string|list<string>  $proxy
 	 */
 	public function setProxy($proxy): static
 	{
 		$this->proxies = (array) $proxy;
+		return $this;
+	}
+
+
+	/**
+	 * Forces the request scheme to HTTPS regardless of the server environment.
+	 */
+	public function setForceHttps(bool $forceHttps = true): static
+	{
+		$this->forceHttps = $forceHttps;
 		return $this;
 	}
 
@@ -62,6 +80,9 @@ class RequestFactory
 		$this->getPathAndQuery($url);
 		[$post, $cookies] = $this->getGetPostCookie($url);
 		[$remoteAddr, $remoteHost] = $this->getClient($url);
+		if ($this->forceHttps) {
+			$url->setScheme('https');
+		}
 
 		return new Request(
 			new UrlScript($url, $this->getScriptPath($url)),
@@ -72,7 +93,7 @@ class RequestFactory
 			$this->getMethod(),
 			$remoteAddr,
 			$remoteHost,
-			fn(): string => file_get_contents('php://input'),
+			fn() => (string) file_get_contents('php://input'),
 		);
 	}
 
@@ -130,9 +151,10 @@ class RequestFactory
 	}
 
 
+	/** @return array{mixed[], mixed[]} */
 	private function getGetPostCookie(Url $url): array
 	{
-		$useFilter = (!in_array((string) ini_get('filter.default'), ['', 'unsafe_raw'], true) || ini_get('filter.default_flags'));
+		$useFilter = (!in_array((string) ini_get('filter.default'), ['', 'unsafe_raw'], strict: true) || ini_get('filter.default_flags'));
 
 		$query = $url->getQueryParameters();
 		$post = $useFilter
@@ -172,6 +194,7 @@ class RequestFactory
 	}
 
 
+	/** @return mixed[] */
 	private function getFiles(): array
 	{
 		$reChars = '#^[' . self::ValidChars . ']*+$#Du';
@@ -228,6 +251,7 @@ class RequestFactory
 	}
 
 
+	/** @return array<string, string> */
 	private function getHeaders(): array
 	{
 		if (function_exists('apache_request_headers')) {
@@ -235,7 +259,7 @@ class RequestFactory
 		} else {
 			$headers = [];
 			foreach ($_SERVER as $k => $v) {
-				if (strncmp($k, 'HTTP_', 5) === 0) {
+				if (str_starts_with($k, 'HTTP_')) {
 					$k = substr($k, 5);
 				} elseif (strncmp($k, 'CONTENT_', 8)) {
 					continue;
@@ -271,6 +295,7 @@ class RequestFactory
 	}
 
 
+	/** @return array{?string, ?string}  [remoteAddr, remoteHost] */
 	private function getClient(Url $url): array
 	{
 		$remoteAddr = !empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : null;

@@ -436,16 +436,16 @@
         },
         {
             "name": "nette/http",
-            "version": "v3.3.3",
+            "version": "v3.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/http.git",
-                "reference": "c557f21c8cedd621dbfd7990752b1d55ef353f1d"
+                "reference": "d92cb97fea369d10b46677223cc2bfb5adc1a2f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/http/zipball/c557f21c8cedd621dbfd7990752b1d55ef353f1d",
-                "reference": "c557f21c8cedd621dbfd7990752b1d55ef353f1d",
+                "url": "https://api.github.com/repos/nette/http/zipball/d92cb97fea369d10b46677223cc2bfb5adc1a2f2",
+                "reference": "d92cb97fea369d10b46677223cc2bfb5adc1a2f2",
                 "shasum": ""
             },
             "require": {
@@ -458,9 +458,11 @@
             },
             "require-dev": {
                 "nette/di": "^3.0",
+                "nette/phpstan-rules": "^1.0",
                 "nette/security": "^3.0",
-                "nette/tester": "^2.4",
-                "phpstan/phpstan-nette": "^2.0@stable",
+                "nette/tester": "^2.6",
+                "phpstan/extension-installer": "^1.4@stable",
+                "phpstan/phpstan": "^2.1@stable",
                 "tracy/tracy": "^2.8"
             },
             "suggest": {
@@ -514,9 +516,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/http/issues",
-                "source": "https://github.com/nette/http/tree/v3.3.3"
+                "source": "https://github.com/nette/http/tree/v3.3.4"
             },
-            "time": "2025-10-30T22:32:24+00:00"
+            "time": "2026-05-26T16:57:36+00:00"
         },
         {
             "name": "nette/neon",

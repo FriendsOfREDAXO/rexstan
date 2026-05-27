@@ -1,11 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * This file is part of the Nette Framework (https://nette.org)
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
-
-declare(strict_types=1);
 
 namespace Nette\Http;
 
@@ -31,34 +29,31 @@ class Session
 		'cookie_httponly' => true, // must be enabled to prevent Session Hijacking
 	];
 
-	/** @var array<callable(self): void>  Occurs when the session is started */
+	/** @var list<callable(static): void>  Occurs when the session is started */
 	public array $onStart = [];
 
-	/** @var array<callable(self): void>  Occurs before the session is written to disk */
+	/** @var list<callable(static): void>  Occurs before the session is written to disk */
 	public array $onBeforeWrite = [];
 
 	private bool $regenerated = false;
 	private bool $started = false;
 
-	/** default configuration */
+	/** @var array<string, mixed> default configuration */
 	private array $options = [
 		'cookie_samesite' => IResponse::SameSiteLax,
 		'cookie_lifetime' => 0,   // for a maximum of 3 hours or until the browser is closed
 		'gc_maxlifetime' => self::DefaultFileLifetime, // 3 hours
 	];
-
-	private readonly IRequest $request;
-	private readonly IResponse $response;
 	private ?\SessionHandlerInterface $handler = null;
 	private bool $readAndClose = false;
 	private bool $fileExists = true;
 	private bool $autoStart = true;
 
 
-	public function __construct(IRequest $request, IResponse $response)
-	{
-		$this->request = $request;
-		$this->response = $response;
+	public function __construct(
+		private readonly IRequest $request,
+		private readonly IResponse $response,
+	) {
 		$this->options['cookie_path'] = &$this->response->cookiePath;
 		$this->options['cookie_domain'] = &$this->response->cookieDomain;
 		$this->options['cookie_secure'] = &$this->response->cookieSecure;
@@ -75,7 +70,7 @@ class Session
 	}
 
 
-	private function doStart($mustExists = false): void
+	private function doStart(bool $mustExists = false): void
 	{
 		if (session_status() === PHP_SESSION_ACTIVE) { // adapt an existing session
 			if (!$this->started) {
@@ -92,7 +87,7 @@ class Session
 			$id = $this->request->getCookie(session_name());
 			$id = is_string($id) && preg_match('#^[0-9a-zA-Z,-]{22,256}$#Di', $id)
 				? $id
-				: session_create_id();
+				: (session_create_id() ?: throw new Nette\InvalidStateException('Failed to create session ID.'));
 			session_id($id); // causes resend of a cookie to make sure it has the right parameters
 		}
 
@@ -188,7 +183,7 @@ class Session
 
 
 	/**
-	 * Has been session started?
+	 * Checks whether the session has been started.
 	 */
 	public function isStarted(): bool
 	{
@@ -254,9 +249,9 @@ class Session
 				throw new Nette\InvalidStateException('Cannot regenerate session ID after HTTP headers have been sent' . ($file ? " (output started at $file:$line)." : '.'));
 			}
 
-			session_regenerate_id(true);
+			session_regenerate_id(delete_old_session: true);
 		} else {
-			session_id(session_create_id());
+			session_id(session_create_id() ?: throw new Nette\InvalidStateException('Failed to create session ID.'));
 		}
 
 		$this->regenerated = true;
@@ -264,7 +259,7 @@ class Session
 
 
 	/**
-	 * Returns the current session ID. Don't make dependencies, can be changed for each request.
+	 * Returns the current session ID. Avoid relying on the value - it may change between requests.
 	 */
 	public function getId(): string
 	{
@@ -273,7 +268,7 @@ class Session
 
 
 	/**
-	 * Sets the session name to a specified one.
+	 * Sets the session name.
 	 */
 	public function setName(string $name): static
 	{
@@ -303,7 +298,7 @@ class Session
 	/**
 	 * Returns specified session section.
 	 * @template T of SessionSection
-	 * @param class-string<T> $class
+	 * @param class-string<T>  $class
 	 * @return T
 	 */
 	public function getSection(string $section, string $class = SessionSection::class): SessionSection
@@ -318,21 +313,26 @@ class Session
 	public function hasSection(string $section): bool
 	{
 		if ($this->exists() && !$this->started) {
-			$this->autoStart(false);
+			$this->autoStart(forWrite: false);
 		}
 
 		return !empty($_SESSION['__NF']['DATA'][$section]);
 	}
 
 
-	/** @return string[] */
+	/**
+	 * Returns the names of all existing session sections.
+	 * @return list<string>
+	 */
 	public function getSectionNames(): array
 	{
 		if ($this->exists() && !$this->started) {
-			$this->autoStart(false);
+			$this->autoStart(forWrite: false);
 		}
 
-		return array_keys($_SESSION['__NF']['DATA'] ?? []);
+		/** @var array<string, mixed> $data */
+		$data = $_SESSION['__NF']['DATA'] ?? [];
+		return array_keys($data);
 	}
 
 
@@ -373,6 +373,7 @@ class Session
 
 	/**
 	 * Sets session options.
+	 * @param array<string, mixed>  $options
 	 * @throws Nette\NotSupportedException
 	 * @throws Nette\InvalidStateException
 	 */
@@ -423,6 +424,7 @@ class Session
 
 	/**
 	 * Returns all session options.
+	 * @return array<string, mixed>
 	 */
 	public function getOptions(): array
 	{
@@ -432,6 +434,7 @@ class Session
 
 	/**
 	 * Configures session environment.
+	 * @param array<string, mixed>  $config
 	 */
 	private function configure(array $config): void
 	{
@@ -442,7 +445,7 @@ class Session
 			if ($value === null || ini_get("session.$key") == $value) { // intentionally ==
 				continue;
 
-			} elseif (strncmp($key, 'cookie_', 7) === 0) {
+			} elseif (str_starts_with($key, 'cookie_')) {
 				$cookie[substr($key, 7)] = $value;
 
 			} else {
@@ -477,8 +480,8 @@ class Session
 
 
 	/**
-	 * Sets the amount of time (like '20 minutes') allowed between requests before the session will be terminated,
-	 * null means "for a maximum of 3 hours or until the browser is closed".
+	 * Sets the session lifetime as a time string (e.g. '20 minutes'), or null to revert to the default
+	 * (up to 3 hours or until the browser is closed).
 	 */
 	public function setExpiration(?string $expire): static
 	{

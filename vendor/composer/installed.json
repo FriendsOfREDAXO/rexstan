@@ -448,17 +448,17 @@
         },
         {
             "name": "nette/http",
-            "version": "v3.3.3",
-            "version_normalized": "3.3.3.0",
+            "version": "v3.3.4",
+            "version_normalized": "3.3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/http.git",
-                "reference": "c557f21c8cedd621dbfd7990752b1d55ef353f1d"
+                "reference": "d92cb97fea369d10b46677223cc2bfb5adc1a2f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/http/zipball/c557f21c8cedd621dbfd7990752b1d55ef353f1d",
-                "reference": "c557f21c8cedd621dbfd7990752b1d55ef353f1d",
+                "url": "https://api.github.com/repos/nette/http/zipball/d92cb97fea369d10b46677223cc2bfb5adc1a2f2",
+                "reference": "d92cb97fea369d10b46677223cc2bfb5adc1a2f2",
                 "shasum": ""
             },
             "require": {
@@ -471,9 +471,11 @@
             },
             "require-dev": {
                 "nette/di": "^3.0",
+                "nette/phpstan-rules": "^1.0",
                 "nette/security": "^3.0",
-                "nette/tester": "^2.4",
-                "phpstan/phpstan-nette": "^2.0@stable",
+                "nette/tester": "^2.6",
+                "phpstan/extension-installer": "^1.4@stable",
+                "phpstan/phpstan": "^2.1@stable",
                 "tracy/tracy": "^2.8"
             },
             "suggest": {
@@ -482,7 +484,7 @@
                 "ext-intl": "to support punycode by Nette\\Http\\Url",
                 "ext-session": "to use Nette\\Http\\Session"
             },
-            "time": "2025-10-30T22:32:24+00:00",
+            "time": "2026-05-26T16:57:36+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -529,7 +531,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/http/issues",
-                "source": "https://github.com/nette/http/tree/v3.3.3"
+                "source": "https://github.com/nette/http/tree/v3.3.4"
             },
             "install-path": "../nette/http"
         },
@@ -829,12 +831,12 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.55",
-            "version_normalized": "2.1.55.0",
+            "version": "2.1.56",
+            "version_normalized": "2.1.56.0",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9eaac3826ed5e9b8427350a43cac825eeca3f566",
-                "reference": "9eaac3826ed5e9b8427350a43cac825eeca3f566",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/93a603c9fc3be8c3c93bbc8d22170ad766685537",
+                "reference": "93a603c9fc3be8c3c93bbc8d22170ad766685537",
                 "shasum": ""
             },
             "require": {
@@ -843,7 +845,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2026-05-18T11:57:34+00:00",
+            "time": "2026-05-26T17:04:57+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -1795,17 +1797,17 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "14.9.11",
-            "version_normalized": "14.9.11.0",
+            "version": "14.10.0",
+            "version_normalized": "14.10.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "5ea4bbd9357cba253aada506dd96d37d7069ac3b"
+                "reference": "dc1035ded416b99313d6a14e69923f5e018a6b40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/5ea4bbd9357cba253aada506dd96d37d7069ac3b",
-                "reference": "5ea4bbd9357cba253aada506dd96d37d7069ac3b",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/dc1035ded416b99313d6a14e69923f5e018a6b40",
+                "reference": "dc1035ded416b99313d6a14e69923f5e018a6b40",
                 "shasum": ""
             },
             "require": {
@@ -1814,7 +1816,7 @@
                 "phpstan/phpstan": "^2.1.33",
                 "webmozart/assert": "^1.12 || ^2.0"
             },
-            "time": "2026-01-05T13:53:59+00:00",
+            "time": "2026-05-22T09:35:51+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1839,7 +1841,7 @@
             "description": "Set of Symplify rules for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/14.9.11"
+                "source": "https://github.com/symplify/phpstan-rules/tree/14.10.0"
             },
             "funding": [
                 {
@@ -1855,24 +1857,24 @@
         },
         {
             "name": "tomasvotruba/cognitive-complexity",
-            "version": "1.1.0",
-            "version_normalized": "1.1.0.0",
+            "version": "1.1.1",
+            "version_normalized": "1.1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/cognitive-complexity.git",
-                "reference": "3ca30d23ec743d1d0d67d2d6f2824538a98941f8"
+                "reference": "435763b488beabc11e7d1102f6891ebe255cc3b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/cognitive-complexity/zipball/3ca30d23ec743d1d0d67d2d6f2824538a98941f8",
-                "reference": "3ca30d23ec743d1d0d67d2d6f2824538a98941f8",
+                "url": "https://api.github.com/repos/TomasVotruba/cognitive-complexity/zipball/435763b488beabc11e7d1102f6891ebe255cc3b8",
+                "reference": "435763b488beabc11e7d1102f6891ebe255cc3b8",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4 || ^8.0",
                 "phpstan/phpstan": "^2"
             },
-            "time": "2026-03-30T14:54:38+00:00",
+            "time": "2026-05-25T12:12:55+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1894,7 +1896,7 @@
             "description": "PHPStan rules to measure cognitive complexity of your classes and methods",
             "support": {
                 "issues": "https://github.com/TomasVotruba/cognitive-complexity/issues",
-                "source": "https://github.com/TomasVotruba/cognitive-complexity/tree/1.1.0"
+                "source": "https://github.com/TomasVotruba/cognitive-complexity/tree/1.1.1"
             },
             "funding": [
                 {
@@ -1910,25 +1912,25 @@
         },
         {
             "name": "tomasvotruba/type-coverage",
-            "version": "2.1.0",
-            "version_normalized": "2.1.0.0",
+            "version": "2.2.1",
+            "version_normalized": "2.2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/type-coverage.git",
-                "reference": "468354b3964120806a69890cbeb3fcf005876391"
+                "reference": "4087caa4639bdd4c646f2984bc333efeddf69e4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/468354b3964120806a69890cbeb3fcf005876391",
-                "reference": "468354b3964120806a69890cbeb3fcf005876391",
+                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/4087caa4639bdd4c646f2984bc333efeddf69e4b",
+                "reference": "4087caa4639bdd4c646f2984bc333efeddf69e4b",
                 "shasum": ""
             },
             "require": {
                 "nette/utils": "^3.2 || ^4.0",
                 "php": "^7.4 || ^8.0",
-                "phpstan/phpstan": "^2.0"
+                "phpstan/phpstan": "^2.1.33"
             },
-            "time": "2025-12-05T16:38:02+00:00",
+            "time": "2026-05-26T08:14:01+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1954,7 +1956,7 @@
             ],
             "support": {
                 "issues": "https://github.com/TomasVotruba/type-coverage/issues",
-                "source": "https://github.com/TomasVotruba/type-coverage/tree/2.1.0"
+                "source": "https://github.com/TomasVotruba/type-coverage/tree/2.2.1"
             },
             "funding": [
                 {
