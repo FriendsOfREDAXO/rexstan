@@ -367,6 +367,7 @@
                 "issues": "https://github.com/paranoiq/dogma/issues",
                 "source": "https://github.com/paranoiq/dogma/tree/v0.2.22"
             },
+            "abandoned": true,
             "time": "2023-06-22T08:25:35+00:00"
         },
         {
