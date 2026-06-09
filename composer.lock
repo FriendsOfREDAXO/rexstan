@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7b18c31d759e267da48edf741535029e",
+    "content-hash": "a010380f4bf0d2a105002ae5a51ca6d4",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1436,16 +1436,16 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.4.2",
+            "version": "0.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "b4a6084d9c08db2d208cef81184bbf26d1581864"
+                "reference": "a3e22daee23b6f52a32e1f06ad863fcb31fa8647"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/b4a6084d9c08db2d208cef81184bbf26d1581864",
-                "reference": "b4a6084d9c08db2d208cef81184bbf26d1581864",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/a3e22daee23b6f52a32e1f06ad863fcb31fa8647",
+                "reference": "a3e22daee23b6f52a32e1f06ad863fcb31fa8647",
                 "shasum": ""
             },
             "require": {
@@ -1456,6 +1456,7 @@
                 "phpstan/phpstan": "^2.0"
             },
             "conflict": {
+                "phpstan/phpstan": "2.1.55||2.1.56||2.2.0||2.2.1",
                 "sqlftw/sqlftw": "<0.1.16"
             },
             "require-dev": {
@@ -1469,7 +1470,7 @@
                 "phpstan/phpstan-strict-rules": "^2.0",
                 "phpunit/phpunit": "^8.5|^9.5",
                 "symplify/easy-coding-standard": "^12.5",
-                "tomasvotruba/unused-public": "^2.0",
+                "tomasvotruba/unused-public": "^2.2",
                 "vlucas/phpdotenv": "^5.4"
             },
             "type": "phpstan-extension",
@@ -1502,7 +1503,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.4.2"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.4.3"
             },
             "funding": [
                 {
@@ -1510,7 +1511,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-08-07T09:33:14+00:00"
+            "time": "2026-06-05T06:43:40+00:00"
         },
         {
             "name": "staabm/phpstan-psr3",
