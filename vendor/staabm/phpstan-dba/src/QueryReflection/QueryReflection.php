@@ -28,11 +28,16 @@ use staabm\PHPStanDba\Analyzer\QueryPlanQueryResolver;
 use staabm\PHPStanDba\Analyzer\QueryPlanResult;
 use staabm\PHPStanDba\Ast\ExpressionFinder;
 use staabm\PHPStanDba\DbaException;
+use staabm\PHPStanDba\DbSchema\LazySchemaHasher;
+use staabm\PHPStanDba\DbSchema\SchemaHasher;
+use staabm\PHPStanDba\DbSchema\SchemaHasherMysql;
+use staabm\PHPStanDba\DbSchema\SchemaHasherString;
 use staabm\PHPStanDba\Error;
 use staabm\PHPStanDba\PhpDoc\PhpDocUtil;
 use staabm\PHPStanDba\SchemaReflection\SchemaReflection;
 use staabm\PHPStanDba\SqlAst\ParserInference;
 use staabm\PHPStanDba\UnresolvableQueryException;
+use function sprintf;
 
 final class QueryReflection
 {
@@ -407,6 +412,12 @@ final class QueryReflection
             return strtoupper($matches[1]);
         }
 
+        // WITH [RECURSIVE] cte [(col_list)] AS (subquery) [, ...] <SELECT|INSERT|UPDATE|DELETE|REPLACE>
+        // (?1) recurses group 1 to balance parentheses inside subqueries.
+        if (1 === preg_match('/^\s*WITH\s+(?:RECURSIVE\s+)?[`"\w]+\s*(?:\([^)]*\))?\s*AS\s*(\((?:[^()]|(?1))*\))(?:\s*,\s*[`"\w]+\s*(?:\([^)]*\))?\s*AS\s*(?1))*\s*(SELECT|INSERT|UPDATE|DELETE|REPLACE)\b/i', $query, $matches)) {
+            return strtoupper($matches[2]);
+        }
+
         return null;
     }
 
@@ -522,6 +533,10 @@ final class QueryReflection
                     $isOptional
                 );
 
+                if ($param->name === null) {
+                    throw new ShouldNotHappenException('Empty parameter name');
+                }
+
                 $parameters[$param->name] = $param;
             } elseif ($keyType->isInteger()->yes()) {
                 $param = new Parameter(
@@ -551,6 +566,8 @@ final class QueryReflection
 
             return $haystack;
         };
+
+        ksort($parameters);
 
         foreach ($parameters as $placeholderKey => $parameter) {
             $value = $parameter->simulatedValue;
@@ -700,5 +717,21 @@ final class QueryReflection
 
             yield $queryPlanAnalyzer->analyze($queryString);
         }
+    }
+
+    public function getSchemaHasher(): SchemaHasher
+    {
+        $reflector = self::reflector();
+
+        return new LazySchemaHasher(function () use ($reflector) {
+            $ds = null;
+            if ($reflector instanceof RecordingReflector) {
+                $ds = $reflector->getDatasource();
+            }
+            if (null === $ds) {
+                return new SchemaHasherString('unknown-fixed-hash');
+            }
+            return new SchemaHasherMysql($ds);
+        });
     }
 }

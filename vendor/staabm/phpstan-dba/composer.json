@@ -8,7 +8,7 @@
 		"composer-runtime-api": "^2.0",
 		"composer/semver": "^3.2",
 		"doctrine/dbal": "3.*|4.*",
-		"phpstan/phpstan": "^2.0"
+		"phpstan/phpstan": "^2.1.2"
 	},
 	"require-dev": {
 		"ext-mysqli": "*",
@@ -21,11 +21,12 @@
 		"phpstan/phpstan-strict-rules": "^2.0",
 		"phpunit/phpunit": "^8.5|^9.5",
 		"symplify/easy-coding-standard": "^12.5",
-		"tomasvotruba/unused-public": "^2.0",
+		"tomasvotruba/unused-public": "^2.2",
 		"vlucas/phpdotenv": "^5.4"
 	},
 	"conflict": {
-		"sqlftw/sqlftw": "<0.1.16"
+		"sqlftw/sqlftw": "<0.1.16",
+		"phpstan/phpstan": "2.1.55||2.1.56||2.2.0||2.2.1"
 	},
 	"autoload": {
 		"psr-4": {
