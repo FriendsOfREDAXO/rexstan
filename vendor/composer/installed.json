@@ -766,6 +766,60 @@
             "install-path": "../nikolaposa/version"
         },
         {
+            "name": "phar-io/version",
+            "version": "3.2.1",
+            "version_normalized": "3.2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phar-io/version.git",
+                "reference": "4f7fd7836c6f332bb2933569e566a0d6c4cbed74"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phar-io/version/zipball/4f7fd7836c6f332bb2933569e566a0d6c4cbed74",
+                "reference": "4f7fd7836c6f332bb2933569e566a0d6c4cbed74",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0"
+            },
+            "time": "2022-02-21T01:04:05+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Arne Blankerts",
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Sebastian Heuer",
+                    "email": "sebastian@phpeople.de",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Library for handling version information and constraints",
+            "support": {
+                "issues": "https://github.com/phar-io/version/issues",
+                "source": "https://github.com/phar-io/version/tree/3.2.1"
+            },
+            "install-path": "../phar-io/version"
+        },
+        {
             "name": "php-parallel-lint/php-parallel-lint",
             "version": "v1.4.0",
             "version_normalized": "1.4.0.0",
@@ -831,12 +885,12 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.2.3",
-            "version_normalized": "2.2.3.0",
+            "version": "2.2.5",
+            "version_normalized": "2.2.5.0",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/4048833dd47b377287818841877fb3087289509c",
-                "reference": "4048833dd47b377287818841877fb3087289509c",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/909c1e5fef7989ac0d0c1c5c42e32a5c4f6198a0",
+                "reference": "909c1e5fef7989ac0d0c1c5c42e32a5c4f6198a0",
                 "shasum": ""
             },
             "require": {
@@ -845,7 +899,7 @@
             "conflict": {
                 "phpstan/phpstan-shim": "*"
             },
-            "time": "2026-06-30T21:15:26+00:00",
+            "time": "2026-07-05T06:31:06+00:00",
             "bin": [
                 "phpstan",
                 "phpstan.phar"
@@ -951,22 +1005,23 @@
         },
         {
             "name": "phpstan/phpstan-phpunit",
-            "version": "2.0.16",
-            "version_normalized": "2.0.16.0",
+            "version": "2.0.18",
+            "version_normalized": "2.0.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-phpunit.git",
-                "reference": "6ab598e1bc106e6827fd346ae4a12b4a5d634c32"
+                "reference": "f5dc20ff8082d02339b60cab68ec3eb0d859fb30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/6ab598e1bc106e6827fd346ae4a12b4a5d634c32",
-                "reference": "6ab598e1bc106e6827fd346ae4a12b4a5d634c32",
+                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/f5dc20ff8082d02339b60cab68ec3eb0d859fb30",
+                "reference": "f5dc20ff8082d02339b60cab68ec3eb0d859fb30",
                 "shasum": ""
             },
             "require": {
+                "phar-io/version": "^3.2",
                 "php": "^7.4 || ^8.0",
-                "phpstan/phpstan": "^2.1.32"
+                "phpstan/phpstan": "^2.2.3"
             },
             "conflict": {
                 "phpunit/phpunit": "<7.0"
@@ -976,9 +1031,10 @@
                 "php-parallel-lint/php-parallel-lint": "^1.2",
                 "phpstan/phpstan-deprecation-rules": "^2.0",
                 "phpstan/phpstan-strict-rules": "^2.0",
-                "phpunit/phpunit": "^9.6"
+                "phpunit/phpunit": "^9.6",
+                "shipmonk/name-collision-detector": "^2.1"
             },
-            "time": "2026-02-14T09:05:21+00:00",
+            "time": "2026-07-04T12:16:09+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1004,7 +1060,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-phpunit/issues",
-                "source": "https://github.com/phpstan/phpstan-phpunit/tree/2.0.16"
+                "source": "https://github.com/phpstan/phpstan-phpunit/tree/2.0.18"
             },
             "install-path": "../phpstan/phpstan-phpunit"
         },
@@ -1495,17 +1551,17 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.4.5",
-            "version_normalized": "0.4.5.0",
+            "version": "0.4.6",
+            "version_normalized": "0.4.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "68009d15e6611beda443399cffd892229e0ff8dd"
+                "reference": "683712f1c2248e2c9d23fe9dcce43817a1ca65fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/68009d15e6611beda443399cffd892229e0ff8dd",
-                "reference": "68009d15e6611beda443399cffd892229e0ff8dd",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/683712f1c2248e2c9d23fe9dcce43817a1ca65fe",
+                "reference": "683712f1c2248e2c9d23fe9dcce43817a1ca65fe",
                 "shasum": ""
             },
             "require": {
@@ -1533,7 +1589,7 @@
                 "tomasvotruba/unused-public": "^2.2",
                 "vlucas/phpdotenv": "^5.4"
             },
-            "time": "2026-06-30T14:09:43+00:00",
+            "time": "2026-07-03T08:52:36+00:00",
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
@@ -1565,7 +1621,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.4.5"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.4.6"
             },
             "funding": [
                 {
