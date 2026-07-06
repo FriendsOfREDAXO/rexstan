@@ -5,7 +5,7 @@
         "php-parallel-lint/php-parallel-lint": "1.4",
         "phpstan/phpstan": "2.2.3",
         "phpstan/phpstan-deprecation-rules": "2.0.4",
-        "phpstan/phpstan-phpunit": "2.0.17",
+        "phpstan/phpstan-phpunit": "2.0.18",
         "phpstan/phpstan-strict-rules": "2.0.11",
         "phpstan/phpstan-symfony": "2.0.20",
         "spaze/phpstan-disallowed-calls": "4.12.0",
