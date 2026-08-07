@@ -32,7 +32,7 @@ class InstancePropertyUsages implements Rule
 
 
 	/**
-	 * @param array<array{property:string|list<string>, message?:string, errorIdentifier?:string, errorTip?:string|list<string>}> $disallowedProperties + AllowDirectivesConfig
+	 * @phpstan-param DisallowedPropertiesConfig $disallowedProperties
 	 * @throws ShouldNotHappenException
 	 */
 	public function __construct(
