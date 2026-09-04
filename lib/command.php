@@ -5,6 +5,7 @@ namespace rexstan;
 use Exception;
 use FriendsOfRedaxo\RexStan\RexStan;
 use rex_console_command;
+use rex_path;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -36,7 +37,7 @@ class rexstan_command extends rex_console_command
 
         $path = null;
         if ($input->getArgument('path') !== null) {
-            $analyzePath = getcwd() .'/../'. $input->getArgument('path');
+            $analyzePath = rex_path::base('/'. $input->getArgument('path'));
             $path = realpath($analyzePath);
 
             if ($path === false) {
