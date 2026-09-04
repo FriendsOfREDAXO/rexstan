@@ -27,6 +27,10 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ### 🐛 Bug Fixes (Fehlerbehebungen)
 
+- Der "Neu analysieren"/"Analyse starten"-Button reagierte auf einen Klick teilweise gar nicht: Der Klick-Handler wurde nur über einen `DOMContentLoaded`-Listener gebunden; lädt/führt das per `rex_view::addJsFile()` eingebundene Script erst NACH diesem Event aus (auf einer Backend-Seite mit vielen anderen Scripts durchaus möglich), lief der Listener nie und es wurde nie ein Handler gebunden. Behoben nach demselben Muster wie `ai-chat-warm-cache.js` in diesem Projekt: zusätzlich ein `jQuery(document).on('rex:ready', …)`-Listener sowie ein unbedingter `init()`-Aufruf beim Laden des Scripts selbst (deckt den Fall ab, dass das DOM zu diesem Zeitpunkt bereits fertig ist) – mit Schutz gegen doppelte Initialisierung.
+- Das Script wird jetzt aus `boot.php` heraus eingebunden (auf die `analysis`-Subseite begrenzt), analog zum bestehenden `confetti.min.js`-Muster dieses Addons, statt aus `pages/analysis.php` selbst.
+- Die "läuft"-Anzeige referenzierte eine CSS-Klasse (`rexstan-analysis-spinner`), die nie definiert war – de facto nur ein statisches Sanduhr-Emoji ohne jede Animation. Jetzt ein echter rotierender CSS-Spinner (`assets/rexstan.css`), serverseitig UND per JS identisch gerendert, damit er auch ohne (oder vor) JS sichtbar und animiert ist.
+
 - `RexStan::generateAnalysisBaseline()` und `RexStan::analyzeSummaryBaseline()` (Backend-Seite "Zusammenfassung") riefen PHPStan ohne `--no-progress` auf. Je nach Umgebung landeten dadurch rohe Fortschrittsbalken-Steuerzeichen im stderr-Output, der bei einem Fehler in der Exception-Message ausgegeben wird ("Unable to generate baseline: ⣾⣽⣻…") – die eigentliche Fehlerursache war darin nicht mehr lesbar. Beide Aufrufe haben jetzt `--no-progress`, wie alle anderen PHPStan-Aufrufe in dieser Datei bereits.
 
 ### 🧹 Code Quality
