@@ -23,7 +23,8 @@ if ($forceRerun) {
     RexStan::startBackgroundWebAnalysis();
 }
 
-rex_view::addJsFile($this->getAssetsUrl('rexstan-analysis.js'));
+// JS is registered in boot.php (gated to this subpage), not here - see the
+// comment there for why (matches this addon's own confetti.min.js pattern).
 
 $isRunning = RexStanRunStore::isRunning();
 $cachedResult = $isRunning ? null : RexStanRunStore::readCachedResult();
