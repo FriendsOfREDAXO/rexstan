@@ -31,7 +31,12 @@ $cachedResult = $isRunning ? null : RexStanRunStore::readCachedResult();
 $resultTimestamp = $isRunning ? null : RexStanRunStore::getCachedResultTimestamp();
 
 if ($isRunning) {
-    $initialHtml = '';
+    // mirrors assets/rexstan-analysis.js's renderRunningPlaceholder() - shown
+    // immediately (animated via pure CSS) rather than waiting for JS, which
+    // may not have bound/run yet at this exact moment
+    $initialHtml = '<div class="rex-view rex-view-info rexstan-analysis-running" style="text-align:center;">'
+        .'<p><span class="rexstan-analysis-spinner" aria-hidden="true"></span>Analyse läuft im Hintergrund … diese Seite aktualisiert sich automatisch, sobald sie fertig ist.</p>'
+        .'</div>';
 } elseif (null !== $cachedResult) {
     $initialHtml = RexResultsRenderer::renderAnalysisBody($cachedResult, $regenerateBaseline);
 } else {
