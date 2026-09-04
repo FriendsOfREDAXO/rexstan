@@ -150,6 +150,14 @@
             return;
         }
 
+        // init() runs from multiple triggers below (rex:ready, DOMContentLoaded,
+        // the unconditional call at load time) to cover every timing case -
+        // guard against binding/polling more than once per page load.
+        if (app.dataset.rexstanAnalysisInit === '1') {
+            return;
+        }
+        app.dataset.rexstanAnalysisInit = '1';
+
         var config = loadConfig();
         if (typeof config.apiBase !== 'string' || config.apiBase === '') {
             return;
@@ -165,5 +173,20 @@
         }
     }
 
-    document.addEventListener('DOMContentLoaded', init);
+    // Same pattern as this project's other backend JS (e.g.
+    // ai-chat-warm-cache.js): a script tag added via rex_view::addJsFile() can
+    // finish loading/executing AFTER DOMContentLoaded already fired, in which
+    // case that listener alone would never call init() at all - no click
+    // handler would ever get bound, and the button would silently do nothing.
+    // rex:ready additionally covers REDAXO's own AJAX-driven content swaps,
+    // and the unconditional call handles the "DOM is already ready by the
+    // time this script runs" case immediately.
+    if (typeof jQuery !== 'undefined') {
+        jQuery(document).on('rex:ready', function () {
+            init();
+        });
+    } else {
+        document.addEventListener('DOMContentLoaded', init);
+    }
+    init();
 }());

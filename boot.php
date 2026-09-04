@@ -22,6 +22,9 @@ if (rex::isBackend() && is_object(rex::getUser())) {
     if (rex_be_controller::getCurrentPagePart(1) === 'rexstan') {
         rex_view::addJsFile($addon->getAssetsUrl('confetti.min.js'));
     }
+    if (rex_be_controller::getCurrentPagePart(2) === 'analysis') {
+        rex_view::addJsFile($addon->getAssetsUrl('rexstan-analysis.js'));
+    }
 }
 
 rex_extension::register('PACKAGE_CACHE_DELETED', static function (rex_extension_point $ep) {
