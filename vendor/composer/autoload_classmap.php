@@ -2236,6 +2236,7 @@ return array(
     'staabm\\PHPStanDba\\DbSchema\\LazySchemaHasher' => $vendorDir . '/staabm/phpstan-dba/src/DbSchema/LazySchemaHasher.php',
     'staabm\\PHPStanDba\\DbSchema\\SchemaHasher' => $vendorDir . '/staabm/phpstan-dba/src/DbSchema/SchemaHasher.php',
     'staabm\\PHPStanDba\\DbSchema\\SchemaHasherMysql' => $vendorDir . '/staabm/phpstan-dba/src/DbSchema/SchemaHasherMysql.php',
+    'staabm\\PHPStanDba\\DbSchema\\SchemaHasherPgsql' => $vendorDir . '/staabm/phpstan-dba/src/DbSchema/SchemaHasherPgsql.php',
     'staabm\\PHPStanDba\\DbSchema\\SchemaHasherString' => $vendorDir . '/staabm/phpstan-dba/src/DbSchema/SchemaHasherString.php',
     'staabm\\PHPStanDba\\DbaException' => $vendorDir . '/staabm/phpstan-dba/src/DbaException.php',
     'staabm\\PHPStanDba\\DibiReflection\\DibiReflection' => $vendorDir . '/staabm/phpstan-dba/src/DibiReflection/DibiReflection.php',

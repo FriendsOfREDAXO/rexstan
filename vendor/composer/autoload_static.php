@@ -2396,6 +2396,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'staabm\\PHPStanDba\\DbSchema\\LazySchemaHasher' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/DbSchema/LazySchemaHasher.php',
         'staabm\\PHPStanDba\\DbSchema\\SchemaHasher' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/DbSchema/SchemaHasher.php',
         'staabm\\PHPStanDba\\DbSchema\\SchemaHasherMysql' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/DbSchema/SchemaHasherMysql.php',
+        'staabm\\PHPStanDba\\DbSchema\\SchemaHasherPgsql' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/DbSchema/SchemaHasherPgsql.php',
         'staabm\\PHPStanDba\\DbSchema\\SchemaHasherString' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/DbSchema/SchemaHasherString.php',
         'staabm\\PHPStanDba\\DbaException' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/DbaException.php',
         'staabm\\PHPStanDba\\DibiReflection\\DibiReflection' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/DibiReflection/DibiReflection.php',

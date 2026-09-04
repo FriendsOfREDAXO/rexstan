@@ -53,6 +53,8 @@ use staabm\PHPStanDba\QueryReflection\ReplayAndRecordingQueryReflector;
 use staabm\PHPStanDba\QueryReflection\ReplayQueryReflector;
 use staabm\PHPStanDba\QueryReflection\ReflectionCache;
 
+/** @var PHPStan\DependencyInjection\Container $container */
+
 require_once __DIR__ . '/vendor/autoload.php';
 
 $config = new RuntimeConfiguration();
@@ -67,7 +69,7 @@ $mysqli = new mysqli('hostname', 'username', 'password', 'database');
 $reflector = new MysqliQueryReflector($mysqli);
 
 /*
-$cacheFile = __DIR__.'/.phpstan-dba.cache';
+$cacheFile = $container->getParameter('resultCachePath') . '.phpstan-dba.cache';
 $reflector = new ReplayAndRecordingQueryReflector(
     ReflectionCache::create(
         $cacheFile

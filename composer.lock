@@ -1302,6 +1302,7 @@
                     "type": "github"
                 }
             ],
+            "abandoned": "tomasvotruba/type-coverage",
             "time": "2026-04-17T23:36:51+00:00"
         },
         {
