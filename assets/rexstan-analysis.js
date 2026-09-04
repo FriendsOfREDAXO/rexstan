@@ -39,6 +39,10 @@
             + '</div>';
     }
 
+    // The trigger link is always server-rendered already (works without JS,
+    // it just reloads the page instead of running this AJAX flow) - this only
+    // (re-)binds the click handler and toggles its visibility/label, it never
+    // builds the link's markup itself.
     function setToolbar(config, running) {
         var toolbar = el('rexstan-analysis-toolbar');
         if (!toolbar) {
@@ -50,14 +54,28 @@
             return;
         }
 
-        var label = config.hasResult ? '🔄 Neu analysieren' : '▶️ Analyse starten';
-        toolbar.innerHTML = '<p><button type="button" id="rexstan-analysis-trigger" class="btn btn-primary">' + label + '</button></p>';
-
         var btn = el('rexstan-analysis-trigger');
-        if (btn) {
-            btn.addEventListener('click', function () {
+        if (!btn) {
+            var label = config.hasResult ? '🔄 Neu analysieren' : '▶️ Analyse starten';
+            toolbar.innerHTML = '<p><a href="#" id="rexstan-analysis-trigger" class="btn btn-primary">' + label + '</a></p>';
+            btn = el('rexstan-analysis-trigger');
+        } else {
+            btn.textContent = config.hasResult ? '🔄 Neu analysieren' : '▶️ Analyse starten';
+        }
+
+        if (btn && btn.dataset.bound !== '1') {
+            btn.dataset.bound = '1';
+            btn.addEventListener('click', function (event) {
+                event.preventDefault();
                 startAnalysis(config);
             });
+        }
+    }
+
+    function setMeta(text) {
+        var meta = el('rexstan-analysis-meta');
+        if (meta) {
+            meta.textContent = text;
         }
     }
 
@@ -89,6 +107,7 @@
                 stopPolling();
                 config.hasResult = true;
                 el('rexstan-analysis-result').innerHTML = data.html || '';
+                setMeta('Ergebnis von gerade eben');
                 setToolbar(config, false);
             })
             .catch(function () {
@@ -99,6 +118,7 @@
 
     function startAnalysis(config) {
         el('rexstan-analysis-result').innerHTML = renderRunningPlaceholder();
+        setMeta('');
         setToolbar(config, true);
 
         fetchJson(config.apiBase + '&action=start')
@@ -138,16 +158,10 @@
         setToolbar(config, !!config.running);
 
         if (config.running) {
+            el('rexstan-analysis-result').innerHTML = renderRunningPlaceholder();
             pollTimer = setInterval(function () {
                 poll(config);
             }, POLL_INTERVAL_MS);
-            return;
-        }
-
-        if (!config.hasResult) {
-            // nothing cached yet on this system - kick off the very first run
-            // automatically instead of showing an empty page
-            startAnalysis(config);
         }
     }
 
