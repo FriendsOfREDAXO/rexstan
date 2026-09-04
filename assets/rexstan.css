@@ -53,3 +53,25 @@ div.page-header h1 span.rexstan-logo img {
 .rexstan-graph {
     margin-bottom: -30px;
 }
+
+.rexstan-analysis-running {
+    padding: 30px 15px;
+}
+
+.rexstan-analysis-spinner {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    vertical-align: middle;
+    margin-right: 10px;
+    border: 3px solid rgba(0, 0, 0, 0.15);
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: rexstan-spin 0.7s linear infinite;
+}
+
+@keyframes rexstan-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -73,6 +73,21 @@ final class RexStanRunStore
         return rex_file::get(self::errorLogPath(), '');
     }
 
+    /**
+     * @return int|null unix timestamp the cached result was generated at, null if there is none
+     */
+    public static function getCachedResultTimestamp(): ?int
+    {
+        $path = self::resultPath();
+        if (!is_file($path)) {
+            return null;
+        }
+
+        $mtime = filemtime($path);
+
+        return false !== $mtime ? $mtime : null;
+    }
+
     public static function clearCachedResult(): void
     {
         @unlink(self::resultPath());
