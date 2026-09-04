@@ -15,6 +15,11 @@ use function dirname;
 
 final class RexResultsRenderer
 {
+    // Heuristic threshold for the "consider a lower level" hint below - not a
+    // hard science, just meant to catch the "way too much to work through at
+    // once" case (e.g. jumping straight to level 10 with every extra rule set).
+    private const MANY_ERRORS_HINT_THRESHOLD = 200;
+
     /**
      * Renders the full analysis result body - the same markup pages/analysis.php
      * used to produce synchronously, now as a reusable string so it can also be
@@ -131,9 +136,24 @@ final class RexResultsRenderer
             echo rex_view::error('Nicht alle Fehler konnten ignoriert werden. <b>Empfehlung:</b> Die verbliebenen kritischen Fehler analysieren und beheben.');
         }
 
+        $level = RexStanUserConfig::getLevel();
+
         echo rex_view::warning(
-            'Level-<strong>'.RexStanUserConfig::getLevel().'</strong>-Analyse: <strong>'. $totalErrors .'</strong> Probleme gefunden in <strong>'. count($phpstanResult['files']) .'</strong> Dateien.'. $baselineButton. $baselineInfo
+            'Level-<strong>'.$level.'</strong>-Analyse: <strong>'. $totalErrors .'</strong> Probleme gefunden in <strong>'. count($phpstanResult['files']) .'</strong> Dateien.'. $baselineButton. $baselineInfo
         );
+
+        // PHPStan's levels are themselves already a priority ordering (stricter
+        // levels build on the checks of every level below them) - rather than
+        // inventing a second, parallel priority scheme on top, a level this
+        // noisy is better addressed by choosing a lower level first and working
+        // back up, so just point at that existing lever instead.
+        if ($totalErrors > self::MANY_ERRORS_HINT_THRESHOLD && $level > 0) {
+            echo rex_view::info(
+                'Das sind sehr viele Ergebnisse auf einmal. Da PHPStan-Level bereits eine Priorisierung nach Strenge sind, '
+                .'lohnt es sich meist mehr, in den <a href="'. rex_url::backendPage('rexstan/settings') .'">Einstellungen</a> '
+                .'zunächst ein niedrigeres Level zu wählen und sich von dort aus nach oben zu arbeiten.'
+            );
+        }
 
         foreach ($phpstanResult['files'] as $file => $fileResult) {
             $linkFile = preg_replace('/\s\(in context.*?$/', '', $file);
