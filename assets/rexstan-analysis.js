@@ -34,8 +34,8 @@
     }
 
     function renderRunningPlaceholder() {
-        return '<div class="rex-view rex-view-info" style="text-align:center;">'
-            + '<p><span class="rexstan-analysis-spinner">&#9203;</span> Analyse läuft im Hintergrund … diese Seite aktualisiert sich automatisch, sobald sie fertig ist.</p>'
+        return '<div class="rex-view rex-view-info rexstan-analysis-running" style="text-align:center;">'
+            + '<p><span class="rexstan-analysis-spinner" aria-hidden="true"></span>Analyse läuft im Hintergrund … diese Seite aktualisiert sich automatisch, sobald sie fertig ist.</p>'
             + '</div>';
     }
 
