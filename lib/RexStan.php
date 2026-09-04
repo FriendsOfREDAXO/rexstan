@@ -13,6 +13,9 @@ use staabm\PHPStanBaselineAnalysis\ResultPrinter;
 use function array_key_exists;
 use function dirname;
 
+/**
+ * @phpstan-import-type PhpstanRunResult from RexResultsRenderer
+ */
 final class RexStan
 {
     /**
@@ -39,7 +42,10 @@ final class RexStan
     }
 
     /**
-     * @return array<string, mixed>|string
+     * @api kept as a public entry point for direct programmatic use even though
+     *      pages/analysis.php now uses startBackgroundWebAnalysis() instead
+     *
+     * @return PhpstanRunResult|string
      */
     public static function runFromWeb()
     {
@@ -104,24 +110,32 @@ final class RexStan
     }
 
     /**
-     * @return array<string, mixed>|string
+     * @return PhpstanRunResult|string
      */
     public static function interpretAnalysisOutput(string $output, string $stderrOutput)
     {
         // return the analysis result as an array
-        if ($output !== '' && $output[0] === '{') {
+        if ('' !== $output && '{' === $output[0]) {
             $decoded = json_decode($output, true);
 
-            if (json_last_error() != 0) {
+            if (JSON_ERROR_NONE !== json_last_error()) {
                 rex_logger::factory()->warning('rexstan - invalid json:{output}', ['output' => "\n\n". $output]);
 
                 throw new Exception('Unable to decode json: '. json_last_error_msg() ."\n\nSee syslog for details");
             }
 
+            /**
+             * Trusting PHPStan's own --error-format=json schema here, same as the
+             * rest of this codebase already implicitly did before this method was
+             * extracted (no runtime shape validation existed either) - see
+             * RexResultsRenderer for why "files"/"errors" stay untyped in the alias.
+             *
+             * @var PhpstanRunResult $decoded
+             */
             return $decoded;
         }
 
-        if ($output == '') {
+        if ('' === $output) {
             return $stderrOutput;
         }
 
@@ -141,7 +155,7 @@ final class RexStan
         $addon = rex_addon::get('rexstan');
         $dataDir = $addon->getDataPath();
 
-        RexCmd::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline '. $analysisBaselinePath .' --allow-empty-baseline', $stderrOutput, $exitCode);
+        RexCmd::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline '. $analysisBaselinePath .' --allow-empty-baseline --no-progress', $stderrOutput, $exitCode);
         if ($exitCode !== 0) {
             throw new Exception('Unable to generate analysis baseline:'. $stderrOutput);
         }
@@ -170,7 +184,7 @@ final class RexStan
         $baselineGlob = $dataDir.$configSignature.DIRECTORY_SEPARATOR.'*-summary.json';
         $htmlGraphPath = $dataDir.'baseline-graph.html';
 
-        RexCmd::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline --allow-empty-baseline', $stderrOutput, $exitCode);
+        RexCmd::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline --allow-empty-baseline --no-progress', $stderrOutput, $exitCode);
         if ($exitCode !== 0) {
             throw new Exception('Unable to generate baseline:'. $stderrOutput);
         }

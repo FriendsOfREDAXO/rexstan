@@ -8,7 +8,8 @@ use FriendsOfRedaxo\RexStan\RexStanRunStore;
 use rex;
 use rex_api_exception;
 use rex_api_function;
-use rex_request;
+
+use function rex_request;
 
 /**
  * Ajax endpoint backing the non-blocking analysis page (pages/analysis.php +
@@ -31,14 +32,14 @@ class AnalysisApi extends rex_api_function
     public function execute()
     {
         $user = rex::getUser();
-        if (!$user || !$user->isAdmin()) {
+        if (null === $user || !$user->isAdmin()) {
             throw new rex_api_exception('Unauthorized');
         }
 
         // A background run doesn't need this request's session locked, and
         // holding it would block every other backend tab/request until this
         // one returns.
-        if (session_id()) {
+        if (false !== session_id()) {
             session_write_close();
         }
 

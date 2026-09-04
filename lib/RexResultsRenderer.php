@@ -13,6 +13,18 @@ use function array_key_exists;
 use function count;
 use function dirname;
 
+/**
+ * @phpstan-type PhpstanMessage array{message: string, line: int, tip?: string, identifier?: string}
+ * @phpstan-type PhpstanFileResult array{messages: list<PhpstanMessage>}
+ *
+ * "files"/"errors" are intentionally left as mixed here rather than fully
+ * typed: they come from PHPStan's own external --error-format=json output,
+ * which is not a versioned public contract, so the is_array() checks against
+ * them in renderAnalysisBody() are a real defensive guard against a future
+ * PHPStan version changing that shape - not dead code.
+ *
+ * @phpstan-type PhpstanRunResult array{totals: array{file_errors: int}, files: mixed, errors?: mixed}
+ */
 final class RexResultsRenderer
 {
     /**
@@ -22,36 +34,12 @@ final class RexResultsRenderer
      * RexStan::startBackgroundWebAnalysis()) has finished, for the polling JS to
      * inject into the page without a full reload.
      *
-     * @param array<string, mixed>|string $phpstanResult
+     * @param PhpstanRunResult|string $phpstanResult
      */
     public static function renderAnalysisBody($phpstanResult, bool $regenerateBaseline = false): string
     {
-        ob_start();
-
-        $settingsUrl = rex_url::backendPage('rexstan/settings');
-
         if (is_string($phpstanResult)) {
-            // we moved settings files into config/.
-            if (stripos($phpstanResult, "neon' is missing or is not readable.") !== false) {
-                echo rex_view::warning(
-                    "Das Einstellungsformat hat sich geändert. Bitte die <a href='".$settingsUrl."'>Einstellungen öffnen</a> und erneut abspeichern. <br/><br/>".nl2br(
-                        $phpstanResult
-                    )
-                );
-            } elseif (stripos($phpstanResult, 'polyfill-php8') !== false && stripos($phpstanResult, 'does not exist') !== false) {
-                echo rex_view::warning(
-                    'Der REDAXO Core wurde aktualisiert. Bitte das rexstan AddOn re-installieren. <br/><br/>'.nl2br($phpstanResult)
-                );
-            } else {
-                echo rex_view::error(
-                    '<h4>PHPSTAN: Fehler</h4>'
-                    .nl2br($phpstanResult)
-                );
-            }
-
-            echo rex_view::info('Die Web UI funktionert nicht auf allen Systemen, siehe README.');
-
-            return ob_get_clean() ?: '';
+            return self::renderStringError($phpstanResult);
         }
 
         $hasPhpstanErrors =
@@ -60,33 +48,90 @@ final class RexResultsRenderer
             && $phpstanResult['errors'] !== []
         ;
 
-        if (
-            !is_array($phpstanResult['files'])
-            || $hasPhpstanErrors
-        ) {
-            // print general php errors, like out of memory...
-            if ($hasPhpstanErrors) {
-                $msg = '<h4>PHPSTAN: Laufzeit-Fehler</h4><ul>';
-                foreach ($phpstanResult['errors'] as $error) {
-                    $msg .= '<li>'.nl2br($error).'<br /></li>';
-                }
-                $msg .= '</li>';
-                echo rex_view::error($msg);
-            } else {
-                echo rex_view::warning('No phpstan result');
-            }
-
-            return ob_get_clean() ?: '';
+        if (!is_array($phpstanResult['files']) || $hasPhpstanErrors) {
+            return self::renderRuntimeError($hasPhpstanErrors ? $phpstanResult['errors'] : null);
         }
 
+        /** @var array<string, PhpstanFileResult> $files */
+        $files = $phpstanResult['files'];
         $totalErrors = $phpstanResult['totals']['file_errors'];
 
+        [$baselineButton, $baselineInfo, $baselineCount] = self::buildBaselineHints($regenerateBaseline);
+
+        if (0 === $totalErrors) {
+            return self::renderCongratulations($baselineCount);
+        }
+
+        return self::renderFileList($files, $totalErrors, $regenerateBaseline, $baselineButton, $baselineInfo);
+    }
+
+    private static function renderStringError(string $phpstanResult): string
+    {
+        ob_start();
+
+        $settingsUrl = rex_url::backendPage('rexstan/settings');
+
+        // we moved settings files into config/.
+        if (stripos($phpstanResult, "neon' is missing or is not readable.") !== false) {
+            echo rex_view::warning(
+                "Das Einstellungsformat hat sich geändert. Bitte die <a href='".$settingsUrl."'>Einstellungen öffnen</a> und erneut abspeichern. <br/><br/>".nl2br(
+                    $phpstanResult
+                )
+            );
+        } elseif (stripos($phpstanResult, 'polyfill-php8') !== false && stripos($phpstanResult, 'does not exist') !== false) {
+            echo rex_view::warning(
+                'Der REDAXO Core wurde aktualisiert. Bitte das rexstan AddOn re-installieren. <br/><br/>'.nl2br($phpstanResult)
+            );
+        } else {
+            echo rex_view::error(
+                '<h4>PHPSTAN: Fehler</h4>'
+                .nl2br($phpstanResult)
+            );
+        }
+
+        echo rex_view::info('Die Web UI funktionert nicht auf allen Systemen, siehe README.');
+
+        return (string) ob_get_clean();
+    }
+
+    /**
+     * @param mixed $errors null if this is a generic "no result at all" case
+     *                      rather than PHPStan reporting its own runtime errors
+     */
+    private static function renderRuntimeError($errors): string
+    {
+        ob_start();
+
+        // print general php errors, like out of memory...
+        if (null !== $errors && is_array($errors)) {
+            $msg = '<h4>PHPSTAN: Laufzeit-Fehler</h4><ul>';
+            foreach ($errors as $error) {
+                if (!is_string($error)) {
+                    continue;
+                }
+                $msg .= '<li>'.nl2br($error).'<br /></li>';
+            }
+            $msg .= '</li>';
+            echo rex_view::error($msg);
+        } else {
+            echo rex_view::warning('No phpstan result');
+        }
+
+        return (string) ob_get_clean();
+    }
+
+    /**
+     * @return array{0: string, 1: string, 2: int} [baselineButton, baselineInfo, baselineCount]
+     */
+    private static function buildBaselineHints(bool $regenerateBaseline): array
+    {
         $baselineButton = '';
         $baselineInfo = '';
         $baselineCount = 0;
+
         if (RexStanUserConfig::isBaselineEnabled()) {
             if (!$regenerateBaseline) {
-                $baselineButton .= ' <a href="'. rex_url::backendPage('rexstan/analysis', ['regenerate-baseline' => 1]) .'" class="btn btn-danger">Alle Probleme ignorieren</a>';
+                $baselineButton = ' <a href="'. rex_url::backendPage('rexstan/analysis', ['regenerate-baseline' => 1]) .'" class="btn btn-danger">Alle Probleme ignorieren</a>';
             }
 
             $baselineCount = RexStan::getBaselineErrorsCount();
@@ -95,59 +140,74 @@ final class RexResultsRenderer
             }
         }
 
-        if ($totalErrors === 0) {
-            $level = RexStanUserConfig::getLevel();
-            $emoji = self::getResultEmoji($level);
+        return [$baselineButton, $baselineInfo, $baselineCount];
+    }
 
-            echo '<span class="rexstan-achievement">'.$emoji .'</span>';
-            echo rex_view::success('Gratulation, es wurden keine Fehler in Level '. $level .' gefunden.');
+    private static function renderCongratulations(int $baselineCount): string
+    {
+        ob_start();
 
-            if ($level === 10) {
-                echo self::getLevel10Jseffect();
-            } else {
-                echo '<p>';
+        $level = RexStanUserConfig::getLevel();
+        $emoji = self::getResultEmoji($level);
 
-                echo 'In den <a href="'. rex_url::backendPage('rexstan/settings') .'">Einstellungen</a>, solltest du jetzt das nächste Level anvisieren.';
-                if (RexStanUserConfig::isBaselineEnabled() && $baselineCount > 0) {
-                    $baselineFile = RexStanSettings::getAnalysisBaselinePath();
-                    $url = rex_editor::factory()->getUrl($baselineFile, 0);
+        echo '<span class="rexstan-achievement">'.$emoji .'</span>';
+        echo rex_view::success('Gratulation, es wurden keine Fehler in Level '. $level .' gefunden.');
 
-                    $baselineHint = 'Baseline '. $baselineCount .' Probleme ignoriert werden';
-                    if ($url !== null) {
-                        $baselineHint = '<a href="'. $url .'">'. $baselineHint .'</a>';
-                    }
+        if (10 === $level) {
+            echo self::getLevel10Jseffect();
+        } else {
+            echo '<p>';
 
-                    echo '<br />Da mittels '. $baselineHint .', solltest Du alternativ versuchen diese zu reduzieren.';
+            echo 'In den <a href="'. rex_url::backendPage('rexstan/settings') .'">Einstellungen</a>, solltest du jetzt das nächste Level anvisieren.';
+            if (RexStanUserConfig::isBaselineEnabled() && $baselineCount > 0) {
+                $baselineFile = RexStanSettings::getAnalysisBaselinePath();
+                $url = rex_editor::factory()->getUrl($baselineFile, 0);
+
+                $baselineHint = 'Baseline '. $baselineCount .' Probleme ignoriert werden';
+                if ($url !== null) {
+                    $baselineHint = '<a href="'. $url .'">'. $baselineHint .'</a>';
                 }
 
-                echo '</p>';
+                echo '<br />Da mittels '. $baselineHint .', solltest Du alternativ versuchen diese zu reduzieren.';
             }
-            echo RexStanSettings::outputSettings();
 
-            return ob_get_clean() ?: '';
+            echo '</p>';
         }
+        echo RexStanSettings::outputSettings();
+
+        return (string) ob_get_clean();
+    }
+
+    /**
+     * @param array<string, PhpstanFileResult> $files
+     */
+    private static function renderFileList(array $files, int $totalErrors, bool $regenerateBaseline, string $baselineButton, string $baselineInfo): string
+    {
+        ob_start();
 
         if ($regenerateBaseline && $totalErrors > 0) {
             echo rex_view::error('Nicht alle Fehler konnten ignoriert werden. <b>Empfehlung:</b> Die verbliebenen kritischen Fehler analysieren und beheben.');
         }
 
         echo rex_view::warning(
-            'Level-<strong>'.RexStanUserConfig::getLevel().'</strong>-Analyse: <strong>'. $totalErrors .'</strong> Probleme gefunden in <strong>'. count($phpstanResult['files']) .'</strong> Dateien.'. $baselineButton. $baselineInfo
+            'Level-<strong>'.RexStanUserConfig::getLevel().'</strong>-Analyse: <strong>'. $totalErrors .'</strong> Probleme gefunden in <strong>'. count($files) .'</strong> Dateien.'. $baselineButton. $baselineInfo
         );
 
-        foreach ($phpstanResult['files'] as $file => $fileResult) {
+        echo RexStanCategorizer::renderSummaryTable($files);
+
+        foreach ($files as $file => $fileResult) {
             $linkFile = preg_replace('/\s\(in context.*?$/', '', $file);
-            if ($linkFile === null) {
+            if (null === $linkFile) {
                 throw new \PHPStan\ShouldNotHappenException();
             }
 
             echo self::renderFileBlock($linkFile, $fileResult['messages']);
         }
 
-        return ob_get_clean() ?: '';
+        return (string) ob_get_clean();
     }
 
-    public static function getResultEmoji(int $level): string
+    private static function getResultEmoji(int $level): string
     {
         $emoji = '';
         switch ($level) {
@@ -188,7 +248,7 @@ final class RexResultsRenderer
         return $emoji;
     }
 
-    public static function getLevel10Jseffect(): string
+    private static function getLevel10Jseffect(): string
     {
         $nonce = ' nonce="'.rex_response::getNonce().'"';
         return
@@ -217,7 +277,7 @@ final class RexResultsRenderer
     }
 
     /**
-     * @param list<array{message: string, line: int, tip?: string}>  $messages
+     * @param list<PhpstanMessage> $messages
      */
     public static function renderFileBlock(string $file, array $messages): string
     {
@@ -241,7 +301,7 @@ final class RexResultsRenderer
     }
 
     /**
-     * @param list<array{message: string, line: int, tip?: string, identifier?: string}>  $messages
+     * @param list<PhpstanMessage> $messages
      */
     private static function renderFileErrors(string $file, array $messages): string
     {
@@ -263,7 +323,7 @@ final class RexResultsRenderer
     }
 
     /**
-     * @param array{message: string, line: int, tip?: string, identifier?: string}  $message
+     * @param PhpstanMessage $message
      */
     private static function renderErrorMessage(string $file, array $message): string
     {
