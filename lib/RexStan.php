@@ -82,7 +82,7 @@ final class RexStan
         $addon = rex_addon::get('rexstan');
         $dataDir = $addon->getDataPath();
 
-        RexCmd::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline '. $analysisBaselinePath .' --allow-empty-baseline', $stderrOutput, $exitCode);
+        RexCmd::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline '. $analysisBaselinePath .' --allow-empty-baseline --no-progress', $stderrOutput, $exitCode);
         if ($exitCode !== 0) {
             throw new Exception('Unable to generate analysis baseline:'. $stderrOutput);
         }
@@ -111,7 +111,7 @@ final class RexStan
         $baselineGlob = $dataDir.$configSignature.DIRECTORY_SEPARATOR.'*-summary.json';
         $htmlGraphPath = $dataDir.'baseline-graph.html';
 
-        RexCmd::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline --allow-empty-baseline', $stderrOutput, $exitCode);
+        RexCmd::execCmd('cd '.$dataDir.' && '. $phpstanBinary .' analyse -c '. $configPath .' --generate-baseline --allow-empty-baseline --no-progress', $stderrOutput, $exitCode);
         if ($exitCode !== 0) {
             throw new Exception('Unable to generate baseline:'. $stderrOutput);
         }
