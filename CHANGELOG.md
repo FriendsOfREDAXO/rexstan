@@ -17,6 +17,8 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
   - `RexStan::startBackgroundWebAnalysis()` spawnt den PHPStan-Lauf detached (Unix: `shell_exec('(...) &')`, Windows: `start /B`); Ergebnis wird atomar (erst in eine Temp-Datei, dann per `mv`/`move`) an seinen finalen Pfad geschrieben, damit ein Poller nie eine unvollständige Ergebnisdatei zu sehen bekommt.
   - `RexResultsRenderer::renderAnalysisBody()` extrahiert die bisher direkt in `pages/analysis.php` liegende Rendering-Logik in eine wiederverwendbare Methode, die sowohl beim normalen Seitenaufruf (gecachtes Ergebnis) als auch von der Ajax-Statusabfrage (frisches Ergebnis) genutzt wird.
 
+- **Hinweis auf niedrigeres Level bei sehr vielen Ergebnissen**: Liefert ein Lauf mehr als 200 Probleme, erscheint ein Hinweis, in den Einstellungen ein niedrigeres Level zu wählen und sich von dort schrittweise nach oben zu arbeiten. PHPStan-Level sind selbst bereits eine Priorisierung nach Strenge (jede Stufe baut auf den Prüfungen aller niedrigeren Stufen auf).
+
 ### 🧹 Code Quality
 
 - `RexStan::runFromWeb()`'s Interpretation der rohen PHPStan-Ausgabe (JSON vs. Klartext-Fehler) in `RexStan::interpretAnalysisOutput()` extrahiert, damit sowohl der synchrone als auch der neue Hintergrund-Pfad dieselbe Logik nutzen.
