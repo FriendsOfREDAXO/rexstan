@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "beeb141daaa275a7e0f93b0db59c55cf",
+    "content-hash": "4823a13ee5f757c736fe1e5283aeef76",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -75,16 +75,16 @@
         },
         {
             "name": "composer/semver",
-            "version": "3.5.0",
+            "version": "3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/semver.git",
-                "reference": "f7a296f4c4cf8cb8bb83e35d6951a406bb11afa5"
+                "reference": "528948210cc46f967a4b98e83b19e76f2b504993"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/f7a296f4c4cf8cb8bb83e35d6951a406bb11afa5",
-                "reference": "f7a296f4c4cf8cb8bb83e35d6951a406bb11afa5",
+                "url": "https://api.github.com/repos/composer/semver/zipball/528948210cc46f967a4b98e83b19e76f2b504993",
+                "reference": "528948210cc46f967a4b98e83b19e76f2b504993",
                 "shasum": ""
             },
             "require": {
@@ -136,7 +136,7 @@
             "support": {
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/semver/issues",
-                "source": "https://github.com/composer/semver/tree/3.5.0"
+                "source": "https://github.com/composer/semver/tree/3.5.1"
             },
             "funding": [
                 {
@@ -148,7 +148,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-09-24T14:38:51+00:00"
+            "time": "2026-10-05T13:12:12+00:00"
         },
         {
             "name": "dogma/dogma",
@@ -1288,16 +1288,16 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.4.13",
+            "version": "0.4.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "176214987b50081477775a82ecf3e5e9d889951e"
+                "reference": "6bf4033057b4dce195027f7abf9ad7e3e8e10bbc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/176214987b50081477775a82ecf3e5e9d889951e",
-                "reference": "176214987b50081477775a82ecf3e5e9d889951e",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/6bf4033057b4dce195027f7abf9ad7e3e8e10bbc",
+                "reference": "6bf4033057b4dce195027f7abf9ad7e3e8e10bbc",
                 "shasum": ""
             },
             "require": {
@@ -1356,7 +1356,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.4.13"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.4.14"
             },
             "funding": [
                 {
@@ -1364,7 +1364,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-09-29T12:25:35+00:00"
+            "time": "2026-10-10T06:33:24+00:00"
         },
         {
             "name": "staabm/phpstan-psr3",
