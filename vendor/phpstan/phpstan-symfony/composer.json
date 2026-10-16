@@ -16,14 +16,14 @@
   "require": {
     "php": "^7.4 || ^8.0",
     "ext-simplexml": "*",
-    "phpstan/phpstan": "^2.1.13"
+    "phpstan/phpstan": "^2.3"
   },
   "conflict": {
     "symfony/framework-bundle": "<3.0"
   },
   "require-dev": {
     "php-parallel-lint/php-parallel-lint": "^1.2",
-    "phpstan/phpstan-phpunit": "^2.0.8",
+    "phpstan/phpstan-phpunit": "^2.0.13",
     "phpstan/phpstan-strict-rules": "^2.0",
     "phpunit/phpunit": "^9.6",
     "psr/container": "1.1.2",

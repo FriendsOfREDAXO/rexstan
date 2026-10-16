@@ -3,11 +3,13 @@
 namespace PHPStan\Type\Symfony;
 
 use PhpParser\Node\Expr\MethodCall;
+use PHPStan\Analyser\DependencyTracker;
 use PHPStan\Analyser\Scope;
 use PHPStan\PhpDoc\TypeStringResolver;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\ShouldNotHappenException;
 use PHPStan\Symfony\ParameterMap;
+use PHPStan\Symfony\ParameterResultCacheValueExtension;
 use PHPStan\Type\ArrayType;
 use PHPStan\Type\BooleanType;
 use PHPStan\Type\Constant\ConstantArrayType;
@@ -86,19 +88,24 @@ final class ParameterDynamicReturnTypeExtension implements DynamicMethodReturnTy
 		return in_array($methodReflection->getName(), $methods, true);
 	}
 
+	/**
+	 * @param Scope&DependencyTracker $scope
+	 */
 	public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): ?Type
 	{
 		switch ($methodReflection->getName()) {
 			case $this->methodGet:
-				return $this->getGetTypeFromMethodCall($methodReflection, $methodCall, $scope);
+				return $this->getGetTypeFromMethodCall($methodCall, $scope);
 			case $this->methodHas:
-				return $this->getHasTypeFromMethodCall($methodReflection, $methodCall, $scope);
+				return $this->getHasTypeFromMethodCall($methodCall, $scope);
 		}
 		throw new ShouldNotHappenException();
 	}
 
+	/**
+	 * @param Scope&DependencyTracker $scope
+	 */
 	private function getGetTypeFromMethodCall(
-		MethodReflection $methodReflection,
 		MethodCall $methodCall,
 		Scope $scope
 	): Type
@@ -124,6 +131,7 @@ final class ParameterDynamicReturnTypeExtension implements DynamicMethodReturnTy
 
 		$returnTypes = [];
 		foreach ($parameterKeys as $parameterKey) {
+			$scope->trackValueDependency(ParameterResultCacheValueExtension::class, $parameterKey);
 			$parameter = $this->parameterMap->getParameter($parameterKey);
 			if ($parameter === null) {
 				return $defaultReturnType;
@@ -203,8 +211,10 @@ final class ParameterDynamicReturnTypeExtension implements DynamicMethodReturnTy
 		});
 	}
 
+	/**
+	 * @param Scope&DependencyTracker $scope
+	 */
 	private function getHasTypeFromMethodCall(
-		MethodReflection $methodReflection,
 		MethodCall $methodCall,
 		Scope $scope
 	): ?Type
@@ -220,6 +230,7 @@ final class ParameterDynamicReturnTypeExtension implements DynamicMethodReturnTy
 
 		$has = null;
 		foreach ($parameterKeys as $parameterKey) {
+			$scope->trackValueDependency(ParameterResultCacheValueExtension::class, $parameterKey);
 			$parameter = $this->parameterMap->getParameter($parameterKey);
 
 			if ($has === null) {
