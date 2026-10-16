@@ -1,8 +1,11 @@
 <?php
 
+use FriendsOfRedaxo\RexStan\Api\AnalysisApi;
 use FriendsOfRedaxo\RexStan\RexStan;
 
 $addon = rex_addon::get('rexstan');
+
+rex_api_function::register('rexstan_analysis', AnalysisApi::class);
 
 if (rex::isBackend() && is_object(rex::getUser())) {
     rex_extension::register('OUTPUT_FILTER', static function (rex_extension_point $ep) use ($addon) {
