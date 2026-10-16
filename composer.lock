@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0752fe4a7d9a0c7d75f355b5c0d59324",
+    "content-hash": "9f521f32e378933fcf2c0d25f6a5c79b",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -214,6 +214,57 @@
                 "source": "https://github.com/paranoiq/dogma/tree/v0.2.22"
             },
             "time": "2023-06-22T08:25:35+00:00"
+        },
+        {
+            "name": "entropy/entropy",
+            "version": "0.4.31",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TomasVotruba/entropy.git",
+                "reference": "e31f93b8e987982e8d579c7c7f0cfa8aa7ae7e18"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TomasVotruba/entropy/zipball/e31f93b8e987982e8d579c7c7f0cfa8aa7ae7e18",
+                "reference": "e31f93b8e987982e8d579c7c7f0cfa8aa7ae7e18",
+                "shasum": ""
+            },
+            "require": {
+                "ext-tokenizer": "*",
+                "php": ">=7.4",
+                "symfony/polyfill-php80": "^1.31"
+            },
+            "require-dev": {
+                "php-parallel-lint/php-parallel-lint": "^1.4",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^9.6",
+                "rector/jack": "^1.0",
+                "rector/rector": "^2.4",
+                "rector/swiss-knife": "^2.4",
+                "shipmonk/composer-dependency-analyser": "^1.8",
+                "shipmonk/dead-code-detector": "^1.4",
+                "symplify/easy-coding-standard": "^13.1",
+                "symplify/phpstan-rules": "^14.10",
+                "tomasvotruba/type-coverage": "^2.2",
+                "tracy/tracy": "^2.12"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Entropy\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "description": "Entropy framework",
+            "support": {
+                "issues": "https://github.com/TomasVotruba/entropy/issues",
+                "source": "https://github.com/TomasVotruba/entropy/tree/0.4.31"
+            },
+            "time": "2026-10-13T12:04:57+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -1700,22 +1751,35 @@
         },
         {
             "name": "tomasvotruba/type-coverage",
-            "version": "2.2.1",
+            "version": "2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/type-coverage.git",
-                "reference": "4087caa4639bdd4c646f2984bc333efeddf69e4b"
+                "reference": "2d8e722c1776a17f506f6a66cd325e50fbaa12ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/4087caa4639bdd4c646f2984bc333efeddf69e4b",
-                "reference": "4087caa4639bdd4c646f2984bc333efeddf69e4b",
+                "url": "https://api.github.com/repos/TomasVotruba/type-coverage/zipball/2d8e722c1776a17f506f6a66cd325e50fbaa12ee",
+                "reference": "2d8e722c1776a17f506f6a66cd325e50fbaa12ee",
                 "shasum": ""
             },
             "require": {
-                "nette/utils": "^3.2 || ^4.0",
-                "php": "^7.4 || ^8.0",
-                "phpstan/phpstan": "^2.1.33"
+                "entropy/entropy": "^0.4.23",
+                "php": ">=7.4",
+                "phpstan/phpstan": "^2.2"
+            },
+            "require-dev": {
+                "doctrine/collections": "^2.3",
+                "phpstan/extension-installer": "^1.4",
+                "phpunit/phpunit": "^13.2",
+                "rector/jack": "^1.1",
+                "rector/rector": "^2.5",
+                "shipmonk/composer-dependency-analyser": "^1.8",
+                "shipmonk/dead-code-detector": "^1.4",
+                "symfony/dom-crawler": "^8.1",
+                "symfony/form": "^8.1",
+                "symplify/easy-coding-standard": "^13.2",
+                "tracy/tracy": "^2.12"
             },
             "type": "phpstan-extension",
             "extra": {
@@ -1727,6 +1791,7 @@
             },
             "autoload": {
                 "psr-4": {
+                    "Rector\\TypePerfect\\": "packages/type-perfect/src",
                     "TomasVotruba\\TypeCoverage\\": "src"
                 }
             },
@@ -1741,7 +1806,7 @@
             ],
             "support": {
                 "issues": "https://github.com/TomasVotruba/type-coverage/issues",
-                "source": "https://github.com/TomasVotruba/type-coverage/tree/2.2.1"
+                "source": "https://github.com/TomasVotruba/type-coverage/tree/2.5.1"
             },
             "funding": [
                 {
@@ -1753,7 +1818,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-05-26T08:14:01+00:00"
+            "time": "2026-10-09T19:09:05+00:00"
         },
         {
             "name": "tomasvotruba/unused-public",
