@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0752fe4a7d9a0c7d75f355b5c0d59324",
+    "content-hash": "018cbfdeee865e11acdadacdc3e31041",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1288,23 +1288,23 @@
         },
         {
             "name": "staabm/phpstan-dba",
-            "version": "0.4.14",
+            "version": "0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/staabm/phpstan-dba.git",
-                "reference": "6bf4033057b4dce195027f7abf9ad7e3e8e10bbc"
+                "reference": "a37ebdbe7495769430cbdd6947e6522b98f4e02c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/6bf4033057b4dce195027f7abf9ad7e3e8e10bbc",
-                "reference": "6bf4033057b4dce195027f7abf9ad7e3e8e10bbc",
+                "url": "https://api.github.com/repos/staabm/phpstan-dba/zipball/a37ebdbe7495769430cbdd6947e6522b98f4e02c",
+                "reference": "a37ebdbe7495769430cbdd6947e6522b98f4e02c",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2.0",
                 "composer/semver": "^3.2",
                 "php": "^7.4 || ^8.0",
-                "phpstan/phpstan": "^2.1.2"
+                "phpstan/phpstan": "^2.3.0"
             },
             "conflict": {
                 "doctrine/dbal": "<3||>=5",
@@ -1356,7 +1356,7 @@
             ],
             "support": {
                 "issues": "https://github.com/staabm/phpstan-dba/issues",
-                "source": "https://github.com/staabm/phpstan-dba/tree/0.4.14"
+                "source": "https://github.com/staabm/phpstan-dba/tree/0.5"
             },
             "funding": [
                 {
@@ -1364,7 +1364,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-10T06:33:24+00:00"
+            "time": "2026-10-14T07:27:08+00:00"
         },
         {
             "name": "staabm/phpstan-psr3",
