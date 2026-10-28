@@ -8,8 +8,7 @@
 namespace Nette\Http;
 
 use Nette;
-use function array_pop, array_slice, bin2hex, chunk_split, defined, explode, function_exists, http_build_query, idn_to_utf8, implode, ini_get, ip2long, is_array, is_string, ksort, parse_str, parse_url, preg_match, preg_quote, preg_replace, preg_replace_callback, rawurldecode, rawurlencode, rtrim, str_contains, str_replace, str_starts_with, strcasecmp, strlen, strrpos, strtolower, strtoupper, substr;
-use const PHP_QUERY_RFC3986;
+use function defined, function_exists, ini_get, is_array, is_string, strlen;
 
 
 /**
@@ -85,7 +84,9 @@ class Url implements \JsonSerializable
 			$this->fragment = rawurldecode($p['fragment'] ?? '');
 
 		} elseif ($url instanceof UrlImmutable || $url instanceof self) {
-			[$this->scheme, $this->user, $this->password, $this->host, $this->port, $this->path, $this->query, $this->fragment] = $url->export();
+			[
+				$this->scheme, $this->user, $this->password, $this->host, $this->port, $this->path, $this->query, $this->fragment,
+			] = $url->export();
 		}
 	}
 
@@ -287,10 +288,10 @@ class Url implements \JsonSerializable
 			: ($this->user !== ''
 				? rawurlencode($this->user) . ($this->password === '' ? '' : ':' . rawurlencode($this->password)) . '@'
 				: '')
-			. $this->host
-			. ($this->port && $this->port !== $this->getDefaultPort()
-				? ':' . $this->port
-				: '');
+				. $this->host
+				. ($this->port && $this->port !== $this->getDefaultPort()
+					? ':' . $this->port
+					: '');
 	}
 
 

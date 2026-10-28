@@ -9,11 +9,11 @@ namespace Nette\Http;
 
 use Nette;
 use Nette\Utils\DateTime;
-use function array_map, explode, implode, inet_pton, sprintf, strlen, strncmp, unpack;
+use function strlen;
 
 
 /**
- * Rendering helpers for HTTP.
+ * Helper functions for HTTP requests, responses and headers.
  */
 final class Helpers
 {

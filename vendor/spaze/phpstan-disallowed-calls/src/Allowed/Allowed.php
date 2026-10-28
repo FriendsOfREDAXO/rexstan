@@ -8,6 +8,7 @@ use PhpParser\Node\Arg;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Function_;
 use PHPStan\Analyser\Scope;
+use PHPStan\BetterReflection\Reflector\Exception\IdentifierNotFound;
 use PHPStan\BetterReflection\Reflector\Reflector;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\FunctionReflection;
@@ -21,6 +22,7 @@ use Spaze\PHPStan\Rules\Disallowed\Exceptions\UnsupportedParamTypeException;
 use Spaze\PHPStan\Rules\Disallowed\Formatter\Formatter;
 use Spaze\PHPStan\Rules\Disallowed\Identifier\Identifier;
 use Spaze\PHPStan\Rules\Disallowed\Params\Param;
+use Spaze\PHPStan\Rules\Disallowed\PHPStanCompatibility;
 use Spaze\PHPStan\Rules\Disallowed\Type\TypeHintContextVisitor;
 
 class Allowed
@@ -334,14 +336,29 @@ class Allowed
 			if (!$scope->isInClass()) {
 				return [];
 			}
+			// Property hooks can't be looked up with getMethod(), their names are like `$property::get`
+			$hookAttributes = PHPStanCompatibility::getPropertyHookAttributes($function, $scope->getClassReflection());
+			if ($hookAttributes !== null) {
+				return $hookAttributes;
+			}
 			return array_map(static fn($a) => $a->getName(), $scope->getClassReflection()->getNativeReflection()->getMethod($function->getName())->getAttributes());
 		} elseif ($function instanceof FunctionReflection) {
-			return array_map(static fn($a) => $a->getName(), $this->reflector->reflectFunction($function->getName())->getAttributes());
+			try {
+				return array_map(static fn($a) => $a->getName(), $this->reflector->reflectFunction($function->getName())->getAttributes());
+			} catch (IdentifierNotFound $e) {
+				// Named functions declared inside other functions or methods can't be reflected, PHPStan doesn't support them anyway
+				return [];
+			}
 		} elseif ($function === null) {
 			if ($node instanceof ClassMethod && $scope->isInClass()) {
 				return array_map(static fn($a) => $a->getName(), $scope->getClassReflection()->getNativeReflection()->getMethod($node->name->name)->getAttributes());
 			} elseif ($node instanceof Function_) {
 				return array_map(static fn($a) => $a->getName(), $this->reflector->reflectFunction(($node->namespacedName ?? $node->name)->toString())->getAttributes());
+			}
+			// Attributes placed on a property hook are checked in the class scope, use the hook's own attributes like for methods
+			$hookAttributes = PHPStanCompatibility::getPropertyHookNodeAttributes($node);
+			if ($hookAttributes !== null) {
+				return $hookAttributes;
 			}
 			// $scope->getFunction() is null in param/return type hints, use the enclosing function attributes stored by TypeHintContextVisitor
 			if ($node !== null) {
@@ -376,7 +393,7 @@ class Allowed
 				$names[] = $attribute->getName();
 			}
 		}
-		return $names;
+		return array_merge($names, PHPStanCompatibility::getAllPropertyHookAttributes($scope->getClassReflection()));
 	}
 
 }

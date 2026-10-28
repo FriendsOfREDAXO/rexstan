@@ -1,17 +1,15 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * This file is part of the Nette Framework (https://nette.org)
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 
-declare(strict_types=1);
-
 namespace Nette\Utils;
 
 use Nette;
-use function defined, is_int, json_decode, json_encode, json_last_error, json_last_error_msg;
-use const JSON_BIGINT_AS_STRING, JSON_FORCE_OBJECT, JSON_HEX_AMP, JSON_HEX_APOS, JSON_HEX_QUOT, JSON_HEX_TAG, JSON_OBJECT_AS_ARRAY, JSON_PRESERVE_ZERO_FRACTION, JSON_PRETTY_PRINT, JSON_UNESCAPED_SLASHES, JSON_UNESCAPED_UNICODE;
+use function defined, is_int;
+use const JSON_HEX_AMP, JSON_HEX_APOS, JSON_HEX_QUOT, JSON_HEX_TAG;
 
 
 /**
@@ -45,7 +43,7 @@ final class Json
 	): string
 	{
 		if (is_int($pretty)) { // back compatibility
-			$flags = ($pretty & self::ESCAPE_UNICODE ? 0 : JSON_UNESCAPED_UNICODE) | ($pretty & ~self::ESCAPE_UNICODE);
+			$flags = ($pretty & self::ESCAPE_UNICODE ? 0 : JSON_UNESCAPED_UNICODE) | ($pretty & ~self::ESCAPE_UNICODE); // dresscode:ignore upgrading.declarations.deprecatedMember
 		} else {
 			$flags = ($asciiSafe ? 0 : JSON_UNESCAPED_UNICODE)
 				| ($pretty ? JSON_PRETTY_PRINT : 0)

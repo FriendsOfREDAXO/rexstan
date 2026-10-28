@@ -9,8 +9,8 @@ namespace Nette\Http;
 
 use Nette;
 use Nette\Utils\DateTime;
-use function array_filter, header, header_remove, headers_list, headers_sent, htmlspecialchars, http_response_code, ini_get, is_int, ltrim, ob_get_length, ob_get_status, preg_match, rawurlencode, setcookie, str_replace, strcasecmp, strlen, strncasecmp, substr, time;
-use const PHP_SAPI;
+use function ini_get, is_int, strlen;
+use const ENT_IGNORE, ENT_QUOTES, PHP_SAPI;
 
 
 /**
@@ -275,9 +275,9 @@ final class Response implements IResponse
 			throw new Nette\InvalidStateException('Cannot send header after HTTP headers have been sent' . ($file ? " (output started at $file:$line)." : '.'));
 
 		} elseif (
-			$this->warnOnBuffer &&
-			ob_get_length() &&
-			!array_filter(ob_get_status(full_status: true), fn(array $i): bool => !$i['chunk_size'])
+			$this->warnOnBuffer
+			&& ob_get_length()
+			&& !array_filter(ob_get_status(full_status: true), fn(array $i): bool => !$i['chunk_size'])
 		) {
 			trigger_error('Possible problem: you are sending a HTTP header while already having some data in output buffer. Try Tracy\OutputDebugger or send cookies/start session earlier.');
 		}

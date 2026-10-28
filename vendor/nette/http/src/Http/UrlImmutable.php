@@ -8,8 +8,7 @@
 namespace Nette\Http;
 
 use Nette;
-use function array_slice, explode, http_build_query, implode, ip2long, is_array, is_string, rawurlencode, str_starts_with, strrpos, substr;
-use const PHP_QUERY_RFC3986;
+use function is_array, is_string;
 
 
 /**
@@ -61,7 +60,9 @@ class UrlImmutable implements \JsonSerializable
 	public function __construct(string|self|Url $url)
 	{
 		$url = is_string($url) ? new Url($url) : $url;
-		[$this->scheme, $this->user, $this->password, $this->host, $this->port, $this->path, $this->query, $this->fragment] = $url->export();
+		[
+			$this->scheme, $this->user, $this->password, $this->host, $this->port, $this->path, $this->query, $this->fragment,
+		] = $url->export();
 	}
 
 
@@ -270,10 +271,10 @@ class UrlImmutable implements \JsonSerializable
 			: ($this->user !== ''
 				? rawurlencode($this->user) . ($this->password === '' ? '' : ':' . rawurlencode($this->password)) . '@'
 				: '')
-			. $this->host
-			. ($this->port && $this->port !== $this->getDefaultPort()
-				? ':' . $this->port
-				: '');
+				. $this->host
+				. ($this->port && $this->port !== $this->getDefaultPort()
+					? ':' . $this->port
+					: '');
 	}
 
 

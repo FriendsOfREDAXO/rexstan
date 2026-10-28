@@ -7,7 +7,7 @@
 
 namespace Nette\Neon;
 
-use function in_array, str_replace, strlen, strrpos, substr, substr_count;
+use function strlen;
 
 
 /** @internal */
@@ -48,12 +48,12 @@ final class TokenStream
 	 */
 	public function isNext(int|string ...$types): bool
 	{
-		while (in_array($this->tokens[$this->pos]->type ?? null, [Token::Comment, Token::Whitespace], strict: true)) {
+		while (in_array($this->tokens[$this->pos]->type ?? null, [Token::Comment, Token::Whitespace], true)) {
 			$this->pos++;
 		}
 
 		return $types
-			? in_array($this->tokens[$this->pos]->type ?? null, $types, strict: true)
+			? in_array($this->tokens[$this->pos]->type ?? null, $types, true)
 			: isset($this->tokens[$this->pos]);
 	}
 
@@ -71,14 +71,15 @@ final class TokenStream
 
 
 	/**
-	 * Returns the whitespace indentation of the token at the current position,
+	 * Returns the whitespace indentation of the token at the current or given position,
 	 * i.e. the whitespace token immediately following a newline (or at the start).
 	 */
-	public function getIndentation(): string
+	public function getIndentation(?int $pos = null): string
 	{
-		return in_array($this->tokens[$this->pos - 2]->type ?? null, [Token::Newline, null], strict: true)
-			&& ($this->tokens[$this->pos - 1]->type ?? null) === Token::Whitespace
-			? $this->tokens[$this->pos - 1]->value
+		$pos ??= $this->pos;
+		return in_array($this->tokens[$pos - 2]->type ?? null, [Token::Newline, null], true)
+			&& ($this->tokens[$pos - 1]->type ?? null) === Token::Whitespace
+			? $this->tokens[$pos - 1]->value
 			: '';
 	}
 
@@ -97,11 +98,24 @@ final class TokenStream
 		}
 
 		$line = substr_count($input, "\n") + 1;
-		$col = strlen($input) - strrpos("\n" . $input, "\n") + 1;
+		$col = self::charLength(substr($input, strrpos("\n" . $input, "\n"))) + 1;
 		$token = $this->tokens[$pos] ?? null;
-		$message ??= 'Unexpected ' . ($token === null
-			? 'end'
-			: "'" . str_replace("\n", '<new line>', substr($this->tokens[$pos]->value, 0, 40)) . "'");
+		if ($message === null) {
+			if ($token === null) {
+				$message = 'Unexpected end';
+			} else {
+				preg_match('~.{0,40}~Asu', $token->value, $m); // truncating at a character boundary keeps the message valid UTF-8
+				$message = "Unexpected '" . str_replace("\n", '<new line>', $m[0] ?? '') . "'";
+			}
+		}
+
 		throw new Exception("$message on line $line at column $col");
+	}
+
+
+	/** Counts UTF-8 characters without requiring the mbstring extension; expects valid UTF-8. */
+	private static function charLength(string $s): int
+	{
+		return strlen($s) - (int) preg_match_all('~[\x80-\xBF]~', $s);
 	}
 }
