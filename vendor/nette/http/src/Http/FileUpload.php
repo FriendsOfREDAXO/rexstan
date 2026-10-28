@@ -9,7 +9,7 @@ namespace Nette\Http;
 
 use Nette;
 use Nette\Utils\Image;
-use function array_intersect_key, array_map, basename, chmod, dirname, file_get_contents, filesize, finfo_file, finfo_open, getimagesize, image_type_to_extension, in_array, is_string, is_uploaded_file, preg_replace, str_replace, trim, unlink;
+use function is_string;
 
 
 /**
@@ -127,7 +127,8 @@ final class FileUpload
 
 
 	/**
-	 * Returns the appropriate file extension (without the period) corresponding to the detected MIME type. Requires the PHP extension fileinfo.
+	 * Returns the appropriate file extension (without the period) corresponding to the detected MIME type.
+	 * Requires the PHP extension fileinfo.
 	 */
 	public function getSuggestedExtension(): ?string
 	{
@@ -231,7 +232,7 @@ final class FileUpload
 	public function isImage(): bool
 	{
 		$types = array_map(Image::typeToMimeType(...), Image::getSupportedTypes());
-		return in_array($this->getContentType(), $types, strict: true);
+		return in_array($this->getContentType(), $types, true);
 	}
 
 

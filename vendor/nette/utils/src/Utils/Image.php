@@ -1,17 +1,14 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * This file is part of the Nette Framework (https://nette.org)
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 
-declare(strict_types=1);
-
 namespace Nette\Utils;
 
 use Nette;
-use function is_array, is_int, is_string;
-use const IMG_BMP, IMG_FLIP_BOTH, IMG_FLIP_HORIZONTAL, IMG_FLIP_VERTICAL, IMG_GIF, IMG_JPG, IMG_PNG, IMG_WEBP, PATHINFO_EXTENSION;
+use function extension_loaded, is_array, is_int, is_string;
 
 
 /**
@@ -138,7 +135,14 @@ class Image
 
 	public const EmptyGIF = "GIF89a\x01\x00\x01\x00\x80\x00\x00\x00\x00\x00\x00\x00\x00!\xf9\x04\x01\x00\x00\x00\x00,\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02D\x01\x00;";
 
-	private const Formats = [ImageType::JPEG => 'jpeg', ImageType::PNG => 'png', ImageType::GIF => 'gif', ImageType::WEBP => 'webp', ImageType::AVIF => 'avif', ImageType::BMP => 'bmp'];
+	private const Formats = [
+		ImageType::JPEG => 'jpeg',
+		ImageType::PNG => 'png',
+		ImageType::GIF => 'gif',
+		ImageType::WEBP => 'webp',
+		ImageType::AVIF => 'avif',
+		ImageType::BMP => 'bmp',
+	];
 
 	private \GdImage $image;
 
@@ -601,9 +605,9 @@ class Image
 
 			for ($x = 0; $x < $width; $x++) {
 				for ($y = 0; $y < $height; $y++) {
-					$c = \imagecolorat($input, $x, $y);
+					$c = imagecolorat($input, $x, $y);
 					$c = ($c & 0xFFFFFF) + ($tbl[$c >> 24] << 24);
-					\imagesetpixel($output, $x, $y, $c);
+					imagesetpixel($output, $x, $y, $c);
 				}
 			}
 
@@ -669,7 +673,7 @@ class Image
 
 
 	/**
-	 * Saves image to the file. Quality is in the range 0..100 for JPEG (default 85), WEBP (default 80) and AVIF (default 30) and 0..9 for PNG (default 9).
+	 * Saves image to the file. Quality is 0..100 for JPEG (default 85), WEBP (default 80) and AVIF (default 30), 0..9 for PNG (default 9).
 	 * @param  ImageType::*|null  $type
 	 * @throws ImageException
 	 */
@@ -681,7 +685,7 @@ class Image
 
 
 	/**
-	 * Outputs image to string. Quality is in the range 0..100 for JPEG (default 85), WEBP (default 80) and AVIF (default 30) and 0..9 for PNG (default 9).
+	 * Outputs image to string. Quality is 0..100 for JPEG (default 85), WEBP (default 80) and AVIF (default 30), 0..9 for PNG (default 9).
 	 * @param  ImageType::*  $type
 	 */
 	public function toString(int $type = ImageType::JPEG, ?int $quality = null): string
@@ -702,7 +706,7 @@ class Image
 
 
 	/**
-	 * Outputs image to browser. Quality is in the range 0..100 for JPEG (default 85), WEBP (default 80) and AVIF (default 30) and 0..9 for PNG (default 9).
+	 * Outputs image to browser. Quality is 0..100 for JPEG (default 85), WEBP (default 80) and AVIF (default 30), 0..9 for PNG (default 9).
 	 * @param  ImageType::*  $type
 	 * @throws ImageException
 	 */
@@ -737,7 +741,7 @@ class Image
 
 		Callback::invokeSafe('image' . self::Formats[$type], $args, function (string $message) use ($file): void {
 			if ($file !== null) {
-				@unlink($file);
+				@unlink($file); // @ file may not exist
 			}
 			throw new ImageException($message);
 		});

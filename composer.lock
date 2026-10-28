@@ -75,16 +75,16 @@
         },
         {
             "name": "composer/semver",
-            "version": "3.5.1",
+            "version": "3.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/semver.git",
-                "reference": "528948210cc46f967a4b98e83b19e76f2b504993"
+                "reference": "9dfce66f1e97360ea5e6d3e38ab14277e4cc591e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/528948210cc46f967a4b98e83b19e76f2b504993",
-                "reference": "528948210cc46f967a4b98e83b19e76f2b504993",
+                "url": "https://api.github.com/repos/composer/semver/zipball/9dfce66f1e97360ea5e6d3e38ab14277e4cc591e",
+                "reference": "9dfce66f1e97360ea5e6d3e38ab14277e4cc591e",
                 "shasum": ""
             },
             "require": {
@@ -136,7 +136,7 @@
             "support": {
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/semver/issues",
-                "source": "https://github.com/composer/semver/tree/3.5.1"
+                "source": "https://github.com/composer/semver/tree/3.5.2"
             },
             "funding": [
                 {
@@ -148,7 +148,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-05T13:12:12+00:00"
+            "time": "2026-10-22T15:37:26+00:00"
         },
         {
             "name": "dogma/dogma",
@@ -282,21 +282,21 @@
         },
         {
             "name": "nette/http",
-            "version": "v3.3.4",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/http.git",
-                "reference": "d92cb97fea369d10b46677223cc2bfb5adc1a2f2"
+                "reference": "b9b7fe605317127b982610981858087cf76f450e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/http/zipball/d92cb97fea369d10b46677223cc2bfb5adc1a2f2",
-                "reference": "d92cb97fea369d10b46677223cc2bfb5adc1a2f2",
+                "url": "https://api.github.com/repos/nette/http/zipball/b9b7fe605317127b982610981858087cf76f450e",
+                "reference": "b9b7fe605317127b982610981858087cf76f450e",
                 "shasum": ""
             },
             "require": {
                 "nette/utils": "^4.0.4",
-                "php": "8.1 - 8.5"
+                "php": "8.1 - 8.6"
             },
             "conflict": {
                 "nette/di": "<3.0.3",
@@ -341,48 +341,44 @@
                 {
                     "name": "David Grudl",
                     "homepage": "https://davidgrudl.com"
-                },
-                {
-                    "name": "Nette Community",
-                    "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "🌐 Nette Http: abstraction for HTTP request, response and session. Provides careful data sanitization and utility for URL and cookies manipulation.",
-            "homepage": "https://nette.org",
+            "description": "🌐 Nette HTTP: the request, response, URL, cookies, sessions and file uploads as objects, with sanitized input and same-origin protection against CSRF.",
+            "homepage": "https://doc.nette.org/http",
             "keywords": [
                 "cookies",
+                "csrf",
+                "file upload",
                 "http",
                 "nette",
-                "proxy",
                 "request",
                 "response",
-                "security",
                 "session",
                 "url"
             ],
             "support": {
                 "issues": "https://github.com/nette/http/issues",
-                "source": "https://github.com/nette/http/tree/v3.3.4"
+                "source": "https://github.com/nette/http/tree/v3.3.5"
             },
-            "time": "2026-05-26T16:57:36+00:00"
+            "time": "2026-10-23T12:59:25+00:00"
         },
         {
             "name": "nette/neon",
-            "version": "v3.4.8",
+            "version": "v3.4.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/neon.git",
-                "reference": "9009f99ce1396b366a88ca16c90177148352b7d3"
+                "reference": "af5d261a7664b3d6377c8528206cd5a7fe21b982"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/neon/zipball/9009f99ce1396b366a88ca16c90177148352b7d3",
-                "reference": "9009f99ce1396b366a88ca16c90177148352b7d3",
+                "url": "https://api.github.com/repos/nette/neon/zipball/af5d261a7664b3d6377c8528206cd5a7fe21b982",
+                "reference": "af5d261a7664b3d6377c8528206cd5a7fe21b982",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": "8.0 - 8.5"
+                "php": "8.0 - 8.6"
             },
             "require-dev": {
                 "nette/tester": "^2.4",
@@ -416,43 +412,41 @@
                 {
                     "name": "David Grudl",
                     "homepage": "https://davidgrudl.com"
-                },
-                {
-                    "name": "Nette Community",
-                    "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "🍸 Nette NEON: encodes and decodes NEON file format.",
+            "description": "🍸 Nette NEON: a human-friendly data format, simpler than YAML and with entities for objects. Comes with a fast encoder and decoder.",
             "homepage": "https://neon.nette.org",
             "keywords": [
-                "export",
-                "import",
+                "config",
+                "configuration",
+                "data format",
                 "neon",
                 "nette",
+                "parser",
                 "yaml"
             ],
             "support": {
                 "issues": "https://github.com/nette/neon/issues",
-                "source": "https://github.com/nette/neon/tree/v3.4.8"
+                "source": "https://github.com/nette/neon/tree/v3.4.10"
             },
-            "time": "2026-05-11T21:34:00+00:00"
+            "time": "2026-10-25T22:35:03+00:00"
         },
         {
             "name": "nette/utils",
-            "version": "v4.0.10",
+            "version": "v4.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/utils.git",
-                "reference": "2778deb6aab136c8db4ed1f4d6e9f465ca2dbee3"
+                "reference": "c9958d457077885860569245ffbf66f8131f36cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/utils/zipball/2778deb6aab136c8db4ed1f4d6e9f465ca2dbee3",
-                "reference": "2778deb6aab136c8db4ed1f4d6e9f465ca2dbee3",
+                "url": "https://api.github.com/repos/nette/utils/zipball/c9958d457077885860569245ffbf66f8131f36cb",
+                "reference": "c9958d457077885860569245ffbf66f8131f36cb",
                 "shasum": ""
             },
             "require": {
-                "php": "8.0 - 8.5"
+                "php": "8.0 - 8.6"
             },
             "conflict": {
                 "nette/finder": "<3",
@@ -522,9 +516,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/utils/issues",
-                "source": "https://github.com/nette/utils/tree/v4.0.10"
+                "source": "https://github.com/nette/utils/tree/v4.0.11"
             },
-            "time": "2025-12-01T17:30:42+00:00"
+            "time": "2026-10-21T16:50:30+00:00"
         },
         {
             "name": "nikolaposa/version",

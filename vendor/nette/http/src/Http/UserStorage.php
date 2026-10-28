@@ -9,7 +9,7 @@ namespace Nette\Http;
 
 use Nette;
 use Nette\Security\IIdentity;
-use function is_bool, time;
+use function is_bool;
 
 
 /**
@@ -21,7 +21,7 @@ class UserStorage implements Nette\Security\IUserStorage
 
 	private string $namespace = '';
 
-	private SessionSection $sessionSection;
+	private ?SessionSection $sessionSection = null;
 
 
 	public function __construct(

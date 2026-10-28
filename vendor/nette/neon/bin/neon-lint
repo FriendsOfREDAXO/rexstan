@@ -2,8 +2,8 @@
 <?php declare(strict_types=1);
 
 if (
-	!(is_file($file = __DIR__ . '/../vendor/autoload.php') && include $file) &&
-	!(is_file($file = __DIR__ . '/../../../autoload.php') && include $file)
+	!(is_file($file = __DIR__ . '/../vendor/autoload.php') && include $file)
+	&& !(is_file($file = __DIR__ . '/../../../autoload.php') && include $file)
 ) {
 	fwrite(STDERR, "Install packages using Composer.\n");
 	exit(1);
@@ -15,17 +15,19 @@ NEON linter
 -----------
 ';
 
-if ($argc < 2) {
+$args = array_slice((array) ($_SERVER['argv'] ?? []), 1);
+$debug = in_array('--debug', $args, true);
+$args = array_values(array_diff($args, ['--debug']));
+if (count($args) !== 1) {
 	echo "Usage: neon-lint [--debug] <path>\n";
 	exit(1);
 }
 
-$debug = in_array('--debug', $argv, true);
 if ($debug) {
 	echo "Debug mode\n";
 }
 
-$path = end($argv);
+$path = (string) $args[0];
 
 try {
 	$linter = new NeonLinter(debug: $debug);

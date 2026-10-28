@@ -7,9 +7,8 @@
 
 namespace Nette\Neon\Node;
 
-use Nette\Neon\Exception;
-use Nette\Neon\Node;
-use function array_key_exists, base_convert, bcadd, bcmul, extension_loaded, is_bool, is_finite, is_float, is_int, is_numeric, is_string, json_encode, ord, preg_match, str_contains, strlen, substr;
+use Nette\Neon\{Exception, Node};
+use function array_key_exists, extension_loaded, is_bool, is_float, is_int, is_string, strlen;
 
 
 /** @internal */
@@ -60,11 +59,25 @@ final class LiteralNode extends Node
 			return self::baseConvert(substr($value, 2), 2);
 
 		} elseif (!$isKey && preg_match(self::PatternDatetime, $value)) {
-			return new \DateTimeImmutable($value);
+			return self::parseDate($value) ?? $value;
 
 		} else {
 			return $value;
 		}
+	}
+
+
+	/** The date, or null if PHP finds it invalid, with an error or a warning such as a day the month does not have. */
+	private static function parseDate(string $value): ?\DateTimeImmutable
+	{
+		try {
+			$date = new \DateTimeImmutable($value);
+		} catch (\Throwable) {
+			return null;
+		}
+
+		$errors = \DateTimeImmutable::getLastErrors();
+		return $errors && ($errors['warning_count'] || $errors['error_count']) ? null : $date;
 	}
 
 
@@ -109,7 +122,6 @@ final class LiteralNode extends Node
 			return str_contains($res, '.') ? $res : $res . '.0';
 
 		} elseif (is_int($this->value) || is_bool($this->value) || $this->value === null) {
-
 			return json_encode($this->value);
 
 		} else {

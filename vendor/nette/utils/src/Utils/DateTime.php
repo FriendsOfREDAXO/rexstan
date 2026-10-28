@@ -1,16 +1,14 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * This file is part of the Nette Framework (https://nette.org)
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 
-declare(strict_types=1);
-
 namespace Nette\Utils;
 
 use Nette;
-use function array_merge, checkdate, implode, is_numeric, is_string, preg_replace_callback, sprintf, time, trim;
+use function is_string;
 
 
 /**
@@ -136,7 +134,10 @@ class DateTime extends \DateTime implements \JsonSerializable
 			|| $second < 0 || $second >= 60
 			|| $microsecond < 0 || $microsecond >= 1_000_000
 		) {
-			trigger_error(sprintf(self::class . ': The time %02d:%02d:%08.5F is not valid.', $hour, $minute, $second + $microsecond / 1_000_000), E_USER_WARNING);
+			trigger_error(
+				sprintf(self::class . ': The time %02d:%02d:%08.5F is not valid.', $hour, $minute, $second + $microsecond / 1_000_000),
+				E_USER_WARNING,
+			);
 		}
 		return parent::setTime($hour, $minute, $second, $microsecond);
 	}
@@ -165,7 +166,7 @@ class DateTime extends \DateTime implements \JsonSerializable
 		);
 
 		if ($ctr) {
-			parent::__construct($absPart, $timezone);
+			parent::__construct(trim($absPart), $timezone);
 			$this->handleErrors($datetime);
 		} elseif (trim($absPart)) {
 			parent::modify($absPart) && $this->handleErrors($datetime);

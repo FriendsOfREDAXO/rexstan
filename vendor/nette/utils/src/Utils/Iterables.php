@@ -1,11 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * This file is part of the Nette Framework (https://nette.org)
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
-
-declare(strict_types=1);
 
 namespace Nette\Utils;
 
@@ -49,7 +47,7 @@ final class Iterables
 
 
 	/**
-	 * Returns the first item (matching the specified predicate if given). If there is no such item, it returns result of invoking $else or null.
+	 * Returns the first item (matching the predicate if given). If there is no such item, returns the result of $else or null.
 	 * @template K
 	 * @template V
 	 * @param  iterable<K, V>  $iterable
@@ -68,7 +66,7 @@ final class Iterables
 
 
 	/**
-	 * Returns the key of first item (matching the specified predicate if given). If there is no such item, it returns result of invoking $else or null.
+	 * Returns the key of the first item (matching the predicate if given). If there is no such item, returns the result of $else or null.
 	 * @template K
 	 * @template V
 	 * @param  iterable<K, V>  $iterable

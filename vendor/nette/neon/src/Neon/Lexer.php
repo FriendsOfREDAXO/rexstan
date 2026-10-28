@@ -7,7 +7,7 @@
 
 namespace Nette\Neon;
 
-use function array_keys, count, implode, preg_match, preg_match_all, str_replace, strlen, substr;
+use function count, strlen;
 
 
 /** @internal */
@@ -68,7 +68,8 @@ final class Lexer
 
 		$stream = new TokenStream($tokens);
 		if ($offset !== strlen($input)) {
-			$s = str_replace("\n", '\n', substr($input, $offset, 40));
+			preg_match('~.{0,40}~Asu', $input, $m, offset: $offset); // truncating at a character boundary keeps the message valid UTF-8
+			$s = str_replace("\n", '\n', $m[0] ?? '');
 			$stream->error("Unexpected '$s'", count($tokens));
 		}
 
@@ -79,7 +80,7 @@ final class Lexer
 	/** Checks whether the string must be quoted when encoding to NEON. */
 	public static function requiresDelimiters(string $s): bool
 	{
-		return preg_match('~[\x00-\x1F]|^[+-.]?\d|^(true|false|yes|no|on|off|null)$~Di', $s)
+		return preg_match('~[\x00-\x1F]|^[+-]?\.?\d|^(true|false|yes|no|on|off|null)$~Di', $s)
 			|| !preg_match('~^' . self::Patterns[Token::Literal] . '$~Dx', $s);
 	}
 }
