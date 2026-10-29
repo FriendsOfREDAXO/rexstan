@@ -7,7 +7,7 @@
         "phpstan/phpstan-deprecation-rules": "2.0.5",
         "phpstan/phpstan-phpunit": "2.1.1",
         "phpstan/phpstan-strict-rules": "2.1.0",
-        "phpstan/phpstan-symfony": "2.1.0",
+        "phpstan/phpstan-symfony": "2.1.1",
         "spaze/phpstan-disallowed-calls": "4.15.0",
         "sqlftw/sqlftw": "0.1.17",
         "staabm/phpstan-baseline-analysis": "0.13.2",
