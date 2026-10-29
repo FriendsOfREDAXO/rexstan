@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d259c9349b31933f20154c0440c891d",
+    "content-hash": "14b5364fdd71fc18afa9b6896a58f012",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -920,16 +920,16 @@
         },
         {
             "name": "phpstan/phpstan-symfony",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-symfony.git",
-                "reference": "1981b94f0dd3a5bb42268f6a7a0e8954ac76dc2e"
+                "reference": "e218a49b5d24c9fd74903e22433fb10e16c33a53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/1981b94f0dd3a5bb42268f6a7a0e8954ac76dc2e",
-                "reference": "1981b94f0dd3a5bb42268f6a7a0e8954ac76dc2e",
+                "url": "https://api.github.com/repos/phpstan/phpstan-symfony/zipball/e218a49b5d24c9fd74903e22433fb10e16c33a53",
+                "reference": "e218a49b5d24c9fd74903e22433fb10e16c33a53",
                 "shasum": ""
             },
             "require": {
@@ -988,9 +988,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-symfony/issues",
-                "source": "https://github.com/phpstan/phpstan-symfony/tree/2.1.0"
+                "source": "https://github.com/phpstan/phpstan-symfony/tree/2.1.1"
             },
-            "time": "2026-10-03T15:54:38+00:00"
+            "time": "2026-10-25T14:57:26+00:00"
         },
         {
             "name": "psr/log",
