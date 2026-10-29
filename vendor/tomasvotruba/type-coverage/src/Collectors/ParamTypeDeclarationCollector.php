@@ -24,7 +24,7 @@ final class ParamTypeDeclarationCollector implements Collector
 
     /**
      * @param FunctionLike $node
-     * @return array{int, list<int>, string|null}|null
+     * @return array{count: int, missingLines: list<int>, traitFilePath: string|null, startFilePos: int}|null
      */
     public function processNode(Node $node, Scope $scope): ?array
     {
@@ -52,7 +52,12 @@ final class ParamTypeDeclarationCollector implements Collector
             }
         }
 
-        return [$paramCount, $missingTypeLines, $this->resolveTraitFilePath($scope)];
+        return [
+            'count' => $paramCount,
+            'missingLines' => $missingTypeLines,
+            'traitFilePath' => $this->resolveTraitFilePath($scope),
+            'startFilePos' => $node->getStartFilePos(),
+        ];
     }
 
     private function resolveTraitFilePath(Scope $scope): ?string
@@ -90,13 +95,15 @@ final class ParamTypeDeclarationCollector implements Collector
             }
         }
 
-        foreach ($classReflection->getInterfaces() as $interfaceReflection) {
-            if ($interfaceReflection->hasMethod($methodName)) {
-                return true;
+        $found = false;
+        foreach ($classReflection->getInterfaces() as $classReflection) {
+            if ($classReflection->hasMethod($methodName)) {
+                $found = true;
+                break;
             }
         }
 
-        return false;
+        return $found;
     }
 
     private function hasFunctionLikeCallableParam(FunctionLike $functionLike): bool
