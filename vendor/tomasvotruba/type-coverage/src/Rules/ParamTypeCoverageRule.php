@@ -4,24 +4,13 @@ declare(strict_types=1);
 
 namespace TomasVotruba\TypeCoverage\Rules;
 
-use PhpParser\Node;
-use PHPStan\Analyser\Scope;
-use PHPStan\Node\CollectedDataNode;
-use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleError;
-use PHPStan\Rules\RuleErrorBuilder;
-use TomasVotruba\TypeCoverage\CollectorDataNormalizer;
+use PHPStan\Collectors\Collector;
 use TomasVotruba\TypeCoverage\Collectors\ParamTypeDeclarationCollector;
-use TomasVotruba\TypeCoverage\Configuration;
-use TomasVotruba\TypeCoverage\Configuration\ScopeConfigurationResolver;
-use TomasVotruba\TypeCoverage\Formatter\TypeCoverageFormatter;
 
 /**
  * @see \TomasVotruba\TypeCoverage\Tests\Rules\ParamTypeCoverageRule\ParamTypeCoverageRuleTest
- *
- * @implements Rule<CollectedDataNode>
  */
-final class ParamTypeCoverageRule implements Rule
+final class ParamTypeCoverageRule extends AbstractTypeCoverageRule
 {
     /**
      * @var string
@@ -34,75 +23,30 @@ final class ParamTypeCoverageRule implements Rule
     private const IDENTIFIER = 'typeCoverage.paramTypeCoverage';
 
     /**
-     * @readonly
+     * @return class-string<Collector>
      */
-    private TypeCoverageFormatter $typeCoverageFormatter;
-
-    /**
-     * @readonly
-     */
-    private Configuration $configuration;
-
-    /**
-     * @readonly
-     */
-    private CollectorDataNormalizer $collectorDataNormalizer;
-
-    public function __construct(
-        TypeCoverageFormatter $typeCoverageFormatter,
-        Configuration $configuration,
-        CollectorDataNormalizer $collectorDataNormalizer
-    ) {
-        $this->typeCoverageFormatter = $typeCoverageFormatter;
-        $this->configuration = $configuration;
-        $this->collectorDataNormalizer = $collectorDataNormalizer;
+    protected function getCollectorClass(): string
+    {
+        return ParamTypeDeclarationCollector::class;
     }
 
-    /**
-     * @return class-string<Node>
-     */
-    public function getNodeType(): string
+    protected function getErrorMessage(): string
     {
-        return CollectedDataNode::class;
+        return self::ERROR_MESSAGE;
     }
 
-    /**
-     * @param CollectedDataNode $node
-     * @return RuleError[]
-     */
-    public function processNode(Node $node, Scope $scope): array
+    protected function getIdentifier(): string
     {
-        // if only subpaths are analysed, skip as data will be false positive
-        if (! ScopeConfigurationResolver::areFullPathsAnalysed($scope)) {
-            return [];
-        }
+        return self::IDENTIFIER;
+    }
 
-        $paramTypeDeclarationCollector = $node->get(ParamTypeDeclarationCollector::class);
+    protected function getMeasureMessage(): string
+    {
+        return 'Param type coverage is %.1f %% out of %d possible';
+    }
 
-        $typeCountAndMissingTypes = $this->collectorDataNormalizer->normalize($paramTypeDeclarationCollector);
-
-        if ($this->configuration->showOnlyMeasure()) {
-            $errorMessage = sprintf(
-                'Param type coverage is %.1f %% out of %d possible',
-                $typeCountAndMissingTypes->getCoveragePercentage(),
-                $typeCountAndMissingTypes->getTotalCount()
-            );
-
-            $ruleError = RuleErrorBuilder::message($errorMessage)
-                ->build();
-
-            return [$ruleError];
-        }
-
-        if ($this->configuration->getRequiredParamTypeLevel() === 0) {
-            return [];
-        }
-
-        return $this->typeCoverageFormatter->formatErrors(
-            self::ERROR_MESSAGE,
-            self::IDENTIFIER,
-            $this->configuration->getRequiredParamTypeLevel(),
-            $typeCountAndMissingTypes
-        );
+    protected function getRequiredTypeLevel(): float
+    {
+        return (float) $this->configuration->getRequiredParamTypeLevel();
     }
 }

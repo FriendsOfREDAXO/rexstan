@@ -1,0 +1,69 @@
+parametersSchema:
+    # see https://doc.nette.org/en/schema for configuration
+    type_perfect: structure([
+        narrow_param: bool()
+        narrow_return: bool()
+        no_mixed: bool()
+        # deprecated, no-op
+        null_over_false: bool()
+
+        # replace for no_mixed
+        no_mixed_property: bool()
+        no_mixed_caller: bool()
+
+        no_param_type_removal: bool()
+        no_isset_on_object: bool()
+        no_empty_on_object: bool()
+    ])
+
+# defaults
+parameters:
+    type_perfect:
+        narrow_param: false
+        narrow_return: false
+        no_mixed: false
+        # deprecated, no-op
+        null_over_false: false
+        # priority override of no_mixed
+        no_mixed_property: false
+        no_mixed_caller: false
+
+        no_param_type_removal: false
+        no_isset_on_object: false
+        no_empty_on_object: false
+
+rules:
+    # turn on by the group name
+
+    # no_param_type_removal
+    - Rector\TypePerfect\Rules\NoParamTypeRemovalRule
+
+    # no_isset_on_object
+    - Rector\TypePerfect\Rules\NoIssetOnObjectRule
+
+    # no_empty_on_object
+    - Rector\TypePerfect\Rules\NoEmptyOnObjectRule
+
+    # narrow_param
+    - Rector\TypePerfect\Rules\NarrowPrivateClassMethodParamTypeRule
+
+    # narrow_return
+    - Rector\TypePerfect\Rules\NarrowReturnObjectTypeRule
+
+    # no_mixed
+    - Rector\TypePerfect\Rules\NoMixedPropertyFetcherRule
+    - Rector\TypePerfect\Rules\NoMixedMethodCallerRule
+
+services:
+    -
+        factory: Rector\TypePerfect\Configuration
+        arguments:
+            - %type_perfect%
+
+    - Rector\TypePerfect\NodeFinder\ClassMethodNodeFinder
+    - Rector\TypePerfect\NodeFinder\MethodCallNodeFinder
+    - Rector\TypePerfect\NodeFinder\ReturnNodeFinder
+    - Rector\TypePerfect\Printer\NodeComparator
+    - Rector\TypePerfect\Reflection\ReflectionParser
+    - Rector\TypePerfect\Reflection\MethodNodeAnalyser
+    - Rector\TypePerfect\Guard\EmptyIssetGuard
