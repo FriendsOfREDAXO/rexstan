@@ -1,0 +1,52 @@
+composer.lock
+  h_53f8f6db02589e 74-75,152-153,218-219,270-271,336-337,419-420,489-490,579-580,641-642,693-694,755-756,820-821,872-873,931-932,984-985,1059-1060,1110-1111,1165-1166,1233-1234,1284-1285,1352-1353,1433-1434,1505-1506,1574-1575,1659-1660,1717-1718,1770-1771,1842-1843,1901-1902,1960-1961,1977
+vendor/bin/phpstan.bat
+  h_53f8f6db02589e 3-4
+vendor/bin/phpstan.phar.bat
+  h_53f8f6db02589e 3-4
+vendor/composer/autoload_classmap.php
+  h_53f8f6db02589e 1972
+vendor/composer/autoload_static.php
+  h_53f8f6db02589e 2123
+vendor/composer/installed.json
+  h_53f8f6db02589e 75-76,80,84-85,95-96,140,777-778,781-782,791-792,960-961,965,969-970,984-985,1010,1396-1397,1401,1405-1406,1434-1435,1468
+vendor/composer/installed.php
+  h_53f8f6db02589e 6,16,32-34,134-136,161-163,224-226
+vendor/composer/semver/CHANGELOG.md
+  h_53f8f6db02589e 6-9,217
+vendor/composer/semver/src/Intervals.php
+  h_53f8f6db02589e 39-43,62,151-163
+vendor/phpstan/phpstan-strict-rules/.agents/setup
+  h_53f8f6db02589e 1-41
+vendor/phpstan/phpstan-strict-rules/src/Rules/BooleansInConditions/BooleanRuleHelper.php
+  h_53f8f6db02589e 25-29
+vendor/phpstan/phpstan-strict-rules/src/Rules/Cast/UselessCastRule.php
+  h_53f8f6db02589e 58-62,64-81,83-87,90
+vendor/phpstan/phpstan/README.md
+  h_53f8f6db02589e 60,62,64,66,68,70,72,74-75
+vendor/phpstan/phpstan/phpstan.phar.asc
+  h_53f8f6db02589e 3-15
+vendor/phpstan/phpstan/turbo-ext/.version
+  h_53f8f6db02589e 1
+vendor/staabm/phpstan-dba/config/extensions.neon
+  h_53f8f6db02589e 72-76
+vendor/staabm/phpstan-dba/src/Extensions/MysqliQueryDynamicReturnTypeExtension.php
+  h_53f8f6db02589e 133
+vendor/staabm/phpstan-dba/src/Extensions/MysqliResultDynamicReturnTypeExtension.php
+  h_53f8f6db02589e 1-173
+vendor/staabm/phpstan-dba/src/MysqliReflection/MysqliResultObjectType.php
+  h_53f8f6db02589e 7,16,18-20,23,25-26,29-34
+vendor/staabm/phpstan-dba/src/QueryReflection/QueryReflection.php
+  h_53f8f6db02589e 347-352
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "30b4adbd38372d1e3320303ce8e7702ea6c6c97e",
+  "prompts": {},
+  "humans": {
+    "h_53f8f6db02589e": {
+      "author": "Markus Staab <markus.staab@redaxo.de>"
+    }
+  }
+}
