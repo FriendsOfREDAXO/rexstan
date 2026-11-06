@@ -1969,6 +1969,7 @@ return array(
     'staabm\\PHPStanDba\\Extensions\\DoctrineStatementExecuteDynamicReturnTypeExtension' => $vendorDir . '/staabm/phpstan-dba/src/Extensions/DoctrineStatementExecuteDynamicReturnTypeExtension.php',
     'staabm\\PHPStanDba\\Extensions\\MysqliEscapeStringDynamicReturnTypeExtension' => $vendorDir . '/staabm/phpstan-dba/src/Extensions/MysqliEscapeStringDynamicReturnTypeExtension.php',
     'staabm\\PHPStanDba\\Extensions\\MysqliQueryDynamicReturnTypeExtension' => $vendorDir . '/staabm/phpstan-dba/src/Extensions/MysqliQueryDynamicReturnTypeExtension.php',
+    'staabm\\PHPStanDba\\Extensions\\MysqliResultDynamicReturnTypeExtension' => $vendorDir . '/staabm/phpstan-dba/src/Extensions/MysqliResultDynamicReturnTypeExtension.php',
     'staabm\\PHPStanDba\\Extensions\\PdoPrepareDynamicReturnTypeExtension' => $vendorDir . '/staabm/phpstan-dba/src/Extensions/PdoPrepareDynamicReturnTypeExtension.php',
     'staabm\\PHPStanDba\\Extensions\\PdoQueryDynamicReturnTypeExtension' => $vendorDir . '/staabm/phpstan-dba/src/Extensions/PdoQueryDynamicReturnTypeExtension.php',
     'staabm\\PHPStanDba\\Extensions\\PdoQuoteDynamicReturnTypeExtension' => $vendorDir . '/staabm/phpstan-dba/src/Extensions/PdoQuoteDynamicReturnTypeExtension.php',

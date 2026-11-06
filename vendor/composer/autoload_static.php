@@ -2120,6 +2120,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'staabm\\PHPStanDba\\Extensions\\DoctrineStatementExecuteDynamicReturnTypeExtension' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/Extensions/DoctrineStatementExecuteDynamicReturnTypeExtension.php',
         'staabm\\PHPStanDba\\Extensions\\MysqliEscapeStringDynamicReturnTypeExtension' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/Extensions/MysqliEscapeStringDynamicReturnTypeExtension.php',
         'staabm\\PHPStanDba\\Extensions\\MysqliQueryDynamicReturnTypeExtension' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/Extensions/MysqliQueryDynamicReturnTypeExtension.php',
+        'staabm\\PHPStanDba\\Extensions\\MysqliResultDynamicReturnTypeExtension' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/Extensions/MysqliResultDynamicReturnTypeExtension.php',
         'staabm\\PHPStanDba\\Extensions\\PdoPrepareDynamicReturnTypeExtension' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/Extensions/PdoPrepareDynamicReturnTypeExtension.php',
         'staabm\\PHPStanDba\\Extensions\\PdoQueryDynamicReturnTypeExtension' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/Extensions/PdoQueryDynamicReturnTypeExtension.php',
         'staabm\\PHPStanDba\\Extensions\\PdoQuoteDynamicReturnTypeExtension' => __DIR__ . '/..' . '/staabm/phpstan-dba/src/Extensions/PdoQuoteDynamicReturnTypeExtension.php',
