@@ -49,12 +49,71 @@ final class RexStan
         $cmd = $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress';
         $output = RexCmd::execCmd($cmd, $stderrOutput, $exitCode);
 
+        return self::interpretAnalysisOutput($output, $stderrOutput);
+    }
+
+    /**
+     * Starts a "runFromWeb()"-equivalent analysis as a detached background
+     * process instead of blocking the current request. Progress/result is
+     * tracked exclusively via RexStanRunStore, so the browser can poll for it
+     * (see Api\AnalysisApi) instead of waiting on this call itself.
+     *
+     * @return bool false if a background run is already in progress
+     */
+    public static function startBackgroundWebAnalysis(): bool
+    {
+        if (RexStanRunStore::isRunning()) {
+            return false;
+        }
+
+        $phpstanBinary = self::phpstanBinPath();
+        $configPath = self::phpstanConfigPath(__DIR__.'/../phpstan.neon');
+        $cmd = $phpstanBinary .' analyse -c '. $configPath .' --error-format=json --no-progress';
+
+        RexStanRunStore::markStarted();
+
+        $resultTmp = RexStanRunStore::resultTmpPath();
+        $result = RexStanRunStore::resultPath();
+        $errorLog = RexStanRunStore::errorLogPath();
+        $lock = RexStanRunStore::lockPath();
+
+        if ('WIN' === strtoupper(substr(PHP_OS, 0, 3))) {
+            // Best effort on Windows: no directly equivalent primitive to Unix's
+            // detached "&" backgrounding exists for cmd.exe: "start /B" is the
+            // closest match and is spawned already-detached from this request.
+            $wrapped = 'cmd /C "'. $cmd .' > '. escapeshellarg($resultTmp) .' 2> '. escapeshellarg($errorLog)
+                .' & move /Y '. escapeshellarg($resultTmp) .' '. escapeshellarg($result)
+                .' & del '. escapeshellarg($lock) .'"';
+
+            $handle = popen('start /B '. $wrapped, 'r');
+            if (false !== $handle) {
+                pclose($handle);
+            }
+        } else {
+            // Write to a temp file first and rename it into place afterwards, so a
+            // poller can never observe a partially-written result file; remove the
+            // lock only once the result is safely in place.
+            $wrapped = '(' . $cmd . ' > '. escapeshellarg($resultTmp) .' 2> '. escapeshellarg($errorLog)
+                .'; mv '. escapeshellarg($resultTmp) .' '. escapeshellarg($result)
+                .'; rm -f '. escapeshellarg($lock) .') > /dev/null 2>&1 &';
+
+            shell_exec($wrapped);
+        }
+
+        return true;
+    }
+
+    /**
+     * @return array<string, mixed>|string
+     */
+    public static function interpretAnalysisOutput(string $output, string $stderrOutput)
+    {
         // return the analysis result as an array
         if ($output !== '' && $output[0] === '{') {
             $decoded = json_decode($output, true);
 
             if (json_last_error() != 0) {
-                rex_logger::factory()->warning("rexstan - invalid json:\n\n". $output);
+                rex_logger::factory()->warning('rexstan - invalid json:{output}', ['output' => "\n\n". $output]);
 
                 throw new Exception('Unable to decode json: '. json_last_error_msg() ."\n\nSee syslog for details");
             }
