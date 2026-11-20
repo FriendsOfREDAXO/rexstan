@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2a5403bde72c3f24f67929439e9483c5",
+    "content-hash": "ca7d12b2812bf87e02f5e26dbedcd5d8",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -217,16 +217,16 @@
         },
         {
             "name": "entropy/entropy",
-            "version": "0.4.36",
+            "version": "0.4.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/entropy.git",
-                "reference": "9f08272a96275d22a9d9808a32581392920626db"
+                "reference": "57bd06e1652f3c38148944b4880ee3b6e6284da3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/entropy/zipball/9f08272a96275d22a9d9808a32581392920626db",
-                "reference": "9f08272a96275d22a9d9808a32581392920626db",
+                "url": "https://api.github.com/repos/TomasVotruba/entropy/zipball/57bd06e1652f3c38148944b4880ee3b6e6284da3",
+                "reference": "57bd06e1652f3c38148944b4880ee3b6e6284da3",
                 "shasum": ""
             },
             "require": {
@@ -262,9 +262,9 @@
             "description": "Entropy framework",
             "support": {
                 "issues": "https://github.com/TomasVotruba/entropy/issues",
-                "source": "https://github.com/TomasVotruba/entropy/tree/0.4.36"
+                "source": "https://github.com/TomasVotruba/entropy/tree/0.4.37"
             },
-            "time": "2026-10-26T16:46:17+00:00"
+            "time": "2026-11-14T16:57:42+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -743,6 +743,53 @@
                 "source": "https://github.com/php-parallel-lint/PHP-Parallel-Lint/tree/v1.4.0"
             },
             "time": "2024-03-27T12:14:49+00:00"
+        },
+        {
+            "name": "phpstan/phpdoc-parser",
+            "version": "2.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpdoc-parser.git",
+                "reference": "af8e840551031d254cfdb3a18a62c3470a309c10"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/af8e840551031d254cfdb3a18a62c3470a309c10",
+                "reference": "af8e840551031d254cfdb3a18a62c3470a309c10",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "doctrine/annotations": "^2.0",
+                "nikic/php-parser": "^5.3.0",
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^9.6",
+                "symfony/process": "^5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHPStan\\PhpDocParser\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHPDoc parser with support for nullable, intersection and generic types",
+            "support": {
+                "issues": "https://github.com/phpstan/phpdoc-parser/issues",
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.4.1"
+            },
+            "time": "2026-10-30T19:36:28+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -1636,29 +1683,58 @@
         },
         {
             "name": "symplify/phpstan-rules",
-            "version": "14.10.0",
+            "version": "14.19.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/phpstan-rules.git",
-                "reference": "dc1035ded416b99313d6a14e69923f5e018a6b40"
+                "reference": "ea19d26ff243523e9ab4e17ea92c3ec83aa93efd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/dc1035ded416b99313d6a14e69923f5e018a6b40",
-                "reference": "dc1035ded416b99313d6a14e69923f5e018a6b40",
+                "url": "https://api.github.com/repos/symplify/phpstan-rules/zipball/ea19d26ff243523e9ab4e17ea92c3ec83aa93efd",
+                "reference": "ea19d26ff243523e9ab4e17ea92c3ec83aa93efd",
                 "shasum": ""
             },
             "require": {
-                "nette/utils": "^3.2|^4.0",
-                "php": "^7.4|^8.0",
-                "phpstan/phpstan": "^2.1.33",
-                "webmozart/assert": "^1.12 || ^2.0"
+                "entropy/entropy": "^0.4.25",
+                "php": ">=7.4",
+                "phpstan/phpdoc-parser": "^2.3.5",
+                "phpstan/phpstan": "^2.3"
+            },
+            "require-dev": {
+                "illuminate/container": "^11.51",
+                "nette/neon": "^3.4",
+                "nikic/php-parser": "^5.9",
+                "phpstan/extension-installer": "^1.4",
+                "phpunit/phpunit": "^13.4",
+                "rector/rector": "^2.7",
+                "rector/swiss-knife": "^2.7",
+                "shipmonk/composer-dependency-analyser": "^1.8",
+                "shipmonk/dead-code-detector": "^1.4",
+                "symfony/console": "^6.4",
+                "symfony/framework-bundle": "^6.4",
+                "symplify/easy-coding-standard": "^13.3",
+                "tomasvotruba/class-leak": "^2.3",
+                "tomasvotruba/type-coverage": "^2.5"
             },
             "type": "phpstan-extension",
             "extra": {
                 "phpstan": {
                     "includes": [
-                        "config/services/services.neon"
+                        "config/services/services.neon",
+                        "config/naming-rules.neon",
+                        "config/code-complexity-rules.neon",
+                        "config/configurable-rules.neon",
+                        "config/static-rules.neon",
+                        "config/modern-rules.neon",
+                        "config/symfony-rules.neon",
+                        "config/symfony-config-rules.neon",
+                        "config/doctrine-rules.neon",
+                        "config/collection-rules.neon",
+                        "config/phpunit-rules.neon",
+                        "config/ctor-rules.neon",
+                        "config/mock-rules.neon",
+                        "config/phpstan-extensions.neon"
                     ]
                 }
             },
@@ -1674,10 +1750,10 @@
             "license": [
                 "MIT"
             ],
-            "description": "Set of Symplify rules for PHPStan",
+            "description": "Set of Symplify rules, type extensions and error formatter for PHPStan",
             "support": {
                 "issues": "https://github.com/symplify/phpstan-rules/issues",
-                "source": "https://github.com/symplify/phpstan-rules/tree/14.10.0"
+                "source": "https://github.com/symplify/phpstan-rules/tree/14.19.4"
             },
             "funding": [
                 {
@@ -1689,7 +1765,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-05-22T09:35:51+00:00"
+            "time": "2026-11-16T20:56:50+00:00"
         },
         {
             "name": "tomasvotruba/cognitive-complexity",
