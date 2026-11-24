@@ -850,6 +850,7 @@ class ComposerStaticInit9cf8af24a7a084f114b4553be2a1ff9f
         'PHPStan\\Rules\\PHPUnit\\DataProviderDeclarationRule' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/Rules/PHPUnit/DataProviderDeclarationRule.php',
         'PHPStan\\Rules\\PHPUnit\\DataProviderHelper' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/Rules/PHPUnit/DataProviderHelper.php',
         'PHPStan\\Rules\\PHPUnit\\DataProviderHelperFactory' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/Rules/PHPUnit/DataProviderHelperFactory.php',
+        'PHPStan\\Rules\\PHPUnit\\EmptyDataProviderRule' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/Rules/PHPUnit/EmptyDataProviderRule.php',
         'PHPStan\\Rules\\PHPUnit\\MockMethodCallRule' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/Rules/PHPUnit/MockMethodCallRule.php',
         'PHPStan\\Rules\\PHPUnit\\NoMissingSpaceInClassAnnotationRule' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/Rules/PHPUnit/NoMissingSpaceInClassAnnotationRule.php',
         'PHPStan\\Rules\\PHPUnit\\NoMissingSpaceInMethodAnnotationRule' => __DIR__ . '/..' . '/phpstan/phpstan-phpunit/src/Rules/PHPUnit/NoMissingSpaceInMethodAnnotationRule.php',

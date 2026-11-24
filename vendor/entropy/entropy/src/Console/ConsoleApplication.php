@@ -31,6 +31,8 @@ final class ConsoleApplication
 
     private CLIRequestMapper $cliRequestMapper;
 
+    private ?string $version = null;
+
     public function __construct(
         HelpPrinter $helpPrinter,
         OutputPrinter $outputPrinter,
@@ -48,12 +50,25 @@ final class ConsoleApplication
     }
 
     /**
+     * Printed on "--version" or "-V", e.g. "Rector 2.1.0"
+     */
+    public function setVersion(string $version): void
+    {
+        $this->version = $version;
+    }
+
+    /**
      * @param mixed[] $argv
      * @return ExitCode::*
      */
     public function run(array $argv): int
     {
         $cliRequest = $this->inputParser->parse($argv);
+
+        if ($this->version !== null && array_intersect(['version', 'V'], array_keys($cliRequest->getOptions())) !== []) {
+            $this->outputPrinter->writeln($this->version);
+            return ExitCode::SUCCESS;
+        }
 
         $commandName = $cliRequest->getCommandName();
 

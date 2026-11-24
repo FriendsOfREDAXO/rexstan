@@ -8,6 +8,7 @@ use Entropy\Attribute\RelatedTest;
 use Entropy\Console\CommandRegistry;
 use Entropy\Console\Contract\CommandInterface;
 use Entropy\Console\ValueObject\CLIRequest;
+use Entropy\Reflection\ParameterOptionMarkerResolver;
 use Entropy\Reflection\ValueOptionNameResolver;
 use Entropy\Tests\Console\Input\InputParserTest;
 use ReflectionMethod;
@@ -46,6 +47,9 @@ final class InputParser
 
         // which "--name" options take a value, so a flag never swallows the next token
         $valueOptionNames = $this->resolveValueOptionNames($command);
+
+        // "-c" short aliases declared via "@option $config -c"
+        $shortAliases = $this->resolveShortAliases($command);
 
         $args = [];
         $options = [];
@@ -102,6 +106,13 @@ final class InputParser
             if (! $optionsEnded && str_starts_with((string) $item, '-')) {
                 $name = ltrim((string) $item, '-');
 
+                // "-c value" or "-c=value" short alias: re-queue as its "--config" long form
+                $shortName = explode('=', $name, 2)[0];
+                if (isset($shortAliases[$shortName])) {
+                    array_unshift($argv, '--' . $shortAliases[$shortName] . substr($name, 1));
+                    continue;
+                }
+
                 // a single dash with a multi-char name is not a valid short flag (likely a missing dash: "-clear-cache"),
                 // keep the raw spelling so it surfaces as an unknown option instead of silently matching a "--option"
                 if (strlen($name) > 1) {
@@ -131,6 +142,27 @@ final class InputParser
         }
 
         return ValueOptionNameResolver::resolve(new ReflectionMethod($command, 'run'));
+    }
+
+    /**
+     * @return array<string, string> map: short alias => long option name
+     */
+    private function resolveShortAliases(?string $commandName): array
+    {
+        $command = $this->resolveCommand($commandName);
+        if (! $command instanceof CommandInterface) {
+            return [];
+        }
+
+        $reflectionMethod = new ReflectionMethod($command, 'run');
+
+        $shortAliases = [];
+        foreach (ParameterOptionMarkerResolver::resolveShortAliases($reflectionMethod) as $shortName => $paramName) {
+            // dryRun → dry-run
+            $shortAliases[$shortName] = strtolower((string) preg_replace('/[A-Z]/', '-$0', $paramName));
+        }
+
+        return $shortAliases;
     }
 
     private function resolveCommand(?string $commandName): ?CommandInterface
