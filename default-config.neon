@@ -7,9 +7,18 @@ includes:
     # required for dead-code.neon, code-complexity.neon, native-type-coverage.neon
     - vendor/symplify/phpstan-rules/config/services/services.neon
     - vendor/staabm/phpstan-psr3/config/extension.neon
+    # loaded once here, configured by native-type-coverage.neon and code-complexity.neon
+    - vendor/tomasvotruba/type-coverage/config/extension.neon
 
 parameters:
     level: 5
+
+    # 0 disables the type coverage rules, native-type-coverage.neon enables them for the summary
+    type_coverage:
+        return_type: 0
+        param_type: 0
+        property_type: 0
+        constant_type: 0
 
     excludePaths:
         - '*/vendor/*'

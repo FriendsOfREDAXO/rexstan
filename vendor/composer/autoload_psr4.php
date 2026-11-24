@@ -17,7 +17,7 @@ return array(
     'Symplify\\PHPStanRules\\' => array($vendorDir . '/symplify/phpstan-rules/src'),
     'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Spaze\\PHPStan\\Rules\\Disallowed\\' => array($vendorDir . '/spaze/phpstan-disallowed-calls/src'),
-    'Rector\\TypePerfect\\' => array($vendorDir . '/tomasvotruba/type-coverage/packages/type-perfect/src', $vendorDir . '/rector/type-perfect/src'),
+    'Rector\\TypePerfect\\' => array($vendorDir . '/tomasvotruba/type-coverage/packages/type-perfect/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
     'PHPStan\\' => array($vendorDir . '/phpstan/phpstan-symfony/src', $vendorDir . '/phpstan/phpstan-strict-rules/src', $vendorDir . '/phpstan/phpstan-phpunit/src', $vendorDir . '/phpstan/phpstan-deprecation-rules/src'),
     'Nette\\' => array($vendorDir . '/nette/neon/src', $vendorDir . '/nette/http/src', $vendorDir . '/nette/utils/src'),
