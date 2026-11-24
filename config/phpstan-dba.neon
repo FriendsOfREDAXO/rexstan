@@ -143,3 +143,7 @@ services:
         tags:
             - phpstan.broker.propertiesClassReflectionExtension
 
+    -
+        class: staabm\PHPStanDba\Extensions\DbSchemaResultCacheMetaExtension
+        tags:
+            - phpstan.resultCacheValueExtension
