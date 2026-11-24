@@ -28,6 +28,7 @@ final class CommandRunParametersMapper
 
         $paramDescriptions = ParameterDescriptionResolver::resolve($runReflectionMethod);
         $optionMarkers = ParameterOptionMarkerResolver::resolve($runReflectionMethod);
+        $shortNamesByParamName = array_flip(ParameterOptionMarkerResolver::resolveShortAliases($runReflectionMethod));
 
         $arguments = [];
         $options = [];
@@ -44,6 +45,7 @@ final class CommandRunParametersMapper
 
             $parameterName = $reflectionParameter->getName();
             $parameterType = $parameterType->getName();
+            $shortName = $shortNamesByParamName[$parameterName] ?? null;
 
             $description = $paramDescriptions[$parameterName] ?? null;
 
@@ -77,7 +79,8 @@ final class CommandRunParametersMapper
                     $parameterType,
                     $description,
                     $acceptsMultipleValue,
-                    $defaultValue
+                    $defaultValue,
+                    $shortName
                 );
             }
         }
