@@ -1,0 +1,46 @@
+name: Unit Tests
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+
+jobs:
+
+    phpstan:
+        name: PHPStan
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+
+        strategy:
+            matrix:
+                php-version: ['8.0', '8.1', '8.2']
+
+        steps:
+            -   name: Setup PHP
+                id: setup-php
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php-version }}
+                    extensions: gd, intl, pdo_mysql
+                    coverage: none
+
+            -   run: composer require redaxo/source
+
+            -   name: Init database
+                run: |
+                    sudo /etc/init.d/mysql start
+                    mysql -uroot -h127.0.0.1 -proot -e 'create database redaxo5;'
+
+            -   name: Setup REDAXO
+                run: |
+                    php vendor/bin/console setup:run -n --lang=de_de --agree-license --db-host=127.0.0.1 --db-password=root --db-createdb=no --db-setup=normal --admin-username=admin --admin-password=adminpassword --error-email=test@redaxo.invalid --ansi
+
+            -   uses: actions/checkout@v3
+                with:
+                    path: vendor/redaxo/source/redaxo/src/addons/rexstan
+
+            -   run: php vendor/bin/console package:install rexstan
+            -   run: php vendor/bin/console package:activate rexstan
+
+            -   run: cd vendor/redaxo/source/redaxo/src/addons/rexstan && composer test
