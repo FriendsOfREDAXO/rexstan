@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "41de4f8c0f99a0728cdd733da2c118aa",
+    "content-hash": "c7543050982aefc058898d435b85583b",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -71,8 +71,7 @@
                 "issues": "https://github.com/beberlei/assert/issues",
                 "source": "https://github.com/beberlei/assert/tree/v3.3.4"
             },
-            "time": "2026-06-10T19:47:05+00:00",
-            "published-time": "2026-06-10T19:57:42+00:00"
+            "time": "2026-06-10T19:47:05+00:00"
         },
         {
             "name": "composer/semver",
@@ -149,8 +148,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-29T09:13:34+00:00",
-            "published-time": "2026-10-29T09:14:11+00:00"
+            "time": "2026-10-29T09:13:34+00:00"
         },
         {
             "name": "dogma/dogma",
@@ -215,8 +213,7 @@
                 "issues": "https://github.com/paranoiq/dogma/issues",
                 "source": "https://github.com/paranoiq/dogma/tree/v0.2.22"
             },
-            "time": "2023-06-22T08:25:35+00:00",
-            "published-time": "2023-06-22T08:27:36+00:00"
+            "time": "2023-06-22T08:25:35+00:00"
         },
         {
             "name": "entropy/entropy",
@@ -267,8 +264,7 @@
                 "issues": "https://github.com/TomasVotruba/entropy/issues",
                 "source": "https://github.com/TomasVotruba/entropy/tree/0.4.37"
             },
-            "time": "2026-11-14T16:57:42+00:00",
-            "published-time": "2026-11-14T16:57:58+00:00"
+            "time": "2026-11-14T16:57:42+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -333,8 +329,7 @@
                 "issues": "https://github.com/jsonrainbow/json-schema/issues",
                 "source": "https://github.com/jsonrainbow/json-schema/tree/5.3.4"
             },
-            "time": "2026-05-04T18:54:58+00:00",
-            "published-time": "2026-05-04T18:58:37+00:00"
+            "time": "2026-05-04T18:54:58+00:00"
         },
         {
             "name": "nette/http",
@@ -416,8 +411,7 @@
                 "issues": "https://github.com/nette/http/issues",
                 "source": "https://github.com/nette/http/tree/v3.3.5"
             },
-            "time": "2026-10-23T12:59:25+00:00",
-            "published-time": "2026-10-23T13:16:43+00:00"
+            "time": "2026-10-23T12:59:25+00:00"
         },
         {
             "name": "nette/neon",
@@ -486,8 +480,7 @@
                 "issues": "https://github.com/nette/neon/issues",
                 "source": "https://github.com/nette/neon/tree/v3.4.10"
             },
-            "time": "2026-10-25T22:35:03+00:00",
-            "published-time": "2026-10-25T23:02:33+00:00"
+            "time": "2026-10-25T22:35:03+00:00"
         },
         {
             "name": "nette/utils",
@@ -576,8 +569,7 @@
                 "issues": "https://github.com/nette/utils/issues",
                 "source": "https://github.com/nette/utils/tree/v4.0.11"
             },
-            "time": "2026-10-21T16:50:30+00:00",
-            "published-time": "2026-10-21T16:52:36+00:00"
+            "time": "2026-10-21T16:50:30+00:00"
         },
         {
             "name": "nikolaposa/version",
@@ -638,8 +630,7 @@
                 "issues": "https://github.com/nikolaposa/version/issues",
                 "source": "https://github.com/nikolaposa/version/tree/4.2.1"
             },
-            "time": "2025-03-24T19:12:02+00:00",
-            "published-time": "2025-03-24T19:12:41+00:00"
+            "time": "2025-03-24T19:12:02+00:00"
         },
         {
             "name": "phar-io/version",
@@ -690,8 +681,7 @@
                 "issues": "https://github.com/phar-io/version/issues",
                 "source": "https://github.com/phar-io/version/tree/3.2.1"
             },
-            "time": "2022-02-21T01:04:05+00:00",
-            "published-time": "2022-02-21T01:04:30+00:00"
+            "time": "2022-02-21T01:04:05+00:00"
         },
         {
             "name": "php-parallel-lint/php-parallel-lint",
@@ -752,8 +742,7 @@
                 "issues": "https://github.com/php-parallel-lint/PHP-Parallel-Lint/issues",
                 "source": "https://github.com/php-parallel-lint/PHP-Parallel-Lint/tree/v1.4.0"
             },
-            "time": "2024-03-27T12:14:49+00:00",
-            "published-time": "2024-03-27T12:18:41+00:00"
+            "time": "2024-03-27T12:14:49+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -817,8 +806,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-11-19T10:31:11+00:00",
-            "published-time": "2026-11-19T10:31:27+00:00"
+            "time": "2026-11-19T10:31:11+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",
@@ -869,8 +857,7 @@
                 "issues": "https://github.com/phpstan/phpstan-deprecation-rules/issues",
                 "source": "https://github.com/phpstan/phpstan-deprecation-rules/tree/2.0.5"
             },
-            "time": "2026-07-22T06:50:43+00:00",
-            "published-time": "2026-07-27T15:18:00+00:00"
+            "time": "2026-07-22T06:50:43+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
@@ -928,21 +915,20 @@
                 "issues": "https://github.com/phpstan/phpstan-phpunit/issues",
                 "source": "https://github.com/phpstan/phpstan-phpunit/tree/2.1.2"
             },
-            "time": "2026-11-12T15:27:53+00:00",
-            "published-time": "2026-11-12T16:07:51+00:00"
+            "time": "2026-11-12T15:27:53+00:00"
         },
         {
             "name": "phpstan/phpstan-strict-rules",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-strict-rules.git",
-                "reference": "fe4a0afae773eedf178fab17ed9361c0061d2804"
+                "reference": "c250a77b36059007de360f28522f0e7b687b8572"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-strict-rules/zipball/fe4a0afae773eedf178fab17ed9361c0061d2804",
-                "reference": "fe4a0afae773eedf178fab17ed9361c0061d2804",
+                "url": "https://api.github.com/repos/phpstan/phpstan-strict-rules/zipball/c250a77b36059007de360f28522f0e7b687b8572",
+                "reference": "c250a77b36059007de360f28522f0e7b687b8572",
                 "shasum": ""
             },
             "require": {
@@ -979,10 +965,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-strict-rules/issues",
-                "source": "https://github.com/phpstan/phpstan-strict-rules/tree/2.1.1"
+                "source": "https://github.com/phpstan/phpstan-strict-rules/tree/2.1.2"
             },
-            "time": "2026-11-02T08:16:15+00:00",
-            "published-time": "2026-11-02T10:55:07+00:00"
+            "time": "2026-11-23T09:01:11+00:00"
         },
         {
             "name": "phpstan/phpstan-symfony",
@@ -1056,8 +1041,7 @@
                 "issues": "https://github.com/phpstan/phpstan-symfony/issues",
                 "source": "https://github.com/phpstan/phpstan-symfony/tree/2.1.1"
             },
-            "time": "2026-10-25T14:57:26+00:00",
-            "published-time": "2026-10-26T09:30:48+00:00"
+            "time": "2026-10-25T14:57:26+00:00"
         },
         {
             "name": "psr/log",
@@ -1107,8 +1091,7 @@
             "support": {
                 "source": "https://github.com/php-fig/log/tree/3.0.2"
             },
-            "time": "2024-09-11T13:17:53+00:00",
-            "published-time": "2024-09-11T13:21:14+00:00"
+            "time": "2024-09-11T13:17:53+00:00"
         },
         {
             "name": "spaze/phpstan-disallowed-calls",
@@ -1175,8 +1158,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-11-12T11:38:35+00:00",
-            "published-time": "2026-11-12T11:41:52+00:00"
+            "time": "2026-11-12T11:38:35+00:00"
         },
         {
             "name": "sqlftw/sqlftw",
@@ -1226,8 +1208,7 @@
                 "issues": "https://github.com/SQLFTW/sqlftw/issues",
                 "source": "https://github.com/SQLFTW/sqlftw/tree/v0.1.17"
             },
-            "time": "2025-02-04T15:11:42+00:00",
-            "published-time": "2025-02-04T15:12:30+00:00"
+            "time": "2025-02-04T15:11:42+00:00"
         },
         {
             "name": "staabm/phpstan-baseline-analysis",
@@ -1294,8 +1275,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-12T06:24:00+00:00",
-            "published-time": "2025-11-12T06:24:18+00:00"
+            "time": "2025-11-12T06:24:00+00:00"
         },
         {
             "name": "staabm/phpstan-dba",
@@ -1375,8 +1355,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-11-06T10:42:33+00:00",
-            "published-time": "2026-11-06T14:01:50+00:00"
+            "time": "2026-11-06T10:42:33+00:00"
         },
         {
             "name": "staabm/phpstan-psr3",
@@ -1447,8 +1426,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-22T16:20:54+00:00",
-            "published-time": "2025-04-22T16:21:31+00:00"
+            "time": "2025-04-22T16:20:54+00:00"
         },
         {
             "name": "staabm/phpstan-todo-by",
@@ -1516,8 +1494,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-08-06T08:40:56+00:00",
-            "published-time": "2026-08-06T08:41:59+00:00"
+            "time": "2026-08-06T08:40:56+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
@@ -1601,8 +1578,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-25T15:50:05+00:00",
-            "published-time": "2026-09-30T10:23:35+00:00"
+            "time": "2026-09-25T15:50:05+00:00"
         },
         {
             "name": "symplify/phpstan-rules",
@@ -1659,8 +1635,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-05-22T09:35:51+00:00",
-            "published-time": "2026-05-22T09:35:27+00:00"
+            "time": "2026-05-22T09:35:51+00:00"
         },
         {
             "name": "tomasvotruba/cognitive-complexity",
@@ -1712,8 +1687,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-05-25T12:12:55+00:00",
-            "published-time": "2026-05-25T12:12:39+00:00"
+            "time": "2026-05-25T12:12:55+00:00"
         },
         {
             "name": "tomasvotruba/type-coverage",
@@ -1784,8 +1758,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-09T19:09:05+00:00",
-            "published-time": "2026-10-09T19:09:39+00:00"
+            "time": "2026-10-09T19:09:05+00:00"
         },
         {
             "name": "tomasvotruba/unused-public",
@@ -1843,8 +1816,7 @@
                 }
             ],
             "abandoned": "shipmonk/dead-code-detector",
-            "time": "2026-01-07T22:23:06+00:00",
-            "published-time": "2026-01-07T22:22:48+00:00"
+            "time": "2026-01-07T22:23:06+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -1902,8 +1874,7 @@
                 "issues": "https://github.com/webmozarts/assert/issues",
                 "source": "https://github.com/webmozarts/assert/tree/1.12.1"
             },
-            "time": "2025-10-29T15:56:20+00:00",
-            "published-time": "2025-10-29T15:56:42+00:00"
+            "time": "2025-10-29T15:56:20+00:00"
         }
     ],
     "packages-dev": [],
@@ -1919,5 +1890,5 @@
     "platform-overrides": {
         "php": "8.1.30"
     },
-    "plugin-api-version": "2.11.0"
+    "plugin-api-version": "2.9.0"
 }
